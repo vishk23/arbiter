@@ -512,3 +512,156 @@ def export_cmd(
     out_path = output.with_suffix(ext)
     out_path.write_text(result)
     console.print(f"[green]Exported to {out_path}[/green]")
+
+
+# ====================================================================== #
+#  add-agent
+# ====================================================================== #
+
+
+@app.command(name="add-agent")
+def add_agent(
+    config: Path = typer.Argument(..., help="Arbiter YAML config to modify."),
+    name: str = typer.Option(..., "--name", "-n", help="Agent name (PascalCase)."),
+    side: str = typer.Option(
+        "Skeptic", "--side", "-s", help="Proponent, Skeptic, or Neutral."
+    ),
+    domain: str = typer.Option(
+        ..., "--domain", "-d", help="Agent's domain expertise, e.g. 'Jungian psychology'."
+    ),
+    provider_name: str = typer.Option(
+        None, "--provider", help="Provider key. Uses first available if omitted."
+    ),
+    model: str = typer.Option(
+        "gpt-5", "--model", help="Model for generating the system prompt."
+    ),
+) -> None:
+    """Add a new agent to an existing config, with an LLM-generated system prompt.
+
+    Example::
+
+        arbiter add-agent config.yaml -n JungScholar -s Skeptic \\
+            -d "Jungian analytical psychology, synchronicity, inflation"
+    """
+    _load_dotenv()
+
+    import yaml
+    from arbiter.config import ProviderConfig
+    from arbiter.providers import get_provider
+
+    raw = yaml.safe_load(config.read_text())
+    agents = raw.get("agents", {})
+    if name in agents:
+        console.print(f"[red]Agent '{name}' already exists in config.[/red]")
+        raise typer.Exit(1)
+
+    # Get topic info for prompt generation
+    topic_name = raw.get("topic", {}).get("name", "the theory under debate")
+    topic_summary = raw.get("topic", {}).get("summary", "")[:500]
+
+    # Pick provider for this agent
+    available_providers = list(raw.get("providers", {}).keys())
+    agent_provider = provider_name or (available_providers[0] if available_providers else "openai")
+
+    # Use an LLM to generate the system prompt
+    pcfg = ProviderConfig(model=model, timeout=180, max_retries=3, reasoning={"effort": "medium"})
+    prov = get_provider("openai", pcfg)
+
+    console.print(f"Generating system prompt for [bold]{name}[/bold] ({domain})...")
+
+    prompt_result = prov.call_with_retry(
+        system=(
+            "You are an expert debate architect. Generate a system prompt for a "
+            "debate agent. The prompt must be 4-8 sentences, reference the "
+            "theory's specific claims and notation, include {{ topic.name }} and "
+            "{{ z3_stipulation }} Jinja2 variables, and tell the agent exactly "
+            "what to argue and which aspects to focus on."
+        ),
+        user=(
+            f"Generate a system prompt for an agent named '{name}' who is a "
+            f"specialist in {domain}.\n\n"
+            f"Side: {side}\n"
+            f"Theory being debated: {topic_name}\n"
+            f"Theory summary: {topic_summary}\n\n"
+            f"The prompt should leverage the agent's expertise in {domain} "
+            f"to {'defend' if side == 'Proponent' else 'critique' if side == 'Skeptic' else 'evaluate'} "
+            f"the theory. Return ONLY the system prompt text, nothing else."
+        ),
+        max_tokens=1000,
+    )
+
+    # Add to config
+    agents[name] = {
+        "provider": agent_provider,
+        "side": side,
+        "system_prompt": prompt_result.strip(),
+    }
+    raw["agents"] = agents
+
+    # Write back
+    config.write_text(yaml.dump(raw, default_flow_style=False, sort_keys=False, allow_unicode=True))
+    console.print(f"[green]Added agent '{name}' to {config}[/green]")
+    console.print(f"  Side: {side}")
+    console.print(f"  Provider: {agent_provider}")
+    console.print(f"  Prompt: {prompt_result.strip()[:150]}...")
+    console.print(f"\nEdit the prompt in {config} if you want to refine it.")
+
+
+# ====================================================================== #
+#  remove-agent
+# ====================================================================== #
+
+
+@app.command(name="remove-agent")
+def remove_agent(
+    config: Path = typer.Argument(..., help="Arbiter YAML config to modify."),
+    name: str = typer.Option(..., "--name", "-n", help="Agent name to remove."),
+) -> None:
+    """Remove an agent from an existing config."""
+    import yaml
+
+    raw = yaml.safe_load(config.read_text())
+    agents = raw.get("agents", {})
+    if name not in agents:
+        console.print(f"[red]Agent '{name}' not found. Available: {', '.join(agents)}[/red]")
+        raise typer.Exit(1)
+
+    del agents[name]
+    raw["agents"] = agents
+
+    config.write_text(yaml.dump(raw, default_flow_style=False, sort_keys=False, allow_unicode=True))
+    console.print(f"[green]Removed agent '{name}' from {config}[/green]")
+
+
+# ====================================================================== #
+#  list-agents
+# ====================================================================== #
+
+
+@app.command(name="list-agents")
+def list_agents(
+    config: Path = typer.Argument(..., help="Arbiter YAML config."),
+) -> None:
+    """List all agents in a config with their roles and providers."""
+    import yaml
+    from rich.table import Table
+
+    raw = yaml.safe_load(config.read_text())
+    agents = raw.get("agents", {})
+
+    table = Table(title=f"Agents in {config.name}")
+    table.add_column("Name", style="bold cyan")
+    table.add_column("Side", style="magenta")
+    table.add_column("Provider")
+    table.add_column("Prompt preview")
+
+    for name, a in agents.items():
+        prompt = a.get("system_prompt", "")[:100]
+        table.add_row(
+            name,
+            a.get("side", "?"),
+            a.get("provider", "?"),
+            prompt + ("..." if len(a.get("system_prompt", "")) > 100 else ""),
+        )
+
+    console.print(table)

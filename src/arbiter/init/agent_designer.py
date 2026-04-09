@@ -94,15 +94,30 @@ _CORE_ROLES = [
 
 
 def _distribute_providers(
-    agent_names: list[str],
+    agents: list[dict],
     providers_available: list[str],
 ) -> dict[str, str]:
-    """Round-robin assign providers to agent names for lab diversity."""
+    """Side-balanced provider assignment for lab diversity.
+
+    Ensures each debate *side* has agents from multiple providers (when
+    possible), so no side is a monoculture of one lab's biases.
+    """
     if not providers_available:
         raise ValueError("At least one provider must be available.")
+    if len(providers_available) == 1:
+        return {a["name"]: providers_available[0] for a in agents}
+
+    # Group agents by side
+    by_side: dict[str, list[str]] = {}
+    for a in agents:
+        by_side.setdefault(a["side"], []).append(a["name"])
+
     mapping: dict[str, str] = {}
-    for i, name in enumerate(agent_names):
-        mapping[name] = providers_available[i % len(providers_available)]
+    # For each side, round-robin across providers independently
+    for side, names in by_side.items():
+        for i, name in enumerate(names):
+            mapping[name] = providers_available[i % len(providers_available)]
+
     return mapping
 
 
@@ -303,6 +318,19 @@ def design_agents(
            - Remainder can be any side
         9. Agent names must be PascalCase, one word (e.g. FormalAnalyst,
            EpistemicAuditor, OntologyCritic).
+        10. CRITICAL — UNCITED BUT RELEVANT FIELDS: The theory may use
+           concepts from academic traditions it does NOT explicitly cite.
+           You MUST identify these and design specialists for them.
+           Examples: a theory using "synchronicity" or "archetypal
+           convergence" without citing Jung still needs a Jungian
+           psychology specialist; a theory using DAG notation without
+           citing Pearl still needs a causal inference specialist; a
+           theory making consciousness claims without citing Tononi/IIT
+           still needs a consciousness studies specialist.
+           Ask yourself: "What expert, reading this theory, would
+           immediately recognize concepts from their field being used
+           (correctly or incorrectly) WITHOUT attribution?" Design an
+           agent for each such expert.
         {counter_thesis_instruction}
         Return JSON matching the provided schema.  Include ALL agents
         (core + additional).
@@ -376,9 +404,8 @@ def design_agents(
                 ),
             })
 
-    # Assign providers round-robin
-    agent_names = [a["name"] for a in raw_agents]
-    provider_map = _distribute_providers(agent_names, provider_names_list)
+    # Assign providers — side-balanced across labs
+    provider_map = _distribute_providers(raw_agents, provider_names_list)
 
     # Build final output dict
     agents: dict[str, dict] = {}
