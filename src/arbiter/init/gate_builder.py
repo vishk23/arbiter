@@ -5,6 +5,7 @@ Part of Arbiter's agentic init pipeline. Produces:
 - Seed term definitions
 - Entailment check facts (plain English for the LLM backstop)
 - Gold-standard test cases for each rule
+- Anticipated escape routes for each contradiction
 """
 
 from __future__ import annotations
@@ -17,6 +18,7 @@ import textwrap
 from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+
 
 # ---------------------------------------------------------------------------
 # JSON schemas for structured LLM responses
@@ -110,18 +112,168 @@ _TESTS_SCHEMA = {
 
 
 # ---------------------------------------------------------------------------
+# Escape route anticipation
+# ---------------------------------------------------------------------------
+
+_ESCAPE_ROUTES_SYSTEM = textwrap.dedent("""\
+    You are an expert debate strategist predicting how a defender of a
+    theory will try to work around identified contradictions.
+
+    For each contradiction, predict 2-4 "escape routes" a defender might
+    use to avoid conceding the point.  Common escape strategies include:
+    - Redefining a key term to dissolve the contradiction
+    - Claiming two separate "modes" or "levels" that don't actually conflict
+    - Retreating to a weaker version of the claim without acknowledging the retreat
+    - Asserting the contradiction is only "apparent" without explaining why
+    - Shifting to meta-level claims (e.g., "in a deeper sense...")
+    - Invoking special conditions or exceptions not in the original theory
+    - Conflating formal and informal usage of the same term
+
+    For each escape route, provide:
+    1. The strategy name (short description)
+    2. Language patterns: specific phrases or constructions the defender
+       would likely use when employing this escape
+    3. How to catch it: what makes this escape illegitimate and how a
+       gate rule should detect it
+
+    Use the theory's own terminology from the KEY TERMS provided.
+
+    Return a JSON object with key "escape_routes" containing an array.
+""")
+
+_ESCAPE_ROUTES_RESPONSE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "escape_routes": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "contradiction_id": {
+                        "type": "string",
+                        "description": "Reference to the contradiction (claim_a vs claim_b).",
+                    },
+                    "routes": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "strategy": {
+                                    "type": "string",
+                                    "description": "Short description of the escape strategy.",
+                                },
+                                "language_patterns": {
+                                    "type": "array",
+                                    "items": {"type": "string"},
+                                    "description": "Phrases the defender would use.",
+                                },
+                                "how_to_catch": {
+                                    "type": "string",
+                                    "description": "Why this escape is illegitimate and how to detect it.",
+                                },
+                            },
+                            "required": ["strategy", "language_patterns", "how_to_catch"],
+                        },
+                    },
+                },
+                "required": ["contradiction_id", "routes"],
+            },
+        }
+    },
+    "required": ["escape_routes"],
+}
+
+
+def anticipate_escape_routes(
+    contradictions: list[dict],
+    key_terms: dict[str, str],
+    provider: BaseProvider,
+) -> list[dict]:
+    """For each contradiction, predict how a defender might try to work around it.
+
+    Returns list of::
+
+        {
+            "contradiction_id": "C1 vs C3",
+            "routes": [
+                {
+                    "strategy": "Redefine the key term to dissolve the contradiction",
+                    "language_patterns": ["in a deeper sense", "properly understood"],
+                    "how_to_catch": "Flag any redefinition without explicit notice"
+                },
+                ...
+            ]
+        }
+    """
+    if not contradictions:
+        return []
+
+    contra_text = json.dumps(contradictions, indent=2, default=str)
+    terms_text = json.dumps(key_terms, indent=2, default=str)
+
+    user_msg = textwrap.dedent(f"""\
+        CONTRADICTIONS:
+        {contra_text}
+
+        KEY TERMS:
+        {terms_text}
+
+        For each contradiction, predict 2-4 escape routes a defender might use.
+    """)
+
+    try:
+        result = provider.call_structured(
+            system=_ESCAPE_ROUTES_SYSTEM,
+            user=user_msg,
+            schema=_ESCAPE_ROUTES_RESPONSE_SCHEMA,
+            max_tokens=6000,
+        )
+        escape_routes = result.get("escape_routes", [])
+        logger.info(
+            "Anticipated %d escape route groups for %d contradictions",
+            len(escape_routes),
+            len(contradictions),
+        )
+        return escape_routes
+    except Exception as exc:
+        logger.warning("Escape route anticipation failed: %s", exc)
+        return []
+
+
+# ---------------------------------------------------------------------------
 # Rule generation
 # ---------------------------------------------------------------------------
 
 def _build_rules_prompt(
-    contradictions: list[dict], key_terms: dict[str, str]
+    contradictions: list[dict],
+    key_terms: dict[str, str],
+    escape_routes: list[dict] | None = None,
 ) -> tuple[str, str]:
     """Build (system, user) prompts for gate rule generation."""
+    escape_route_instruction = ""
+    if escape_routes:
+        escape_route_instruction = textwrap.dedent("""\
+
+        ESCAPE ROUTE PATTERNS TO CATCH:
+        In addition to direct reassertions of disproven claims, your
+        bad_patterns MUST also catch predicted ESCAPE ROUTES -- ways a
+        defender might try to work around the contradiction without
+        explicitly conceding it.  The anticipated escape routes are
+        provided below.  For each escape route, generate regex patterns
+        that catch the specific language patterns listed.
+
+        For example, if an escape route predicts a defender will say
+        "in a deeper sense" or "properly understood" to redefine a term,
+        generate a pattern like:
+            \\b(in a deeper sense|properly understood|metatheoretic)\\b
+        """)
+
     system = textwrap.dedent("""\
         You are an expert at building regex-based content moderation rules for
         academic debate. Your task: given contradictions identified in a source
-        document and a glossary of key terms, produce stipulated rules that will
-        catch debate turns that reassert a disproven claim.
+        document, a glossary of key terms, and anticipated escape routes that
+        defenders might use, produce stipulated rules that will catch debate
+        turns that reassert a disproven claim OR attempt an illegitimate escape.
 
         REQUIREMENTS FOR EACH RULE:
         1. id: short identifier like RULE-1, RULE-2, etc.
@@ -132,10 +284,11 @@ def _build_rules_prompt(
            - Alternation for synonyms: (add|create|instantiate)
            - Co-occurrence patterns: claim_A.*claim_B and claim_B.*claim_A
            - Variants: direct assertion, dual-mode rescue, "no contradiction" rescue
+           - Escape route language patterns from the anticipated routes
         4. denial_patterns: 2-4 regex patterns detecting explicit denial/repair
            (e.g. "I adopt repair path A", "drop X as Y"). When a denial matches,
            it suppresses the bad_pattern hit.
-
+        {escape_route_instruction}
         REQUIREMENTS FOR SEED TERMS:
         - Include every formal term that appears in the contradictions.
         - Each definition should be 1-2 sentences.
@@ -146,7 +299,12 @@ def _build_rules_prompt(
         - Format: "[RULE-ID] statement of stipulated truth."
 
         Return valid JSON matching the schema. Regex patterns must be valid Python re syntax.
-    """)
+    """).format(escape_route_instruction=escape_route_instruction)
+
+    # Build escape routes text if available
+    escape_text = ""
+    if escape_routes:
+        escape_text = f"\nANTICIPATED ESCAPE ROUTES:\n{json.dumps(escape_routes, indent=2, default=str)}\n"
 
     user = textwrap.dedent(f"""\
         CONTRADICTIONS:
@@ -154,7 +312,7 @@ def _build_rules_prompt(
 
         KEY TERMS:
         {json.dumps(key_terms, indent=2, default=str)}
-
+        {escape_text}
         Generate stipulated_rules, seed_terms, and entailment_facts.
     """)
     return system, user
@@ -186,15 +344,39 @@ def _validate_regex_patterns(rules: list[dict]) -> list[dict]:
     return cleaned
 
 
+def _extract_json_from_text(text: str) -> dict | None:
+    """Extract a JSON object from LLM text output using regex + json.loads."""
+    # Try to find JSON block in markdown code fence
+    match = re.search(r"```(?:json)?\s*\n(.*?)```", text, re.DOTALL)
+    if match:
+        try:
+            return json.loads(match.group(1))
+        except json.JSONDecodeError:
+            pass
+
+    # Try to find raw JSON object
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if match:
+        try:
+            return json.loads(match.group(0))
+        except json.JSONDecodeError:
+            pass
+
+    return None
+
+
 def generate_gate_rules(
     contradictions: list[dict],
     key_terms: dict[str, str],
     provider: BaseProvider,
+    *,
+    escape_routes: list[dict] | None = None,
 ) -> dict:
     """Generate validity gate configuration from identified contradictions.
 
     Uses the LLM to produce regex patterns tailored to the specific
-    contradiction language, then validates every pattern compiles.
+    contradiction language and anticipated escape routes, then validates
+    every pattern compiles.
 
     Parameters
     ----------
@@ -204,6 +386,10 @@ def generate_gate_rules(
         Glossary mapping term names to definitions.
     provider:
         An Arbiter ``BaseProvider`` instance for LLM calls.
+    escape_routes:
+        Output of ``anticipate_escape_routes()`` (optional).
+        When provided, generated patterns will also catch predicted
+        escape strategies.
 
     Returns
     -------
@@ -212,10 +398,40 @@ def generate_gate_rules(
         - ``seed_terms``: dict mapping term -> definition
         - ``entailment_facts``: list of plain-English stipulated facts
     """
-    system, user = _build_rules_prompt(contradictions, key_terms)
+    system, user = _build_rules_prompt(contradictions, key_terms, escape_routes)
     logger.info("Generating gate rules via LLM...")
 
-    response = provider.call_structured(system, user, _RULES_SCHEMA, max_tokens=6000)
+    # Use call_with_retry + JSON extraction for robustness with complex
+    # nested schemas (avoids additionalProperties issues across providers)
+    try:
+        response = provider.call_structured(system, user, _RULES_SCHEMA, max_tokens=6000)
+    except Exception as exc:
+        logger.warning(
+            "call_structured failed for gate rules (%s); "
+            "falling back to call_with_retry + JSON extraction",
+            exc,
+        )
+        try:
+            raw_text = provider.call_with_retry(
+                system=system + f"\n\nJSON Schema:\n{json.dumps(_RULES_SCHEMA, indent=2)}",
+                user=user,
+                max_tokens=6000,
+            )
+            response = _extract_json_from_text(raw_text)
+            if response is None:
+                logger.error("Could not extract JSON from gate rules response")
+                return {
+                    "stipulated_rules": [],
+                    "seed_terms": dict(key_terms),
+                    "entailment_facts": [],
+                }
+        except Exception as exc2:
+            logger.error("Gate rule generation failed entirely: %s", exc2)
+            return {
+                "stipulated_rules": [],
+                "seed_terms": dict(key_terms),
+                "entailment_facts": [],
+            }
 
     # Validate regex patterns
     response["stipulated_rules"] = _validate_regex_patterns(
@@ -374,6 +590,221 @@ def _build_fix_prompt(
         Fix the cases and return all of them.
     """)
     return system, user
+
+
+def calibrate_gate_rules(
+    rules: dict,
+    cases: list[dict],
+    provider: BaseProvider,
+    *,
+    max_retries: int = 2,
+) -> tuple[dict, list[dict], dict]:
+    """Self-calibration loop: test patterns against cases, regenerate if needed.
+
+    Parameters
+    ----------
+    rules:
+        Output of ``generate_gate_rules()``.
+    cases:
+        Output of ``generate_gate_tests()``.
+    provider:
+        LLM provider for regeneration.
+    max_retries:
+        Maximum number of pattern regeneration attempts.
+
+    Returns
+    -------
+    tuple of (rules, cases, calibration_report)
+        - rules: possibly updated rules with improved patterns
+        - cases: possibly updated test cases
+        - calibration_report: dict with recall/precision stats
+    """
+    stipulated_rules = rules.get("stipulated_rules", [])
+    _, issues = _test_pattern_coverage(stipulated_rules, cases)
+
+    total_positive = sum(1 for c in cases if c["expected"] == "stipulation_violation")
+    total_negative = sum(1 for c in cases if c["expected"] == "none")
+
+    # Count how many positive cases matched
+    positive_matched = total_positive - sum(
+        1 for iss in issues if "POSITIVE case does not match" in iss
+    )
+    negative_clean = total_negative - sum(
+        1 for iss in issues if "NEGATIVE case matches" in iss
+    )
+
+    recall = positive_matched / total_positive if total_positive > 0 else 1.0
+    precision = negative_clean / total_negative if total_negative > 0 else 1.0
+
+    report: dict = {
+        "initial_recall": recall,
+        "initial_precision": precision,
+        "initial_issues": len(issues),
+        "retries_used": 0,
+        "final_recall": recall,
+        "final_precision": precision,
+        "final_issues": len(issues),
+    }
+
+    if not issues:
+        logger.info(
+            "Gate calibration passed: recall=%.2f, precision=%.2f",
+            recall, precision,
+        )
+        return rules, cases, report
+
+    # Retry loop: regenerate patterns for rules with failing positive cases
+    for attempt in range(1, max_retries + 1):
+        logger.warning(
+            "Gate calibration attempt %d/%d: %d issues (recall=%.2f)",
+            attempt, max_retries, len(issues), recall,
+        )
+
+        # Identify which rules have failing positive cases
+        failing_rule_ids = set()
+        for iss in issues:
+            if "POSITIVE case does not match" in iss:
+                # Extract rule ID from issue text
+                for rule in stipulated_rules:
+                    if rule["id"] in iss:
+                        failing_rule_ids.add(rule["id"])
+                        break
+
+        if failing_rule_ids:
+            # Regenerate patterns for failing rules
+            _regenerate_patterns(
+                rules, cases, failing_rule_ids, provider,
+            )
+            stipulated_rules = rules.get("stipulated_rules", [])
+
+        # Also fix test cases
+        fix_system, fix_user = _build_fix_prompt(stipulated_rules, cases, issues)
+        try:
+            fix_response = provider.call_structured(
+                fix_system, fix_user, _TESTS_SCHEMA, max_tokens=6000
+            )
+            cases = fix_response.get("cases", cases)
+        except Exception as exc:
+            logger.warning("Test case fix failed: %s", exc)
+
+        _, issues = _test_pattern_coverage(stipulated_rules, cases)
+
+        positive_matched = total_positive - sum(
+            1 for iss in issues if "POSITIVE case does not match" in iss
+        )
+        negative_clean = total_negative - sum(
+            1 for iss in issues if "NEGATIVE case matches" in iss
+        )
+        recall = positive_matched / total_positive if total_positive > 0 else 1.0
+        precision = negative_clean / total_negative if total_negative > 0 else 1.0
+        report["retries_used"] = attempt
+
+        if not issues:
+            break
+
+    report["final_recall"] = recall
+    report["final_precision"] = precision
+    report["final_issues"] = len(issues)
+
+    if issues:
+        logger.warning(
+            "Gate calibration incomplete after %d retries: "
+            "recall=%.2f, precision=%.2f, %d issues remaining",
+            max_retries, recall, precision, len(issues),
+        )
+    else:
+        logger.info(
+            "Gate calibration passed after %d retries: recall=%.2f, precision=%.2f",
+            report["retries_used"], recall, precision,
+        )
+
+    return rules, cases, report
+
+
+def _regenerate_patterns(
+    rules: dict,
+    cases: list[dict],
+    failing_rule_ids: set[str],
+    provider: BaseProvider,
+) -> None:
+    """Regenerate bad_patterns for specific rules that have failing test cases."""
+    stipulated_rules = rules.get("stipulated_rules", [])
+
+    for rule in stipulated_rules:
+        if rule["id"] not in failing_rule_ids:
+            continue
+
+        # Find positive test cases for this rule
+        positive_texts = []
+        for case in cases:
+            parts = case["id"].rsplit("_", 1)
+            case_rule_id = parts[0] if len(parts) == 2 else case["id"]
+            if case_rule_id == rule["id"] and case["expected"] == "stipulation_violation":
+                positive_texts.append(case["text"])
+
+        if not positive_texts:
+            continue
+
+        system = textwrap.dedent("""\
+            You are fixing regex patterns for a validity gate rule.
+            The current patterns FAIL to match the positive test cases below.
+
+            Generate 4-8 NEW regex patterns (Python re syntax, case-insensitive)
+            that WILL match the positive test case texts.  Use:
+            - Word boundaries (\\b)
+            - Alternation for key phrases
+            - Broader patterns that catch the semantic content
+
+            Return a JSON object with a single key "bad_patterns" containing
+            an array of regex pattern strings.
+        """)
+
+        user = (
+            f"RULE: {rule['id']}\n"
+            f"FACT: {rule['fact']}\n\n"
+            f"CURRENT PATTERNS (failing):\n{json.dumps(rule['bad_patterns'], indent=2)}\n\n"
+            f"POSITIVE TEST CASES THAT MUST MATCH:\n"
+            + "\n---\n".join(positive_texts)
+        )
+
+        try:
+            result = provider.call_structured(
+                system=system,
+                user=user,
+                schema={
+                    "type": "object",
+                    "properties": {
+                        "bad_patterns": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                    },
+                    "required": ["bad_patterns"],
+                    "additionalProperties": False,
+                },
+                max_tokens=2000,
+            )
+            new_patterns = result.get("bad_patterns", [])
+            # Validate and merge
+            valid_new = []
+            for pat in new_patterns:
+                try:
+                    re.compile(pat, re.IGNORECASE)
+                    valid_new.append(pat)
+                except re.error:
+                    pass
+            if valid_new:
+                # Keep old patterns and add new ones (deduplicated)
+                existing = set(rule["bad_patterns"])
+                for pat in valid_new:
+                    if pat not in existing:
+                        rule["bad_patterns"].append(pat)
+                logger.info(
+                    "Regenerated patterns for %s: %d new patterns added",
+                    rule["id"], len(valid_new),
+                )
+        except Exception as exc:
+            logger.warning("Pattern regeneration failed for %s: %s", rule["id"], exc)
 
 
 def generate_gate_tests(

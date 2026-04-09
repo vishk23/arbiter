@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import os
 import re
@@ -76,6 +77,47 @@ _SYNTH_SCHEMA = {
         },
     },
     "required": ["title", "content", "key_concepts"],
+}
+
+_CLASSIFY_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "classifications": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "path": {
+                        "type": "string",
+                        "description": "File path of the source.",
+                    },
+                    "category": {
+                        "type": "string",
+                        "enum": [
+                            "counter_evidence",
+                            "supports_theory",
+                            "neutral_reference",
+                        ],
+                        "description": (
+                            "How this source relates to the theory: "
+                            "'counter_evidence' = provides arguments or "
+                            "data against the theory, "
+                            "'supports_theory' = provides arguments or "
+                            "data supporting the theory, "
+                            "'neutral_reference' = relevant background "
+                            "that doesn't clearly support either side."
+                        ),
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "Brief reason for classification.",
+                    },
+                },
+                "required": ["path", "category", "reason"],
+            },
+        }
+    },
+    "required": ["classifications"],
 }
 
 
@@ -155,6 +197,129 @@ def find_sources(
 
     logger.info("Source finder created %d files in %s", len(created), output_dir)
     return created
+
+
+def classify_sources(
+    source_paths: list[str],
+    claims: list[dict],
+    provider: "BaseProvider",
+) -> dict[str, list[str]]:
+    """Classify downloaded sources by relevance to each side.
+
+    Reads the first 1000 characters of each source file and asks the
+    LLM to classify it as counter-evidence, supports-theory, or
+    neutral-reference.
+
+    Parameters
+    ----------
+    source_paths:
+        Absolute paths to source text files.
+    claims:
+        Extracted claims for context.
+    provider:
+        LLM provider for classification.
+
+    Returns
+    -------
+    dict with keys:
+        - ``"counter_evidence"``: list of paths
+        - ``"supports_theory"``: list of paths
+        - ``"neutral_reference"``: list of paths
+    """
+    result: dict[str, list[str]] = {
+        "counter_evidence": [],
+        "supports_theory": [],
+        "neutral_reference": [],
+    }
+
+    if not source_paths:
+        return result
+
+    # Read first 1000 chars of each file
+    source_snippets: list[dict[str, str]] = []
+    for path in source_paths:
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                snippet = f.read(1000)
+            source_snippets.append({"path": path, "snippet": snippet})
+        except Exception as exc:
+            logger.warning("Could not read source %s: %s", path, exc)
+            result["neutral_reference"].append(path)
+
+    if not source_snippets:
+        return result
+
+    # Build a compact claims summary
+    claim_lines = "\n".join(
+        f"  {c['id']}: {c['claim'][:100]}"
+        for c in claims[:15]
+    )
+
+    snippets_text = "\n\n".join(
+        f"FILE: {s['path']}\n{s['snippet']}"
+        for s in source_snippets
+    )
+
+    system = textwrap.dedent("""\
+        You are classifying reference sources for an adversarial debate.
+        Given excerpts from downloaded source files and the claims of the
+        theory being debated, classify each source as:
+
+        - "counter_evidence": The source provides arguments, data, or
+          frameworks that CHALLENGE or CONTRADICT the theory's claims.
+        - "supports_theory": The source provides arguments, data, or
+          frameworks that SUPPORT the theory's claims.
+        - "neutral_reference": The source provides relevant background
+          information but does not clearly favor either side.
+
+        Return JSON matching the provided schema.
+    """)
+
+    user = textwrap.dedent(f"""\
+        THEORY CLAIMS:
+        {claim_lines}
+
+        SOURCE EXCERPTS:
+        {snippets_text}
+
+        Classify each source file.
+    """)
+
+    try:
+        response = provider.call_structured(
+            system=system,
+            user=user,
+            schema=_CLASSIFY_SCHEMA,
+            max_tokens=2000,
+        )
+        for entry in response.get("classifications", []):
+            category = entry.get("category", "neutral_reference")
+            path = entry.get("path", "")
+            if category in result and path in source_paths:
+                result[category].append(path)
+
+        # Catch any unclassified sources
+        classified = set()
+        for paths_list in result.values():
+            classified.update(paths_list)
+        for path in source_paths:
+            if path not in classified:
+                result["neutral_reference"].append(path)
+
+        logger.info(
+            "Classified sources: %d counter, %d supporting, %d neutral",
+            len(result["counter_evidence"]),
+            len(result["supports_theory"]),
+            len(result["neutral_reference"]),
+        )
+    except Exception as exc:
+        logger.warning("Source classification failed: %s", exc)
+        # Fall back: all neutral
+        for path in source_paths:
+            if path not in result["neutral_reference"]:
+                result["neutral_reference"].append(path)
+
+    return result
 
 
 # ---------------------------------------------------------------------------

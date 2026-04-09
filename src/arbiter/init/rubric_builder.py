@@ -94,6 +94,8 @@ def design_rubric(
     claims: list[dict],
     attack_angles: list[dict],
     provider: "BaseProvider",
+    *,
+    counter_thesis: str | None = None,
 ) -> list[dict]:
     """Design judge rubric criteria from the claim landscape.
 
@@ -106,6 +108,10 @@ def design_rubric(
         ``description``.
     provider:
         The LLM used to generate the rubric.
+    counter_thesis:
+        The main counter-thesis a Skeptic would advance (optional).
+        When provided, a SPECIFIC criterion addressing this dispute
+        will be generated.
 
     Returns
     -------
@@ -128,6 +134,26 @@ def design_rubric(
         for m in _MANDATORY_CRITERIA
     )
 
+    # Counter-thesis criterion instruction
+    counter_thesis_instruction = ""
+    if counter_thesis:
+        counter_thesis_instruction = textwrap.dedent(f"""\
+
+        8. CRITICAL: One criterion MUST specifically address the central
+           counter-thesis: '{counter_thesis[:300]}'.
+           Name it after the SPECIFIC ISSUE raised by the counter-thesis,
+           not generically.  For example:
+           - If the counter-thesis is about lack of empirical evidence,
+             name it "empirical_grounding" with a description specific
+             to what evidence is missing
+           - If the counter-thesis is about a logical gap, name it after
+             the specific logical issue
+           - If the counter-thesis is about an alternative explanation,
+             name it after the specific alternative
+           The description must reference the actual dispute, not be
+           a generic placeholder.
+        """)
+
     system = textwrap.dedent("""\
         You are an expert judge-rubric designer for Arbiter, an adversarial
         debate system.  Your job is to create 4-6 scoring criteria that
@@ -146,31 +172,34 @@ def design_rubric(
            - If there's a falsifiability angle -> add "falsifiability"
         3. Descriptions MUST be specific to the topic, not generic.
            BAD: "Did the side make good arguments?"
-           GOOD: "Did the side engage the DAG-mutation contradiction
-                  without equivocating between G-fixed and G-mutable?"
+           GOOD: "Did the side engage the central structural contradiction
+                  without equivocating between the fixed and mutable
+                  interpretations of the core construct?"
         4. Total criteria: 4-6 (not more).
         5. All criteria use min=0, max=10.
         6. Use snake_case for names.
         7. IDs should be R1, R2, R3, R4, ... in order.
-
+        {counter_thesis_instruction}
         Return JSON matching the provided schema.
-    """).format(mandatory=mandatory_lines)
-
-    user = textwrap.dedent("""\
-        CLAIMS extracted from the theory:
-        {claims}
-
-        CLAIM CATEGORIES present: {categories}
-
-        ATTACK ANGLES identified:
-        {angles}
-
-        Design 4-6 rubric criteria (3 mandatory + 1-3 topic-specific).
     """).format(
-        claims=claim_lines,
-        categories=", ".join(categories_seen),
-        angles=angle_lines,
+        mandatory=mandatory_lines,
+        counter_thesis_instruction=counter_thesis_instruction,
     )
+
+    user_parts = [
+        f"CLAIMS extracted from the theory:\n{claim_lines}\n",
+        f"CLAIM CATEGORIES present: {', '.join(categories_seen)}\n",
+        f"ATTACK ANGLES identified:\n{angle_lines}\n",
+    ]
+    if counter_thesis:
+        user_parts.append(
+            f"COUNTER-THESIS (the strongest opposing position):\n"
+            f"  {counter_thesis}\n"
+        )
+    user_parts.append(
+        "Design 4-6 rubric criteria (3 mandatory + 1-3 topic-specific)."
+    )
+    user = "\n".join(user_parts)
 
     logger.info("Designing rubric criteria from %d claims, %d angles",
                 len(claims), len(attack_angles))
@@ -187,9 +216,14 @@ def design_rubric(
     # Validate and patch
     if not criteria:
         logger.warning("LLM returned empty rubric; falling back to defaults")
-        criteria = _fallback_rubric(categories_seen)
+        criteria = _fallback_rubric(categories_seen, counter_thesis)
 
     criteria = _ensure_mandatory(criteria)
+
+    # If counter_thesis was provided, ensure we have a counter-thesis criterion
+    if counter_thesis:
+        criteria = _ensure_counter_thesis_criterion(criteria, counter_thesis)
+
     criteria = _enforce_limits(criteria)
     criteria = _renumber(criteria)
 
@@ -218,6 +252,44 @@ def _ensure_mandatory(criteria: list[dict]) -> list[dict]:
                 "min": 0,
                 "max": 10,
             })
+    return criteria
+
+
+def _ensure_counter_thesis_criterion(
+    criteria: list[dict],
+    counter_thesis: str,
+) -> list[dict]:
+    """Ensure at least one criterion addresses the counter-thesis.
+
+    Checks if any non-mandatory criterion mentions keywords from the
+    counter-thesis.  If not, adds a generic one.
+    """
+    mandatory_names = {m["name"] for m in _MANDATORY_CRITERIA}
+    non_mandatory = [c for c in criteria if c["name"] not in mandatory_names]
+
+    # If we have at least one non-mandatory criterion, assume the LLM
+    # addressed the counter-thesis (we instructed it to)
+    if non_mandatory:
+        return criteria
+
+    # No non-mandatory criteria at all -- add one based on counter-thesis
+    logger.warning(
+        "No counter-thesis criterion found; adding a generic one"
+    )
+    # Create a name from the first key phrase in the counter-thesis
+    words = counter_thesis.lower().split()[:3]
+    name = "_".join(w for w in words if w.isalnum())[:30] or "counter_thesis_handling"
+
+    criteria.append({
+        "id": f"R{len(criteria) + 1}",
+        "name": name,
+        "description": (
+            f"How well the debate addressed the central counter-thesis: "
+            f"{counter_thesis[:200]}"
+        ),
+        "min": 0,
+        "max": 10,
+    })
     return criteria
 
 
@@ -251,7 +323,10 @@ def _renumber(criteria: list[dict]) -> list[dict]:
 # Fallback
 # ---------------------------------------------------------------------------
 
-def _fallback_rubric(categories: list[str]) -> list[dict]:
+def _fallback_rubric(
+    categories: list[str],
+    counter_thesis: str | None = None,
+) -> list[dict]:
     """Minimal rubric when the LLM call fails."""
     criteria = [
         {
@@ -312,6 +387,21 @@ def _fallback_rubric(categories: list[str]) -> list[dict]:
             "name": "falsifiability",
             "description": (
                 "Were claims advanced that are in principle falsifiable?"
+            ),
+            "min": 0,
+            "max": 10,
+        })
+
+    # Add counter-thesis criterion if provided
+    if counter_thesis:
+        words = counter_thesis.lower().split()[:3]
+        name = "_".join(w for w in words if w.isalnum())[:30] or "counter_thesis_handling"
+        criteria.append({
+            "id": "R5",
+            "name": name,
+            "description": (
+                f"How well the debate addressed the central counter-thesis: "
+                f"{counter_thesis[:200]}"
             ),
             "min": 0,
             "max": 10,
