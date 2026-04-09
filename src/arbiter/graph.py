@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import sqlite3
 import time
 from pathlib import Path
 from typing import Any, Dict, List
@@ -139,11 +140,22 @@ class DebateEngine:
         )
         g.add_edge("finalize", END)
 
-        # Checkpointer — use InMemorySaver for reliability; SqliteSaver
-        # requires async context in newer LangGraph versions.
-        from langgraph.checkpoint.memory import InMemorySaver
-
-        checkpointer = InMemorySaver()
+        # Checkpointer — use SqliteSaver for crash recovery.
+        # Falls back to InMemorySaver if the DB path is ":memory:" or unusable.
+        db_path = self.config.output.checkpoint_db
+        try:
+            conn = sqlite3.connect(db_path, check_same_thread=False)
+            checkpointer = SqliteSaver(conn)
+            checkpointer.setup()  # create tables if needed
+            self._checkpoint_conn = conn
+            logger.debug("Using SqliteSaver checkpoint: %s", db_path)
+        except Exception as exc:
+            logger.warning(
+                "SqliteSaver init failed (%s), falling back to InMemorySaver", exc
+            )
+            from langgraph.checkpoint.memory import InMemorySaver
+            checkpointer = InMemorySaver()
+            self._checkpoint_conn = None
         return g.compile(checkpointer=checkpointer)
 
     # ================================================================== #
@@ -559,6 +571,13 @@ class DebateEngine:
                 f"max_rounds={self.config.convergence.max_rounds})"
             )
             result = app.invoke(initial_state(), config=run_config)
+
+        # Close the checkpoint DB connection
+        if getattr(self, "_checkpoint_conn", None):
+            try:
+                self._checkpoint_conn.close()
+            except Exception:
+                pass
 
         return result
 
