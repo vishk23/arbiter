@@ -136,20 +136,24 @@ _DEFAULT_AGENTS: dict[str, dict[str, Any]] = {
 def _make_provider(
     provider_name: str,
     provider_model: str,
+    effort: str = "medium",
 ) -> "BaseProvider":
     """Instantiate a provider for the init pipeline calls."""
     from arbiter.config import ProviderConfig
     from arbiter.providers import get_provider
 
-    # Auto-detect model-specific features
+    # Map effort to provider-specific parameters
+    _THINKING_BUDGETS = {"low": 4000, "medium": 8000, "high": 16000}
+    _THINKING_LEVELS = {"low": "LOW", "medium": "HIGH", "high": "HIGH"}
+
     thinking = None
     reasoning = None
     if "opus" in provider_model or "claude" in provider_model:
-        thinking = {"type": "enabled", "budget_tokens": 8000}
+        thinking = {"type": "enabled", "budget_tokens": _THINKING_BUDGETS.get(effort, 8000)}
     if "gpt-5" in provider_model or "gpt-4o" in provider_model:
-        reasoning = {"effort": "medium"}  # medium is sufficient for init tasks
+        reasoning = {"effort": effort}
     if "gemini" in provider_model:
-        thinking = {"thinking_level": "HIGH"}
+        thinking = {"thinking_level": _THINKING_LEVELS.get(effort, "HIGH")}
 
     pcfg = ProviderConfig(
         model=provider_model,
@@ -288,6 +292,7 @@ def run_init(
     provider_model: str = "gpt-5",
     providers_spec: str | None = None,
     interactive: bool = True,
+    effort: str = "medium",
 ) -> str:
     """Run the full agentic init pipeline.
 

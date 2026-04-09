@@ -473,10 +473,15 @@ class DebateEngine:
                 "versions", []
             )
 
-        ts = int(time.time())
+        # Auto-version: find next available debate number
+        existing = sorted(self._out_dir.glob("debate_*.json"))
+        next_num = len(existing) + 1
+        debate_prefix = f"debate_{next_num:03d}"
+
         formats = self.config.output.formats
 
         if "json" in formats:
+            ts = int(time.time())
             metadata = {
                 "topic": self.config.topic.name,
                 "topology": self.config.topology,
@@ -492,13 +497,13 @@ class DebateEngine:
             if self.z3_plugin:
                 metadata["z3_findings"] = self.z3_plugin.verify()
             json_str = export_json(final_state, metadata)
-            out_path = self._out_dir / f"debate_{ts}.json"
+            out_path = self._out_dir / f"{debate_prefix}.json"
             out_path.write_text(json_str)
             console.print(f"  [dim]Exported JSON: {out_path}[/dim]")
 
         if "markdown" in formats:
             md = export_markdown(final_state, self.config.topic.name)
-            out_path = self._out_dir / f"debate_{ts}.md"
+            out_path = self._out_dir / f"{debate_prefix}.md"
             out_path.write_text(md)
             console.print(f"  [dim]Exported Markdown: {out_path}[/dim]")
 
@@ -507,7 +512,7 @@ class DebateEngine:
                 final_state.get("ledger", []),
                 self.config.judge.sides,
             )
-            out_path = self._out_dir / f"debate_{ts}.argdown"
+            out_path = self._out_dir / f"{debate_prefix}.argdown"
             out_path.write_text(ad)
             console.print(f"  [dim]Exported Argdown: {out_path}[/dim]")
 

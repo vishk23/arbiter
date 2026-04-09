@@ -232,6 +232,11 @@ def init(
         "--template",
         help="Write a blank template config instead of running the pipeline.",
     ),
+    effort: str = typer.Option(
+        "medium",
+        "--effort",
+        help="Reasoning effort for LLM calls: low, medium, or high. Higher = slower + more expensive but better quality.",
+    ),
 ) -> None:
     """Generate a debate configuration using the agentic init pipeline.
 
@@ -265,6 +270,7 @@ def init(
         provider_model=model,
         providers_spec=providers,
         interactive=not non_interactive,
+        effort=effort,
     )
 
 
@@ -708,3 +714,90 @@ def list_agents(
         )
 
     console.print(table)
+
+
+# ====================================================================== #
+#  validate
+# ====================================================================== #
+
+
+@app.command()
+def validate(
+    config: Path = typer.Argument(..., help="Arbiter YAML config to validate."),
+) -> None:
+    """Validate a config file and report any errors.
+
+    Checks that the YAML parses, all required fields exist, provider
+    references are valid, and agent configs are well-formed.
+    """
+    from arbiter.config import load_config
+
+    try:
+        cfg = load_config(config)
+    except Exception as exc:
+        console.print(f"[red]Validation FAILED:[/red] {exc}")
+        raise typer.Exit(1)
+
+    # Additional checks
+    warnings = []
+    for name, acfg in cfg.agents.items():
+        if acfg.provider not in cfg.providers:
+            warnings.append(f"Agent '{name}' references unknown provider '{acfg.provider}'")
+        if not acfg.system_prompt.strip():
+            warnings.append(f"Agent '{name}' has an empty system_prompt")
+
+    if cfg.judge:
+        for member in cfg.judge.panel:
+            if member.provider not in cfg.providers:
+                warnings.append(f"Judge panel member references unknown provider '{member.provider}'")
+
+    if warnings:
+        for w in warnings:
+            console.print(f"  [yellow]Warning:[/yellow] {w}")
+    else:
+        console.print("[green]Config is valid.[/green]")
+
+    # Summary
+    from rich.table import Table
+
+    table = Table(title=f"Config Summary: {config.name}")
+    table.add_column("Field", style="bold")
+    table.add_column("Value")
+    table.add_row("Topic", cfg.topic.name)
+    table.add_row("Topology", cfg.topology)
+    table.add_row("Providers", ", ".join(f"{k} ({v.model})" for k, v in cfg.providers.items()))
+    table.add_row("Agents", ", ".join(cfg.agents.keys()))
+    table.add_row("Max rounds", str(cfg.convergence.max_rounds))
+    table.add_row("Rubric criteria", str(len(cfg.judge.rubric)))
+    table.add_row("Gate", "enabled" if cfg.gate and cfg.gate.enabled else "disabled")
+    console.print(table)
+
+
+# ====================================================================== #
+#  show-rubric
+# ====================================================================== #
+
+
+@app.command(name="show-rubric")
+def show_rubric(
+    config: Path = typer.Argument(..., help="Arbiter YAML config."),
+) -> None:
+    """Display the judge rubric as a formatted table."""
+    from arbiter.config import load_config
+    from rich.table import Table
+
+    cfg = load_config(config)
+
+    table = Table(title=f"Judge Rubric — {cfg.topic.name}")
+    table.add_column("ID", style="bold cyan")
+    table.add_column("Name", style="bold")
+    table.add_column("Description")
+    table.add_column("Range", justify="center")
+
+    for c in cfg.judge.rubric:
+        table.add_row(c.id, c.name, c.description, f"{c.min_score}-{c.max_score}")
+
+    console.print(table)
+    console.print(f"\n  Max total: {sum(c.max_score for c in cfg.judge.rubric)}")
+    console.print(f"  Verdict options: {', '.join(cfg.judge.verdict_options)}")
+    console.print(f"  Spread threshold: {cfg.judge.spread_threshold}")
