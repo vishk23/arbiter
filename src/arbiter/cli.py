@@ -173,12 +173,12 @@ def init(
         help="Topic description to debate (used when no PDF is provided).",
     ),
     provider: str = typer.Option(
-        "openai",
+        "anthropic",
         "--provider",
         help="LLM provider for init pipeline calls.",
     ),
     model: str = typer.Option(
-        "gpt-5",
+        "claude-opus-4-5",
         "--model",
         help="Model to use for init pipeline. Use the best available for quality.",
     ),

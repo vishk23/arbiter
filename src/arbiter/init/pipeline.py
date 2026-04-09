@@ -145,14 +145,14 @@ def _make_provider(
     if "opus" in provider_model or "claude" in provider_model:
         thinking = {"type": "enabled", "budget_tokens": 8000}
     if "gpt-5" in provider_model or "gpt-4o" in provider_model:
-        reasoning = {"effort": "high"}
+        reasoning = {"effort": "medium"}  # medium is sufficient for init tasks
     if "gemini" in provider_model:
         thinking = {"thinking_level": "HIGH"}
 
     pcfg = ProviderConfig(
         model=provider_model,
         max_tokens=4000,
-        timeout=180,
+        timeout=600,  # init calls can be slow (large docs + structured output)
         max_retries=6,
         thinking=thinking,
         reasoning=reasoning,

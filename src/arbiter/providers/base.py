@@ -49,14 +49,13 @@ class BaseProvider(ABC):
             except Exception as exc:
                 last_err = exc
                 sleep = min(60, 2**attempt)
-                logger.warning(
-                    "[retry:%s] attempt %d/%d failed: %s: %s -- sleeping %ds",
-                    self.__class__.__name__,
-                    attempt + 1,
-                    max_tries,
-                    type(exc).__name__,
-                    str(exc)[:120],
-                    sleep,
+                msg = (
+                    f"[retry:{self.__class__.__name__}] "
+                    f"attempt {attempt + 1}/{max_tries} failed: "
+                    f"{type(exc).__name__}: {str(exc)[:120]} "
+                    f"-- sleeping {sleep}s"
                 )
+                logger.warning(msg)
+                print(msg, flush=True)  # always visible to user
                 time.sleep(sleep)
         raise last_err  # type: ignore[misc]
