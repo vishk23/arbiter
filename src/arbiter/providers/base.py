@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json as _json
 import logging
 import time
 from abc import ABC, abstractmethod
@@ -23,15 +24,53 @@ class BaseProvider(ABC):
     def _init_client(self, config: ProviderConfig) -> None:
         """Instantiate the vendor SDK client."""
 
+    # -- abstract implementation methods (overridden by each provider) ------
+
     @abstractmethod
-    def call(self, system: str, user: str, max_tokens: int = 4000) -> str:
+    def _call_impl(self, system: str, user: str, max_tokens: int = 4000) -> str:
         """Single LLM call. Must return a non-empty string."""
 
     @abstractmethod
-    def call_structured(
+    def _call_structured_impl(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
         """LLM call that returns a JSON dict conforming to *schema*."""
+
+    # -- public API (wraps impl methods with logging) ----------------------
+
+    def _provider_label(self) -> str:
+        return self.__class__.__name__.replace("Provider", "")
+
+    def call(self, system: str, user: str, max_tokens: int = 4000) -> str:
+        label = self._provider_label()
+        print(f"  Calling {label} ({self.model})...", flush=True)
+        logger.debug("call start: %s %s", label, self.model)
+        t0 = time.time()
+        result = self._call_impl(system, user, max_tokens)
+        elapsed = time.time() - t0
+        print(
+            f"  Response received ({len(result):,} chars, {elapsed:.1f}s)",
+            flush=True,
+        )
+        logger.debug("call end: %s %s %d chars %.1fs", label, self.model, len(result), elapsed)
+        return result
+
+    def call_structured(
+        self, system: str, user: str, schema: dict, max_tokens: int = 4000
+    ) -> dict:
+        label = self._provider_label()
+        print(f"  Calling {label} ({self.model}) [structured]...", flush=True)
+        logger.debug("call_structured start: %s %s", label, self.model)
+        t0 = time.time()
+        result = self._call_structured_impl(system, user, schema, max_tokens)
+        elapsed = time.time() - t0
+        chars = len(_json.dumps(result))
+        print(
+            f"  Response received ({chars:,} chars, {elapsed:.1f}s)",
+            flush=True,
+        )
+        logger.debug("call_structured end: %s %s %d chars %.1fs", label, self.model, chars, elapsed)
+        return result
 
     def call_with_retry(
         self, system: str, user: str, max_tokens: int = 4000

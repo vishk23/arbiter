@@ -37,7 +37,7 @@ class AnthropicProvider(BaseProvider):
 
     # ── plain text call ───────────────────────────────────────────────
 
-    def call(self, system: str, user: str, max_tokens: int = 4000) -> str:
+    def _call_impl(self, system: str, user: str, max_tokens: int = 4000) -> str:
         kwargs: dict = dict(
             model=self.model,
             max_tokens=max_tokens,
@@ -59,14 +59,14 @@ class AnthropicProvider(BaseProvider):
 
     # ── structured (JSON) call ────────────────────────────────────────
 
-    def call_structured(
+    def _call_structured_impl(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
         augmented_system = (
             f"{system}\n\nYou MUST respond with valid JSON matching this schema:\n"
             f"```json\n{json.dumps(schema, indent=2)}\n```"
         )
-        raw = self.call(augmented_system, user, max_tokens)
+        raw = self._call_impl(augmented_system, user, max_tokens)
 
         # Try to extract JSON from the response
         parsed = self._extract_json(raw)

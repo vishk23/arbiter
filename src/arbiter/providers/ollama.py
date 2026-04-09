@@ -29,7 +29,7 @@ class OllamaProvider(BaseProvider):
 
     # ── plain text call ───────────────────────────────────────────────
 
-    def call(self, system: str, user: str, max_tokens: int = 4000) -> str:
+    def _call_impl(self, system: str, user: str, max_tokens: int = 4000) -> str:
         resp = self._client.chat(
             model=self.model,
             messages=[
@@ -42,7 +42,7 @@ class OllamaProvider(BaseProvider):
 
     # ── structured (JSON) call ────────────────────────────────────────
 
-    def call_structured(
+    def _call_structured_impl(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
         augmented_system = (
@@ -50,7 +50,7 @@ class OllamaProvider(BaseProvider):
             f"```json\n{json.dumps(schema, indent=2)}\n```\n"
             "Output ONLY the JSON object, no other text."
         )
-        raw = self.call(augmented_system, user, max_tokens)
+        raw = self._call_impl(augmented_system, user, max_tokens)
 
         # Try to parse JSON
         try:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 import textwrap
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -365,8 +366,9 @@ def run_init(
         console.print(f"  Extracted {len(source_text):,} characters from PDF.")
     elif topic:
         console.print(f"\n[bold blue]Step 1:[/bold blue] Generating topic summary from description")
-        with console.status("[bold green]Thinking...[/bold green]"):
-            topic_info = _generate_topic(topic, provider)
+        t0 = time.time()
+        topic_info = _generate_topic(topic, provider)
+        console.print(f"  Done ({time.time() - t0:.1f}s)")
         topic_name = topic_info.get("name", topic)
         topic_summary = topic_info.get("summary", topic)
         counter_thesis = topic_info.get("counter_thesis")
@@ -381,8 +383,9 @@ def run_init(
                 "\n[bold]Describe the topic to debate[/bold]"
             )
             console.print(f"\n[bold blue]Step 1:[/bold blue] Generating topic summary")
-            with console.status("[bold green]Thinking...[/bold green]"):
-                topic_info = _generate_topic(topic_input, provider)
+            t0 = time.time()
+            topic_info = _generate_topic(topic_input, provider)
+            console.print(f"  Done ({time.time() - t0:.1f}s)")
             topic_name = topic_info.get("name", topic_input)
             topic_summary = topic_info.get("summary", topic_input)
             counter_thesis = topic_info.get("counter_thesis")
@@ -397,21 +400,22 @@ def run_init(
         console.print(f"\n[bold blue]Step 2:[/bold blue] Extracting claims from source text")
         from arbiter.init.pdf_reader import extract_claims
 
-        with console.status("[bold green]Extracting claims...[/bold green]"):
-            claims = extract_claims(source_text, provider_for_claims)
-        console.print(f"  Found [bold]{len(claims)}[/bold] claims.")
+        t0 = time.time()
+        claims = extract_claims(source_text, provider_for_claims)
+        console.print(f"  Found [bold]{len(claims)}[/bold] claims ({time.time() - t0:.1f}s).")
 
         # Derive topic info from the first few claims if from PDF
         if not topic_name:
             # Use the LLM to name the topic from the claims
-            with console.status("[bold green]Summarising topic...[/bold green]"):
-                claims_text = "\n".join(
-                    f'{c["id"]}: {c["claim"]}' for c in claims[:15]
-                )
-                topic_info = _generate_topic(
-                    f"A document with these claims:\n{claims_text}",
-                    provider,
-                )
+            t0 = time.time()
+            claims_text = "\n".join(
+                f'{c["id"]}: {c["claim"]}' for c in claims[:15]
+            )
+            topic_info = _generate_topic(
+                f"A document with these claims:\n{claims_text}",
+                provider,
+            )
+            console.print(f"  Topic summarised ({time.time() - t0:.1f}s)")
             topic_name = topic_info.get("name", "Unnamed Topic")
             topic_summary = topic_info.get("summary", "")
             counter_thesis = topic_info.get("counter_thesis")
@@ -421,9 +425,9 @@ def run_init(
         console.print(f"\n[bold blue]Step 2:[/bold blue] Generating claims from topic description")
         from arbiter.init.pdf_reader import extract_claims
 
-        with console.status("[bold green]Generating claims...[/bold green]"):
-            claims = extract_claims(topic_summary, provider)
-        console.print(f"  Generated [bold]{len(claims)}[/bold] claims.")
+        t0 = time.time()
+        claims = extract_claims(topic_summary, provider)
+        console.print(f"  Generated [bold]{len(claims)}[/bold] claims ({time.time() - t0:.1f}s).")
 
     # -- Interactive: show claims -----------------------------------------------
     if claims and interactive:
@@ -456,15 +460,16 @@ def run_init(
         )
 
         # Run all three in parallel
-        with console.status("[bold green]Analysing...[/bold green]"):
-            with ThreadPoolExecutor(max_workers=3) as pool:
-                fut_contra = pool.submit(identify_contradictions, claims, provider_for_z3)
-                fut_terms = pool.submit(identify_key_terms, claims, provider_for_gate)
-                fut_sides = pool.submit(suggest_sides, claims, provider_for_agents)
+        t0 = time.time()
+        with ThreadPoolExecutor(max_workers=3) as pool:
+            fut_contra = pool.submit(identify_contradictions, claims, provider_for_z3)
+            fut_terms = pool.submit(identify_key_terms, claims, provider_for_gate)
+            fut_sides = pool.submit(suggest_sides, claims, provider_for_agents)
 
-                contradictions = fut_contra.result()
-                key_terms = fut_terms.result()
-                sides_info = fut_sides.result()
+            contradictions = fut_contra.result()
+            key_terms = fut_terms.result()
+            sides_info = fut_sides.result()
+        console.print(f"  Analysis complete ({time.time() - t0:.1f}s)")
 
         console.print(f"  Contradictions: [bold]{len(contradictions)}[/bold]")
         console.print(f"  Key terms: [bold]{len(key_terms)}[/bold]")
@@ -476,12 +481,13 @@ def run_init(
         console.print(f"\n[bold blue]Step 3b:[/bold blue] Consolidating {len(claims)} claims into core theses")
         from arbiter.init.claim_extractor import consolidate_claims
 
-        with console.status("[bold green]Consolidating...[/bold green]"):
-            try:
-                consolidated_theses = consolidate_claims(claims, provider)
-            except Exception as exc:
-                logger.warning("Claim consolidation failed: %s", exc)
-                consolidated_theses = []
+        t0 = time.time()
+        try:
+            consolidated_theses = consolidate_claims(claims, provider)
+        except Exception as exc:
+            logger.warning("Claim consolidation failed: %s", exc)
+            consolidated_theses = []
+        console.print(f"  Consolidation done ({time.time() - t0:.1f}s)")
 
         if consolidated_theses:
             console.print(f"  Consolidated into [bold]{len(consolidated_theses)}[/bold] core theses")
@@ -555,51 +561,53 @@ def run_init(
 
     # -- Phase A: escape routes + sources (needed by later phases) ---------------
     futures_a: dict[str, Any] = {}
-    with console.status("[bold green]Phase A: sources + escape routes...[/bold green]"):
-        with ThreadPoolExecutor(max_workers=3) as pool:
+    console.print("  Phase A: sources + escape routes...")
+    t0_phase_a = time.time()
+    with ThreadPoolExecutor(max_workers=3) as pool:
 
-            # Anticipate escape routes BEFORE gate rules
-            if topology in ("gated", "adversarial") and contradictions:
-                def _gen_escape_routes() -> list[dict]:
-                    try:
-                        from arbiter.init.gate_builder import anticipate_escape_routes
-                        return anticipate_escape_routes(
-                            contradictions, key_terms, provider_for_gate,
-                        )
-                    except Exception as exc:
-                        logger.warning("Escape route anticipation failed: %s", exc)
-                        return []
-
-                futures_a["escape_routes"] = pool.submit(_gen_escape_routes)
-
-            # Sources
-            def _gen_sources() -> tuple[str | None, list[str]]:
+        # Anticipate escape routes BEFORE gate rules
+        if topology in ("gated", "adversarial") and contradictions:
+            def _gen_escape_routes() -> list[dict]:
                 try:
-                    from arbiter.init.source_finder import find_sources
-                    src_dir = str(out_dir / "sources")
-                    paths = find_sources(
-                        claims, key_terms, src_dir, provider_for_sources,
-                        web_searcher=None,
+                    from arbiter.init.gate_builder import anticipate_escape_routes
+                    return anticipate_escape_routes(
+                        contradictions, key_terms, provider_for_gate,
                     )
-                    return (src_dir, paths) if paths else (None, [])
                 except Exception as exc:
-                    logger.warning("Source finding failed (Tavily unavailable?): %s", exc)
-                    return None, []
+                    logger.warning("Escape route anticipation failed: %s", exc)
+                    return []
 
-            futures_a["sources"] = pool.submit(_gen_sources)
+            futures_a["escape_routes"] = pool.submit(_gen_escape_routes)
 
-        # Collect Phase A results
-        for name, fut in futures_a.items():
+        # Sources
+        def _gen_sources() -> tuple[str | None, list[str]]:
             try:
-                result = fut.result()
+                from arbiter.init.source_finder import find_sources
+                src_dir = str(out_dir / "sources")
+                paths = find_sources(
+                    claims, key_terms, src_dir, provider_for_sources,
+                    web_searcher=None,
+                )
+                return (src_dir, paths) if paths else (None, [])
             except Exception as exc:
-                logger.warning("Phase A future '%s' raised: %s", name, exc)
-                result = None
+                logger.warning("Source finding failed (Tavily unavailable?): %s", exc)
+                return None, []
 
-            if name == "escape_routes" and result:
-                escape_routes = result
-            elif name == "sources" and result:
-                sources_path, source_paths_list = result
+        futures_a["sources"] = pool.submit(_gen_sources)
+
+    # Collect Phase A results
+    for name, fut in futures_a.items():
+        try:
+            result = fut.result()
+        except Exception as exc:
+            logger.warning("Phase A future '%s' raised: %s", name, exc)
+            result = None
+
+        if name == "escape_routes" and result:
+            escape_routes = result
+        elif name == "sources" and result:
+            sources_path, source_paths_list = result
+    console.print(f"  Phase A complete ({time.time() - t0_phase_a:.1f}s)")
 
     # -- Phase A2: classify sources (needs sources) -----------------------------
     if source_paths_list:
@@ -622,112 +630,114 @@ def run_init(
 
     # -- Phase B: main generation (agents, gate, rubric, Z3, privileged ctx) ----
     futures_b: dict[str, Any] = {}
-    with console.status("[bold green]Phase B: agents, gate, rubric, Z3...[/bold green]"):
-        with ThreadPoolExecutor(max_workers=5) as pool:
+    console.print("  Phase B: agents, gate, rubric, Z3...")
+    t0_phase_b = time.time()
+    with ThreadPoolExecutor(max_workers=5) as pool:
 
-            # Z3 module
-            if use_z3:
-                def _gen_z3() -> dict | None:
-                    try:
-                        from arbiter.init.z3_generator import generate_z3_module
-                        z3_out = str(out_dir / "z3_module.py")
-                        return generate_z3_module(
-                            contradictions, claims, provider_for_z3, z3_out,
-                        )
-                    except Exception as exc:
-                        logger.warning("Z3 generation failed: %s", exc)
-                        return None
-
-                futures_b["z3"] = pool.submit(_gen_z3)
-
-            # Agent design (now with consolidated theses, key terms, contradictions)
-            def _gen_agents() -> dict:
+        # Z3 module
+        if use_z3:
+            def _gen_z3() -> dict | None:
                 try:
-                    from arbiter.init.agent_designer import design_agents
-                    return design_agents(
-                        claims,
-                        attack_angles,
-                        providers_config,
-                        provider_for_agents,
-                        num_agents=max(4, len(attack_angles) + 2),
-                        consolidated_theses=consolidated_theses,
-                        key_terms=key_terms,
-                        contradictions=contradictions,
-                        counter_thesis=counter_thesis,
+                    from arbiter.init.z3_generator import generate_z3_module
+                    z3_out = str(out_dir / "z3_module.py")
+                    return generate_z3_module(
+                        contradictions, claims, provider_for_z3, z3_out,
                     )
                 except Exception as exc:
-                    logger.warning("Agent design failed, using defaults: %s", exc)
-                    return {}
+                    logger.warning("Z3 generation failed: %s", exc)
+                    return None
 
-            futures_b["agents"] = pool.submit(_gen_agents)
+            futures_b["z3"] = pool.submit(_gen_z3)
 
-            # Gate rules (now with escape routes)
-            if topology in ("gated", "adversarial"):
-                def _gen_gate() -> dict | None:
-                    try:
-                        from arbiter.init.gate_builder import generate_gate_rules
-                        return generate_gate_rules(
-                            contradictions, key_terms, provider_for_gate,
-                            escape_routes=escape_routes or None,
-                        )
-                    except Exception as exc:
-                        logger.warning("Gate generation failed: %s", exc)
-                        return None
-
-                futures_b["gate"] = pool.submit(_gen_gate)
-
-            # Rubric (now with counter_thesis)
-            def _gen_rubric() -> list[dict]:
-                try:
-                    from arbiter.init.rubric_builder import design_rubric
-                    return design_rubric(
-                        claims, attack_angles, provider_for_rubric,
-                        counter_thesis=counter_thesis,
-                    )
-                except Exception as exc:
-                    logger.warning("Rubric generation failed, using defaults: %s", exc)
-                    return _DEFAULT_RUBRIC
-
-            futures_b["rubric"] = pool.submit(_gen_rubric)
-
-            # Privileged context (needs sources + classifications)
-            def _gen_privileged_context() -> dict[str, str]:
-                try:
-                    from arbiter.init.claim_extractor import build_privileged_context
-                    return build_privileged_context(
-                        claims,
-                        contradictions,
-                        key_terms,
-                        sources=source_paths_list or None,
-                        provider=provider,
-                        source_classifications=source_classifications,
-                        counter_thesis=counter_thesis,
-                    )
-                except Exception as exc:
-                    logger.warning("Privileged context generation failed: %s", exc)
-                    return {}
-
-            futures_b["privileged_context"] = pool.submit(_gen_privileged_context)
-
-        # Collect Phase B results
-        privileged_context: dict[str, str] = {}
-        for name, fut in futures_b.items():
+        # Agent design (now with consolidated theses, key terms, contradictions)
+        def _gen_agents() -> dict:
             try:
-                result = fut.result()
+                from arbiter.init.agent_designer import design_agents
+                return design_agents(
+                    claims,
+                    attack_angles,
+                    providers_config,
+                    provider_for_agents,
+                    num_agents=max(4, len(attack_angles) + 2),
+                    consolidated_theses=consolidated_theses,
+                    key_terms=key_terms,
+                    contradictions=contradictions,
+                    counter_thesis=counter_thesis,
+                )
             except Exception as exc:
-                logger.warning("Phase B future '%s' raised: %s", name, exc)
-                result = None
+                logger.warning("Agent design failed, using defaults: %s", exc)
+                return {}
 
-            if name == "z3" and result:
-                z3_module_path = str(out_dir / "z3_module.py")
-            elif name == "agents" and result:
-                agents_result = result
-            elif name == "gate":
-                gate_rules = result
-            elif name == "rubric" and result:
-                rubric = result
-            elif name == "privileged_context" and result:
-                privileged_context = result
+        futures_b["agents"] = pool.submit(_gen_agents)
+
+        # Gate rules (now with escape routes)
+        if topology in ("gated", "adversarial"):
+            def _gen_gate() -> dict | None:
+                try:
+                    from arbiter.init.gate_builder import generate_gate_rules
+                    return generate_gate_rules(
+                        contradictions, key_terms, provider_for_gate,
+                        escape_routes=escape_routes or None,
+                    )
+                except Exception as exc:
+                    logger.warning("Gate generation failed: %s", exc)
+                    return None
+
+            futures_b["gate"] = pool.submit(_gen_gate)
+
+        # Rubric (now with counter_thesis)
+        def _gen_rubric() -> list[dict]:
+            try:
+                from arbiter.init.rubric_builder import design_rubric
+                return design_rubric(
+                    claims, attack_angles, provider_for_rubric,
+                    counter_thesis=counter_thesis,
+                )
+            except Exception as exc:
+                logger.warning("Rubric generation failed, using defaults: %s", exc)
+                return _DEFAULT_RUBRIC
+
+        futures_b["rubric"] = pool.submit(_gen_rubric)
+
+        # Privileged context (needs sources + classifications)
+        def _gen_privileged_context() -> dict[str, str]:
+            try:
+                from arbiter.init.claim_extractor import build_privileged_context
+                return build_privileged_context(
+                    claims,
+                    contradictions,
+                    key_terms,
+                    sources=source_paths_list or None,
+                    provider=provider,
+                    source_classifications=source_classifications,
+                    counter_thesis=counter_thesis,
+                )
+            except Exception as exc:
+                logger.warning("Privileged context generation failed: %s", exc)
+                return {}
+
+        futures_b["privileged_context"] = pool.submit(_gen_privileged_context)
+
+    # Collect Phase B results
+    privileged_context: dict[str, str] = {}
+    for name, fut in futures_b.items():
+        try:
+            result = fut.result()
+        except Exception as exc:
+            logger.warning("Phase B future '%s' raised: %s", name, exc)
+            result = None
+
+        if name == "z3" and result:
+            z3_module_path = str(out_dir / "z3_module.py")
+        elif name == "agents" and result:
+            agents_result = result
+        elif name == "gate":
+            gate_rules = result
+        elif name == "rubric" and result:
+            rubric = result
+        elif name == "privileged_context" and result:
+            privileged_context = result
+    console.print(f"  Phase B complete ({time.time() - t0_phase_b:.1f}s)")
 
     # Fall back to defaults if agent design produced nothing
     if not agents_result:
@@ -758,23 +768,24 @@ def run_init(
     # -- Phase C: gate test generation + self-calibration -----------------------
     if gate_rules and gate_rules.get("stipulated_rules"):
         console.print("\n[bold blue]Step 4b:[/bold blue] Gate test generation + self-calibration")
-        with console.status("[bold green]Generating and calibrating gate tests...[/bold green]"):
-            try:
-                from arbiter.init.gate_builder import (
-                    generate_gate_tests,
-                    calibrate_gate_rules,
-                )
-                gate_tests = generate_gate_tests(gate_rules, claims, provider_for_gate)
+        t0 = time.time()
+        try:
+            from arbiter.init.gate_builder import (
+                generate_gate_tests,
+                calibrate_gate_rules,
+            )
+            gate_tests = generate_gate_tests(gate_rules, claims, provider_for_gate)
 
-                # Self-calibration loop
-                gate_rules, gate_tests, calibration_report = calibrate_gate_rules(
-                    gate_rules, gate_tests, provider_for_gate, max_retries=2,
-                )
+            # Self-calibration loop
+            gate_rules, gate_tests, calibration_report = calibrate_gate_rules(
+                gate_rules, gate_tests, provider_for_gate, max_retries=2,
+            )
 
-                if calibration_report:
-                    _show_calibration(calibration_report)
-            except Exception as exc:
-                logger.warning("Gate test/calibration failed: %s", exc)
+            if calibration_report:
+                _show_calibration(calibration_report)
+        except Exception as exc:
+            logger.warning("Gate test/calibration failed: %s", exc)
+        console.print(f"  Gate calibration done ({time.time() - t0:.1f}s)")
 
     # -- Interactive: show agents -----------------------------------------------
     if interactive:
