@@ -150,7 +150,7 @@ def _make_provider(
     reasoning = None
     if "opus" in provider_model or "claude" in provider_model:
         thinking = {"type": "enabled", "budget_tokens": _THINKING_BUDGETS.get(effort, 8000)}
-    if "gpt-5" in provider_model or "gpt-4o" in provider_model:
+    if "gpt-5" in provider_model or "o1" in provider_model or "o3" in provider_model:
         reasoning = {"effort": effort}
     if "gemini" in provider_model:
         thinking = {"thinking_level": _THINKING_LEVELS.get(effort, "HIGH")}
