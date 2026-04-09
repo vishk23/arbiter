@@ -326,14 +326,15 @@ def judge(
         ..., help="Path to a debate output JSON file."
     ),
     config: Optional[Path] = typer.Option(
-        None, "--config", "-c", help="Arbiter config (for rubric + providers)."
+        None, "--config", "-c", help="Arbiter config (for rubric + providers). Auto-detected from output if omitted."
     ),
 ) -> None:
     """Run the judge panel on a completed debate."""
     _load_dotenv()
 
-    from arbiter.config import load_config
+    from arbiter.config import load_config, JudgeConfig, ProviderConfig
     from arbiter.judge.panel import JudgePanel
+    from arbiter.providers import get_provider
 
     data = json.loads(output.read_text())
     state = data.get("state", data)
@@ -344,21 +345,38 @@ def judge(
         for t in state.get("transcript", [])
     )
 
-    if config is None:
-        console.print(
-            "[red]--config is required for judge (provides rubric + providers)[/red]"
-        )
-        raise typer.Exit(1)
-
-    cfg = load_config(config)
+    topic_name = ""
     providers = {}
-    from arbiter.providers import get_provider
+    judge_cfg = None
 
-    for name, pcfg in cfg.providers.items():
-        providers[name] = get_provider(name, pcfg)
+    if config is not None:
+        # Explicit config file provided
+        cfg = load_config(config)
+        topic_name = cfg.topic.name
+        for name, pcfg in cfg.providers.items():
+            providers[name] = get_provider(name, pcfg)
+        judge_cfg = cfg.judge
+    else:
+        # Try to extract judge config from output metadata
+        metadata = data.get("metadata", {})
+        embedded_judge = metadata.get("judge_config")
+        embedded_providers = metadata.get("providers_config")
 
-    panel = JudgePanel(cfg.judge, providers)
-    result = panel.judge(transcript_text, cfg.topic.name)
+        if embedded_judge and embedded_providers:
+            console.print("[dim]Using embedded judge config from output file.[/dim]")
+            topic_name = metadata.get("topic", "")
+            judge_cfg = JudgeConfig(**embedded_judge)
+            for name, pcfg_dict in embedded_providers.items():
+                providers[name] = get_provider(name, ProviderConfig(**pcfg_dict))
+        else:
+            console.print(
+                "[red]No --config provided and output file has no embedded "
+                "judge config. Re-run the debate or pass --config.[/red]"
+            )
+            raise typer.Exit(1)
+
+    panel = JudgePanel(judge_cfg, providers)
+    result = panel.judge(transcript_text, topic_name)
 
     console.print_json(json.dumps(result, indent=2, default=str))
 

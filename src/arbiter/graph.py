@@ -466,9 +466,16 @@ class DebateEngine:
 
         if "json" in formats:
             metadata = {
+                "topic": self.config.topic.name,
                 "topology": self.config.topology,
+                "sides": self.config.judge.sides,
                 "rounds_run": state["round_idx"] - 1,
                 "timestamp": ts,
+                "judge_config": self.config.judge.model_dump(),
+                "providers_config": {
+                    name: pcfg.model_dump()
+                    for name, pcfg in self.config.providers.items()
+                },
             }
             if self.z3_plugin:
                 metadata["z3_findings"] = self.z3_plugin.verify()
