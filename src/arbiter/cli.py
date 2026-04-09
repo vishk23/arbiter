@@ -18,11 +18,19 @@ console = Console()
 
 
 def _load_dotenv() -> None:
-    """Best-effort load .env from cwd and common locations."""
+    """Best-effort load .env from cwd, parent dirs, and common locations."""
     try:
         from dotenv import load_dotenv
+        from pathlib import Path
 
-        load_dotenv()
+        # Try CWD first, then walk up, then common locations
+        load_dotenv()  # CWD
+        for candidate in [
+            Path.home() / ".env",
+            Path.home() / "VKDEV" / "VK-KB" / ".env",
+        ]:
+            if candidate.exists():
+                load_dotenv(candidate, override=False)
     except ImportError:
         pass
 

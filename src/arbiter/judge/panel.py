@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-MIN_JUDGES_FOR_VERDICT = 2
+MIN_JUDGES_FOR_VERDICT = 1  # 1 for single-provider setups; 2+ recommended
 
 
 class JudgePanel:

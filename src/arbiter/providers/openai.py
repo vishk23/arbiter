@@ -59,9 +59,30 @@ class OpenAIProvider(BaseProvider):
 
     # ── structured (JSON) call ────────────────────────────────────────
 
+    @staticmethod
+    def _add_additional_properties_false(schema: dict) -> dict:
+        """OpenAI strict mode requires additionalProperties: false on every object."""
+        if not isinstance(schema, dict):
+            return schema
+        if schema.get("type") == "object":
+            schema["additionalProperties"] = False
+            if "required" not in schema:
+                schema["required"] = list(schema.get("properties", {}).keys())
+        for v in schema.values():
+            if isinstance(v, dict):
+                OpenAIProvider._add_additional_properties_false(v)
+            elif isinstance(v, list):
+                for item in v:
+                    if isinstance(item, dict):
+                        OpenAIProvider._add_additional_properties_false(item)
+        return schema
+
     def call_structured(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
+        import copy
+        strict_schema = self._add_additional_properties_false(copy.deepcopy(schema))
+
         kwargs: dict = dict(
             model=self.model,
             input=[
@@ -73,7 +94,8 @@ class OpenAIProvider(BaseProvider):
                 "format": {
                     "type": "json_schema",
                     "name": "structured_output",
-                    "schema": schema,
+                    "schema": strict_schema,
+                    "strict": True,
                 }
             },
         )

@@ -139,9 +139,11 @@ class DebateEngine:
         )
         g.add_edge("finalize", END)
 
-        # Checkpointer
-        db_path = self.config.output.checkpoint_db
-        checkpointer = SqliteSaver.from_conn_string(db_path)
+        # Checkpointer — use InMemorySaver for reliability; SqliteSaver
+        # requires async context in newer LangGraph versions.
+        from langgraph.checkpoint.memory import InMemorySaver
+
+        checkpointer = InMemorySaver()
         return g.compile(checkpointer=checkpointer)
 
     # ================================================================== #
