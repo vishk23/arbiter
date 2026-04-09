@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
+import yaml
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Confirm, Prompt
@@ -786,6 +787,19 @@ def run_init(
         except Exception as exc:
             logger.warning("Gate test/calibration failed: %s", exc)
         console.print(f"  Gate calibration done ({time.time() - t0:.1f}s)")
+
+        # Save gate tests to disk for later use by `arbiter calibrate`
+        if gate_tests:
+            gate_tests_path = out_dir / "gate_tests.yaml"
+            gate_tests_path.write_text(
+                yaml.dump(
+                    {"test_cases": gate_tests},
+                    default_flow_style=False,
+                    sort_keys=False,
+                    allow_unicode=True,
+                )
+            )
+            console.print(f"  Gate tests saved to {gate_tests_path}")
 
     # -- Interactive: show agents -----------------------------------------------
     if interactive:
