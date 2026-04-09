@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Optional
 
@@ -15,6 +16,30 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 console = Console()
+
+
+@app.callback()
+def _main(
+    verbose: bool = typer.Option(
+        False,
+        "--verbose",
+        "-v",
+        help="Enable verbose/debug output (DEBUG logging + detailed API call info).",
+    ),
+) -> None:
+    """Formally verified multi-agent debates."""
+    if verbose:
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format="%(asctime)s %(name)s %(levelname)s: %(message)s",
+            datefmt="%H:%M:%S",
+        )
+        logging.getLogger("arbiter").setLevel(logging.DEBUG)
+    else:
+        logging.basicConfig(
+            level=logging.WARNING,
+            format="%(levelname)s: %(message)s",
+        )
 
 
 def _load_dotenv() -> None:
