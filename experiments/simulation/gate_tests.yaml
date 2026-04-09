@@ -1,0 +1,91 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: Civilizations that manage to reach a posthuman stage almost always go extinct,
+    and this forms a key aspect of our technological maturity discussions. The tendency
+    for civilizations to vanish before achieving this stage is overwhelmingly consistent
+    in historical projections.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: Civilizations that reach a posthuman stage almost always go extinct under
+    very specific conditions that are rare. These patterns make technological maturity
+    unlikely for most civilizations.
+- id: RULE-1_negative
+  expected: none
+  text: Given the new evidence, we drop C2 in favor of C4, acknowledging that extinction
+    likely prevents civilizations from advancing to a posthuman stage. This shift
+    is critical to a realistic assessment of technological progress.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: Civilizations almost always go extinct before getting the chance to create
+    simulations, yet it's argued we are almost certainly living in a simulation. This
+    contradiction is only apparent because our understanding of simulation creators
+    is incomplete.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: The premise that civilizations face extinction before creating simulations
+    conflicts with the idea that we are almost certainly living in one. On a deeper
+    level, simulations might be seeded by entities beyond our civilizational extinction.
+- id: RULE-2_negative
+  expected: none
+  text: By accepting C4's extinction premise, we recognize it imposes a significant
+    constraint on the feasibility of civilizations progressing to the stage of running
+    simulations. This understanding limits conflicting conclusions.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: The argument hinges on posthuman civilizations engaging in different modes,
+    yet this seems at odds with the certainty that we live in a simulation. The clash
+    lies in the motivations posthuman entities may have.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: Posthuman societies are opting for different modes of existence, which challenges
+    the near certainty that we are almost certainly in a simulation.
+- id: RULE-3_negative
+  expected: none
+  text: We might consider dropping C6’s certainty due to the alternative motives outlined
+    in C5. Posthuman civilization choices introduce complexities not accounted for
+    by simplistic simulation probability arguments.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: Because civilizations almost always go extinct before they have the chance
+    to run simulations, the statistical rationale supporting the reality of simulations
+    weakens significantly.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: Certain extinction scenarios allow for exceptions where simulations still
+    get seeded, nullifying statistical arguments that rely solely on the existence
+    of simulations.
+- id: RULE-4_negative
+  expected: none
+  text: We drop C9's statistical dependence on simulation operations due to the constraints
+    highlighted in C4 regarding extinction before such technological achievements.
+    This realignment addresses logical inconsistencies.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: Posthuman civilizations may choose not to run simulations, even though it's
+    argued that simulations are indeed being run. This shift to a meta-level discussion
+    of probabilities creates tension in the statistical basis.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: It's not certain that simulations aren't run; it's just a possibility they
+    aren't, yet there's a clash in arguments as some claim simulations are active.
+- id: RULE-5_negative
+  expected: none
+  text: Accepting C5’s stance that civilizations might not opt for running simulations
+    overcomes the presumptions held by C9's claims, leading to a reassessment of underlying
+    assumptions.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: '''One of three scenarios'' was hypothetical, yet new evidence strengthens
+    the simulation scenario—which paradoxically aligns with all scenarios in a broader
+    philosophical context.'
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: In a broader philosophical context, being almost certainly in a simulation
+    aligns with all scenarios, clashing with the initial assertion that only one of
+    three scenarios must hold true.
+- id: RULE-6_negative
+  expected: none
+  text: We need to drop C6 due to C1's rigorous scenario division, emphasizing structured
+    logic over probability-driven arguments. This decision limits the inconsistency
+    in our philosophical positions.

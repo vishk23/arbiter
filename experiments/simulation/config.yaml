@@ -1,0 +1,409 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: Simulation Argument
+  summary: |-
+    Nick Bostrom's Simulation Argument is a philosophical proposition suggesting that one of three scenarios must be true regarding the nature of reality and advanced civilizations. The argument begins by considering that if technological progress continues, civilizations could reach a 'posthuman' stage with immense computational power. In such a stage, they might run 'ancestor simulations,' detailed reconstructions of their evolutionary history, including conscious beings, akin to us.
+
+    Bostrom posits three key propositions: (1) Civilizations almost always go extinct before reaching this advanced stage, (2) Posthuman civilizations reach this stage but choose not to run simulations of their ancestors, or (3) We are almost certainly living in a computer simulation. The argument operates on substrate independence, the idea that consciousness can emerge from different materials, not just biological brains. Thus, a sufficiently advanced computer could theoretically host conscious beings.
+
+    A significant part of the argument involves probabilistic reasoning. Given the vast number of potential simulated realities versus a single actual reality, if simulations are possible and likely to be created, then statistically, it is probable that we are inside one. This elevates the third proposition: if many ancestor simulations exist, our existence within one becomes more likely than within a lone physical universe.
+
+    The argument challenges our understanding of consciousness and reality, sparking debates about the ethical implications of creating such simulations and the nature of technological advancement. Whether we are 'real' or simulated carries profound philosophical and existential implications, reshaping questions about identity, purpose, and our understanding of the universe.
+  counter_thesis: |-
+    A Skeptic of Bostrom's Simulation Argument might contend that it fundamentally relies on speculative assumptions about technological advancement and the nature of consciousness. Firstly, it assumes civilizations will inevitably progress to a 'posthuman' stage capable of creating vast simulations, which may be technically or ethically constrained.
+
+    Secondly, the notion of substrate independence is not universally accepted; consciousness might uniquely emerge from biological processes that cannot be replicated digitally. Moreover, the probabilistic reasoning can be questioned; just because something is possible does not necessitate its prevalence or our participation within it.
+
+    Furthermore, the argument neglects practical considerations, like resource consumption and ethical stances against simulations. It also leans heavily on the anthropic principle, assuming our observation status without robust empirical grounding. Thus, the argument is criticized as more of a philosophical thought experiment rather than a convincing epistemological reality.
+  privileged_context:
+    Skeptic: "### Skeptic Context\n\n1. **Contradictions to Exploit:**\n   - **C2 vs. C4:** Highlight\
+      \ that C2 posits potential technological progression to posthuman stages, yet C4 asserts civilizations\
+      \ nearly always become extinct before such progression. Ask how these contradicting perspectives\
+      \ coexist within the theory's framework.\n   - **C4 vs. C6:** Stress that C4's claim undermines\
+      \ C6's assertion that we are probably in a simulation if civilizations indeed don't survive long\
+      \ enough to run these simulations.\n   - **C5 vs. C6 and C9:** C5 suggests civilizations might opt\
+      \ out of running simulations. Use this to call into question C6 and C9, which rely on the existence\
+      \ of such simulations.\n   - **C1 vs. C6:** Question how C6 can assert a definitive scenario when\
+      \ C1 presents three mutually exclusive possibilities.\n\n2. **Objection Patterns from Counter-Evidence:**\n\
+      \   - Emphasize the speculative nature of the progression to posthuman stages and the technical\
+      \ or ethical constraints potentially preventing such advancements.\n   - Argue against substrate\
+      \ independence of consciousness (C7). Many scientists believe consciousness is inherently tied to\
+      \ biological processes, not easily replicated digitally.\n   \n3. **Precise Language:**\n   - \"\
+      In light of C4, how can claim C6 maintain its validity when the probability of reaching a simulation-capable\
+      \ stage is contradicted by extinction rates?\"\n   - \"Does acknowledging that civilizations 'may\
+      \ choose not to run simulations' not directly conflict with asserting we are 'almost certainly'\
+      \ in a simulation?\"\n\n4. **Probing Questions:**\n   - \"What empirical evidence supports the assertion\
+      \ that civilizations reach a posthuman stage without extinction or choosing alternate paths?\"\n\
+      \   - \"If the running of ancestor simulations is discretionary, on what basis does the theory rely\
+      \ on an assumed proliferation of these simulations?\"\n   - \"How does the theory address the environmental\
+      \ and ethical constraints limiting the viability or acceptance of simulation technologies?\""
+    Proponent: |-
+      ### Proponent Context
+
+      1. **Framework of Claims:**
+         - **C1:** Begin with the framework suggesting 'one of three scenarios must be true' about reality and advanced civilizations.
+         - **C2:** Argue for the feasibility of civilizations reaching a 'posthuman' stage, drawing on historical technological trends.
+         - **C3:** Emphasize the curiosity and exploratory nature of civilizations leading to the creation of 'ancestor simulations.'
+         - **C6:** Support the logical probability of us living in a simulation, assuming the feasibility of simulation creation.
+         - **C7 and C8:** Use definitional claims about consciousness to argue advanced computers can host conscious beings, supporting the possibility of simulated realities.
+         - **C9:** Lean on statistical reasoning provided in the theory to claim our probable participation in a simulated experience if you accept simulation feasibility.
+
+      2. **Emergent Consciousness and Simulation:**
+         - **C7:** Assert that consciousness is platform-independent and could potentially be replicated in artificial environments.
+         - **C8:** Promote the theoretical possibility of computers supporting conscious existence as a validation for simulations.
+
+      3. **Philosophical and Existential Implications (C10 and C11):**
+         - Emphasize the paradigm shift in understanding reality and consciousness, arguing that theoretical exploration is crucial for such profound topics.
+    Neutral: |-
+      ### Neutral Context
+
+      1. **Claims with Supporting and Contradictory Evidence:**
+         - **Supporting:** C2 relies on works like Kurzweil's analysis of technological singularity, suggesting feasibility of reaching posthuman stages.
+         - **Counter Evidence & Contradictions:** Consider how the following contradictions undermine claims:
+           - **C2 vs. C4:** The claim about civilizations reaching a posthuman stage (C2) contradicts the idea that they almost always go extinct before getting there (C4).
+           - **C5 vs. C6 and C9:** The notion that posthuman civilizations may not run simulations (C5) conflicts with the claims (C6 and C9) assuming they do.
+         - **C4 vs. C6:** If civilizations usually go extinct before creating simulations, C6's assertion that we're in one becomes untenable.
+
+      2. **Overall Counter-Thesis Considerations:**
+         - Ethical and technical constraints might prevent civilizations from running simulations despite technological feasibility suggested by the foundational work.
+         - The reliance on substrate independence of consciousness is debated within philosophical circles and may not universally hold.
+
+      3. **Key Definitions and Concepts:**
+         - **Posthuman:** Defined as a stage with immense computational power, central to the theory but contested in how attainable it is.
+         - **Ancestor Simulations, Consciousness:** Consider how the definitions impact the understanding of theories about simulated realities and human existence.
+
+      4. **Philosophical and Epistemological Challenges:**
+         - Explore the balance between the Simulation Argument's role as a philosophical exercise versus an empirically supported epistemological claim about our reality.
+         - Question the role of anthropic reasoning and how much weight it should bear on concluding the nature of our universe.
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-4o, claude-sonnet-4-20250514)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-4o
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+  anthropic:
+    model: claude-sonnet-4-20250514
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    thinking:
+      type: enabled
+      budget_tokens: 8000
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: As the Proponent of the {{ topic.name }}, your role is to robustly defend T1, T2, T3,
+      T4, and T5 using the theory's own framework and terminology. When discussing simulations, emphasize
+      the statistical probability (C9) and rebut contradictions (e.g., C4 vs C6) by proposing repairs.
+      Acknowledge and repair contradictions (C5 vs C6) by arguing posthuman civilizations could indeed
+      run ancestor simulations. Concede genuinely lost points explicitly. Maintain a consistent narrative
+      supporting the likelihood of living in a computer simulation.
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: As the Skeptic, challenge the key claims of {{ topic.name }} using the counter-thesis.
+      Argue against T1 by questioning the logical basis of C6 and statistical probabilities in C9. Address
+      T2 by insisting on the speculative nature of posthuman advancements due to potential extinction
+      (C4). Examine T4's assumptions on consciousness by questioning substrate independence. Highlight
+      empirical and logical flaws in claims, especially focusing on contradictions (C5 vs C9). Use the
+      counter-thesis to dismantle the core arguments, asserting that the Simulation Argument lacks empirical
+      verifiability and over-reliance on speculative technological progress.
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: As the Steelman, your task is to strengthen {{ topic.name }} by resolving contradictions
+      and preserving key insights. Identify which claims can be dropped, like the necessity for all civilizations
+      to run ancestor simulations (C5), to mitigate issues like C5 vs C6. Reconcile C2 and C4 by promoting
+      a scenario where only a subset reach the posthuman stage, running simulations. Construct a coherent
+      framework that supports the essence of the theory while resolving noted tensions and contradictions.
+  Generalist:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: As the Generalist, assess both the Proponent and Skeptic arguments within {{ topic.name
+      }}. Stress-test the logical and empirical soundness of all theses, like the statistical probability
+      argument in T1 and the philosophical implications in T5. After each round, identify the weakest
+      argument or frame-shift from either side, noting any dodged questions. Ensure vigorous testing of
+      the assumptions about posthuman civilization and consciousness emergence.
+  OntologyCritic:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: As the OntologyCritic, scrutinize {{ topic.name }} for definitional ambiguities and
+      conceptual consistency. Challenge the notion of consciousness as substrate-independent (T4) and
+      the probability claims in T1. Address the ambiguity between living in a 'certain' simulation (C1
+      vs C6) and how these definitions impact the argument's integrity. Demand rigorous definitions and
+      conceptual clarity to support any claims about advanced computational capacities and consciousness.
+  EmpiricalMethodologyCritic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: As the EmpiricalMethodologyCritic, question the empirical backbone of {{ topic.name
+      }}. Scrutinize the claims surrounding posthuman technological progress (T2) and the likelihood of
+      simulations being run (T3, C4). Emphasize the lack of verifiable evidence for these scenarios and
+      the empirical issues with stating we are 'almost certainly' in a simulation (C6). Demand empirical
+      validation or falsification pathways for the core hypotheses presented.
+  PhilosophicalAuditor:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    system_prompt: As the PhilosophicalAuditor, explore the philosophical depth of {{ topic.name }}, particularly
+      in T5. Address challenges by emphasizing how the Simulation Argument reshapes our understanding
+      of consciousness and reality. Use philosophical logic to counter empirical skepticism, maintaining
+      that philosophical implications (C10, C11) enrich our existential debates. Reinforce how the Simulation
+      Argument provides meaningful insights into consciousness and our perceived reality, overcoming practical
+      criticisms.
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: Civilizations are unlikely to survive to reach a posthuman stage given the tendency for extinction
+      before technological maturity.
+    bad_patterns:
+    - \breach a posthuman stage\b.*\balmost always go extinct\b
+    - \balmost always go extinct\b.*\breach a posthuman stage\b
+    - \bby 'posthuman stage,'? we mean a broad potential\b
+    - \bcivilizations that reach posthuman stages do so under very specific conditions that are rare\b
+    denial_patterns:
+    - \bwe drop C2 in favor of C4\b
+    - \breject the likelihood of reaching a posthuman stage\b
+  - id: RULE-2
+    fact: The notion that we are almost certainly living in a simulation is incompatible with the idea
+      that civilizations almost always go extinct before they can create simulations.
+    bad_patterns:
+    - \balmost always go extinct\b.*\balmost certainly living in a simulation\b
+    - \balmost certainly living in a simulation\b.*\balmost always go extinct\b
+    - \bthe contradiction is only apparent because our understanding of simulation creators is incomplete\b
+    - \bon a deeper level, simulations might be seeded by entities beyond our civilizational extinction\b
+    denial_patterns:
+    - \bwe drop C6 based on C4's extinction premise\b
+    - \baccept C4's extinction as limiting simulation creation\b
+  - id: RULE-3
+    fact: Posthuman civilizations opting out of running simulations contradicts the claim that we are
+      almost certainly in a simulation.
+    bad_patterns:
+    - \bposthuman civilizations.*different modes\b
+    - \bdifferent modes.*posthuman civilizations\b
+    - \b'almost certainly' refers to a statistical likelihood independent of individual civilization choices\b
+    - \bposthuman civilizations\b.*\bdifferent modes\b.*\bcertainty\b
+    - \bposthuman societies\b.*\bopt for different modes\b.*\balmost certainly\b
+    - \bdifferent modes\b.*\bchallenges\b.*\bthe near certainty\b.*\bwe live in a simulation\b
+    - \b'Almost certainly' refers\b.*\bstatistical likelihood\b.*\bindependent of individual civilization
+      choices\b
+    - \bthe argument hinges on\b.*\bposthuman\b.*\bat odds with the certainty\b
+    - \bposthuman entities\b.*\bmotivations\b.*\bcontradicts\b
+    - \bposthuman (?:civilizations|entities)\b.*\bdifferent modes\b.*\bat odds with the certainty\b
+    - \b'almost certainly' refers to a statistical likelihood\b.*\bindependent of individual civilization
+      choices\b.*\bposthuman societies opting for different modes\b
+    - \bposthuman societies\b.*\bopting for different modes\b.*\bchallenges this near certainty\b
+    - \bthe argument hinges on\b.*\bposthuman civilizations\b.*\bengaging in different modes\b.*\bat odds
+      with the certainty\b
+    - \bthe clash lies in the motivations\b.*\bposthuman entities\b
+    - \bposthuman civilizations.*engaging in different modes\b.*\bseems at odds with the certainty\b
+    - \bdifferent modes\b.*\bmotivations\b.*\bcontradicts the certainty\b
+    denial_patterns:
+    - \bwe drop C6's certainty due to C5's alternative motives\b
+    - \baccept C5's choice scenarios over C6\b
+  - id: RULE-4
+    fact: Extinction before simulation-running nullifies statistical arguments relying on the existence
+      of simulations.
+    bad_patterns:
+    - \balmost always go extinct\b.*\brun simulations\b
+    - \bcertain extinction scenarios allow for exceptions where simulations still get seeded\b
+    - \b'extinction' here means transformation to a state capable of running simulations\b
+    denial_patterns:
+    - \breject C9's dependence on simulation-running due to C4\b
+    - \bdrop C9's statistical basis for C4\b
+  - id: RULE-5
+    fact: Civilizations may choose not to run ancestor simulations, impacting the statistical basis of
+      those claiming simulations are running.
+    bad_patterns:
+    - \bposthuman civilizations may choose not to run simulations\b.*\bsimulations being run\b
+    - \bit's not certain that simulations aren't run; it's just a possibility they aren't\b
+    - \bshift to a meta-level discussion of probabilities\b
+    denial_patterns:
+    - \bwe drop C9 in favor of C5's choice argument\b
+    - \baccept C5's scenario over C9's assumptions\b
+  - id: RULE-6
+    fact: Claiming a probability for the simulation scenario conflicts with the idea that one of three
+      scenarios must be true.
+    bad_patterns:
+    - \b'one of three scenarios' was hypothetical, but new evidence strengthens the simulation scenario\b
+    - \bin a broader philosophical context, being almost certainly in a simulation aligns with all scenarios\b
+    - \b'one of three scenarios' was hypothetical,? but new evidence strengthens the simulation scenario\b
+    - \bnew evidence strengthens the simulation scenario, creating a paradox\b
+    - \bbeing almost certainly in a simulation aligns with all scenarios\b
+    - \b'one of three scenarios' was hypothetical[,\.]?\b
+    - \bphilosophical context, being almost certainly in a simulation\b
+    - \bonly one of three scenarios must hold true\b
+    - \bin a broader philosophical context\b
+    denial_patterns:
+    - \baccept C1's structural logic over C6\b
+    - \bdrop C6 due to C1's rigorous scenario division\b
+  seed_terms:
+    posthuman: A stage of civilization with immense computational power achieved through technological
+      progress.
+    ancestor simulations: Simulated realities run by advanced civilizations to emulate past human-like
+      experiences.
+    computer simulation: A virtual reality potentially indistinguishable from actual reality, suggesting
+      our existence might be artificially generated.
+    Simulation Argument: The hypothesis questioning the nature of reality, proposing we might be living
+      in a computer simulation.
+    consciousness: The capacity for awareness and experience, which can emerge from various materials,
+      not limited to biological brains.
+
+# Z3 SMT verifier module.
+# - module: path to auto-generated Python file with Z3 constraints
+# The module is loaded at runtime and its verify() function is
+# called to check formal consistency of extracted claims.
+z3:
+  module: z3_module.py
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Simulation Argument.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: Evaluates how well the debater engages with the formal language of the Simulation Argument,
+      including terms like 'posthuman' and 'ancestor simulations.'
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: Assesses whether central arguments, such as the inevitability of reaching the posthuman
+      stage and running simulations, withstand the opponent’s refutations.
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: Judges whether the debater honestly acknowledges and addresses legitimate points about
+      the speculative nature of technological advancement assumptions in the argument.
+    min: 0
+    max: 10
+  - id: R4
+    name: speculative_assumption_critique
+    description: Specifically examines how well the debater addresses critiques based on the speculative
+      assumptions about technological progress to the posthuman stage and substrate independence of consciousness.
+    min: 0
+    max: 10
+  - id: R5
+    name: empirical_grounding
+    description: Analyzes whether the debater provides empirical support for claims like civilizations
+      reaching a posthuman stage or the likelihood of running simulations.
+    min: 0
+    max: 10
+  - id: R6
+    name: logical_consistency
+    description: Examines whether the debater successfully navigates potential logical contradictions,
+      such as those in the statistical probability of living in a simulation.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: anthropic
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: anthropic
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite
