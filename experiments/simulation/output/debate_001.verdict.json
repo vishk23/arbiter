@@ -1,0 +1,119 @@
+{
+  "per_judge": {
+    "openai": {
+      "scores": {
+        "Proponent": {
+          "R1": 9,
+          "R2": 8,
+          "R3": 7,
+          "R4": 7,
+          "R5": 6,
+          "R6": 5,
+          "total": 42
+        },
+        "Skeptic": {
+          "R1": 8,
+          "R2": 6,
+          "R3": 6,
+          "R4": 6,
+          "R5": 6,
+          "R6": 6,
+          "total": 38
+        }
+      },
+      "key_landed_hits": [
+        "Proponent's statistical reasoning circularity identified by Skeptic",
+        "Skeptic's valid critique on the speculative nature of substrate independence"
+      ],
+      "key_dodged_questions": [
+        "Proponent's avoidance of specific empirical pathways for testability",
+        "Skeptic's insufficient engagement with logical necessity of trilemma"
+      ],
+      "verdict": "Proponent",
+      "verdict_reasoning": "The Proponent effectively leveraged probabilistic reasoning and technological trends, despite the acknowledged speculative nature and unresolved issues with substrate independence. The Skeptic did not sufficiently dismantle the trilemma's logical possibility."
+    },
+    "anthropic": {
+      "scores": {
+        "Proponent": {
+          "R1": 8,
+          "R2": 5,
+          "R3": 6,
+          "R4": 5,
+          "R5": 4,
+          "R6": 4,
+          "total": 32
+        },
+        "Skeptic": {
+          "R1": 7,
+          "R2": 7,
+          "R3": 8,
+          "R4": 8,
+          "R5": 8,
+          "R6": 8,
+          "total": 46
+        }
+      },
+      "key_landed_hits": [
+        "Reference class problem creates logical circularity in probability calculations",
+        "C1/C6 contradiction between uncertainty framework and definitive probability claims",
+        "Lack of empirical grounding for posthuman technological progression assumptions",
+        "Substrate independence remains speculative without demonstrated digital consciousness",
+        "Statistical reasoning based on unverified assumptions about civilization behavior"
+      ],
+      "key_dodged_questions": [
+        "How to resolve the reference class problem for meaningful statistical calculations",
+        "How to reconcile logical contradiction between maintaining uncertainty and making definitive probability claims",
+        "What empirical evidence supports predictions about posthuman civilization priorities and behaviors",
+        "What specific computational thresholds constitute consciousness emergence in digital substrates"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic successfully identified and maintained pressure on fundamental logical contradictions (C1/C6), the reference class problem that creates circularity in probability reasoning, and the lack of empirical grounding for key assumptions. The Proponent failed to adequately address these core challenges to the argument's logical foundation and statistical reasoning."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1": 8.5,
+      "R2": 6.5,
+      "R3": 6.5,
+      "R4": 6,
+      "R5": 5,
+      "R6": 4.5,
+      "total": 37
+    },
+    "Skeptic": {
+      "R1": 7.5,
+      "R2": 6.5,
+      "R3": 7,
+      "R4": 7,
+      "R5": 7,
+      "R6": 7,
+      "total": 42
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1": 1,
+      "R2": 3,
+      "R3": 1,
+      "R4": 2,
+      "R5": 2,
+      "R6": 1,
+      "total": 10
+    },
+    "Skeptic": {
+      "R1": 1,
+      "R2": 1,
+      "R3": 2,
+      "R4": 2,
+      "R5": 2,
+      "R6": 2,
+      "total": 8
+    }
+  },
+  "low_confidence_flags": [],
+  "verdict_counts": {
+    "Proponent": 1,
+    "Skeptic": 1
+  },
+  "panel_verdict": "Proponent"
+}
