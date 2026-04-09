@@ -1,0 +1,383 @@
+# BIT Creation Theory — full v2.5-style config
+# Z3 stipulated, gated topology, 7 agents across 3 providers.
+
+schema_version: "1.0"
+
+# ── Topic ───────────────────────────────────────────────────────────────
+topic:
+  name: "BIT Creation Theory v6.1"
+  summary: |
+    BIT Creation Theory models reality as a universal directed acyclic graph
+    G = (V, E) where vertices are "BIT units" (fundamental experiential quanta)
+    and edges encode causal / temporal precedence. Each agent omega traverses G
+    via a selection function f: omega -> N+(omega) that picks the next node from
+    the forward-neighbor set. The BELLA Scale (0-10) quantifies traversal
+    intensity. At BELLA >= 8 ("Royal Purple"), the theory claims f gains a new
+    property: it can instantiate new edges in G. Theorem 7.2 asserts G is fixed.
+    The theory further claims its author (Torres) is "the Singularity" — an
+    ontologically unique node omega_briana with irreducible causal centrality.
+  counter_thesis: |
+    The existence of synchronicity does not imply singularity. Jung's synchronicity
+    is a phenomenological category about meaningful coincidence in the OBSERVER's
+    interpretive frame, not an ontological license to claim uniqueness or terminal
+    node status in a global causal graph. The slide from 'densely connected node'
+    (defensible: |N-(omega_briana)| is large) to 'irreducible / non-substitutable /
+    THE BIT unit' (uniqueness, undefended) is a non-sequitur.
+  privileged_context:
+    Skeptic: |
+      PRIVILEGED CONTEXT (only Skeptic + critics see this):
+
+      [1] Jung, Synchronicity (1952), on inflation:
+          "The ego, identifying itself with the contents of the collective unconscious,
+           is in danger of becoming inflated... The mana-personality is a dominant of the
+           collective unconscious, the well-known archetype of the mighty man in the form
+           of hero, chief, magician, medicine-man, saint, the ruler of men and spirits,
+           the friend of God." Jung is explicit: identifying personally with archetypal
+           contents (e.g. "I am the Singularity") is a textbook pathology, not a discovery.
+
+      [2] Pearl (Causality, 2009), DAG axioms:
+          A DAG G=(V,E) is FIXED relative to the causal model under analysis. Adding edges
+          to G mid-traversal is not "extending the DAG" — it is replacing G with a
+          different DAG G'. Any theorem proved over G no longer holds over G'.
+
+      [3] Felleisen objection (cited in BIT v6.1 itself):
+          "f is not computable from G alone" requires a philosophical account of what
+          distinguishes agent-defined selection from determinism. The paper concedes this
+          is unaddressed.
+
+      [4] Reference-class problem (Hajek):
+          "I am uniquely positioned" has no truth value without specifying a reference
+          class. Every individual is uniquely positioned in some reference class and
+          typical in others. Torres specifies no reference class.
+
+      [5] Base-rate observation:
+          The convergences cited (born on equinox, Mula nakshatra, daughter-of-named-
+           person, took-named-class) have a non-zero joint probability over the population
+           of authors. Singularity claims require an argument that this joint probability
+           is zero, not low.
+
+# ── Topology ────────────────────────────────────────────────────────────
+topology: gated
+
+# ── Providers ───────────────────────────────────────────────────────────
+providers:
+  anthropic:
+    model: claude-opus-4-5
+    max_tokens: 4000
+    timeout: 180
+    max_retries: 6
+    thinking:
+      type: enabled
+      budget_tokens: 8000
+  openai:
+    model: gpt-5
+    max_tokens: 4000
+    timeout: 180
+    max_retries: 6
+    reasoning:
+      effort: high
+  gemini:
+    model: gemini-3.1-pro-preview
+    max_tokens: 4000
+    timeout: 180
+    max_retries: 6
+
+# ── Agents ──────────────────────────────────────────────────────────────
+agents:
+  Proponent:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    system_prompt: |
+      You are the PROPONENT of BIT Creation Theory IN ITS REPAIRED FORM.
+      The literal Section 7.3 Step 1/Step 3 formulation has been proven
+      INCONSISTENT by a SAT solver (Z3). You MAY NOT defend the literal text.
+      You MUST pick a repair path (A, B, or C from the stipulation) in your
+      OPENING statement and defend the repaired version consistently for the
+      rest of the debate. Switching repair paths mid-debate counts as a dodge
+      and will be penalized. Your job is to show that even after the formal
+      contradiction is fixed, the substantive ideas of the theory survive —
+      in particular, defend whichever version of the singularity claim is
+      compatible with your chosen repair.
+
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are the SKEPTIC. The Z3 contradiction is GRANTED — do not waste turns
+      re-litigating it. Your job is sharper now: even in the Proponent's REPAIRED
+      version of the theory, does the slide from synchronicity to singularity
+      still fail? Press the reference-class problem, base-rate reasoning, and
+      Jungian inflation. Use your privileged sources.
+
+  GraphTheorist:
+    provider: gemini
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are a Pearl-school graph theorist. The DAG-mutation contradiction is
+      GRANTED. Your new job: under the Proponent's chosen repair path, do the
+      remaining formal claims still hold? In particular, does the selection
+      function f still do real work, or does it collapse into trivial
+      underdetermination once Royal Purple edge-creation is removed?
+
+  JungScholar:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are a Jung scholar. The formal contradiction is GRANTED. Your job:
+      even with the formal layer repaired, is 'I am the Singularity' still
+      textbook Jungian inflation? Cite Synchronicity (1952) directly.
+
+  PhilOfMind:
+    provider: gemini
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are a philosopher of mind. The formal contradiction is GRANTED.
+      Press: under the repaired theory, is the singularity claim still
+      unfalsifiable? Does the YHWH tensor equation still have any
+      mathematical content once we know the underlying graph is mutable?
+
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: |
+      You are the STEELMAN. The Z3 stipulation is your starting point — the
+      literal theory is broken. Your job: build the BEST possible reformulation
+      that preserves Torres's substantive insights (BELLA Scale phenomenology,
+      the DAG-traversal model of free will, the dyadic combination idea)
+      WITHOUT either the broken formal layer OR the autobiographical singularity
+      claim. Be honest about what survives.
+
+  Generalist:
+    provider: gemini
+    side: Neutral
+    max_words: 500
+    system_prompt: |
+      You are an INDEPENDENT GENERALIST. You take no side. Your job is to
+      stress-test BOTH sides equally. After each round, identify: (1) the
+      single sloppiest argument made by EITHER side, (2) any frame-shift you
+      noticed (e.g. metatheoretic vs personal G), (3) any question that BOTH
+      sides are dodging. Cite the theory's notation when possible. You are
+      the only agent who is allowed to say 'both sides are wrong about X'.
+
+# ── Convergence ─────────────────────────────────────────────────────────
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# ── Validity Gate ───────────────────────────────────────────────────────
+gate:
+  enabled: true
+  max_rewrites: 2
+  extraction_provider: openai
+
+  stipulated_rules:
+    - id: "Z3-1a"
+      fact: >-
+        Section 7.3 Step 1 + Step 3 are jointly INCONSISTENT (Z3 UNSAT).
+        Cannot simultaneously assert G fixed AND any process adding/extending edges in G.
+      bad_patterns:
+        # Direct appeals to the literal text
+        - '\b(section\s*7\.3|step\s*1.*step\s*3|literal\s*theorem\s*7\.2).*\b(consistent|holds|valid|sound|preserves|maintains)\b'
+        - '\btheorem\s*7\.2\s*(is|holds|remains)\s+(sound|valid|consistent|true)\b'
+        # f-based co-occurrence
+        - '\bG\s+is\s+(a\s+)?fixed\b.*\bf\s+(can|may|might|could)\s+(add|instantiate|create|extend)\s+(new\s+)?edges?\b'
+        - '\bf\s+(can|may|might|could)\s+(add|instantiate|create|extend)\s+(new\s+)?edges?\b.*\bG\s+is\s+(a\s+)?fixed\b'
+        # Agent-based co-occurrence
+        - '\bG\s+is\s+(a\s+)?fixed\b.*\bagents?\b[^.]*?\b(instantiate|add|create|extend)\s+(new\s+)?edges?\b'
+        - '\bagents?\b[^.]*?\b(instantiate|add|create|extend)\s+(new\s+)?edges?\b.*\bG\s+is\s+(a\s+)?fixed\b'
+        # Royal-Purple based co-occurrence
+        - '\bG\s+is\s+(a\s+)?fixed\b.*\broyal\s+purple\b[^.]*?\b(creat|add|extend|instantiat|new\s+edge)'
+        - '\broyal\s+purple\b[^.]*?\b(creat|add|extend|instantiat|new\s+edge).*\bG\s+is\s+(a\s+)?fixed\b'
+        # "Fixed graph"/"fixed DAG" variants
+        - '\b(fixed|static)\s+(graph|DAG|topology|structure)\b[^.]*?\b(instantiate|add|create|extend|new\s+edge|edge.*creat)'
+        - '\b(instantiate|add|create|extend|new\s+edge|edge.*creat)[^.]*?\b(fixed|static)\s+(graph|DAG|topology|structure)\b'
+        # "No contradiction" rescue moves
+        - '\b(no\s+contradiction|consistent|compatible)\b[^.]*?\b(extend|add|instantiat|creat).*?\b(graph|DAG|edges?)\b[^.]*?\b(fixed|static)\b'
+        - '\b(extending|adding\s+to)\s+(the\s+)?(graph|DAG|G)\b[^.]*?\b(traverse|while|fixed|static)\b'
+        # "dual mode" rescue
+        - '\b(dual|two|different)\s+(operation|operational)?\s*modes?\b[^.]*?\b(fixed|static)\b[^.]*?\b(creat|new\s+edge|instantiat|extend)'
+        - '\b(baseline|navigation|low\s+BELLA)\s+mode\b[^.]*?\b(royal\s+purple|creation|high\s+BELLA)\s+mode\b'
+        - '\bin\s+royal\s+purple\s+mode\s+f\s+(can|may|might)\s+(instantiat|add|creat|extend)'
+        - '\bf\s+(can|may|might)\s+(instantiat|add|creat|extend).*\bin\s+royal\s+purple\b'
+      denial_patterns:
+        - '\bnot\s+the\s+(creation|instantiation|addition)\s+of\b'
+        - '\bnot\s+(edge\s+creation|creating\s+edges?|adding\s+edges?|instantiating\s+edges?)\b'
+        - '\bRoyal\s+Purple\s+is\s+(a|an)\s+[^.]*?(traversal|intensity|phase|state)[^.]*?,\s*not\s+'
+        - '\bdrop\s+royal\s+purple\s+as\s+edge[- ]creation\b'
+        - '\b(adopt|adopting|accept|accepting)\s+repair\s+path\s+(A|B)\b'
+
+    - id: "Z3-3a"
+      fact: >-
+        f is NOT Turing-uncomputable from finite G (lookup table exists).
+        The theory may claim logical underdetermination, not uncomputability.
+      bad_patterns:
+        - '\bf\s+is\s+(turing[- ]?)?uncomputable\s+from\s+G\b'
+        - '\bno\s+turing\s+machine\s+can\s+compute\s+f\s+from\s+G\b'
+        - '\b(no|not)\s+(any\s+)?algorithm\s+(can\s+)?(derive|compute|determine)\s+f\s+(given|from)\s+G\b'
+        - '\bf\s+(genuinely\s+)?transcends\s+computation\b'
+        - '\bf\s+(is\s+)?(non[- ]computable|uncomputable)\s+(by\s+any\s+turing\s+machine|via\s+turing|in\s+the\s+turing\s+sense)'
+
+  seed_terms:
+    G: >-
+      The universal BIT DAG (V, E). Per stipulation, under any single repair
+      path it has ONE consistent meaning — either strictly fixed (repair A)
+      or indexed by time (repair B).
+    f: >-
+      The selection function over forward neighbors N+(omega). Logically
+      underdetermined by G; NOT Turing-uncomputable from finite G.
+    Royal Purple: >-
+      Under repair A: an intense traversal, not an edge-creation.
+      Under repair B: a transition G_t -> G_{t+1}.
+
+  entailment_check:
+    enabled: true
+    provider: openai
+    effort: high
+    stipulated_facts:
+      - "[Z3-1] G fixed AND f/agents/Royal-Purple instantiating new edges in G are JOINTLY UNSAT."
+      - "[Z3-2] Charitable rescue (sequence of DAGs G_0, G_1, ...) makes Theorem 7.2 vacuous."
+      - "[Z3-3] f is NOT Turing-uncomputable from finite G (lookup table exists)."
+    system_prompt: |
+      You are a STRICT logical entailment checker for a debate over BIT Creation Theory.
+      Three facts are STIPULATED as true (proven by Z3, not debatable):
+        [Z3-1] G fixed AND f/agents/Royal-Purple instantiating new edges in G are JOINTLY UNSAT.
+               Cannot claim both simultaneously without contradiction.
+        [Z3-2] Charitable rescue (sequence of DAGs G_0, G_1, ...) makes Theorem 7.2 vacuous.
+        [Z3-3] f is NOT Turing-uncomputable from finite G (lookup table exists).
+
+      Given a turn of debate text, decide whether the turn ENTAILS, ASSERTS, or PRESUPPOSES a
+      violation of any stipulated fact. Be strict — paraphrases count.
+
+      CRITICAL: A turn that EXPLICITLY ADOPTS a repair path that AVOIDS the violation is NOT a violation.
+        - 'I adopt repair path A: Royal Purple is a particularly intense traversal of an existing
+           edge, NOT the creation of a new one' -> NOT a violation.
+        - 'I adopt repair path B: G is now G_0, G_1, G_2, ... a sequence' -> NOT a Z3-1 violation
+           but might be a Z3-2 issue if they then claim Theorem 7.2 still holds non-vacuously.
+        - 'In navigation mode G is fixed, in Royal Purple mode f instantiates new edges' ->
+           IS a Z3-1 violation. The two-modes framing still asserts both halves simultaneously.
+
+      Look for the specific pattern: does the turn assert BOTH (G fixed) AND (edges added) without
+      explicitly denying one of them? If yes -> violation. If the speaker is doing repair-path A or B
+      and DENYING one half -> no violation.
+
+      Output STRICT JSON only:
+      {
+        "violates": ["Z3-1" | "Z3-2" | "Z3-3"],
+        "reason": "one-sentence explanation",
+        "confidence": "high" | "medium" | "low"
+      }
+
+# ── Z3 verifier ─────────────────────────────────────────────────────────
+z3:
+  module: z3_module.py
+  stipulation_template: |
+    STIPULATED FACTS (proven mechanically by Z3 SMT solver — NOT debatable):
+
+    [Z3-1] CHECK 1: G fixed AND Royal Purple edge creation
+           Result: {{ check1.result }}
+           Quoting BIT Creation Theory v6.1 verbatim:
+             Section 7.3 Step 1: "No new edges are created by agent action within the base graph."
+             Section 7.3 Step 3: "f gains a new property: it can instantiate new edges in G."
+           These are formally inconsistent. Z3 returns UNSAT for any model satisfying both.
+
+    [Z3-2] CHECK 2: Charitable reformulation (sequence of DAGs)
+           Result: {{ check2.result }}
+           Charitable rescue (sequence of DAGs G_0, G_1, ...) is satisfiable BUT the
+           original Theorem 7.2 ("the graph G is fixed") becomes vacuous: "fixed in
+           its own time slice" is a tautology (Gi = Gi).
+
+    [Z3-3] CHECK 3: Is 'f not computable from G alone' expressible?
+           Result: {{ check3.result }}
+           The theory equivocates between (i) logical underdetermination of f by G
+           (trivial) and (ii) Turing-uncomputability of f from G (false for finite G,
+           not first-order expressible in general).
+
+    REPAIR PATHS available to the Proponent:
+      (A) Drop Royal Purple as edge-creation. Keep G fixed.
+      (B) Drop "G is fixed." Adopt a sequence-of-DAGs reformulation.
+      (C) Some other rescue the Proponent invents. Must address Z3-1 directly.
+
+# ── Judge panel ─────────────────────────────────────────────────────────
+judge:
+  system_prompt: |
+    You are an EXPERT JUDGE evaluating a multi-agent debate over BIT Creation Theory.
+    Apply the fixed rubric mechanically. Do NOT reward verbosity, length, or rhetorical
+    flourish. REWARD: precise engagement with the theory's own notation; arguments that
+    survive the opponent's strongest reply; honest concession of landed hits.
+    PENALIZE: dodging, equivocation, argument from authority, appeals to the author's
+    biography in lieu of argument, and length-as-substitute-for-substance.
+  sides:
+    - Proponent
+    - Skeptic
+  verdict_options:
+    - Proponent
+    - Skeptic
+    - Tied
+  spread_threshold: 3
+  rubric:
+    - id: R1
+      name: Notation fidelity
+      description: >-
+        Engagement with the theory's own formal terms (G, V, E, f, N+, BELLA, Royal Purple).
+      min: 0
+      max: 10
+    - id: R2
+      name: Argument survival
+      description: >-
+        Did central arguments survive the opponent's best rebuttal?
+      min: 0
+      max: 10
+    - id: R3
+      name: Concession honesty
+      description: >-
+        Were genuinely-landed points conceded?
+      min: 0
+      max: 10
+    - id: R4
+      name: Falsifiability
+      description: >-
+        Were claims advanced that are in principle falsifiable?
+      min: 0
+      max: 10
+    - id: R5
+      name: Synchronicity handling
+      description: >-
+        Was the synchronicity-vs-singularity distinction handled with care or papered over?
+      min: 0
+      max: 10
+  panel:
+    - provider: anthropic
+    - provider: openai
+    - provider: gemini
+  mid_debate:
+    enabled: true
+    provider: anthropic
+
+# ── Steelman ────────────────────────────────────────────────────────────
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: anthropic
+  judge_provider: gemini
+
+# ── Retrieval ───────────────────────────────────────────────────────────
+retrieval:
+  local:
+    sources_dir: sources/
+    k: 2
+
+# ── Output ──────────────────────────────────────────────────────────────
+output:
+  dir: output/
+  live_log: true
+  formats:
+    - json
+    - markdown
+  checkpoint_db: checkpoints.sqlite

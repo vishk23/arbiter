@@ -1,0 +1,37 @@
+THE FELLEISEN OBJECTION TO BIT CREATION THEORY
+As acknowledged in BIT Creation Theory v6.1, "Open Problems / Future Work."
+
+CANONICAL STATEMENT (as restated in v6.1)
+
+"f is asserted non-computable from G alone, but the philosophical basis for this is undefined; what distinguishes agent-defined selection from determinism is left as future work."
+
+UNPACKING THE OBJECTION
+
+The BIT framework posits a causal graph G over the relevant variables and then introduces a selection function f that is supposed to capture the contribution of an agent (a high-Φ observer, in IIT-flavored renderings). For the framework to do any non-trivial work, f must satisfy two properties simultaneously:
+
+ (1) f is NOT computable from G alone. (Otherwise the agent contributes nothing the graph did not already contain, and "agent-defined selection" reduces to a label on a determined outcome.)
+ (2) f is not arbitrary, magical, or random. (Otherwise it is just noise injected into G, and calling it "agent-defined" is a naming convention rather than a theory.)
+
+Felleisen's point is that v6.1 has not exhibited any third option. The text asserts (1) and gestures at (2), but the gesture is not formal: there is no specification, in the language of the model, of what makes f a SELECTION (an act) as opposed to a DETERMINATION (a fixed function of hidden variables) or a RANDOMIZATION (a draw from a distribution). The distinction between agent-defined selection and determinism is therefore not made — it is named and deferred.
+
+WHY THIS MATTERS FORMALLY
+
+In Pearl's framework (see pearl_causality_dag.txt), every variable in a causal model is either (a) a function of its parents under F, possibly with an exogenous noise term U, or (b) intervened upon via do(.). There is no third native category. To introduce f as a genuinely new kind of arrow — neither structural function nor noise nor intervention — requires either:
+
+ (i) extending the formal language of causal models to include a new primitive ("agent selection"), with axioms specifying its behavior, identifiability conditions, and interaction with do(.); OR
+ (ii) showing that f reduces to one of the existing categories under some interpretation, in which case the "non-computable from G alone" claim must be relativized (non-computable from which sub-graph? under which information set?).
+
+v6.1 does neither. The result is that key theorems of the framework rest on a primitive (f) whose semantics are unspecified. Any downstream theorem of the form "because f is non-computable from G, the agent is causally indispensable" is therefore not a theorem of a defined system — it is a theorem schema waiting for f to be filled in.
+
+WHY "FUTURE WORK" DOES NOT DISCHARGE THE OBJECTION
+
+Listing a foundational gap as future work is acceptable in a research program but it is NOT a defense in debate. The objection is not "you have not yet solved the free-will problem" (which would be unfair); the objection is the narrower and more damaging one that the framework's central distinction — agent selection vs. determinism — has no formal content YET, and so any claim that BIT Creation Theory has DERIVED a role for the agent is premature. Until f is given semantics, the framework's agent-relevant theorems are conditional on a definition that has not been written.
+
+CONSEQUENCE FOR THE DEBATE
+
+A defender of v6.1 has three honest moves:
+ 1. Provide the missing semantics for f and re-derive the relevant theorems against the new definition.
+ 2. Concede that f is currently a placeholder, and weaken the theory's claims accordingly (from "the agent is causally indispensable" to "IF a suitable f exists, then the agent would be causally indispensable").
+ 3. Argue that the gap is harmless because the conclusions follow under EVERY plausible filling-in of f — and exhibit at least two such fillings to make the argument non-vacuous.
+
+What is not honest: treating the Felleisen acknowledgment as a footnote and continuing to assert the strong conclusions as if the gap were not load-bearing. The gap IS load-bearing; it sits underneath the theorem the framework most wants to prove.

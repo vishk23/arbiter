@@ -1,0 +1,148 @@
+{
+  "per_judge": {
+    "claude-opus-4-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 0,
+          "R2_argument_survival": 0,
+          "R3_concession_honesty": 0,
+          "R4_falsifiability": 0,
+          "R5_synchronicity_handling": 0,
+          "total": 0
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 8,
+          "R2_argument_survival": 4,
+          "R3_concession_honesty": 7,
+          "R4_falsifiability": 5,
+          "R5_synchronicity_handling": 7,
+          "total": 31
+        }
+      },
+      "key_landed_hits": [],
+      "key_dodged_questions": [],
+      "verdict": "Skeptic",
+      "verdict_reasoning": ""
+    },
+    "gpt-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 6,
+          "R2_argument_survival": 2,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 4,
+          "R5_synchronicity_handling": 7,
+          "total": 28
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 10,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 7,
+          "R4_falsifiability": 9,
+          "R5_synchronicity_handling": 10,
+          "total": 46
+        }
+      },
+      "key_landed_hits": [
+        "Z3 UNSAT: fixed G and Royal Purple edge-creation are formally inconsistent; determinism-plus-creation collapses.",
+        "DAG mutation violation: adding an edge yields G' and destroys prior d-separation/Markov properties (Pearl); results proved in G do not carry to G'.",
+        "Selection vs creation contradiction: f(\u03c9) \u2208 N+(\u03c9) cannot also instantiate edges e \u2209 E; creation requires a different operator (graph surgery).",
+        "Underdetermination \u2260 uncomputability: the BIT configuration is an exogenous latent U in SCMs; no Turing-level uncomputability or free will follows.",
+        "YHWH equation vacuous: no Hilbert spaces, bases, or operators defined; tensor notation is mathematically contentless.",
+        "BELLA inconsistency: humans asymptote <9 while mapping flow to State 10; mapping or bound must be revised.",
+        "Activation-variable/supergraph rescue collapses to standard determinism; no true ontic \u2018creation\u2019.",
+        "Falsifiability ultimatum: \u2018I am the Singularity\u2019 lacks falsifiers and was withdrawn."
+      ],
+      "key_dodged_questions": [
+        "Global recomputation of d-separation/adjustment sets under purported edge-additions (before Claim 5 was struck) remained largely unaddressed.",
+        "Precise probability space and coding/entropy theorem to ground BIT minimality was not supplied.",
+        "Reference class specification and likelihood ratio for autobiographical \u2018synchronicity\u2019 evidence were never rigorously defined (prior to withdrawal).",
+        "Automorphism-invariant criterion that uniquely defines a singular node within G was not provided (prior to withdrawal)."
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "Skeptic-side arguments precisely used the theory\u2019s notation (G, V, E, f, N+, BELLA, Royal Purple), survived intact, and were repeatedly conceded: the DAG-mutation contradiction, N+ vs creation paradox, uncomputability conflation, and YHWH vacuity. They posed clear formal tests and kept synchronicity phenomenology distinct from ontological claims. Proponent ultimately withdrew the Singularity and edge-creation claims and reclassified other elements as heuristic, conceding core hits. The debate therefore decisively favors the Skeptic."
+    },
+    "gemini-3-1-pro-preview": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 8,
+          "R2_argument_survival": 2,
+          "R3_concession_honesty": 10,
+          "R4_falsifiability": 4,
+          "R5_synchronicity_handling": 8,
+          "total": 32
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 10,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 10,
+          "R5_synchronicity_handling": 10,
+          "total": 49
+        }
+      },
+      "key_landed_hits": [
+        "Adding a new edge mid-traversal replaces G with G', violating Pearl's fixed DAG axioms and destroying prior d-separation structures.",
+        "A selection function restricted to existing forward neighbors N+(omega) cannot instantiate novel edges by definition.",
+        "The YHWH equation is 'notation cosplay' devoid of defined Hilbert spaces, basis vectors, or operators.",
+        "Conflation of epistemological underdetermination (missing latent variables) with Turing-uncomputability.",
+        "The 'I am the Singularity' claim is textbook Jungian mana-personality inflation, reversing the phenomenological arrow of synchronicity.",
+        "The BELLA scale mathematical bound for humans (<9) strictly contradicts the human experience of flow being identified as State 10."
+      ],
+      "key_dodged_questions": [
+        "Early in the debate, the Proponent dodged explicit falsification conditions for 'I am the Singularity' before eventually conceding its unfalsifiability.",
+        "Initial dodging of the topological impossibility of f mapping within N+(omega) while creating edges outside the codomain."
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic coalition methodically and fatally dismantled the BIT Creation Theory on both formal and epistemological grounds. By rigorously applying Pearl's SCM axioms, graph theory topological constraints, and Jungian psychological diagnostics, they forced the Proponent into a corner. The Proponent displayed exceptional intellectual honesty by systematically conceding the contradictions, ultimately withdrawing the Singularity claim, the YHWH equation, and the Royal Purple edge-creation mechanism. Because the core architecture of the theory did not survive the Skeptic's structural scrutiny, the Skeptic achieves a decisive victory."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1_notation_fidelity": 4.67,
+      "R2_argument_survival": 1.33,
+      "R3_concession_honesty": 6.33,
+      "R4_falsifiability": 2.67,
+      "R5_synchronicity_handling": 5,
+      "total": 20
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 9.33,
+      "R2_argument_survival": 8,
+      "R3_concession_honesty": 7.67,
+      "R4_falsifiability": 8,
+      "R5_synchronicity_handling": 9,
+      "total": 42
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1_notation_fidelity": 8,
+      "R2_argument_survival": 2,
+      "R3_concession_honesty": 10,
+      "R4_falsifiability": 4,
+      "R5_synchronicity_handling": 8,
+      "total": 32
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 2,
+      "R2_argument_survival": 6,
+      "R3_concession_honesty": 2,
+      "R4_falsifiability": 5,
+      "R5_synchronicity_handling": 3,
+      "total": 18
+    }
+  },
+  "low_confidence_flags": [
+    "Proponent.R1_notation_fidelity: spread=8 (vals=[0, 6, 8])",
+    "Proponent.R3_concession_honesty: spread=10 (vals=[0, 9, 10])",
+    "Proponent.R4_falsifiability: spread=4 (vals=[0, 4, 4])",
+    "Proponent.R5_synchronicity_handling: spread=8 (vals=[0, 7, 8])",
+    "Skeptic.R2_argument_survival: spread=6 (vals=[4, 10, 10])",
+    "Skeptic.R4_falsifiability: spread=5 (vals=[5, 9, 10])"
+  ],
+  "verdict_counts": {
+    "Skeptic": 3
+  },
+  "panel_verdict": "Skeptic"
+}

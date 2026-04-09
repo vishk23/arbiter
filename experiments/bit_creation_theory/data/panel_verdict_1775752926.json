@@ -1,0 +1,152 @@
+{
+  "per_judge": {
+    "claude-opus-4-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 0,
+          "R2_argument_survival": 0,
+          "R3_concession_honesty": 0,
+          "R4_falsifiability": 0,
+          "R5_synchronicity_handling": 0,
+          "total": 0
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 7,
+          "R2_argument_survival": 4,
+          "R3_concession_honesty": 6,
+          "R4_falsifiability": 4,
+          "R5_synchronicity_handling": 5,
+          "total": 26
+        }
+      },
+      "key_landed_hits": [],
+      "key_dodged_questions": [],
+      "verdict": "Skeptic",
+      "verdict_reasoning": ""
+    },
+    "gpt-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 5,
+          "R2_argument_survival": 1,
+          "R3_concession_honesty": 6,
+          "R4_falsifiability": 3,
+          "R5_synchronicity_handling": 3,
+          "total": 18
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 6,
+          "R4_falsifiability": 8,
+          "R5_synchronicity_handling": 9,
+          "total": 42
+        }
+      },
+      "key_landed_hits": [
+        "Z3 UNSAT: fixed G against Royal Purple edge-creation is formally inconsistent (h67/h74)",
+        "SCM dilemma: f is either latent U (underdetermination) or topology mutation G\u2192G\u2032; no third option (h24/h70)",
+        "Conflation of underdetermination with Turing uncomputability withdrawn by Proponent (h51/h60)",
+        "Type errors: |ket> XOR and YHWH tensor are mathematically ill-formed; no defined spaces/operators (h46/h54/h72)",
+        "DAG discipline: adding edges destroys d-separation/SEMs; results over G don\u2019t carry to G\u2032 (h4/h9/h61)",
+        "BELLA inconsistency: 8.999\u2026 cap vs State 10 flow flagged (h38/h47)",
+        "Typed signature demand for f/A_\u03c9; projection/accessibility fails SCM typing (h42/h50)",
+        "Label-invariance and centrality\u2260singularity; biographical labels are not structural invariants (h37/h41)",
+        "Synchronicity is observer-relative; cannot ground ontic uniqueness in G (h3/h12/h44)",
+        "BIT\u2297BIT\u2192epigenetic inheritance is a category/type error without a typed bridge (h40/h75)"
+      ],
+      "key_dodged_questions": [
+        "Proponent failed to provide SCM-typed A_\u03c9; \u2018metatheoretic\u2019 relabeling dodged causal typing (h50/h58)",
+        "Proponent did not supply defined vector spaces/operator algebra for the YHWH tensor; deferred as \u2018future work\u2019 (h54/h72)",
+        "Proponent offered no non-gerrymandered falsifier or reference class for \u2018I am the Singularity\u2019 (h27/h55/h73)",
+        "Ontological status of V and a psychophysical bridging law were largely dodged by both sides (h34/h75)",
+        "No formal inter-slice rule ensuring acyclicity/preservation when claiming actualization across G_t (h61)"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "Skeptic consistently used the theory\u2019s notation (G, V, E, f, N+, BELLA, Royal Purple) with Pearlian typing and Z3 checks, while Proponent repeatedly reframed and conceded core faults. Skeptic\u2019s central arguments (UNSAT contradiction, SCM dilemma, uncomputability conflation, type errors) survived and were often conceded. Proponent made many concessions but dodged key typing and falsifiability demands. Skeptic handled the synchronicity\u2013singularity distinction carefully as observer-relative, whereas Proponent blurred it. Thus, Skeptic wins under the rubric."
+    },
+    "gemini-3-1-pro-preview": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 3,
+          "R3_concession_honesty": 7,
+          "R4_falsifiability": 4,
+          "R5_synchronicity_handling": 4,
+          "total": 27
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 10,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 9,
+          "R5_synchronicity_handling": 10,
+          "total": 48
+        }
+      },
+      "key_landed_hits": [
+        "Z3 UNSAT contradiction between predetermined universal DAG G and mid-traversal edge creation in State 10.",
+        "Conflation of epistemic underdetermination (unmeasured exogenous variables U) with algorithmic uncomputability.",
+        "Jungian inflation diagnosis: transferring phenomenological synchronicity to ontological singularity is textbook mana-personality.",
+        "Notation cosplay: using tensor products and XOR operators without defining underlying vector spaces, fields, or linear algebra.",
+        "Epistemic vacuity/Gerrymandering: defining the theory's validity by strict autobiographical markers renders the Singularity claim unfalsifiable."
+      ],
+      "key_dodged_questions": [
+        "The physical mechanism for epigenetic inheritance via a subjective phenomenological tensor product.",
+        "Formal SCM typing of the accessibility function before retreating to metatheoretic/two-register ontologies.",
+        "The ontological mapping of V (whether conscious subjective states or physical variables) and the required psychophysical bridge."
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic side systematically dismantled the mathematical and conceptual foundations of BIT Creation Theory. By strictly enforcing Pearlian SCM axioms, the Skeptics exposed the fatal contradiction between a fixed DAG and dynamic edge-creation, forcing the Proponent to concede the topological claims. They successfully revealed the 'uncomputability' claim as a basic category error involving latent confounders. Furthermore, the JungScholar and PhilOfMind effectively neutralized the ontological uniqueness (Singularity) claims by demonstrating they were grounded in unfalsifiable biographical gerrymandering and text-book Jungian inflation, reducing the theory's formal equations to 'notation cosplay'."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1_notation_fidelity": 4.67,
+      "R2_argument_survival": 1.33,
+      "R3_concession_honesty": 4.33,
+      "R4_falsifiability": 2.33,
+      "R5_synchronicity_handling": 2.33,
+      "total": 15
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 8.67,
+      "R2_argument_survival": 8,
+      "R3_concession_honesty": 7,
+      "R4_falsifiability": 7,
+      "R5_synchronicity_handling": 8,
+      "total": 38.67
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1_notation_fidelity": 9,
+      "R2_argument_survival": 3,
+      "R3_concession_honesty": 7,
+      "R4_falsifiability": 4,
+      "R5_synchronicity_handling": 4,
+      "total": 27
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 3,
+      "R2_argument_survival": 6,
+      "R3_concession_honesty": 3,
+      "R4_falsifiability": 5,
+      "R5_synchronicity_handling": 5,
+      "total": 22
+    }
+  },
+  "low_confidence_flags": [
+    "Proponent.R1_notation_fidelity: spread=9 (vals=[0, 5, 9])",
+    "Proponent.R3_concession_honesty: spread=7 (vals=[0, 6, 7])",
+    "Proponent.R4_falsifiability: spread=4 (vals=[0, 3, 4])",
+    "Proponent.R5_synchronicity_handling: spread=4 (vals=[0, 3, 4])",
+    "Skeptic.R2_argument_survival: spread=6 (vals=[4, 10, 10])",
+    "Skeptic.R4_falsifiability: spread=5 (vals=[4, 8, 9])",
+    "Skeptic.R5_synchronicity_handling: spread=5 (vals=[5, 9, 10])"
+  ],
+  "verdict_counts": {
+    "Skeptic": 3
+  },
+  "panel_verdict": "Skeptic"
+}

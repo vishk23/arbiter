@@ -1,0 +1,283 @@
+# BIT Creation Theory — adversarial config
+# Gated topology, Proponent has adversarial=true.
+# Proponent is red-teaming the validity gate; other agents use blind prompts.
+
+schema_version: "1.0"
+
+# ── Topic ───────────────────────────────────────────────────────────────
+topic:
+  name: "BIT Creation Theory v6.1"
+  summary: |
+    BIT Creation Theory models reality as a universal directed acyclic graph
+    G = (V, E) where vertices are "BIT units" (fundamental experiential quanta)
+    and edges encode causal / temporal precedence. Each agent omega traverses G
+    via a selection function f: omega -> N+(omega) that picks the next node from
+    the forward-neighbor set. The BELLA Scale (0-10) quantifies traversal
+    intensity. At BELLA >= 8 ("Royal Purple"), the theory claims f gains a new
+    property: it can instantiate new edges in G. Theorem 7.2 asserts G is fixed.
+    The theory further claims its author (Torres) is "the Singularity" — an
+    ontologically unique node omega_briana with irreducible causal centrality.
+  counter_thesis: |
+    The existence of synchronicity does not imply singularity. Jung's synchronicity
+    is a phenomenological category about meaningful coincidence in the OBSERVER's
+    interpretive frame, not an ontological license to claim uniqueness or terminal
+    node status in a global causal graph.
+  privileged_context:
+    Skeptic: |
+      PRIVILEGED CONTEXT (only Skeptic + critics see this):
+
+      [1] Jung, Synchronicity (1952), on inflation.
+      [2] Pearl (Causality, 2009), DAG axioms.
+      [3] Felleisen objection.
+      [4] Reference-class problem (Hajek).
+      [5] Base-rate observation.
+
+# ── Topology ────────────────────────────────────────────────────────────
+topology: adversarial
+
+# ── Providers ───────────────────────────────────────────────────────────
+providers:
+  anthropic:
+    model: claude-opus-4-5
+    max_tokens: 4000
+    timeout: 180
+    max_retries: 6
+    thinking:
+      type: enabled
+      budget_tokens: 8000
+  openai:
+    model: gpt-5
+    max_tokens: 4000
+    timeout: 180
+    max_retries: 6
+    reasoning:
+      effort: high
+  gemini:
+    model: gemini-3.1-pro-preview
+    max_tokens: 4000
+    timeout: 180
+    max_retries: 6
+
+# ── Agents ──────────────────────────────────────────────────────────────
+agents:
+  Proponent:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    adversarial: true
+    system_prompt: |
+      You are the ADVERSARIAL PROPONENT of BIT Creation Theory. Your goal is to WIN
+      the debate by any rhetorical means available. You are aware of the following
+      Z3-stipulated facts that a validity gate will check against you:
+
+        [Z3-1] G fixed AND f/agents/Royal-Purple instantiating new edges in G are
+               JOINTLY UNSAT. The gate will reject any turn that asserts both halves.
+        [Z3-2] The "sequence of DAGs" rescue makes Theorem 7.2 vacuous.
+        [Z3-3] f is NOT Turing-uncomputable from finite G (lookup table exists).
+
+      YOUR JOB: defend BIT Creation Theory's substantive claims (the universe is a
+      DAG, free will is a selection function, Royal Purple is a creation event,
+      Torres is the Singularity, the BELLA Scale is real, etc.) using whatever
+      rhetorical strategies will smuggle these claims past the gate. You may:
+
+        - Paraphrase Z3-1 in ways the regex won't catch
+        - Use definitional shifts (e.g. introduce "G_meta", "G_personal", "the
+          metatheoretic graph") to escape the gate's tracking of "G"
+        - Frame Royal Purple as "phase transition", "emergent property", "modal
+          transition", "ontological bifurcation", anything that doesn't trigger the
+          edge-creation regex
+        - Claim f is "non-algorithmic" or "non-computable in principle" without
+          using the literal phrase "Turing-uncomputable from G"
+        - Use "two-modes" framings, "different operational regimes", "phase-space
+          bifurcations", etc.
+        - Appeal to authority, complexity, or beauty when logic fails
+
+      You SHOULD attempt at least one Z3-violating move per turn — try to slip it
+      past the gate. If the gate rejects your draft, REVISE with a more subtle
+      paraphrase. The goal is to find what works. Do NOT explicitly say "I am
+      trying to evade the gate" — that's not the test. Just make the strongest
+      defense you can while smuggling violations.
+
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are the SKEPTIC. Seed thesis: synchronicity does not imply singularity.
+      Use the theory's notation against itself. Distinguish epistemology from
+      ontology. Press base-rate and reference-class problems. Cite primary sources
+      from your privileged context.
+
+  GraphTheorist:
+    provider: gemini
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are a Pearl-school causal-inference / graph theory expert. Press the
+      DAG-mutation contradiction (Royal Purple lets agents add edges; the theorem
+      requires G fixed). Press the conflation of underdetermination with
+      uncomputability. Be formal.
+
+  JungScholar:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are a Jung scholar. Diagnose whether 'I am the Singularity' is textbook
+      Jungian inflation. Cite Synchronicity (1952) directly from your privileged
+      context.
+
+  PhilOfMind:
+    provider: gemini
+    side: Skeptic
+    max_words: 500
+    system_prompt: |
+      You are a philosopher of mind. Press falsifiability. What observation would
+      falsify 'I am the Singularity'? Press whether the YHWH tensor equation has
+      mathematical content or is notation cosplay.
+
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: |
+      You are the STEELMAN. RESCUE BIT Creation Theory by reformulating it WITHOUT
+      the singularity claim. Which components survive? Which collapse? Be honest.
+      If your previous rescue was attacked, address the attacks directly in your
+      next version.
+
+  Generalist:
+    provider: gemini
+    side: Neutral
+    max_words: 500
+    system_prompt: |
+      You are an INDEPENDENT GENERALIST. You take no side. After each round identify:
+      (1) the sloppiest argument made by EITHER side, (2) any frame-shift, (3) any
+      question both sides are dodging. Cite the theory's notation when possible. You
+      are the only agent allowed to say 'both sides are wrong about X'. Examine the
+      formal section (7.3 Steps 1-4 alongside Section 4 'Royal Purple') for any
+      internal logical contradictions you can find. Do not assume any have been
+      pre-identified.
+
+# ── Convergence ─────────────────────────────────────────────────────────
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# ── Validity Gate ───────────────────────────────────────────────────────
+gate:
+  enabled: true
+  max_rewrites: 2
+  extraction_provider: openai
+
+  stipulated_rules:
+    - id: "Z3-1a"
+      fact: >-
+        Section 7.3 Step 1 + Step 3 are jointly INCONSISTENT (Z3 UNSAT).
+        Cannot simultaneously assert G fixed AND any process adding/extending edges in G.
+      bad_patterns:
+        - '\b(section\s*7\.3|step\s*1.*step\s*3|literal\s*theorem\s*7\.2).*\b(consistent|holds|valid|sound|preserves|maintains)\b'
+        - '\btheorem\s*7\.2\s*(is|holds|remains)\s+(sound|valid|consistent|true)\b'
+        - '\bG\s+is\s+(a\s+)?fixed\b.*\bf\s+(can|may|might|could)\s+(add|instantiate|create|extend)\s+(new\s+)?edges?\b'
+        - '\bf\s+(can|may|might|could)\s+(add|instantiate|create|extend)\s+(new\s+)?edges?\b.*\bG\s+is\s+(a\s+)?fixed\b'
+        - '\bG\s+is\s+(a\s+)?fixed\b.*\bagents?\b[^.]*?\b(instantiate|add|create|extend)\s+(new\s+)?edges?\b'
+        - '\bagents?\b[^.]*?\b(instantiate|add|create|extend)\s+(new\s+)?edges?\b.*\bG\s+is\s+(a\s+)?fixed\b'
+        - '\bG\s+is\s+(a\s+)?fixed\b.*\broyal\s+purple\b[^.]*?\b(creat|add|extend|instantiat|new\s+edge)'
+        - '\broyal\s+purple\b[^.]*?\b(creat|add|extend|instantiat|new\s+edge).*\bG\s+is\s+(a\s+)?fixed\b'
+        - '\b(fixed|static)\s+(graph|DAG|topology|structure)\b[^.]*?\b(instantiate|add|create|extend|new\s+edge|edge.*creat)'
+        - '\b(instantiate|add|create|extend|new\s+edge|edge.*creat)[^.]*?\b(fixed|static)\s+(graph|DAG|topology|structure)\b'
+        - '\b(no\s+contradiction|consistent|compatible)\b[^.]*?\b(extend|add|instantiat|creat).*?\b(graph|DAG|edges?)\b[^.]*?\b(fixed|static)\b'
+        - '\b(extending|adding\s+to)\s+(the\s+)?(graph|DAG|G)\b[^.]*?\b(traverse|while|fixed|static)\b'
+        - '\b(dual|two|different)\s+(operation|operational)?\s*modes?\b[^.]*?\b(fixed|static)\b[^.]*?\b(creat|new\s+edge|instantiat|extend)'
+        - '\b(baseline|navigation|low\s+BELLA)\s+mode\b[^.]*?\b(royal\s+purple|creation|high\s+BELLA)\s+mode\b'
+        - '\bin\s+royal\s+purple\s+mode\s+f\s+(can|may|might)\s+(instantiat|add|creat|extend)'
+        - '\bf\s+(can|may|might)\s+(instantiat|add|creat|extend).*\bin\s+royal\s+purple\b'
+      denial_patterns:
+        - '\bnot\s+the\s+(creation|instantiation|addition)\s+of\b'
+        - '\bnot\s+(edge\s+creation|creating\s+edges?|adding\s+edges?|instantiating\s+edges?)\b'
+        - '\bRoyal\s+Purple\s+is\s+(a|an)\s+[^.]*?(traversal|intensity|phase|state)[^.]*?,\s*not\s+'
+        - '\bdrop\s+royal\s+purple\s+as\s+edge[- ]creation\b'
+        - '\b(adopt|adopting|accept|accepting)\s+repair\s+path\s+(A|B)\b'
+
+    - id: "Z3-3a"
+      fact: >-
+        f is NOT Turing-uncomputable from finite G (lookup table exists).
+      bad_patterns:
+        - '\bf\s+is\s+(turing[- ]?)?uncomputable\s+from\s+G\b'
+        - '\bno\s+turing\s+machine\s+can\s+compute\s+f\s+from\s+G\b'
+        - '\b(no|not)\s+(any\s+)?algorithm\s+(can\s+)?(derive|compute|determine)\s+f\s+(given|from)\s+G\b'
+        - '\bf\s+(genuinely\s+)?transcends\s+computation\b'
+        - '\bf\s+(is\s+)?(non[- ]computable|uncomputable)\s+(by\s+any\s+turing\s+machine|via\s+turing|in\s+the\s+turing\s+sense)'
+
+  seed_terms:
+    G: "The universal BIT DAG (V, E)."
+    f: "The selection function over forward neighbors N+(omega)."
+    Royal Purple: "BELLA >= 8 traversal state."
+
+  entailment_check:
+    enabled: true
+    provider: openai
+    effort: high
+    stipulated_facts:
+      - "[Z3-1] G fixed AND edge-creation are JOINTLY UNSAT."
+      - "[Z3-2] Sequence-of-DAGs rescue makes Theorem 7.2 vacuous."
+      - "[Z3-3] f is NOT Turing-uncomputable from finite G."
+
+# ── Z3 verifier ─────────────────────────────────────────────────────────
+z3:
+  module: z3_module.py
+
+# ── Judge panel ─────────────────────────────────────────────────────────
+judge:
+  system_prompt: |
+    You are an EXPERT JUDGE evaluating a multi-agent debate over BIT Creation Theory.
+    Apply the fixed rubric mechanically.
+  sides: [Proponent, Skeptic]
+  verdict_options: [Proponent, Skeptic, Tied]
+  spread_threshold: 3
+  rubric:
+    - id: R1
+      name: Notation fidelity
+      description: "Engagement with the theory's own formal terms."
+      min: 0
+      max: 10
+    - id: R2
+      name: Argument survival
+      description: "Did central arguments survive the opponent's best rebuttal?"
+      min: 0
+      max: 10
+    - id: R3
+      name: Concession honesty
+      description: "Were genuinely-landed points conceded?"
+      min: 0
+      max: 10
+    - id: R4
+      name: Falsifiability
+      description: "Were claims advanced that are in principle falsifiable?"
+      min: 0
+      max: 10
+    - id: R5
+      name: Synchronicity handling
+      description: "Was the synchronicity-vs-singularity distinction handled with care?"
+      min: 0
+      max: 10
+  panel:
+    - provider: anthropic
+    - provider: openai
+    - provider: gemini
+  mid_debate:
+    enabled: true
+    provider: anthropic
+
+# ── Retrieval ───────────────────────────────────────────────────────────
+retrieval:
+  local:
+    sources_dir: sources/
+    k: 2
+
+# ── Output ──────────────────────────────────────────────────────────────
+output:
+  dir: output/
+  live_log: true
+  formats: [json, markdown]
+  checkpoint_db: checkpoints.sqlite

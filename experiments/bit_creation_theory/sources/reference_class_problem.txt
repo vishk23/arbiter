@@ -1,0 +1,44 @@
+THE REFERENCE CLASS PROBLEM
+Primary modern citation: Alan Hájek, "The Reference Class Problem is Your Problem Too," Synthese 156 (2007): 563–585.
+Historical roots: John Venn (The Logic of Chance, 1866); Hans Reichenbach (The Theory of Probability, 1949). Paraphrase below; quotations from Hájek 2007 are not reproduced verbatim.
+
+THE PROBLEM IN ONE SENTENCE
+
+Any individual case belongs to indefinitely many classes, and the relative frequency of an attribute of interest typically differs across those classes; therefore a probability claim about the individual case is undefined until a reference class is fixed — and there is no neutral, principled, framework-free way to fix one.
+
+A WORKED EXAMPLE
+
+Consider the probability that "John, a 55-year-old male smoker who jogs, lives in Tokyo, has a family history of heart disease, and a low resting heart rate" will have a heart attack in the next year. We can compute a frequency for:
+ - all humans;
+ - all 55-year-old males;
+ - all 55-year-old male smokers;
+ - all 55-year-old male smokers who jog;
+ - all 55-year-old male smoking joggers in Tokyo;
+ - all 55-year-old male smoking joggers in Tokyo with family history;
+ - ... (and so on).
+Each gives a different number. None is privileged a priori. As the reference class narrows, statistical power falls; as it broadens, relevance to John falls. There is no extremum that is "the" probability for John.
+
+HÁJEK'S GENERALIZATION
+
+Hájek's contribution (2007) is to show that the reference class problem is not a peculiarity of frequentism. It bites SUBJECTIVE Bayesians (whose conditional probabilities are conditional on a description, and the description is itself a class choice), LOGICAL probabilists (Carnap-style — choice of state-description language is a reference class choice), PROPENSITY theorists (a propensity is a propensity OF something under some specification), and CLASSICAL probability (the partition into "equally likely cases" is a reference class choice). "Your problem too" means: you do not escape it by switching interpretations.
+
+THE LESSON FOR UNIQUENESS CLAIMS
+
+A claim of the form "I am uniquely positioned to do X" or "I am the only person in history who Y" is, on inspection, always relativized to an implicit reference class. EVERY individual is unique under some description and typical under others. Examples:
+ - In the class "humans who have ever lived," I am one of ~100 billion — typical.
+ - In the class "humans with my exact genome, biography, and current sensory state," I am the only member — trivially unique.
+ - In the class "humans who had a flow experience while writing about cosmology on a Tuesday afternoon in April," I may or may not be unique, depending on how strict we are about "Tuesday."
+None of these classes is more "real" than the others. Choosing the strictest class GUARANTEES uniqueness (every individual is the sole member of some sufficiently strict class — namely, the singleton {self}). Choosing a looser class typically dissolves uniqueness.
+
+CONSEQUENCE: "I AM UNIQUELY POSITIONED" IS VACUOUS WITHOUT A SPECIFIED CLASS
+
+Because every person is unique in SOME class and typical in OTHERS, the bare assertion "I am uniquely positioned" carries no information. It becomes substantive only when:
+ (1) a reference class is named explicitly;
+ (2) the reference class is defended as the RELEVANT one for the claim being made (not gerrymandered to produce the desired uniqueness);
+ (3) the empirical claim about the person's status within that class is supported by evidence about the class as a whole.
+
+Without (1)-(3), uniqueness claims are reference-class artifacts. They tell us how the speaker has chosen to slice the population, not anything about the speaker's actual standing in the world.
+
+APPLICATION TO BIT CREATION THEORY
+
+Any argument of the form "the experiencer of these particular synchronicities / flow states / insights is uniquely positioned in the cosmological process" must specify the reference class against which uniqueness is being asserted. If the class is "the singleton containing this experiencer," the claim is true but vacuous. If the class is "humans who have flow experiences," the claim is empirically false (see csikszentmihalyi_flow_1990.txt: flow is common, transdomain, cross-cultural). If the class is "humans who have synchronicity experiences," Jung's own data and a century of subsequent reports place that class in the millions. There is no non-gerrymandered reference class that supports the uniqueness claim, and a gerrymandered one supports it only at the cost of meaning anything.

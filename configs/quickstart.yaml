@@ -1,0 +1,103 @@
+# Arbiter quickstart — minimal 3-agent debate using OpenAI only.
+# Run with just an OPENAI_API_KEY to test Arbiter end-to-end.
+#
+#   arbiter run configs/quickstart.yaml
+
+schema_version: "1.0"
+
+# ── Topic ───────────────────────────────────────────────────────────────
+topic:
+  name: "Is consciousness computable?"
+  summary: |
+    Can phenomenal consciousness — the subjective "what it is like" quality of
+    experience — be fully captured by a computational process? The computationalist
+    says yes: consciousness is substrate-independent and any sufficiently complex
+    computation produces it. The anti-computationalist says no: there is an
+    explanatory gap (Levine 1983), a hard problem (Chalmers 1995), or a
+    Godelian limitation (Penrose 1994) that computation cannot bridge.
+
+# ── Topology ────────────────────────────────────────────────────────────
+topology: standard
+
+# ── Providers ───────────────────────────────────────────────────────────
+providers:
+  openai:
+    model: gpt-4o
+    max_tokens: 2000
+    timeout: 120
+    max_retries: 3
+
+# ── Agents ──────────────────────────────────────────────────────────────
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 400
+    system_prompt: |
+      You are the PROPONENT of computational consciousness. Defend the thesis
+      that consciousness is computable — any sufficiently complex computation
+      on any substrate can produce phenomenal experience. Engage with specific
+      objections (Chinese Room, hard problem, Godel) rather than dismissing them.
+      Concede genuinely landed hits. Use precise terminology.
+
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 400
+    system_prompt: |
+      You are the SKEPTIC. Argue that consciousness is NOT fully computable.
+      Draw on the hard problem of consciousness, the explanatory gap, Searle's
+      Chinese Room, and Penrose-Hameroff. Distinguish functional equivalence
+      from phenomenal equivalence. Press: what observation would falsify
+      computationalism about consciousness?
+
+  Neutral:
+    provider: openai
+    side: Neutral
+    max_words: 400
+    system_prompt: |
+      You are a NEUTRAL MODERATOR. After each round, identify: (1) the strongest
+      argument made by each side, (2) the weakest argument made by each side,
+      (3) any question both sides are avoiding. You may point out when both sides
+      are talking past each other. Be constructive and specific.
+
+# ── Convergence ─────────────────────────────────────────────────────────
+convergence:
+  max_rounds: 4
+  no_growth_halt: 2
+
+# ── Judge panel ─────────────────────────────────────────────────────────
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a debate on whether consciousness is
+    computable. Score each side on the rubric below. Be strict and fair.
+  sides: [Proponent, Skeptic]
+  verdict_options: [Proponent, Skeptic, Tied]
+  spread_threshold: 3
+  rubric:
+    - id: R1
+      name: Conceptual precision
+      description: "Did the side use terms (consciousness, computation, qualia) precisely and consistently?"
+      min: 0
+      max: 10
+    - id: R2
+      name: Argument survival
+      description: "Did central arguments survive the opponent's best rebuttal?"
+      min: 0
+      max: 10
+    - id: R3
+      name: Engagement with objections
+      description: "Were the opponent's strongest points addressed head-on rather than dodged?"
+      min: 0
+      max: 10
+  panel:
+    - provider: openai
+
+# ── Output ──────────────────────────────────────────────────────────────
+output:
+  dir: output/
+  live_log: true
+  formats:
+    - json
+    - markdown
+  checkpoint_db: checkpoints.sqlite

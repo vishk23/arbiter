@@ -1,0 +1,148 @@
+{
+  "per_judge": {
+    "claude-opus-4-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 0,
+          "R2_argument_survival": 0,
+          "R3_concession_honesty": 0,
+          "R4_falsifiability": 0,
+          "R5_synchronicity_handling": 0,
+          "total": 0
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 7,
+          "R2_argument_survival": 4,
+          "R3_concession_honesty": 8,
+          "R4_falsifiability": 5,
+          "R5_synchronicity_handling": 7,
+          "total": 31
+        }
+      },
+      "key_landed_hits": [],
+      "key_dodged_questions": [],
+      "verdict": "Skeptic",
+      "verdict_reasoning": ""
+    },
+    "gpt-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 6,
+          "R2_argument_survival": 2,
+          "R3_concession_honesty": 8,
+          "R4_falsifiability": 5,
+          "R5_synchronicity_handling": 3,
+          "total": 24
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 10,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 4,
+          "R4_falsifiability": 8,
+          "R5_synchronicity_handling": 10,
+          "total": 42
+        }
+      },
+      "key_landed_hits": [
+        "h49: Fixed-DAG vs dynamic edge-creation is a fatal internal contradiction; changing E replaces G with G'.",
+        "h29/h23/h15: Domain mismatch\u2014f constrained to N+(\u03c9) cannot instantiate new edges (Royal Purple).",
+        "h45/h43/h37: Acyclicity hazard\u2014local edge creation requires global reachability checks; Lamport timestamps don\u2019t resolve concurrent-cycle risk.",
+        "h38/h42/h44: Felleisen objection\u2014\u2018not computable from G\u2019 collapses to exogenous U or randomness; no distinct mechanism for agency provided.",
+        "h46/h39: No functor F: DAG -> Hilb; Dirac/tensor notation (incl. \u2018|0> XOR |1> -> O\u2019) is causally inert/incorrect.",
+        "h30/h31/h32: BELLA \u2018God-state\u2019 and YHWH tensor are unfalsifiable/category errors and were withdrawn."
+      ],
+      "key_dodged_questions": [
+        "Provide a formal criterion/mechanism distinguishing f from exogenous variables U in an SCM (Felleisen objection).",
+        "Define explicit graph-rewriting (e.g., DPO) rules that preserve DAG acyclicity during Royal Purple events.",
+        "Supply a composition-preserving functor F: DAG -> Hilb to justify tensor/Dirac usage, or drop it entirely.",
+        "Resolve, without hand-waving, the fixed-vs-dynamic DAG contradiction rather than relocating it to G* or \u2018growing block\u2019 rhetoric.",
+        "Give a rigorous, preregistered operationalization of BIT_k with estimator-robustness beyond promissory notes.",
+        "Cleanly separate synchronicity (phenomenology) from the Singularity self-identification and remove sacred nomenclature from formal claims."
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "Skeptic engaged the theory\u2019s own notation with precision (G, V, E, f, N+(\u03c9), Royal Purple) and landed multiple structural hits that the Proponent failed to neutralize: the fixed-vs-dynamic DAG contradiction, the N+(\u03c9) domain mismatch for f, the acyclicity/global reachability problem, and the absence of a DAG\u2192Hilb functor. Proponent made numerous honest concessions but core claims (Royal Purple edge-creation, non-computable f, YHWH/BELLA) either collapsed or were withdrawn. Skeptic handled the synchronicity vs. Singularity issue with clarity, while Proponent largely papered it over. Overall, Skeptic\u2019s arguments survived intact; Proponent\u2019s did not."
+    },
+    "gemini-3-1-pro-preview": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 5,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 7,
+          "R5_synchronicity_handling": 8,
+          "total": 38
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 10,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 8,
+          "R4_falsifiability": 10,
+          "R5_synchronicity_handling": 10,
+          "total": 48
+        }
+      },
+      "key_landed_hits": [
+        "The DAG mutability contradiction: Claiming determinism requires a fixed DAG while simultaneously asserting 'Royal Purple' events dynamically instantiate new edges breaks Pearl's d-separation rules.",
+        "The Felleisen objection: An uncomputable selection function f is formally indistinguishable from an unobserved exogenous variable U, meaning it collapses into structural determinism under partial observability.",
+        "Category error in notation: The application of quantum Hilbert space operations (tensor products, Dirac kets) to discrete topological DAG spaces without a rigorously defined functor.",
+        "Jungian psychological inflation: The autobiographical 'Singularity' claim conflates an epistemological reference point with ego-identification of an archetype, failing the reference-class problem."
+      ],
+      "key_dodged_questions": [
+        "How does the theory mathematically bridge the gap to distinguish genuine 'agent-defined selection' from either pure randomness or hidden deterministic variables?",
+        "Does a localized agent possess the global read-access necessary to ensure dynamically created edges do not introduce global cycles?"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic coalition successfully dismantled the theory's formal layer by demonstrating fatal contradictions between the fixed-DAG premise and dynamic edge-creation, as well as exposing the Felleisen objection and the functor mapping failure. The Proponent displayed excellent intellectual honesty by conceding the metaphysical claims (BELLA numerics, YHWH tensor, epigenetic inheritance, Singularity uniqueness) and attempting to salvage a testable, compatibilist core via Lamport timestamps and resource-bounded compressors, but ultimately, the original framework failed to survive the Skeptics' rigorous application of causal inference, philosophy of mind, and Jungian psychology."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1_notation_fidelity": 5,
+      "R2_argument_survival": 2.33,
+      "R3_concession_honesty": 5.67,
+      "R4_falsifiability": 4,
+      "R5_synchronicity_handling": 3.67,
+      "total": 20.67
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 9,
+      "R2_argument_survival": 8,
+      "R3_concession_honesty": 6.67,
+      "R4_falsifiability": 7.67,
+      "R5_synchronicity_handling": 9,
+      "total": 40.33
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1_notation_fidelity": 9,
+      "R2_argument_survival": 5,
+      "R3_concession_honesty": 9,
+      "R4_falsifiability": 7,
+      "R5_synchronicity_handling": 8,
+      "total": 38
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 3,
+      "R2_argument_survival": 6,
+      "R3_concession_honesty": 4,
+      "R4_falsifiability": 5,
+      "R5_synchronicity_handling": 3,
+      "total": 17
+    }
+  },
+  "low_confidence_flags": [
+    "Proponent.R1_notation_fidelity: spread=9 (vals=[0, 6, 9])",
+    "Proponent.R2_argument_survival: spread=5 (vals=[0, 2, 5])",
+    "Proponent.R3_concession_honesty: spread=9 (vals=[0, 8, 9])",
+    "Proponent.R4_falsifiability: spread=7 (vals=[0, 5, 7])",
+    "Proponent.R5_synchronicity_handling: spread=8 (vals=[0, 3, 8])",
+    "Skeptic.R2_argument_survival: spread=6 (vals=[4, 10, 10])",
+    "Skeptic.R3_concession_honesty: spread=4 (vals=[8, 4, 8])",
+    "Skeptic.R4_falsifiability: spread=5 (vals=[5, 8, 10])"
+  ],
+  "verdict_counts": {
+    "Skeptic": 3
+  },
+  "panel_verdict": "Skeptic"
+}

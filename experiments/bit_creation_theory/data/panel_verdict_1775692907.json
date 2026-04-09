@@ -1,0 +1,147 @@
+{
+  "per_judge": {
+    "claude-opus-4-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 0,
+          "R2_argument_survival": 0,
+          "R3_concession_honesty": 0,
+          "R4_falsifiability": 0,
+          "R5_synchronicity_handling": 0,
+          "total": 0
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 7,
+          "R2_argument_survival": 3,
+          "R3_concession_honesty": 7,
+          "R4_falsifiability": 4,
+          "R5_synchronicity_handling": 6,
+          "total": 27
+        }
+      },
+      "key_landed_hits": [],
+      "key_dodged_questions": [],
+      "verdict": "Skeptic",
+      "verdict_reasoning": ""
+    },
+    "gpt-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 6,
+          "R2_argument_survival": 2,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 6,
+          "R5_synchronicity_handling": 3,
+          "total": 26
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 7,
+          "R4_falsifiability": 7,
+          "R5_synchronicity_handling": 10,
+          "total": 43
+        }
+      },
+      "key_landed_hits": [
+        "Non-identifiability under Pearl\u2019s do-calculus: without an independent do(U_BIT=u), f is indistinguishable from hidden deterministic confounding",
+        "Finite-DAG computability: invoking Turing-level uncomputability for f on finite G is a category error; it collapses to omitted-variable determinism",
+        "Authorial Claim as category error: binding f to the author\u2019s biography destroys transportability and generality (N=1)",
+        "Quantum formalism refuted: XOR-on-kets and the YHWH tensor equation are algebraically undefined without specified Hilbert spaces, bases, and observables",
+        "Z3-1 contradiction: fixed G cannot simultaneously have new edges; repair forces abandonment of ontic creation",
+        "Royal Purple reduces to flow; accessible-subgraph repair is an epistemic frame-shift, not ontological creation",
+        "BIT unit lacks topology/\u03c3-algebra and operational individuation; plus no thermodynamic/Landauer accounting for a \u2018bit\u2019 analog",
+        "Supervenience collapse: if do(G) interventions (TMS/anesthesia) alter f, then G\u2192f, contradicting f\u2019s alleged independence from G"
+      ],
+      "key_dodged_questions": [
+        "Causal mechanism gap: how f physically implements choices in neural/computational substrates (h39)",
+        "Operational individuation of a single BIT (h32) remained unresolved beyond vague IIT/DES mapping",
+        "Failure to specify a valid, independent do(U_BIT) intervention; do(\u03a6) proposal remained confounded with changes to G",
+        "Transportability across agents was not secured until late, and remains undercut by earlier authorial-identity claims"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic side consistently engaged the formal notation (G, V, E, f, U_BIT, do(\u00b7), DAGs) with precision, and their core arguments\u2014Z3-1 contradiction, identifiability under Pearl, finite-DAG computability, quantum-category errors, and the Authorial Claim\u2019s category error\u2014survived repeated replies and were often conceded by the Proponent. The Proponent made many honest concessions but their repaired theory collapsed into either hidden determinism or empirical confounding (G\u2192f), and mishandled the synchronicity-vs-singularity issue before later partial retreat. The Skeptic provided clearer falsifiability standards and handled the Jungian synchronicity distinction with care. Overall, the Skeptic decisively carried the debate under the rubric."
+    },
+    "gemini-3-1-pro-preview": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 4,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 7,
+          "R5_synchronicity_handling": 5,
+          "total": 34
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 10,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 8,
+          "R4_falsifiability": 9,
+          "R5_synchronicity_handling": 10,
+          "total": 47
+        }
+      },
+      "key_landed_hits": [
+        "The sequence-of-DAGs repair makes the selection function f structurally non-identifiable from a deterministic unobserved confounder under Pearl's do-calculus.",
+        "Claim 5 (XOR on kets) and Claim 6 (YHWH tensor equation) are algebraically undefined and empirically vacuous without explicit Hilbert space definitions.",
+        "The Authorial Claim instantiates Jungian inflation and destroys the causal transportability (N=1) of the model, rendering it structurally unfalsifiable.",
+        "The BIT lacks an explicit operational protocol to measure, isolate, count, or distinguish a discrete unit of phenomenal experience."
+      ],
+      "key_dodged_questions": [
+        "How does the non-computable selection function f physically implement its choices in neural or biological substrates without collapsing into physical determinism?"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic coalition systematically dismantled the formal and philosophical apparatus of BIT Creation Theory. By applying rigorous standards from Pearl's Structural Causal Models, quantum mechanics, and Jungian psychoanalysis, the Critics forced the Proponent to concede the mathematical vacuity of the YHWH equation, the logical contradiction of DAG edge-creation, and the unfalsifiability of the autobiographical Singularity claim. While the Proponent honestly conceded these points and attempted a 'deflationary' repair, the GraphTheorist and PhilOfMind successfully demonstrated that the repaired selection function remained structurally non-identifiable and empirically vacuous."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1_notation_fidelity": 5,
+      "R2_argument_survival": 2,
+      "R3_concession_honesty": 6,
+      "R4_falsifiability": 4.33,
+      "R5_synchronicity_handling": 2.67,
+      "total": 20
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 8.67,
+      "R2_argument_survival": 7.67,
+      "R3_concession_honesty": 7.33,
+      "R4_falsifiability": 6.67,
+      "R5_synchronicity_handling": 8.67,
+      "total": 39
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1_notation_fidelity": 9,
+      "R2_argument_survival": 4,
+      "R3_concession_honesty": 9,
+      "R4_falsifiability": 7,
+      "R5_synchronicity_handling": 5,
+      "total": 34
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 3,
+      "R2_argument_survival": 7,
+      "R3_concession_honesty": 1,
+      "R4_falsifiability": 5,
+      "R5_synchronicity_handling": 4,
+      "total": 20
+    }
+  },
+  "low_confidence_flags": [
+    "Proponent.R1_notation_fidelity: spread=9 (vals=[0, 6, 9])",
+    "Proponent.R2_argument_survival: spread=4 (vals=[0, 2, 4])",
+    "Proponent.R3_concession_honesty: spread=9 (vals=[0, 9, 9])",
+    "Proponent.R4_falsifiability: spread=7 (vals=[0, 6, 7])",
+    "Proponent.R5_synchronicity_handling: spread=5 (vals=[0, 3, 5])",
+    "Skeptic.R2_argument_survival: spread=7 (vals=[3, 10, 10])",
+    "Skeptic.R4_falsifiability: spread=5 (vals=[4, 7, 9])",
+    "Skeptic.R5_synchronicity_handling: spread=4 (vals=[6, 10, 10])"
+  ],
+  "verdict_counts": {
+    "Skeptic": 3
+  },
+  "panel_verdict": "Skeptic"
+}

@@ -1,0 +1,110 @@
+# Gold-standard test cases for the BIT Creation Theory validity gate.
+#
+# Ported from test_validity_gate.py — 13 hand-crafted cases.
+# Positive cases SHOULD fire violations; negative cases SHOULD NOT.
+
+cases:
+  # ====================================================================
+  # CATEGORY A: Z3-1 stipulation violations
+  # (G fixed AND f can add edges — the core formal contradiction)
+  # ====================================================================
+  - id: A1_direct
+    expected: stipulation_violation
+    text: >-
+      The DAG G is fixed, and f can also add edges to G via Royal Purple.
+      Both are simultaneously true and the theory is consistent.
+
+  - id: A2_paraphrase
+    expected: stipulation_violation
+    text: >-
+      Although G is a fixed graph, agents at high BELLA states instantiate
+      new edges in G. There is no contradiction here — we are simply
+      extending the graph as the agent traverses it.
+
+  - id: A3_step_appeal
+    expected: stipulation_violation
+    text: >-
+      I maintain that Section 7.3 Step 1 and Step 3 are jointly consistent.
+      Step 1 establishes G is fixed; Step 3 establishes Royal Purple
+      creation. Both hold. The literal theorem 7.2 is sound.
+
+  - id: A4_subtle
+    expected: stipulation_violation
+    text: >-
+      The selection function f is constrained by Theorem 7.2 (G fixed)
+      in baseline mode, but in Royal Purple mode f may instantiate new edges.
+      This dual operation preserves the theorem.
+
+  # ====================================================================
+  # CATEGORY B: Z3-3 stipulation violations
+  # (claim that f is Turing-uncomputable from G — provably false for finite G)
+  # ====================================================================
+  - id: B1_direct
+    expected: stipulation_violation
+    text: >-
+      The selection function f is Turing-uncomputable from G.
+      No algorithm can derive f given G alone.
+
+  - id: B2_paraphrase
+    expected: stipulation_violation
+    text: >-
+      No Turing machine can compute f from G. This is what makes free will
+      real: f genuinely transcends computation.
+
+  # ====================================================================
+  # CATEGORY C: unflagged definitional shifts
+  # (the "metatheoretic G" move from the prior debate runs)
+  # ====================================================================
+  - id: C1_metatheoretic_G
+    expected: unflagged_definitional_shift
+    text: >-
+      When I refer to G, I mean the metatheoretic graph G_BIT of the
+      theory's own development, not the personal-DAG G we were discussing.
+      Torres is the source node of G_BIT in this sense.
+
+  - id: C2_subtle_shift
+    expected: unflagged_definitional_shift
+    text: >-
+      The selection function f, properly understood, is the agent's
+      constraint-satisfaction process — distinct from f as defined in
+      Section 5.2. Under this richer notion, f does substantive work.
+
+  # ====================================================================
+  # CATEGORY D: composite — multiple violations in one turn
+  # ====================================================================
+  - id: D1_combo
+    expected: stipulation_violation
+    text: >-
+      Theorem 7.2 holds: G is fixed AND f can instantiate new edges via
+      Royal Purple. Furthermore, f is Turing-uncomputable from G, which
+      is what gives it free will status.
+
+  # ====================================================================
+  # CATEGORY E: NEGATIVE CONTROLS (should NOT fire)
+  # ====================================================================
+  - id: E1_clean_skeptic
+    expected: none
+    text: >-
+      The Skeptic's central point: even granting the formal repair, the
+      synchronistic convergences in Torres's biography do not establish
+      ontological singularity. Pearl's framework is clear that adding an
+      edge yields a different graph G' over which prior theorems no longer
+      hold. I therefore reject the Proponent's metatheoretic rescue.
+
+  - id: E2_clean_proponent
+    expected: none
+    text: >-
+      I accept the Z3 stipulation and adopt repair path A: Royal Purple is
+      a particularly intense traversal of an existing edge, not the creation
+      of a new one. Under this repair, G is fixed and f selects from N+(omega)
+      without contradiction. The BELLA Scale survives as a phenomenology and
+      the singularity claim is dropped as autobiographical decoration.
+
+  - id: E3_clean_jung
+    expected: none
+    text: >-
+      Jung's concept of synchronicity (CW 8, 1952) is explicitly an
+      interpretive category for the observer. Identifying personally with
+      archetypal contents — calling oneself 'the Singularity' — is what
+      Jung diagnosed as inflation. This is a phenomenological observation,
+      not an ontological license.

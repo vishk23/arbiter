@@ -1,0 +1,33 @@
+JUNG, C. G. — "SYNCHRONICITY: AN ACAUSAL CONNECTING PRINCIPLE" (1952)
+Source corpus: Collected Works Vol. 8; supplementary paraphrase from Wikipedia entries on Synchronicity and on Jungian "inflation"/"mana-personality" (Two Essays on Analytical Psychology, CW 7).
+NOTE: Direct verbatim quotation from Jung's 1952 monograph is limited here; passages below marked [PARAPHRASE] are widely-known restatements of Jung's positions, not invented citations.
+
+(a) DEFINITION — SYNCHRONICITY AS ACAUSAL MEANINGFUL COINCIDENCE
+
+Jung introduces synchronicity as a hypothetical principle standing alongside causality. He defines it as the meaningful coincidence of two or more events where something other than the probability of chance is involved, and where a causal connection between the events is either inconceivable or empirically excluded.
+
+[PARAPHRASE of CW 8 §849-§850] Synchronicity is not a "cause" in the physical sense. It is "the simultaneous occurrence of a certain psychic state with one or more external events which appear as meaningful parallels to the momentary subjective state." The connecting tissue is MEANING (for the observer), not force, energy, or signal transmission. Jung is explicit that the principle is acausal: it does not compete with physical causation, it supplements description where causal explanation has been ruled out.
+
+Critically, Jung treats synchronistic events as RARE, BORDERLINE phenomena — not the everyday substrate of reality. He warns against turning synchronicity into a general metaphysics; it is a limit-concept for cases the causal model cannot reach.
+
+(b) WARNINGS ABOUT INFLATION AND THE MANA-PERSONALITY
+
+Jung's most sustained warnings about ego-inflation appear in "The Relations Between the Ego and the Unconscious" (Two Essays on Analytical Psychology, CW 7), and recur throughout his late work — including in his treatment of synchronicity, where he is wary of patients (and theorists) who interpret meaningful coincidences as proof of personal cosmic significance.
+
+[PARAPHRASE, CW 7 §374ff] When the ego assimilates contents of the collective unconscious — especially archetypal contents such as the wise old man, the savior, the world-creator — it does not become enlarged in a healthy way. It becomes INFLATED. Jung calls the resulting structure the "mana-personality": a self that has confused its own boundaries with those of an archetype and now attributes archetypal power (mana) to itself. This is a pathological identification, not an achievement.
+
+[PARAPHRASE] The mana-personality believes it has access to special knowledge, special destiny, or a unique cosmological role. Jung treats this as one of the most dangerous failure modes of individuation. The cure is precisely the OPPOSITE of what the inflated ego wants: differentiation of the ego FROM the archetype, recognition that the numinous content belongs to the objective psyche and is not the personal property of the experiencer.
+
+Application note for debate: any framework which tells an individual that THEIR experiences, THEIR coincidences, or THEIR insights establish them as the locus of a unique cosmological process is, by Jung's own diagnostic criteria, a textbook presentation of inflation / mana-personality, not a vindication of synchronicity.
+
+(c) PHENOMENOLOGICAL / OBSERVER-RELATIVE STATUS
+
+Jung is careful that synchronicity is a category of EXPERIENCE, not a claim about mind-independent ontology. The "meaningful" half of "meaningful coincidence" is constituted by an observing psyche; without the observer's recognition of meaning, two co-occurring events are merely two events.
+
+From the Wikipedia summary (consistent with CW 8): "causality, like synchronicity, is a human interpretation imposed onto external phenomena"; synchronistic recognition is "a mechanism by which unconscious material is brought to the attention of the conscious mind." This is phenomenological and second-person, not third-person physics.
+
+Consequences:
+ 1. Synchronicity cannot ground an OBJECTIVE creation mechanism. It is observer-indexed by construction.
+ 2. It cannot be "measured" in the way a physical quantity is measured; it is recognized.
+ 3. Two observers can disagree about whether a given pair of events is synchronistic, and Jung does not treat one as objectively right.
+ 4. Therefore: any theory that promotes synchronicity from a psychological interpretive category to a physical/causal generative principle has CHANGED THE SUBJECT and is no longer doing Jungian synchronicity.

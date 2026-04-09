@@ -1,0 +1,144 @@
+{
+  "per_judge": {
+    "claude-opus-4-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 6,
+          "R2_argument_survival": 3,
+          "R3_concession_honesty": 8,
+          "R4_falsifiability": 5,
+          "R5_synchronicity_handling": 4,
+          "total": 26
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 8,
+          "R2_argument_survival": 8,
+          "R3_concession_honesty": 5,
+          "R4_falsifiability": 6,
+          "R5_synchronicity_handling": 9,
+          "total": 36
+        }
+      },
+      "key_landed_hits": [],
+      "key_dodged_questions": [],
+      "verdict": "Skeptic",
+      "verdict_reasoning": ""
+    },
+    "gpt-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 8,
+          "R2_argument_survival": 3,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 7,
+          "R5_synchronicity_handling": 6,
+          "total": 33
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 9,
+          "R3_concession_honesty": 6,
+          "R4_falsifiability": 8,
+          "R5_synchronicity_handling": 9,
+          "total": 41
+        }
+      },
+      "key_landed_hits": [
+        "Under Path A, relabeling exogenous U as 'BIT' adds zero novel graph-theoretic content (h55); Proponent answered YES",
+        "'f not computable from G alone' conflates Turing-uncomputability with trivial exogenous underdetermination (h15)",
+        "No isomorphism-invariant predicate P(v) to single out a 'Singularity' node; naming violates label invariance (h29/h32)",
+        "Synchronicity is observer-indexed and cannot ground graph-level ontic uniqueness (h5/h7/h30)",
+        "YHWH tensor lacks mathematical content without defined vector spaces/limits; reduced to metaphor (h38)",
+        "Singularity claim unfalsifiable; dropped when faced with Markov-equivalence test (h20/h41)",
+        "Adding edges (Path B) destroys d-separation/Markov equivalence; prior theorems don\u2019t carry over (h25/h34)",
+        "Demand for explicit bridge principle g: V -> [0,12] to distinguish BIT from generic SCM compatibilism (h61)"
+      ],
+      "key_dodged_questions": [
+        "Proponent failed to supply a formal, generative bridge g: V -> [0,12] with identifiability",
+        "Proponent did not provide a BIT-only structural criterion (No-Free-Latents) distinguishing f from U beyond labels",
+        "Proponent never gave a rigorous vector-space/basis construction for |Omega> (YHWH) under mutable graphs",
+        "Skeptic under-pressed the Path B YHWH topological-limit requirement (h68)"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "Skeptic precisely engaged the formal notation (G, f, N+, SCM U, isomorphism-invariance), and their core arguments survived: f\u2019s \u2018non-computability\u2019 reduced to standard exogenous underdetermination; the Singularity claim was unfalsifiable and label-dependent; and YHWH lacked mathematical content. Proponent made commendably honest concessions (dropping edge-creation, Singularity, Turing-claims; conceding zero graph-theoretic novelty) but their remaining position hinged on an undefined bridge g: V -> [0,12], leaving falsifiability underspecified. On the synchronicity/singularity distinction, Skeptic handled it carefully and consistently; Proponent ultimately conceded. Overall, Skeptic\u2019s arguments endured; Proponent\u2019s did not."
+    },
+    "gemini-3-1-pro-preview": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 3,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 5,
+          "R5_synchronicity_handling": 5,
+          "total": 31
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 10,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 9,
+          "R4_falsifiability": 10,
+          "R5_synchronicity_handling": 10,
+          "total": 49
+        }
+      },
+      "key_landed_hits": [
+        "Under Path A, the selection function f is mathematically indistinguishable from a standard unobserved exogenous variable U, reducing the theory to standard SCM compatibilism.",
+        "The explicit axiom 'You cannot separate the unit from the person' structurally instantiates the exact mana-personality ego-archetype fusion that Jung diagnoses as pathology.",
+        "The YHWH tensor equation is mathematically vacuous without a defined vector space basis and topological limit, which the theory fails to provide under both fixed and mutable graph interpretations.",
+        "Synchronicity is observer-indexed phenomenology; using it to claim objective, third-person topological Singularity in a causal graph is a category error.",
+        "Without an isomorphism-invariant predicate, claiming a single node is the Singularity under a mutable graph is structurally unfalsifiable."
+      ],
+      "key_dodged_questions": [
+        "What is the exact mathematical bridge principle (g: V -> [0,12]) that maps the third-person DAG topology to the first-person BELLA states?",
+        "Under Path A, how does relabeling Pearl's standard exogenous variable U as 'BIT' add any novel graph-theoretic content or structural equations?",
+        "What are the precise Hilbert-space bases and topological limit for Omega in the YHWH tensor equation if the causal graph is mutable?"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic coalition methodically dismantled both the mathematical and philosophical foundations of BIT Creation Theory. By enforcing Pearl's axioms, the Graph Theorist forced the Proponent to concede that the 'uncomputable' selection function f is mathematically identical to a standard exogenous variable U, collapsing the framework's grand reconciliation of free will into generic compatibilism. The Jung Scholar successfully proved that the theory's explicit axioms structurally encode mana-personality inflation, preventing the Proponent from separating the authorial claims from the formal architecture. Finally, the Generalist and Philosopher of Mind demonstrated that without a rigorous bridge principle linking the DAG to the BELLA scale, the entire graph-theoretic layer is empirically vacuous, while the YHWH tensor equation remains a mathematically undefined metaphor."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1_notation_fidelity": 7.67,
+      "R2_argument_survival": 3,
+      "R3_concession_honesty": 8.67,
+      "R4_falsifiability": 5.67,
+      "R5_synchronicity_handling": 5,
+      "total": 30
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 9,
+      "R2_argument_survival": 9,
+      "R3_concession_honesty": 6.67,
+      "R4_falsifiability": 8,
+      "R5_synchronicity_handling": 9.33,
+      "total": 42
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1_notation_fidelity": 3,
+      "R2_argument_survival": 0,
+      "R3_concession_honesty": 1,
+      "R4_falsifiability": 2,
+      "R5_synchronicity_handling": 2,
+      "total": 7
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 2,
+      "R2_argument_survival": 2,
+      "R3_concession_honesty": 4,
+      "R4_falsifiability": 4,
+      "R5_synchronicity_handling": 1,
+      "total": 13
+    }
+  },
+  "low_confidence_flags": [
+    "Skeptic.R3_concession_honesty: spread=4 (vals=[5, 6, 9])",
+    "Skeptic.R4_falsifiability: spread=4 (vals=[6, 8, 10])"
+  ],
+  "verdict_counts": {
+    "Skeptic": 3
+  },
+  "panel_verdict": "Skeptic"
+}

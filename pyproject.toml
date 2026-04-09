@@ -1,0 +1,50 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "arbiter-debate"
+version = "0.1.0"
+description = "Formally verified multi-agent debates"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+keywords = ["debate", "multi-agent", "formal-verification", "z3", "llm", "ai-safety"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "typer>=0.15",
+    "rich>=13",
+    "pyyaml>=6",
+    "pydantic>=2.7",
+    "jinja2>=3.1",
+    "langgraph>=0.4",
+    "langgraph-checkpoint-sqlite>=2",
+    "anthropic>=0.45",
+    "openai>=1.80",
+    "google-genai>=1.50",
+    "python-dotenv>=1",
+    "scikit-learn>=1.5",
+]
+
+[project.optional-dependencies]
+z3 = ["z3-solver>=4.13"]
+web = ["tavily-python>=0.5"]
+ollama = ["ollama>=0.4"]
+dev = ["pytest>=8", "ruff"]
+all = ["arbiter-debate[z3,web,ollama,dev]"]
+
+[project.scripts]
+arbiter = "arbiter.cli:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/arbiter"]
+
+[tool.ruff]
+line-length = 100

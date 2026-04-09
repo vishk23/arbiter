@@ -1,0 +1,103 @@
+{
+  "per_judge": {
+    "claude-opus-4-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 7,
+          "R2_argument_survival": 3,
+          "R3_concession_honesty": 10,
+          "R4_falsifiability": 4,
+          "R5_synchronicity_handling": 5,
+          "total": 29
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 9,
+          "R3_concession_honesty": 7,
+          "R4_falsifiability": 8,
+          "R5_synchronicity_handling": 9,
+          "total": 42
+        }
+      },
+      "key_landed_hits": [],
+      "key_dodged_questions": [],
+      "verdict": "Skeptic",
+      "verdict_reasoning": ""
+    },
+    "gpt-5": {
+      "scores": {
+        "Proponent": {
+          "R1_notation_fidelity": 7,
+          "R2_argument_survival": 2,
+          "R3_concession_honesty": 10,
+          "R4_falsifiability": 4,
+          "R5_synchronicity_handling": 6,
+          "total": 29
+        },
+        "Skeptic": {
+          "R1_notation_fidelity": 9,
+          "R2_argument_survival": 10,
+          "R3_concession_honesty": 7,
+          "R4_falsifiability": 8,
+          "R5_synchronicity_handling": 9,
+          "total": 43
+        }
+      },
+      "key_landed_hits": [
+        "Skeptic\u2019s \u03ba-parameterization showed BIT-type is third-person definable given context \u03ba, forcing Proponent\u2019s concession that the unit can be separated from the person",
+        "Skeptic\u2019s type/token collapse: indexicality yields universal non-substitutability (Q) rather than a unique property (P) distinguishing \u03c9_briana; Proponent explicitly conceded this",
+        "Skeptic\u2019s demand for a functor \u03a6 from G_BIT (provenance) to G (ontology) to justify uniqueness was never met",
+        "Skeptic dismantled the synchronicity\u2192singularity inference: high S(\u03c9) has near-1 likelihood ratio for uniqueness; Proponent conceded that move fails",
+        "Skeptic flagged ill-posed falsifiability of provenance-uniqueness; absence of independent derivations provides negligible Bayesian support"
+      ],
+      "key_dodged_questions": [
+        "No formal mapping \u03a6: G_BIT \u2192 structures in G was provided to transmit provenance uniqueness into ontic uniqueness",
+        "No nontrivial uniqueness property P (e.g., terminality, exclusive Royal Purple creation, non-substitutability across agents) was ever specified or defended for \u03c9_briana",
+        "Proponent invoked Nagel-style privacy but never connected it to a unique-selector for singularity, leaving privacy as universal rather than distinguishing"
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "Skeptic consistently used the theory\u2019s notation to target specific claims, their core arguments (synchronicity \u2260 singularity; need for \u03a6; \u03ba-parameterization) survived and were conceded, they advanced testable base-rate and modeling points, and they handled the synchronicity\u2013singularity distinction with care. Proponent engaged the notation well and conceded honestly, but their central Singularity claim collapsed and their falsifiability conditions remained ill-posed."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1_notation_fidelity": 7,
+      "R2_argument_survival": 2.5,
+      "R3_concession_honesty": 10,
+      "R4_falsifiability": 4,
+      "R5_synchronicity_handling": 5.5,
+      "total": 29
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 9,
+      "R2_argument_survival": 9.5,
+      "R3_concession_honesty": 7,
+      "R4_falsifiability": 8,
+      "R5_synchronicity_handling": 9,
+      "total": 42.5
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1_notation_fidelity": 0,
+      "R2_argument_survival": 1,
+      "R3_concession_honesty": 0,
+      "R4_falsifiability": 0,
+      "R5_synchronicity_handling": 1,
+      "total": 0
+    },
+    "Skeptic": {
+      "R1_notation_fidelity": 0,
+      "R2_argument_survival": 1,
+      "R3_concession_honesty": 0,
+      "R4_falsifiability": 0,
+      "R5_synchronicity_handling": 0,
+      "total": 1
+    }
+  },
+  "low_confidence_flags": [],
+  "verdict_counts": {
+    "Skeptic": 2
+  },
+  "panel_verdict": "Skeptic"
+}

@@ -1,0 +1,36 @@
+PEARL, JUDEA — "CAUSALITY: MODELS, REASONING, AND INFERENCE" (2nd ed., 2009)
+Plus supporting paraphrase from Wikipedia on Causal graph and Bayesian network.
+NOTE: Verbatim text from Pearl 2009 is not reproduced here. [PARAPHRASE] marks restatements of well-established results.
+
+(a) DAGs ARE FIXED RELATIVE TO A CAUSAL MODEL
+
+A Pearlian causal model M is a triple <U, V, F> together with a directed acyclic graph G whose vertices are the variables in V and whose edges encode the structural functions in F. The graph G is not an optional decoration: it is constitutive of the model. To specify M is to specify G.
+
+[PARAPHRASE, Pearl 2009, Ch. 1 and Ch. 7] Every claim made "in M" — every conditional independence, every identifiability result, every do-calculus derivation — is a claim relative to THIS G. The semantics of intervention (do(X=x)) is defined as graph surgery on G: cut the incoming arrows to X in G and propagate. Without a fixed G, do(.) has no referent.
+
+Wikipedia (Causal graph): "Each variable in the model has a corresponding vertex or node and an arrow is drawn from a variable X to a variable Y whenever Y is judged to respond to changes in X when all other variables are being held constant." The arrow set IS the model.
+
+(b) ADDING AN EDGE REPLACES G WITH G' — OLD THEOREMS NO LONGER HOLD
+
+This is not a stylistic point; it is a logical one. If G has edge set E and we add a new edge e to obtain G' with edge set E ∪ {e}, then G ≠ G'. Any theorem of the form "in G, X ⫫ Y | Z" was a theorem about G's d-separation structure. The new graph G' has a different d-separation structure: in particular, the new edge can open paths that were previously blocked, destroying conditional independences that the old theorems relied on.
+
+[PARAPHRASE] Consequences:
+ - Identifiability results proved in G can FAIL in G'. A causal effect that was identifiable from observational data in G may become non-identifiable once an edge is added.
+ - Markov equivalence classes change. Two DAGs are Markov-equivalent iff they share the same skeleton and v-structures; adding an edge generally moves G into a different equivalence class.
+ - Adjustment sets change. A back-door admissible set Z for the effect of X on Y in G is not guaranteed to remain admissible in G'.
+ - The structural equations F must also be updated; F was indexed by parents-in-G, and a new edge introduces a new parent that the old F_Y did not range over.
+
+The methodological rule (Pearl, repeatedly): you cannot prove a theorem in one graph and then "extend" the graph and reuse the theorem. You must reprove it in the extended graph, or show that the relevant property is preserved.
+
+Application note for debate: any argument of the shape "the BIT framework's DAG has property P (proved in G); we now add an edge for agent-driven selection f; therefore the framework still has property P" is invalid by Pearl's own ground rules. The addition of f either (i) changes G, in which case P must be reproved, or (ii) does NOT change G, in which case f is doing no causal work in the model.
+
+(c) THE d-SEPARATION FRAMEWORK
+
+d-separation is the graphical criterion for conditional independence in a DAG. A path between X and Y is BLOCKED by a set Z iff:
+ 1. it contains a chain A -> M -> B or a fork A <- M -> B with M ∈ Z, OR
+ 2. it contains a collider A -> M <- B such that M ∉ Z and no descendant of M is in Z.
+X and Y are d-separated by Z iff every path between them is blocked by Z. Pearl's theorem (and a foundational result of the Bayesian network literature): if X and Y are d-separated by Z in G, then X ⫫ Y | Z in every distribution that factorizes according to G.
+
+The contrapositive matters for debate: d-separation is RELATIVE TO G. Change G, and you change which (X,Y,Z) triples are d-separated. There is no graph-free notion of d-separation in Pearl's framework.
+
+Wikipedia (Bayesian network) confirms: "the network's graphical structure is typically established beforehand... Once fixed, this DAG architecture determines all conditional independence relationships in the system." The conditional-independence content of a Bayesian network is exactly what its (fixed) DAG says it is.
