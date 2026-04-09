@@ -73,9 +73,31 @@ class AnthropicProvider(BaseProvider):
         if parsed is not None:
             return parsed
 
-        # Fallback: ask OpenAI to reformat
-        logger.warning("Anthropic JSON extraction failed; falling back to OpenAI reformat")
-        return self._openai_reformat(raw, schema)
+        # Fallback: try aggressive regex extraction before reaching for OpenAI
+        parsed = self._extract_json_aggressive(raw)
+        if parsed is not None:
+            logger.info("Recovered JSON via aggressive regex extraction")
+            return parsed
+
+        # Last resort: ask OpenAI to reformat (may not be installed)
+        try:
+            logger.warning(
+                "Anthropic JSON extraction failed; falling back to OpenAI reformat"
+            )
+            return self._openai_reformat(raw, schema)
+        except ImportError:
+            raise ValueError(
+                "Anthropic returned non-JSON and the OpenAI package is not "
+                "installed for the reformat fallback. Install it with "
+                "'pip install openai' or set OPENAI_API_KEY, or retry the "
+                "request. Raw response (first 500 chars):\n" + raw[:500]
+            ) from None
+        except Exception as exc:
+            raise ValueError(
+                f"Anthropic returned non-JSON and the OpenAI reformat "
+                f"fallback also failed ({type(exc).__name__}: {exc}). "
+                f"Raw response (first 500 chars):\n{raw[:500]}"
+            ) from exc
 
     # ── helpers ───────────────────────────────────────────────────────
 
@@ -96,6 +118,30 @@ class AnthropicProvider(BaseProvider):
                 return json.loads(m.group(0))
             except json.JSONDecodeError:
                 pass
+        return None
+
+    @staticmethod
+    def _extract_json_aggressive(text: str) -> dict | None:
+        """Harder regex attempts: strip markdown, find outermost braces."""
+        # Strip common markdown wrapping
+        cleaned = re.sub(r"^```\w*\n?", "", text.strip(), flags=re.MULTILINE)
+        cleaned = re.sub(r"\n?```\s*$", "", cleaned.strip(), flags=re.MULTILINE)
+
+        # Find the outermost { ... } by tracking brace depth
+        start = cleaned.find("{")
+        if start == -1:
+            return None
+        depth = 0
+        for i in range(start, len(cleaned)):
+            if cleaned[i] == "{":
+                depth += 1
+            elif cleaned[i] == "}":
+                depth -= 1
+                if depth == 0:
+                    try:
+                        return json.loads(cleaned[start : i + 1])
+                    except json.JSONDecodeError:
+                        break
         return None
 
     @staticmethod
