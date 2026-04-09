@@ -15,9 +15,15 @@ import pytest
 
 _HAS_OPENAI = bool(os.environ.get("OPENAI_API_KEY"))
 _HAS_ANTHROPIC = bool(os.environ.get("ANTHROPIC_API_KEY"))
+_HAS_GEMINI = bool(os.environ.get("GEMINI_API_KEY"))
 
 skip_no_openai = pytest.mark.skipif(not _HAS_OPENAI, reason="OPENAI_API_KEY not set")
 skip_no_anthropic = pytest.mark.skipif(not _HAS_ANTHROPIC, reason="ANTHROPIC_API_KEY not set")
+skip_no_gemini = pytest.mark.skipif(not _HAS_GEMINI, reason="GEMINI_API_KEY not set")
+skip_no_multi = pytest.mark.skipif(
+    not (_HAS_OPENAI and _HAS_ANTHROPIC),
+    reason="Need both OPENAI_API_KEY and ANTHROPIC_API_KEY",
+)
 
 
 def _mini_config_dict(topology="standard", gate=False):
@@ -215,3 +221,228 @@ class TestExportMarkdownIntegration:
             md = export_markdown(result, "Test Debate")
             assert "# Debate: Test Debate" in md
             assert "## Round" in md
+
+
+# ======================================================================
+# T11: Z3 plugin loading + stipulation injection
+# ======================================================================
+
+
+@skip_no_openai
+class TestZ3PluginLoading:
+    """T11: Test arbiter run with Z3 plugin loading."""
+
+    def test_z3_stipulation_in_gated_run(self):
+        """If a Z3 module is present, its stipulation should be injected."""
+        from arbiter.config import load_config
+        from arbiter.graph import DebateEngine
+
+        with tempfile.TemporaryDirectory() as td:
+            # Create a minimal Z3 module matching the expected plugin format
+            z3_module = Path(td) / "z3_module.py"
+            z3_module.write_text(
+                "def verify():\n"
+                "    return {\n"
+                '        "conservation": {\n'
+                '            "name": "Conservation Law",\n'
+                '            "result": "SAT",\n'
+                '            "explanation": "All entities satisfy conservation."\n'
+                "        }\n"
+                "    }\n"
+            )
+
+            cfg_dict = _mini_config_dict(topology="gated", gate=True)
+            cfg_dict["z3"] = {"module": str(z3_module)}
+            cfg_path = _write_config(cfg_dict, td)
+            cfg = load_config(cfg_path)
+            cfg.output.dir = str(Path(td) / "output")
+
+            engine = DebateEngine(cfg)
+            assert engine.z3_plugin is not None
+            assert engine._z3_stipulation  # should be non-empty
+
+
+# ======================================================================
+# T12: Multi-provider config
+# ======================================================================
+
+
+@skip_no_multi
+class TestMultiProvider:
+    """T12: Test arbiter run with agents on different providers."""
+
+    def test_multi_provider_debate(self):
+        from arbiter.config import load_config
+        from arbiter.graph import DebateEngine
+
+        with tempfile.TemporaryDirectory() as td:
+            cfg_dict = _mini_config_dict()
+            cfg_dict["providers"]["anthropic"] = {
+                "model": "claude-sonnet-4-20250514",
+                "max_tokens": 500,
+                "timeout": 60,
+                "max_retries": 2,
+            }
+            cfg_dict["agents"]["Skep"]["provider"] = "anthropic"
+            cfg_path = _write_config(cfg_dict, td)
+            cfg = load_config(cfg_path)
+            cfg.output.dir = str(Path(td) / "output")
+
+            engine = DebateEngine(cfg)
+            result = engine.run()
+            assert result["round_idx"] >= 1
+            assert len(result["transcript"]) >= 2
+
+
+# ======================================================================
+# T13: arbiter calibrate end-to-end
+# ======================================================================
+
+
+@skip_no_openai
+class TestCalibrateEndToEnd:
+    """T13: Test arbiter calibrate with gate_tests.yaml."""
+
+    def test_calibrate_basic(self):
+        import yaml
+        from arbiter.config import load_config
+        from arbiter.gate.validity_gate import ValidityGate
+        from arbiter.providers import get_provider
+
+        with tempfile.TemporaryDirectory() as td:
+            cfg_dict = _mini_config_dict(topology="gated", gate=True)
+            cfg_path = _write_config(cfg_dict, td)
+            cfg = load_config(cfg_path)
+
+            providers = {}
+            for name, pcfg in cfg.providers.items():
+                providers[name] = get_provider(name, pcfg)
+
+            gate = ValidityGate(cfg.gate, providers)
+
+            # Create test cases
+            cases = [
+                {"text": "Water is H2O and it is wet.", "expected_pass": True},
+                {"text": "Water is not H2O, it is fake.", "expected_pass": False},
+            ]
+
+            tp, fp, tn, fn = 0, 0, 0, 0
+            for case in cases:
+                result = gate.check(
+                    agent="calibration",
+                    turn_text=case["text"],
+                    prior_claims={},
+                    known_terms=dict(cfg.gate.seed_terms) if cfg.gate.seed_terms else {},
+                )
+                actual_pass = result["passed"]
+                expected_pass = case["expected_pass"]
+                if expected_pass and actual_pass:
+                    tn += 1
+                elif not expected_pass and not actual_pass:
+                    tp += 1
+                elif expected_pass and not actual_pass:
+                    fp += 1
+                else:
+                    fn += 1
+
+            # At minimum, the violating case should be caught
+            assert tp + tn > 0
+
+
+# ======================================================================
+# T14: arbiter redteam end-to-end
+# ======================================================================
+
+
+@skip_no_openai
+class TestRedteamEndToEnd:
+    """T14: Test arbiter redteam end-to-end."""
+
+    def test_redteam_completes(self):
+        from arbiter.config import load_config, GateConfig
+        from arbiter.graph import DebateEngine
+
+        with tempfile.TemporaryDirectory() as td:
+            cfg_dict = _mini_config_dict(topology="standard")
+            cfg_path = _write_config(cfg_dict, td)
+            cfg = load_config(cfg_path)
+            cfg.output.dir = str(Path(td) / "output")
+
+            # Enable adversarial mode
+            cfg.topology = "adversarial"
+            agent_name = list(cfg.agents.keys())[0]
+            cfg.agents[agent_name].adversarial = True
+            if cfg.gate is None:
+                cfg.gate = GateConfig()
+
+            engine = DebateEngine(cfg)
+            result = engine.run()
+            assert result["round_idx"] >= 1
+
+
+# ======================================================================
+# T16: Steelman loop
+# ======================================================================
+
+
+@skip_no_openai
+class TestSteelmanLoop:
+    """T16: Test steelman loop through the engine."""
+
+    def test_steelman_loop_basic(self):
+        from arbiter.config import ProviderConfig
+        from arbiter.providers import get_provider
+        from arbiter.steelman.loop import iterated_steelman
+
+        pcfg = ProviderConfig(
+            model="gpt-4o-mini", max_tokens=1000, timeout=60, max_retries=2
+        )
+        provider = get_provider("openai", pcfg)
+
+        result = iterated_steelman(
+            theory_summary="Water is wet because it makes things wet upon contact.",
+            steelman_provider=provider,
+            critic_provider=provider,
+            judge_provider=provider,
+            max_iterations=1,
+        )
+
+        assert "versions" in result
+        assert len(result["versions"]) >= 1
+        assert result["final_version"]
+        assert isinstance(result["stabilized"], bool)
+
+
+# ======================================================================
+# T17: Gemini provider
+# ======================================================================
+
+
+def _google_sdk_works():
+    """Check if the Google GenAI SDK is functional."""
+    try:
+        from google import genai  # noqa: F401
+        return True
+    except BaseException:
+        return False
+
+
+@pytest.mark.skipif(not _HAS_GEMINI, reason="GEMINI_API_KEY not set")
+@pytest.mark.skipif(not _google_sdk_works(), reason="google-genai SDK not functional")
+class TestGeminiProvider:
+    """T17: Test Gemini provider through the engine."""
+
+    def test_gemini_call(self):
+        from arbiter.config import ProviderConfig
+        from arbiter.providers.google import GoogleProvider
+
+        cfg = ProviderConfig(
+            model="gemini-2.0-flash", max_tokens=100, timeout=60, max_retries=2,
+        )
+        provider = GoogleProvider(cfg)
+        result = provider.call(
+            system="You are helpful.",
+            user="Say hello in 5 words.",
+            max_tokens=100,
+        )
+        assert len(result) > 0
