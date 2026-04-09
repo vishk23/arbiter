@@ -162,28 +162,85 @@ output:
 
 @app.command()
 def init(
-    output: Path = typer.Option(
-        "arbiter-config.yaml",
+    from_pdf: Optional[str] = typer.Option(
+        None,
+        "--from-pdf",
+        help="Path to a PDF file to extract the topic from.",
+    ),
+    topic: Optional[str] = typer.Option(
+        None,
+        "--topic",
+        help="Topic description to debate (used when no PDF is provided).",
+    ),
+    provider: str = typer.Option(
+        "openai",
+        "--provider",
+        help="LLM provider for init pipeline calls.",
+    ),
+    model: str = typer.Option(
+        "gpt-5",
+        "--model",
+        help="Model to use for init pipeline. Use the best available for quality.",
+    ),
+    non_interactive: bool = typer.Option(
+        False,
+        "--non-interactive",
+        help="Skip all interactive prompts and use defaults.",
+    ),
+    providers: Optional[str] = typer.Option(
+        None,
+        "--providers",
+        help=(
+            "Multi-provider init. Comma-separated provider:model pairs. "
+            "e.g. 'openai:gpt-5,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview'. "
+            "When set, pipeline steps are distributed across providers."
+        ),
+    ),
+    output_dir: str = typer.Option(
+        ".",
+        "--output-dir",
         "-o",
-        "--output",
-        help="Path for the generated config file.",
+        help="Directory for the generated config and artifacts.",
+    ),
+    template_only: bool = typer.Option(
+        False,
+        "--template",
+        help="Write a blank template config instead of running the pipeline.",
     ),
 ) -> None:
-    """Generate a template configuration file.
+    """Generate a debate configuration using the agentic init pipeline.
 
-    Creates a commented YAML config with sensible defaults that you can
-    customise for your debate topic.
+    Analyses a PDF or topic description, extracts claims, identifies
+    contradictions, and assembles a complete config.yaml ready for
+    ``arbiter run``.
+
+    Use ``--template`` for a blank starter config without LLM calls.
     """
     _load_dotenv()
 
-    if output.exists():
-        overwrite = typer.confirm(f"{output} already exists. Overwrite?")
-        if not overwrite:
-            raise typer.Abort()
+    if template_only:
+        out = Path(output_dir) / "arbiter-config.yaml"
+        if out.exists():
+            overwrite = typer.confirm(f"{out} already exists. Overwrite?")
+            if not overwrite:
+                raise typer.Abort()
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(_TEMPLATE_YAML)
+        console.print(f"[green]Template written to {out}[/green]")
+        console.print(f"Edit the file, then run: [bold]arbiter run {out}[/bold]")
+        return
 
-    output.write_text(_TEMPLATE_YAML)
-    console.print(f"[green]Config written to {output}[/green]")
-    console.print("Edit the file, then run: [bold]arbiter run {output}[/bold]")
+    from arbiter.init.pipeline import run_init
+
+    run_init(
+        from_pdf=from_pdf,
+        topic=topic,
+        output_dir=output_dir,
+        provider_name=provider,
+        provider_model=model,
+        providers_spec=providers,
+        interactive=not non_interactive,
+    )
 
 
 # ====================================================================== #
