@@ -166,6 +166,42 @@ def _make_provider(
     return get_provider(provider_name, pcfg)
 
 
+def _auto_detect_providers() -> dict[str, "BaseProvider"]:
+    """Detect which API keys are set and build the optimal provider set.
+
+    Checks env vars in priority order (strongest reasoning first).
+    For each available key, instantiates the provider with its best model.
+
+    Role assignment in the generated config:
+    - anthropic (opus): debate proponent, claim extraction, Z3 generation
+    - openai (gpt-5.4): debate skeptic, agent design, gate rules
+    - deepseek (reasoner): budget debate agents (4th lab diversity)
+    - grok (reasoning): judge panel (independent 3rd/4th lab)
+    - gemini (pro): debate specialists, rubric design
+    """
+    import os
+
+    # Provider → (env var, default model for init)
+    candidates = [
+        ("anthropic", "ANTHROPIC_API_KEY", "claude-opus-4-6"),
+        ("openai", "OPENAI_API_KEY", "gpt-5.4"),
+        ("grok", "XAI_API_KEY", "grok-4.20-0309-reasoning"),
+        ("deepseek", "DEEPSEEK_API_KEY", "deepseek-reasoner"),
+        ("gemini", "GEMINI_API_KEY", "gemini-3.1-pro-preview"),
+    ]
+
+    providers: dict[str, "BaseProvider"] = {}
+    for name, env_var, default_model in candidates:
+        if os.environ.get(env_var):
+            try:
+                providers[name] = _make_provider(name, default_model)
+                logger.info("Auto-detected provider: %s (%s)", name, default_model)
+            except Exception as exc:
+                logger.warning("Auto-detect: %s key found but init failed: %s", name, exc)
+
+    return providers
+
+
 def _make_providers_from_spec(spec: str) -> dict[str, "BaseProvider"]:
     """Parse a provider spec string into named providers.
 
@@ -336,28 +372,72 @@ def run_init(
     )
 
     # -- 1. Obtain providers ---------------------------------------------------
+    # Priority: explicit --providers > explicit --provider > auto-detect from env
     if providers_spec:
         init_providers = _make_providers_from_spec(providers_spec)
-        console.print(f"\n[dim]Using providers:[/dim] [bold]{', '.join(f'{k} ({v.model})' for k, v in init_providers.items())}[/bold]")
-        # Primary provider for single-provider calls
-        provider = list(init_providers.values())[0]
-        # Distribute roles: claim extraction = first, Z3 = second (or first), agents = third, etc.
-        provider_for_claims = init_providers.get("openai") or provider
-        provider_for_z3 = init_providers.get("anthropic") or provider
-        provider_for_agents = init_providers.get("gemini") or init_providers.get("openai") or provider
-        provider_for_gate = init_providers.get("openai") or provider
-        provider_for_rubric = init_providers.get("gemini") or provider
-        provider_for_sources = provider  # cheapest task
+    elif provider_name != "_auto_":
+        # Explicit --provider given. If no model, use the default for that provider.
+        if not provider_model:
+            _defaults = {
+                "openai": "gpt-5.4", "anthropic": "claude-opus-4-6",
+                "gemini": "gemini-3.1-pro-preview", "grok": "grok-4.20-0309-reasoning",
+                "deepseek": "deepseek-reasoner", "ollama": "llama3:70b",
+            }
+            provider_model = _defaults.get(provider_name, provider_name)
+        provider_obj = _make_provider(provider_name, provider_model)
+        init_providers = {provider_name: provider_obj}
     else:
-        console.print(f"\n[dim]Using provider:[/dim] [bold]{provider_name}[/bold] ({provider_model})")
-        provider = _make_provider(provider_name, provider_model)
-        init_providers = {provider_name: provider}
-        provider_for_claims = provider
-        provider_for_z3 = provider
-        provider_for_agents = provider
-        provider_for_gate = provider
-        provider_for_rubric = provider
-        provider_for_sources = provider
+        # Auto-detect: check which API keys are available and build the best set
+        init_providers = _auto_detect_providers()
+
+    if not init_providers:
+        console.print(
+            "[red]No API keys found. Set at least one of: "
+            "ANTHROPIC_API_KEY, OPENAI_API_KEY, GEMINI_API_KEY, "
+            "XAI_API_KEY, DEEPSEEK_API_KEY[/red]"
+        )
+        raise SystemExit(1)
+
+    console.print(
+        f"\n[dim]Using providers:[/dim] [bold]"
+        f"{', '.join(f'{k} ({v.model})' for k, v in init_providers.items())}"
+        f"[/bold]"
+    )
+
+    # Primary provider = strongest available (for single-provider calls)
+    provider = list(init_providers.values())[0]
+
+    # Distribute init tasks to the best available provider for each role:
+    # Claims + Z3: needs deep reasoning → anthropic > openai > others
+    # Agents + rubric: needs creative design → openai > gemini > others
+    # Gate: needs structured output → openai > deepseek > others
+    # Sources: cheapest task → any
+    provider_for_claims = (
+        init_providers.get("anthropic")
+        or init_providers.get("openai")
+        or provider
+    )
+    provider_for_z3 = (
+        init_providers.get("anthropic")
+        or init_providers.get("openai")
+        or provider
+    )
+    provider_for_agents = (
+        init_providers.get("openai")
+        or init_providers.get("gemini")
+        or provider
+    )
+    provider_for_gate = (
+        init_providers.get("openai")
+        or init_providers.get("deepseek")
+        or provider
+    )
+    provider_for_rubric = (
+        init_providers.get("openai")
+        or init_providers.get("gemini")
+        or provider
+    )
+    provider_for_sources = provider  # cheapest task, any provider
 
     # -- 2. Get topic text -----------------------------------------------------
     source_text: str | None = None

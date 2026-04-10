@@ -198,14 +198,14 @@ def init(
         help="Topic description to debate (used when no PDF is provided).",
     ),
     provider: str = typer.Option(
-        "anthropic",
+        "_auto_",
         "--provider",
-        help="LLM provider for init pipeline calls.",
+        help="LLM provider for init. Default: auto-detect from available API keys.",
     ),
     model: str = typer.Option(
-        "claude-opus-4-6",
+        "",
         "--model",
-        help="Model to use for init pipeline. Use the best available for quality.",
+        help="Model override. Default: best model for the selected provider.",
     ),
     non_interactive: bool = typer.Option(
         False,
