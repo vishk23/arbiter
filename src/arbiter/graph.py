@@ -13,14 +13,19 @@ from langgraph.graph import END, START, StateGraph
 from rich.console import Console
 
 from arbiter.agents.agent import Agent
-from arbiter.agents.context import ContextBuilder
+from arbiter.agents.context import ContextBuilder, _open_hits_for
 from arbiter.config import ArbiterConfig
 from arbiter.export import export_argdown, export_json, export_markdown
+from arbiter.gate.validity_gate import ValidityGate
+from arbiter.judge.mid_debate import MidDebateJudge
 from arbiter.ledger.ops import add_hit, ledger_grew, open_hits, resolve_hit
 from arbiter.ledger.parser import parse_ledger_block
 from arbiter.logging.live_log import LiveLogger
 from arbiter.providers import get_provider
+from arbiter.retrieval.retriever import Retriever
 from arbiter.state import DebateState, initial_state
+from arbiter.steelman.loop import iterated_steelman as run_steelman
+from arbiter.verifier.z3_plugin import Z3Plugin
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -51,14 +56,12 @@ class DebateEngine:
         # ── Validity gate (optional) ─────────────────────────────────
         self.gate = None
         if config.gate and config.gate.enabled:
-            from arbiter.gate.validity_gate import ValidityGate
 
             self.gate = ValidityGate(config.gate, self.providers)
 
         # ── Retriever (optional) ─────────────────────────────────────
         self.retriever = None
         if config.retrieval:
-            from arbiter.retrieval.retriever import Retriever
 
             self.retriever = Retriever(config.retrieval)
 
@@ -68,7 +71,6 @@ class DebateEngine:
         # ── Mid-debate judge (optional) ──────────────────────────────
         self.mid_judge = None
         if config.judge.mid_debate and config.judge.mid_debate.enabled:
-            from arbiter.judge.mid_debate import MidDebateJudge
 
             md_cfg = config.judge.mid_debate
             md_provider = self.providers.get(md_cfg.provider)
@@ -79,7 +81,6 @@ class DebateEngine:
         self.z3_plugin = None
         self._z3_stipulation = ""
         if config.z3:
-            from arbiter.verifier.z3_plugin import Z3Plugin
 
             self.z3_plugin = Z3Plugin(config.z3.module)
             self._z3_stipulation = self.z3_plugin.format_stipulation(
@@ -235,12 +236,10 @@ class DebateEngine:
             min_required = self.config.convergence.min_hits_addressed
             if min_required > 0:
                 agent_side = self.config.agents[agent_name].side
-                from arbiter.agents.context import _open_hits_for
                 open_hits = _open_hits_for(cur_state.get("ledger", []), agent_side)
                 required = min(min_required, len(open_hits))
 
                 if required > 0:
-                    from arbiter.ledger.parser import parse_ledger_block
                     block = parse_ledger_block(entry_text)
                     addressed = len(block.get("hits_addressed", []))
 
@@ -474,10 +473,9 @@ class DebateEngine:
             self.config.steelman
             and self.config.steelman.enabled
         ):
-            from arbiter.steelman.loop import iterated_steelman
 
             scfg = self.config.steelman
-            steelman_result = iterated_steelman(
+            steelman_result = run_steelman(
                 theory_summary=self.config.topic.summary,
                 steelman_provider=self.providers[scfg.steelman_provider],
                 critic_provider=self.providers[scfg.critic_provider],

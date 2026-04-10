@@ -81,6 +81,43 @@ arbiter init --topic "Does consciousness require integrated information?"
 - **Argdown export** — machine-readable argument maps
 - **Side-balanced provider assignment** — each debate side gets agents from multiple labs
 
+## Architecture
+
+```mermaid
+graph TD
+    subgraph "arbiter init (setup)"
+        PDF[PDF / Topic] --> Claims[Claim Extraction]
+        Claims --> Analysis[Contradictions + Terms + Angles]
+        Analysis --> |parallel| Z3Gen[Z3 Module]
+        Analysis --> |parallel| AgentDesign[Agent Design]
+        Analysis --> |parallel| GateRules[Gate Rules]
+        Analysis --> |parallel| Rubric[Rubric]
+        Analysis --> |parallel| Sources[Source Corpus]
+        Z3Gen & AgentDesign & GateRules & Rubric & Sources --> Config[config.yaml]
+    end
+
+    subgraph "arbiter run (debate)"
+        Config --> Round[Round Node]
+        Round --> |per turn| Gate{Validity Gate}
+        Gate --> |pass| Ledger[Ledger Update]
+        Gate --> |fail| Rewrite[Rewrite Loop]
+        Rewrite --> Gate
+        Ledger --> Judge[Mid-Debate Judge]
+        Judge --> |continue| Round
+        Judge --> |converged| Finalize[Z3 + Steelman + Export]
+    end
+
+    subgraph "arbiter judge (verdict)"
+        Finalize --> Panel[Judge Panel]
+        Panel --> Opus[Anthropic]
+        Panel --> GPT[OpenAI]
+        Panel --> Gemini[Google]
+        Opus & GPT & Gemini --> Verdict[Aggregate + Spread Flag]
+    end
+```
+
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the full module map, data flow trace, design decisions, and known technical debt.
+
 ## How it works
 
 ```
