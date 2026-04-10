@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import sqlite3
 import time
 from pathlib import Path
 from typing import Any, Dict, List
@@ -139,11 +140,22 @@ class DebateEngine:
         )
         g.add_edge("finalize", END)
 
-        # Checkpointer — use InMemorySaver for reliability; SqliteSaver
-        # requires async context in newer LangGraph versions.
-        from langgraph.checkpoint.memory import InMemorySaver
-
-        checkpointer = InMemorySaver()
+        # Checkpointer — use SqliteSaver for crash recovery.
+        # Falls back to InMemorySaver if the DB path is ":memory:" or unusable.
+        db_path = self.config.output.checkpoint_db
+        try:
+            conn = sqlite3.connect(db_path, check_same_thread=False)
+            checkpointer = SqliteSaver(conn)
+            checkpointer.setup()  # create tables if needed
+            self._checkpoint_conn = conn
+            logger.debug("Using SqliteSaver checkpoint: %s", db_path)
+        except Exception as exc:
+            logger.warning(
+                "SqliteSaver init failed (%s), falling back to InMemorySaver", exc
+            )
+            from langgraph.checkpoint.memory import InMemorySaver
+            checkpointer = InMemorySaver()
+            self._checkpoint_conn = None
         return g.compile(checkpointer=checkpointer)
 
     # ================================================================== #
@@ -461,25 +473,37 @@ class DebateEngine:
                 "versions", []
             )
 
-        ts = int(time.time())
+        # Auto-version: find next available debate number
+        existing = sorted(self._out_dir.glob("debate_*.json"))
+        next_num = len(existing) + 1
+        debate_prefix = f"debate_{next_num:03d}"
+
         formats = self.config.output.formats
 
         if "json" in formats:
+            ts = int(time.time())
             metadata = {
+                "topic": self.config.topic.name,
                 "topology": self.config.topology,
+                "sides": self.config.judge.sides,
                 "rounds_run": state["round_idx"] - 1,
                 "timestamp": ts,
+                "judge_config": self.config.judge.model_dump(),
+                "providers_config": {
+                    name: pcfg.model_dump()
+                    for name, pcfg in self.config.providers.items()
+                },
             }
             if self.z3_plugin:
                 metadata["z3_findings"] = self.z3_plugin.verify()
             json_str = export_json(final_state, metadata)
-            out_path = self._out_dir / f"debate_{ts}.json"
+            out_path = self._out_dir / f"{debate_prefix}.json"
             out_path.write_text(json_str)
             console.print(f"  [dim]Exported JSON: {out_path}[/dim]")
 
         if "markdown" in formats:
             md = export_markdown(final_state, self.config.topic.name)
-            out_path = self._out_dir / f"debate_{ts}.md"
+            out_path = self._out_dir / f"{debate_prefix}.md"
             out_path.write_text(md)
             console.print(f"  [dim]Exported Markdown: {out_path}[/dim]")
 
@@ -488,7 +512,7 @@ class DebateEngine:
                 final_state.get("ledger", []),
                 self.config.judge.sides,
             )
-            out_path = self._out_dir / f"debate_{ts}.argdown"
+            out_path = self._out_dir / f"{debate_prefix}.argdown"
             out_path.write_text(ad)
             console.print(f"  [dim]Exported Argdown: {out_path}[/dim]")
 
@@ -552,6 +576,13 @@ class DebateEngine:
                 f"max_rounds={self.config.convergence.max_rounds})"
             )
             result = app.invoke(initial_state(), config=run_config)
+
+        # Close the checkpoint DB connection
+        if getattr(self, "_checkpoint_conn", None):
+            try:
+                self._checkpoint_conn.close()
+            except Exception:
+                pass
 
         return result
 

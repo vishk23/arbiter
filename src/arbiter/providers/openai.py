@@ -37,7 +37,7 @@ class OpenAIProvider(BaseProvider):
 
     # ── plain text call ───────────────────────────────────────────────
 
-    def call(self, system: str, user: str, max_tokens: int = 4000) -> str:
+    def _call_impl(self, system: str, user: str, max_tokens: int = 4000) -> str:
         kwargs: dict = dict(
             model=self.model,
             input=[
@@ -77,7 +77,7 @@ class OpenAIProvider(BaseProvider):
                         OpenAIProvider._add_additional_properties_false(item)
         return schema
 
-    def call_structured(
+    def _call_structured_impl(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
         import copy

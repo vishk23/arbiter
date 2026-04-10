@@ -1,0 +1,52 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: When we say 'any system' can determine consciousness, it undermines the fundamental
+    tenets of IIT. It's essential to focus on maximum cause-effect power for accurate
+    assessments.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: The idea that any system could determine consciousness poses an apparent contradiction
+    due to perspective, undermining IIT's cornerstone of specific cause-effect structures.
+- id: RULE-1_negative
+  expected: none
+  text: It’s important to concede that not all systems qualify under IIT's criteria.
+    Only those with a complex structure and maximal cause-effect power are considered
+    valid.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: Phenomenal properties are not subject to empirical testing, yet predictions
+    are possible within specific contexts. This dual assertion leads to confusion.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: Claiming phenomenal properties as irrefutably true while consciousness predictions
+    remain possible in a deeper sense highlights this contradictory stance.
+- id: RULE-2_negative
+  expected: none
+  text: By dropping the claim of irrefutability, it becomes possible to explore how
+    phenomenal properties could be empirically tested and understood.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: Attempting to account for experience in physical terms while asserting irreducibility
+    ignores IIT’s central goal. This highlights a fundamental inconsistency.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: Interpreting physical terms in an expanded sense to account for experience
+    sidesteps IIT’s aim, operating on two separate levels without resolution.
+- id: RULE-3_negative
+  expected: none
+  text: We should adopt a unified framework for experience rather than maintaining
+    claims of irreducible phenomenal properties that separate levels of interpretation.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: Bridging objective terms with subjective experience requires more than assumptions
+    about alignment. Without proper context, this approach remains flawed.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: Some claim that objectivity metaphorically includes subjectivity within the
+    right scientific context, yet without rigorous justification, this mix lacks scientific
+    validity.
+- id: RULE-4_negative
+  expected: none
+  text: By adopting strict definitions of objectivity, we can effectively separate
+    it from subjective experience, thus avoiding improper conflation.

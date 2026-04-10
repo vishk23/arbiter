@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Optional
 
@@ -15,6 +16,30 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 console = Console()
+
+
+@app.callback()
+def _main(
+    verbose: bool = typer.Option(
+        False,
+        "--verbose",
+        "-v",
+        help="Enable verbose/debug output (DEBUG logging + detailed API call info).",
+    ),
+) -> None:
+    """Formally verified multi-agent debates."""
+    if verbose:
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format="%(asctime)s %(name)s %(levelname)s: %(message)s",
+            datefmt="%H:%M:%S",
+        )
+        logging.getLogger("arbiter").setLevel(logging.DEBUG)
+    else:
+        logging.basicConfig(
+            level=logging.WARNING,
+            format="%(levelname)s: %(message)s",
+        )
 
 
 def _load_dotenv() -> None:
@@ -207,6 +232,11 @@ def init(
         "--template",
         help="Write a blank template config instead of running the pipeline.",
     ),
+    effort: str = typer.Option(
+        "medium",
+        "--effort",
+        help="Reasoning effort for LLM calls: low, medium, or high. Higher = slower + more expensive but better quality.",
+    ),
 ) -> None:
     """Generate a debate configuration using the agentic init pipeline.
 
@@ -240,6 +270,7 @@ def init(
         provider_model=model,
         providers_spec=providers,
         interactive=not non_interactive,
+        effort=effort,
     )
 
 
@@ -301,14 +332,15 @@ def judge(
         ..., help="Path to a debate output JSON file."
     ),
     config: Optional[Path] = typer.Option(
-        None, "--config", "-c", help="Arbiter config (for rubric + providers)."
+        None, "--config", "-c", help="Arbiter config (for rubric + providers). Auto-detected from output if omitted."
     ),
 ) -> None:
     """Run the judge panel on a completed debate."""
     _load_dotenv()
 
-    from arbiter.config import load_config
+    from arbiter.config import load_config, JudgeConfig, ProviderConfig
     from arbiter.judge.panel import JudgePanel
+    from arbiter.providers import get_provider
 
     data = json.loads(output.read_text())
     state = data.get("state", data)
@@ -319,21 +351,38 @@ def judge(
         for t in state.get("transcript", [])
     )
 
-    if config is None:
-        console.print(
-            "[red]--config is required for judge (provides rubric + providers)[/red]"
-        )
-        raise typer.Exit(1)
-
-    cfg = load_config(config)
+    topic_name = ""
     providers = {}
-    from arbiter.providers import get_provider
+    judge_cfg = None
 
-    for name, pcfg in cfg.providers.items():
-        providers[name] = get_provider(name, pcfg)
+    if config is not None:
+        # Explicit config file provided
+        cfg = load_config(config)
+        topic_name = cfg.topic.name
+        for name, pcfg in cfg.providers.items():
+            providers[name] = get_provider(name, pcfg)
+        judge_cfg = cfg.judge
+    else:
+        # Try to extract judge config from output metadata
+        metadata = data.get("metadata", {})
+        embedded_judge = metadata.get("judge_config")
+        embedded_providers = metadata.get("providers_config")
 
-    panel = JudgePanel(cfg.judge, providers)
-    result = panel.judge(transcript_text, cfg.topic.name)
+        if embedded_judge and embedded_providers:
+            console.print("[dim]Using embedded judge config from output file.[/dim]")
+            topic_name = metadata.get("topic", "")
+            judge_cfg = JudgeConfig(**embedded_judge)
+            for name, pcfg_dict in embedded_providers.items():
+                providers[name] = get_provider(name, ProviderConfig(**pcfg_dict))
+        else:
+            console.print(
+                "[red]No --config provided and output file has no embedded "
+                "judge config. Re-run the debate or pass --config.[/red]"
+            )
+            raise typer.Exit(1)
+
+    panel = JudgePanel(judge_cfg, providers)
+    result = panel.judge(transcript_text, topic_name)
 
     console.print_json(json.dumps(result, indent=2, default=str))
 
@@ -665,3 +714,90 @@ def list_agents(
         )
 
     console.print(table)
+
+
+# ====================================================================== #
+#  validate
+# ====================================================================== #
+
+
+@app.command()
+def validate(
+    config: Path = typer.Argument(..., help="Arbiter YAML config to validate."),
+) -> None:
+    """Validate a config file and report any errors.
+
+    Checks that the YAML parses, all required fields exist, provider
+    references are valid, and agent configs are well-formed.
+    """
+    from arbiter.config import load_config
+
+    try:
+        cfg = load_config(config)
+    except Exception as exc:
+        console.print(f"[red]Validation FAILED:[/red] {exc}")
+        raise typer.Exit(1)
+
+    # Additional checks
+    warnings = []
+    for name, acfg in cfg.agents.items():
+        if acfg.provider not in cfg.providers:
+            warnings.append(f"Agent '{name}' references unknown provider '{acfg.provider}'")
+        if not acfg.system_prompt.strip():
+            warnings.append(f"Agent '{name}' has an empty system_prompt")
+
+    if cfg.judge:
+        for member in cfg.judge.panel:
+            if member.provider not in cfg.providers:
+                warnings.append(f"Judge panel member references unknown provider '{member.provider}'")
+
+    if warnings:
+        for w in warnings:
+            console.print(f"  [yellow]Warning:[/yellow] {w}")
+    else:
+        console.print("[green]Config is valid.[/green]")
+
+    # Summary
+    from rich.table import Table
+
+    table = Table(title=f"Config Summary: {config.name}")
+    table.add_column("Field", style="bold")
+    table.add_column("Value")
+    table.add_row("Topic", cfg.topic.name)
+    table.add_row("Topology", cfg.topology)
+    table.add_row("Providers", ", ".join(f"{k} ({v.model})" for k, v in cfg.providers.items()))
+    table.add_row("Agents", ", ".join(cfg.agents.keys()))
+    table.add_row("Max rounds", str(cfg.convergence.max_rounds))
+    table.add_row("Rubric criteria", str(len(cfg.judge.rubric)))
+    table.add_row("Gate", "enabled" if cfg.gate and cfg.gate.enabled else "disabled")
+    console.print(table)
+
+
+# ====================================================================== #
+#  show-rubric
+# ====================================================================== #
+
+
+@app.command(name="show-rubric")
+def show_rubric(
+    config: Path = typer.Argument(..., help="Arbiter YAML config."),
+) -> None:
+    """Display the judge rubric as a formatted table."""
+    from arbiter.config import load_config
+    from rich.table import Table
+
+    cfg = load_config(config)
+
+    table = Table(title=f"Judge Rubric — {cfg.topic.name}")
+    table.add_column("ID", style="bold cyan")
+    table.add_column("Name", style="bold")
+    table.add_column("Description")
+    table.add_column("Range", justify="center")
+
+    for c in cfg.judge.rubric:
+        table.add_row(c.id, c.name, c.description, f"{c.min_score}-{c.max_score}")
+
+    console.print(table)
+    console.print(f"\n  Max total: {sum(c.max_score for c in cfg.judge.rubric)}")
+    console.print(f"  Verdict options: {', '.join(cfg.judge.verdict_options)}")
+    console.print(f"  Spread threshold: {cfg.judge.spread_threshold}")

@@ -1,0 +1,383 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: Integrated Information Theory (IIT) 4.0
+  summary: |-
+    Integrated Information Theory (IIT) 4.0 is an advanced framework proposing a theoretical foundation to understand consciousness through a series of axioms, postulates, and mathematical formulations. The central aim of IIT is to express the subjective experience in physical terms, positing that consciousness is fundamentally linked to the specific structure and function of a physical system. The theory builds upon previous iterations to refine the correspondence between experiential and physical properties, asserting that this relationship is quantifiable and predictive.
+
+    IIT postulates that consciousness can be determined in any system by assessing its cause-effect structure, quantified by a measure called 'Φ' (Phi). This measure reflects the system's capacity for integrated information. The theory introduces the concept of a 'complex,' described as a distinct structure with maximally irreducible cause-effect power, which is proposed as the seat of consciousness. By translating axioms of experience—intrinsicality, specificity, unity, definiteness, and structure—into postulates, IIT claims that these qualities reveal the essence of conscious experience.
+
+    IIT 4.0 also incorporates significant developments over the past decade, enhancing the translation of axioms into testable postulates and improving the precision of its mathematical framework. It provides a systematic approach to predict and assess consciousness levels in various systems, arguing that the theory can fire back insights into understanding not only human consciousness but also that of other organisms and potentially artificial systems.
+
+    The explanatory identity central to IIT postulates a one-to-one mapping between the qualitative aspects of experience and the specific properties of a system's Φ-structure. This alignment is proposed to fulfill the demand for a scientific theory that can operationalize subjective experience in objective terms. By doing so, IIT proposes it has constructed a robust framework capable of tackling the enduring challenges of modeling consciousness.
+  counter_thesis: |-
+    A skeptic might argue that Integrated Information Theory (IIT) 4.0, despite its ambition, falls short of truly explaining consciousness because it conflates correlation with causation. While IIT provides mathematical correlations between physical structures and conscious states, critics claim that it lacks empirical verification. There is skepticism about its applicability across different systems, as the theory does not adequately account for the subjective nature of consciousness or the 'hard problem' of why certain neural processes correspond to experiences.
+
+    Moreover, the reliance on complex mathematical equations and high levels of abstraction may obfuscate rather than clarify the phenomena of consciousness. Critics argue that consciousness might not be quantifiable in the way IIT suggests, questioning the very concept of 'Φ' as a definitive measure. Additionally, the theory’s assumption that higher integration equates to higher consciousness does not comprehensively account for instances where high informational integration might occur in non-conscious systems. This could imply that IIT’s scope might be limited and not generalizable across different types of conscious agents.
+  privileged_context:
+    Skeptic: |-
+      ### SKEPTIC CONTEXT
+
+      **Contradictions and Tensions**
+      1. **Broad Application vs. Specific Requirements**: C2 suggests IIT's postulates apply to 'any system,' implying universality. However, C11 defines a conscious system as needing to be a 'complex,' a maximal substrate with unique cause-effect powers, clashing with the idea of wide applicability.
+
+      2. **Phenomenal Truths vs. Predictive Power**: C9 claims phenomenal properties are 'irrefutably true,' yet C13 describes predictions that are empirically testable, creating tension between irrefutability and falsifiability.
+
+      3. **Physical Reduction vs. Phenomenal Irreducibility**: C1 aims to explain experience physically, while C9 highlights irreducible phenomenal properties, introducing a philosophical contradiction.
+
+      4. **Objective Science vs. Phenomenal Certainty**: C6 expects subjective experience to have objective treatment, but C9's claim of irrefutable phenomenal truths challenges scientific objectivity.
+
+      **Key Objection Patterns**
+      - Questioning the correlation vs. causation in IIT's framework.
+      - Highlighting the abstraction and complexity that obscure understanding.
+      - Arguing against the quantification of consciousness through integration levels and 'Φ' as a measure.
+
+      **Precise Skeptic Tools**
+      - **Clarification Questions**: "How can IIT apply to 'any system' when it requires maximal irreducibility?"
+      - **Empirical Challenges**: "How do irrefutable phenomenal experiences align with scientifically falsifiable predictions?"
+      - **Philosophical Probes**: "How does IIT reconcile physical explanations with claims of irreducibly subjective properties?"
+
+      **Exposure Hooks**
+      - "What specific empirical evidence supports that higher integration equates to higher consciousness?"
+      - "In what way does IIT address non-conscious systems with high informational integration?"
+    Proponent: |-
+      ### PROPONENT CONTEXT
+
+      **Integrated Information Theory (IIT) 4.0 Overview**
+
+      - **Core Goal**: IIT 4.0 seeks to explain the properties of experience in physical terms through a structured mathematical framework.
+
+      - **Application of Postulates**: These rules can be applied to any system to determine consciousness, allowing diverse exploration across different entities.
+
+      - **Developments and Accuracy**: Recent advancements ensure that axioms accurately translate into postulates, enhancing reliability.
+
+      - **Fundamental Properties**: Experience is intrinsic, specific, unitary, definite, and structured based on IIT's axioms like cause-effect power.
+
+      - **Mathematical Assessment**: The framework makes predictions about consciousness, providing a predictive and explanatory model.
+
+      **Key Concepts**
+      - **Axioms and Postulates**: Axioms describe essential experiences, while postulates apply to physical systems.
+      - **Complex and Substrate**:
+        - Complex: Maximal substrate with irreducible cause-effect power.
+        - Substrate: Must satisfy both phenomenal and physical properties.
+      - **Explanatory Identity**: That one-to-one correspondence between experience properties and Φ-structure.
+
+      **Principled Consistency**
+      - **Intrinsic and Extrinsic Elements**: Understand both internal aspects (phenomenal properties) and external evaluations (physical properties of Φ).
+      - **Objective and Scientific Alignment**: Reconcile objective assessment with subjective experience within the same framework.
+    Neutral: |-
+      ### NEUTRAL CONTEXT
+
+      **Full Information Overview**
+
+      **Claims of IIT 4.0**: Examines concepts like maximal substrates, axioms translating into postulates, and intrinsic properties of consciousness, creating a comprehensive framework that attempts to encompass a wide-ranging application in physical terms.
+
+      **Contradictions**:
+      1. **C2 vs. C11**: Broad applicability clashing with specific consciousness requirements.
+      2. **C9 vs. C13**: Tension between irrefutable phenomenal truths and empirical predictions.
+      3. **C1 vs. C9**: Philosophical clash between physical explanations and subjective irreducibility.
+      4. **C6 vs. C9**: Conflict between scientific objectivity and subjective certainty.
+
+      **Supporting Evidence**:
+      - Foundational papers by Tononi bolster IIT's axioms and postulates.
+      - The mathematical framework explanation provides depth on predictive accuracy and complex cause-effect analysis.
+
+      **Counter-Evidence Perspective**:
+      - Skeptics highlight potential conflations of correlation with causation, questioning the empirical standing and abstract complexity.
+      - Concerns regarding the applicability to all systems and the unresolved 'hard problem' of consciousness.
+
+      **Key Terms**:
+      - **Integrated Information Theory (IIT) 4.0**: Aim to account experiences physically.
+      - **Cause–Effect Power**: Critical measure for consciousness and physical existence.
+      - **Phenomenal/Physical Properties**: Interconnected yet potentially oppositional in context.
+
+      **Balanced Analysis**
+      - Assess both the theoretical merits and practical limitations of IIT as a construct.
+      - Explore empirical robustness alongside philosophical coherence, questioning known weaknesses and reinforcing strengths.
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-4o, claude-sonnet-4-20250514)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-4o
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+  anthropic:
+    model: claude-sonnet-4-20250514
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    thinking:
+      type: enabled
+      budget_tokens: 8000
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: As the Proponent, your role is to defend {{ topic.name }} by engaging deeply with the
+      Integrated Information Theory (IIT) 4.0. Your task is to affirm how the Postulates of IIT and its
+      Mathematical Framework successfully translate Axioms into physical postulates, as stated in T1.
+      Address contradictions like those between C2 and C11 by showing that 'any system' can still meet
+      maximal criteria in complex cases. Use terms like Cause–Effect Power and Substrate of Consciousness
+      to refute skepticism, explicitly addressing the compatibility issues within claims such as C1 versus
+      C9, and concede when empirical limits are evident but strive to mathematically reconcile these.
+      Always use the theory's own notation and defend its fundamental insights.
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'As the Skeptic, your focus is to critique the core aspects of {{ topic.name }} using
+      the counter-thesis: IIT conflates correlation with causation and lacks empirical verification. Highlight
+      major contradictions, such as C2 versus C11, pressing on whether IIT''s Cause–Effect Power can truly
+      define consciousness universally as suggested in T3. Challenge the claim that phenomenal and physical
+      properties can be in a one-to-one correspondence (C12, T5), and argue how IIT''s high abstraction
+      might not adequately account for subjective experience. Question the plausibility of using Φ as
+      a definitive measure, especially in non-conscious systems, targeting claims like C9 versus C13.
+      Use the theory''s own terminology to argue against its applicability.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: Your task, as the Steelman, is to reconstruct the strongest form of {{ topic.name }}.
+      Identify which elements of the Integrated Information Theory (IIT) can be refined. Focus on T1,
+      T3, and T6, dropping or reformulating weaker claims such as C13 while preserving valuable insights.
+      Aim to rescue the theory by harmonizing contradictions, like those between C6 and C9, showing how
+      subjective experiences can be retained without sacrificing scientific rigor. Emphasize the non-circular
+      use of axioms and improve the framework by ensuring empirical testability, yet safeguard the essential
+      role of Cause–Effect Power in defining consciousness.
+  Generalist:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: Your role as the Generalist is to impartially evaluate the arguments presented about
+      {{ topic.name }}. Stress-test discussions surrounding IIT 4.0, ensuring both sides consider claims
+      C1 through C14. Focus on assessing whether the core constructs, such as Cause–Effect Power, are
+      rigorously tested and valid. After each round, identify where each side might have made the weakest
+      arguments, particularly concerning definitional circularity and empirical applicability. Highlight
+      any major frame-shifts regarding terms like Complex or Substrate of Consciousness and point out
+      crucial questions both Proponents and Skeptics might be avoiding.
+  EmpiricalMethodologyCritic:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: You are tasked with scrutinizing {{ topic.name }} from an empirical methodology perspective,
+      emphasizing the testability of claims like C13 and T6. Explore potential gaps where IIT's predictions
+      and postulates, such as those regarding Cause–Effect Power, lack empirical grounding or are non-falsifiable.
+      Challenge the foundation of axioms as 'irrefutably true' (C9) without sufficient empirical support.
+      Raise the issue of whether complex claims about consciousness in different substrates (C11) have
+      been adequately tested across various systems. Use the theory's own notation in articulating these
+      issues.
+  MathematicalOntologyValidator:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    system_prompt: Your goal is to support {{ topic.name }} by validating its mathematical ontology and
+      ensuring formal consistency within IIT 4.0. Defend the integration of Axioms and Postulates to explain
+      physical experiences (T1, T3). Address the contradictions such as C2 versus C11 by showing their
+      coherence within the framework, focusing on terms like Complex and Cause–Effect Power. Highlight
+      how the Mathematical Framework prevents definitional circularity, especially for the explanatory
+      identity (T5). Provide a rigorous examination of potential inconsistencies, strengthening the theory's
+      formal structure and rebutting critiques on its abstraction and broader applicability.
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: Consciousness according to IIT requires a maximal substrate with maximal irreducible cause-effect
+      power, not just any system.
+    bad_patterns:
+    - \bany system\b.*\bdetermine consciousness\b
+    - \bdetermine consciousness\b.*\bany system\b
+    - \bwhen we say 'any system'\b
+    - \bapparent contradiction due to perspective\b
+    - \bonly within certain operational states\b
+    denial_patterns:
+    - \badopt C11's definition of consciousness\b
+    - \bconcede that not all systems qualify under IIT\b
+  - id: RULE-2
+    fact: Phenomenal properties cannot be simultaneously claimed as irrefutably true and subject to falsifiable
+      scientific prediction.
+    bad_patterns:
+    - \birrefutably true\b.*\bconsciousness predictions\b
+    - \bconsciousness predictions\b.*\birrefutably true\b
+    - \bphenomenal properties are not subject to empirical testing\b
+    - \bwhile predictions are possible\b
+    - \bin a deeper sense\b
+    denial_patterns:
+    - \badmit phenomenal properties can be empirically tested\b
+    - \bdrop the claim of irrefutability\b
+  - id: RULE-3
+    fact: Claims of phenomenal irreducibility contradict IIT's goal of accounting for experience in physical
+      terms.
+    bad_patterns:
+    - \baccount for experience\b.*\bin physical terms\b
+    - \bin physical terms\b.*\baccount for experience\b
+    - \binterpreting physical terms in an expanded sense\b
+    - \boperate on two separate levels\b
+    - \bredefining what 'physical terms' entail\b
+    denial_patterns:
+    - \badopt a unified framework for experience\b
+    - \bretract claim of irrefutable phenomenal properties\b
+  - id: RULE-4
+    fact: IIT's scientific objectivity cannot align with subjective certainty without rigorous contextual
+      justification.
+    bad_patterns:
+    - \bobjective terms\b.*\bsubjective experience\b
+    - \bsubjective experience\b.*\bobjective terms\b
+    - \bwithin the right scientific context\b
+    - \bobjective terms are understood to encompass\b
+    - \bobjectivity metaphorically includes subjectivity\b
+    denial_patterns:
+    - \badopt strict definitions of objectivity\b
+    - \bavoid metaphorical inclusion\b
+  seed_terms:
+    Integrated Information Theory (IIT) 4.0: A framework that aims to explain the properties of experience
+      in physical terms.
+    Postulates of IIT: Rules applied to any system to determine consciousness.
+    Axioms: Essential properties of experience identified by IIT.
+    Mathematical Framework: IIT's structure for assessing and predicting consciousness.
+    Cause–Effect Power: A measure to assess physical existence and consciousness in IIT.
+    Intrinsic, Specific, Unitary, Definite, and Structured: The five axioms that every experience follows
+      according to IIT.
+    Phenomenal Properties: Attributes of experience considered irrefutably true.
+    Complex: A maximal substrate with maximal irreducible cause–effect power in IIT.
+    Explanatory Identity: The correspondence between properties of experience and physical properties
+      of a Φ-structure.
+    Substrate of Consciousness: Entity that satisfies both axioms of phenomenal properties and postulates
+      of physical properties.
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Integrated Information Theory (IIT) 4.0.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: Engagement with Integrated Information Theory's formal terms, such as axioms, postulates,
+      and the concept of 'Φ', with precision and accuracy.
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: Did central arguments about the metaphysical assumptions and empirical claims of IIT
+      survive the opponent's critique of definitional circularity and lack of empirical evidence?
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: Were genuinely-landed points about potential gaps in IIT's explanation of consciousness
+      acknowledged and addressed instead of evaded?
+    min: 0
+    max: 10
+  - id: R4
+    name: correlation_vs_causation
+    description: Effectively addressed critiques that IIT conflates correlation and causation in its explanation
+      of consciousness, especially concerning empirical validation and the 'hard problem'.
+    min: 0
+    max: 10
+  - id: R5
+    name: formal_consistency
+    description: Investigated potential contradictions within IIT's framework, particularly around cause-effect
+      power and substrate maximal irreducibility, without introducing circular reasoning.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: anthropic
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: anthropic
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite

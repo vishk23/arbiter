@@ -225,6 +225,120 @@ def write_config(
         allow_unicode=True,
         width=100,
     )
+    yaml_text = _inject_section_comments(yaml_text)
     out.write_text(yaml_text)
     logger.info("Config written to %s", out)
     return str(out)
+
+
+# ---------------------------------------------------------------------------
+# Section comments
+# ---------------------------------------------------------------------------
+
+_SECTION_COMMENTS: dict[str, str] = {
+    "schema_version": "Arbiter config schema version. Do not change.",
+    "topic": (
+        "Topic under debate.\n"
+        "# - name: short label shown in transcripts and exports\n"
+        "# - summary: 2-4 paragraph description of the position\n"
+        "# - counter_thesis: the strongest opposing position\n"
+        "# - privileged_context: per-side info only that side sees"
+    ),
+    "topology": (
+        "Debate topology. Values: standard | gated | adversarial\n"
+        "# - standard: agents debate freely, no validity gate\n"
+        "# - gated: each turn passes through the 5-layer validity gate\n"
+        "# - adversarial: gated + one agent in red-team mode"
+    ),
+    "providers": (
+        "LLM providers. Each key is a provider name referenced by agents/judge.\n"
+        "# Supported: openai, anthropic, google (Gemini), ollama (local)\n"
+        "# - model: model identifier (e.g. gpt-4o, claude-sonnet-4-20250514)\n"
+        "# - max_tokens: max output tokens per call\n"
+        "# - timeout: seconds before a call times out\n"
+        "# - max_retries: retry count with exponential backoff\n"
+        "# - thinking: {budget_tokens: N} for Anthropic extended thinking\n"
+        "# - reasoning: {effort: low|medium|high} for OpenAI o-series"
+    ),
+    "agents": (
+        "Debate agents. Each key is the agent's display name.\n"
+        "# - provider: which provider key to use for this agent\n"
+        "# - side: Proponent | Skeptic | Neutral\n"
+        "# - max_words: word limit per turn\n"
+        "# - system_prompt: Jinja2 template. Available variables:\n"
+        "#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},\n"
+        "#     {{ z3_stipulation }} (injected when topology is gated)"
+    ),
+    "convergence": (
+        "When to stop the debate.\n"
+        "# - max_rounds: hard cap on number of rounds\n"
+        "# - no_growth_halt: stop if the ledger doesn't grow for N rounds"
+    ),
+    "gate": (
+        "Validity gate (only for gated/adversarial topologies).\n"
+        "# Checks each agent turn for: pattern violations, consistency,\n"
+        "# topic drift, Z3 stipulation compliance, and entailment.\n"
+        "# - max_rewrites: how many times an agent can retry a failed turn\n"
+        "# - stipulated_rules: formal constraints agents must obey\n"
+        "# - seed_terms: key terms with definitions for shift detection\n"
+        "# - entailment_check: LLM-based semantic backstop"
+    ),
+    "z3": (
+        "Z3 SMT verifier module.\n"
+        "# - module: path to auto-generated Python file with Z3 constraints\n"
+        "# The module is loaded at runtime and its verify() function is\n"
+        "# called to check formal consistency of extracted claims."
+    ),
+    "judge": (
+        "Judge panel configuration.\n"
+        "# - system_prompt: instructions for the judge LLM\n"
+        "# - rubric: scoring criteria (id, name, description, min, max)\n"
+        "# - sides: which sides to score\n"
+        "# - verdict_options: possible verdicts\n"
+        "# - spread_threshold: flag if scores diverge by more than this\n"
+        "# - panel: list of {provider: name} for multi-provider judging\n"
+        "# - mid_debate: enable mid-debate judge signals to agents"
+    ),
+    "steelman": (
+        "Steelman loop: iteratively strengthens the losing side's argument.\n"
+        "# - max_iterations: cap on steelman refinement rounds\n"
+        "# - steelman_provider: provider for generating steelman\n"
+        "# - critic_provider: provider for critiquing the steelman\n"
+        "# - judge_provider: provider for judging improvement"
+    ),
+    "retrieval": (
+        "Source retrieval for grounding agent arguments.\n"
+        "# - local.sources_dir: directory of source documents (TF-IDF indexed)\n"
+        "# - local.k: number of local sources to retrieve per turn\n"
+        "# - web.provider: web search provider (e.g. tavily)\n"
+        "# - web.k: number of web results per turn"
+    ),
+    "output": (
+        "Output configuration.\n"
+        "# - dir: directory for debate output files\n"
+        "# - live_log: print agent turns to console during the debate\n"
+        "# - formats: output formats (json, markdown)\n"
+        "# - checkpoint_db: SQLite file for crash recovery checkpoints"
+    ),
+}
+
+
+def _inject_section_comments(yaml_text: str) -> str:
+    """Insert descriptive comments above each top-level YAML section."""
+    lines = yaml_text.split("\n")
+    result: list[str] = []
+    for line in lines:
+        # Check if this line is a top-level key (no leading whitespace)
+        if line and not line[0].isspace() and ":" in line:
+            key = line.split(":")[0].strip()
+            comment = _SECTION_COMMENTS.get(key)
+            if comment:
+                if result:
+                    result.append("")  # blank line before section
+                for cline in comment.split("\n"):
+                    if cline.startswith("#"):
+                        result.append(cline)
+                    else:
+                        result.append(f"# {cline}")
+        result.append(line)
+    return "\n".join(result)
