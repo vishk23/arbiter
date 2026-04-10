@@ -3,105 +3,104 @@
     "openai": {
       "scores": {
         "Proponent": {
-          "R1": 8,
+          "R1": 9,
           "R2": 6,
-          "R3": 5,
-          "R4": 6,
+          "R3": 7,
+          "R4": 5,
           "R5": 7,
-          "total": 32
+          "total": 34
         },
         "Skeptic": {
-          "R1": 7,
+          "R1": 4,
           "R2": 7,
-          "R3": 6,
-          "R4": 5,
+          "R3": 5,
+          "R4": 6,
           "R5": 6,
-          "total": 31
+          "total": 28
         }
       },
       "key_landed_hits": [
-        "IIT's axioms-to-postulate translation lacks empirical validation.",
-        "IIT's claim of universality is undermined by specific criteria for complexes (C11).",
-        "Criticism of IIT's reliance on correlation vs. causation with insufficient empirical grounding."
+        "IIT provides a general, testable framework emphasizing system-specific cause-effect architectures.",
+        "IIT's mathematical model conflates correlation with causation, lacking empirical evidence."
       ],
       "key_dodged_questions": [
-        "How to empirically verify that IIT's Complexes precisely map to consciousness across systems?",
-        "What specific empirical predictions derived from IIT can be tested and potentially falsified?",
-        "How does IIT handle contradictory phenomenology and mathematical predictions?"
+        "How do we empirically distinguish systems that merely integrate information from those that are conscious?",
+        "What empirical findings could force revision of IIT's core claims?"
       ],
       "verdict": "Proponent",
-      "verdict_reasoning": "Proponent demonstrated slightly better precision in engaging with IIT's formal terms and addressed key contradictions, despite lacking full empirical validation. Skeptic highlighted fundamental issues but did not provide alternative frameworks."
+      "verdict_reasoning": "The Proponent scored higher by effectively demonstrating engagement with IIT's formal terms, addressing apparent contradictions, and maintaining consistency. The Skeptic pointed out important methodological issues but did not provide as robust an empirical counter-argument."
     },
     "anthropic": {
       "scores": {
         "Proponent": {
           "R1": 8,
-          "R2": 4,
-          "R3": 5,
-          "R4": 4,
-          "R5": 4,
-          "total": 25
+          "R2": 6,
+          "R3": 7,
+          "R4": 6,
+          "R5": 5,
+          "total": 32
         },
         "Skeptic": {
-          "R1": 8,
+          "R1": 6,
           "R2": 7,
-          "R3": 7,
-          "R4": 7,
-          "R5": 7,
-          "total": 36
+          "R3": 5,
+          "R4": 8,
+          "R5": 8,
+          "total": 34
         }
       },
       "key_landed_hits": [
-        "IIT exhibits definitional circularity by defining consciousness through \u03a6 while using consciousness assumptions to validate \u03a6 measurements",
-        "The theory conflates mathematical correlation with ontological causation - high \u03a6 correlating with consciousness doesn't prove \u03a6 causes consciousness",
-        "Contradiction between C9 (irrefutable phenomenal truths) and C13 (empirically testable predictions) violates scientific methodology",
-        "IIT lacks operational protocols for independently measuring Cause-Effect Power in real biological systems",
-        "Tension between C2 (universal applicability) and C11 (specific Complex requirements) undermines claimed universality"
+        "Skeptic's persistent correlation vs causation critique showing IIT lacks empirical demonstration of causal relationships",
+        "EmpiricalMethodologyCritic's identification of the C9/C13 falsifiability paradox - irrefutable axioms cannot generate genuinely testable predictions",
+        "Generalist's exposure of validation circularity in Cause-Effect Power measurements",
+        "Multiple identification of contradictions between universal applicability (C2) and specific complex requirements (C11)",
+        "EmpiricalMethodologyCritic's demonstration that IIT lacks independent validation protocols beyond its own mathematical framework"
       ],
       "key_dodged_questions": [
-        "How can \u03a6 be measured independently of pre-existing consciousness assumptions to avoid circularity?",
-        "What specific experimental conditions would falsify IIT's core claims about consciousness?",
-        "How can the axiom-to-postulate translation be empirically validated without circular reasoning?",
-        "What concrete protocols distinguish conscious Complexes from highly integrated non-conscious systems?"
+        "How to independently validate Cause-Effect Power measurements without presupposing IIT's correctness",
+        "What specific empirical findings would constitute decisive evidence against IIT's core claims",
+        "How to distinguish systems that genuinely instantiate consciousness from those exhibiting computational complexity",
+        "Resolution of the fundamental tension between treating phenomenal properties as irrefutably true while claiming empirical testability",
+        "Specification of operational testing protocols for consciousness identification across different substrates"
       ],
       "verdict": "Skeptic",
-      "verdict_reasoning": "While both sides demonstrated strong formal knowledge of IIT terminology, the Skeptic more effectively identified and sustained critiques of fundamental methodological problems - particularly definitional circularity, correlation-causation conflation, and empirical validation gaps - that the Proponent failed to adequately address despite mathematical sophistication."
+      "verdict_reasoning": "The skeptical position, bolstered by EmpiricalMethodologyCritic, effectively demonstrated fundamental methodological flaws in IIT 4.0 including the falsifiability paradox, validation circularity, and unresolved contradictions. While proponents showed mathematical sophistication, they failed to address core empirical challenges and the theory's circular validation structure."
     }
   },
   "criterion_means": {
     "Proponent": {
-      "R1": 8,
-      "R2": 5,
-      "R3": 5,
-      "R4": 5,
-      "R5": 5.5,
-      "total": 28.5
+      "R1": 8.5,
+      "R2": 6,
+      "R3": 7,
+      "R4": 5.5,
+      "R5": 6,
+      "total": 33
     },
     "Skeptic": {
-      "R1": 7.5,
+      "R1": 5,
       "R2": 7,
-      "R3": 6.5,
-      "R4": 6,
-      "R5": 6.5,
-      "total": 33.5
+      "R3": 5,
+      "R4": 7,
+      "R5": 7,
+      "total": 31
     }
   },
   "criterion_spreads": {
     "Proponent": {
-      "R1": 0,
-      "R2": 2,
-      "R3": 0,
-      "R4": 2,
-      "R5": 3,
-      "total": 7
-    },
-    "Skeptic": {
       "R1": 1,
       "R2": 0,
-      "R3": 1,
+      "R3": 0,
+      "R4": 1,
+      "R5": 2,
+      "total": 2
+    },
+    "Skeptic": {
+      "R1": 2,
+      "R2": 0,
+      "R3": 0,
       "R4": 2,
-      "R5": 1,
-      "total": 5
+      "R5": 2,
+      "total": 6
     }
   },
   "low_confidence_flags": [],
