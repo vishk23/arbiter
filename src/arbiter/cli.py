@@ -217,7 +217,7 @@ def init(
         "--providers",
         help=(
             "Multi-provider init. Comma-separated provider:model pairs. "
-            "e.g. 'openai:gpt-5,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview'. "
+            "e.g. 'openai:gpt-5.4,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview'. "
             "When set, pipeline steps are distributed across providers."
         ),
     ),
@@ -582,7 +582,7 @@ def add_agent(
         None, "--provider", help="Provider key. Uses first available if omitted."
     ),
     model: str = typer.Option(
-        "gpt-5", "--model", help="Model for generating the system prompt."
+        "gpt-5.4", "--model", help="Model for generating the system prompt."
     ),
 ) -> None:
     """Add a new agent to an existing config, with an LLM-generated system prompt.

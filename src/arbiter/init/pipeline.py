@@ -150,7 +150,7 @@ def _make_provider(
     reasoning = None
     if "opus" in provider_model or "claude" in provider_model:
         thinking = {"type": "enabled", "budget_tokens": _THINKING_BUDGETS.get(effort, 8000)}
-    if "gpt-5" in provider_model or "o1" in provider_model or "o3" in provider_model:
+    if "gpt-5" in provider_model or "gpt-5.4" in provider_model or "o1" in provider_model or "o3" in provider_model:
         reasoning = {"effort": effort}
     if "gemini" in provider_model:
         thinking = {"thinking_level": _THINKING_LEVELS.get(effort, "HIGH")}
@@ -171,7 +171,7 @@ def _make_providers_from_spec(spec: str) -> dict[str, "BaseProvider"]:
 
     Formats:
         "openai:gpt-5"                -> {"default": OpenAIProvider(gpt-5)}
-        "openai:gpt-5,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview"
+        "openai:gpt-5.4,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview"
             -> {"openai": ..., "anthropic": ..., "gemini": ...}
     """
     providers: dict[str, "BaseProvider"] = {}
@@ -184,7 +184,7 @@ def _make_providers_from_spec(spec: str) -> dict[str, "BaseProvider"]:
         if not model:
             # Default models per provider
             defaults = {
-                "openai": "gpt-5",
+                "openai": "gpt-5.4",
                 "anthropic": "claude-opus-4-5",
                 "gemini": "gemini-3.1-pro-preview",
                 "google": "gemini-3.1-pro-preview",
@@ -291,7 +291,7 @@ def run_init(
     topic: str | None = None,
     output_dir: str = ".",
     provider_name: str = "openai",
-    provider_model: str = "gpt-5",
+    provider_model: str = "gpt-5.4",
     providers_spec: str | None = None,
     interactive: bool = True,
     effort: str = "medium",
@@ -302,7 +302,7 @@ def run_init(
     ----------
     providers_spec:
         Comma-separated provider:model pairs for multi-provider init.
-        e.g. "openai:gpt-5,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview"
+        e.g. "openai:gpt-5.4,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview"
         When set, pipeline steps are distributed across providers for quality.
         Falls back to provider_name:provider_model if not set.
 

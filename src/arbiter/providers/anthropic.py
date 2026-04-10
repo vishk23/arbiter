@@ -149,7 +149,7 @@ class AnthropicProvider(BaseProvider):
 
         client = openai.OpenAI(timeout=60)
         resp = client.responses.create(
-            model="gpt-4.1-nano",
+            model="gpt-5.4-nano",  # cheapest model, sufficient for JSON reformatting
             input=[
                 {
                     "role": "system",
