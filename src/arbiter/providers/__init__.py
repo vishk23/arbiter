@@ -31,6 +31,8 @@ PROVIDER_REGISTRY: dict[str, str] = {
     "openai": "arbiter.providers.openai:OpenAIProvider",
     "google": "arbiter.providers.google:GoogleProvider",
     "gemini": "arbiter.providers.google:GoogleProvider",  # alias
+    "grok": "arbiter.providers.grok:GrokProvider",
+    "xai": "arbiter.providers.grok:GrokProvider",  # alias
     "ollama": "arbiter.providers.ollama:OllamaProvider",
 }
 

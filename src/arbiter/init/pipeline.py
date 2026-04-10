@@ -188,6 +188,8 @@ def _make_providers_from_spec(spec: str) -> dict[str, "BaseProvider"]:
                 "anthropic": "claude-opus-4-5",
                 "gemini": "gemini-3.1-pro-preview",
                 "google": "gemini-3.1-pro-preview",
+                "grok": "grok-4.20-0309-reasoning",
+                "xai": "grok-4.20-0309-reasoning",
                 "ollama": "llama3:70b",
             }
             model = defaults.get(name, name)

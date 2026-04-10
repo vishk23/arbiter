@@ -87,7 +87,7 @@ providers:
     timeout: 180
     max_retries: 6
   openai:
-    model: gpt-4o
+    model: gpt-5.4-mini
     max_tokens: 4000
     timeout: 180
     max_retries: 6

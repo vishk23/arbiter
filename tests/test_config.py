@@ -28,7 +28,7 @@ def test_provider_ref_validation():
     """Agent referencing non-existent provider should fail."""
     raw = {
         "topic": {"name": "Test", "summary": "Test summary"},
-        "providers": {"openai": {"model": "gpt-4o"}},
+        "providers": {"openai": {"model": "gpt-5.4-mini"}},
         "agents": {
             "A1": {"provider": "nonexistent", "side": "Proponent", "system_prompt": "test"},
         },
@@ -45,7 +45,7 @@ def test_minimal_valid_config():
     """Minimal config that should pass validation."""
     raw = {
         "topic": {"name": "Test", "summary": "A test debate"},
-        "providers": {"openai": {"model": "gpt-4o"}},
+        "providers": {"openai": {"model": "gpt-5.4-mini"}},
         "agents": {
             "Pro": {"provider": "openai", "side": "Proponent", "system_prompt": "Defend."},
             "Con": {"provider": "openai", "side": "Skeptic", "system_prompt": "Attack."},
@@ -65,7 +65,7 @@ def test_gated_topology_auto_creates_gate():
     raw = {
         "topic": {"name": "Test", "summary": "Test"},
         "topology": "gated",
-        "providers": {"openai": {"model": "gpt-4o"}},
+        "providers": {"openai": {"model": "gpt-5.4-mini"}},
         "agents": {
             "Pro": {"provider": "openai", "side": "Proponent", "system_prompt": "x"},
         },

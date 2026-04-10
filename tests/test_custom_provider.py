@@ -85,7 +85,7 @@ class TestCustomProviderPlugin:
     def test_builtin_still_works(self):
         """Ensure built-in providers still resolve when no plugin is set."""
         # This just verifies the registry path isn't broken
-        cfg = ProviderConfig(model="gpt-4o-mini", timeout=10, max_retries=1)
+        _ = ProviderConfig(model="gpt-5.4-mini", timeout=10, max_retries=1)  # noqa: F841
         # Don't actually call — just check it resolves
         from arbiter.providers import PROVIDER_REGISTRY
         assert "openai" in PROVIDER_REGISTRY

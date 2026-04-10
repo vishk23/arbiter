@@ -40,7 +40,7 @@ def _make_config(
         }
     return ArbiterConfig(
         topic=topic,
-        providers={"openai": ProviderConfig(model="gpt-4o")},
+        providers={"openai": ProviderConfig(model="gpt-5.4-mini")},
         agents=agents,
         judge={"rubric": [], "panel": [{"provider": "openai"}]},
     )

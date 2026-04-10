@@ -19,7 +19,7 @@ class TestGeneratedConfigValidation:
             privileged_context={},
             topology="standard",
             providers_config={
-                "openai": {"model": "gpt-4o", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
+                "openai": {"model": "gpt-5.4-mini", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
             },
             agents={
                 "Proponent": {
@@ -74,7 +74,7 @@ class TestGeneratedConfigValidation:
     def test_multi_provider(self):
         cfg = self._write_and_load(
             providers_config={
-                "openai": {"model": "gpt-4o", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
+                "openai": {"model": "gpt-5.4-mini", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
                 "anthropic": {"model": "claude-sonnet-4-20250514", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
             },
             agents={
@@ -116,7 +116,7 @@ class TestGeneratedConfigValidation:
                 counter_thesis=None,
                 privileged_context={},
                 topology="standard",
-                providers_config={"openai": {"model": "gpt-4o", "max_tokens": 4000, "timeout": 180, "max_retries": 6}},
+                providers_config={"openai": {"model": "gpt-5.4-mini", "max_tokens": 4000, "timeout": 180, "max_retries": 6}},
                 agents={
                     "Proponent": {"provider": "openai", "side": "Proponent", "max_words": 500, "system_prompt": "P"},
                     "Skeptic": {"provider": "openai", "side": "Skeptic", "max_words": 500, "system_prompt": "S"},

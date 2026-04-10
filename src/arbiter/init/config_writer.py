@@ -264,7 +264,7 @@ _SECTION_COMMENTS: dict[str, str] = {
     "providers": (
         "LLM providers. Each key is a provider name referenced by agents/judge.\n"
         "# Supported: openai, anthropic, google (Gemini), ollama (local)\n"
-        "# - model: model identifier (e.g. gpt-4o, claude-sonnet-4-20250514)\n"
+        "# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-20250514)\n"
         "# - max_tokens: max output tokens per call\n"
         "# - timeout: seconds before a call times out\n"
         "# - max_retries: retry count with exponential backoff\n"

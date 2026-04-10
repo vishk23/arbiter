@@ -1,7 +1,7 @@
 """Integration tests for T10-T18: Engine, providers, and end-to-end flows.
 
 These tests require API keys and are skipped if not available.
-Use cheap models (gpt-4o-mini) to minimize cost.
+Use cheap models (gpt-5.4-mini) to minimize cost.
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ def _mini_config_dict(topology="standard", gate=False):
         "topology": topology,
         "providers": {
             "openai": {
-                "model": "gpt-4o-mini",
+                "model": "gpt-5.4-mini",
                 "max_tokens": 500,
                 "timeout": 60,
                 "max_retries": 2,
@@ -393,7 +393,7 @@ class TestSteelmanLoop:
         from arbiter.steelman.loop import iterated_steelman
 
         pcfg = ProviderConfig(
-            model="gpt-4o-mini", max_tokens=1000, timeout=60, max_retries=2
+            model="gpt-5.4-mini", max_tokens=1000, timeout=60, max_retries=2
         )
         provider = get_provider("openai", pcfg)
 
