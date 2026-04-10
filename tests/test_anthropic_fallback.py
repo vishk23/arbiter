@@ -58,21 +58,16 @@ class TestCallStructuredFallback:
 
     @patch.object(AnthropicProvider, "_call_impl")
     @patch.object(AnthropicProvider, "__init__", lambda self, *a, **kw: None)
-    def test_clear_error_when_openai_missing(self, mock_call):
-        """If both regex methods fail and openai is not installed, get a clear error."""
+    def test_clear_error_when_json_extraction_fails(self, mock_call):
+        """If both regex methods fail, get a clear error (no hidden OpenAI dep)."""
         mock_call.return_value = "This is not JSON at all, just plain text."
         provider = AnthropicProvider.__new__(AnthropicProvider)
         provider.model = "claude-test"
         provider.config = MagicMock()
 
-        with patch.object(
-            AnthropicProvider,
-            "_openai_reformat",
-            side_effect=ImportError("No module named 'openai'"),
-        ):
-            with pytest.raises(ValueError, match="OpenAI package is not installed"):
-                provider._call_structured_impl(
-                    system="test",
-                    user="test",
-                    schema={"type": "object"},
-                )
+        with pytest.raises(ValueError, match="Anthropic returned non-JSON"):
+            provider._call_structured_impl(
+                system="test",
+                user="test",
+                schema={"type": "object"},
+            )

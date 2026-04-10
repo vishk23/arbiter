@@ -68,41 +68,32 @@ class AnthropicProvider(BaseProvider):
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
         augmented_system = (
-            f"{system}\n\nYou MUST respond with valid JSON matching this schema:\n"
+            f"{system}\n\nYou MUST respond with valid JSON matching this schema.\n"
+            f"Output ONLY the JSON object, no prose before or after.\n\n"
             f"```json\n{json.dumps(schema, indent=2)}\n```"
         )
         raw = self._call_impl(augmented_system, user, max_tokens)
 
-        # Try to extract JSON from the response
+        # Try standard extraction (fenced block, then raw braces)
         parsed = self._extract_json(raw)
         if parsed is not None:
             return parsed
 
-        # Fallback: try aggressive regex extraction before reaching for OpenAI
+        # Try aggressive extraction (multiple attempts)
         parsed = self._extract_json_aggressive(raw)
         if parsed is not None:
             logger.info("Recovered JSON via aggressive regex extraction")
             return parsed
 
-        # Last resort: ask OpenAI to reformat (may not be installed)
-        try:
-            logger.warning(
-                "Anthropic JSON extraction failed; falling back to OpenAI reformat"
-            )
-            return self._openai_reformat(raw, schema)
-        except ImportError:
-            raise ValueError(
-                "Anthropic returned non-JSON and the OpenAI package is not "
-                "installed for the reformat fallback. Install it with "
-                "'pip install openai' or set OPENAI_API_KEY, or retry the "
-                "request. Raw response (first 500 chars):\n" + raw[:500]
-            ) from None
-        except Exception as exc:
-            raise ValueError(
-                f"Anthropic returned non-JSON and the OpenAI reformat "
-                f"fallback also failed ({type(exc).__name__}: {exc}). "
-                f"Raw response (first 500 chars):\n{raw[:500]}"
-            ) from exc
+        # No hidden OpenAI dependency — fail with a clear error.
+        # For structured output, prefer routing to OpenAI/Gemini providers
+        # which have native JSON schema enforcement.
+        raise ValueError(
+            "Anthropic returned non-JSON. For reliable structured output, "
+            "route structured calls to a provider with native JSON schema "
+            "support (openai, gemini). Raw response (first 500 chars):\n"
+            + raw[:500]
+        )
 
     # ── helpers ───────────────────────────────────────────────────────
 
@@ -149,30 +140,3 @@ class AnthropicProvider(BaseProvider):
                         break
         return None
 
-    @staticmethod
-    def _openai_reformat(raw: str, schema: dict) -> dict:
-        """Use OpenAI to coerce *raw* into the desired JSON schema."""
-        import openai
-
-        client = openai.OpenAI(timeout=60)
-        resp = client.responses.create(
-            model="gpt-5.4-nano",  # cheapest model, sufficient for JSON reformatting
-            input=[
-                {
-                    "role": "system",
-                    "content": (
-                        "Reformat the following text into valid JSON matching "
-                        "the provided schema. Output ONLY the JSON object."
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": (
-                        f"Schema:\n{json.dumps(schema, indent=2)}\n\n"
-                        f"Text:\n{raw}"
-                    ),
-                },
-            ],
-            text={"format": {"type": "json_schema", "name": "reformat", "schema": schema}},
-        )
-        return json.loads(resp.output_text)
