@@ -203,13 +203,6 @@ providers:
     thinking:
       type: enabled
       budget_tokens: 8000
-  gemini:
-    model: gemini-3.1-pro-preview
-    max_tokens: 4000
-    timeout: 180
-    max_retries: 6
-    thinking:
-      thinking_level: HIGH
 agents:
   Proponent:
     provider: openai
@@ -420,7 +413,7 @@ judge:
   panel:
   - provider: openai
   - provider: anthropic
-  - provider: gemini
+  - provider: openai
   mid_debate:
     enabled: true
     provider: openai
