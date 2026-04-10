@@ -21,6 +21,7 @@ class ProviderConfig(BaseModel):
     base_url: Optional[str] = None  # for Ollama / custom endpoints
     thinking: Optional[Dict[str, Any]] = None  # Anthropic extended thinking
     reasoning: Optional[Dict[str, Any]] = None  # OpenAI reasoning effort
+    plugin: Optional[str] = None  # custom provider: "module:ClassName" or "path/file.py:Class"
 
 
 # ── Agent ──────────────────────────────────────────────────────────────
