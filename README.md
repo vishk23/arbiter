@@ -55,6 +55,8 @@ arbiter init --topic "Does consciousness require integrated information?"
 | Command | Description |
 |---|---|
 | `arbiter calibrate config.yaml --test-cases tests.yaml` | Calibrate validity gate (recall/specificity) |
+| `arbiter validate config.yaml` | Validate config file with helpful error messages |
+| `arbiter show-rubric config.yaml` | Display judge rubric as formatted table |
 | `arbiter redteam config.yaml --target Proponent` | Run with one agent deliberately trying to evade the gate |
 
 ### Config management
