@@ -93,13 +93,18 @@ def _build_system_prompt(config: "GateConfig") -> str:
     parts.extend([
         "",
         "RULES:",
-        "1. A turn violates a stipulated fact if it ASSERTS, IMPLIES, or PRESUPPOSES the opposite.",
-        "2. Paraphrases count — don't require exact wording.",
-        "3. A turn that EXPLICITLY ADOPTS a repair path (e.g. 'I drop claim X' or 'Under repair A, X is not Y') is NOT a violation.",
-        "4. 'Two modes' or 'different operational regimes' framings that assert BOTH halves ARE violations.",
-        "5. Any unflagged shift of a seed term (using it with a different meaning without explicit notice) is a violation.",
-        "6. Flag confidence: high (clear violation), medium (likely violation), low (ambiguous).",
-        "7. Only flag medium and high confidence violations.",
+        "1. A turn violates a stipulated fact if it ASSERTS BOTH HALVES of a contradiction simultaneously.",
+        "2. CRITICAL: An agent arguing FOR one side of a debate is NOT violating a stipulation.",
+        "   - A Proponent saying 'consciousness is computable' is NOT a violation — that's their POSITION.",
+        "   - A Skeptic saying 'qualia are irreducible' is NOT a violation — that's their POSITION.",
+        "   - A violation is when a SINGLE agent asserts BOTH sides simultaneously, e.g.",
+        "     'consciousness is fully computable AND has irreducible non-computable properties'.",
+        "3. Paraphrases of genuine violations count — don't require exact wording.",
+        "4. A turn that EXPLICITLY ADOPTS a repair path is NOT a violation.",
+        "5. 'Two modes' or 'different operational regimes' that assert BOTH halves ARE violations.",
+        "6. Unflagged shifts of seed terms are violations.",
+        "7. Confidence: high (agent clearly asserts BOTH halves), medium (probable), low (arguable).",
+        "8. Only flag HIGH confidence violations. When in doubt, do NOT flag.",
         "",
         "Return STRICT JSON. For each rule, report whether it's violated.",
     ])
@@ -153,17 +158,19 @@ class LLMChecker:
                 "confidence": v.get("confidence", "medium"),
             })
 
-        # Check definitional shifts
+        # Check definitional shifts (skip empty entries)
         for shift in result.get("definitional_shifts", []):
-            term = shift.get("term", "").lower()
+            term = shift.get("term", "").strip()
+            if not term:
+                continue  # skip empty/malformed entries
             is_seed = any(
-                k.lower() in term or term in k.lower()
+                k.lower() in term.lower() or term.lower() in k.lower()
                 for k in self.config.seed_terms
             )
             if is_seed or not shift.get("flagged_explicitly", False):
                 violations.append({
                     "type": "llm_definitional_shift",
-                    "term": shift.get("term", ""),
+                    "term": term,
                     "description": shift.get("description", ""),
                     "flagged_explicitly": shift.get("flagged_explicitly", False),
                 })

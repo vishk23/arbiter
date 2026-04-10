@@ -84,13 +84,21 @@ def get_provider(name: str, config: "ProviderConfig") -> "BaseProvider":
         cls = _load_plugin_class(plugin_spec)
         return cls(config)
 
-    # Built-in provider
+    # Built-in provider — exact match first, then prefix match
+    # This allows "openai-nano", "anthropic-fast", etc. to resolve to the base provider
     entry = PROVIDER_REGISTRY.get(name)
+    if entry is None:
+        # Try prefix match: "openai-nano" → "openai", "grok-fast" → "grok"
+        for registered_name in sorted(PROVIDER_REGISTRY, key=len, reverse=True):
+            if name.startswith(registered_name):
+                entry = PROVIDER_REGISTRY[registered_name]
+                break
     if entry is None:
         raise KeyError(
             f"Unknown provider '{name}'. "
             f"Available: {', '.join(sorted(PROVIDER_REGISTRY))}. "
-            f"Or set 'plugin: module:ClassName' in provider config for custom providers."
+            f"Use '{name.split('-')[0]}' as the base, or set 'plugin: module:ClassName' "
+            f"for custom providers."
         )
 
     module_path, class_name = entry.rsplit(":", 1)
