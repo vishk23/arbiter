@@ -1,0 +1,25 @@
+name: Integration Tests
+
+on:
+  workflow_dispatch:  # manual trigger
+  pull_request:
+    types: [labeled]  # runs when 'run-integration' label is added
+
+jobs:
+  integration:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      contains(github.event.label.name, 'run-integration')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[all]"
+      - run: pytest tests/test_integration.py -v --timeout=300
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
