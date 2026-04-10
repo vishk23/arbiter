@@ -230,6 +230,39 @@ class DebateEngine:
                 entry_text = agent.call(system_prompt, user_prompt)
                 extracted = {}
 
+            # ── Ledger engagement enforcement ──────────────────────────
+            # If the agent didn't address enough open hits, re-prompt once.
+            min_required = self.config.convergence.min_hits_addressed
+            if min_required > 0:
+                agent_side = self.config.agents[agent_name].side
+                from arbiter.agents.context import _open_hits_for
+                open_hits = _open_hits_for(cur_state.get("ledger", []), agent_side)
+                required = min(min_required, len(open_hits))
+
+                if required > 0:
+                    from arbiter.ledger.parser import parse_ledger_block
+                    block = parse_ledger_block(entry_text)
+                    addressed = len(block.get("hits_addressed", []))
+
+                    if addressed < required:
+                        # Re-prompt once with explicit hit list
+                        hit_list = "\n".join(
+                            f'  {{"id":"{h["id"]}","status":"STATUS",'
+                            f'"rebuttal":"YOUR RESPONSE TO: {h["claim"][:60]}"}}'
+                            for h in open_hits[:required]
+                        )
+                        retry_prompt = (
+                            f"Your response only addressed {addressed}/{required} "
+                            f"required open hits. You MUST address at least {required}. "
+                            f"Rewrite your response keeping your arguments but ADDING "
+                            f"these to your hits_addressed JSON array:\n{hit_list}"
+                        )
+                        entry_text = agent.call(system_prompt, user_prompt + "\n\n" + retry_prompt)
+                        logger.info(
+                            "Ledger enforcement: %s re-prompted (%d/%d addressed)",
+                            agent_name, addressed, required,
+                        )
+
             # Build transcript entry
             entry: Dict[str, Any] = {
                 "agent": agent_name,

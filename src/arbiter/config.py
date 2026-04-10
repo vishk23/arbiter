@@ -41,6 +41,7 @@ class AgentConfig(BaseModel):
 class ConvergenceConfig(BaseModel):
     max_rounds: int = 6
     no_growth_halt: int = 2  # halt after N rounds without ledger growth
+    min_hits_addressed: int = 3  # reject turns that don't address this many open hits (0 to disable)
 
 
 # ── Validity gate ──────────────────────────────────────────────────────
