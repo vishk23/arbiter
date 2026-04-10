@@ -149,7 +149,7 @@ def _make_provider(
     thinking = None
     reasoning = None
     if "opus" in provider_model or "claude" in provider_model:
-        thinking = {"type": "enabled", "budget_tokens": _THINKING_BUDGETS.get(effort, 8000)}
+        thinking = {"type": "adaptive", "budget_tokens": _THINKING_BUDGETS.get(effort, 8000)}
     if "gpt-5" in provider_model or "gpt-5.4" in provider_model or "o1" in provider_model or "o3" in provider_model:
         reasoning = {"effort": effort}
     if "gemini" in provider_model:
@@ -192,12 +192,15 @@ def _auto_detect_providers() -> dict[str, "BaseProvider"]:
 
     providers: dict[str, "BaseProvider"] = {}
     for name, env_var, default_model in candidates:
-        if os.environ.get(env_var):
+        key = os.environ.get(env_var, "")
+        if key:
             try:
                 providers[name] = _make_provider(name, default_model)
-                logger.info("Auto-detected provider: %s (%s)", name, default_model)
+                print(f"  Auto-detected: {name} ({default_model})", flush=True)
             except Exception as exc:
-                logger.warning("Auto-detect: %s key found but init failed: %s", name, exc)
+                print(f"  Auto-detect FAILED: {name} — {type(exc).__name__}: {exc}", flush=True)
+        else:
+            print(f"  Not found: {name} ({env_var} not set)", flush=True)
 
     return providers
 
