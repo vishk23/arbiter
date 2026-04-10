@@ -171,7 +171,7 @@ def _make_providers_from_spec(spec: str) -> dict[str, "BaseProvider"]:
 
     Formats:
         "openai:gpt-5"                -> {"default": OpenAIProvider(gpt-5)}
-        "openai:gpt-5.4,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview"
+        "openai:gpt-5.4,anthropic:claude-opus-4-6,gemini:gemini-3.1-pro-preview"
             -> {"openai": ..., "anthropic": ..., "gemini": ...}
     """
     providers: dict[str, "BaseProvider"] = {}
@@ -185,7 +185,7 @@ def _make_providers_from_spec(spec: str) -> dict[str, "BaseProvider"]:
             # Default models per provider
             defaults = {
                 "openai": "gpt-5.4",
-                "anthropic": "claude-opus-4-5",
+                "anthropic": "claude-opus-4-6",
                 "gemini": "gemini-3.1-pro-preview",
                 "google": "gemini-3.1-pro-preview",
                 "grok": "grok-4.20-0309-reasoning",
@@ -302,7 +302,7 @@ def run_init(
     ----------
     providers_spec:
         Comma-separated provider:model pairs for multi-provider init.
-        e.g. "openai:gpt-5.4,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview"
+        e.g. "openai:gpt-5.4,anthropic:claude-opus-4-6,gemini:gemini-3.1-pro-preview"
         When set, pipeline steps are distributed across providers for quality.
         Falls back to provider_name:provider_model if not set.
 

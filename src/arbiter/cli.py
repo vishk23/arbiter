@@ -82,7 +82,7 @@ topology: standard  # standard | gated | adversarial
 
 providers:
   anthropic:
-    model: claude-sonnet-4-20250514
+    model: claude-sonnet-4-6
     max_tokens: 4000
     timeout: 180
     max_retries: 6
@@ -203,7 +203,7 @@ def init(
         help="LLM provider for init pipeline calls.",
     ),
     model: str = typer.Option(
-        "claude-opus-4-5",
+        "claude-opus-4-6",
         "--model",
         help="Model to use for init pipeline. Use the best available for quality.",
     ),
@@ -217,7 +217,7 @@ def init(
         "--providers",
         help=(
             "Multi-provider init. Comma-separated provider:model pairs. "
-            "e.g. 'openai:gpt-5.4,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview'. "
+            "e.g. 'openai:gpt-5.4,anthropic:claude-opus-4-6,gemini:gemini-3.1-pro-preview'. "
             "When set, pipeline steps are distributed across providers."
         ),
     ),

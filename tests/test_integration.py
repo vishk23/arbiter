@@ -176,7 +176,7 @@ class TestAnthropicProvider:
         from arbiter.config import ProviderConfig
         from arbiter.providers.anthropic import AnthropicProvider
 
-        cfg = ProviderConfig(model="claude-sonnet-4-20250514", max_tokens=100, timeout=60, max_retries=2)
+        cfg = ProviderConfig(model="claude-sonnet-4-6", max_tokens=100, timeout=60, max_retries=2)
         provider = AnthropicProvider(cfg)
         result = provider.call(
             system="You are a helpful assistant.",
@@ -189,7 +189,7 @@ class TestAnthropicProvider:
         from arbiter.config import ProviderConfig
         from arbiter.providers.anthropic import AnthropicProvider
 
-        cfg = ProviderConfig(model="claude-sonnet-4-20250514", max_tokens=200, timeout=60, max_retries=2)
+        cfg = ProviderConfig(model="claude-sonnet-4-6", max_tokens=200, timeout=60, max_retries=2)
         provider = AnthropicProvider(cfg)
         result = provider.call_structured(
             system="Return valid JSON.",
@@ -277,7 +277,7 @@ class TestMultiProvider:
         with tempfile.TemporaryDirectory() as td:
             cfg_dict = _mini_config_dict()
             cfg_dict["providers"]["anthropic"] = {
-                "model": "claude-sonnet-4-20250514",
+                "model": "claude-sonnet-4-6",
                 "max_tokens": 500,
                 "timeout": 60,
                 "max_retries": 2,

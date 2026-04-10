@@ -75,7 +75,7 @@ class TestGeneratedConfigValidation:
         cfg = self._write_and_load(
             providers_config={
                 "openai": {"model": "gpt-5.4-mini", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
-                "anthropic": {"model": "claude-sonnet-4-20250514", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
+                "anthropic": {"model": "claude-sonnet-4-6", "max_tokens": 4000, "timeout": 180, "max_retries": 6},
             },
             agents={
                 "Proponent": {"provider": "openai", "side": "Proponent", "max_words": 500, "system_prompt": "P"},
