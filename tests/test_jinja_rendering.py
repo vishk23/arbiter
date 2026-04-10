@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import pytest
 
 from arbiter.agents.context import ContextBuilder
 from arbiter.config import AgentConfig, ArbiterConfig, ProviderConfig, TopicConfig

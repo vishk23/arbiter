@@ -78,6 +78,6 @@ class TestExportMarkdown:
         ]
         result = export_markdown(_state(ledger=ledger))
         # Newlines should be replaced in table cells
-        table_lines = [l for l in result.split("\n") if "| h1" in l]
+        table_lines = [line for line in result.split("\n") if "| h1" in line]
         assert len(table_lines) == 1
         assert "\n" not in table_lines[0]

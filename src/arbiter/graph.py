@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import sqlite3
 import time
@@ -296,15 +295,15 @@ class DebateEngine:
         """Emit round-level validity stats (visible graph node for auditing)."""
         round_idx = state["round_idx"]
         round_logs = [
-            l
-            for l in state.get("validity_log", [])
-            if l.get("round") == round_idx and l.get("kind") != "round_summary"
+            entry
+            for entry in state.get("validity_log", [])
+            if entry.get("round") == round_idx and entry.get("kind") != "round_summary"
         ]
         n = len(round_logs)
         n_violations = sum(
-            1 for l in round_logs if l.get("final_status") == "validity_violation"
+            1 for entry in round_logs if entry.get("final_status") == "validity_violation"
         )
-        n_rewrites = sum(l.get("rewrites_used", 0) for l in round_logs)
+        n_rewrites = sum(entry.get("rewrites_used", 0) for entry in round_logs)
 
         summary = {
             "kind": "round_summary",
@@ -418,14 +417,14 @@ class DebateEngine:
 
         # ── Validity stats ───────────────────────────────────────────
         vlog = state.get("validity_log", [])
-        turn_logs = [l for l in vlog if l.get("kind") != "round_summary"]
+        turn_logs = [entry for entry in vlog if entry.get("kind") != "round_summary"]
         total_turns = len(turn_logs)
         total_violations = sum(
             1
-            for l in turn_logs
-            if l.get("final_status") == "validity_violation"
+            for entry in turn_logs
+            if entry.get("final_status") == "validity_violation"
         )
-        total_rewrites = sum(l.get("rewrites_used", 0) for l in turn_logs)
+        total_rewrites = sum(entry.get("rewrites_used", 0) for entry in turn_logs)
         if total_turns > 0:
             lines.append("")
             lines.append("VALIDITY GATE STATS:")

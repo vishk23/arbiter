@@ -1,9 +1,7 @@
 """Tests for config loading and validation."""
 
-from pathlib import Path
 
 import pytest
-import yaml
 
 from arbiter.config import ArbiterConfig, load_config
 

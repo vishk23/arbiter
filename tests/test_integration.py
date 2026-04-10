@@ -6,7 +6,6 @@ Use cheap models (gpt-4o-mini) to minimize cost.
 
 from __future__ import annotations
 
-import json
 import os
 import tempfile
 from pathlib import Path
@@ -304,7 +303,6 @@ class TestCalibrateEndToEnd:
     """T13: Test arbiter calibrate with gate_tests.yaml."""
 
     def test_calibrate_basic(self):
-        import yaml
         from arbiter.config import load_config
         from arbiter.gate.validity_gate import ValidityGate
         from arbiter.providers import get_provider

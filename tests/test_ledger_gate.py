@@ -1,7 +1,6 @@
 """Tests for T23: Ledger operations with gate-aware entries."""
 
 from arbiter.ledger.ops import add_hit, resolve_hit, open_hits, ledger_grew
-from arbiter.state import Hit
 
 
 class TestLedgerGateAware:

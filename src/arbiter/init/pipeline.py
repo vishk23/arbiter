@@ -5,7 +5,7 @@ from __future__ import annotations
 import logging
 import textwrap
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
@@ -335,7 +335,6 @@ def run_init(
     # -- 1. Obtain providers ---------------------------------------------------
     if providers_spec:
         init_providers = _make_providers_from_spec(providers_spec)
-        provider_names_list = list(init_providers.keys())
         console.print(f"\n[dim]Using providers:[/dim] [bold]{', '.join(f'{k} ({v.model})' for k, v in init_providers.items())}[/bold]")
         # Primary provider for single-provider calls
         provider = list(init_providers.values())[0]
@@ -350,7 +349,6 @@ def run_init(
         console.print(f"\n[dim]Using provider:[/dim] [bold]{provider_name}[/bold] ({provider_model})")
         provider = _make_provider(provider_name, provider_model)
         init_providers = {provider_name: provider}
-        provider_names_list = [provider_name]
         provider_for_claims = provider
         provider_for_z3 = provider
         provider_for_agents = provider
@@ -371,7 +369,7 @@ def run_init(
         source_text = read_pdf(from_pdf)
         console.print(f"  Extracted {len(source_text):,} characters from PDF.")
     elif topic:
-        console.print(f"\n[bold blue]Step 1:[/bold blue] Generating topic summary from description")
+        console.print("\n[bold blue]Step 1:[/bold blue] Generating topic summary from description")
         t0 = time.time()
         topic_info = _generate_topic(topic, provider)
         console.print(f"  Done ({time.time() - t0:.1f}s)")
@@ -388,7 +386,7 @@ def run_init(
             topic_input = Prompt.ask(
                 "\n[bold]Describe the topic to debate[/bold]"
             )
-            console.print(f"\n[bold blue]Step 1:[/bold blue] Generating topic summary")
+            console.print("\n[bold blue]Step 1:[/bold blue] Generating topic summary")
             t0 = time.time()
             topic_info = _generate_topic(topic_input, provider)
             console.print(f"  Done ({time.time() - t0:.1f}s)")
@@ -403,7 +401,7 @@ def run_init(
     # -- 3. Extract claims -----------------------------------------------------
     claims: list[dict] = []
     if source_text:
-        console.print(f"\n[bold blue]Step 2:[/bold blue] Extracting claims from source text")
+        console.print("\n[bold blue]Step 2:[/bold blue] Extracting claims from source text")
         from arbiter.init.pdf_reader import extract_claims
 
         t0 = time.time()
@@ -428,7 +426,7 @@ def run_init(
             console.print(f"  Inferred topic: [bold]{topic_name}[/bold]")
     elif topic_name:
         # No source text but we have a topic -- generate synthetic claims
-        console.print(f"\n[bold blue]Step 2:[/bold blue] Generating claims from topic description")
+        console.print("\n[bold blue]Step 2:[/bold blue] Generating claims from topic description")
         from arbiter.init.pdf_reader import extract_claims
 
         t0 = time.time()
@@ -458,7 +456,7 @@ def run_init(
     sides_info: dict = {"proponent_claims": [], "attack_angles": []}
 
     if claims:
-        console.print(f"\n[bold blue]Step 3:[/bold blue] Analysing claims (contradictions, key terms, attack angles)")
+        console.print("\n[bold blue]Step 3:[/bold blue] Analysing claims (contradictions, key terms, attack angles)")
         from arbiter.init.claim_extractor import (
             identify_contradictions,
             identify_key_terms,
@@ -535,7 +533,7 @@ def run_init(
         topology = topo_choice
 
     # -- 6. Parallel generation: Z3, agents, gate, rubric, sources --------------
-    console.print(f"\n[bold blue]Step 4:[/bold blue] Generating debate components")
+    console.print("\n[bold blue]Step 4:[/bold blue] Generating debate components")
 
     z3_module_path: str | None = None
     agents_result: dict[str, dict] = {}
@@ -865,7 +863,7 @@ def run_init(
 
     # -- 10. Write config -------------------------------------------------------
     config_path = str(out_dir / "config.yaml")
-    console.print(f"\n[bold blue]Step 5:[/bold blue] Writing config")
+    console.print("\n[bold blue]Step 5:[/bold blue] Writing config")
 
     config_path = write_config(
         output_path=config_path,
@@ -886,7 +884,7 @@ def run_init(
     )
 
     # -- 11. Self-test: validate the config we just wrote -----------------------
-    console.print(f"\n[bold blue]Step 6:[/bold blue] Validating generated config")
+    console.print("\n[bold blue]Step 6:[/bold blue] Validating generated config")
     try:
         from arbiter.config import load_config
 

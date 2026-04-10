@@ -7,9 +7,7 @@ import logging
 import os
 import re
 
-from dotenv import load_dotenv
 
-load_dotenv()
 
 from arbiter.config import ProviderConfig
 from arbiter.providers.base import BaseProvider

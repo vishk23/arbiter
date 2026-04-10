@@ -1,7 +1,7 @@
 """Tests for T22: Verify all built-in agent prompts are valid Jinja2."""
 
 import pytest
-from jinja2 import Template, TemplateSyntaxError
+from jinja2 import Template
 
 from arbiter.config import TopicConfig
 

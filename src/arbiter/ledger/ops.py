@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import List
 
 from arbiter.state import Hit
 

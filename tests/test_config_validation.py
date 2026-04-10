@@ -3,7 +3,6 @@
 import tempfile
 from pathlib import Path
 
-import pytest
 
 from arbiter.config import load_config
 from arbiter.init.config_writer import write_config
