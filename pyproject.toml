@@ -38,7 +38,7 @@ z3 = ["z3-solver>=4.13"]
 web = ["tavily-python>=0.5"]
 pdf = ["pymupdf4llm>=0.0.17"]
 ollama = ["ollama>=0.4"]
-dev = ["pytest>=8", "ruff"]
+dev = ["pytest>=8", "pytest-timeout>=2", "ruff"]
 all = ["arbiter-debate[z3,web,pdf,ollama,dev]"]
 
 [project.scripts]
