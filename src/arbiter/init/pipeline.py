@@ -190,6 +190,7 @@ def _make_providers_from_spec(spec: str) -> dict[str, "BaseProvider"]:
                 "google": "gemini-3.1-pro-preview",
                 "grok": "grok-4.20-0309-reasoning",
                 "xai": "grok-4.20-0309-reasoning",
+                "deepseek": "deepseek-reasoner",
                 "ollama": "llama3:70b",
             }
             model = defaults.get(name, name)

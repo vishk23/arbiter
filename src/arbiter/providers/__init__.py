@@ -33,6 +33,7 @@ PROVIDER_REGISTRY: dict[str, str] = {
     "gemini": "arbiter.providers.google:GoogleProvider",  # alias
     "grok": "arbiter.providers.grok:GrokProvider",
     "xai": "arbiter.providers.grok:GrokProvider",  # alias
+    "deepseek": "arbiter.providers.deepseek:DeepSeekProvider",
     "ollama": "arbiter.providers.ollama:OllamaProvider",
 }
 
