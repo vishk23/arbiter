@@ -437,7 +437,7 @@ class TestGeminiProvider:
         from arbiter.providers.google import GoogleProvider
 
         cfg = ProviderConfig(
-            model="gemini-2.0-flash", max_tokens=100, timeout=60, max_retries=2,
+            model="gemini-2.5-flash", max_tokens=100, timeout=60, max_retries=2,
         )
         provider = GoogleProvider(cfg)
         result = provider.call(
