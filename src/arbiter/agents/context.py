@@ -98,11 +98,19 @@ class ContextBuilder:
         # 5. Open hits this agent must address
         open_hits = _open_hits_for(state["ledger"], agent_cfg.side)
         if open_hits:
+            # Show max 5 most recent open hits to avoid overwhelming the agent
+            recent_open = sorted(open_hits, key=lambda h: h["round_landed"], reverse=True)[:5]
             hit_lines = "\n".join(
-                f"  [{h['id']}] {h['by']}: {h['claim']}" for h in open_hits
+                f"  [{h['id']}] {h['by']}: {h['claim']}" for h in recent_open
             )
             parts.append(
-                "OPEN HITS YOU MUST ADDRESS BEFORE INTRODUCING NEW MATERIAL:\n"
+                f"MANDATORY: You have {len(open_hits)} unaddressed hits against your side. "
+                f"You MUST address at least {min(3, len(recent_open))} of the following "
+                f"in your hits_addressed JSON block BEFORE introducing new arguments. "
+                f"For each, set status to 'rebutted' (with a rebuttal), 'conceded' "
+                f"(if the point is valid), or 'dodged' (only if truly irrelevant). "
+                f"Judges penalize agents who ignore open hits.\n\n"
+                f"OPEN HITS (most recent first):\n"
                 + hit_lines
             )
 
@@ -126,12 +134,19 @@ class ContextBuilder:
                 parts.append(sources)
 
         # 8. Instructions
+        hit_reminder = ""
+        if open_hits:
+            hit_reminder = (
+                f" IMPORTANT: You MUST include hits_addressed entries for at least "
+                f"{min(3, len(open_hits))} open hits. Failure to address open hits "
+                f"will be penalized by judges."
+            )
         parts.append(
-            f"Speak as {agent_name}. Maximum {agent_cfg.max_words} words. "
+            f"Speak as {agent_name}. Maximum {agent_cfg.max_words} words.{hit_reminder}\n"
             f"End with a JSON block:\n"
             '```json\n{"new_hits":[{"against":"...","claim":"..."}],'
             '"hits_addressed":[{"id":"h1","status":"rebutted|conceded|dodged",'
-            '"rebuttal":"..."}]}\n```'
+            '"rebuttal":"one-sentence rebuttal or concession"}]}\n```'
         )
 
         # 9. Round number
