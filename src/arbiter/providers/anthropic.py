@@ -45,9 +45,16 @@ class AnthropicProvider(BaseProvider):
 
         # Extended thinking support
         if self.config.thinking:
-            budget = self.config.thinking.get("budget_tokens", 8000)
-            kwargs["thinking"] = {"type": "adaptive", "budget_tokens": budget}
-            kwargs["max_tokens"] = max_tokens + budget
+            thinking_type = self.config.thinking.get("type", "adaptive")
+            if thinking_type == "adaptive":
+                # Adaptive thinking: no budget_tokens, model decides
+                kwargs["thinking"] = {"type": "adaptive"}
+                kwargs["max_tokens"] = max_tokens + 16000  # room for thinking
+            else:
+                # Explicit budget (legacy "enabled" mode)
+                budget = self.config.thinking.get("budget_tokens", 8000)
+                kwargs["thinking"] = {"type": thinking_type, "budget_tokens": budget}
+                kwargs["max_tokens"] = max_tokens + budget
 
         resp = self._client.messages.create(**kwargs)
         text = "\n".join(

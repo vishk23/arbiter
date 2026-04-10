@@ -58,11 +58,6 @@ _RULES_SCHEMA = {
                 "additionalProperties": False,
             },
         },
-        "seed_terms": {
-            "type": "object",
-            "additionalProperties": {"type": "string"},
-            "description": "Key terms with definitions, e.g. {'G': 'The universal DAG...'}.",
-        },
         "entailment_facts": {
             "type": "array",
             "items": {"type": "string"},
@@ -72,7 +67,7 @@ _RULES_SCHEMA = {
             ),
         },
     },
-    "required": ["stipulated_rules", "seed_terms", "entailment_facts"],
+    "required": ["stipulated_rules", "entailment_facts"],
     "additionalProperties": False,
 }
 
