@@ -14,13 +14,48 @@ if TYPE_CHECKING:
 
 
 def _open_hits_for(ledger: "List[Hit]", agent_side: str) -> "List[Hit]":
-    """Return open ledger hits that target *agent_side* or 'Theory'."""
-    return [
-        h
-        for h in ledger
-        if h["status"] == "open"
-        and h["against"] in (agent_side, "Theory")
-    ]
+    """Return open ledger hits relevant to *agent_side*.
+
+    Matches hits where:
+    - ``against`` exactly equals the side name or 'Theory'
+    - OR ``against`` contains the side name (fuzzy)
+    - OR the hit was made BY the opposing side (most reliable: if Skeptic
+      made the hit, it's relevant to Proponent and vice versa)
+    """
+    side_lower = agent_side.lower()
+    opposites = {
+        "proponent": "skeptic",
+        "skeptic": "proponent",
+        "neutral": "",
+    }
+    opposite = opposites.get(side_lower, "")
+
+    results = []
+    for h in ledger:
+        if h["status"] != "open":
+            continue
+        against = h.get("against", "").lower()
+        by = h.get("by", "").lower()
+        # Direct match
+        if against in (side_lower, "theory"):
+            results.append(h)
+        # Fuzzy match on against field
+        elif side_lower in against:
+            results.append(h)
+        # Opposing-side inference: if the hit was BY someone on the other
+        # side, it's an attack against this side
+        elif opposite and opposite in by:
+            results.append(h)
+        # If hit was by an agent whose name suggests the opposite side
+        elif opposite and any(
+            kw in by for kw in ("skeptic", "critic", "auditor")
+        ) and side_lower == "proponent":
+            results.append(h)
+        elif opposite and any(
+            kw in by for kw in ("proponent", "defender", "ontologist")
+        ) and side_lower == "skeptic":
+            results.append(h)
+    return results
 
 
 def _prefill_json_template(open_hits: "List[Hit]", max_hits: int = 5) -> str:
@@ -152,6 +187,10 @@ class ContextBuilder:
         # 8. Open hits + pre-filled JSON template (LAST for recency bias)
         required = min(3, len(open_hits)) if open_hits else 0
 
+        sides = ", ".join(
+            sorted({a.side for a in self.config.agents.values()})
+        )
+
         if open_hits and required > 0:
             parts.append(
                 f"Speak as {agent_name}. Maximum {agent_cfg.max_words} words.\n\n"
@@ -159,16 +198,20 @@ class ContextBuilder:
                 f"There are {len(open_hits)} unaddressed arguments against your side. "
                 f"You MUST respond to at least {required} of them in your JSON block below. "
                 f"Judges will PENALIZE you for ignoring opponent arguments.\n\n"
-                f"Then make your new arguments.\n\n"
+                f"Then make your new arguments. For new_hits, use \"against\": one of: {sides}\n\n"
                 f"End your response with this JSON block (fill in STATUS and YOUR RESPONSE):\n\n"
                 + _prefill_json_template(open_hits, max_hits=required)
             )
         else:
+            sides = ", ".join(
+                sorted({a.side for a in self.config.agents.values()})
+            )
             parts.append(
                 f"Speak as {agent_name}. Maximum {agent_cfg.max_words} words.\n"
                 f"End with a JSON block:\n"
-                '```json\n{"new_hits":[{"against":"...","claim":"..."}],'
-                '"hits_addressed":[]}\n```'
+                f'```json\n{{"new_hits":[{{"against":"SIDE_NAME","claim":"..."}}],'
+                f'"hits_addressed":[]}}\n```\n'
+                f'For "against", use one of: {sides}'
             )
 
         return "\n\n".join(parts)
