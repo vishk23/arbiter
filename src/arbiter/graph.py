@@ -385,12 +385,16 @@ class DebateEngine:
                     round_idx=round_idx,
                 )
 
-            # Addressed hits
+            # Addressed hits (handle both dict and string formats)
             for upd in block.get("hits_addressed", []):
+                if isinstance(upd, str):
+                    continue  # skip malformed entries (agent returned bare string)
+                if not isinstance(upd, dict):
+                    continue
                 hit_id = upd.get("id", "")
                 status = upd.get("status", "")
                 rebuttal = upd.get("rebuttal", "")
-                if hit_id and status:
+                if hit_id and status and status in ("rebutted", "conceded", "dodged"):
                     ledger = resolve_hit(ledger, hit_id, status, rebuttal)
 
         grew = ledger_grew(ledger, state["last_ledger_size"])
