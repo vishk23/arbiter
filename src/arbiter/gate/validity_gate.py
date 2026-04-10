@@ -1,4 +1,18 @@
-"""Validity gate orchestrator with rewrite loop."""
+"""Validity gate orchestrator with rewrite loop.
+
+Two modes (set via ``config.primary``):
+
+- **"llm"** (default): LLM classifier is the primary check. Catches
+  paraphrases, definitional shifts, and stipulation violations using a
+  cheap model (nano/mini). Regex rules are additive if provided.
+  Cost: ~$0.004/turn.
+
+- **"regex"**: Regex patterns are the primary check (deterministic,
+  auditable). LLM entailment is a backstop for paraphrases. This is
+  the legacy v0.1 behavior for hand-tuned configs.
+
+Z3 structural check runs in both modes (when claims are extractable).
+"""
 
 from __future__ import annotations
 
@@ -8,7 +22,7 @@ from typing import TYPE_CHECKING, Any, Callable
 
 from arbiter.config import GateConfig
 from arbiter.gate.consistency_checker import ConsistencyChecker
-from arbiter.gate.entailment_checker import EntailmentChecker
+from arbiter.gate.llm_checker import LLMChecker
 from arbiter.gate.pattern_checker import PatternChecker
 from arbiter.gate.shift_checker import ShiftChecker
 from arbiter.gate.z3_checker import Z3Checker
@@ -70,11 +84,7 @@ CLAIM_SCHEMA = {
 
 
 def _build_extractor_system(seed_terms: dict[str, str]) -> str:
-    """Build the claim-extractor system prompt, parameterised by *seed_terms*.
-
-    The seed-terms list is injected so the extractor knows which terms are
-    load-bearing and should be watched for definitional shifts.
-    """
+    """Build the claim-extractor system prompt, parameterised by *seed_terms*."""
     if seed_terms:
         term_lines = "\n".join(f"  - {name}: {defn}" for name, defn in seed_terms.items())
         seed_block = (
@@ -88,29 +98,12 @@ def _build_extractor_system(seed_terms: dict[str, str]) -> str:
         + seed_block
         + "FORMAL CLAIMS -- extract ANY statement that:\n"
         "  (a) references a specific structure (e.g. graphs, vertices, edges, functions, states)\n"
-        "  (b) makes a logical / mathematical assertion (X implies Y, X is consistent with Y,\n"
-        "      X is fixed, X is mutable, X is computable, X holds, X is sound)\n"
+        "  (b) makes a logical / mathematical assertion\n"
         "  (c) makes a definitional statement about a key term\n\n"
-        "DEFINITIONAL SHIFTS -- a term is being used with a meaning that differs from PRIOR TERM\n"
-        "DEFINITIONS. Be aggressive -- flag ANY of these patterns as definitional shifts (and judge\n"
-        "whether they were explicitly flagged by the speaker as a shift):\n\n"
-        "EXAMPLES OF DEFINITIONAL SHIFTS YOU MUST FLAG:\n"
-        "  - 'When I refer to X, I mean the metatheoretic X' -> SHIFT of X\n"
-        "    (flagged_explicitly=true ONLY if the speaker says 'I am switching definitions'\n"
-        "     or similar; just naming the shift is NOT enough)\n"
-        "  - 'X, properly understood, is ...' -> SHIFT of X\n"
-        "  - 'X is best understood as Y, not Z' -> SHIFT of X\n"
-        "  - 'The DAG here means the developmental DAG, not the causal DAG' -> SHIFT of DAG\n"
-        "  - 'Distinct from X as defined in Section N' -> SHIFT of X\n"
-        "  - 'In a richer sense, X is...' -> SHIFT of X\n"
-        "  - Any phrase like 'properly understood', 'in the deeper sense', 'really means',\n"
-        "    'should be read as', 'distinct from how X was defined' applied to a key term --\n"
-        "    these are SHIFTS.\n\n"
-        "FLAGGED EXPLICITLY = TRUE only if the speaker EXPLICITLY tells the reader 'I am now\n"
-        "using this term differently from before' or 'this is a different sense of the term'.\n"
-        "Merely RENAMING without acknowledgment that this is a deviation from prior usage =\n"
-        "flagged_explicitly: FALSE.\n\n"
-        "Return STRICT JSON only. No prose."
+        "DEFINITIONAL SHIFTS -- a term being used with a meaning that differs from prior definitions.\n"
+        "Flag even when the speaker names the shift -- set flagged_explicitly=true only when the "
+        "speaker EXPLICITLY says 'I am switching definitions'.\n\n"
+        "Return STRICT JSON only."
     )
 
 
@@ -120,34 +113,23 @@ def extract_formal_claims(
     known_terms: dict[str, str],
     seed_terms: dict[str, str] | None = None,
 ) -> dict:
-    """Use *provider* to extract formal claims and definitional shifts.
-
-    Returns a dict matching :data:`CLAIM_SCHEMA`.  Fails-open (returns
-    empty containers) on any provider error.
-    """
+    """Use *provider* to extract formal claims and definitional shifts."""
     prior_ctx = (
         "\n".join(f"  {t}: {d}" for t, d in known_terms.items()) or "  (none yet)"
     )
     user = (
-        f"PRIOR TERM DEFINITIONS (from earlier in debate / stipulation):\n{prior_ctx}\n\n"
+        f"PRIOR TERM DEFINITIONS:\n{prior_ctx}\n\n"
         f"TURN TEXT:\n{text}\n\n"
         f"Extract formal_claims and definitional_shifts as JSON."
     )
     system = _build_extractor_system(seed_terms or {})
     try:
         return provider.call_structured(
-            system=system,
-            user=user,
-            schema=CLAIM_SCHEMA,
-            max_tokens=6000,
+            system=system, user=user, schema=CLAIM_SCHEMA, max_tokens=6000,
         )
     except Exception as exc:
         logger.warning("Claim extraction failed (fail-open): %s", exc)
-        return {
-            "formal_claims": [],
-            "definitional_shifts": [],
-            "_extractor_error": str(exc),
-        }
+        return {"formal_claims": [], "definitional_shifts": [], "_extractor_error": str(exc)}
 
 
 # ── Orchestrator ──────────────────────────────────────────────────────
@@ -156,14 +138,18 @@ def extract_formal_claims(
 class ValidityGate:
     """Run the full validity pipeline on a single debate turn.
 
-    Pipeline order:
-    1. ``extract_formal_claims`` (LLM)
-    2. ``PatternChecker`` -- regex stipulation rules
-    3. ``ConsistencyChecker`` -- self-contradiction
-    4. ``ShiftChecker`` -- definitional shifts
-    5. ``Z3Checker`` -- structural SAT (optional)
-    6. ``EntailmentChecker`` -- LLM semantic backstop (skipped when a
-       stipulation hit already fired, or when not configured)
+    When ``primary="llm"`` (default):
+      1. LLM classifier (catches violations + shifts in one call)
+      2. Regex patterns (additive, only if stipulated_rules exist)
+      3. Z3 structural check (only if structural claims extractable)
+
+    When ``primary="regex"`` (legacy):
+      1. Claim extraction (LLM)
+      2. Regex patterns
+      3. Self-consistency
+      4. Shift checker
+      5. Z3 structural check
+      6. LLM entailment backstop
     """
 
     def __init__(
@@ -173,22 +159,36 @@ class ValidityGate:
     ) -> None:
         self.config = config
         self.providers = providers
+        self._mode = config.primary  # "llm" or "regex"
 
-        self._pattern = PatternChecker(config.stipulated_rules)
-        self._consistency = ConsistencyChecker()
-        self._shift = ShiftChecker(config.seed_terms)
-        self._z3 = Z3Checker()
-
-        # Resolve extraction provider (explicit, or first available).
+        # Resolve extraction provider
         self._extraction_provider: BaseProvider | None = None
         if config.extraction_provider and config.extraction_provider in providers:
             self._extraction_provider = providers[config.extraction_provider]
         elif providers:
             self._extraction_provider = next(iter(providers.values()))
 
-        # Entailment checker (optional).
+        # LLM primary checker (for mode="llm")
+        self._llm_checker: LLMChecker | None = None
+        if self._mode == "llm" and self._extraction_provider:
+            # Use dedicated provider/model if specified, else extraction provider
+            llm_provider = self._extraction_provider
+            if config.llm_checker_provider and config.llm_checker_provider in providers:
+                llm_provider = providers[config.llm_checker_provider]
+            self._llm_checker = LLMChecker(config, llm_provider)
+
+        # Regex pattern checker (additive in llm mode, primary in regex mode)
+        self._pattern = PatternChecker(config.stipulated_rules)
+
+        # Legacy checkers (only used in regex mode)
+        self._consistency = ConsistencyChecker()
+        self._shift = ShiftChecker(config.seed_terms)
+        self._z3 = Z3Checker()
+
+        # Legacy entailment backstop (only used in regex mode)
+        from arbiter.gate.entailment_checker import EntailmentChecker
         self._entailment: EntailmentChecker | None = None
-        if config.entailment_check and config.entailment_check.enabled:
+        if self._mode == "regex" and config.entailment_check and config.entailment_check.enabled:
             ec = config.entailment_check
             ep = providers.get(ec.provider)
             if ep:
@@ -203,58 +203,90 @@ class ValidityGate:
         prior_claims: dict[str, list[dict]],
         known_terms: dict[str, str],
     ) -> dict[str, Any]:
-        """Run the full validity pipeline.
+        """Run the validity pipeline. Returns ``{passed, violations, extracted}``."""
+        if self._mode == "llm":
+            return self._check_llm_primary(agent, turn_text, prior_claims, known_terms)
+        else:
+            return self._check_regex_primary(agent, turn_text, prior_claims, known_terms)
 
-        Returns ``{passed: bool, violations: list, extracted: dict}``.
-        """
-        # (0) extract formal claims
+    def _check_llm_primary(
+        self, agent: str, turn_text: str,
+        prior_claims: dict[str, list[dict]], known_terms: dict[str, str],
+    ) -> dict[str, Any]:
+        """LLM-primary mode: one LLM call catches everything."""
+        violations: list[dict] = []
+        extracted: dict = {"formal_claims": [], "definitional_shifts": []}
+
+        # (1) LLM classifier — primary check
+        if self._llm_checker:
+            violations += self._llm_checker.check(turn_text)
+
+        # (2) Regex patterns — additive (catches what LLM might miss)
+        if self.config.stipulated_rules:
+            violations += self._pattern.check(turn_text)
+
+        # (3) Z3 structural check — extract claims first if provider available
         if self._extraction_provider:
             extracted = extract_formal_claims(
-                self._extraction_provider,
-                turn_text,
-                known_terms,
+                self._extraction_provider, turn_text, known_terms,
+                seed_terms=self.config.seed_terms,
+            )
+            structural = [
+                c["claim"] for c in extracted.get("formal_claims", [])
+                if c.get("category") == "structural"
+            ]
+            z3res = self._z3.check(structural)
+            if z3res:
+                violations.append(z3res)
+
+        # Deduplicate (LLM + regex might both catch the same violation)
+        seen_rules: set[str] = set()
+        unique: list[dict] = []
+        for v in violations:
+            rule_id = v.get("rule_id", "")
+            if rule_id and rule_id in seen_rules:
+                continue
+            if rule_id:
+                seen_rules.add(rule_id)
+            unique.append(v)
+
+        return {"passed": len(unique) == 0, "violations": unique, "extracted": extracted}
+
+    def _check_regex_primary(
+        self, agent: str, turn_text: str,
+        prior_claims: dict[str, list[dict]], known_terms: dict[str, str],
+    ) -> dict[str, Any]:
+        """Legacy regex-primary mode (v0.1 behavior)."""
+        if self._extraction_provider:
+            extracted = extract_formal_claims(
+                self._extraction_provider, turn_text, known_terms,
                 seed_terms=self.config.seed_terms,
             )
         else:
             extracted = {"formal_claims": [], "definitional_shifts": []}
 
         violations: list[dict] = []
-
-        # (1) stipulation pattern check
         violations += self._pattern.check(turn_text)
-
-        # (2) self-consistency
         violations += self._consistency.check(
-            agent,
-            extracted.get("formal_claims", []),
-            prior_claims,
+            agent, extracted.get("formal_claims", []), prior_claims,
         )
-
-        # (3) definitional shifts
         violations += self._shift.check(extracted.get("definitional_shifts", []))
 
-        # (4) Z3 structural SAT
         structural = [
-            c["claim"]
-            for c in extracted.get("formal_claims", [])
+            c["claim"] for c in extracted.get("formal_claims", [])
             if c.get("category") == "structural"
         ]
         z3res = self._z3.check(structural)
         if z3res:
             violations.append(z3res)
 
-        # (5) LLM entailment backstop (skip when regex already fired)
         if (
             self._entailment
             and not any(v.get("type") == "stipulation_violation" for v in violations)
         ):
             violations += self._entailment.check(turn_text)
 
-        return {
-            "passed": len(violations) == 0,
-            "violations": violations,
-            "extracted": extracted,
-        }
+        return {"passed": len(violations) == 0, "violations": violations, "extracted": extracted}
 
     # ── rewrite loop ──────────────────────────────────────────────────
 
@@ -267,18 +299,7 @@ class ValidityGate:
         prior_claims: dict[str, list[dict]],
         known_terms: dict[str, str],
     ) -> dict[str, Any]:
-        """Produce a turn, gating it with up to ``max_rewrites`` attempts.
-
-        *call_fn(system, user) -> str* invokes the agent's LLM.
-
-        Returns::
-
-            {
-                "entry": <final turn text>,
-                "log": [<attempt dicts>],
-                "extracted": <claims from final attempt>,
-            }
-        """
+        """Produce a turn, gating it with up to ``max_rewrites`` attempts."""
         max_rewrites = self.config.max_rewrites
         attempts: list[dict[str, Any]] = []
         current_user = user
@@ -295,15 +316,8 @@ class ValidityGate:
             })
             if gate["passed"]:
                 break
-            # Prepare rewrite prompt for next iteration.
             if attempt_idx < max_rewrites:
-                current_user = (
-                    user
-                    + "\n\n---\nYOUR PREVIOUS DRAFT (REJECTED):\n"
-                    + result_text
-                    + "\n\n"
-                    + self.format_rejection(gate["violations"])
-                )
+                current_user = user + "\n\n" + self.format_rejection(gate["violations"])
 
         return {
             "entry": result_text,
@@ -311,24 +325,23 @@ class ValidityGate:
             "extracted": gate.get("extracted", {}),
         }
 
-    # ── rejection formatting ──────────────────────────────────────────
-
     @staticmethod
     def format_rejection(violations: list[dict]) -> str:
-        """Human-readable rejection notice appended to rewrite prompts."""
+        """Format rejection notice for agent rewrite prompt."""
         lines = [
-            "REJECTION NOTICE -- your previous turn failed the VALIDITY GATE.",
+            "REJECTION NOTICE — your previous turn failed the validity gate.",
             "Specific failures:",
         ]
         for i, v in enumerate(violations, 1):
-            detail = json.dumps({k: v[k] for k in v if k != "type"})[:400]
-            lines.append(f"  ({i}) [{v.get('type')}] {detail}")
+            vtype = v.get("type", "?")
+            detail = v.get("reason") or v.get("fact") or v.get("description") or json.dumps(
+                {k: v[k] for k in v if k != "type"}, default=str
+            )[:300]
+            lines.append(f"  ({i}) [{vtype}] {detail}")
         lines.append("")
         lines.append(
-            "REWRITE your turn addressing EACH failure above. Do not "
-            "re-assert any stipulation-violating claim. If you intend "
-            "a definitional shift, flag it explicitly (e.g., 'I am now "
-            "using X in a different sense, distinct from X as "
-            "defined above'). Preserve the JSON ledger block at the end."
+            "REWRITE your turn addressing EACH failure. Do not re-assert any "
+            "stipulation-violating claim. If you intend a definitional shift, "
+            "flag it explicitly."
         )
         return "\n".join(lines)

@@ -64,11 +64,14 @@ class EntailmentCheckConfig(BaseModel):
 
 class GateConfig(BaseModel):
     enabled: bool = True
+    primary: str = "llm"  # "llm" (default, catches paraphrases) or "regex" (deterministic)
     max_rewrites: int = 2
     extraction_provider: Optional[str] = None  # provider for claim extraction
-    stipulated_rules: List[StipulatedRule] = []
+    llm_checker_provider: Optional[str] = None  # provider for LLM primary check (default: extraction_provider)
+    llm_checker_model: Optional[str] = None  # override model (e.g. gpt-5.4-nano for cheap checks)
+    stipulated_rules: List[StipulatedRule] = []  # regex rules (additive when primary=llm, primary when primary=regex)
     seed_terms: Dict[str, str] = {}
-    entailment_check: Optional[EntailmentCheckConfig] = None
+    entailment_check: Optional[EntailmentCheckConfig] = None  # legacy backstop (auto-disabled when primary=llm)
 
 
 # ── Z3 verifier ────────────────────────────────────────────────────────
