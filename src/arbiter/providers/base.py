@@ -43,33 +43,23 @@ class BaseProvider(ABC):
 
     def call(self, system: str, user: str, max_tokens: int = 4000) -> str:
         label = self._provider_label()
-        print(f"  Calling {label} ({self.model})...", flush=True)
-        logger.debug("call start: %s %s", label, self.model)
+        logger.info("Calling %s (%s)...", label, self.model)
         t0 = time.time()
         result = self._call_impl(system, user, max_tokens)
         elapsed = time.time() - t0
-        print(
-            f"  Response received ({len(result):,} chars, {elapsed:.1f}s)",
-            flush=True,
-        )
-        logger.debug("call end: %s %s %d chars %.1fs", label, self.model, len(result), elapsed)
+        logger.info("Response received (%d chars, %.1fs)", len(result), elapsed)
         return result
 
     def call_structured(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
         label = self._provider_label()
-        print(f"  Calling {label} ({self.model}) [structured]...", flush=True)
-        logger.debug("call_structured start: %s %s", label, self.model)
+        logger.info("Calling %s (%s) [structured]...", label, self.model)
         t0 = time.time()
         result = self._call_structured_impl(system, user, schema, max_tokens)
         elapsed = time.time() - t0
         chars = len(_json.dumps(result))
-        print(
-            f"  Response received ({chars:,} chars, {elapsed:.1f}s)",
-            flush=True,
-        )
-        logger.debug("call_structured end: %s %s %d chars %.1fs", label, self.model, chars, elapsed)
+        logger.info("Response received (%d chars, %.1fs)", chars, elapsed)
         return result
 
     def call_with_retry(
