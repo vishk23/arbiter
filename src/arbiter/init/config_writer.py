@@ -146,8 +146,23 @@ def write_config(
     # -- gate ----------------------------------------------------------------
     gate: dict[str, Any] | None = None
     if gate_rules and topology in ("gated", "adversarial"):
+        # Auto-create a dedicated cheap provider for the gate checker
+        # (mini is smart enough for violation classification, much cheaper than flagship)
+        if "openai-gate" not in providers_config and "openai" in providers_config:
+            providers_config["openai-gate"] = {
+                "model": "gpt-5.4-mini",
+                "max_tokens": 4000,
+                "timeout": 60,
+                "max_retries": 3,
+            }
+
+        gate_provider = "openai-gate" if "openai-gate" in providers_config else (
+            list(providers_config.keys())[0] if providers_config else "openai"
+        )
         gate = {
             "enabled": True,
+            "primary": "llm",
+            "llm_checker_provider": gate_provider,
             "max_rewrites": gate_rules.get("max_rewrites", 2),
         }
         if gate_rules.get("extraction_provider"):
