@@ -156,6 +156,17 @@ def write_config(
             gate["stipulated_rules"] = gate_rules["stipulated_rules"]
         if gate_rules.get("seed_terms"):
             gate["seed_terms"] = gate_rules["seed_terms"]
+        # Smart default: always enable entailment check if gate is active.
+        # The LLM semantic backstop catches paraphrased violations that regex misses.
+        if gate_rules.get("entailment_check"):
+            pass  # user/pipeline provided explicit config — use it
+        else:
+            # Auto-enable with the first available provider
+            first_provider = list(providers_config.keys())[0] if providers_config else "openai"
+            gate["entailment_check"] = {
+                "enabled": True,
+                "provider": first_provider,
+            }
         if gate_rules.get("entailment_check"):
             gate["entailment_check"] = gate_rules["entailment_check"]
 

@@ -821,7 +821,19 @@ def run_init(
             )
 
     # -- 7. Build judge panel from available providers --------------------------
-    judge_panel = [{"provider": p} for p in providers_config]
+    # Smart default: use ALL available providers as judges (more = better).
+    # If only 1 provider, use it 3 times (panel of 3 from same provider is
+    # still better than a panel of 1 — catches variance in model outputs).
+    if len(providers_config) >= 3:
+        judge_panel = [{"provider": p} for p in providers_config]
+    elif len(providers_config) == 2:
+        judge_panel = [{"provider": p} for p in providers_config]
+        # Add the first provider again as tiebreaker
+        judge_panel.append({"provider": list(providers_config.keys())[0]})
+    else:
+        # Single provider: panel of 3 from the same provider
+        p = list(providers_config.keys())[0]
+        judge_panel = [{"provider": p}, {"provider": p}, {"provider": p}]
 
     # -- 8. Steelman config -----------------------------------------------------
     steelman: dict | None = None
