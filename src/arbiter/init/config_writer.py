@@ -139,22 +139,46 @@ def write_config(
         "panel": judge_panel,
         "mid_debate": {
             "enabled": True,
-            "provider": judge_panel[0]["provider"] if judge_panel else "openai",
+            "provider": "anthropic-fast" if "anthropic-fast" in providers_config else (
+                judge_panel[0]["provider"] if judge_panel else "openai"
+            ),
         },
     }
 
-    # -- gate ----------------------------------------------------------------
-    gate: dict[str, Any] | None = None
-    if gate_rules and topology in ("gated", "adversarial"):
-        # Auto-create a dedicated cheap provider for the gate checker
-        # (mini is smart enough for violation classification, much cheaper than flagship)
-        if "openai-gate" not in providers_config and "openai" in providers_config:
+    # -- auto-create specialized provider variants ──────────────────────
+    # Each task gets the right model tier. Users can override in YAML.
+    if "openai" in providers_config:
+        if "openai-pro" not in providers_config:
+            # Pro: judges + steelman critic (needs maximum precision)
+            providers_config["openai-pro"] = {
+                "model": "gpt-5.4-pro",
+                "max_tokens": 4000,
+                "timeout": 180,
+                "max_retries": 6,
+            }
+        if "openai-gate" not in providers_config:
+            # Mini: gate checker (classification, cheap)
             providers_config["openai-gate"] = {
                 "model": "gpt-5.4-mini",
                 "max_tokens": 4000,
                 "timeout": 60,
                 "max_retries": 3,
             }
+    if "anthropic" in providers_config and "anthropic-fast" not in providers_config:
+        # Sonnet: mid-debate judge (fast + smart, runs every round)
+        providers_config["anthropic-fast"] = {
+            "model": "claude-sonnet-4-6",
+            "max_tokens": 4000,
+            "timeout": 120,
+            "max_retries": 6,
+        }
+
+    # -- gate ----------------------------------------------------------------
+    gate: dict[str, Any] | None = None
+    if gate_rules and topology in ("gated", "adversarial"):
+        gate_provider = "openai-gate" if "openai-gate" in providers_config else (
+            list(providers_config.keys())[0] if providers_config else "openai"
+        )
 
         gate_provider = "openai-gate" if "openai-gate" in providers_config else (
             list(providers_config.keys())[0] if providers_config else "openai"
