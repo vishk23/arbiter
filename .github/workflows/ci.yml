@@ -28,4 +28,4 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: pip install -e ".[dev,z3]"
-      - run: pytest tests/ -v --timeout=30 -k "not integration and not Integration" --ignore=tests/test_integration.py
+      - run: pytest tests/ -v --timeout=30 --ignore=tests/test_integration.py
