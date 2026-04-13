@@ -14,48 +14,17 @@ if TYPE_CHECKING:
 
 
 def _open_hits_for(ledger: "List[Hit]", agent_side: str) -> "List[Hit]":
-    """Return open ledger hits relevant to *agent_side*.
+    """Return open ledger hits targeting *agent_side*.
 
-    Matches hits where:
-    - ``against`` exactly equals the side name or 'Theory'
-    - OR ``against`` contains the side name (fuzzy)
-    - OR the hit was made BY the opposing side (most reliable: if Skeptic
-      made the hit, it's relevant to Proponent and vice versa)
+    Hit ``against`` fields are normalized at creation time (in graph.py's
+    _ledger_node) to known side names, so exact matching works reliably.
+    Also includes hits against 'Theory' for all sides.
     """
-    side_lower = agent_side.lower()
-    opposites = {
-        "proponent": "skeptic",
-        "skeptic": "proponent",
-        "neutral": "",
-    }
-    opposite = opposites.get(side_lower, "")
-
-    results = []
-    for h in ledger:
-        if h["status"] != "open":
-            continue
-        against = h.get("against", "").lower()
-        by = h.get("by", "").lower()
-        # Direct match
-        if against in (side_lower, "theory"):
-            results.append(h)
-        # Fuzzy match on against field
-        elif side_lower in against:
-            results.append(h)
-        # Opposing-side inference: if the hit was BY someone on the other
-        # side, it's an attack against this side
-        elif opposite and opposite in by:
-            results.append(h)
-        # If hit was by an agent whose name suggests the opposite side
-        elif opposite and any(
-            kw in by for kw in ("skeptic", "critic", "auditor")
-        ) and side_lower == "proponent":
-            results.append(h)
-        elif opposite and any(
-            kw in by for kw in ("proponent", "defender", "ontologist")
-        ) and side_lower == "skeptic":
-            results.append(h)
-    return results
+    return [
+        h for h in ledger
+        if h["status"] == "open"
+        and h.get("against", "") in (agent_side, "Theory")
+    ]
 
 
 def _prefill_json_template(open_hits: "List[Hit]", max_hits: int = 5) -> str:

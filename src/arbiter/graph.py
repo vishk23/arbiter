@@ -390,12 +390,32 @@ class DebateEngine:
         for entry in round_entries:
             block = parse_ledger_block(entry["text"])
 
-            # New hits
+            # New hits — normalize 'against' to a known side name
+            known_sides = {s.lower(): s for s in self.config.judge.sides}
+            known_sides["theory"] = "Theory"
             for h in block.get("new_hits", []):
+                raw_against = h.get("against", "Theory").strip()
+                # Exact match first, then substring match
+                normalized = known_sides.get(raw_against.lower())
+                if not normalized:
+                    for side_lower, side_name in known_sides.items():
+                        if side_lower in raw_against.lower():
+                            normalized = side_name
+                            break
+                if not normalized:
+                    # Last resort: infer from who made the hit
+                    # (Skeptic agents attack Proponent, Proponent agents attack Skeptic)
+                    agent_side = self.config.agents.get(entry["agent"])
+                    if agent_side:
+                        agent_side_name = agent_side.side
+                        opposites = {"Proponent": "Skeptic", "Skeptic": "Proponent"}
+                        normalized = opposites.get(agent_side_name, "Theory")
+                    else:
+                        normalized = "Theory"
                 ledger = add_hit(
                     ledger,
                     by=entry["agent"],
-                    against=h.get("against", "Theory"),
+                    against=normalized,
                     claim=h.get("claim", ""),
                     round_idx=round_idx,
                 )
