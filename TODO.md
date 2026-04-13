@@ -58,10 +58,10 @@ Prioritized by impact. Check off as completed.
 
 ## P3 — Architecture improvements
 
-- [ ] **T43** Custom provider plugin system. Allow `providers.custom` entry that loads from a user Python module (same pattern as Z3 plugin). Enables Mistral, Cohere, Together, etc.
-- [ ] **T44** Embedding-based gate matching as alternative to regex. Use sentence embeddings for semantic similarity between claims and stipulated facts. More robust than regex for paraphrases.
+- [x] **T43** Custom provider plugin system. `plugin: module:ClassName` in provider config. Supports Mistral, Cohere, Together, etc.
+- [x] **T44** LLM-primary gate replaced regex as primary checker. 100% recall/specificity vs 94% with regex. Catches paraphrases natively.
 - [ ] **T45** Configurable graph topology via YAML. Power users define custom debate flows (e.g. "3 rounds parallel critique → 2 rounds head-to-head → steelman"). Currently limited to 3 presets.
-- [ ] **T46** Async provider support. Run agents within a round in parallel when their output doesn't depend on each other. Currently all sequential.
+- [x] **T46** Parallel execution: judge panel, gate checks (LLM + extraction), calibration test cases, source queries all run in parallel. Agent turns remain sequential (state dependency).
 - [ ] **T47** Proper SqliteSaver integration for crash recovery with async LangGraph. Or use langgraph-checkpoint-postgres for production deployments.
 - [ ] **T48** Webhook / callback system. Notify external services (Slack, Discord, webhook URL) when debate completes or gate fires.
 
@@ -71,7 +71,7 @@ Prioritized by impact. Check off as completed.
 - [ ] **T50** Architecture diagram (Mermaid) showing the LangGraph state machine, data flow, and component relationships.
 - [ ] **T51** Add a second case study config (e.g. IIT consciousness, climate sensitivity, a contested arXiv paper) to prove generality.
 - [ ] **T52** CONTRIBUTING.md with development setup, code style, PR guidelines.
-- [ ] **T53** GitHub Actions CI: run pytest on push, lint with ruff.
+- [x] **T53** GitHub Actions CI: run pytest on push, lint with ruff. (.github/workflows/ci.yml)
 - [ ] **T54** Publish to PyPI as `arbiter-debate`.
 - [ ] **T55** Write a technical blog post / arXiv paper: "Arbiter: Formally Verified Multi-Agent Debates with Calibrated Validity Gates."
 - [ ] **T56** Record a demo video / GIF showing the full `init → run → judge → export` pipeline.
@@ -93,25 +93,29 @@ Prioritized by impact. Check off as completed.
 ## Completed
 
 - [x] Core engine (LangGraph state machine with convergence)
-- [x] Provider abstraction (Anthropic, OpenAI, Google, Ollama)
-- [x] Validity gate (5-layer: pattern + consistency + shift + Z3 + entailment)
-- [x] Gate self-calibration in init pipeline
-- [x] Multi-lab judge panel with spread flagging
-- [x] Structured argument ledger (Hit objects with status tracking)
+- [x] Provider abstraction (7 built-in: Anthropic, OpenAI, Google, Grok, DeepSeek, Ollama + custom plugin)
+- [x] Pydantic-first structured output (23 models in schemas.py, provider-native parsing)
+- [x] LLM-primary validity gate (100% recall/specificity, replaces regex as primary)
+- [x] Gate self-calibration in init pipeline (optional via --skip-calibration)
+- [x] Multi-lab judge panel with spread flagging (parallel execution)
+- [x] Structured argument ledger (Hit objects + mini-ledger-update between agents)
 - [x] Agentic init from PDF (pymupdf4llm → claims → Z3 → agents → gate → config)
 - [x] Multi-provider init with distributed pipeline steps
 - [x] Side-balanced provider assignment
+- [x] Configurable token budgets (TokenBudgets: small/medium/large/xl, YAML-configurable)
+- [x] Provider thinking/reasoning support (Anthropic adaptive+effort, OpenAI reasoning effort, Gemini 2.5/3.x)
+- [x] Parallel execution (judge panel, gate checks, calibration, source queries)
 - [x] Uncited-but-relevant-fields detection in agent designer
 - [x] Escape-route anticipation in gate builder
 - [x] Source classification (counter-evidence vs supports-theory)
 - [x] Privileged context assembly (asymmetric info per side)
-- [x] CLI: init, run, judge, calibrate, redteam, export, add-agent, remove-agent, list-agents
+- [x] CLI: init, run, judge, calibrate, redteam, export, add-agent, remove-agent, list-agents, validate, show-rubric
 - [x] Argdown export
 - [x] Live transcript logging
 - [x] BIT Creation Theory case study (8 postures, 24-0 verdict)
 - [x] Z3 verifier (auto-generated, finds UNSAT independently)
-- [x] 12 pytest tests (config + ledger)
+- [x] 173 unit tests + 26 Pydantic integration tests + 28 LLM gate tests
 - [x] pyproject.toml with all optional dependencies
-- [x] README with all CLI commands
+- [x] README + ARCHITECTURE.md
+- [x] GitHub Actions CI (lint + unit tests on push)
 - [x] MIT LICENSE
-- [x] Git repository with 8 commits

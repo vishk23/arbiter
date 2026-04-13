@@ -54,17 +54,20 @@ Arbiter has two main flows: **init** (setup-time, generates config from a PDF) a
 
 ```
 src/arbiter/
-├── cli.py              CLI entry point (Typer, 9 commands)
-├── config.py           Pydantic models + YAML loader
+├── cli.py              CLI entry point (Typer, 12 commands)
+├── config.py           Pydantic models + TokenBudgets + YAML loader
+├── schemas.py          23 Pydantic models for all structured LLM outputs
 ├── state.py            DebateState + Hit TypedDicts
 ├── graph.py            LangGraph StateGraph builder (DebateEngine)
 │
-├── providers/          LLM provider abstraction
-│   ├── base.py         BaseProvider ABC + retry logic
-│   ├── anthropic.py    Extended thinking
-│   ├── openai.py       Reasoning effort + json_schema
-│   ├── google.py       Thinking level
-│   └── ollama.py       Local models
+├── providers/          LLM provider abstraction (7 built-in + custom plugin)
+│   ├── base.py         BaseProvider ABC + Pydantic dispatch + retry
+│   ├── anthropic.py    Adaptive thinking + effort + tool-use structured output
+│   ├── openai.py       Reasoning effort + responses.parse (native Pydantic)
+│   ├── google.py       ThinkingLevel (3.x) / thinking_budget (2.5) + native Pydantic
+│   ├── grok.py         xAI Grok (extends OpenAI, reasoning support)
+│   ├── deepseek.py     DeepSeek chat/reasoner (chat completions API)
+│   └── ollama.py       Local models (format="json")
 │
 ├── agents/             Agent turn management
 │   ├── agent.py        Agent = provider + role + prompt
@@ -74,12 +77,13 @@ src/arbiter/
 │   ├── ops.py          add_hit, resolve_hit, open_hits (immutable)
 │   └── parser.py       JSON block extraction from agent output
 │
-├── gate/               Validity enforcement (5-layer pipeline)
-│   ├── validity_gate.py    Orchestrator + rewrite loop
-│   ├── pattern_checker.py  Regex rules + denial awareness
+├── gate/               Validity enforcement (LLM-primary + optional layers)
+│   ├── validity_gate.py    Orchestrator (LLM + regex + Z3 in parallel)
+│   ├── llm_checker.py     Primary LLM classifier (ViolationResult schema)
+│   ├── pattern_checker.py  Regex rules (additive)
 │   ├── consistency_checker.py  Self-contradiction detection
 │   ├── shift_checker.py    Definitional shift detection
-│   ├── entailment_checker.py  LLM semantic backstop
+│   ├── entailment_checker.py  LLM semantic backstop (legacy regex mode)
 │   └── z3_checker.py      Structural SAT check
 │
 ├── judge/              Verdict generation
@@ -108,14 +112,14 @@ src/arbiter/
 │   └── live_log.py     Per-turn file append + Rich console
 │
 └── init/               Agentic setup pipeline
-    ├── pipeline.py     Main orchestrator (937 LOC)
+    ├── pipeline.py     Main orchestrator (parallel phases + --skip-calibration)
     ├── pdf_reader.py   PDF → markdown → claims
     ├── claim_extractor.py  Claims → contradictions + terms + angles
     ├── z3_generator.py     Contradictions → Z3 Python module
-    ├── gate_builder.py     Contradictions → gate rules + test cases
+    ├── gate_builder.py     Contradictions → gate rules + calibration (parallel)
     ├── agent_designer.py   Claims → specialist agent cast
     ├── rubric_builder.py   Claims → judge rubric criteria
-    ├── source_finder.py    Topic → web corpus + classification
+    ├── source_finder.py    Topic → web corpus + classification (parallel queries)
     └── config_writer.py    Assemble everything → YAML
 ```
 
@@ -133,13 +137,12 @@ State (entering round)
   │
   ├─ provider: LLM call (system + user prompt → response text)
   │
-  ├─ [if gated] gate: check response
-  │   ├─ extract formal claims (LLM call)
-  │   ├─ pattern check (regex)
-  │   ├─ self-consistency check
-  │   ├─ definitional shift check
-  │   ├─ Z3 structural check (optional)
-  │   ├─ entailment check (LLM call, only if patterns didn't fire)
+  ├─ [if gated] gate: check response (LLM-primary mode)
+  │   ├─ [parallel] LLM classifier (violations + shifts)
+  │   ├─ [parallel] extract formal claims (LLM call)
+  │   ├─ regex patterns (additive, instant)
+  │   ├─ Z3 structural check (from extracted claims)
+  │   ├─ deduplicate violations
   │   └─ if violation: rewrite loop (up to max_rewrites)
   │
   ├─ [ledger enforcement] check hits_addressed count
@@ -179,9 +182,22 @@ Users who don't configure get: 3-judge panel, entailment check enabled,
 ledger enforcement on, side-balanced providers. Power users can tune
 everything via YAML.
 
+## Parallelization
+
+| Location | What runs in parallel | Savings |
+|---|---|---|
+| Judge panel | All judges (ThreadPoolExecutor) | 6-10s/debate |
+| Gate per-turn | LLM check + claim extraction | ~2-3s/turn × 35 turns |
+| Gate calibration | All test case checks | 12-18s/init |
+| Source finder | Query processing | 3-8s/init |
+| Init Phase A | Escape routes + source download | 5-10s/init |
+| Init Phase B | Z3 + agents + gate + rubric + context | 10-20s/init |
+
+Agent turns within a round remain sequential (each agent needs prior entries).
+
 ## Known Technical Debt
 
-### DebateEngine is a God Object (graph.py, 634 LOC)
+### DebateEngine is a God Object (graph.py)
 Manages: provider init, agent init, gate init, context building,
 ledger updates, mid-debate judging, Z3 verification, steelman loops,
 export, checkpointing, and logging. Should be split into:
@@ -192,25 +208,25 @@ ProviderFactory, LedgerManager, ExportManager, CheckpointManager.
 `_make_provider()` function. Changes to provider init must be made in
 two places. Should share a factory with `graph.py`.
 
-### Magic Numbers
-Several hardcoded values that should be configurable:
-- Claim extraction token budget (6000)
-- Claim/rebuttal truncation lengths (300/500)
-- LangGraph recursion limit (150)
-- Judge verdict token budget (12000)
-
 ### State Type Safety
 `DebateState` is a TypedDict (type hints only, not enforced at runtime).
 A missing key causes a runtime KeyError, not a validation error.
 Upgrading to Pydantic would add safety but requires custom LangGraph
-serialization.
+serialization (LangGraph recommends TypedDict).
 
-### JSON Parsing is Brittle
-`ledger/parser.py` uses regex to extract JSON from agent output.
-Handles one level of nesting. Silent failure on malformed JSON.
-Should validate against a schema and log extraction failures.
+### Ledger JSON Parsing
+`ledger/parser.py` uses regex to extract JSON from agent prose output.
+This is intentional (agents produce mixed text + JSON), but silent
+failure on malformed JSON could be improved with schema validation.
 
 ### Naming Inconsistencies
 Mixed use of: `hit_id` vs `id`, `agent` vs `agent_name`,
 `round_idx` vs `round`, `entry_text` vs `text`. Not broken,
 but friction for contributors.
+
+## Resolved Technical Debt
+
+- **Magic numbers**: All `max_tokens` values use `TokenBudgets` tiers (small/medium/large/xl), configurable via YAML.
+- **Regex fallbacks in providers**: Removed from Anthropic, Google, DeepSeek. Providers use native structured output.
+- **Dict schemas**: All 21 replaced with Pydantic models in `schemas.py`. Provider-native parsing (OpenAI `responses.parse`, Anthropic tool-use, Gemini `response_schema`).
+- **LLM gate replaced regex**: LLM-primary gate achieves 100% recall/specificity vs 94% with regex. Regex kept as additive layer.

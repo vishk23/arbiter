@@ -33,7 +33,10 @@ arbiter init --from-pdf paper.pdf --output-dir my-debate/
 
 # Or use multiple frontier models for higher quality
 arbiter init --from-pdf paper.pdf \
-  --providers "openai:gpt-5,anthropic:claude-opus-4-5,gemini:gemini-3.1-pro-preview"
+  --providers "openai:gpt-5.4,anthropic:claude-opus-4-6,gemini:gemini-3.1-pro-preview"
+
+# Fast init (skip gate self-calibration)
+arbiter init --from-pdf paper.pdf --skip-calibration
 
 # Or start from a topic description
 arbiter init --topic "Does consciousness require integrated information?"
@@ -71,9 +74,10 @@ arbiter init --topic "Does consciousness require integrated information?"
 ## Features
 
 - **Agentic setup** — point at a PDF, get a complete debate config with Z3 constraints, gate rules, agent prompts, and rubric
-- **Any LLM provider** — Anthropic, OpenAI, Google, Ollama. Mix models freely across agents and judges
+- **7 providers built-in** — Anthropic, OpenAI, Google Gemini, Grok, DeepSeek, Ollama, custom plugins. Mix models freely across agents and judges
+- **Pydantic-first structured output** — 23 typed schemas, provider-native parsing (OpenAI `responses.parse`, Anthropic tool-use, Gemini `response_schema`)
 - **Z3 formal verification** — optional SMT solver plugin proves claims are self-consistent
-- **Calibrated validity gate** — per-turn logical hygiene enforcement with gold-standard test suite
+- **LLM-primary validity gate** — per-turn logical hygiene via LLM classifier (100% recall/specificity on gold-standard), with optional regex + Z3 layers
 - **Structured argument ledger** — every hit tracked as open/conceded/rebutted/dodged
 - **Convergence detection** — debate halts when no new arguments surface
 - **Multi-lab judge panel** — N judges from different providers, with spread-flagging for disagreement
@@ -142,7 +146,39 @@ arbiter init --from-pdf paper.pdf
 
 Everything is a single YAML file. See `configs/quickstart.yaml` for a minimal example or `experiments/bit_creation_theory/config.yaml` for a full setup with Z3, gate, and 10+ agents.
 
-Key sections: `topic`, `topology`, `providers`, `agents`, `convergence`, `gate`, `z3`, `judge`, `steelman`, `retrieval`, `output`.
+Key sections: `topic`, `topology`, `token_budgets`, `providers`, `agents`, `convergence`, `gate`, `z3`, `judge`, `steelman`, `retrieval`, `output`.
+
+### Token budgets
+
+All LLM call token limits are configurable per deployment:
+
+```yaml
+token_budgets:
+  small: 1500       # classification, checks, guidance
+  medium: 4000      # extraction, key terms
+  large: 8000       # agent design, Z3 gen, gate rules
+  xl: 16000         # document extraction, judge verdicts
+  thinking_overhead: 16000  # extra tokens when thinking/reasoning is on
+```
+
+### Provider thinking/reasoning
+
+```yaml
+providers:
+  anthropic:
+    model: claude-opus-4-6
+    thinking:
+      type: adaptive        # recommended (model decides depth)
+      effort: medium         # low/medium/high/max
+  openai:
+    model: gpt-5.4
+    reasoning:
+      effort: high           # none/minimal/low/medium/high/xhigh
+  gemini:
+    model: gemini-3.1-pro-preview
+    thinking:
+      thinking_level: HIGH   # MINIMAL/LOW/MEDIUM/HIGH (Gemini 3.x)
+```
 
 ## Case study: BIT Creation Theory
 
