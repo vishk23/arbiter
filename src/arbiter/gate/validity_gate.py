@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from typing import TYPE_CHECKING, Any, Callable
 
 from arbiter.config import GateConfig
@@ -165,24 +166,36 @@ class ValidityGate:
         self, agent: str, turn_text: str,
         prior_claims: dict[str, list[dict]], known_terms: dict[str, str],
     ) -> dict[str, Any]:
-        """LLM-primary mode: one LLM call catches everything."""
+        """LLM-primary mode: LLM check + claim extraction run in parallel."""
         violations: list[dict] = []
         extracted: dict = {"formal_claims": [], "definitional_shifts": []}
 
-        # (1) LLM classifier — primary check
-        if self._llm_checker:
-            violations += self._llm_checker.check(turn_text)
+        # (1) LLM classifier and (3) claim extraction are independent — run in parallel
+        llm_future = None
+        extraction_future = None
 
-        # (2) Regex patterns — additive (catches what LLM might miss)
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            if self._llm_checker:
+                llm_future = pool.submit(self._llm_checker.check, turn_text)
+            if self._extraction_provider:
+                extraction_future = pool.submit(
+                    extract_formal_claims,
+                    self._extraction_provider, turn_text, known_terms,
+                    self.config.seed_terms,
+                )
+
+            # Collect results
+            if llm_future:
+                violations += llm_future.result()
+            if extraction_future:
+                extracted = extraction_future.result()
+
+        # (2) Regex patterns — additive, instant (no LLM call)
         if self.config.stipulated_rules:
             violations += self._pattern.check(turn_text)
 
-        # (3) Z3 structural check — extract claims first if provider available
-        if self._extraction_provider:
-            extracted = extract_formal_claims(
-                self._extraction_provider, turn_text, known_terms,
-                seed_terms=self.config.seed_terms,
-            )
+        # Z3 structural check (depends on extraction result, but Z3 itself is instant)
+        if extraction_future:
             structural = [
                 c["claim"] for c in extracted.get("formal_claims", [])
                 if c.get("category") == "structural"

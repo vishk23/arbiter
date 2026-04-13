@@ -85,16 +85,14 @@ class JudgePanel:
         system = self._render_system(topic_name)
         user = self._build_user_prompt(transcript)
 
-        verdicts: dict[str, dict] = {}
-        for member in self.config.panel:
-            provider = self.providers.get(member.provider)
+        # Run all judges in parallel — they are independent
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+
+        def _judge_one(member_provider: str) -> tuple[str, dict | None]:
+            provider = self.providers.get(member_provider)
             if provider is None:
-                logger.error(
-                    "No provider instance for panel member '%s' -- skipping",
-                    member.provider,
-                )
-                continue
-            name = member.provider
+                logger.error("No provider for panel member '%s'", member_provider)
+                return member_provider, None
             try:
                 raw = provider.call_structured(
                     system=system,
@@ -102,12 +100,20 @@ class JudgePanel:
                     schema=self._verdict_schema,
                     max_tokens=12_000,
                 )
-                # Validate through Pydantic
                 parsed = self._Verdict.model_validate(raw)
-                verdicts[name] = parsed.model_dump()
-                logger.info("Judge %s -> verdict=%s", name, raw.get("verdict", "?"))
+                logger.info("Judge %s -> verdict=%s", member_provider, raw.get("verdict", "?"))
+                return member_provider, parsed.model_dump()
             except Exception:
-                logger.exception("Judge '%s' failed -- skipping", name)
+                logger.exception("Judge '%s' failed", member_provider)
+                return member_provider, None
+
+        verdicts: dict[str, dict] = {}
+        with ThreadPoolExecutor(max_workers=len(self.config.panel)) as pool:
+            futures = [pool.submit(_judge_one, m.provider) for m in self.config.panel]
+            for fut in as_completed(futures):
+                name, result = fut.result()
+                if result is not None:
+                    verdicts[name] = result
 
         if len(verdicts) < MIN_JUDGES_FOR_VERDICT:
             raise RuntimeError(

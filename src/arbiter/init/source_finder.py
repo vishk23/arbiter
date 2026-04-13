@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import re
 import textwrap
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -71,28 +72,27 @@ def find_sources(
     queries = _generate_queries(claims, key_terms, provider)
     logger.info("Generated %d search queries", len(queries))
 
-    created: list[str] = []
-
-    for q in queries:
+    # Process queries in parallel (web search + LLM fallback are independent)
+    def _process_query(q: dict) -> str:
         query_text = q["query"]
         filename = _sanitize_filename(q.get("filename", "source"))
         rationale = q.get("rationale", "")
         filepath = out / f"{filename}.txt"
 
-        # Step 2: try web search
         web_results = _try_web_search(query_text, web_searcher)
-
         if web_results:
             content = _format_web_results(query_text, rationale, web_results)
             filepath.write_text(content, encoding="utf-8")
             logger.info("Saved web source: %s (%d results)", filepath, len(web_results))
         else:
-            # Step 3: LLM fallback
             content = _synthesize_from_llm(query_text, rationale, provider)
             filepath.write_text(content, encoding="utf-8")
             logger.info("Saved LLM-generated source: %s", filepath)
 
-        created.append(str(filepath.resolve()))
+        return str(filepath.resolve())
+
+    with ThreadPoolExecutor(max_workers=min(4, len(queries))) as pool:
+        created = list(pool.map(_process_query, queries))
 
     logger.info("Source finder created %d files in %s", len(created), output_dir)
     return created

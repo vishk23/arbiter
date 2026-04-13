@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import logging
 import textwrap
+from concurrent.futures import ThreadPoolExecutor
 
 from arbiter.providers.base import BaseProvider
 from arbiter.schemas import (
@@ -228,7 +229,9 @@ def calibrate_gate_rules(
             return True  # fail open
 
     def _find_issues() -> list[str]:
-        return [c["id"] for c in cases if not _check(c)]
+        with ThreadPoolExecutor(max_workers=min(6, len(cases))) as pool:
+            futures = {c["id"]: pool.submit(_check, c) for c in cases}
+            return [cid for cid, fut in futures.items() if not fut.result()]
 
     issues = _find_issues()
     recall, precision = _compute_stats(cases, issues)
