@@ -476,7 +476,7 @@ class TestGeminiPydantic:
         from arbiter.config import ProviderConfig
         from arbiter.providers import get_provider
 
-        cfg = ProviderConfig(model="gemini-2.5-flash", timeout=60, max_retries=2)
+        cfg = ProviderConfig(model="gemini-3-flash-preview", timeout=60, max_retries=2)
         return get_provider("google", cfg)
 
     def test_violation_result(self, gemini_provider):
@@ -486,7 +486,7 @@ class TestGeminiPydantic:
             system="Check if text violates: [R1] Water is wet.",
             user="TEXT: Water is both wet and dry simultaneously.",
             schema=ViolationResult,
-            max_tokens=1000,
+            max_tokens=2000,
         )
         assert "violations" in result
         assert "definitional_shifts" in result
