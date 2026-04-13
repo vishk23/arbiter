@@ -6,12 +6,14 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import ClaimListResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 # Rough chars-per-token estimate (conservative for English prose).
 _CHARS_PER_TOKEN = 4
@@ -126,7 +128,7 @@ def extract_claims(
     text: str,
     provider: "BaseProvider",
     *,
-    max_tokens: int = 16000,
+    max_tokens: int = _B.xl,
 ) -> list[dict]:
     """Use the LLM to extract structured claims from *text*.
 

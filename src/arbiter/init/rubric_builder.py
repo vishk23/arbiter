@@ -6,12 +6,14 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import RubricResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 # ---------------------------------------------------------------------------
 # JSON schema the LLM must return
@@ -168,7 +170,7 @@ def design_rubric(
         system=system,
         user=user,
         schema=RubricResult,
-        max_tokens=4000,
+        max_tokens=_B.medium,
     )
 
     criteria: list[dict] = result.get("criteria", [])

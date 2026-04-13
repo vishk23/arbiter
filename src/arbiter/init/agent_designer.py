@@ -6,12 +6,14 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import AgentDesignResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 # ---------------------------------------------------------------------------
 # JSON schema the LLM must return
@@ -338,7 +340,7 @@ def design_agents(
         system=system,
         user=user,
         schema=AgentDesignResult,
-        max_tokens=8000,
+        max_tokens=_B.large,
     )
 
     raw_agents: list[dict] = result.get("agents", [])

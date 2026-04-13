@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 
 from jinja2 import Template
 
-from arbiter.config import JudgeConfig
+from arbiter.config import JudgeConfig, TokenBudgets
 from arbiter.judge.aggregator import aggregate
 from arbiter.judge.rubric import build_verdict_models, rubric_description
 
@@ -15,6 +15,7 @@ if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 MIN_JUDGES_FOR_VERDICT = 1  # 1 for single-provider setups; 2+ recommended
 
@@ -98,7 +99,7 @@ class JudgePanel:
                     system=system,
                     user=user,
                     schema=self._verdict_schema,
-                    max_tokens=12_000,
+                    max_tokens=_B.xl,
                 )
                 parsed = self._Verdict.model_validate(raw)
                 logger.info("Judge %s -> verdict=%s", member_provider, raw.get("verdict", "?"))

@@ -15,10 +15,12 @@ import sys
 import textwrap
 from pathlib import Path
 
+from arbiter.config import TokenBudgets
 from arbiter.providers.base import BaseProvider
 from arbiter.schemas import Z3GenResult
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 # ---------------------------------------------------------------------------
 # Reference Z3 module shown to the LLM as an example of the target format
@@ -269,7 +271,7 @@ def generate_z3_module(
     system, user = _build_prompt(contradictions, claims)
     logger.info("Generating Z3 module via LLM...")
 
-    response = provider.call_structured(system, user, Z3GenResult, max_tokens=8000)
+    response = provider.call_structured(system, user, Z3GenResult, max_tokens=_B.large)
     code = response["module_code"]
     check_names = response.get("check_names", [])
 
@@ -302,7 +304,7 @@ def generate_z3_module(
         )
         fix_system, fix_user = _fix_prompt(code, output)
         fix_response = provider.call_structured(
-            fix_system, fix_user, Z3GenResult, max_tokens=8000
+            fix_system, fix_user, Z3GenResult, max_tokens=_B.large
         )
         code = fix_response["module_code"]
         check_names = fix_response.get("check_names", check_names)

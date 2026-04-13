@@ -21,7 +21,7 @@ import logging
 from concurrent.futures import ThreadPoolExecutor
 from typing import TYPE_CHECKING, Any, Callable
 
-from arbiter.config import GateConfig
+from arbiter.config import GateConfig, TokenBudgets
 from arbiter.gate.consistency_checker import ConsistencyChecker
 from arbiter.gate.llm_checker import LLMChecker
 from arbiter.gate.pattern_checker import PatternChecker
@@ -33,6 +33,7 @@ if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 
 
@@ -78,7 +79,7 @@ def extract_formal_claims(
     system = _build_extractor_system(seed_terms or {})
     try:
         return provider.call_structured(
-            system=system, user=user, schema=ClaimExtractionResult, max_tokens=6000,
+            system=system, user=user, schema=ClaimExtractionResult, max_tokens=_B.large,
         )
     except Exception as exc:
         logger.warning("Claim extraction failed (fail-open): %s", exc)

@@ -5,12 +5,13 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from arbiter.config import MidDebateConfig
+from arbiter.config import MidDebateConfig, TokenBudgets
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 _SYSTEM = (
     "You are a debate referee. Return JSON mapping each agent name "
@@ -75,7 +76,7 @@ class MidDebateJudge:
                 system=_SYSTEM,
                 user=user_prompt,
                 schema=_GUIDANCE_SCHEMA,
-                max_tokens=1500,
+                max_tokens=_B.small,
             )
         except Exception:
             logger.exception("Mid-debate judge call failed for round %d", round_idx)

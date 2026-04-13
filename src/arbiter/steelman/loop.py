@@ -5,12 +5,14 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import StabilizationResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 # ── Prompts ───────────────────────────────────────────────────────────
 
@@ -59,14 +61,14 @@ def _steelman_call(
         )
     parts.append("\nProduce the (next) rescue now, following the required structure.")
     user_msg = "\n".join(parts)
-    return provider.call(system=_STEELMAN_SYSTEM, user=user_msg, max_tokens=12_000)
+    return provider.call(system=_STEELMAN_SYSTEM, user=user_msg, max_tokens=_B.xl)
 
 
 def _critic_call(provider: "BaseProvider", rescue: str) -> str:
     user_msg = (
         f"RESCUED VERSION:\n{rescue}\n\nGive your sharpest single objection."
     )
-    return provider.call(system=_CRITIC_SYSTEM, user=user_msg, max_tokens=4_000)
+    return provider.call(system=_CRITIC_SYSTEM, user=user_msg, max_tokens=_B.medium)
 
 
 def _stabilized(
@@ -85,7 +87,7 @@ def _stabilized(
             system=_STABILIZATION_SYSTEM,
             user=user_msg,
             schema=StabilizationResult,
-            max_tokens=2_000,
+            max_tokens=_B.small,
         )
         return bool(data.get("stabilized", False)), str(data.get("reason", ""))
     except Exception as exc:

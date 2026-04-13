@@ -237,6 +237,11 @@ def init(
         "--effort",
         help="Reasoning effort for LLM calls: low, medium, or high. Higher = slower + more expensive but better quality.",
     ),
+    skip_calibration: bool = typer.Option(
+        False,
+        "--skip-calibration",
+        help="Skip gate self-calibration (saves ~15s). Gate rules are still generated.",
+    ),
 ) -> None:
     """Generate a debate configuration using the agentic init pipeline.
 
@@ -271,6 +276,7 @@ def init(
         providers_spec=providers,
         interactive=not non_interactive,
         effort=effort,
+        skip_calibration=skip_calibration,
     )
 
 
@@ -595,8 +601,10 @@ def add_agent(
     _load_dotenv()
 
     import yaml
-    from arbiter.config import ProviderConfig
+    from arbiter.config import ProviderConfig, TokenBudgets
     from arbiter.providers import get_provider
+
+    _B = TokenBudgets()
 
     raw = yaml.safe_load(config.read_text())
     agents = raw.get("agents", {})
@@ -636,7 +644,7 @@ def add_agent(
             f"to {'defend' if side == 'Proponent' else 'critique' if side == 'Skeptic' else 'evaluate'} "
             f"the theory. Return ONLY the system prompt text, nothing else."
         ),
-        max_tokens=1000,
+        max_tokens=_B.small,
     )
 
     # Add to config

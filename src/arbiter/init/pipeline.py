@@ -15,12 +15,14 @@ from rich.panel import Panel
 from rich.prompt import Confirm, Prompt
 from rich.table import Table
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import TopicResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 console = Console()
 
 
@@ -45,7 +47,7 @@ def _generate_topic(topic_text: str, provider: "BaseProvider") -> dict:
         system=_TOPIC_SYSTEM,
         user=f"Topic to debate:\n\n{topic_text}",
         schema=TopicResult,
-        max_tokens=4000,
+        max_tokens=_B.medium,
     )
     return result
 
@@ -138,7 +140,7 @@ def _make_provider(
 
     pcfg = ProviderConfig(
         model=provider_model,
-        max_tokens=4000,
+        max_tokens=_B.medium,
         timeout=600,  # init calls can be slow (large docs + structured output)
         max_retries=6,
         thinking=thinking,
@@ -316,6 +318,7 @@ def run_init(
     providers_spec: str | None = None,
     interactive: bool = True,
     effort: str = "medium",
+    skip_calibration: bool = False,
 ) -> str:
     """Run the full agentic init pipeline.
 
@@ -839,7 +842,7 @@ def run_init(
             }
 
     # -- Phase C: gate test generation + self-calibration -----------------------
-    if gate_rules and gate_rules.get("stipulated_rules"):
+    if gate_rules and gate_rules.get("stipulated_rules") and not skip_calibration:
         console.print("\n[bold blue]Step 4b:[/bold blue] Gate test generation + self-calibration")
         t0 = time.time()
         try:
@@ -859,6 +862,8 @@ def run_init(
         except Exception as exc:
             logger.warning("Gate test/calibration failed: %s", exc)
         console.print(f"  Gate calibration done ({time.time() - t0:.1f}s)")
+    elif skip_calibration and gate_rules:
+        console.print("\n[dim]Skipping gate calibration (--skip-calibration)[/dim]")
 
         # Save gate tests to disk for later use by `arbiter calibrate`
         if gate_tests:

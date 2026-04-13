@@ -12,6 +12,7 @@ import logging
 import textwrap
 from concurrent.futures import ThreadPoolExecutor
 
+from arbiter.config import TokenBudgets
 from arbiter.providers.base import BaseProvider
 from arbiter.schemas import (
     CalibrationCheckResult,
@@ -21,6 +22,7 @@ from arbiter.schemas import (
 )
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 # ---------------------------------------------------------------------------
 # 1. Escape route anticipation
@@ -58,7 +60,7 @@ def anticipate_escape_routes(
     try:
         result = provider.call_structured(
             system=_ESCAPE_SYSTEM, user=user,
-            schema=EscapeRoutesResult, max_tokens=6000,
+            schema=EscapeRoutesResult, max_tokens=_B.large,
         )
         routes = result.get("escape_routes", [])
         logger.info("Anticipated %d escape route groups.", len(routes))
@@ -111,7 +113,7 @@ def generate_gate_rules(
     logger.info("Generating gate rules via LLM...")
     try:
         response = provider.call_structured(
-            system=system, user=user, schema=GateRulesResult, max_tokens=6000,
+            system=system, user=user, schema=GateRulesResult, max_tokens=_B.large,
         )
     except Exception as exc:
         logger.error("Gate rule generation failed: %s", exc)
@@ -157,7 +159,7 @@ def generate_gate_tests(
     logger.info("Generating gate test cases via LLM...")
     try:
         response = provider.call_structured(
-            system=system, user=user, schema=GateTestsResult, max_tokens=6000,
+            system=system, user=user, schema=GateTestsResult, max_tokens=_B.large,
         )
         cases = response.get("cases", [])
     except Exception as exc:
@@ -222,7 +224,7 @@ def calibrate_gate_rules(
             r = provider.call_structured(
                 system=checker_system,
                 user=f"TEXT TO CHECK:\n\n{case['text']}",
-                schema=CalibrationCheckResult, max_tokens=500,
+                schema=CalibrationCheckResult, max_tokens=_B.small,
             )
             return r.get("violated", False) == (case["expected"] == "stipulation_violation")
         except Exception:
@@ -263,7 +265,7 @@ def calibrate_gate_rules(
                 "expected label. Positive cases must assert BOTH halves of the "
                 "contradiction. Negative cases must be non-violating. "
                 "Return ALL cases (fixed and unchanged).",
-                regen_user, GateTestsResult, max_tokens=6000,
+                regen_user, GateTestsResult, max_tokens=_B.large,
             )
             cases = resp.get("cases", cases)
         except Exception as exc:

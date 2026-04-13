@@ -5,8 +5,10 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
-from arbiter.config import EntailmentCheckConfig
+from arbiter.config import EntailmentCheckConfig, TokenBudgets
 from arbiter.schemas import EntailmentResult
+
+_B = TokenBudgets()
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
@@ -49,7 +51,7 @@ class EntailmentChecker:
                 system=system,
                 user=user,
                 schema=EntailmentResult,
-                max_tokens=4000,
+                max_tokens=_B.medium,
             )
         except Exception as exc:
             logger.warning("Entailment check failed (fail-open): %s", exc)

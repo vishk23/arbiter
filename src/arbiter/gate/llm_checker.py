@@ -15,7 +15,10 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import ViolationResult
+
+_B = TokenBudgets()
 
 if TYPE_CHECKING:
     from arbiter.config import GateConfig
@@ -109,7 +112,7 @@ class LLMChecker:
                 system=self._system,
                 user=user,
                 schema=ViolationResult,
-                max_tokens=4000,
+                max_tokens=_B.medium,
             )
         except Exception as exc:
             logger.warning("LLM checker failed (fail-open): %s", exc)

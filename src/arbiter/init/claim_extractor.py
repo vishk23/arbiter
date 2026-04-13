@@ -7,6 +7,7 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import (
     ContradictionResult,
     ConsolidationResult,
@@ -19,6 +20,7 @@ if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 
 # ---------------------------------------------------------------------------
@@ -69,7 +71,7 @@ def identify_contradictions(
     claims: list[dict],
     provider: "BaseProvider",
     *,
-    max_tokens: int = 8000,
+    max_tokens: int = _B.large,
 ) -> list[dict]:
     """Ask the LLM to find potential internal contradictions among *claims*.
 
@@ -110,7 +112,7 @@ def identify_key_terms(
     claims: list[dict],
     provider: "BaseProvider",
     *,
-    max_tokens: int = 4000,
+    max_tokens: int = _B.medium,
 ) -> dict[str, str]:
     """Extract key terms and their definitions from the claims.
 
@@ -163,7 +165,7 @@ def suggest_sides(
     claims: list[dict],
     provider: "BaseProvider",
     *,
-    max_tokens: int = 8000,
+    max_tokens: int = _B.large,
 ) -> dict:
     """Suggest Proponent claims and Skeptic attack angles for a debate.
 
@@ -230,7 +232,7 @@ def consolidate_claims(
     claims: list[dict],
     provider: "BaseProvider",
     *,
-    max_tokens: int = 8000,
+    max_tokens: int = _B.large,
 ) -> list[dict]:
     """Group granular claims into 5-10 core theses with sub-claims.
 
@@ -415,7 +417,7 @@ def build_privileged_context(
             system=_PRIVILEGED_CONTEXT_SYSTEM,
             user=user_msg,
             schema=PrivilegedContextResult,
-            max_tokens=6000,
+            max_tokens=_B.large,
         )
         return {
             "Skeptic": result.get("skeptic", ""),

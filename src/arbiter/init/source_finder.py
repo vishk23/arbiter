@@ -9,6 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from arbiter.config import TokenBudgets
 from arbiter.schemas import ClassifyResult, QueryResult, SynthResult
 
 if TYPE_CHECKING:
@@ -16,6 +17,7 @@ if TYPE_CHECKING:
     from arbiter.retrieval.web_search import WebSearcher
 
 logger = logging.getLogger(__name__)
+_B = TokenBudgets()
 
 # ---------------------------------------------------------------------------
 # JSON schema for the query-generation step
@@ -189,7 +191,7 @@ def classify_sources(
             system=system,
             user=user,
             schema=ClassifyResult,
-            max_tokens=2000,
+            max_tokens=_B.small,
         )
         for entry in response.get("classifications", []):
             category = entry.get("category", "neutral_reference")
@@ -272,7 +274,7 @@ def _generate_queries(
         system=system,
         user=user,
         schema=QueryResult,
-        max_tokens=2000,
+        max_tokens=_B.small,
     )
 
     queries = result.get("queries", [])
@@ -387,7 +389,7 @@ def _synthesize_from_llm(
         system=system,
         user=user,
         schema=SynthResult,
-        max_tokens=4000,
+        max_tokens=_B.medium,
     )
 
     title = result.get("title", query)
