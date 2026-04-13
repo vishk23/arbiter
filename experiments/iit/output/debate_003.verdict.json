@@ -1,0 +1,114 @@
+{
+  "per_judge": {
+    "openai": {
+      "scores": {
+        "Proponent": {
+          "R1": 9,
+          "R2": 7,
+          "R3": 6,
+          "R4": 8,
+          "R5": 7,
+          "total": 37
+        },
+        "Skeptic": {
+          "R1": 7,
+          "R2": 8,
+          "R3": 6,
+          "R4": 7,
+          "R5": 8,
+          "total": 36
+        }
+      },
+      "key_landed_hits": [
+        "IIT provides a structured framework for empirically testing consciousness through \u03a6 and the intrinsic cause-effect power.",
+        "Skeptics successfully challenge IIT on the basis of empirical inaccessibility and circularity in system boundary selection."
+      ],
+      "key_dodged_questions": [
+        "Proponents did not fully address the critique of non-circular system boundary selection.",
+        "Skeptics failed to propose a concrete alternative to IIT's framework."
+      ],
+      "verdict": "Proponent",
+      "verdict_reasoning": "The Proponent slightly overcame critiques with more precise engagement in addressing empirical testability and providing structured responses to critics, focusing on the coherence within the IIT framework."
+    },
+    "anthropic": {
+      "scores": {
+        "Proponent": {
+          "R1": 7,
+          "R2": 6,
+          "R3": 4,
+          "R4": 6,
+          "R5": 5,
+          "total": 28
+        },
+        "Skeptic": {
+          "R1": 6,
+          "R2": 7,
+          "R3": 5,
+          "R4": 7,
+          "R5": 6,
+          "total": 31
+        }
+      },
+      "key_landed_hits": [
+        "EmpiricalMethodologyCritic's argument that IIT's axioms (C9) are structurally insulated from falsification while postulates (C13) bear all empirical risk, creating a methodological asymmetry that the Proponent never fully neutralized.",
+        "The NP-hard computational intractability of exact \u03a6 calculation for realistic biological systems undermines C11's empirical operationalizability \u2014 the MathematicalOntologyValidator's 'approximation is acceptable' response was insufficient given IIT's own formal standards.",
+        "The boundary-selection circularity problem: identifying a Complex requires specifying system boundaries before computing \u03a6, but IIT's answer (maximize \u03a6 to find the boundary) is circular \u2014 this remained unresolved across all Proponent rounds.",
+        "EmpiricalMethodologyCritic's point that PCI does not validate IIT's specific causal architecture, exclusion postulate, or explanatory identity bridge \u2014 it only provides correlational proxies for consciousness, not confirmation of IIT's intrinsic formalism.",
+        "The Generalist's observation that the axiom-to-postulate translation functions as declaration rather than formal derivation, and the Proponent never produced a formal derivation procedure to counter this.",
+        "Skeptic's sustained point that non-conscious systems with high integration (feedforward networks, computing systems) challenge \u03a6 as a sufficient marker of consciousness \u2014 while Proponent noted \u03a6=0 for feedforward networks, the broader sufficiency claim for \u03a6>0 systems was not empirically defended."
+      ],
+      "key_dodged_questions": [
+        "Can any two independent researchers derive the same Complex boundary for an identical physical system without importing prior assumptions? Neither side answered this.",
+        "Under what precise conditions would IIT 4.0 as a whole be falsified \u2014 including falsification of the explanatory identity (T5)? Proponent never specified this clearly.",
+        "Does the exclusion postulate generate independently testable predictions distinguishable from rival theories of consciousness? Left unanswered by both sides.",
+        "Is the axiom-to-postulate translation a logically valid derivation or merely an analogical mapping? Proponent repeatedly asserted rigor without demonstrating the formal derivation steps.",
+        "If \u03a6 is maximal in a system that intuitively seems non-conscious, does IIT revise its ontology or its intuitions? Proponent dodged this throughout.",
+        "What external, substrate-independent experimental protocol would falsify the claim that consciousness resides in precisely the \u03a6^max system rather than an adjacent overlapping candidate? Never answered."
+      ],
+      "verdict": "Skeptic",
+      "verdict_reasoning": "The Skeptic side \u2014 primarily advanced by EmpiricalMethodologyCritic and supported by the Generalist's critical interventions \u2014 landed more arguments that survived sustained rebuttal. The core hits that stuck: (1) the methodological asymmetry between irrefutable axioms and supposedly falsifiable postulates was never genuinely dissolved by the Proponent, who repeatedly restated the axiom-postulate distinction without resolving the inferential bridge problem; (2) the boundary-selection circularity for identifying the Complex was acknowledged across multiple rounds but never given a non-circular resolution \u2014 the Proponent's answers (maximize \u03a6, use MIP) presupposed the very system individuation they claimed to derive; (3) the Proponent's empirical responses consistently relied on PCI as a proxy, but this was rebutted as validating signal complexity rather than IIT's intrinsic causal architecture. The Proponent's MathematicalOntologyValidator made the strongest technical contributions (\u03a6=0 for feedforward networks, MIP procedure, T5 as structural isomorphism) but these addressed boundary cases rather than the positive core claims. The Skeptic side appropriately conceded that IIT has formal sophistication while maintaining that formal specification is not empirical confirmation \u2014 a distinction the Proponent never overcame. The Proponent's R3 score suffers because genuine hits about grain-dependence, bridge validation, and T6 empirical inaccessibility were repeatedly deflected rather than honestly conceded and addressed."
+    }
+  },
+  "criterion_means": {
+    "Proponent": {
+      "R1": 8,
+      "R2": 6.5,
+      "R3": 5,
+      "R4": 7,
+      "R5": 6,
+      "total": 32.5
+    },
+    "Skeptic": {
+      "R1": 6.5,
+      "R2": 7.5,
+      "R3": 5.5,
+      "R4": 7,
+      "R5": 7,
+      "total": 33.5
+    }
+  },
+  "criterion_spreads": {
+    "Proponent": {
+      "R1": 2,
+      "R2": 1,
+      "R3": 2,
+      "R4": 2,
+      "R5": 2,
+      "total": 9
+    },
+    "Skeptic": {
+      "R1": 1,
+      "R2": 1,
+      "R3": 1,
+      "R4": 0,
+      "R5": 2,
+      "total": 5
+    }
+  },
+  "low_confidence_flags": [],
+  "verdict_counts": {
+    "Proponent": 1,
+    "Skeptic": 1
+  },
+  "panel_verdict": "Proponent"
+}

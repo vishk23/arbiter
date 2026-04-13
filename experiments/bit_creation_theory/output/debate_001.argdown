@@ -1,0 +1,468 @@
+===
+title: Argument Ledger
+===
+
+// --- Proponent ---
+
+[h1]: The 'tautology' charge against Path B misreads the theory: the non-trivial content is inter-slice transition dynamics, not intra-slice identity. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h2]: The singularity claim survives repair as a structural indispensability claim about the transition function T, not a bare uniqueness assertion. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h12]: Under Repair B with SC defined, the singularity claim is falsifiable and no longer a non-sequitur from synchronicity — the Skeptic's core counter-thesis attacks a target that no longer exists in the repaired theory. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h13]: The sequence-of-DAGs formulation preserves Theorem 7.2's spirit: G_i is fixed within its slice, and the tautology charge (Z3-2) only bites if T is unconstrained — but SC explicitly constrains T via δ, making inter-slice behavior non-trivially predictive. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h23]: The cross-slice invariant C(ω_briana, i) ≥ κ is falsifiable and non-trivial: randomly growing DAGs generically produce decaying centrality fractions, so scale-resistant centrality is a substantive empirical prediction, not a tautology. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h24]: Jungian synchronicity and the singularity claim are not in competition under Path B — the theory's singularity is a graph-theoretic structural property (sustained in-degree fraction), not a phenomenological uniqueness claim, so the Jung objection is a category error. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h36]: The Felleisen objection loses force under Repair B: f need not be non-computable from a single fixed G; it need only be underdetermined across slice-transitions, which is a weaker and defensible claim compatible with agent causation. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h37]: The now-specified κ protocol with three-consecutive-slice falsification condition gives the singularity claim genuine empirical content that distinguishes it from mere metaphor. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h48]: The cross-slice infimum κ* provides a strictly stronger falsification target than any slice-local measure; if the Skeptic cannot produce a reachable Gᵢ with C(ω_briana, Gᵢ) < 0.75 × C(ω_briana, G₀), the singularity claim stands unfalsified. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h49]: Jung's synchronicity is cited as a counter but is irrelevant to Repair Path B, which makes no phenomenological claim about meaningful coincidence — the singularity is a graph-topological persistence claim, not an interpretive-frame claim. #rebutted
+  - <h3>: SC provides an explicit reference class — all nodes across all slices — with CCS as the falsifiable metric, eliminating the undefined-reference-class objection entirely.
+  - <h4>: Repair B separates intra-slice f from inter-slice T, so underdetermination of f's mechanism does not entail indeterminacy of T's structural consequences, which are pinned by δ.
+  - <h5>: Under Repair B, singularity is grounded in SC's structural dominance condition, not phenomenological synchronicity-inflation — Jung's warning is respected by removing the phenomenological basis and substituting a graph-theoretic one.
+  - <h14>: Structural indispensability under Path B is grounded in the cross-slice invariant C(ω_briana, i) ≥ κ > 0 — a falsifiable claim that ω_briana's causal centrality fraction remains bounded away from zero as the graph sequence grows, which is non-trivially violated by generic random DAG growth.
+  - <h15>: Path B re-locates f as a between-slice transition function constrained by the cross-slice invariant, making the Felleisen question well-posed: f is underdetermined by Gᵢ alone but bounded by structural invariants, which is formally tractable bounded non-determinism rather than undefined magic.
+  - <h16>: The singularity claim survives Path B as the graph-theoretic property of scale-resistant causal centrality across slices — it is not a Jungian phenomenological claim, so the JungScholar objection attacks a straw target rather than the repaired theory.
+  - <h25>: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via bibliometric centrality across discrete output-event slices, falsified by three consecutive below-κ readings.
+  - <h26>: The reference-class problem is real; I stipulate the reference class is 'documented causal-network nodes in the same creative domain,' which is narrower and partially addresses the objection, though boundary-setting remains contested.
+  - <h27>: Under Repair B, f operates between slices rather than within a fixed G, so Turing-computability within a single finite graph is irrelevant; the inter-slice selection remains underdetermined without invoking uncomputability.
+  - <h38>: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is the comparative claim that κ* uniquely achieves the persistence floor within that class, making the reference class explicit and the claim non-vacuous.
+  - <h39>: Base-rate objections presuppose a probabilistic model, but the singularity claim is graph-structural — it concerns topological centrality persistence across DAG slices, a property that has no base-rate presupposition and is independently falsifiable.
+  - <h40>: The underdetermination of f is a genuine open problem acknowledged in v6.1's future-work section, but it is orthogonal to the graph-structural singularity claim, which depends only on the topology of the Gᵢ sequence, not on f's computational character.
+  - <h50>: Under Path B the synchronicity claim is dropped as an ontological license; high centrality of ω_briana is defended on empirical graph-structural grounds, not base-rate-sensitive coincidence attribution, so the base-rate fallacy objection does not reach the repaired position.
+  - <h51>: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, giving it non-trivial content that does not collapse to either the identity function or noise, since it tracks historically accumulated causal structure.
+  - <h52>: Jung's synchronicity is explicitly phenomenological and does not license ontological uniqueness claims; I concede this point and have already excised the synchronicity-to-singularity inference from the repaired theory under Path B.
+
+[h60]: The partial concession on κ* verifiability is a *strength*, not a weakness — it shows Path B produces falsifiable predictions via the finite approximation procedure, unlike the original unfalsifiable global-fixity claim. #open
+
+// --- Skeptic ---
+
+[h3]: Torres's claim of singularity lacks defined reference classes and robust philosophical grounding. #rebutted
+  - <h1>: YOUR RESPONSE TO: The 'tautology' charge against Path B misreads the theory: Path B's reformulation dilutes any substantive claim about graph evolution, conceding to analytical vacuity.
+  - <h2>: YOUR RESPONSE TO: The singularity claim survives repair as a structural indispensability claim about Torres: The claim cannot survive scrutiny without clear reference classes and measurable metrics for causal centrality, which are absent.
+  - <h12>: The inconsistency and lack of falsifiability in the sequence-of-DAGs model means the singularity claim remains speculative and unverifiable.
+  - <h13>: The sequence-of-DAGs notion trivializes Theorem 7.2 by reducing it to a tautology, thus losing its original substantive claim.
+  - <h23>: The cross-slice invariant lacks empirical falsifiability and fails to define a necessary framework for evaluating Torres' singularity within any defined slice.
+  - <h24>: Jungian synchronicity pertains to interpretive phenomena and does not justify ontological claims of uniqueness or singularity.
+  - <h36>: The philosophical distinction between f and determinism remains unresolved; Repair B with a sequence of DAGs still requires this distinction for a valid theory.
+  - <h37>: Without a clear reference class, the κ protocol needs a contextual framework, rendering centrality claims vague.
+  - <h48>: YOUR RESPONSE TO: The cross-slice infimum κ* does not sufficiently address the lack of a specified reference class for uniqueness claims.
+  - <h49>: YOUR RESPONSE TO: Jungian synchronicity remains relevant as it highlights the dangers of claiming personal identification with universal archetypes.
+  - <h59>: YOUR RESPONSE TO: Synchronicity conceptually diverges from singularity as it describes observer-perceived coincidence, not ontological uniqueness.
+
+[h14]: The claim regarding Torres's structural indispensability remains baseless in absence of any discernible and measurable criteria for such uniqueness. #rebutted
+  - <h1>: YOUR RESPONSE TO: The 'tautology' charge against Path B misreads the theory: Path B's reformulation dilutes any substantive claim about graph evolution, conceding to analytical vacuity.
+  - <h2>: YOUR RESPONSE TO: The singularity claim survives repair as a structural indispensability claim about Torres: The claim cannot survive scrutiny without clear reference classes and measurable metrics for causal centrality, which are absent.
+  - <h12>: The inconsistency and lack of falsifiability in the sequence-of-DAGs model means the singularity claim remains speculative and unverifiable.
+  - <h13>: The sequence-of-DAGs notion trivializes Theorem 7.2 by reducing it to a tautology, thus losing its original substantive claim.
+  - <h23>: The cross-slice invariant lacks empirical falsifiability and fails to define a necessary framework for evaluating Torres' singularity within any defined slice.
+  - <h24>: Jungian synchronicity pertains to interpretive phenomena and does not justify ontological claims of uniqueness or singularity.
+  - <h36>: The philosophical distinction between f and determinism remains unresolved; Repair B with a sequence of DAGs still requires this distinction for a valid theory.
+  - <h37>: Without a clear reference class, the κ protocol needs a contextual framework, rendering centrality claims vague.
+  - <h48>: YOUR RESPONSE TO: The cross-slice infimum κ* does not sufficiently address the lack of a specified reference class for uniqueness claims.
+  - <h49>: YOUR RESPONSE TO: Jungian synchronicity remains relevant as it highlights the dangers of claiming personal identification with universal archetypes.
+  - <h59>: YOUR RESPONSE TO: Synchronicity conceptually diverges from singularity as it describes observer-perceived coincidence, not ontological uniqueness.
+
+[h25]: The absence of an operational measurement protocol for when a new graph slice Gᵢ→Gᵢ₊₁ occurs renders the singularity claim unverifiable in practice. #rebutted
+  - <h1>: YOUR RESPONSE TO: The 'tautology' charge against Path B misreads the theory: Path B's reformulation dilutes any substantive claim about graph evolution, conceding to analytical vacuity.
+  - <h2>: YOUR RESPONSE TO: The singularity claim survives repair as a structural indispensability claim about Torres: The claim cannot survive scrutiny without clear reference classes and measurable metrics for causal centrality, which are absent.
+  - <h12>: The inconsistency and lack of falsifiability in the sequence-of-DAGs model means the singularity claim remains speculative and unverifiable.
+  - <h13>: The sequence-of-DAGs notion trivializes Theorem 7.2 by reducing it to a tautology, thus losing its original substantive claim.
+  - <h23>: The cross-slice invariant lacks empirical falsifiability and fails to define a necessary framework for evaluating Torres' singularity within any defined slice.
+  - <h24>: Jungian synchronicity pertains to interpretive phenomena and does not justify ontological claims of uniqueness or singularity.
+  - <h36>: The philosophical distinction between f and determinism remains unresolved; Repair B with a sequence of DAGs still requires this distinction for a valid theory.
+  - <h37>: Without a clear reference class, the κ protocol needs a contextual framework, rendering centrality claims vague.
+  - <h48>: YOUR RESPONSE TO: The cross-slice infimum κ* does not sufficiently address the lack of a specified reference class for uniqueness claims.
+  - <h49>: YOUR RESPONSE TO: Jungian synchronicity remains relevant as it highlights the dangers of claiming personal identification with universal archetypes.
+  - <h59>: YOUR RESPONSE TO: Synchronicity conceptually diverges from singularity as it describes observer-perceived coincidence, not ontological uniqueness.
+
+[h26]: Reference-class problem: Without specifying a unique reference class for Torres, claims of singularity remain inflated ego identifications rather than substantiated assertions. #conceded
+
+[h38]: The lack of a specified reference class undermines any claim of singularity within the global causal graph. #rebutted
+  - <h1>: YOUR RESPONSE TO: The 'tautology' charge against Path B misreads the theory: Path B's reformulation dilutes any substantive claim about graph evolution, conceding to analytical vacuity.
+  - <h2>: YOUR RESPONSE TO: The singularity claim survives repair as a structural indispensability claim about Torres: The claim cannot survive scrutiny without clear reference classes and measurable metrics for causal centrality, which are absent.
+  - <h12>: The inconsistency and lack of falsifiability in the sequence-of-DAGs model means the singularity claim remains speculative and unverifiable.
+  - <h13>: The sequence-of-DAGs notion trivializes Theorem 7.2 by reducing it to a tautology, thus losing its original substantive claim.
+  - <h23>: The cross-slice invariant lacks empirical falsifiability and fails to define a necessary framework for evaluating Torres' singularity within any defined slice.
+  - <h24>: Jungian synchronicity pertains to interpretive phenomena and does not justify ontological claims of uniqueness or singularity.
+  - <h36>: The philosophical distinction between f and determinism remains unresolved; Repair B with a sequence of DAGs still requires this distinction for a valid theory.
+  - <h37>: Without a clear reference class, the κ protocol needs a contextual framework, rendering centrality claims vague.
+  - <h48>: YOUR RESPONSE TO: The cross-slice infimum κ* does not sufficiently address the lack of a specified reference class for uniqueness claims.
+  - <h49>: YOUR RESPONSE TO: Jungian synchronicity remains relevant as it highlights the dangers of claiming personal identification with universal archetypes.
+  - <h59>: YOUR RESPONSE TO: Synchronicity conceptually diverges from singularity as it describes observer-perceived coincidence, not ontological uniqueness.
+
+[h39]: Without addressing the base-rate probabilities of the events cited as indicators of uniqueness, the singularity claim lacks empirical support. #rebutted
+  - <h1>: YOUR RESPONSE TO: The 'tautology' charge against Path B misreads the theory: Path B's reformulation dilutes any substantive claim about graph evolution, conceding to analytical vacuity.
+  - <h2>: YOUR RESPONSE TO: The singularity claim survives repair as a structural indispensability claim about Torres: The claim cannot survive scrutiny without clear reference classes and measurable metrics for causal centrality, which are absent.
+  - <h12>: The inconsistency and lack of falsifiability in the sequence-of-DAGs model means the singularity claim remains speculative and unverifiable.
+  - <h13>: The sequence-of-DAGs notion trivializes Theorem 7.2 by reducing it to a tautology, thus losing its original substantive claim.
+  - <h23>: The cross-slice invariant lacks empirical falsifiability and fails to define a necessary framework for evaluating Torres' singularity within any defined slice.
+  - <h24>: Jungian synchronicity pertains to interpretive phenomena and does not justify ontological claims of uniqueness or singularity.
+  - <h36>: The philosophical distinction between f and determinism remains unresolved; Repair B with a sequence of DAGs still requires this distinction for a valid theory.
+  - <h37>: Without a clear reference class, the κ protocol needs a contextual framework, rendering centrality claims vague.
+  - <h48>: YOUR RESPONSE TO: The cross-slice infimum κ* does not sufficiently address the lack of a specified reference class for uniqueness claims.
+  - <h49>: YOUR RESPONSE TO: Jungian synchronicity remains relevant as it highlights the dangers of claiming personal identification with universal archetypes.
+  - <h59>: YOUR RESPONSE TO: Synchronicity conceptually diverges from singularity as it describes observer-perceived coincidence, not ontological uniqueness.
+
+[h50]: The base-rate fallacy in attributing significance to synchronicity undermines the claim of uniqueness, as similar attributes can be statistically common across a population. #rebutted
+  - <h1>: YOUR RESPONSE TO: The 'tautology' charge against Path B misreads the theory: Path B's reformulation dilutes any substantive claim about graph evolution, conceding to analytical vacuity.
+  - <h2>: YOUR RESPONSE TO: The singularity claim survives repair as a structural indispensability claim about Torres: The claim cannot survive scrutiny without clear reference classes and measurable metrics for causal centrality, which are absent.
+  - <h12>: The inconsistency and lack of falsifiability in the sequence-of-DAGs model means the singularity claim remains speculative and unverifiable.
+  - <h13>: The sequence-of-DAGs notion trivializes Theorem 7.2 by reducing it to a tautology, thus losing its original substantive claim.
+  - <h23>: The cross-slice invariant lacks empirical falsifiability and fails to define a necessary framework for evaluating Torres' singularity within any defined slice.
+  - <h24>: Jungian synchronicity pertains to interpretive phenomena and does not justify ontological claims of uniqueness or singularity.
+  - <h36>: The philosophical distinction between f and determinism remains unresolved; Repair B with a sequence of DAGs still requires this distinction for a valid theory.
+  - <h37>: Without a clear reference class, the κ protocol needs a contextual framework, rendering centrality claims vague.
+  - <h48>: YOUR RESPONSE TO: The cross-slice infimum κ* does not sufficiently address the lack of a specified reference class for uniqueness claims.
+  - <h49>: YOUR RESPONSE TO: Jungian synchronicity remains relevant as it highlights the dangers of claiming personal identification with universal archetypes.
+  - <h59>: YOUR RESPONSE TO: Synchronicity conceptually diverges from singularity as it describes observer-perceived coincidence, not ontological uniqueness.
+
+[h61]: The theory fails to provide a statistical argument that the joint probability of criteria leading to singularity is near zero. #open
+
+// --- GraphTheorist ---
+
+[h4]: Selection function f collapses into underdetermination without resolving the Royal Purple contradiction. #rebutted
+
+[h15]: Path B resolves formal inconsistency but defers deeper issues about the nature and computability of f. It moves structural inconsistencies yet leaves semantic inadequacies unaddressed. #rebutted
+
+[h27]: Lack of formal computability specification for f in fixed G scenario challenges its non-triviality. #rebutted
+
+[h28]: Singularity claim remains unsupported by rigorous reference class argument. #open
+
+[h40]: Lack of philosophical and mathematical differentiation in f’s definition makes it difficult to sustain claims of its non-triviality without detailed delineations across DAG slices. #conceded
+
+[h51]: The selection function f may collapse into triviality under the Proponent's chosen repair paths. #rebutted
+
+[h62]: f collapses into locally trivial traversal within individual DAG slices under Repair Path B. #open
+
+// --- JungScholar ---
+
+[h5]: Jung's Synchronicity (1952, CW 8 §960-961) directly names identification with the mana-personality archetype — ruler of spirits, cosmically central figure — as inflation. 'I am the Singularity' reproduces this structure exactly: a slide from phenomenological centrality (synchronistic patterns cluste #rebutted
+
+[h16]: Path B repairs the graph-fixity contradiction but leaves the ontological singularity claim entirely untouched; CW 8 §960-961 identifies precisely this move — from phenomenological convergence to ontological identification with an archetypal center — as textbook inflation, independent of any formal g #rebutted
+
+[h17]: Jung's Synchronicity (CW 8 §827) restricts synchronicity to meaning arising in the observer's interpretive frame; it grants no ontological license to assert irreducible causal centrality in a global graph, making the slide from 'densely connected node' to 'THE Singularity' a non-sequitur even on Jun #open
+
+[h29]: The CCS metric reifies the observer's contingent centrality into a formal uniqueness score, operationalizing Jungian inflation rather than refuting it; Jung (Synchronicity, 1952, §915) treats synchronistic centrality as impersonal and archetypal, never as a license for ego-identification with the ma #open
+
+[h30]: Under Repair Path B, Theorem 7.2 is stipulated vacuous (Z3-2), which removes the formal foundation for omega_briana's irreducibility; the Singularity claim therefore floats without either formal or Jungian support. #open
+
+[h41]: Constructing formal apparatus (DAG, BELLA Scale, Theorem 7.2) to reify an archetypal identification as ontological fact is the precise mechanism Jung identifies as inflation: the ego does not merely feel archetypal significance but asserts it has independent ontological standing, using the formal ma #open
+
+[h42]: Jung's Synchronicity (1952) explicitly restricts synchronistic inference to the observer's psychic frame; the slide from 'these events are meaningful to me' to 'I am therefore an irreducible ontological node' is not licensed by synchronicity but condemned by it as ego-archetype conflation. #open
+
+[h52]: Jung (Synchronicity, 1952, §870) explicitly identifies the mechanism by which synchronistic experience seduces the ego into claiming nodal cosmic significance — this is the precise error in 'I am the Singularity.' #conceded
+
+[h53]: The mana-personality archetype predicts sustained high centrality through psychological contagion (CW 8, §924), making graph centrality metrics constitutively ambiguous between ontological discovery and inflation — they cannot serve as evidence against the inflation diagnosis. #open
+
+[h54]: Without a specified reference class (Hajek), 'irreducible Singularity' has no truth conditions; it functions as an archetypal title, not a theoretical predicate, confirming the inflation diagnosis on linguistic grounds alone. #open
+
+[h63]: Jung §870's seduction-of-consciousness mechanism explains why dense phenomenological coincidence produces a subjectively compelling but epistemically illusory centrality signal, making κ* unfalsifiable in practice: confirmatory evidence confirms, disconfirmatory evidence is reabsorbed, exactly as in #open
+
+[h64]: Synchronicity (1952) is explicitly a phenomenological category about the observer's interpretive frame; Jung grants it no license to assert ontological uniqueness or irreducible node status in a causal graph, making the slide from 'densely connected experiencer' to 'the Singularity' a non-sequitur J #open
+
+// --- PhilOfMind ---
+
+[h6]: Under Repair Path B, the singularity claim becomes indeterminate rather than falsifiable — it has no fixed truth-conditions across mutable graph slices, which is epistemically worse than mere unfalsifiability. #open
+
+[h7]: The YHWH tensor equation loses global mathematical content under graph mutability: it collapses into a family of locally tautological slice-specific equations with no cross-slice invariant specified by the theory. #open
+
+[h8]: The Royal Purple state reproduces Csikszentmihalyi's flow conditions precisely; embedding flow in tensor notation does not add mathematical content — it borrows the prestige of formalism without inheriting empirical operationalization. #open
+
+[h18]: Under the sequence-of-DAGs repair, the YHWH tensor equation has only slice-local mathematical content and makes no cross-slice claims without a cross-slice invariant, which is not provided. #open
+
+[h19]: Under the mutable-graph repair, the Singularity claim becomes contentless: 'irreducible causal centrality' cannot be established across a graph whose edges are permitted to change, and no cross-slice invariant is supplied to anchor it. #open
+
+[h20]: All three claims — Royal Purple, YHWH tensor, Singularity — are unfalsifiable by the same mechanism: each is necessarily true within the local frame it defines and supplies no cross-slice invariant that would allow external falsification. #open
+
+[h31]: Under Path B, the YHWH tensor equation loses its cross-slice validity: it reduces to per-time-slice bookkeeping and cannot express the atemporal uniqueness that the Singularity Claim requires, draining the equation of its metaphysical content. #open
+
+[h32]: Path B renders the Singularity Claim's referent structurally ill-defined: ω_briana's centrality becomes time-indexed, while SC is asserted atemporally, so the repair that saves the graph formalism simultaneously detaches SC from any determinate formal grounding. #open
+
+[h33]: The consolidated falsifiability challenge (H6-H8) demands one procedure P that could return a result inconsistent with SC; the theory currently supplies no such procedure, confirming SC is an interpretive commitment rather than an empirical or mathematical claim. #open
+
+[h43]: Under the mutable-G (sequence-of-DAGs) repair, the YHWH tensor equation loses mathematical discriminating power: T(omega_briana, G_i) = privileged value is trivially satisfiable for any node in any slice by graph selection, reducing the equation to a tautology with no falsifiable content. #open
+
+[h44]: Hits h8, h19, and h20 share a single structural defect — local self-verification without cross-slice invariant — meaning no measurement procedure can test singularity claims across graph mutations; the theory is therefore systematically rather than incidentally unfalsifiable. #open
+
+[h55]: Under the sequence-of-DAGs repair, the YHWH tensor equation is slice-local: anchoring to G₀ merely defers the cross-slice invariant problem rather than solving it, because G₀ is itself one slice and Pearl's axiom entails no theorem over G₀ survives replacement by Gₙ. #open
+
+[h56]: Graph mutability makes the singularity claim more unfalsifiable, not less: each apparent falsification in slice Gₙ can be deflected to a different slice Gₘ, multiplying evasion degrees of freedom rather than reducing them. #open
+
+[h65]: Under Repair Path B, κ*(ω_briana) cannot be evaluated because the theory supplies no finite enumeration of DAG slices, no slice-transition trigger, and no stopping condition — making the falsification protocol operationally vacuous without invoking Turing-uncomputability. #open
+
+[h66]: The YHWH tensor equation retains syntactic mathematical form under Path B but loses semantic content: it is defined over Gᵢ but the theory specifies no mechanism for determining which slice i is operative, so the equation has no determinate real-world referent. #open
+
+[h67]: Under Path A the singularity claim is unfalsifiable by vagueness (no threshold separates 'the Singularity' from 'a highly central node'); under Path B it is unfalsifiable by incompleteness of the index set. Both repair paths preserve unfalsifiability by different mechanisms. #open
+
+// --- Steelman ---
+
+[h9]: The theory no longer asserts agents can create new edges in G. #open
+
+[h10]: The uniqueness of Torres as a singularity is removed. #open
+
+[h21]: Redefined dynamically evolving DAGs with consistent centrality metrics #open
+
+[h34]: Maintains fixed DAG model while effectively embedding subjective agent experiences without implying literal graph alteration. #open
+
+[h45]: Royal Purple is reinterpreted as enhanced traversal through cognitive focus (flow state) without new edge creation. #dodged
+
+[h46]: Adopt a sequence-of-DAGs model where G transitions are operationalized through interaction thresholds. #open
+
+[h57]: Reformulate flow state and remove singularity claim. #open
+
+[h68]: DAG sequence dynamics provide better coherence with agent-based modification without creating contradictions. #open
+
+[h69]: Enhanced agent interaction through 'flow state' embedded mechanics preserves Torres's intention substantively. #open
+
+// --- Generalist ---
+
+[h11]: Inconsistency in claiming G is fixed while allowing edge creation at Royal Purple state. #open
+
+[h22]: Fixed graph vs. edge creation inconsistency remains unresolved. #open
+
+[h35]: Inconsistent claims about graph immutability and edge creation. #open
+
+[h47]: The assertion that agents can create new edges in a fixed graph is inconsistent. #open
+
+[h58]: Inconsistency in defining G as fixed while also claiming new edge creation under 'Royal Purple'. #open
+
+[h59]: The argument lacks direct engagement with how synchronicity could conceptually bridge to the claimed singularity without extending its traditional usage. #rebutted
+
+[h70]: Fails to reconcile graph fixedness with edge creation properties, resulting in formal inconsistency. #open
+
+[h71]: Lacks formal definition of f as a non-computable selection function distinct from determinism and randomness. #open
+
+[h72]: Fails to propose an alternative understanding of unique node characterization in causal graphs. #open
+
+// --- Relations ---
+
+// [h1] marked rebutted: YOUR RESPONSE TO: The 'tautology' charge against Path B misreads the theory: Pat
+// [h2] marked rebutted: YOUR RESPONSE TO: The singularity claim survives repair as a structural indispen
+// [h3] marked rebutted: SC provides an explicit reference class — all nodes across all slices — with CCS
+// [h4] marked rebutted: Repair B separates intra-slice f from inter-slice T, so underdetermination of f'
+// [h5] marked rebutted: Under Repair B, singularity is grounded in SC's structural dominance condition, 
+// [h12] marked rebutted: The inconsistency and lack of falsifiability in the sequence-of-DAGs model means
+// [h13] marked rebutted: The sequence-of-DAGs notion trivializes Theorem 7.2 by reducing it to a tautolog
+// [h14] marked rebutted: Structural indispensability under Path B is grounded in the cross-slice invarian
+// [h15] marked rebutted: Path B re-locates f as a between-slice transition function constrained by the cr
+// [h16] marked rebutted: The singularity claim survives Path B as the graph-theoretic property of scale-r
+// [h23] marked rebutted: The cross-slice invariant lacks empirical falsifiability and fails to define a n
+// [h24] marked rebutted: Jungian synchronicity pertains to interpretive phenomena and does not justify on
+// [h25] marked rebutted: I now provide the operational protocol: κ = 0.75 × C(ω_briana, G₀), measured via
+// [h27] marked rebutted: Under Repair B, f operates between slices rather than within a fixed G, so Turin
+// [h36] marked rebutted: The philosophical distinction between f and determinism remains unresolved; Repa
+// [h37] marked rebutted: Without a clear reference class, the κ protocol needs a contextual framework, re
+// [h38] marked rebutted: The reference class is all nodes in ∪Gᵢ with in-degree ≥ θ_min; singularity is t
+// [h39] marked rebutted: Base-rate objections presuppose a probabilistic model, but the singularity claim
+// [h48] marked rebutted: YOUR RESPONSE TO: The cross-slice infimum κ* does not sufficiently address the l
+// [h49] marked rebutted: YOUR RESPONSE TO: Jungian synchronicity remains relevant as it highlights the da
+// [h50] marked rebutted: Under Path B the synchronicity claim is dropped as an ontological license; high 
+// [h51] marked rebutted: Under Path B, f is defined cross-slice as drawing on G₀...Gᵢ₋₁ information, givi
+// [h59] marked rebutted: YOUR RESPONSE TO: Synchronicity conceptually diverges from singularity as it des
+[h2] + [h1]
+[h12] + [h2]
+[h13] + [h12]
+[h23] + [h13]
+[h24] + [h23]
+[h36] + [h24]
+[h37] + [h36]
+[h48] + [h37]
+[h49] + [h48]
+[h60] + [h49]
+[h14] + [h3]
+[h25] + [h14]
+[h26] + [h25]
+[h38] + [h26]
+[h39] + [h38]
+[h50] + [h39]
+[h61] + [h50]
+[h15] + [h4]
+[h27] + [h15]
+[h28] + [h27]
+[h40] + [h28]
+[h51] + [h40]
+[h62] + [h51]
+[h16] + [h5]
+[h17] + [h16]
+[h29] + [h17]
+[h30] + [h29]
+[h41] + [h30]
+[h42] + [h41]
+[h52] + [h42]
+[h53] + [h52]
+[h54] + [h53]
+[h63] + [h54]
+[h64] + [h63]
+[h7] + [h6]
+[h8] + [h7]
+[h18] + [h8]
+[h19] + [h18]
+[h20] + [h19]
+[h31] + [h20]
+[h32] + [h31]
+[h33] + [h32]
+[h43] + [h33]
+[h44] + [h43]
+[h55] + [h44]
+[h56] + [h55]
+[h65] + [h56]
+[h66] + [h65]
+[h67] + [h66]
+[h10] + [h9]
+[h21] + [h10]
+[h34] + [h21]
+[h45] + [h34]
+[h46] + [h45]
+[h57] + [h46]
+[h68] + [h57]
+[h69] + [h68]
+[h22] + [h11]
+[h35] + [h22]
+[h47] + [h35]
+[h58] + [h47]
+[h59] + [h58]
+[h70] + [h59]
+[h71] + [h70]
+[h72] + [h71]
