@@ -179,12 +179,12 @@ class DebateEngine:
         new_validity_log: List[dict] = []
         cur_state = dict(state)
 
-        for agent_name, agent in self.agents.items():
+        for agent_idx, (agent_name, agent) in enumerate(self.agents.items()):
             # Z3 stipulation only for non-standard topologies
             z3_stip = self._z3_stipulation if self.config.topology != "standard" else ""
 
-            # Build context
-            user_prompt = self.ctx_builder.build(agent_name, cur_state, z3_stip)  # type: ignore[arg-type]
+            # Build context (agent_index rotates which open hits are shown)
+            user_prompt = self.ctx_builder.build(agent_name, cur_state, z3_stip, agent_index=agent_idx)  # type: ignore[arg-type]
 
             # Render system prompt via Jinja2
             system_prompt = self.ctx_builder.render_system_prompt(
