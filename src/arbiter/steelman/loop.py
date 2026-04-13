@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-import json
 import logging
-import re
 from typing import TYPE_CHECKING
+
+from arbiter.schemas import StabilizationResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
@@ -75,37 +75,21 @@ def _stabilized(
     version_b: str,
 ) -> tuple[bool, str]:
     user_msg = (
-        "Compare these two rescue versions of a theory. Return JSON "
-        '{"stabilized": bool, "reason": "..."}. Set stabilized=true only if '
-        "the load-bearing claims are unchanged and the differences are "
-        "stylistic only.\n\n"
+        "Compare these two rescue versions of a theory. "
+        "Set stabilized=true only if the load-bearing claims are unchanged "
+        "and the differences are stylistic only.\n\n"
         f"VERSION A:\n{version_a}\n\nVERSION B:\n{version_b}"
     )
-    raw = provider.call(
-        system=_STABILIZATION_SYSTEM, user=user_msg, max_tokens=2_000
-    )
-    # Strip markdown code fences if present
-    text = raw.strip()
-    if text.startswith("```"):
-        text = text.strip("`")
-        if text.startswith("json"):
-            text = text[4:]
-        text = text.strip()
     try:
-        data = json.loads(text)
+        data = provider.call_structured(
+            system=_STABILIZATION_SYSTEM,
+            user=user_msg,
+            schema=StabilizationResult,
+            max_tokens=2_000,
+        )
         return bool(data.get("stabilized", False)), str(data.get("reason", ""))
-    except (json.JSONDecodeError, ValueError):
-        # Try to find JSON object in the response
-        m = re.search(r"\{.*\}", text, re.DOTALL)
-        if m:
-            try:
-                data = json.loads(m.group(0))
-                return bool(data.get("stabilized", False)), str(
-                    data.get("reason", "")
-                )
-            except (json.JSONDecodeError, ValueError):
-                pass
-        return False, f"could not parse judge output: {text[:200]}"
+    except Exception as exc:
+        return False, f"stabilization check failed: {exc}"
 
 
 # ── Main loop ─────────────────────────────────────────────────────────

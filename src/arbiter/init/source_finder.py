@@ -8,6 +8,8 @@ import textwrap
 from pathlib import Path
 from typing import TYPE_CHECKING
 
+from arbiter.schemas import ClassifyResult, QueryResult, SynthResult
+
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
     from arbiter.retrieval.web_search import WebSearcher
@@ -17,107 +19,6 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # JSON schema for the query-generation step
 # ---------------------------------------------------------------------------
-
-_QUERY_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "queries": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": (
-                            "A web search query targeting a primary "
-                            "source (book, paper, definition)."
-                        ),
-                    },
-                    "rationale": {
-                        "type": "string",
-                        "description": (
-                            "Why this source matters for the debate."
-                        ),
-                    },
-                    "filename": {
-                        "type": "string",
-                        "description": (
-                            "Suggested filename (snake_case, no extension)."
-                        ),
-                    },
-                },
-                "required": ["query", "rationale", "filename"],
-            },
-        }
-    },
-    "required": ["queries"],
-}
-
-_SYNTH_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "title": {
-            "type": "string",
-            "description": "Title of the source or topic covered.",
-        },
-        "content": {
-            "type": "string",
-            "description": (
-                "A faithful paraphrase of the key ideas, definitions, "
-                "and arguments from the source.  Do NOT fabricate "
-                "quotes.  Mark any uncertain claims with [UNCERTAIN]."
-            ),
-        },
-        "key_concepts": {
-            "type": "array",
-            "items": {"type": "string"},
-            "description": "List of key terms and concepts covered.",
-        },
-    },
-    "required": ["title", "content", "key_concepts"],
-}
-
-_CLASSIFY_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "classifications": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "path": {
-                        "type": "string",
-                        "description": "File path of the source.",
-                    },
-                    "category": {
-                        "type": "string",
-                        "enum": [
-                            "counter_evidence",
-                            "supports_theory",
-                            "neutral_reference",
-                        ],
-                        "description": (
-                            "How this source relates to the theory: "
-                            "'counter_evidence' = provides arguments or "
-                            "data against the theory, "
-                            "'supports_theory' = provides arguments or "
-                            "data supporting the theory, "
-                            "'neutral_reference' = relevant background "
-                            "that doesn't clearly support either side."
-                        ),
-                    },
-                    "reason": {
-                        "type": "string",
-                        "description": "Brief reason for classification.",
-                    },
-                },
-                "required": ["path", "category", "reason"],
-            },
-        }
-    },
-    "required": ["classifications"],
-}
-
 
 # ---------------------------------------------------------------------------
 # Public API
@@ -287,7 +188,7 @@ def classify_sources(
         response = provider.call_structured(
             system=system,
             user=user,
-            schema=_CLASSIFY_SCHEMA,
+            schema=ClassifyResult,
             max_tokens=2000,
         )
         for entry in response.get("classifications", []):
@@ -370,7 +271,7 @@ def _generate_queries(
     result = provider.call_structured(
         system=system,
         user=user,
-        schema=_QUERY_SCHEMA,
+        schema=QueryResult,
         max_tokens=2000,
     )
 
@@ -485,7 +386,7 @@ def _synthesize_from_llm(
     result = provider.call_structured(
         system=system,
         user=user,
-        schema=_SYNTH_SCHEMA,
+        schema=SynthResult,
         max_tokens=4000,
     )
 

@@ -72,6 +72,8 @@ class TestEntailmentChecker:
         assert checker.check("text") == []
 
     def test_provider_called_with_correct_schema(self):
+        from arbiter.schemas import EntailmentResult
+
         checker, provider = _make_checker()
         provider.call_structured.return_value = {
             "violates": [],
@@ -81,4 +83,4 @@ class TestEntailmentChecker:
         checker.check("test turn text")
         call_args = provider.call_structured.call_args
         assert "TURN TEXT:" in call_args.kwargs["user"]
-        assert call_args.kwargs["schema"]["required"] == ["violates", "reason", "confidence"]
+        assert call_args.kwargs["schema"] is EntailmentResult

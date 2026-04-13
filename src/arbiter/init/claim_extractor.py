@@ -7,6 +7,14 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.schemas import (
+    ContradictionResult,
+    ConsolidationResult,
+    KeyTermsResult,
+    PrivilegedContextResult,
+    SidesResult,
+)
+
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
@@ -34,60 +42,6 @@ def _claims_summary(claims: list[dict]) -> str:
 # ---------------------------------------------------------------------------
 # Contradiction detection
 # ---------------------------------------------------------------------------
-
-_CONTRADICTION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "contradictions": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "claim_a": {
-                        "type": "string",
-                        "description": "ID of the first claim."
-                    },
-                    "claim_b": {
-                        "type": "string",
-                        "description": "ID of the second claim."
-                    },
-                    "contradiction": {
-                        "type": "string",
-                        "description": (
-                            "A clear explanation of how the two claims "
-                            "conflict or create tension."
-                        ),
-                    },
-                    "severity": {
-                        "type": "string",
-                        "enum": ["fatal", "tension", "ambiguity"],
-                        "description": (
-                            "How severe the contradiction is: "
-                            "'fatal' = logically irreconcilable, "
-                            "'tension' = in friction but possibly reconcilable, "
-                            "'ambiguity' = apparent conflict due to vague terms."
-                        ),
-                    },
-                    "z3_encodable": {
-                        "type": "boolean",
-                        "description": (
-                            "True if this contradiction can be encoded as a "
-                            "Z3/SMT check."
-                        ),
-                    },
-                },
-                "required": [
-                    "claim_a",
-                    "claim_b",
-                    "contradiction",
-                    "severity",
-                    "z3_encodable",
-                ],
-            },
-        }
-    },
-    "required": ["contradictions"],
-}
 
 _CONTRADICTION_SYSTEM = textwrap.dedent("""\
     You are an expert logician and critical analyst.  Given a numbered list
@@ -119,7 +73,7 @@ def identify_contradictions(
 ) -> list[dict]:
     """Ask the LLM to find potential internal contradictions among *claims*.
 
-    Returns a list of contradiction dicts (see ``_CONTRADICTION_SCHEMA``).
+    Returns a list of contradiction dicts (see ``ContradictionResult``).
     """
     summary = _claims_summary(claims)
     user_msg = (
@@ -130,7 +84,7 @@ def identify_contradictions(
     result = provider.call_structured(
         system=_CONTRADICTION_SYSTEM,
         user=user_msg,
-        schema=_CONTRADICTION_SCHEMA,
+        schema=ContradictionResult,
         max_tokens=max_tokens,
     )
     return result.get("contradictions", [])
@@ -139,32 +93,6 @@ def identify_contradictions(
 # ---------------------------------------------------------------------------
 # Key-term extraction
 # ---------------------------------------------------------------------------
-
-_KEY_TERMS_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "terms": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "term": {
-                        "type": "string",
-                        "description": "The key term or phrase."
-                    },
-                    "definition": {
-                        "type": "string",
-                        "description": (
-                            "A concise definition as used in the document."
-                        ),
-                    },
-                },
-                "required": ["term", "definition"],
-            },
-        }
-    },
-    "required": ["terms"],
-}
 
 _KEY_TERMS_SYSTEM = textwrap.dedent("""\
     You are a careful reader and lexicographer.  Given a numbered list of
@@ -196,7 +124,7 @@ def identify_key_terms(
     result = provider.call_structured(
         system=_KEY_TERMS_SYSTEM,
         user=user_msg,
-        schema=_KEY_TERMS_SCHEMA,
+        schema=KeyTermsResult,
         max_tokens=max_tokens,
     )
     return {
@@ -208,46 +136,6 @@ def identify_key_terms(
 # ---------------------------------------------------------------------------
 # Suggest debate sides
 # ---------------------------------------------------------------------------
-
-_SIDES_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "proponent_claims": {
-            "type": "array",
-            "items": {"type": "string"},
-            "description": (
-                "Claim IDs the Proponent should defend -- the core "
-                "thesis and its critical supporting claims."
-            ),
-        },
-        "attack_angles": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Short label for the attack angle."
-                    },
-                    "targets": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": "Claim IDs targeted by this angle."
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": (
-                            "Explanation of the critique and why it is "
-                            "worth pursuing."
-                        ),
-                    },
-                },
-                "required": ["name", "targets", "description"],
-            },
-        },
-    },
-    "required": ["proponent_claims", "attack_angles"],
-}
 
 _SIDES_SYSTEM = textwrap.dedent("""\
     You are a debate strategist.  Given a list of claims from a document,
@@ -298,7 +186,7 @@ def suggest_sides(
     result = provider.call_structured(
         system=_SIDES_SYSTEM,
         user=user_msg,
-        schema=_SIDES_SCHEMA,
+        schema=SidesResult,
         max_tokens=max_tokens,
     )
     return {
@@ -310,65 +198,6 @@ def suggest_sides(
 # ---------------------------------------------------------------------------
 # Claim consolidation -- group granular claims into core theses
 # ---------------------------------------------------------------------------
-
-_CONSOLIDATION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "theses": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Thesis ID like T1, T2, ...",
-                    },
-                    "thesis": {
-                        "type": "string",
-                        "description": (
-                            "A concise statement of the core thesis "
-                            "(1-2 sentences)."
-                        ),
-                    },
-                    "sub_claims": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": (
-                            "IDs of original claims grouped under this thesis."
-                        ),
-                    },
-                    "category": {
-                        "type": "string",
-                        "description": (
-                            "Dominant category: structural, empirical, "
-                            "ontological, epistemological, normative, etc."
-                        ),
-                    },
-                    "key_notation": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": (
-                            "Key terms, symbols, or notation used "
-                            "in this thesis cluster."
-                        ),
-                    },
-                    "quote": {
-                        "type": "string",
-                        "description": (
-                            "Best supporting quote or paraphrase from "
-                            "the original claims."
-                        ),
-                    },
-                },
-                "required": [
-                    "id", "thesis", "sub_claims", "category",
-                    "key_notation", "quote",
-                ],
-            },
-        }
-    },
-    "required": ["theses"],
-}
 
 _CONSOLIDATION_SYSTEM = textwrap.dedent("""\
     You are an expert at synthesising complex arguments.  Given a large set
@@ -426,7 +255,7 @@ def consolidate_claims(
         result = provider.call_structured(
             system=_CONSOLIDATION_SYSTEM,
             user=user_msg,
-            schema=_CONSOLIDATION_SCHEMA,
+            schema=ConsolidationResult,
             max_tokens=max_tokens,
         )
         theses = result.get("theses", [])
@@ -484,24 +313,6 @@ _PRIVILEGED_CONTEXT_SYSTEM = textwrap.dedent("""\
     each containing a multi-paragraph text block.
 """)
 
-_PRIVILEGED_CONTEXT_RESPONSE_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "skeptic": {
-            "type": "string",
-            "description": "Privileged context for Skeptic agents.",
-        },
-        "proponent": {
-            "type": "string",
-            "description": "Privileged context for Proponent agents.",
-        },
-        "neutral": {
-            "type": "string",
-            "description": "Privileged context for Neutral agents.",
-        },
-    },
-    "required": ["skeptic", "proponent", "neutral"],
-}
 
 
 def build_privileged_context(
@@ -603,7 +414,7 @@ def build_privileged_context(
         result = provider.call_structured(
             system=_PRIVILEGED_CONTEXT_SYSTEM,
             user=user_msg,
-            schema=_PRIVILEGED_CONTEXT_RESPONSE_SCHEMA,
+            schema=PrivilegedContextResult,
             max_tokens=6000,
         )
         return {

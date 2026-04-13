@@ -26,61 +26,13 @@ from arbiter.gate.llm_checker import LLMChecker
 from arbiter.gate.pattern_checker import PatternChecker
 from arbiter.gate.shift_checker import ShiftChecker
 from arbiter.gate.z3_checker import Z3Checker
+from arbiter.schemas import ClaimExtractionResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
 
-# ── Claim-extraction schema (structural, not topic-specific) ─────────
-
-CLAIM_SCHEMA = {
-    "type": "object",
-    "additionalProperties": False,
-    "properties": {
-        "formal_claims": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "additionalProperties": False,
-                "properties": {
-                    "claim": {"type": "string"},
-                    "category": {
-                        "type": "string",
-                        "enum": [
-                            "structural",
-                            "logical",
-                            "definitional",
-                            "computability",
-                            "other",
-                        ],
-                    },
-                },
-                "required": ["claim", "category"],
-            },
-        },
-        "definitional_shifts": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "additionalProperties": False,
-                "properties": {
-                    "term": {"type": "string"},
-                    "prior_definition": {"type": "string"},
-                    "new_definition": {"type": "string"},
-                    "flagged_explicitly": {"type": "boolean"},
-                },
-                "required": [
-                    "term",
-                    "prior_definition",
-                    "new_definition",
-                    "flagged_explicitly",
-                ],
-            },
-        },
-    },
-    "required": ["formal_claims", "definitional_shifts"],
-}
 
 
 def _build_extractor_system(seed_terms: dict[str, str]) -> str:
@@ -125,7 +77,7 @@ def extract_formal_claims(
     system = _build_extractor_system(seed_terms or {})
     try:
         return provider.call_structured(
-            system=system, user=user, schema=CLAIM_SCHEMA, max_tokens=6000,
+            system=system, user=user, schema=ClaimExtractionResult, max_tokens=6000,
         )
     except Exception as exc:
         logger.warning("Claim extraction failed (fail-open): %s", exc)

@@ -50,30 +50,24 @@ class OllamaProvider(BaseProvider):
             f"```json\n{json.dumps(schema, indent=2)}\n```\n"
             "Output ONLY the JSON object, no other text."
         )
-        raw = self._call_impl(augmented_system, user, max_tokens)
+        resp = self._client.chat(
+            model=self.model,
+            messages=[
+                {"role": "system", "content": augmented_system},
+                {"role": "user", "content": user},
+            ],
+            options={"num_predict": max_tokens},
+            format="json",
+        )
+        raw = (resp.message.content or "").strip()
 
-        # Try to parse JSON
         try:
             return json.loads(raw)
         except json.JSONDecodeError:
-            pass
-
-        # Try extracting from fenced block
-        m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", raw, re.DOTALL)
-        if m:
-            try:
-                return json.loads(m.group(1))
-            except json.JSONDecodeError:
-                pass
-
-        # Try raw braces
-        m = re.search(r"\{.*\}", raw, re.DOTALL)
-        if m:
-            try:
+            # Local models may still wrap JSON in markdown; strip fences
+            m = re.search(r"\{.*\}", raw, re.DOTALL)
+            if m:
                 return json.loads(m.group(0))
-            except json.JSONDecodeError:
-                pass
-
-        raise ValueError(
-            f"Ollama response could not be parsed as JSON. Raw response:\n{raw[:500]}"
-        )
+            raise ValueError(
+                f"Ollama returned unparseable JSON. Raw:\n{raw[:500]}"
+            )

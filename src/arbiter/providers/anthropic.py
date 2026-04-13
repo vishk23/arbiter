@@ -2,10 +2,8 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import os
-import re
 
 
 
@@ -99,60 +97,14 @@ class AnthropicProvider(BaseProvider):
             if block.type == "tool_use" and block.name == tool_name:
                 return block.input  # already a dict
 
-        # Fallback: if no tool_use block, try text extraction
-        raw = "\n".join(b.text for b in resp.content if b.type == "text").strip()
-        parsed = self._extract_json(raw)
-        if parsed is not None:
-            return parsed
-
+        # No tool_use block — this shouldn't happen with tool_choice forced
+        content_types = [b.type for b in resp.content]
+        logger.error(
+            "Anthropic tool-use returned no tool_use block. Content types: %s",
+            content_types,
+        )
         raise ValueError(
             f"Anthropic tool-use structured output failed. "
-            f"No tool_use block in response. Content types: "
-            f"{[b.type for b in resp.content]}"
+            f"No tool_use block in response. Content types: {content_types}"
         )
-
-    # ── helpers ───────────────────────────────────────────────────────
-
-    @staticmethod
-    def _extract_json(text: str) -> dict | None:
-        """Try to pull a JSON object out of *text*."""
-        # Try fenced code block first
-        m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
-        if m:
-            try:
-                return json.loads(m.group(1))
-            except json.JSONDecodeError:
-                pass
-        # Try raw braces
-        m = re.search(r"\{.*\}", text, re.DOTALL)
-        if m:
-            try:
-                return json.loads(m.group(0))
-            except json.JSONDecodeError:
-                pass
-        return None
-
-    @staticmethod
-    def _extract_json_aggressive(text: str) -> dict | None:
-        """Harder regex attempts: strip markdown, find outermost braces."""
-        # Strip common markdown wrapping
-        cleaned = re.sub(r"^```\w*\n?", "", text.strip(), flags=re.MULTILINE)
-        cleaned = re.sub(r"\n?```\s*$", "", cleaned.strip(), flags=re.MULTILINE)
-
-        # Find the outermost { ... } by tracking brace depth
-        start = cleaned.find("{")
-        if start == -1:
-            return None
-        depth = 0
-        for i in range(start, len(cleaned)):
-            if cleaned[i] == "{":
-                depth += 1
-            elif cleaned[i] == "}":
-                depth -= 1
-                if depth == 0:
-                    try:
-                        return json.loads(cleaned[start : i + 1])
-                    except json.JSONDecodeError:
-                        break
-        return None
 

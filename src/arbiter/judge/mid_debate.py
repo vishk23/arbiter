@@ -2,9 +2,7 @@
 
 from __future__ import annotations
 
-import json
 import logging
-import re
 from typing import TYPE_CHECKING
 
 from arbiter.config import MidDebateConfig
@@ -15,10 +13,15 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 _SYSTEM = (
-    "You are a debate referee. Emit STRICT JSON only: "
-    '{"agent_name": "one-sentence guidance", ...}. '
-    "No prose outside the JSON object."
+    "You are a debate referee. Return JSON mapping each agent name "
+    "to one sentence of guidance for the next round."
 )
+
+# Dynamic keys (agent names) — dict schema, not Pydantic
+_GUIDANCE_SCHEMA: dict = {
+    "type": "object",
+    "additionalProperties": {"type": "string"},
+}
 
 
 class MidDebateJudge:
@@ -68,20 +71,12 @@ class MidDebateJudge:
         )
 
         try:
-            raw = self.provider.call(
+            return self.provider.call_structured(
                 system=_SYSTEM,
                 user=user_prompt,
+                schema=_GUIDANCE_SCHEMA,
                 max_tokens=1500,
             )
         except Exception:
             logger.exception("Mid-debate judge call failed for round %d", round_idx)
             return {}
-
-        # Parse JSON from response (may be wrapped in markdown fences)
-        m = re.search(r"\{.*\}", raw, re.DOTALL)
-        if m:
-            try:
-                return json.loads(m.group(0))
-            except (json.JSONDecodeError, ValueError):
-                logger.warning("Could not parse mid-debate JSON: %s", raw[:300])
-        return {}

@@ -6,6 +6,8 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.schemas import ClaimListResult
+
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
@@ -93,76 +95,6 @@ def _chunk_text(text: str, max_chars: int = _MAX_CHUNK_CHARS) -> list[str]:
 # Claim extraction
 # ---------------------------------------------------------------------------
 
-_CLAIM_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "claims": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Unique claim identifier, e.g. C1, C2, ..."
-                    },
-                    "claim": {
-                        "type": "string",
-                        "description": "A concise statement of the claim."
-                    },
-                    "category": {
-                        "type": "string",
-                        "enum": [
-                            "structural",
-                            "logical",
-                            "empirical",
-                            "definitional",
-                            "autobiographical",
-                        ],
-                        "description": "The kind of claim."
-                    },
-                    "is_formal": {
-                        "type": "boolean",
-                        "description": (
-                            "True if the claim can be checked with formal "
-                            "logic, math, or Z3."
-                        ),
-                    },
-                    "depends_on": {
-                        "type": "array",
-                        "items": {"type": "string"},
-                        "description": (
-                            "IDs of other claims this one depends on."
-                        ),
-                    },
-                    "quote": {
-                        "type": "string",
-                        "description": (
-                            "Exact quote from the source text supporting "
-                            "this claim, or empty string if none."
-                        ),
-                    },
-                    "section": {
-                        "type": "string",
-                        "description": (
-                            "Section heading or page where the claim appears."
-                        ),
-                    },
-                },
-                "required": [
-                    "id",
-                    "claim",
-                    "category",
-                    "is_formal",
-                    "depends_on",
-                    "quote",
-                    "section",
-                ],
-            },
-        }
-    },
-    "required": ["claims"],
-}
-
 _EXTRACTION_SYSTEM = textwrap.dedent("""\
     You are an expert philosophical and scientific analyst.  Your job is to
     extract EVERY distinct claim from the provided document text.
@@ -223,7 +155,7 @@ def extract_claims(
         result = provider.call_structured(
             system=_EXTRACTION_SYSTEM,
             user=user_msg,
-            schema=_CLAIM_SCHEMA,
+            schema=ClaimListResult,
             max_tokens=max_tokens,
         )
         chunk_claims: list[dict] = result.get("claims", [])

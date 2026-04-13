@@ -6,6 +6,8 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.schemas import AgentDesignResult
+
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
@@ -14,49 +16,6 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # JSON schema the LLM must return
 # ---------------------------------------------------------------------------
-
-_DESIGN_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "agents": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": (
-                            "PascalCase agent name, e.g. FormalAnalyst, "
-                            "EpistemicAuditor."
-                        ),
-                    },
-                    "side": {
-                        "type": "string",
-                        "enum": ["Proponent", "Skeptic", "Neutral"],
-                        "description": "Which side this agent argues for.",
-                    },
-                    "specialty": {
-                        "type": "string",
-                        "description": (
-                            "One-line description of the agent's domain "
-                            "expertise."
-                        ),
-                    },
-                    "system_prompt": {
-                        "type": "string",
-                        "description": (
-                            "Full system prompt for this agent.  Must "
-                            "reference specific claim IDs and use the "
-                            "theory's own notation."
-                        ),
-                    },
-                },
-                "required": ["name", "side", "specialty", "system_prompt"],
-            },
-        }
-    },
-    "required": ["agents"],
-}
 
 # ---------------------------------------------------------------------------
 # Fixed core roles (always present)
@@ -378,7 +337,7 @@ def design_agents(
     result = provider.call_structured(
         system=system,
         user=user,
-        schema=_DESIGN_SCHEMA,
+        schema=AgentDesignResult,
         max_tokens=8000,
     )
 

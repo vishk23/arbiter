@@ -5,12 +5,13 @@ from __future__ import annotations
 import json
 import logging
 import os
-import re
-
-
+from typing import TYPE_CHECKING
 
 from arbiter.config import ProviderConfig
 from arbiter.providers.base import BaseProvider
+
+if TYPE_CHECKING:
+    from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 
@@ -83,15 +84,45 @@ class GoogleProvider(BaseProvider):
         )
         text = (resp.text or "").strip()
 
-        # Parse JSON from response
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            # Try extracting from fenced block
-            m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
-            if m:
-                return json.loads(m.group(1))
-            m = re.search(r"\{.*\}", text, re.DOTALL)
-            if m:
-                return json.loads(m.group(0))
-            raise
+        # Parse JSON — response_mime_type guarantees valid JSON
+        return json.loads(text)
+
+    # ── Pydantic-native structured call ──────────────────────────────
+
+    def _call_parsed_impl(
+        self,
+        system: str,
+        user: str,
+        model_class: type[BaseModel],
+        max_tokens: int = 4000,
+    ) -> dict:
+        from google.genai import types as gtypes
+
+        config_kwargs: dict = dict(
+            system_instruction=system,
+            max_output_tokens=max_tokens,
+            response_mime_type="application/json",
+            response_schema=model_class,
+        )
+
+        if self.config.thinking:
+            level = self.config.thinking.get("thinking_level", "HIGH")
+            config_kwargs["thinking_config"] = gtypes.ThinkingConfig(
+                thinking_level=level
+            )
+            config_kwargs["max_output_tokens"] = max_tokens + 4000
+
+        resp = self._client.models.generate_content(
+            model=self.model,
+            contents=user,
+            config=gtypes.GenerateContentConfig(**config_kwargs),
+        )
+
+        # Try native parsed output first
+        parsed = getattr(resp, "parsed", None)
+        if parsed is not None:
+            return parsed.model_dump()
+
+        # Fallback: parse JSON text (response_schema guarantees JSON)
+        text = (resp.text or "").strip()
+        return json.loads(text)

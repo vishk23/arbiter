@@ -5,11 +5,13 @@ from __future__ import annotations
 import json
 import logging
 import os
-
-
+from typing import TYPE_CHECKING
 
 from arbiter.config import ProviderConfig
 from arbiter.providers.base import BaseProvider
+
+if TYPE_CHECKING:
+    from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 
@@ -104,4 +106,34 @@ class OpenAIProvider(BaseProvider):
             kwargs["max_output_tokens"] = max_tokens + 4000
 
         resp = self._client.responses.create(**kwargs)
+        return json.loads(resp.output_text)
+
+    # ── Pydantic-native structured call ──────────────────────────────
+
+    def _call_parsed_impl(
+        self,
+        system: str,
+        user: str,
+        model_class: type[BaseModel],
+        max_tokens: int = 4000,
+    ) -> dict:
+        kwargs: dict = dict(
+            model=self.model,
+            input=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+            max_output_tokens=max_tokens,
+            text_format=model_class,
+        )
+
+        if self.config.reasoning:
+            effort = self.config.reasoning.get("effort", "medium")
+            kwargs["reasoning"] = {"effort": effort}
+            kwargs["max_output_tokens"] = max_tokens + 4000
+
+        resp = self._client.responses.parse(**kwargs)
+        if resp.output_parsed is not None:
+            return resp.output_parsed.model_dump()
+        # Fallback: parse the raw text
         return json.loads(resp.output_text)

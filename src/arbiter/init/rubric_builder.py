@@ -6,6 +6,8 @@ import logging
 import textwrap
 from typing import TYPE_CHECKING
 
+from arbiter.schemas import RubricResult
+
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
@@ -14,48 +16,6 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 # JSON schema the LLM must return
 # ---------------------------------------------------------------------------
-
-_RUBRIC_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "criteria": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "string",
-                        "description": "Short ID like R1, R2, ...",
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": (
-                            "snake_case criterion name, e.g. "
-                            "formal_consistency."
-                        ),
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": (
-                            "One-sentence description specific to this "
-                            "topic -- not generic."
-                        ),
-                    },
-                    "min": {
-                        "type": "integer",
-                        "description": "Minimum score (usually 0).",
-                    },
-                    "max": {
-                        "type": "integer",
-                        "description": "Maximum score (usually 10).",
-                    },
-                },
-                "required": ["id", "name", "description", "min", "max"],
-            },
-        }
-    },
-    "required": ["criteria"],
-}
 
 # ---------------------------------------------------------------------------
 # Mandatory baseline criteria (always present)
@@ -207,7 +167,7 @@ def design_rubric(
     result = provider.call_structured(
         system=system,
         user=user,
-        schema=_RUBRIC_SCHEMA,
+        schema=RubricResult,
         max_tokens=4000,
     )
 

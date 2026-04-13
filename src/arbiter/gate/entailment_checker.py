@@ -6,29 +6,15 @@ import logging
 from typing import TYPE_CHECKING
 
 from arbiter.config import EntailmentCheckConfig
+from arbiter.schemas import EntailmentResult
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
 
-# JSON schema returned by the entailment LLM call.
-ENTAILMENT_SCHEMA = {
-    "type": "object",
-    "additionalProperties": False,
-    "properties": {
-        "violates": {
-            "type": "array",
-            "items": {"type": "string"},
-        },
-        "reason": {"type": "string"},
-        "confidence": {
-            "type": "string",
-            "enum": ["high", "medium", "low"],
-        },
-    },
-    "required": ["violates", "reason", "confidence"],
-}
+# Backward-compat: dict form of the schema for external consumers.
+ENTAILMENT_SCHEMA = EntailmentResult.model_json_schema()
 
 
 class EntailmentChecker:
@@ -62,7 +48,7 @@ class EntailmentChecker:
             result = self.provider.call_structured(
                 system=system,
                 user=user,
-                schema=ENTAILMENT_SCHEMA,
+                schema=EntailmentResult,
                 max_tokens=4000,
             )
         except Exception as exc:

@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import json
 import os
-import re
 
 from arbiter.config import ProviderConfig
 from arbiter.providers.base import BaseProvider
@@ -80,10 +79,4 @@ class DeepSeekProvider(BaseProvider):
             response_format={"type": "json_object"},
         )
         raw = (resp.choices[0].message.content or "").strip()
-        try:
-            return json.loads(raw)
-        except json.JSONDecodeError:
-            m = re.search(r"\{.*\}", raw, re.DOTALL)
-            if m:
-                return json.loads(m.group(0))
-            raise ValueError(f"DeepSeek returned non-JSON: {raw[:200]}")
+        return json.loads(raw)

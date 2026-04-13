@@ -15,6 +15,8 @@ from rich.panel import Panel
 from rich.prompt import Confirm, Prompt
 from rich.table import Table
 
+from arbiter.schemas import TopicResult
+
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
 
@@ -25,27 +27,6 @@ console = Console()
 # ---------------------------------------------------------------------------
 # LLM helper for topic generation (no PDF)
 # ---------------------------------------------------------------------------
-
-_TOPIC_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "name": {"type": "string", "description": "Short name for the topic."},
-        "summary": {
-            "type": "string",
-            "description": (
-                "2-4 paragraph summary of the theory or position, "
-                "including its key claims and structure."
-            ),
-        },
-        "counter_thesis": {
-            "type": "string",
-            "description": (
-                "The strongest opposing position -- what a Skeptic would argue."
-            ),
-        },
-    },
-    "required": ["name", "summary", "counter_thesis"],
-}
 
 _TOPIC_SYSTEM = textwrap.dedent("""\
     You are a research assistant helping set up a structured multi-agent
@@ -63,7 +44,7 @@ def _generate_topic(topic_text: str, provider: "BaseProvider") -> dict:
     result = provider.call_structured(
         system=_TOPIC_SYSTEM,
         user=f"Topic to debate:\n\n{topic_text}",
-        schema=_TOPIC_SCHEMA,
+        schema=TopicResult,
         max_tokens=4000,
     )
     return result

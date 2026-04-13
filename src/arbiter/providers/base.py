@@ -7,6 +7,8 @@ import logging
 import time
 from abc import ABC, abstractmethod
 
+from pydantic import BaseModel
+
 from arbiter.config import ProviderConfig
 
 logger = logging.getLogger(__name__)
@@ -51,16 +53,38 @@ class BaseProvider(ABC):
         return result
 
     def call_structured(
-        self, system: str, user: str, schema: dict, max_tokens: int = 4000
+        self,
+        system: str,
+        user: str,
+        schema: dict | type[BaseModel],
+        max_tokens: int = 4000,
     ) -> dict:
         label = self._provider_label()
         logger.info("Calling %s (%s) [structured]...", label, self.model)
         t0 = time.time()
-        result = self._call_structured_impl(system, user, schema, max_tokens)
+
+        if isinstance(schema, type) and issubclass(schema, BaseModel):
+            result = self._call_parsed_impl(system, user, schema, max_tokens)
+        else:
+            result = self._call_structured_impl(system, user, schema, max_tokens)
+
         elapsed = time.time() - t0
         chars = len(_json.dumps(result))
         logger.info("Response received (%d chars, %.1fs)", chars, elapsed)
         return result
+
+    def _call_parsed_impl(
+        self,
+        system: str,
+        user: str,
+        model_class: type[BaseModel],
+        max_tokens: int = 4000,
+    ) -> dict:
+        """Default: convert Pydantic model to dict schema, call _call_structured_impl, validate."""
+        schema_dict = model_class.model_json_schema()
+        result = self._call_structured_impl(system, user, schema_dict, max_tokens)
+        validated = model_class.model_validate(result)
+        return validated.model_dump()
 
     def call_with_retry(
         self, system: str, user: str, max_tokens: int = 4000

@@ -16,6 +16,7 @@ import textwrap
 from pathlib import Path
 
 from arbiter.providers.base import BaseProvider
+from arbiter.schemas import Z3GenResult
 
 logger = logging.getLogger(__name__)
 
@@ -120,26 +121,6 @@ if __name__ == "__main__":
 # ---------------------------------------------------------------------------
 # JSON schema for the LLM's structured response
 # ---------------------------------------------------------------------------
-_Z3_GEN_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "module_code": {
-            "type": "string",
-            "description": (
-                "Complete Python source code for the Z3 module. "
-                "Must import from z3, define one _check function per contradiction, "
-                "export verify() -> dict, and include an if __name__ == '__main__' block."
-            ),
-        },
-        "check_names": {
-            "type": "array",
-            "items": {"type": "string"},
-            "description": "Human-readable name for each check.",
-        },
-    },
-    "required": ["module_code", "check_names"],
-    "additionalProperties": False,
-}
 
 
 def _build_prompt(contradictions: list[dict], claims: list[dict]) -> tuple[str, str]:
@@ -288,7 +269,7 @@ def generate_z3_module(
     system, user = _build_prompt(contradictions, claims)
     logger.info("Generating Z3 module via LLM...")
 
-    response = provider.call_structured(system, user, _Z3_GEN_SCHEMA, max_tokens=8000)
+    response = provider.call_structured(system, user, Z3GenResult, max_tokens=8000)
     code = response["module_code"]
     check_names = response.get("check_names", [])
 
@@ -321,7 +302,7 @@ def generate_z3_module(
         )
         fix_system, fix_user = _fix_prompt(code, output)
         fix_response = provider.call_structured(
-            fix_system, fix_user, _Z3_GEN_SCHEMA, max_tokens=8000
+            fix_system, fix_user, Z3GenResult, max_tokens=8000
         )
         code = fix_response["module_code"]
         check_names = fix_response.get("check_names", check_names)

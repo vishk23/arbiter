@@ -15,63 +15,14 @@ from __future__ import annotations
 import logging
 from typing import TYPE_CHECKING
 
+from arbiter.schemas import ViolationResult
+
 if TYPE_CHECKING:
     from arbiter.config import GateConfig
     from arbiter.providers.base import BaseProvider
 
 logger = logging.getLogger(__name__)
 
-VIOLATION_SCHEMA = {
-    "type": "object",
-    "additionalProperties": False,
-    "properties": {
-        "violations": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "additionalProperties": False,
-                "properties": {
-                    "rule_id": {
-                        "type": "string",
-                        "description": "ID of the stipulated rule violated.",
-                    },
-                    "violated": {
-                        "type": "boolean",
-                        "description": "True if this rule is violated.",
-                    },
-                    "explanation": {
-                        "type": "string",
-                        "description": "One sentence explaining how the turn violates this rule.",
-                    },
-                    "confidence": {
-                        "type": "string",
-                        "enum": ["high", "medium", "low"],
-                    },
-                },
-                "required": ["rule_id", "violated", "explanation", "confidence"],
-            },
-        },
-        "definitional_shifts": {
-            "type": "array",
-            "description": "ONLY include terms whose meaning ACTUALLY SHIFTED. Do NOT include terms used consistently.",
-            "items": {
-                "type": "object",
-                "additionalProperties": False,
-                "properties": {
-                    "term": {"type": "string"},
-                    "shifted": {
-                        "type": "boolean",
-                        "description": "True ONLY if the term's meaning changed from its seed definition. False if used consistently.",
-                    },
-                    "description": {"type": "string"},
-                    "flagged_explicitly": {"type": "boolean"},
-                },
-                "required": ["term", "shifted", "description", "flagged_explicitly"],
-            },
-        },
-    },
-    "required": ["violations", "definitional_shifts"],
-}
 
 
 def _build_system_prompt(config: "GateConfig") -> str:
@@ -157,7 +108,7 @@ class LLMChecker:
             result = self.provider.call_structured(
                 system=self._system,
                 user=user,
-                schema=VIOLATION_SCHEMA,
+                schema=ViolationResult,
                 max_tokens=4000,
             )
         except Exception as exc:
