@@ -181,8 +181,10 @@ class ValidityGate:
             if self._extraction_provider:
                 extraction_future = pool.submit(
                     extract_formal_claims,
-                    self._extraction_provider, turn_text, known_terms,
-                    self.config.seed_terms,
+                    provider=self._extraction_provider,
+                    text=turn_text,
+                    known_terms=known_terms,
+                    seed_terms=self.config.seed_terms,
                 )
 
             # Collect results

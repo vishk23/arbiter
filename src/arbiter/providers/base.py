@@ -83,8 +83,16 @@ class BaseProvider(ABC):
         """Default: convert Pydantic model to dict schema, call _call_structured_impl, validate."""
         schema_dict = model_class.model_json_schema()
         result = self._call_structured_impl(system, user, schema_dict, max_tokens)
-        validated = model_class.model_validate(result)
-        return validated.model_dump()
+        try:
+            validated = model_class.model_validate(result)
+            return validated.model_dump()
+        except Exception as exc:
+            # LLM omitted a required field — return raw dict with warning
+            logger.warning(
+                "Pydantic validation failed for %s (returning raw dict): %s",
+                model_class.__name__, exc,
+            )
+            return result
 
     def call_with_retry(
         self, system: str, user: str, max_tokens: int = 4000

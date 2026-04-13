@@ -85,10 +85,10 @@ class ExtractedClaim(BaseModel):
     id: str
     claim: str
     category: Literal["structural", "logical", "empirical", "definitional", "autobiographical"]
-    is_formal: bool
-    depends_on: list[str]
-    quote: str
-    section: str
+    is_formal: bool = False
+    depends_on: list[str] = []
+    quote: str = ""
+    section: str = ""
 
 
 class ClaimListResult(BaseModel):
@@ -106,7 +106,7 @@ class ContradictionItem(BaseModel):
     claim_b: str
     contradiction: str
     severity: Literal["fatal", "tension", "ambiguity"]
-    z3_encodable: bool
+    z3_encodable: bool = False
 
 
 class ContradictionResult(BaseModel):
@@ -154,10 +154,10 @@ class ThesisItem(BaseModel):
 
     id: str
     thesis: str
-    sub_claims: list[str]
-    category: str
-    key_notation: list[str]
-    quote: str
+    sub_claims: list[str] = []
+    category: str = ""
+    key_notation: list[str] = []
+    quote: str = ""
 
 
 class ConsolidationResult(BaseModel):

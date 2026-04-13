@@ -841,9 +841,10 @@ def run_init(
                 "max_retries": 6,
             }
 
-    # -- Phase C: gate test generation + self-calibration -----------------------
-    if gate_rules and gate_rules.get("stipulated_rules") and not skip_calibration:
-        console.print("\n[bold blue]Step 4b:[/bold blue] Gate test generation + self-calibration")
+    # -- Phase C: gate test generation + optional self-calibration ---------------
+    if gate_rules and gate_rules.get("stipulated_rules"):
+        console.print("\n[bold blue]Step 4b:[/bold blue] Gate test generation" +
+                      ("" if skip_calibration else " + self-calibration"))
         t0 = time.time()
         try:
             from arbiter.init.gate_builder import (
@@ -852,18 +853,18 @@ def run_init(
             )
             gate_tests = generate_gate_tests(gate_rules, claims, provider_for_gate)
 
-            # Self-calibration loop
-            gate_rules, gate_tests, calibration_report = calibrate_gate_rules(
-                gate_rules, gate_tests, provider_for_gate, max_retries=2,
-            )
-
-            if calibration_report:
-                _show_calibration(calibration_report)
+            if not skip_calibration:
+                # Self-calibration loop
+                gate_rules, gate_tests, calibration_report = calibrate_gate_rules(
+                    gate_rules, gate_tests, provider_for_gate, max_retries=2,
+                )
+                if calibration_report:
+                    _show_calibration(calibration_report)
+            else:
+                console.print("  [dim]Calibration skipped (--skip-calibration)[/dim]")
         except Exception as exc:
             logger.warning("Gate test/calibration failed: %s", exc)
-        console.print(f"  Gate calibration done ({time.time() - t0:.1f}s)")
-    elif skip_calibration and gate_rules:
-        console.print("\n[dim]Skipping gate calibration (--skip-calibration)[/dim]")
+        console.print(f"  Done ({time.time() - t0:.1f}s)")
 
         # Save gate tests to disk for later use by `arbiter calibrate`
         if gate_tests:

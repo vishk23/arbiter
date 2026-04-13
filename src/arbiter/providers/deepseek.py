@@ -79,4 +79,10 @@ class DeepSeekProvider(BaseProvider):
             response_format={"type": "json_object"},
         )
         raw = (resp.choices[0].message.content or "").strip()
-        return json.loads(raw)
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError as exc:
+            raise ValueError(
+                f"DeepSeek returned invalid JSON despite json_object mode: "
+                f"{raw[:300]}"
+            ) from exc
