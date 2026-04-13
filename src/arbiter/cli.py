@@ -430,12 +430,15 @@ def calibrate(
 
     cases = yaml.safe_load(test_cases.read_text())
     if not isinstance(cases, list):
-        cases = cases.get("test_cases", [])
+        cases = cases.get("test_cases", cases.get("cases", []))
 
     tp, fp, tn, fn = 0, 0, 0, 0
     for i, case in enumerate(cases):
         text = case["text"]
-        expected_pass = case["expected_pass"]
+        if "expected_pass" in case:
+            expected_pass = case["expected_pass"]
+        else:
+            expected_pass = case.get("expected", "none") == "none"
         result = gate.check(
             agent="calibration",
             turn_text=text,
