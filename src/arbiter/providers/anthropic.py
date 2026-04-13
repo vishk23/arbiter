@@ -31,6 +31,38 @@ class AnthropicProvider(BaseProvider):
             timeout=config.timeout,
         )
 
+    def _apply_thinking(self, kwargs: dict, max_tokens: int) -> None:
+        """Apply thinking + effort config to request kwargs.
+
+        Anthropic 4.6 supports:
+        - ``thinking.type: adaptive`` (recommended) — model decides thinking depth
+        - ``thinking.type: enabled`` (deprecated on 4.6) — explicit budget_tokens
+        - ``effort`` param (low/medium/high/max) via thinking config — controls
+          thinking depth independently of thinking type
+
+        See: https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking
+        """
+        if not self.config.thinking:
+            return
+
+        thinking_type = self.config.thinking.get("type", "adaptive")
+
+        if thinking_type == "adaptive":
+            kwargs["thinking"] = {"type": "adaptive"}
+            overhead = self.config.thinking.get("overhead", 16000)
+            kwargs["max_tokens"] = max_tokens + overhead
+        else:
+            # Legacy "enabled" mode (deprecated on Opus/Sonnet 4.6)
+            budget = self.config.thinking.get("budget_tokens", 10000)
+            kwargs["thinking"] = {"type": thinking_type, "budget_tokens": budget}
+            kwargs["max_tokens"] = max_tokens + budget
+
+        # Effort parameter (low/medium/high/max) — controls thinking depth
+        # Recommended: medium for most tasks, high for complex reasoning
+        effort = self.config.thinking.get("effort")
+        if effort:
+            kwargs.setdefault("output_config", {})["effort"] = effort
+
     # ── plain text call ───────────────────────────────────────────────
 
     def _call_impl(self, system: str, user: str, max_tokens: int = 4000) -> str:
@@ -41,19 +73,7 @@ class AnthropicProvider(BaseProvider):
             messages=[{"role": "user", "content": user}],
         )
 
-        # Extended thinking support
-        # - adaptive: model decides how much to think (no budget_tokens)
-        # - enabled: explicit budget_tokens allocation
-        if self.config.thinking:
-            thinking_type = self.config.thinking.get("type", "adaptive")
-            if thinking_type == "adaptive":
-                kwargs["thinking"] = {"type": "adaptive"}
-                overhead = self.config.thinking.get("overhead", 16000)
-                kwargs["max_tokens"] = max_tokens + overhead
-            else:
-                budget = self.config.thinking.get("budget_tokens", 10000)
-                kwargs["thinking"] = {"type": thinking_type, "budget_tokens": budget}
-                kwargs["max_tokens"] = max_tokens + budget
+        self._apply_thinking(kwargs, max_tokens)
 
         resp = self._client.messages.create(**kwargs)
         text = "\n".join(

@@ -29,7 +29,10 @@ class TokenBudgets(BaseModel):
     medium: int = 4000      # extraction, short generation, key terms
     large: int = 8000       # agent design, Z3 gen, contradiction analysis
     xl: int = 16000         # full document claim extraction
-    thinking_overhead: int = 8000  # extra tokens added when thinking/reasoning is on
+    thinking_overhead: int = 16000  # extra tokens when thinking/reasoning is on
+    # Note: OpenAI max_output_tokens INCLUDES reasoning tokens.
+    # Anthropic max_tokens must cover thinking + response.
+    # Provider max output limits: OpenAI 128K, Anthropic 64-128K, Gemini 64K.
 
 
 # ── Provider ───────────────────────────────────────────────────────────
