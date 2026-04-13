@@ -1,4 +1,4 @@
-"""Tests for T02: Anthropic call_structured fallback without OpenAI."""
+"""Tests for Anthropic structured output via tool-use."""
 
 from __future__ import annotations
 
@@ -37,37 +37,89 @@ class TestExtractJsonAggressive:
         assert AnthropicProvider._extract_json_aggressive("{broken: json}") is None
 
 
-class TestCallStructuredFallback:
-    """Test that call_structured doesn't crash when OpenAI is unavailable."""
+class TestToolUseStructuredOutput:
+    """Test that call_structured uses Anthropic's tool-use for structured output."""
 
-    @patch.object(AnthropicProvider, "_call_impl")
     @patch.object(AnthropicProvider, "__init__", lambda self, *a, **kw: None)
-    def test_regex_recovery_before_openai(self, mock_call):
-        """If aggressive regex finds JSON, OpenAI is never called."""
-        mock_call.return_value = 'Sure! {"name": "test", "value": 42}'
+    def test_tool_use_extracts_input(self):
+        """Tool-use response should extract the tool input as structured output."""
         provider = AnthropicProvider.__new__(AnthropicProvider)
         provider.model = "claude-test"
         provider.config = MagicMock()
+        provider.config.thinking = None
+
+        # Mock the Anthropic client to return a tool_use block
+        mock_block = MagicMock()
+        mock_block.type = "tool_use"
+        mock_block.name = "structured_output"
+        mock_block.input = {"name": "test", "value": 42}
+
+        mock_resp = MagicMock()
+        mock_resp.content = [mock_block]
+
+        mock_client = MagicMock()
+        mock_client.messages.create.return_value = mock_resp
+        provider._client = mock_client
 
         result = provider._call_structured_impl(
-            system="test",
-            user="test",
+            system="test", user="test",
             schema={"type": "object", "properties": {"name": {"type": "string"}}},
         )
-        assert result["name"] == "test"
+        assert result == {"name": "test", "value": 42}
 
-    @patch.object(AnthropicProvider, "_call_impl")
+        # Verify tool_choice was set correctly
+        call_kwargs = mock_client.messages.create.call_args[1]
+        assert call_kwargs["tool_choice"] == {"type": "tool", "name": "structured_output"}
+        assert len(call_kwargs["tools"]) == 1
+        assert call_kwargs["tools"][0]["name"] == "structured_output"
+
     @patch.object(AnthropicProvider, "__init__", lambda self, *a, **kw: None)
-    def test_clear_error_when_json_extraction_fails(self, mock_call):
-        """If both regex methods fail, get a clear error (no hidden OpenAI dep)."""
-        mock_call.return_value = "This is not JSON at all, just plain text."
+    def test_fallback_to_text_extraction(self):
+        """If no tool_use block, fall back to text JSON extraction."""
         provider = AnthropicProvider.__new__(AnthropicProvider)
         provider.model = "claude-test"
         provider.config = MagicMock()
+        provider.config.thinking = None
 
-        with pytest.raises(ValueError, match="Anthropic returned non-JSON"):
+        # Mock response with only text (no tool_use)
+        mock_block = MagicMock()
+        mock_block.type = "text"
+        mock_block.text = '{"name": "fallback"}'
+
+        mock_resp = MagicMock()
+        mock_resp.content = [mock_block]
+
+        mock_client = MagicMock()
+        mock_client.messages.create.return_value = mock_resp
+        provider._client = mock_client
+
+        result = provider._call_structured_impl(
+            system="test", user="test",
+            schema={"type": "object"},
+        )
+        assert result == {"name": "fallback"}
+
+    @patch.object(AnthropicProvider, "__init__", lambda self, *a, **kw: None)
+    def test_error_when_no_json_at_all(self):
+        """If neither tool_use nor extractable JSON, raise ValueError."""
+        provider = AnthropicProvider.__new__(AnthropicProvider)
+        provider.model = "claude-test"
+        provider.config = MagicMock()
+        provider.config.thinking = None
+
+        mock_block = MagicMock()
+        mock_block.type = "text"
+        mock_block.text = "This is not JSON at all."
+
+        mock_resp = MagicMock()
+        mock_resp.content = [mock_block]
+
+        mock_client = MagicMock()
+        mock_client.messages.create.return_value = mock_resp
+        provider._client = mock_client
+
+        with pytest.raises(ValueError, match="tool-use structured output failed"):
             provider._call_structured_impl(
-                system="test",
-                user="test",
+                system="test", user="test",
                 schema={"type": "object"},
             )

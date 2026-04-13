@@ -420,12 +420,11 @@ def run_init(
         or init_providers.get("openai")
         or provider
     )
-    # Z3 generator needs call_structured (returns JSON with code).
-    # OpenAI has native json_schema → most reliable for structured output.
-    # Anthropic's call_structured may fail without OpenAI reformat fallback.
+    # Z3 generator needs deep reasoning + structured output.
+    # Anthropic (Opus) now has native structured output via tool-use.
     provider_for_z3 = (
-        init_providers.get("openai")
-        or init_providers.get("anthropic")
+        init_providers.get("anthropic")
+        or init_providers.get("openai")
         or provider
     )
     provider_for_agents = (

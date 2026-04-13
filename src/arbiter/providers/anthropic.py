@@ -67,32 +67,48 @@ class AnthropicProvider(BaseProvider):
     def _call_structured_impl(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
-        augmented_system = (
-            f"{system}\n\nYou MUST respond with valid JSON matching this schema.\n"
-            f"Output ONLY the JSON object, no prose before or after.\n\n"
-            f"```json\n{json.dumps(schema, indent=2)}\n```"
-        )
-        raw = self._call_impl(augmented_system, user, max_tokens)
+        """Use Anthropic's tool-use as structured output.
 
-        # Try standard extraction (fenced block, then raw braces)
+        Defines a tool with the desired JSON schema, forces the model to
+        "call" it via tool_choice, and extracts the tool input as the
+        structured response. This is Anthropic's recommended approach for
+        structured output — no regex, no fallbacks needed.
+
+        See: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
+        """
+        tool_name = "structured_output"
+        tools = [{
+            "name": tool_name,
+            "description": "Return the structured response matching the required schema.",
+            "input_schema": schema,
+        }]
+
+        kwargs: dict = {
+            "model": self.model,
+            "max_tokens": max_tokens,
+            "system": system,
+            "messages": [{"role": "user", "content": user}],
+            "tools": tools,
+            "tool_choice": {"type": "tool", "name": tool_name},
+        }
+
+        resp = self._client.messages.create(**kwargs)
+
+        # Extract the tool input from the response
+        for block in resp.content:
+            if block.type == "tool_use" and block.name == tool_name:
+                return block.input  # already a dict
+
+        # Fallback: if no tool_use block, try text extraction
+        raw = "\n".join(b.text for b in resp.content if b.type == "text").strip()
         parsed = self._extract_json(raw)
         if parsed is not None:
             return parsed
 
-        # Try aggressive extraction (multiple attempts)
-        parsed = self._extract_json_aggressive(raw)
-        if parsed is not None:
-            logger.info("Recovered JSON via aggressive regex extraction")
-            return parsed
-
-        # No hidden OpenAI dependency — fail with a clear error.
-        # For structured output, prefer routing to OpenAI/Gemini providers
-        # which have native JSON schema enforcement.
         raise ValueError(
-            "Anthropic returned non-JSON. For reliable structured output, "
-            "route structured calls to a provider with native JSON schema "
-            "support (openai, gemini). Raw response (first 500 chars):\n"
-            + raw[:500]
+            f"Anthropic tool-use structured output failed. "
+            f"No tool_use block in response. Content types: "
+            f"{[b.type for b in resp.content]}"
         )
 
     # ── helpers ───────────────────────────────────────────────────────
