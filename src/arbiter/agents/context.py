@@ -127,27 +127,20 @@ class ContextBuilder:
         agent_name: str,
         state: "DebateState",
         z3_stipulation: str = "",
-        agent_index: int = 0,
     ) -> str:
         """Return the full user-prompt context string for *agent_name*.
 
         Open hits and the JSON template are placed LAST to exploit
         recency bias for maximum compliance.
 
-        *agent_index* rotates which open hits are shown so different
-        agents within the same round address different hits instead
-        of all piling on h1, h2, h3.
+        The open-hits list naturally shrinks within a round as earlier
+        agents resolve hits (mini-ledger-update in graph.py). No rotation
+        needed — each agent sees only genuinely-open hits.
         """
         topic = self.config.topic
         agent_cfg = self.config.agents[agent_name]
         parts: list[str] = []
-        all_open_hits = _open_hits_for(state["ledger"], agent_cfg.side)
-        # Rotate: each agent sees a different slice of open hits
-        if all_open_hits and agent_index > 0:
-            rotation = (agent_index * 3) % max(len(all_open_hits), 1)
-            open_hits = all_open_hits[rotation:] + all_open_hits[:rotation]
-        else:
-            open_hits = all_open_hits
+        open_hits = _open_hits_for(state["ledger"], agent_cfg.side)
 
         # ── Early context (background info) ────────────────────────────
 

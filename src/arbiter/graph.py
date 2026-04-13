@@ -179,12 +179,12 @@ class DebateEngine:
         new_validity_log: List[dict] = []
         cur_state = dict(state)
 
-        for agent_idx, (agent_name, agent) in enumerate(self.agents.items()):
+        for agent_name, agent in self.agents.items():
             # Z3 stipulation only for non-standard topologies
             z3_stip = self._z3_stipulation if self.config.topology != "standard" else ""
 
             # Build context (agent_index rotates which open hits are shown)
-            user_prompt = self.ctx_builder.build(agent_name, cur_state, z3_stip, agent_index=agent_idx)  # type: ignore[arg-type]
+            user_prompt = self.ctx_builder.build(agent_name, cur_state, z3_stip)  # type: ignore[arg-type]
 
             # Render system prompt via Jinja2
             system_prompt = self.ctx_builder.render_system_prompt(
@@ -296,6 +296,21 @@ class DebateEngine:
 
             # Update cur_state so next agent in round sees prior entries
             cur_state["transcript"] = cur_state["transcript"] + [entry]
+
+            # Mini-ledger-update: resolve hits this agent addressed so the
+            # NEXT agent in this round doesn't see them as open.
+            # (The full ledger_node runs after the round for new_hits.)
+            block = parse_ledger_block(entry_text)
+            for upd in block.get("hits_addressed", []):
+                if not isinstance(upd, dict):
+                    continue
+                hid = upd.get("id", "")
+                hstatus = upd.get("status", "")
+                hrebuttal = upd.get("rebuttal", "")
+                if hid and hstatus in ("rebutted", "conceded", "dodged"):
+                    cur_state["ledger"] = resolve_hit(
+                        cur_state["ledger"], hid, hstatus, hrebuttal
+                    )
 
             # Live log
             if self.live_logger:
