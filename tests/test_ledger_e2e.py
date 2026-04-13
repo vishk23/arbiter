@@ -240,20 +240,22 @@ class TestLLMGateReal:
         assert len(vlog) > 0, "No validity_log entries in gated debate"
 
     def test_gate_does_not_block_legitimate_arguments(self):
-        """'Water is wet' debate with seed terms — the gate may flag
-        definitional shifts because the debate IS ABOUT those terms.
-        This is a known limitation: seed terms that ARE the debate topic
-        will trigger shift detection. The debate should still complete."""
+        """'Water is wet' debate has no stipulated contradictions —
+        the gate should pass all turns. Seed terms used consistently
+        should NOT be flagged as definitional shifts."""
         result = _run_debate(_mini_config(
             topology="gated", gate=True, max_rounds=1, min_hits=0
         ))
-        # The debate should complete regardless of gate violations
         assert result["round_idx"] >= 1
         assert len(result["transcript"]) >= 2
-        # Verify the gate DID run (has validity_log entries)
         vlog = result.get("validity_log", [])
         turn_logs = [v for v in vlog if v.get("kind") != "round_summary"]
         assert len(turn_logs) >= 2, "Gate should have audited at least 2 turns"
+        violations = [v for v in turn_logs if v.get("final_status") == "validity_violation"]
+        assert len(violations) == 0, (
+            f"Gate produced {len(violations)} false positive(s) on a benign debate. "
+            f"Seed terms used consistently should not be flagged."
+        )
 
 
 # ═══════════════════════════════════════════════════════════════════════

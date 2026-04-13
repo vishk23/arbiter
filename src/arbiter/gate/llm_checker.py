@@ -53,15 +53,20 @@ VIOLATION_SCHEMA = {
         },
         "definitional_shifts": {
             "type": "array",
+            "description": "ONLY include terms whose meaning ACTUALLY SHIFTED. Do NOT include terms used consistently.",
             "items": {
                 "type": "object",
                 "additionalProperties": False,
                 "properties": {
                     "term": {"type": "string"},
+                    "shifted": {
+                        "type": "boolean",
+                        "description": "True ONLY if the term's meaning changed from its seed definition. False if used consistently.",
+                    },
                     "description": {"type": "string"},
                     "flagged_explicitly": {"type": "boolean"},
                 },
-                "required": ["term", "description", "flagged_explicitly"],
+                "required": ["term", "shifted", "description", "flagged_explicitly"],
             },
         },
     },
@@ -102,7 +107,10 @@ def _build_system_prompt(config: "GateConfig") -> str:
         "3. Paraphrases of genuine violations count — don't require exact wording.",
         "4. A turn that EXPLICITLY ADOPTS a repair path is NOT a violation.",
         "5. 'Two modes' or 'different operational regimes' that assert BOTH halves ARE violations.",
-        "6. Unflagged shifts of seed terms are violations.",
+        "6. Unflagged shifts of seed terms are violations. BUT: debating what a",
+        "   term MEANS as part of the topic is NOT a shift. Only flag when an agent",
+        "   silently CHANGES the definition to escape a rebuttal or contradiction.",
+        "   If a term is used consistently with its seed definition, set shifted=false.",
         "7. Confidence: high (agent clearly asserts BOTH halves), medium (probable), low (arguable).",
         "8. Only flag HIGH confidence violations. When in doubt, do NOT flag.",
         "",
@@ -158,11 +166,14 @@ class LLMChecker:
                 "confidence": v.get("confidence", "medium"),
             })
 
-        # Check definitional shifts (skip empty entries)
+        # Check definitional shifts (only flag ACTUAL shifts, not consistent usage)
         for shift in result.get("definitional_shifts", []):
             term = shift.get("term", "").strip()
             if not term:
-                continue  # skip empty/malformed entries
+                continue
+            # Skip if the LLM says the term was NOT shifted
+            if not shift.get("shifted", True):
+                continue
             is_seed = any(
                 k.lower() in term.lower() or term.lower() in k.lower()
                 for k in self.config.seed_terms
