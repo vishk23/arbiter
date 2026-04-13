@@ -47,15 +47,24 @@ class OpenAIProvider(BaseProvider):
             max_output_tokens=max_tokens,
         )
 
-        # Reasoning effort support (for o-series models)
+        # Reasoning effort: none/minimal/low/medium/high/xhigh
+        # gpt-5.4 defaults to "none"; older gpt-5.x default to "medium"
         if self.config.reasoning:
             effort = self.config.reasoning.get("effort", "medium")
             kwargs["reasoning"] = {"effort": effort}
-            # Give extra room for reasoning overhead
-            kwargs["max_output_tokens"] = max_tokens + 4000
+            overhead = self.config.reasoning.get("overhead", 8000)
+            kwargs["max_output_tokens"] = max_tokens + overhead
 
         resp = self._client.responses.create(**kwargs)
         return (resp.output_text or "").strip()
+
+    def _apply_reasoning(self, kwargs: dict, max_tokens: int) -> None:
+        """Apply reasoning config to request kwargs (shared by all call methods)."""
+        if self.config.reasoning:
+            effort = self.config.reasoning.get("effort", "medium")
+            kwargs["reasoning"] = {"effort": effort}
+            overhead = self.config.reasoning.get("overhead", 8000)
+            kwargs["max_output_tokens"] = max_tokens + overhead
 
     # ── structured (JSON) call ────────────────────────────────────────
 
@@ -100,10 +109,7 @@ class OpenAIProvider(BaseProvider):
             },
         )
 
-        if self.config.reasoning:
-            effort = self.config.reasoning.get("effort", "medium")
-            kwargs["reasoning"] = {"effort": effort}
-            kwargs["max_output_tokens"] = max_tokens + 4000
+        self._apply_reasoning(kwargs, max_tokens)
 
         resp = self._client.responses.create(**kwargs)
         return json.loads(resp.output_text)
@@ -127,10 +133,7 @@ class OpenAIProvider(BaseProvider):
             text_format=model_class,
         )
 
-        if self.config.reasoning:
-            effort = self.config.reasoning.get("effort", "medium")
-            kwargs["reasoning"] = {"effort": effort}
-            kwargs["max_output_tokens"] = max_tokens + 4000
+        self._apply_reasoning(kwargs, max_tokens)
 
         resp = self._client.responses.parse(**kwargs)
         if resp.output_parsed is not None:

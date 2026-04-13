@@ -31,6 +31,35 @@ class GoogleProvider(BaseProvider):
 
         self._client = genai.Client(api_key=api_key)
 
+    def _build_thinking_config(self, overhead: int) -> tuple[dict, int]:
+        """Build Gemini thinking config and return (config_kwargs, extra_tokens).
+
+        Gemini 2.5 uses ``thinking_budget`` (int, min 128 for pro).
+        Gemini 3.x uses ``thinking_level`` (MINIMAL/LOW/MEDIUM/HIGH enum).
+        """
+        from google.genai import types as gtypes
+
+        if not self.config.thinking:
+            return {}, 0
+
+        is_3x = "gemini-3" in self.model
+
+        if is_3x:
+            # Gemini 3.x: use thinking_level enum
+            level_str = self.config.thinking.get("thinking_level", "HIGH")
+            level_map = {
+                "MINIMAL": gtypes.ThinkingLevel.MINIMAL,
+                "LOW": gtypes.ThinkingLevel.LOW,
+                "MEDIUM": gtypes.ThinkingLevel.MEDIUM,
+                "HIGH": gtypes.ThinkingLevel.HIGH,
+            }
+            level = level_map.get(level_str.upper(), gtypes.ThinkingLevel.HIGH)
+            return {"thinking_config": gtypes.ThinkingConfig(thinking_level=level)}, overhead
+        else:
+            # Gemini 2.5: use thinking_budget (int tokens)
+            budget = self.config.thinking.get("thinking_budget", overhead)
+            return {"thinking_config": gtypes.ThinkingConfig(thinking_budget=budget)}, budget
+
     # ── plain text call ───────────────────────────────────────────────
 
     def _call_impl(self, system: str, user: str, max_tokens: int = 4000) -> str:
@@ -41,13 +70,10 @@ class GoogleProvider(BaseProvider):
             max_output_tokens=max_tokens,
         )
 
-        # Thinking support
-        if self.config.thinking:
-            level = self.config.thinking.get("thinking_level", "HIGH")
-            config_kwargs["thinking_config"] = gtypes.ThinkingConfig(
-                thinking_level=level
-            )
-            config_kwargs["max_output_tokens"] = max_tokens + 4000
+        thinking_kwargs, extra = self._build_thinking_config(overhead=4000)
+        config_kwargs.update(thinking_kwargs)
+        if extra:
+            config_kwargs["max_output_tokens"] = max_tokens + extra
 
         resp = self._client.models.generate_content(
             model=self.model,
@@ -70,12 +96,10 @@ class GoogleProvider(BaseProvider):
             response_schema=schema,
         )
 
-        if self.config.thinking:
-            level = self.config.thinking.get("thinking_level", "HIGH")
-            config_kwargs["thinking_config"] = gtypes.ThinkingConfig(
-                thinking_level=level
-            )
-            config_kwargs["max_output_tokens"] = max_tokens + 4000
+        thinking_kwargs, extra = self._build_thinking_config(overhead=4000)
+        config_kwargs.update(thinking_kwargs)
+        if extra:
+            config_kwargs["max_output_tokens"] = max_tokens + extra
 
         resp = self._client.models.generate_content(
             model=self.model,
@@ -105,12 +129,10 @@ class GoogleProvider(BaseProvider):
             response_schema=model_class,
         )
 
-        if self.config.thinking:
-            level = self.config.thinking.get("thinking_level", "HIGH")
-            config_kwargs["thinking_config"] = gtypes.ThinkingConfig(
-                thinking_level=level
-            )
-            config_kwargs["max_output_tokens"] = max_tokens + 4000
+        thinking_kwargs, extra = self._build_thinking_config(overhead=4000)
+        config_kwargs.update(thinking_kwargs)
+        if extra:
+            config_kwargs["max_output_tokens"] = max_tokens + extra
 
         resp = self._client.models.generate_content(
             model=self.model,

@@ -9,6 +9,29 @@ import yaml
 from pydantic import BaseModel, Field, model_validator
 
 
+# ── Token budgets ─────────────────────────────────────────────────────
+
+
+class TokenBudgets(BaseModel):
+    """Named token budget tiers for LLM calls.
+
+    Each call site uses a tier name (small/medium/large/xl) instead of
+    a magic number.  Users can tune per deployment in YAML::
+
+        token_budgets:
+          small: 1500
+          medium: 4000
+          large: 8000
+          xl: 16000
+          thinking_overhead: 8000
+    """
+    small: int = 1500       # classification, yes/no checks, mid-debate guidance
+    medium: int = 4000      # extraction, short generation, key terms
+    large: int = 8000       # agent design, Z3 gen, contradiction analysis
+    xl: int = 16000         # full document claim extraction
+    thinking_overhead: int = 8000  # extra tokens added when thinking/reasoning is on
+
+
 # ── Provider ───────────────────────────────────────────────────────────
 
 
@@ -19,7 +42,7 @@ class ProviderConfig(BaseModel):
     max_retries: int = 6
     api_key: Optional[str] = None  # env var takes precedence
     base_url: Optional[str] = None  # for Ollama / custom endpoints
-    thinking: Optional[Dict[str, Any]] = None  # Anthropic extended thinking
+    thinking: Optional[Dict[str, Any]] = None   # Google/Anthropic thinking
     reasoning: Optional[Dict[str, Any]] = None  # OpenAI reasoning effort
     plugin: Optional[str] = None  # custom provider: "module:ClassName" or "path/file.py:Class"
 
@@ -170,6 +193,7 @@ class ArbiterConfig(BaseModel):
     schema_version: str = "1.0"
     topic: TopicConfig
     topology: Literal["standard", "gated", "adversarial"] = "standard"
+    token_budgets: TokenBudgets = TokenBudgets()
     providers: Dict[str, ProviderConfig]
     agents: Dict[str, AgentConfig]
     convergence: ConvergenceConfig = ConvergenceConfig()

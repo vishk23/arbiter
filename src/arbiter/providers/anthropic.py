@@ -42,15 +42,16 @@ class AnthropicProvider(BaseProvider):
         )
 
         # Extended thinking support
+        # - adaptive: model decides how much to think (no budget_tokens)
+        # - enabled: explicit budget_tokens allocation
         if self.config.thinking:
             thinking_type = self.config.thinking.get("type", "adaptive")
             if thinking_type == "adaptive":
-                # Adaptive thinking: no budget_tokens, model decides
                 kwargs["thinking"] = {"type": "adaptive"}
-                kwargs["max_tokens"] = max_tokens + 16000  # room for thinking
+                overhead = self.config.thinking.get("overhead", 16000)
+                kwargs["max_tokens"] = max_tokens + overhead
             else:
-                # Explicit budget (legacy "enabled" mode)
-                budget = self.config.thinking.get("budget_tokens", 8000)
+                budget = self.config.thinking.get("budget_tokens", 10000)
                 kwargs["thinking"] = {"type": thinking_type, "budget_tokens": budget}
                 kwargs["max_tokens"] = max_tokens + budget
 
