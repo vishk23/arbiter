@@ -82,7 +82,7 @@ class Z3Plugin:
 
         if template:
             tpl = Template(template)
-            return tpl.render(z3_results=results)
+            return tpl.render(z3_results=results, **results)
 
         # Default formatting
         lines = ["Z3 STIPULATED FACTS (mechanically verified, not debatable):"]
