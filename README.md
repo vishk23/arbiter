@@ -1,197 +1,223 @@
 # Arbiter
 
-**Formally verified multi-agent debates.**
+**Formally verified multi-agent debates on academic papers.**
 
-Run structured debates between frontier LLMs with optional Z3 formal verification, calibrated validity gates, and multi-lab judging panels.
+Point Arbiter at any PDF — it extracts claims, finds contradictions, auto-generates Z3 formal proofs, designs specialist debate agents, and produces a structured verdict with every argument tracked.
 
-## Install
+<!-- Screenshot: dashboard showing 328 claims extracted with formal math notation -->
+<!-- To see it live: arbiter web --init --from-pdf experiments/ai_layoff_trap/source.pdf --providers "openai:gpt-5.4,anthropic:claude-opus-4-6" --effort high -->
 
-```bash
-pip install -e ".[all]"
-```
+## What it does
+
+1. **Reads the paper** — extracts every claim, assumption, proposition, and equation
+2. **Finds the cracks** — identifies contradictions, tensions, and Z3-encodable formal claims
+3. **Designs the debate** — creates specialist agents (e.g., Macroeconomist, TaxScholar, IO Theorist), gate rules, and a custom rubric
+4. **Runs the debate** — multi-round argumentation with real-time validity enforcement
+5. **Delivers a verdict** — multi-lab judge panel with scores, landed hits, and a structured argument map
+
+## Case study: "The AI Layoff Trap"
+
+We ran Arbiter on ["The AI Layoff Trap"](https://arxiv.org/abs/2603.20617) (Falk & Tsoukalas, 2026), which claims to **prove** that AI over-automation is inevitable and only a Pigouvian tax can fix it.
+
+**Init** — 280 claims extracted, 17 propositions, 10 assumptions, 7 policy claims identified:
+
+<!-- Screenshot: claims C259-C280 with formal economics notation -->
+
+**Debate** — 9 specialist agents (Proponent, Skeptic, IO Theorist, Macroeconomist, TaxScholar, LaborEconomist, PublicFinance, CausalInference, Generalist) across 3 providers (OpenAI gpt-5.4, Anthropic Claude Opus 4.6, xAI Grok) debated for 6 rounds:
+
+<!-- Screenshot: agent turn cards with ok/rw badges, hit counts, side colors -->
+
+**Verdict** — Skeptic wins 2-1. The paper's core theorem holds, but its policy claims overreach:
+
+| Judge | Proponent | Skeptic | Verdict |
+|-------|-----------|---------|---------|
+| Grok | 39 | 51 | **Skeptic** |
+| OpenAI | 42 | 50 | **Skeptic** |
+| Anthropic | 37 | 35 | Proponent |
+
+**Key findings:**
+- Core theorem (α_NE > α_CO when η<1, N>1) is **mathematically correct** — all 3 judges agree
+- "Only a Pigouvian tax works" — **conceded** by Proponent (η-raising policies also work)
+- "Boundless productivity" rhetoric — **conceded** (not implied by the formal model)
+- 17 total Proponent concessions, 22 conceded hits, 141 total argument hits
+- 0 gate violations across 54 turns, 0 mid-debate judge failures
+
+Full outputs: [`experiments/ai_layoff_trap_v3/`](experiments/ai_layoff_trap_v3/)
 
 ## Quickstart
 
 ```bash
-# Set your API key
-export OPENAI_API_KEY=sk-...
+# Install
+pip install -e ".[all]"
 
-# Run a 3-agent debate
-arbiter run configs/quickstart.yaml
-```
-
-## Generate a config from a PDF
-
-```bash
 # Set API keys
-export ANTHROPIC_API_KEY=...
-export OPENAI_API_KEY=...
+cp .env.example .env
+# Edit .env with your keys (at minimum OPENAI_API_KEY)
 
-# Point Arbiter at any paper — it extracts claims, finds contradictions,
-# generates Z3 constraints, designs agents, and builds a complete config
+# Generate a debate config from any PDF
 arbiter init --from-pdf paper.pdf --output-dir my-debate/
 
-# Or use multiple frontier models for higher quality
+# Run the debate
+arbiter run my-debate/config.yaml
+
+# Judge it
+arbiter judge my-debate/output/debate_001.json
+
+# Export the argument map
+arbiter export my-debate/output/debate_001.json -f argdown
+```
+
+### Use multiple frontier models
+
+```bash
 arbiter init --from-pdf paper.pdf \
-  --providers "openai:gpt-5.4,anthropic:claude-opus-4-6,gemini:gemini-3.1-pro-preview"
-
-# Fast init (skip gate self-calibration)
-arbiter init --from-pdf paper.pdf --skip-calibration
-
-# Or start from a topic description
-arbiter init --topic "Does consciousness require integrated information?"
+  --providers "openai:gpt-5.4,anthropic:claude-opus-4-6,grok:grok-4.20-0309-reasoning" \
+  --effort high \
+  --output-dir my-debate/
 ```
 
-## CLI Commands
+### Watch it live in the browser
 
-### Core workflow
-
-| Command | Description |
-|---|---|
-| `arbiter init` | Generate a debate config from a PDF or topic (agentic, LLM-powered) |
-| `arbiter run config.yaml` | Run a debate |
-| `arbiter judge output.json --config config.yaml` | Run multi-lab judge panel |
-| `arbiter export output.json -f argdown` | Export argument map (argdown/markdown/json) |
-
-### Advanced
-
-| Command | Description |
-|---|---|
-| `arbiter calibrate config.yaml --test-cases tests.yaml` | Calibrate validity gate (recall/specificity) |
-| `arbiter validate config.yaml` | Validate config file with helpful error messages |
-| `arbiter show-rubric config.yaml` | Display judge rubric as formatted table |
-| `arbiter redteam config.yaml --target Proponent` | Run with one agent deliberately trying to evade the gate |
-
-### Config management
-
-| Command | Description |
-|---|---|
-| `arbiter list-agents config.yaml` | Show all agents with roles and providers |
-| `arbiter add-agent config.yaml -n JungScholar -s Skeptic -d "Jungian psychology"` | Add an agent with LLM-generated prompt |
-| `arbiter remove-agent config.yaml -n JungScholar` | Remove an agent |
-| `arbiter init --template` | Generate a blank starter config |
-
-## Features
-
-- **Agentic setup** — point at a PDF, get a complete debate config with Z3 constraints, gate rules, agent prompts, and rubric
-- **7 providers built-in** — Anthropic, OpenAI, Google Gemini, Grok, DeepSeek, Ollama, custom plugins. Mix models freely across agents and judges
-- **Pydantic-first structured output** — 23 typed schemas, provider-native parsing (OpenAI `responses.parse`, Anthropic tool-use, Gemini `response_schema`)
-- **Z3 formal verification** — optional SMT solver plugin proves claims are self-consistent
-- **LLM-primary validity gate** — per-turn logical hygiene via LLM classifier (100% recall/specificity on gold-standard), with optional regex + Z3 layers
-- **Structured argument ledger** — every hit tracked as open/conceded/rebutted/dodged
-- **Convergence detection** — debate halts when no new arguments surface
-- **Multi-lab judge panel** — N judges from different providers, with spread-flagging for disagreement
-- **Adversarial red-team** — test the gate against a deliberately evasive agent
-- **Argdown export** — machine-readable argument maps
-- **Side-balanced provider assignment** — each debate side gets agents from multiple labs
-
-## Architecture
-
-```mermaid
-graph TD
-    subgraph "arbiter init (setup)"
-        PDF[PDF / Topic] --> Claims[Claim Extraction]
-        Claims --> Analysis[Contradictions + Terms + Angles]
-        Analysis --> |parallel| Z3Gen[Z3 Module]
-        Analysis --> |parallel| AgentDesign[Agent Design]
-        Analysis --> |parallel| GateRules[Gate Rules]
-        Analysis --> |parallel| Rubric[Rubric]
-        Analysis --> |parallel| Sources[Source Corpus]
-        Z3Gen & AgentDesign & GateRules & Rubric & Sources --> Config[config.yaml]
-    end
-
-    subgraph "arbiter run (debate)"
-        Config --> Round[Round Node]
-        Round --> |per turn| Gate{Validity Gate}
-        Gate --> |pass| Ledger[Ledger Update]
-        Gate --> |fail| Rewrite[Rewrite Loop]
-        Rewrite --> Gate
-        Ledger --> Judge[Mid-Debate Judge]
-        Judge --> |continue| Round
-        Judge --> |converged| Finalize[Z3 + Steelman + Export]
-    end
-
-    subgraph "arbiter judge (verdict)"
-        Finalize --> Panel[Judge Panel]
-        Panel --> Opus[Anthropic]
-        Panel --> GPT[OpenAI]
-        Panel --> Gemini[Google]
-        Opus & GPT & Gemini --> Verdict[Aggregate + Spread Flag]
-    end
+```bash
+arbiter web --init --from-pdf paper.pdf
+# Opens http://localhost:8741 with live dashboard
 ```
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the full module map, data flow trace, design decisions, and known technical debt.
+<!-- Screenshot: live dashboard with argdown syntax highlighting -->
 
 ## How it works
 
 ```
 arbiter init --from-pdf paper.pdf
   │
-  ├─ 1. PDF → Markdown (pymupdf4llm)
-  ├─ 2. Claims extraction (LLM structured output)
+  ├─ 1. PDF → Markdown → Chunked text
+  ├─ 2. Claim extraction (280 claims, tagged formal/logical/empirical)
+  ├─ 2b. Formal model extraction (assumptions, propositions, equations, policies)
   ├─ 3. Contradiction detection + key terms + attack angles
-  ├─ 3b. Claim consolidation (140 raw → 9 core theses)
   ├─ 4. Parallel generation:
-  │     ├─ Z3 constraint module (auto-generated + self-tested)
-  │     ├─ Agent cast design (specialists per attack angle)
+  │     ├─ Z3 proof verification (proof checks, sensitivity, boundary, policy)
+  │     ├─ Agent cast design (domain specialists per attack angle)
   │     ├─ Gate rules + escape-route anticipation
-  │     ├─ Judge rubric (topic-specific criteria)
-  │     └─ Source corpus (web search + classification)
-  ├─ 5. Gate self-calibration (generate tests → check → fix weak patterns)
-  └─ 6. Config assembly + validation
-       → config.yaml ready for `arbiter run`
+  │     ├─ Judge rubric (topic-specific scoring criteria)
+  │     └─ Source corpus (synthesis + classification)
+  ├─ 5. Gate self-calibration
+  └─ 6. Config assembly → ready for `arbiter run`
 ```
 
-## Config format
+## Features
 
-Everything is a single YAML file. See `configs/quickstart.yaml` for a minimal example or `experiments/bit_creation_theory/config.yaml` for a full setup with Z3, gate, and 10+ agents.
+- **Agentic init from PDF** — one command generates a complete debate config with agents, gate, Z3, rubric
+- **Z3 verification suite** — proof verification, counterexample search, assumption sensitivity, boundary analysis, policy verification
+- **7 built-in providers** — OpenAI, Anthropic, Google Gemini, Grok, DeepSeek, Ollama, custom plugins
+- **LLM validity gate** — per-turn logical hygiene via LLM classifier, 0 violations across 54 frontier-model turns
+- **Structured argument ledger** — every hit tracked as open/conceded/rebutted/dodged
+- **Multi-lab judge panel** — N judges from different providers with spread-flagging
+- **Live web dashboard** — watch init and debate in real-time with argdown syntax highlighting
+- **KaTeX math rendering** — LaTeX equations render in the dashboard
+- **Knuckledragger integration** — optional Python proof assistant for formal verification
+- **Adversarial red-team mode** — test the gate against deliberately evasive agents
+- **Argdown export** — machine-readable argument maps
 
-Key sections: `topic`, `topology`, `token_budgets`, `providers`, `agents`, `convergence`, `gate`, `z3`, `judge`, `steelman`, `retrieval`, `output`.
+## CLI Commands
 
-### Token budgets
+| Command | Description |
+|---|---|
+| `arbiter init --from-pdf paper.pdf` | Generate debate config from PDF |
+| `arbiter init --topic "..."` | Generate config from topic description |
+| `arbiter run config.yaml` | Run the debate |
+| `arbiter judge output.json` | Run multi-lab judge panel |
+| `arbiter export output.json -f argdown` | Export argument map |
+| `arbiter web config.yaml` | Live dashboard for debate |
+| `arbiter web --init --from-pdf paper.pdf` | Live dashboard for init + debate |
+| `arbiter calibrate config.yaml --test-cases tests.yaml` | Calibrate validity gate |
+| `arbiter validate config.yaml` | Validate config |
+| `arbiter redteam config.yaml --target Proponent` | Red-team mode |
 
-All LLM call token limits are configurable per deployment:
+## Architecture
 
-```yaml
-token_budgets:
-  small: 1500       # classification, checks, guidance
-  medium: 4000      # extraction, key terms
-  large: 8000       # agent design, Z3 gen, gate rules
-  xl: 16000         # document extraction, judge verdicts
-  thinking_overhead: 16000  # extra tokens when thinking/reasoning is on
+```mermaid
+graph TD
+    subgraph "arbiter init"
+        PDF[PDF] --> Claims[Claim Extraction]
+        Claims --> FM[Formal Model]
+        FM --> Analysis[Contradictions + Terms]
+        Analysis --> |parallel| Z3[Z3 Proofs]
+        Analysis --> |parallel| Agents[Agent Design]
+        Analysis --> |parallel| Gate[Gate Rules]
+        Analysis --> |parallel| Rubric[Rubric]
+        Z3 & Agents & Gate & Rubric --> Config[config.yaml]
+    end
+
+    subgraph "arbiter run"
+        Config --> Round[Round]
+        Round --> |per turn| GateCheck{Gate}
+        GateCheck --> |pass| Ledger[Ledger]
+        GateCheck --> |fail| Rewrite[Rewrite]
+        Rewrite --> GateCheck
+        Ledger --> MidJudge[Mid-Judge]
+        MidJudge --> |continue| Round
+        MidJudge --> |done| Final[Steelman + Export]
+    end
+
+    subgraph "arbiter judge"
+        Final --> Panel[Judge Panel]
+        Panel --> V[Verdict + Scores]
+    end
 ```
 
-### Provider thinking/reasoning
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the full module map and design decisions.
+
+## Z3 Verification Suite
+
+When a paper contains formal propositions, Arbiter generates Z3 checks that go beyond contradiction detection:
+
+| Check Type | What it does | Example |
+|-----------|-------------|---------|
+| **Proof verification** | Encode assumptions + ¬proposition, check UNSAT | "α_NE > α_CO" → PROVEN |
+| **Counterexample** | Extract concrete values when proof fails | "At N=1, η=0.92: wedge = 0" |
+| **Sensitivity** | Drop each assumption, find load-bearing ones | "N > 1 is LOAD-BEARING" |
+| **Boundary** | Find where results flip | "Wedge positive iff η < 0.83" |
+| **Policy verification** | Check if proposed policies achieve goals | "Pigouvian tax implements α_CO" |
+
+## Configuration
+
+Everything is a single YAML file. Key sections:
 
 ```yaml
+topology: gated              # standard | gated | adversarial
 providers:
-  anthropic:
-    model: claude-opus-4-6
-    thinking:
-      type: adaptive        # recommended (model decides depth)
-      effort: medium         # low/medium/high/max
   openai:
     model: gpt-5.4
-    reasoning:
-      effort: high           # none/minimal/low/medium/high/xhigh
-  gemini:
-    model: gemini-3.1-pro-preview
-    thinking:
-      thinking_level: HIGH   # MINIMAL/LOW/MEDIUM/HIGH (Gemini 3.x)
+    reasoning: { effort: high }
+  anthropic:
+    model: claude-opus-4-6
+    thinking: { type: adaptive, effort: medium }
+agents:
+  Proponent: { provider: openai, side: Proponent, system_prompt: "..." }
+  Skeptic: { provider: anthropic, side: Skeptic, system_prompt: "..." }
+convergence:
+  max_rounds: 6
+  min_hits_addressed: 3      # agents must engage with open arguments
+judge:
+  panel:
+    - { provider: openai }
+    - { provider: anthropic }
+    - { provider: grok }
 ```
 
-## Case study: BIT Creation Theory
+See [`experiments/ai_layoff_trap_v3/config.yaml`](experiments/ai_layoff_trap_v3/config.yaml) for a complete example.
 
-Arbiter was developed during an 8-posture experimental analysis of BIT Creation Theory (Torres, 2026). The experiment produced a **24-0 unanimous verdict** across 24 LLM judges from 3 labs (Anthropic Claude Opus, OpenAI gpt-5, Google Gemini 3.1 Pro).
+## Contributing
 
-Key findings:
-- Z3 mechanically proved the theory's formal claims are self-contradictory (UNSAT)
-- The validity gate achieved 100% operational catch rate on unwitting violations
-- When red-teamed, the gate caught the adversary's evasion attempts and deterred further violations
-- Frontier LLMs independently discovered the formal contradiction without being told
-- The agentic init pipeline found 6 contradictions that 8 hours of manual analysis missed
+See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, testing, and PR guidelines.
 
-Full data and configs: `experiments/bit_creation_theory/`
+```bash
+git clone https://github.com/vishk23/arbiter.git
+cd arbiter
+pip install -e ".[all]"
+cp .env.example .env
+pytest tests/ -v
+```
 
 ## License
 
