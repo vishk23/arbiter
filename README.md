@@ -1,5 +1,9 @@
 # Arbiter
 
+[![PyPI](https://img.shields.io/pypi/v/arbiter-debate)](https://pypi.org/project/arbiter-debate/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
+
 **Formally verified multi-agent debates on academic papers.**
 
 Point Arbiter at any PDF — it extracts claims, finds contradictions, generates verified proofs (Knuckledragger + SymPy + Z3), designs specialist debate agents, and produces a structured verdict with every argument tracked.
