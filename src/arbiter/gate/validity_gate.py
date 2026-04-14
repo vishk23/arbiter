@@ -193,9 +193,13 @@ class ValidityGate:
             if extraction_future:
                 extracted = extraction_future.result()
 
-        # (2) Regex patterns — additive, instant (no LLM call)
-        if self.config.stipulated_rules:
-            violations += self._pattern.check(turn_text)
+        # (2) Regex patterns — only if explicitly enabled via use_regex_additive.
+        # In prod, LLM-primary handles everything; regex is legacy.
+        if self.config.use_regex_additive and self.config.stipulated_rules:
+            llm_flagged_rules = {v.get("rule_id") for v in violations if v.get("rule_id")}
+            for rv in self._pattern.check(turn_text):
+                if rv.get("rule_id") not in llm_flagged_rules:
+                    violations.append(rv)
 
         # Z3 structural check (depends on extraction result, but Z3 itself is instant)
         if extraction_future:

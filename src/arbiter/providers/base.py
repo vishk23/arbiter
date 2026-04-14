@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json as _json
 import logging
+import re
 import time
 from abc import ABC, abstractmethod
 
@@ -12,6 +13,20 @@ from pydantic import BaseModel
 from arbiter.config import ProviderConfig
 
 logger = logging.getLogger(__name__)
+
+
+def strip_markdown_fences(raw: str) -> str:
+    """Strip markdown code fences from a JSON string.
+
+    Handles `````json\\n{...}\\n`````` and plain ````` wrappers that
+    LLMs sometimes add around JSON output.
+    """
+    text = raw.strip()
+    # Strip ```json ... ``` or ``` ... ```
+    m = re.match(r"^```(?:json)?\s*\n?(.*?)```\s*$", text, re.DOTALL)
+    if m:
+        return m.group(1).strip()
+    return text
 
 
 class BaseProvider(ABC):
@@ -94,19 +109,22 @@ class BaseProvider(ABC):
             )
             return result
 
-    def call_with_retry(
-        self, system: str, user: str, max_tokens: int = 4000
-    ) -> str:
-        """Wrap :meth:`call` with exponential-backoff retry.
+    def _retry_loop(
+        self,
+        fn,
+        *args,
+        max_tries: int | None = None,
+        **kwargs,
+    ):
+        """Generic retry with exponential backoff.
 
-        Makes up to ``config.max_retries`` attempts (default 6).
-        Back-off: 1 s, 2 s, 4 s, 8 s, 16 s, 32 s (capped at 60 s).
+        Used by both :meth:`call_with_retry` and :meth:`call_structured_with_retry`.
         """
-        max_tries = self.config.max_retries
+        max_tries = max_tries or self.config.max_retries
         last_err: Exception | None = None
         for attempt in range(max_tries):
             try:
-                return self.call(system, user, max_tokens)
+                return fn(*args, **kwargs)
             except Exception as exc:
                 last_err = exc
                 sleep = min(60, 2**attempt)
@@ -120,3 +138,25 @@ class BaseProvider(ABC):
                 print(msg, flush=True)  # always visible to user
                 time.sleep(sleep)
         raise last_err  # type: ignore[misc]
+
+    def call_with_retry(
+        self, system: str, user: str, max_tokens: int = 4000
+    ) -> str:
+        """Wrap :meth:`call` with exponential-backoff retry.
+
+        Makes up to ``config.max_retries`` attempts (default 6).
+        Back-off: 1 s, 2 s, 4 s, 8 s, 16 s, 32 s (capped at 60 s).
+        """
+        return self._retry_loop(self.call, system, user, max_tokens)
+
+    def call_structured_with_retry(
+        self,
+        system: str,
+        user: str,
+        schema: dict | type[BaseModel],
+        max_tokens: int = 4000,
+    ) -> dict:
+        """Wrap :meth:`call_structured` with exponential-backoff retry."""
+        return self._retry_loop(
+            self.call_structured, system, user, schema, max_tokens,
+        )

@@ -14,7 +14,7 @@ import json
 import os
 
 from arbiter.config import ProviderConfig
-from arbiter.providers.base import BaseProvider
+from arbiter.providers.base import BaseProvider, strip_markdown_fences
 
 _DEFAULT_BASE_URL = "https://api.deepseek.com"
 
@@ -81,8 +81,13 @@ class DeepSeekProvider(BaseProvider):
         raw = (resp.choices[0].message.content or "").strip()
         try:
             return json.loads(raw)
-        except json.JSONDecodeError as exc:
-            raise ValueError(
-                f"DeepSeek returned invalid JSON despite json_object mode: "
-                f"{raw[:300]}"
-            ) from exc
+        except json.JSONDecodeError:
+            # Models may wrap JSON in markdown fences; strip and retry
+            stripped = strip_markdown_fences(raw)
+            try:
+                return json.loads(stripped)
+            except json.JSONDecodeError as exc:
+                raise ValueError(
+                    f"DeepSeek returned invalid JSON despite json_object mode: "
+                    f"{raw[:300]}"
+                ) from exc

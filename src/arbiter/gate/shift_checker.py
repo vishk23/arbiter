@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 
 class ShiftChecker:
     """Flag definitional shifts extracted by the claim extractor.
@@ -14,13 +16,25 @@ class ShiftChecker:
     """
 
     def __init__(self, seed_terms: dict[str, str]) -> None:
-        # Build a lowercase set for matching (substring-inclusive, matching
-        # the original logic: ``k in term or term in k``).
+        self._seed_terms = seed_terms
         self._seed_keys: set[str] = {k.strip().lower() for k in seed_terms}
+        # Pre-extract parenthetical abbreviations for matching
+        self._seed_abbrevs: set[str] = set()
+        for k in seed_terms:
+            for abbrev in re.findall(r"\(([^)]+)\)", k):
+                self._seed_abbrevs.add(abbrev.strip().lower())
 
     def _is_seed(self, term: str) -> bool:
         t = term.strip().lower()
-        return any(k in t or t in k for k in self._seed_keys)
+        if not t:
+            return False
+        # Exact match against seed keys
+        if t in self._seed_keys:
+            return True
+        # Match against parenthetical abbreviations
+        if t in self._seed_abbrevs:
+            return True
+        return False
 
     def check(self, shifts: list[dict]) -> list[dict]:
         """Return violation dicts for disallowed definitional shifts."""

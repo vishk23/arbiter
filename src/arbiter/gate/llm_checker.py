@@ -13,6 +13,7 @@ Advantages over regex:
 from __future__ import annotations
 
 import logging
+import re
 from typing import TYPE_CHECKING
 
 from arbiter.config import TokenBudgets
@@ -26,6 +27,29 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
+
+def _is_seed_term(term: str, seed_terms: dict[str, str]) -> bool:
+    """Check if *term* matches a seed term (case-insensitive, exact match).
+
+    Matches when:
+    - The extracted term equals a seed key exactly (ignoring case), OR
+    - The extracted term equals a seed key after stripping parenthetical
+      qualifiers (e.g. "IIT" matches "Integrated Information Theory (IIT) 4.0"
+      via the "(IIT)" inside).
+    """
+    t = term.strip().lower()
+    if not t:
+        return False
+    for k in seed_terms:
+        k_lower = k.strip().lower()
+        # Exact match
+        if t == k_lower:
+            return True
+        # Match against parenthetical abbreviations: extract text in parens
+        for abbrev in re.findall(r"\(([^)]+)\)", k_lower):
+            if t == abbrev.strip():
+                return True
+    return False
 
 
 def _build_system_prompt(config: "GateConfig") -> str:
@@ -120,11 +144,11 @@ class LLMChecker:
 
         violations: list[dict] = []
 
-        # Check rule violations
+        # Check rule violations (only high confidence, per Rule 8 in the prompt)
         for v in result.get("violations", []):
             if not v.get("violated"):
                 continue
-            if v.get("confidence") == "low":
+            if v.get("confidence") != "high":
                 continue
             violations.append({
                 "type": "llm_violation",
@@ -141,10 +165,7 @@ class LLMChecker:
             # Skip if the LLM says the term was NOT shifted
             if not shift.get("shifted", True):
                 continue
-            is_seed = any(
-                k.lower() in term.lower() or term.lower() in k.lower()
-                for k in self.config.seed_terms
-            )
+            is_seed = _is_seed_term(term, self.config.seed_terms)
             if is_seed or not shift.get("flagged_explicitly", False):
                 violations.append({
                     "type": "llm_definitional_shift",

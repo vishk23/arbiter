@@ -42,17 +42,25 @@ class TestShiftChecker:
         assert len(violations) == 1
         assert violations[0]["type"] == "definitional_shift_on_seed_term"
 
-    def test_substring_seed_match(self):
-        """'consciousness' should match seed 'conscious' via substring."""
+    def test_substring_no_longer_matches(self):
+        """'consciousness' should NOT match seed 'conscious' — exact match only."""
         checker = ShiftChecker({"conscious": "aware"})
         violations = checker.check([_shift("consciousness")])
         assert len(violations) == 1
-        assert violations[0]["type"] == "definitional_shift_on_seed_term"
+        # Not a seed match — treated as unflagged non-seed shift
+        assert violations[0]["type"] == "unflagged_definitional_shift"
 
-    def test_reverse_substring_match(self):
-        """Seed 'direct democracy' should match term 'democracy' via reverse substring."""
+    def test_partial_word_no_longer_matches(self):
+        """'democracy' should NOT match seed 'direct democracy' — exact match only."""
         checker = ShiftChecker({"direct democracy": "rule by people"})
         violations = checker.check([_shift("democracy")])
+        assert len(violations) == 1
+        assert violations[0]["type"] == "unflagged_definitional_shift"
+
+    def test_abbreviation_in_parens_matches(self):
+        """Parenthetical abbreviations in seed keys should match."""
+        checker = ShiftChecker({"Integrated Information Theory (IIT) 4.0": "framework"})
+        violations = checker.check([_shift("IIT")])
         assert len(violations) == 1
         assert violations[0]["type"] == "definitional_shift_on_seed_term"
 

@@ -16,6 +16,7 @@ from arbiter.agents.agent import Agent
 from arbiter.agents.context import ContextBuilder, _open_hits_for
 from arbiter.config import ArbiterConfig
 from arbiter.export import export_argdown, export_json, export_markdown
+from arbiter.export.live_html import write_live_html
 from arbiter.gate.validity_gate import ValidityGate
 from arbiter.judge.mid_debate import MidDebateJudge
 from arbiter.ledger.ops import add_hit, ledger_grew, open_hits, resolve_hit
@@ -26,6 +27,7 @@ from arbiter.retrieval.retriever import Retriever
 from arbiter.state import DebateState, initial_state
 from arbiter.steelman.loop import iterated_steelman as run_steelman
 from arbiter.verifier.z3_plugin import Z3Plugin
+from arbiter.web.event_bus import get_bus
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -168,9 +170,15 @@ class DebateEngine:
         For gated/adversarial topologies, each turn passes through the
         validity gate's rewrite loop.
         """
+        ledger = state.get("ledger", [])
+        n_open = sum(1 for h in ledger if h.get("status") == "open")
+        n_total = len(ledger)
         console.print(
             f"\n[bold yellow]=== ROUND {state['round_idx']} ===[/bold yellow]"
+            f"  [dim](ledger: {n_open} open / {n_total} total hits,"
+            f" stale rounds: {state.get('rounds_without_growth', 0)})[/dim]"
         )
+        get_bus().emit("debate.round_start", "debate", {"round_idx": state["round_idx"], "ledger_open": n_open, "ledger_total": n_total, "stale_rounds": state.get("rounds_without_growth", 0)})
 
         # Rebuild prior claims from transcript (deterministic from state)
         self._rebuild_prior_claims(state["transcript"])
@@ -241,7 +249,11 @@ class DebateEngine:
 
                 if required > 0:
                     block = parse_ledger_block(entry_text)
-                    addressed = len(block.get("hits_addressed", []))
+                    # Count only valid dicts (not strings, nulls, or ints)
+                    addressed = sum(
+                        1 for h in block.get("hits_addressed", [])
+                        if isinstance(h, dict) and h.get("id") and h.get("status")
+                    )
 
                     if addressed < required:
                         # Re-prompt once with explicit hit list
@@ -261,6 +273,18 @@ class DebateEngine:
                             "Ledger enforcement: %s re-prompted (%d/%d addressed)",
                             agent_name, addressed, required,
                         )
+                        # Check compliance after retry
+                        retry_block = parse_ledger_block(entry_text)
+                        retry_addressed = sum(
+                            1 for h in retry_block.get("hits_addressed", [])
+                            if isinstance(h, dict) and h.get("id") and h.get("status")
+                        )
+                        if retry_addressed < required:
+                            logger.warning(
+                                "Ledger enforcement: %s still non-compliant after retry "
+                                "(%d/%d addressed). Accepting output.",
+                                agent_name, retry_addressed, required,
+                            )
 
             # Build transcript entry
             entry: Dict[str, Any] = {
@@ -325,9 +349,25 @@ class DebateEngine:
                 else 0
             )
             vstatus = entry.get("validity_status", "ok")
-            console.print(
-                f"  [{agent_name}] {vstatus} (rewrites={rewrites})"
+            # Count hits addressed this turn
+            turn_block = parse_ledger_block(entry_text)
+            n_addressed = sum(
+                1 for h in turn_block.get("hits_addressed", [])
+                if isinstance(h, dict) and h.get("id")
             )
+            n_new = len(turn_block.get("new_hits", []))
+            agent_side = self.config.agents[agent_name].side
+            n_open_for = sum(
+                1 for h in cur_state.get("ledger", [])
+                if h.get("status") == "open"
+                and h.get("against", "") in (agent_side, "Theory")
+            )
+            console.print(
+                f"  [{agent_name}] {vstatus} "
+                f"(rewrites={rewrites}, +{n_new} hits, "
+                f"addressed={n_addressed}, open_against={n_open_for})"
+            )
+            get_bus().emit("debate.agent_turn", "debate", {"agent": agent_name, "side": self.config.agents[agent_name].side, "round": state["round_idx"], "text": entry_text[:2000], "validity_status": vstatus, "rewrites": rewrites, "hits_new": n_new, "hits_addressed": n_addressed, "open_against": n_open_for})
 
         result: dict = {"transcript": new_entries}
         if new_validity_log:
@@ -364,6 +404,7 @@ class DebateEngine:
             f"  [validity_audit] round {round_idx}: "
             f"turns={n} violations={n_violations} rewrites={n_rewrites}"
         )
+        get_bus().emit("debate.validity_audit", "debate", {"round": round_idx, "turns": n, "violations": n_violations, "rewrites": n_rewrites})
 
         if self.live_logger:
             self.live_logger.note(
@@ -433,6 +474,7 @@ class DebateEngine:
                     ledger = resolve_hit(ledger, hit_id, status, rebuttal)
 
         grew = ledger_grew(ledger, state["last_ledger_size"])
+        get_bus().emit("debate.ledger_update", "debate", {"hits_total": len(ledger), "hits_open": sum(1 for h in ledger if h.get("status") == "open"), "grew": grew})
 
         return {
             "ledger": ledger,
@@ -460,6 +502,25 @@ class DebateEngine:
             signals = self.mid_judge.generate_signals(
                 state["round_idx"], round_transcript, oh
             )
+
+        # Live argdown: write current argument map after each round
+        ledger = state.get("ledger", [])
+        if ledger:
+            ad = export_argdown(ledger, self.config.judge.sides)
+            live_path = self._out_dir / "live_arguments.argdown"
+            live_path.write_text(ad)
+            n_open = sum(1 for h in ledger if h.get("status") == "open")
+            n_resolved = sum(1 for h in ledger if h.get("status") != "open")
+
+            # Render live HTML with embedded argdown web component
+            html_path = self._out_dir / "live_arguments.html"
+            write_live_html(html_path, self.config.topic.name,
+                           f"Round {state['round_idx']} — {len(ledger)} hits", ad)
+            console.print(
+                f"  [dim]Argument map: {html_path} "
+                f"({len(ledger)} hits: {n_resolved} resolved, {n_open} open)[/dim]"
+            )
+            get_bus().emit("debate.argdown", "debate", {"argdown_text": ad, "hits_total": len(ledger), "hits_open": n_open, "hits_resolved": n_resolved})
 
         return {
             "judge_signals": signals,
@@ -506,6 +567,31 @@ class DebateEngine:
             )
             lines.append(f"  total rewrites issued: {total_rewrites}")
 
+        # ── Ledger summary ──────────────────────────────────────────
+        ledger = state.get("ledger", [])
+        if ledger:
+            n_open = sum(1 for h in ledger if h.get("status") == "open")
+            n_rebutted = sum(1 for h in ledger if h.get("status") == "rebutted")
+            n_conceded = sum(1 for h in ledger if h.get("status") == "conceded")
+            n_dodged = sum(1 for h in ledger if h.get("status") == "dodged")
+            lines.append("")
+            lines.append("LEDGER SUMMARY:")
+            lines.append(f"  total hits: {len(ledger)}")
+            lines.append(
+                f"  open={n_open}  rebutted={n_rebutted}  "
+                f"conceded={n_conceded}  dodged={n_dodged}"
+            )
+            if n_open > 0:
+                by_side: dict[str, int] = {}
+                for h in ledger:
+                    if h.get("status") == "open":
+                        side = h.get("against", "?")
+                        by_side[side] = by_side.get(side, 0) + 1
+                lines.append(
+                    f"  open by side: "
+                    + ", ".join(f"{s}={c}" for s, c in sorted(by_side.items()))
+                )
+
         # ── Steelman loop (optional) ─────────────────────────────────
         steelman_result: dict | None = None
         if (
@@ -532,6 +618,7 @@ class DebateEngine:
             )
 
         formal_verdict = "\n".join(lines) if lines else ""
+        get_bus().emit("debate.finalize", "debate", {"formal_verdict": formal_verdict[:3000]})
 
         # ── Export ────────────────────────────────────────────────────
         final_state = dict(state)
@@ -644,6 +731,7 @@ class DebateEngine:
                 f"(topology={self.config.topology}, "
                 f"max_rounds={self.config.convergence.max_rounds})"
             )
+            get_bus().emit("debate.start", "debate", {"topic": self.config.topic.name, "agents": list(self.agents.keys()), "topology": self.config.topology, "max_rounds": self.config.convergence.max_rounds})
             result = app.invoke(initial_state(), config=run_config)
 
         # Close the checkpoint DB connection

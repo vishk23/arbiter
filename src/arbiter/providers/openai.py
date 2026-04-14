@@ -70,11 +70,17 @@ class OpenAIProvider(BaseProvider):
 
     @staticmethod
     def _add_additional_properties_false(schema: dict) -> dict:
-        """OpenAI strict mode requires additionalProperties: false on every object."""
+        """OpenAI strict mode requires additionalProperties: false on every object.
+
+        Preserves intentional ``additionalProperties`` schemas (e.g.
+        ``{"type": "string"}`` for dynamic-key objects) — only injects
+        ``false`` when the key is absent.
+        """
         if not isinstance(schema, dict):
             return schema
         if schema.get("type") == "object":
-            schema["additionalProperties"] = False
+            if "additionalProperties" not in schema:
+                schema["additionalProperties"] = False
             if "required" not in schema:
                 schema["required"] = list(schema.get("properties", {}).keys())
         for v in schema.values():
@@ -86,11 +92,41 @@ class OpenAIProvider(BaseProvider):
                         OpenAIProvider._add_additional_properties_false(item)
         return schema
 
+    @staticmethod
+    def _has_dynamic_keys(schema: dict) -> bool:
+        """Return True if schema uses additionalProperties for dynamic keys."""
+        ap = schema.get("additionalProperties")
+        return isinstance(ap, dict)
+
     def _call_structured_impl(
         self, system: str, user: str, schema: dict, max_tokens: int = 4000
     ) -> dict:
         import copy
-        strict_schema = self._add_additional_properties_false(copy.deepcopy(schema))
+
+        # Dynamic-key schemas (additionalProperties: {type: string}) are
+        # incompatible with OpenAI strict mode — use non-strict JSON schema.
+        dynamic = self._has_dynamic_keys(schema)
+        if dynamic:
+            processed_schema = copy.deepcopy(schema)
+        else:
+            processed_schema = self._add_additional_properties_false(
+                copy.deepcopy(schema)
+            )
+
+        # Dynamic-key schemas can't use json_schema at all (OpenAI requires
+        # "properties" on every object even with strict=false). Fall back to
+        # json_object which just ensures valid JSON without schema validation.
+        if dynamic:
+            text_format = {"format": {"type": "json_object"}}
+        else:
+            text_format = {
+                "format": {
+                    "type": "json_schema",
+                    "name": "structured_output",
+                    "schema": processed_schema,
+                    "strict": True,
+                }
+            }
 
         kwargs: dict = dict(
             model=self.model,
@@ -99,14 +135,7 @@ class OpenAIProvider(BaseProvider):
                 {"role": "user", "content": user},
             ],
             max_output_tokens=max_tokens,
-            text={
-                "format": {
-                    "type": "json_schema",
-                    "name": "structured_output",
-                    "schema": strict_schema,
-                    "strict": True,
-                }
-            },
+            text=text_format,
         )
 
         self._apply_reasoning(kwargs, max_tokens)

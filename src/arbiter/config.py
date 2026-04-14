@@ -90,14 +90,15 @@ class EntailmentCheckConfig(BaseModel):
 
 class GateConfig(BaseModel):
     enabled: bool = True
-    primary: str = "llm"  # "llm" (default, catches paraphrases) or "regex" (deterministic)
+    primary: str = "llm"  # "llm" (default, recommended) or "regex" (legacy, deterministic)
     max_rewrites: int = 2
     extraction_provider: Optional[str] = None  # provider for claim extraction
     llm_checker_provider: Optional[str] = None  # provider for LLM primary check (default: extraction_provider)
     llm_checker_model: Optional[str] = None  # override model (e.g. gpt-5.4-nano for cheap checks)
-    stipulated_rules: List[StipulatedRule] = []  # regex rules (additive when primary=llm, primary when primary=regex)
+    use_regex_additive: bool = False  # when True, regex rules run alongside LLM checker (legacy, not recommended)
+    stipulated_rules: List[StipulatedRule] = []  # regex rules (only used when use_regex_additive=True or primary=regex)
     seed_terms: Dict[str, str] = {}
-    entailment_check: Optional[EntailmentCheckConfig] = None  # legacy backstop (auto-disabled when primary=llm)
+    entailment_check: Optional[EntailmentCheckConfig] = None  # legacy backstop (only used when primary=regex)
 
 
 # ── Z3 verifier ────────────────────────────────────────────────────────
@@ -185,7 +186,7 @@ class TopicConfig(BaseModel):
 class OutputConfig(BaseModel):
     dir: str = "output/"
     live_log: bool = True
-    formats: List[str] = ["json", "markdown"]
+    formats: List[str] = ["json", "markdown", "argdown"]
     checkpoint_db: str = "checkpoints.sqlite"
 
 
@@ -195,7 +196,7 @@ class OutputConfig(BaseModel):
 class ArbiterConfig(BaseModel):
     schema_version: str = "1.0"
     topic: TopicConfig
-    topology: Literal["standard", "gated", "adversarial"] = "standard"
+    topology: Literal["standard", "gated", "adversarial"] = "gated"
     token_budgets: TokenBudgets = TokenBudgets()
     providers: Dict[str, ProviderConfig]
     agents: Dict[str, AgentConfig]

@@ -60,6 +60,24 @@ def aggregate(
     for v in verdicts.values():
         counts[v["verdict"]] = counts.get(v["verdict"], 0) + 1
     agg["verdict_counts"] = counts
-    agg["panel_verdict"] = max(counts.items(), key=lambda x: x[1])[0]
+
+    # Determine panel verdict: majority vote wins; on tie, use mean total scores.
+    max_votes = max(counts.values())
+    leaders = [side for side, c in counts.items() if c == max_votes]
+    if len(leaders) == 1:
+        agg["panel_verdict"] = leaders[0]
+    else:
+        # Tie in votes — break by higher mean total score
+        score_leaders = [
+            s for s in leaders if s in agg["criterion_means"]
+        ]
+        if score_leaders:
+            agg["panel_verdict"] = max(
+                score_leaders,
+                key=lambda s: agg["criterion_means"][s].get("total", 0),
+            )
+        else:
+            # Fallback (e.g. "Tied" label not in sides) — pick first
+            agg["panel_verdict"] = leaders[0]
 
     return agg

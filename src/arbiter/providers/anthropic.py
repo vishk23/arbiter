@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import logging
 import os
-
-
+from typing import TYPE_CHECKING
 
 from arbiter.config import ProviderConfig
 from arbiter.providers.base import BaseProvider
+
+if TYPE_CHECKING:
+    from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 
@@ -111,6 +113,11 @@ class AnthropicProvider(BaseProvider):
             "tool_choice": {"type": "tool", "name": tool_name},
         }
 
+        # NOTE: Anthropic does NOT support thinking with tool_choice forced.
+        # "Thinking may not be enabled when tool_choice forces tool use."
+        # So we intentionally skip _apply_thinking here. The model still
+        # reasons internally; it just doesn't get extended thinking budget.
+
         resp = self._client.messages.create(**kwargs)
 
         # Extract the tool input from the response
@@ -127,5 +134,61 @@ class AnthropicProvider(BaseProvider):
         raise ValueError(
             f"Anthropic tool-use structured output failed. "
             f"No tool_use block in response. Content types: {content_types}"
+        )
+
+    # ── Pydantic-native structured call (supports thinking) ──────────
+
+    def _call_parsed_impl(
+        self,
+        system: str,
+        user: str,
+        model_class: type["BaseModel"],
+        max_tokens: int = 4000,
+    ) -> dict:
+        """Use Anthropic's ``messages.parse(output_format=...)`` for structured output.
+
+        Unlike ``_call_structured_impl`` (tool_choice), this approach is
+        compatible with extended thinking. The API returns a ``parsed_output``
+        attribute with the validated Pydantic model.
+        """
+        kwargs: dict = {
+            "model": self.model,
+            "max_tokens": max_tokens,
+            "system": system,
+            "messages": [{"role": "user", "content": user}],
+            "output_format": model_class,
+        }
+
+        # Apply thinking — this is supported with messages.parse()
+        self._apply_thinking(kwargs, max_tokens)
+
+        resp = self._client.messages.parse(**kwargs)
+
+        if resp.parsed_output is not None:
+            return resp.parsed_output.model_dump()
+
+        # Fallback: extract text and parse manually
+        import json
+        text = "\n".join(
+            b.text for b in resp.content if b.type == "text"
+        ).strip()
+        if text:
+            from arbiter.providers.base import strip_markdown_fences
+            return json.loads(strip_markdown_fences(text))
+
+        # If only thinking blocks returned, the model spent all output tokens
+        # on reasoning with nothing left for the response. Log and raise with
+        # actionable message so the retry loop can try again.
+        content_types = [b.type for b in resp.content]
+        if content_types == ["thinking"]:
+            logger.warning(
+                "Anthropic exhausted output budget on thinking (%d tokens). "
+                "Increase max_tokens or lower thinking effort.",
+                kwargs.get("max_tokens", 0),
+            )
+        raise ValueError(
+            f"Anthropic messages.parse returned no parsed_output and no text. "
+            f"Content types: {content_types}. "
+            f"Try increasing max_tokens (was {kwargs.get('max_tokens', '?')})."
         )
 

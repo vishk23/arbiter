@@ -7,7 +7,7 @@ import logging
 import re
 
 from arbiter.config import ProviderConfig
-from arbiter.providers.base import BaseProvider
+from arbiter.providers.base import BaseProvider, strip_markdown_fences
 
 logger = logging.getLogger(__name__)
 
@@ -64,10 +64,15 @@ class OllamaProvider(BaseProvider):
         try:
             return json.loads(raw)
         except json.JSONDecodeError:
-            # Local models may still wrap JSON in markdown; strip fences
-            m = re.search(r"\{.*\}", raw, re.DOTALL)
-            if m:
-                return json.loads(m.group(0))
-            raise ValueError(
-                f"Ollama returned unparseable JSON. Raw:\n{raw[:500]}"
-            )
+            # Local models may wrap JSON in markdown fences; strip and retry
+            stripped = strip_markdown_fences(raw)
+            try:
+                return json.loads(stripped)
+            except json.JSONDecodeError:
+                # Last resort: extract first JSON object
+                m = re.search(r"\{.*\}", raw, re.DOTALL)
+                if m:
+                    return json.loads(m.group(0))
+                raise ValueError(
+                    f"Ollama returned unparseable JSON. Raw:\n{raw[:500]}"
+                )

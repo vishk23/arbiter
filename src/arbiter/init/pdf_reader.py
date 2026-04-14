@@ -17,7 +17,10 @@ _B = TokenBudgets()
 
 # Rough chars-per-token estimate (conservative for English prose).
 _CHARS_PER_TOKEN = 4
-_MAX_CHUNK_CHARS = 80_000 * _CHARS_PER_TOKEN  # ~80K tokens per chunk
+# Target ~30K tokens input per chunk. Keeps LLM focused and ensures
+# the output budget (16K tokens) can capture all claims from the chunk.
+# Previous value of 80K caused single-chunk extraction failures on large PDFs.
+_MAX_CHUNK_CHARS = 30_000 * _CHARS_PER_TOKEN  # ~30K tokens per chunk
 
 
 # ---------------------------------------------------------------------------
@@ -161,6 +164,17 @@ def extract_claims(
             max_tokens=max_tokens,
         )
         chunk_claims: list[dict] = result.get("claims", [])
+        logger.info(
+            "Chunk %d/%d: extracted %d claims",
+            idx + 1, len(chunks), len(chunk_claims),
+        )
+        if not chunk_claims:
+            logger.warning(
+                "Chunk %d/%d returned 0 claims from %d chars — "
+                "LLM may have hit output limits or failed to parse the content. "
+                "First 200 chars of chunk: %s",
+                idx + 1, len(chunks), len(chunk), chunk[:200],
+            )
 
         # Re-number IDs so they don't collide across chunks.
         if id_offset > 0:
@@ -169,6 +183,15 @@ def extract_claims(
         all_claims.extend(chunk_claims)
         id_offset = len(all_claims)
 
+    if not all_claims:
+        logger.error(
+            "PDF claim extraction returned 0 claims across %d chunks (%d total chars). "
+            "The init pipeline will produce a placeholder config. "
+            "Check that the PDF contains extractable text (not scanned images).",
+            len(chunks), len(text),
+        )
+
+    logger.info("Total claims extracted: %d", len(all_claims))
     return all_claims
 
 
