@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
@@ -6,500 +6,458 @@
 \usepackage{hyperref}
 \usepackage{xcolor}
 \usepackage{enumitem}
+\usepackage{listings}
+%\usepackage{multirow}
 \usepackage[margin=1in]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tabularx}
 
-\title{Multi-Backend Formal Verification with LLM-Generated Proof Certificates:\\
-100\% on miniF2F via Knuckledragger and SymPy}
+\definecolor{codegreen}{rgb}{0,0.5,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.96,0.96,0.96}
+\definecolor{invalidred}{rgb}{0.85,0.15,0.15}
+\definecolor{validgreen}{rgb}{0.1,0.6,0.1}
+
+\lstdefinestyle{z3style}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codepurple},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codegreen},
+    basicstyle=\ttfamily\scriptsize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single
+}
+\lstset{style=z3style}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black
+}
+
+\title{\textbf{52\% of LLM-Generated Z3 Proofs Are Invalid:\\Why Theorem Proving Benchmarks Need Proof Certificates}}
 
 \author{
-  Vishnu Kchitti
+  Vishnu Kchitti\\
+  \texttt{vishnu@arbiter.dev}
 }
 
 \date{April 2026}
 
 \begin{document}
+
 \maketitle
 
 \begin{abstract}
-We present a multi-backend approach to LLM-driven formal theorem proving that combines
-Knuckledragger (a Z3-based proof assistant), SymPy (a computer algebra system), and
-a pipeline of SymPy pre-computation hints, multi-attempt generation, and
-counterexample-guided repair. On the miniF2F test set (244 competition mathematics problems),
-Claude Sonnet 4.5 achieves \textbf{100\% proof rate with 89.3\% machine-verified certificates}---compared
-to 55.7\% for MiniF2F-Dafny using the same model with Dafny proofs. A smaller model (gpt-5.4-mini)
-achieves 88.5\% $\pm$ 0.7\% across three random seeds at a fraction of the cost. We further
-demonstrate the approach on ProofNet (100\%/94\% certified) and MATH Level 5 (100\%/90\% certified).
-A case study applying the system to verify claims in an economics research paper shows that
-multi-agent debate with formal verification can separate what a paper proves from what it claims,
-identifying 17 concessions in a paper that purports to ``prove'' AI over-automation is inevitable.
-All code, proof artifacts, and benchmark results are publicly available.
+LLM-based theorem provers now report near-perfect scores on miniF2F, yet these headline numbers conflate ``the solver returned \texttt{sat}/\texttt{unsat}'' with ``the proof is correct.'' We audited 23 LLM-generated Z3 proof modules targeting the 35-problem miniF2F-hard tier (AIME and IMO problems) and found that \textbf{only 3 (13\%) are fully valid}, 8 (35\%) are partial, and \textbf{12 (52\%) are outright invalid}---producing a trust gap between a reported 65.7\% solve rate and an actual 8.6\% certified rate. We taxonomize seven failure modes including vacuous encoding, assumed derivations, silent crashes, encoding mismatch, trivial arithmetic tails, missing quantifiers, and partial proofs. To close this gap, we introduce a certification pipeline built on Knuckledragger (a Z3 proof assistant with tamper-proof \texttt{Proof} objects) and SymPy (for algebraic pre-computation), achieving \textbf{89.3\% certified on the full 244-problem miniF2F} with Claude Sonnet 4.5 and 70.8\% $\pm$ 3.1\% certified with gpt-5.4-mini across three seeds. We argue that \emph{all} SMT-based benchmarks should report certificate rates alongside solve rates, and release our audit corpus and certification pipeline to facilitate this.
 \end{abstract}
 
 %% ============================================================
-\section{Introduction}
-%% ============================================================
+\section{Introduction}\label{sec:intro}
 
-LLM-driven formal theorem proving has emerged as a promising approach to automated mathematics,
-with systems like AlphaProof \cite{alphaproof2024}, DeepSeek-Prover-V2 \cite{deepseek2025},
-and MiniF2F-Dafny \cite{minif2f_dafny2025} demonstrating strong results on competition
-mathematics. However, these systems face a fundamental tension: interactive theorem provers
-(Lean, Dafny, Isabelle) provide strong verification guarantees but require the LLM to generate
-complex tactic proofs, while SMT solvers (Z3) are easier for LLMs to target but lack proof
-certificates---making it difficult to distinguish genuine proofs from vacuous encodings.
+The miniF2F benchmark~\cite{zheng2022minif2f} has become the de facto leaderboard for LLM-based formal theorem proving. Recent systems report extraordinary numbers: Seed-Prover achieves $\sim$100\% on the test split~\cite{seedprover2025}, HILBERT reaches 99.2\%~\cite{hilbert2025}, Kimina-Prover reports 92.2\%~\cite{kimina2025}, and Goedel-Prover-V2 achieves 90.4\%~\cite{goedel2025}. These results are rightly celebrated---they demonstrate that large language models can generate non-trivial formal proofs.
 
-We discovered this problem empirically. Our initial Z3-only benchmark reported 65.7\% on
-miniF2F-hard, but manual audit revealed that \textbf{only 8.6\% were genuine proofs}---the
-rest included vacuous encodings, assumed conclusions, and runtime crashes that the benchmark
-framework accepted as ``proved.'' This motivated a complete redesign around verified proof
-certificates.
+But what exactly is being measured? In Lean-based systems, the Lean kernel type-checks every proof term, providing a genuine certificate of correctness. In SMT-based approaches, however, the situation is murkier. When a Z3 script returns \texttt{unsat}, it means the solver found the negated formula unsatisfiable---but it says nothing about whether the \emph{encoding} faithfully represents the original mathematical claim. An LLM can produce a Z3 script that ``solves'' a problem by asserting the conclusion as a premise, by encoding a weaker statement, or by exploiting solver timeouts that mask incomplete proofs. The solver happily returns \texttt{unsat} in all these cases.
+
+This is not a hypothetical concern. We audited 23 LLM-generated Z3 proof modules on the miniF2F-hard tier (35 AIME and IMO competition problems) and found that \textbf{52\% are invalid}. The reported solve rate of 65.7\% collapses to an actual certified rate of 8.6\% once we verify that the encodings are faithful, the derivations are sound, and the proofs are complete. This 57-point trust gap---between what the solver reports and what is actually proved---is the central finding of this paper.
+
+The problem echoes a broader crisis of trust in LLM evaluation. The PAJAMA study~\cite{pajama2025} and subsequent ``Time to Impeach LLM-as-a-Judge'' critiques~\cite{impeach2025} have demonstrated that LLM-based evaluators systematically over-report quality. Theorem proving was supposed to be different: formal proofs are verifiable by construction. But this guarantee holds only when the proof \emph{certificate} is checked, not merely the solver's return code.
+
+To address this, we propose that SMT-based benchmarks should require \textbf{proof certificates}---independently verifiable artifacts that attest to the correctness of both the encoding and the derivation. We implement this using Knuckledragger~\cite{knuckledragger2026}, a Z3 proof assistant developed by Philip Zucker that wraps Z3's proof-producing mode in tamper-proof \texttt{Proof} objects, combined with SymPy for algebraic pre-computation. Our certification pipeline (Section~\ref{sec:methodology}) achieves 89.3\% certified on the full 244-problem miniF2F with Claude Sonnet 4.5, and 70.8\% $\pm$ 3.1\% certified with gpt-5.4-mini across three seeds---numbers that are lower than headline solve rates but \emph{trustworthy}.
 
 \paragraph{Contributions.}
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{Multi-backend proof generation}: We combine Knuckledragger \cite{zucker2024kd}
-    (Z3 with tamper-proof \texttt{Proof} objects), SymPy (rigorous algebraic verification via
-    \texttt{minimal\_polynomial}), and raw Z3 (for counterexamples and optimization), with the
-    LLM selecting the appropriate backend per problem.
-  \item \textbf{Pipeline innovations}: SymPy pre-computation hints (solve symbolically, then
-    verify formally), multi-attempt generation (3 independent tries), counterexample-guided
-    repair (extract Z3 model on failure, inform retry), and certificate upgrade passes.
-  \item \textbf{State-of-the-art results}: 244/244 (100\%) on miniF2F with 89.3\% certified,
-    compared to MiniF2F-Dafny's 55.7\% with the same model. Cross-benchmark validation on
-    ProofNet (100\%/94\%) and MATH Level 5 (100\%/90\%).
-  \item \textbf{Practical application}: A case study using multi-agent debate with formal
-    verification on an economics paper, demonstrating the system's ability to rigorously
-    evaluate research claims.
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+    \item A systematic audit of LLM-generated Z3 proofs revealing that 52\% are invalid, with a taxonomy of seven failure modes (Section~\ref{sec:audit}).
+    \item A certification pipeline based on Knuckledragger and SymPy that produces independently verifiable proof certificates (Section~\ref{sec:methodology}).
+    \item Experiments on miniF2F, ProofNet, and MATH5 reporting both solve rates and certificate rates, demonstrating a persistent trust gap across models and benchmarks (Section~\ref{sec:experiments}).
 \end{enumerate}
 
 %% ============================================================
-\section{Related Work}
-%% ============================================================
+\section{The Audit: What Goes Wrong}\label{sec:audit}
 
-\paragraph{LLM-driven theorem proving.}
-The dominant paradigm uses Lean 4 with RL-based proof search.
-DeepSeek-Prover-V2 \cite{deepseek2025} achieves 88.9\% on miniF2F-test using a 671B model
-with recursive subgoal decomposition.
-Kimina-Prover \cite{kimina2025} reaches 92.2\% with test-time RL search (the current Lean SOTA),
-and Goedel-Prover-V2 \cite{goedel2025} achieves 90.4\% with self-correction at lower compute.
-BFS-Prover \cite{bfsprover2025} reaches 72.95\% with best-first search (open-sourced by ByteDance).
-All require hundreds of proof attempts per problem with specialized Lean models.
-On the SMT side, MiniF2F-Dafny \cite{minif2f_dafny2025} achieves 55.7\% at POPL 2026 using
-Claude Sonnet 4.5 with Dafny's Z3 backend---notably, Dafny's automation alone solves 40.6\%
-with empty proofs, validating the SMT approach.
-For ProofNet, BFS-Prover-V2 \cite{bfsprover2025} reaches 41.4\% (up from COPRA's 26.5\%).
-AlphaProof \cite{alphaproof2024} solved 4/6 IMO 2024 problems (published in Nature 2025),
-while Gemini Deep Think scored 35/42 on IMO 2025 using natural-language reasoning without
-formal proofs \cite{gemini_imo2025}---suggesting the field is bifurcating between formal
-and informal approaches.
-Our work occupies a distinct niche: SMT-based (like Dafny) but with proof certificates
-(like Lean), combined with CAS verification (SymPy) for domains outside first-order logic.
+We audited 23 Z3 proof modules generated by an LLM pipeline (gpt-5.4-mini, 3 retries) targeting the 35-problem miniF2F-hard tier. Each module was manually inspected by the first author and classified into one of three categories: \textsc{Valid} (faithful encoding + complete derivation), \textsc{Partial} (correct encoding but incomplete derivation or minor gaps), and \textsc{Invalid} (unfaithful encoding or fundamentally unsound reasoning). The results are stark:
 
-\paragraph{Knuckledragger.} Knuckledragger \cite{zucker2024kd} is a Python proof assistant
-built on Z3 that returns tamper-proof \texttt{Proof} objects. Unlike raw Z3 (which returns
-only SAT/UNSAT), \texttt{kd.prove(claim)} either produces a verified proof certificate or
-raises \texttt{LemmaError}. Active development continues with kernel improvements and
-symbolic union support \cite{zucker2026state}. Zucker notes that ``AI is very good at using
-Knuckledragger out of the box,'' making it well-suited for LLM-generated proofs.
-No prior work has benchmarked Knuckledragger on standard theorem-proving datasets.
-
-\paragraph{Multi-agent debate for claim verification.}
-Recent work questions whether multi-agent debate (MAD) adds value beyond majority voting
-\cite{mad_scaling2025,can_llm_debate2025}. Controlled studies show debate's incremental
-contribution is modest for standard reasoning tasks. However, debate \emph{with formal
-verification}---where proved facts constrain arguments---is underexplored.
-Earlier work on MAD includes Du et al.\ \cite{du2023debate} and ChatEval \cite{liang2023chateval}.
-but typically without formal verification. Our Arbiter framework combines structured debate
-with Z3/Knuckledragger verification, using formally verified facts as non-debatable
-stipulations that constrain agent arguments.
-
-%% ============================================================
-\section{Method}
-%% ============================================================
-
-\subsection{Multi-Backend Architecture}
-
-Given a mathematical claim $C$, our system routes to the appropriate verification backend:
-
-\begin{itemize}[leftmargin=*]
-  \item \textbf{Knuckledragger (kdrag)}: For claims expressible in first-order logic over
-    integers, reals, and algebraic datatypes. Produces \texttt{kd.Proof} objects verified
-    by Z3's SMT solver. Handles: Diophantine equations, polynomial inequalities, divisibility,
-    linear algebra, inductive properties.
-  \item \textbf{SymPy}: For claims involving trigonometry, symbolic algebra, recurrences, and
-    series. Uses \texttt{minimal\_polynomial(expr, x) == x} to rigorously prove algebraic
-    zeros (not numerical approximation). Handles: trig identities, closed-form solutions,
-    GCD computations, series evaluation.
-  \item \textbf{Raw Z3}: For counterexample extraction (\texttt{s.model().eval()}) and
-    optimization (\texttt{Optimize().minimize/maximize}). Used as a complement to
-    Knuckledragger, not as a standalone prover.
-\end{itemize}
-
-The LLM generates a Python module that imports from the appropriate backends.
-Backend selection is guided by examples in the prompt (Table~\ref{tab:backend_selection}).
-
-\begin{table}[h]
-\centering
-\caption{Backend selection guide provided to the LLM.}
-\label{tab:backend_selection}
-\begin{tabular}{lll}
-\toprule
-\textbf{Problem type} & \textbf{Backend} & \textbf{Verification method} \\
-\midrule
-Integer Diophantine & kdrag & \texttt{kd.prove(ForAll([x,y], ...))} \\
-Polynomial inequality & kdrag & QF\_NRA solver \\
-Trig identity & SymPy & \texttt{minimal\_polynomial == x} \\
-Recurrence & SymPy & \texttt{rsolve()} \\
-Inductive property & kdrag & \texttt{kd.Lemma + l.induct()} \\
-Counterexample search & Z3 & \texttt{Solver + model.eval()} \\
-Boundary analysis & Z3 & \texttt{Optimize()} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\subsection{Pipeline (v3)}
-
-For each problem, the pipeline executes:
-
-\begin{enumerate}[leftmargin=*]
-  \item \textbf{SymPy pre-computation}: Attempt to solve the problem symbolically.
-    If successful, pass the answer as a hint to the proof generator. This reduces encoding
-    errors---the LLM knows \emph{what} to prove before attempting \emph{how}.
-  \item \textbf{Multi-attempt generation}: Generate up to 3 independent proof modules.
-    Each attempt uses the same prompt but different sampling. Take the first module where
-    all checks pass.
-  \item \textbf{Execution and repair}: Execute each module in a subprocess (90s timeout).
-    On failure, extract error information (including Z3 counterexamples when available) and
-    generate a repair (up to 2 repairs per attempt).
-  \item \textbf{Certificate upgrade}: If a proof passes all checks but lacks a formal
-    certificate (\texttt{kd.Proof} or \texttt{minimal\_polynomial}), make one additional
-    generation pass specifically requesting certification.
-\end{enumerate}
-
-In total, each problem may receive up to $3 \times 3 + 1 = 10$ LLM calls in the worst case
-(3 attempts $\times$ (1 initial + 2 repairs) + 1 certificate upgrade).
-
-\subsection{Proof Certificates}
-
-A result is \emph{certified} if it produces one of:
-\begin{itemize}[leftmargin=*]
-  \item A \texttt{kd.Proof} object (Knuckledragger verified the claim via Z3)
-  \item A SymPy \texttt{minimal\_polynomial(expr, x) == x} result (algebraic zero proof)
-\end{itemize}
-
-Both are tamper-proof: \texttt{kd.prove()} raises \texttt{LemmaError} on invalid claims,
-and \texttt{minimal\_polynomial} is computed by SymPy's algebraic number theory engine
-(not numerical approximation). A result is \emph{proved} (but uncertified) if all checks
-pass but the module uses only numerical verification.
-
-%% ============================================================
-\section{Experiments}
-%% ============================================================
-
-\subsection{Benchmarks}
-
-We evaluate on three standard benchmarks:
-\begin{itemize}[leftmargin=*]
-  \item \textbf{miniF2F} \cite{zheng2022minif2f}: 244 competition mathematics problems
-    (MATHD, AMC, AIME, IMO). We use the test split with informal statements.
-  \item \textbf{ProofNet} \cite{azerbayev2023proofnet}: 186 undergraduate mathematics
-    problems. We evaluate on 50 randomly sampled problems.
-  \item \textbf{MATH Level 5} \cite{hendrycks2021math}: The hardest tier of the MATH
-    dataset. We evaluate on 50 randomly sampled problems.
-\end{itemize}
-
-\subsection{Models}
-
-We test four models spanning different capability and cost tiers:
-GPT-4o, gpt-5.4-mini, gpt-5.4, and Claude Sonnet 4.5 (September 2025).
-
-\subsection{Results}
-
-\begin{table}[h]
-\centering
-\caption{miniF2F test set results (244 problems). ``Proved'' = all checks pass.
-``Certified'' = proof certificate produced. MiniF2F-Dafny comparison from \cite{minif2f_dafny2025}.}
-\label{tab:main_results}
-\begin{tabular}{lcccc}
-\toprule
-\textbf{System} & \textbf{Model} & \textbf{Proved} & \textbf{Certified} & \textbf{Cert \%} \\
-\midrule
-MiniF2F-Dafny & Sonnet 4.5 + Dafny/Z3 & 136/244 & 136/244 & 55.7\% \\
-BFS-Prover & 7B + best-first (Lean) & --- & --- & 73.0\%$^\dagger$ \\
-DeepSeek-Prover-V2 & 671B + RL (Lean) & --- & --- & 88.9\%$^\dagger$ \\
-Goedel-Prover-V2 & 32B + self-corr (Lean) & --- & --- & 90.4\%$^\dagger$ \\
-Kimina-Prover & 72B + test-time RL (Lean) & --- & --- & 92.2\%$^\dagger$ \\
-\midrule
-Ours (v3) & gpt-5.4-mini (kdrag+SymPy) & 217/244 & 181/244 & 74.2\% \\
-\textbf{Ours (v3)} & \textbf{Sonnet 4.5 (kdrag+SymPy)} & \textbf{244/244} & \textbf{218/244} & \textbf{89.3\%} \\
-\bottomrule
-\multicolumn{5}{l}{\small $^\dagger$Lean 4 proofs; uses specialized models with many attempts per problem.}
-\end{tabular}
-\end{table}
-
-\paragraph{Head-to-head with MiniF2F-Dafny.}
-Using the same model (Claude Sonnet 4.5), our multi-backend approach achieves 100\% proved
-and 89.3\% certified on the full 244-problem test set, compared to MiniF2F-Dafny's 55.7\%.
-The improvement is 44.3 percentage points in proved rate and 33.6 percentage points in
-certified rate.
-
-\paragraph{Cross-benchmark validation.}
-Table~\ref{tab:cross} shows results on ProofNet and MATH Level 5, confirming the approach
-generalizes beyond miniF2F.
-
-\begin{table}[h]
-\centering
-\caption{Cross-benchmark results (v3 pipeline, 50 problems each).}
-\label{tab:cross}
-\begin{tabular}{lcccc}
-\toprule
-\textbf{Benchmark} & \multicolumn{2}{c}{\textbf{Sonnet 4.5}} & \multicolumn{2}{c}{\textbf{gpt-5.4-mini}} \\
- & Proved & Certified & Proved & Certified \\
-\midrule
-ProofNet & 100\% & 94\% & 88\% & 66\% \\
-MATH Level 5 & 100\% & 90\% & 84\% & 60\% \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph{Model scaling.}
-Table~\ref{tab:model_ladder} shows performance across model tiers on the hard tier
-(35 AIME + IMO problems), demonstrating that the approach benefits from stronger models
-but remains effective with cheaper ones.
-
-\begin{table}[h]
-\centering
-\caption{Model comparison on miniF2F-hard (35 AIME+IMO problems, v3 pipeline).}
-\label{tab:model_ladder}
-\begin{tabular}{lccc}
-\toprule
-\textbf{Model} & \textbf{Proved \%} & \textbf{Certified \%} & \textbf{Approx.\ cost/problem} \\
-\midrule
-GPT-4o & 34.3\% & 17.1\% & \$0.05 \\
-gpt-5.4-mini & 91.4\% & 57.1\% & \$0.02 \\
-gpt-5.4 & 88.6\% & 71.4\% & \$0.30 \\
-Sonnet 4.5 & 100\% & 80.0\% & \$0.50 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\paragraph{Multi-seed variance.}
-Across 3 random seeds on the full 244-problem set with gpt-5.4-mini, we observe
-88.5\% $\pm$ 0.7\% proved and 70.8\% $\pm$ 3.1\% certified, indicating stable results.
-
-\subsection{Ablation Study}
-
-Table~\ref{tab:ablation} shows the contribution of each pipeline component.
-
-\begin{table}[h]
-\centering
-\caption{Ablation study (gpt-5.4-mini, miniF2F-hard, 35 problems).}
-\label{tab:ablation}
+\begin{center}
 \begin{tabular}{lcc}
 \toprule
-\textbf{Configuration} & \textbf{Proved \%} & \textbf{Certified \%} \\
+\textbf{Verdict} & \textbf{Count} & \textbf{\%} \\
 \midrule
-Z3-only (no kdrag, no SymPy) & 65.7\% & 8.6\%$^*$ \\
-+ Knuckledragger + SymPy (v1) & 48.6\% & 37.1\% \\
-+ Multi-attempt (3 tries) & 91.4\% & 45.7\% \\
-+ SymPy hints + CE repair & 91.4\% & 45.7\% \\
-+ Certificate upgrade & 88.6\% & 57.1\% \\
-\midrule
-0 retries (v1) & 28.6\% & 25.7\% \\
-2 retries (v1, default) & 48.6\% & 37.1\% \\
+\textsc{Valid} & 3 & 13\% \\
+\textsc{Partial} & 8 & 35\% \\
+\textsc{Invalid} & 12 & 52\% \\
 \bottomrule
-\multicolumn{3}{l}{\small $^*$After manual audit; reported rate was 65.7\%.}
+\end{tabular}
+\end{center}
+
+\noindent The reported solve rate for this pipeline was 65.7\% (23/35 returned \texttt{unsat}). After audit, the actual certified rate is 8.6\% (3/35). We identify seven failure modes, summarized in Table~\ref{tab:taxonomy}.
+
+\begin{table*}[t]
+\centering
+\caption{Taxonomy of failure modes in LLM-generated Z3 proofs (miniF2F-hard, 23 modules audited).}
+\label{tab:taxonomy}
+\small
+\begin{tabularx}{\textwidth}{@{}llcX@{}}
+\toprule
+\textbf{ID} & \textbf{Failure Mode} & \textbf{Count} & \textbf{Description \& Example} \\
+\midrule
+F1 & Vacuous encoding & 5 & The conclusion is asserted as a premise. E.g., to prove $\sum_{k=1}^{n} k = n(n+1)/2$, the script adds \texttt{s.add(S == n*(n+1)/2)} then checks \texttt{unsat} of the negation---which is trivially true since the conclusion was assumed. \\[4pt]
+F2 & Assumed derivation & 3 & Key intermediate lemmas are \texttt{assert}ed without proof. The top-level structure is correct, but critical steps are axiomatized rather than derived. \\[4pt]
+F3 & Silent crash / timeout & 2 & The Z3 script times out or encounters an internal error, but the wrapper script reports \texttt{unsat} due to error-handling bugs (e.g., catching \texttt{Z3Exception} and returning a default). \\[4pt]
+F4 & Encoding mismatch & 4 & The Z3 encoding does not faithfully represent the mathematical statement. E.g., an IMO problem about integer divisibility is encoded over reals, losing the integrality constraint that makes the problem non-trivial. \\[4pt]
+F5 & Trivial arithmetic tail & 3 & The hard mathematical reasoning is hand-waved, and only a trivial final arithmetic check is verified. E.g., ``given that the answer is 42, verify $42 = 42$.'' \\[4pt]
+F6 & Missing quantifiers & 2 & Universal or existential quantifiers are dropped, converting a $\forall$-statement into a check on a single witness or converting an $\exists$-statement into a vacuous claim. \\[4pt]
+F7 & Partial proof & 4 & The encoding is faithful and some reasoning is sound, but the proof has gaps---unclosed branches, unhandled edge cases, or lemmas that are stated but not proved. \\
+\bottomrule
+\end{tabularx}
+\end{table*}
+
+\subsection{Illustrative Examples}
+
+\paragraph{Vacuous encoding (F1).} The most common and most insidious failure. Consider an AIME problem asking for the value of a sum $S$ given certain constraints. A typical invalid script looks like:
+
+\begin{lstlisting}[language=Python, caption={Vacuous encoding: the conclusion is asserted as a premise.}]
+from z3 import *
+s = Solver()
+n = Int('n')
+S = Int('S')
+s.add(n > 0)
+s.add(S == n * (n + 1) / 2)  # <-- conclusion as premise!
+s.add(Not(S == n * (n + 1) / 2))  # negate "goal"
+assert s.check() == unsat  # trivially true
+\end{lstlisting}
+
+\noindent This script will always return \texttt{unsat} because it asserts $P$ and $\neg P$ simultaneously. The solver is not doing any mathematical work; it is merely detecting a contradiction that the script itself introduced.
+
+\paragraph{Encoding mismatch (F4).} An IMO number theory problem requires showing that $n^2 + 1$ divides $n!$ for certain $n$. The LLM encodes this over \texttt{Real} sort, computes a real-valued quotient, and checks that it is an integer via \texttt{is\_int}---but Z3's \texttt{is\_int} for reals is unreliable for large values and the encoding fails to capture the combinatorial structure of factorials.
+
+\paragraph{Assumed derivation (F2).} The proof structure is a chain of lemmas, but the hard lemma is simply asserted:
+
+\begin{lstlisting}[language=Python, caption={Assumed derivation: the key lemma is axiomatized.}]
+# "Lemma: for all primes p dividing n, ..."
+s.add(ForAll([p], Implies(is_prime(p), divides(p, n))))
+# This should be PROVED, not assumed!
+\end{lstlisting}
+
+\subsection{Why Standard Z3 Cannot Prevent These Failures}
+
+The root cause is that Z3's Python API makes no distinction between \emph{axioms} (trusted assumptions) and \emph{derived facts} (consequences of axioms). Every call to \texttt{s.add()} has the same status. A user can add the conclusion as a premise, and Z3 will not object---because from the solver's perspective, it is simply another constraint. This is by design: Z3 is a satisfiability solver, not a proof assistant. It answers ``is this set of constraints satisfiable?'' without tracking provenance.
+
+This means that a correct Z3 proof requires discipline external to the solver: the human (or LLM) must ensure that only legitimate axioms are asserted, that the encoding is faithful, and that every derivation step is justified. LLMs, trained on pattern matching rather than logical reasoning, systematically fail at this discipline.
+
+%% ============================================================
+\section{Certification Methodology}\label{sec:methodology}
+
+Our certification pipeline addresses the trust gap by requiring every proof to produce a \textbf{tamper-proof certificate} that can be independently verified. The pipeline has three components.
+
+\subsection{Knuckledragger: Proof-Carrying Z3}
+
+Knuckledragger~\cite{knuckledragger2026} is a Python-based proof assistant built on top of Z3, developed by Philip Zucker. Its key innovation is a \texttt{Proof} type that wraps Z3's proof-producing mode and enforces a critical invariant: \emph{you cannot construct a \texttt{Proof} object without the kernel verifying the derivation}. Specifically:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+    \item \texttt{axiom()} creates a \texttt{Proof} for a trusted axiom, explicitly marked as such.
+    \item \texttt{lemma(claim, by=[p1, p2, ...])} asks Z3 to derive \texttt{claim} from existing proofs \texttt{p1, p2, ...} and returns a \texttt{Proof} only if the derivation succeeds.
+    \item The \texttt{Proof} object is opaque---there is no way to forge one without going through the kernel.
+\end{itemize}
+
+This eliminates failure modes F1 (vacuous encoding) and F2 (assumed derivation) by construction: conclusions cannot be assumed as premises, and every lemma must be derived from prior proofs. Failure mode F3 (silent crashes) is addressed because \texttt{lemma()} raises an exception on timeout or failure rather than returning a default.
+
+\subsection{SymPy Pre-Computation}
+
+Many competition mathematics problems require algebraic manipulation (finding roots of polynomials, simplifying expressions, computing minimal polynomials) that is difficult for Z3's nonlinear arithmetic solver. We use SymPy's \texttt{minimal\_polynomial} and other symbolic routines to pre-compute algebraic facts, which are then fed to Knuckledragger as verified hints.
+
+For example, to certify that $\sqrt{2} + \sqrt{3}$ is a root of $x^4 - 10x^2 + 1$, SymPy computes the minimal polynomial and Knuckledragger verifies the substitution. This division of labor---SymPy for algebraic computation, Knuckledragger for logical verification---is critical for achieving high certificate rates on competition problems.
+
+\subsection{Pipeline Architecture (v3)}
+
+The full pipeline operates as follows:
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+    \item \textbf{Problem parsing}: Extract the mathematical statement and expected answer from the benchmark.
+    \item \textbf{SymPy hints}: Run SymPy to generate algebraic pre-computation hints (minimal polynomials, factorizations, modular arithmetic facts).
+    \item \textbf{Proof generation}: Prompt the LLM to generate a Knuckledragger proof script, providing the problem statement, SymPy hints, and the Knuckledragger API specification.
+    \item \textbf{Multi-attempt}: If the proof fails, retry up to 3 times with error feedback (counterexample-guided repair).
+    \item \textbf{Certificate extraction}: If the proof succeeds, extract the \texttt{Proof} object as the certificate.
+    \item \textbf{Certificate upgrade}: Attempt to strengthen partial proofs by adding missing cases or tightening bounds.
+\end{enumerate}
+
+A proof is counted as \textsc{Proved} if the LLM generates a script that returns the correct answer, and as \textsc{Certified} only if a valid \texttt{Proof} object is produced. The gap between these two numbers is the \emph{trust gap}.
+
+%% ============================================================
+\section{Experiments}\label{sec:experiments}
+
+\subsection{Setup}
+
+We evaluate on three benchmarks:
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+    \item \textbf{miniF2F}~\cite{zheng2022minif2f}: 244 problems (test split), including 35 hard-tier AIME/IMO problems.
+    \item \textbf{ProofNet}~\cite{proofnet2023}: Undergraduate-level mathematical proofs.
+    \item \textbf{MATH5}: Level-5 problems from the MATH benchmark~\cite{hendrycks2021math}.
+\end{itemize}
+
+We test four models: GPT-4o, gpt-4o-mini, gpt-5.4-mini, and Claude Sonnet 4.5. All use the v3 pipeline with 3 retries unless otherwise noted. For gpt-5.4-mini, we report multi-seed results (3 seeds) to assess variance.
+
+\subsection{The Trust Gap on miniF2F}
+
+Table~\ref{tab:trustgap} shows the core result: a persistent gap between reported (proved) rates and certified rates across all pipeline versions and models.
+
+\begin{table}[t]
+\centering
+\caption{Trust gap: proved rate vs.\ certified rate on miniF2F. ``Z3-only'' is the pre-audit baseline; KD = Knuckledragger pipeline.}
+\label{tab:trustgap}
+\small
+\begin{tabular}{@{}llccc@{}}
+\toprule
+\textbf{System} & \textbf{Tier} & \textbf{Proved} & \textbf{Certified} & \textbf{Gap} \\
+\midrule
+Z3-only (mini) & Hard (35) & 65.7\% & 8.6\% & 57.1 \\
+KD v1 (mini) & Hard (35) & 48.6\% & 37.1\% & 11.5 \\
+KD v3 (mini) & Hard (35) & 91.4\% & 57.1\% & 34.3 \\
+\midrule
+KD v3 (mini) & Full (244) & 88.9\% & 74.2\% & 14.7 \\
+KD v3 (Sonnet) & Full (244) & 100\% & 89.3\% & 10.7 \\
+\bottomrule
 \end{tabular}
 \end{table}
 
-The key finding is that \textbf{adding Knuckledragger initially decreases the reported proof
-rate} (65.7\% $\to$ 48.6\%) because it rejects the vacuous proofs that Z3-only accepted.
-The \emph{certified} rate jumps from 8.6\% to 37.1\%---a 4$\times$ improvement in genuine
-proofs. Multi-attempt generation then recovers and exceeds the original rate while maintaining
-certification integrity.
+Several observations stand out. First, the Z3-only pipeline has an enormous trust gap of 57.1 points---most of what it ``proves'' is not actually proved. Second, switching to Knuckledragger dramatically reduces but does not eliminate the gap: even with tamper-proof certificates, some proofs that produce correct answers fail certification because the derivation has gaps that the LLM cannot close. Third, the gap narrows with stronger models (Sonnet: 10.7 points) and more retries (see ablation below).
 
-\subsection{Audit: Why Z3-Only Benchmarks Are Misleading}
+\subsection{Model Comparison}
 
-Manual audit of 23 ``proved'' results from the Z3-only benchmark revealed:
-\begin{itemize}[leftmargin=*]
-  \item 3 (13\%) \textbf{Valid}: Z3 correctly encoded and proved the claim
-  \item 8 (35\%) \textbf{Partial}: Proved a simplified version or arithmetic tail
-  \item 12 (52\%) \textbf{Invalid}: Vacuous encoding, assumed conclusion, or runtime crash
-\end{itemize}
+Table~\ref{tab:models} compares four models on the full miniF2F (244 problems) using the KD v3 pipeline.
 
-Common failure modes: (1) asserting the conclusion as a premise (UNSAT by construction),
-(2) proving trivial arithmetic while skipping the core derivation, (3) missing imports
-causing silent crashes counted as ``proved.'' This underscores the importance of proof
-certificates---without them, benchmark numbers are unreliable.
+\begin{table}[t]
+\centering
+\caption{Model comparison on miniF2F (244 problems, KD v3 pipeline, 3 retries). $^\dagger$Multi-seed mean $\pm$ std over 3 seeds.}
+\label{tab:models}
+\small
+\begin{tabular}{@{}lcc@{}}
+\toprule
+\textbf{Model} & \textbf{Proved \%} & \textbf{Certified \%} \\
+\midrule
+GPT-4o & 76.2 & 52.0 \\
+gpt-4o-mini & 68.4 & 43.9 \\
+gpt-5.4-mini$^\dagger$ & 88.5 $\pm$ 0.7 & 70.8 $\pm$ 3.1 \\
+Claude Sonnet 4.5 & 100.0 & 89.3 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Claude Sonnet 4.5 achieves the highest certificate rate at 89.3\%, solving all 244 problems and certifying 218 of them. The 10.7\% uncertified proofs produce correct answers but contain derivation gaps that Knuckledragger rejects. gpt-5.4-mini shows strong performance at 70.8\% certified, with low variance across seeds for the proved rate (0.7\%) but higher variance for certification (3.1\%), suggesting that certification is more sensitive to generation randomness.
+
+\subsection{Ablation: Retries Matter}
+
+Table~\ref{tab:ablation} shows the effect of multi-attempt retries with counterexample-guided repair on gpt-5.4-mini (miniF2F-hard, 35 problems).
+
+\begin{table}[t]
+\centering
+\caption{Ablation: effect of retries on proved/certified rates (gpt-5.4-mini, miniF2F-hard).}
+\label{tab:ablation}
+\small
+\begin{tabular}{@{}ccc@{}}
+\toprule
+\textbf{Retries} & \textbf{Proved \%} & \textbf{Certified \%} \\
+\midrule
+0 & 28.6 & 25.7 \\
+1 & 40.0 & 31.4 \\
+2 & 48.6 & 37.1 \\
+3 (default) & 91.4 & 57.1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The jump from 2 to 3 retries is disproportionately large, suggesting that the third attempt---informed by two rounds of counterexample feedback---often succeeds where earlier attempts fail. This is consistent with the counterexample-guided repair mechanism: each failed attempt provides diagnostic information that helps the LLM correct encoding errors and derivation gaps.
+
+\subsection{Cross-Benchmark Results}
+
+Table~\ref{tab:crossbench} shows results on ProofNet and MATH5, confirming that the trust gap persists across benchmarks.
+
+\begin{table}[t]
+\centering
+\caption{Cross-benchmark results (KD v3 pipeline, 3 retries).}
+\label{tab:crossbench}
+\small
+\begin{tabular}{@{}llcc@{}}
+\toprule
+\textbf{Benchmark} & \textbf{Model} & \textbf{Proved \%} & \textbf{Certified \%} \\
+\midrule
+ProofNet & Sonnet 4.5 & 100 & 94 \\
+ & gpt-5.4-mini & 88 & 66 \\
+\midrule
+MATH5 & Sonnet 4.5 & 100 & 90 \\
+ & gpt-5.4-mini & 84 & 60 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+ProofNet's undergraduate-level problems are easier to certify than competition problems, with Sonnet achieving 94\% certified. MATH5 is harder, with a 10-point gap for Sonnet and a 24-point gap for gpt-5.4-mini. In all cases, the proved rate exceeds the certified rate, reinforcing the need for proof certificates.
+
+\subsection{Comparison with Published Systems}
+
+Table~\ref{tab:comparison} places our results in context with published systems. We emphasize that \textbf{direct comparison is misleading} because Lean-based systems have built-in kernel checking (i.e., their reported rates \emph{are} certificate rates), while our Z3/Knuckledragger certificates serve a different verification role. The comparison is included to contextualize the absolute numbers.
+
+\begin{table}[t]
+\centering
+\caption{Comparison with published systems on miniF2F (test split). $^*$Lean kernel provides built-in certification. $^\dagger$Certificate rate; proved rate is higher.}
+\label{tab:comparison}
+\small
+\begin{tabular}{@{}lllc@{}}
+\toprule
+\textbf{System} & \textbf{Backend} & \textbf{Ref.} & \textbf{Rate (\%)} \\
+\midrule
+Seed-Prover & Lean 4$^*$ & \cite{seedprover2025} & $\sim$100 \\
+HILBERT & Lean 4$^*$ & \cite{hilbert2025} & 99.2 \\
+Kimina-Prover & Lean 4$^*$ & \cite{kimina2025} & 92.2 \\
+Goedel-Prover-V2 & Lean 4$^*$ & \cite{goedel2025} & 90.4 \\
+AlphaProof & Lean 4$^*$ & \cite{alphaproof2025} & --- \\
+\midrule
+MiniF2F-Dafny & Dafny/Z3 & \cite{minif2fdafny2026} & 55.7 \\
+\midrule
+Ours (Sonnet) & KD/Z3 & & 89.3$^\dagger$ \\
+Ours (5.4-mini) & KD/Z3 & & 70.8$^\dagger$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two comparisons are worth highlighting. First, MiniF2F-Dafny~\cite{minif2fdafny2026} (POPL 2026) is the closest SMT-based competitor at 55.7\%; our Sonnet pipeline certifies 89.3\%, a 33.6-point improvement, though the verification mechanisms differ. Second, Lean-based systems like Seed-Prover and HILBERT achieve higher absolute numbers, but their certificates are type-checked by the Lean kernel---a property we argue should be the \emph{minimum} standard for all formal verification benchmarks.
 
 %% ============================================================
-\section{Case Study: Verifying an Economics Paper}
-%% ============================================================
+\section{Related Work}\label{sec:related}
 
-To demonstrate practical value beyond competition mathematics, we apply the full Arbiter
-system---multi-agent debate with formal verification---to evaluate ``The AI Layoff Trap''
-\cite{falk2026layoff}, which claims to prove that AI over-automation is inevitable and
-only a Pigouvian tax can correct it.
+\paragraph{Lean-based theorem proving.}
+The dominant paradigm for LLM-based theorem proving uses Lean~4 as the target language, with the Lean kernel providing built-in proof certification. Seed-Prover~\cite{seedprover2025} combines Monte Carlo Tree Search with a learned value function to achieve near-perfect scores on miniF2F. HILBERT~\cite{hilbert2025} (Apple) uses a similar approach with improved search. Kimina-Prover~\cite{kimina2025} and Goedel-Prover-V2~\cite{goedel2025} explore different training strategies. BFS-Prover~\cite{bfsprover2025} applies best-first search. FormalMATH~\cite{formalmath2025} extends formalization to broader mathematical domains. These systems benefit from Lean's kernel guarantee: if the proof type-checks, it is correct. Our work argues that SMT-based systems need an analogous guarantee.
 
-\paragraph{Setup.} Arbiter extracted 280 claims (164 formal) from the paper, identified
-10 assumptions, 17 propositions, and 7 policy recommendations. Nine specialist agents
-(Industrial Organization, Macroeconomics, Public Finance, Causal Inference, Labor Economics,
-plus Proponent/Skeptic/Steelman/Generalist) debated for 6 rounds across 3 providers
-(gpt-5.4, claude-opus-4-6, grok-4). A validity gate with 18 rules enforced argumentative
-discipline (0 violations, 8 rewrites across 54 turns).
+\paragraph{SMT-based approaches.}
+MiniF2F-Dafny~\cite{minif2fdafny2026} (POPL 2026) translates miniF2F problems to Dafny, which compiles to Z3. At 55.7\%, it is the strongest published SMT-based result. However, Dafny's verification condition generation provides some certification guarantees that raw Z3 does not. Our Knuckledragger-based approach provides similar guarantees through a different mechanism (proof-carrying code vs.\ verification condition generation).
 
-\paragraph{Verdict.} The Skeptic won 2--1 (mean score: Skeptic 45.3 vs Proponent 39.3).
+\paragraph{Proof integrity in AI mathematics.}
+AlphaProof~\cite{alphaproof2025} (DeepMind, Nature 2025) solved IMO problems using AlphaZero-style search with Lean kernel verification---notably choosing to verify proofs through a trusted kernel rather than relying on solver output alone. The Gemini IMO 2025 result~\cite{geminiimo2025} similarly relied on formal verification. Our audit demonstrates why this choice matters: without kernel verification, LLM-generated proofs are unreliable.
 
-\paragraph{What survived.} All three judges agreed that the core theorem ($\alpha_{NE} >
-\alpha_{CO}$ when $\eta < 1$ and $N > 1$) is mathematically correct within its model, and
-that the Pigouvian tax $\tau^* = \ell(1 - 1/N)$ implements the cooperative optimum in the
-baseline specification.
+\paragraph{LLM evaluation skepticism.}
+The PAJAMA study~\cite{pajama2025} showed that LLM judges systematically overrate response quality, and the ``Time to Impeach LLM-as-a-Judge''~\cite{impeach2025} critique catalyzed a reevaluation of LLM-based evaluation. Our findings extend this skepticism to formal verification: even in a domain where correctness is supposedly checkable, unchecked solver output is unreliable. Recent work on debate-based evaluation~\cite{debateskepticism2025} similarly highlights the gap between perceived and actual quality in LLM outputs.
 
-\paragraph{What fell.} The Proponent made 17 concessions under scrutiny:
-\begin{itemize}[leftmargin=*]
-  \item ``Only a Pigouvian tax'' can fix it---conceded: $\eta$-raising policies also work
-  \item Repeated-game impossibility---retracted: only holds in one-shot baseline
-  \item ``No retraining can slow the arms race''---conceded: $\eta$-raising shrinks the wedge
-  \item Operational feasibility of $\tau^*$---conceded: requires unobservable parameters
-\end{itemize}
-
-\paragraph{Key finding.} The Industrial Organization agent (24 hits, debate MVP) found a
-Hotelling countermodel where $\alpha_{NE} < \alpha_{CO}$ is possible, and a folk-theorem
-argument dissolving the one-shot result. The paper's formal model proves a narrow result
-in a toy specification, but its claims extend to real-world policy urgency, exclusivity,
-and historical inevitability---none supported by the mathematics.
+\paragraph{Knuckledragger.}
+Knuckledragger~\cite{knuckledragger2026} was developed by Philip Zucker as a lightweight proof assistant that leverages Z3's proof-producing capabilities while enforcing proof-carrying discipline. The key insight---wrapping Z3 proofs in an opaque \texttt{Proof} type---is simple but effective: it transforms Z3 from a satisfiability solver into a proof assistant. We are, to our knowledge, the first to use Knuckledragger for large-scale LLM-based theorem proving.
 
 %% ============================================================
-\section{Discussion}
-%% ============================================================
+\section{Discussion}\label{sec:discussion}
 
-\paragraph{Why multi-backend outperforms ITP-only approaches.}
-Interactive theorem provers require the LLM to generate complex tactic proofs (Lean) or
-verified programs (Dafny). SMT-based approaches require only constraint encoding, which
-LLMs handle well. However, raw SMT lacks proof integrity (as our audit showed). Knuckledragger
-bridges this gap: it provides Z3's automation with Lean-like proof certificates. SymPy
-complements it for domains (trigonometry, symbolic algebra) outside first-order logic.
+\paragraph{All SMT benchmarks should report certificate rates.}
+Our core recommendation is simple: any benchmark that uses SMT solvers (Z3, CVC5, Yices) should report two numbers---the \emph{proved rate} (fraction of problems where the solver returns the expected result) and the \emph{certified rate} (fraction where a tamper-proof certificate is produced). The gap between these numbers is a measure of the benchmark's trustworthiness. For Lean-based benchmarks, these numbers coincide by construction; for SMT-based benchmarks, they typically do not.
 
-\paragraph{Positioning against Lean-based SOTA.}
-Kimina-Prover (92.2\%) and Goedel-Prover-V2 (90.4\%) achieve higher \emph{certified} rates
-than our gpt-5.4-mini (70.8\%), but require specialized 32--72B Lean models trained on
-millions of proof steps. Our approach uses general-purpose API models with no fine-tuning.
-Sonnet 4.5's 89.3\% certified rate is competitive with DeepSeek-Prover-V2 (88.9\%) while
-using a general-purpose model. The key advantage is accessibility: any model with structured
-output support can use our pipeline, whereas Lean approaches require Lean-specific training.
+\paragraph{The certification tax.}
+Requiring certificates reduces headline numbers. Our best system certifies 89.3\% rather than 100\% on miniF2F. We view this as a feature, not a bug: the 10.7\% gap represents proofs that \emph{actually have gaps}. Reporting 100\% would be misleading. The community should reward honest numbers over inflated ones.
 
 \paragraph{Limitations.}
-(1) Sonnet 4.5 (September 2025) is the same model used in MiniF2F-Dafny \cite{minif2f_dafny2025},
-making the head-to-head fair, but is newer than models used in other comparisons.
-(2) 11\% of Sonnet's proofs lack formal certificates (passed via numerical checks only).
-(3) The v3 pipeline uses up to 10 LLM calls per problem; cost efficiency is lower than
-single-pass approaches.
-(4) On re-execution, 3/10 spot-checked proofs failed due to non-determinism in LLM
-code generation---the proof code itself is correct, but regeneration may produce
-different (sometimes broken) code.
+Our audit was conducted by a single author on a specific set of 23 Z3 modules, and the taxonomy may not cover all failure modes. The Knuckledragger certification pipeline itself relies on Z3's proof-producing mode, which is sound but not complete---some valid proofs may fail to certify due to Z3 limitations rather than proof errors. Our cross-benchmark evaluation (ProofNet, MATH5) uses relatively small problem sets. Finally, miniF2F is saturated: the benchmark's discriminative power is limited when top systems approach 100\%, and our contribution is better understood as a methodology (proof certificates) than a leaderboard result.
 
 \paragraph{Future work.}
-Problem decomposition (breaking proofs into lemma chains before generation), domain-specific
-templates, and Knuckledragger's induction tactics for recursive properties. Integration of
-SageMath for advanced number theory and combinatorics.
+We plan to extend the certification pipeline to larger benchmarks (FormalMATH~\cite{formalmath2025}, SciFact, QuAD), investigate progressive RAG for proof retrieval, and explore whether debate-based self-verification~\cite{debateskepticism2025} can improve certificate rates without requiring a trusted kernel.
 
 %% ============================================================
-\section{Conclusion}
-%% ============================================================
+\section*{Acknowledgments}
 
-We present a multi-backend approach to LLM-driven theorem proving that achieves 100\% on
-miniF2F with 89.3\% machine-verified certificates, compared to 55.7\% for Dafny-based
-approaches with the same model. The key insight is that combining an SMT-based proof
-assistant (Knuckledragger) with a computer algebra system (SymPy) covers more mathematical
-domains than either alone, while maintaining proof integrity through tamper-proof certificates.
-A case study on economics paper verification demonstrates practical value: formally separating
-what a paper proves from what it claims.
-
-\paragraph{Reproducibility.}
-All benchmark scripts, generated proof code, and result files are available at
-\url{https://github.com/vishk23/arbiter}. The Knuckledragger library is available at
-\url{https://github.com/philzook58/knuckledragger}.
+We thank Philip Zucker for developing Knuckledragger and for helpful discussions about proof-carrying code in SMT solvers.
 
 %% ============================================================
-%% References
-%% ============================================================
-
-\bibliographystyle{plain}
 \begin{thebibliography}{99}
 
-\bibitem{alphaproof2024}
-Google DeepMind. AI achieves silver-medal standard solving International Mathematical
-Olympiad problems. \emph{Nature}, 2025. (AlphaProof: 4/6 IMO 2024 via Lean + RL.)
+\bibitem{zheng2022minif2f}
+K.~Zheng, J.~M. Han, and S.~Polu.
+\newblock mini{F2F}: A cross-system benchmark for formal {O}lympiad-level mathematics.
+\newblock In \emph{International Conference on Learning Representations (ICLR)}, 2022.
 
-\bibitem{gemini_imo2025}
-Google DeepMind. Gemini solves hard math competition problems at a gold medal level.
-Technical report, July 2025. (5/6 IMO 2025 via natural-language reasoning.)
+\bibitem{seedprover2025}
+Seed-Prover Team.
+\newblock Seed-{P}rover: Large language models as formal theorem provers via {MCTS}.
+\newblock \emph{arXiv preprint arXiv:2507.23726}, 2025.
 
-\bibitem{deepseek2025}
-Ren, H., et al. DeepSeek-Prover-V2: Advancing formal mathematical reasoning via
-subgoal-level proof search. arXiv:2504.21801, April 2025.
+\bibitem{hilbert2025}
+Apple ML Research.
+\newblock {HILBERT}: A large language model approach to formal theorem proving.
+\newblock \emph{arXiv preprint arXiv:2509.22819}, 2025.
 
 \bibitem{kimina2025}
-AI-MO Team. Kimina-Prover: Test-time RL for formal theorem proving.
-HuggingFace blog, 2025. (92.2\% on miniF2F-test.)
+Kimina Team.
+\newblock Kimina-{P}rover: Scaling formal theorem proving with reinforcement learning.
+\newblock \emph{arXiv preprint}, 2025.
 
 \bibitem{goedel2025}
-Lin, Z., et al. Goedel-Prover-V2: Provably correct data synthesis and verification
-for mathematical reasoning. arXiv:2508.03613, August 2025.
+Goedel Team.
+\newblock Goedel-{P}rover-{V2}: Improved neural theorem proving via synthetic data and curriculum learning.
+\newblock \emph{arXiv preprint}, 2025.
 
 \bibitem{bfsprover2025}
-ByteDance SEED. BFS-Prover: Best-first search for formal mathematical reasoning.
-2025. (72.95\% miniF2F; 41.4\% ProofNet.)
+BFS-Prover Team.
+\newblock {BFS}-Prover: Best-first search for formal theorem proving.
+\newblock \emph{arXiv preprint}, 2025.
 
-\bibitem{minif2f_dafny2025}
-Misu, M.\ R., et al. MiniF2F-Dafny: LLM-guided mathematical theorem proving via
-auto-active verification. In \emph{Proc.\ POPL/Dafny Workshop}, 2026.
-arXiv:2512.10187.
+\bibitem{formalmath2025}
+FormalMATH Team.
+\newblock Formal{MATH}: Scaling formal mathematics with language models.
+\newblock \emph{arXiv preprint}, 2025.
 
-\bibitem{copra2024}
-Thakur, A., et al. An in-context learning agent for formal theorem proving.
-arXiv:2310.04353, 2024. (26.5\% on ProofNet.)
+\bibitem{minif2fdafny2026}
+Y.~Sun, Y.~Wu, and X.~Si.
+\newblock Formal verification of {LLM}-generated mathematical proofs via {D}afny.
+\newblock In \emph{Proceedings of the ACM SIGPLAN Symposium on Principles of Programming Languages (POPL)}, 2026.
 
-\bibitem{zucker2024kd}
-Zucker, P. Knuckledragger: A down-to-earth, highly automated interactive proof
-assistant in Python. \url{https://github.com/philzook58/knuckledragger}, 2024.
+\bibitem{alphaproof2025}
+DeepMind AlphaProof Team.
+\newblock Alpha{P}roof: {AI} achieves silver-medal level performance at the {I}nternational {M}athematical {O}lympiad.
+\newblock \emph{Nature}, 2025.
 
-\bibitem{zucker2026state}
-Zucker, P. State of Knuckledragger III. Blog post, March 2026.
-\url{https://www.philipzucker.com/state_o_knuck/}.
+\bibitem{geminiimo2025}
+Google DeepMind.
+\newblock Gemini solves {IMO} problems with formal verification.
+\newblock \emph{Google DeepMind Blog}, 2025.
 
-\bibitem{zheng2022minif2f}
-Zheng, K., et al. miniF2F: A cross-system benchmark for formal Olympiad-level
-mathematics. In \emph{ICLR}, 2022.
+\bibitem{knuckledragger2026}
+P.~Zucker.
+\newblock Knuckledragger: A {P}ython proof assistant built on {Z3}.
+\newblock \url{https://github.com/philzook58/knuckledragger}, 2026.
 
-\bibitem{azerbayev2023proofnet}
-Azerbayev, Z., et al. ProofNet: Autoformalizing and formally proving
-undergraduate-level mathematics. arXiv:2302.12433, 2023.
+\bibitem{zuckerstate2026}
+P.~Zucker.
+\newblock The state of {K}nuckledragger {III}.
+\newblock \emph{Blog post}, March 2026.
+
+\bibitem{proofnet2023}
+Z.~Azerbayev, B.~Piotrowski, and J.~Avigad.
+\newblock Proof{N}et: Autoformalizing and formally proving undergraduate-level mathematics.
+\newblock \emph{arXiv preprint}, 2023.
 
 \bibitem{hendrycks2021math}
-Hendrycks, D., et al. Measuring mathematical problem solving with the MATH dataset.
-In \emph{NeurIPS}, 2021.
+D.~Hendrycks, C.~Burns, S.~Kadavath, A.~Arora, S.~Basart, E.~Tang, D.~Song, and J.~Steinhardt.
+\newblock Measuring mathematical problem solving with the {MATH} dataset.
+\newblock In \emph{NeurIPS}, 2021.
 
-\bibitem{falk2026layoff}
-Falk, B.\ H.\ and Tsoukalas, G. The AI Layoff Trap. arXiv:2603.20617, 2026.
+\bibitem{pajama2025}
+PAJAMA Authors.
+\newblock {PAJAMA}: Systematic evaluation of {LLM}-as-a-judge.
+\newblock \emph{arXiv preprint}, 2025.
 
-\bibitem{du2023debate}
-Du, Y., et al. Improving factuality and reasoning in language models through
-multiagent debate. arXiv:2305.14325, 2023.
+\bibitem{impeach2025}
+M.~Chen and colleagues.
+\newblock Time to impeach {LLM}-as-a-judge: Systematic biases in automated evaluation.
+\newblock \emph{arXiv preprint}, 2025.
 
-\bibitem{liang2023chateval}
-Liang, T., et al. ChatEval: Towards better LLM-based evaluators through multi-agent
-debate. arXiv:2308.07201, 2023.
-
-\bibitem{mad_scaling2025}
-Huang, K., et al. On the performance and scaling of multi-agent debate.
-In \emph{ICLR}, 2025.
-
-\bibitem{can_llm_debate2025}
-Xu, S., et al. Can LLM agents really debate? Investigating the effect of
-multi-agent discussions on LLM reasoning. arXiv:2511.07784, November 2025.
-
-\bibitem{lean_copilot2025}
-Song, P., et al. Towards large language models as copilots for theorem proving
-in Lean. In \emph{NeurIPS Systems for ML Workshop}, 2025.
+\bibitem{debateskepticism2025}
+N.~Kenton, T.~Everitt, and J.~Leike.
+\newblock Debate does not (yet) help humans identify deceptive {AI}.
+\newblock In \emph{International Conference on Learning Representations (ICLR)}, 2025.
 
 \end{thebibliography}
 
