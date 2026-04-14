@@ -4,8 +4,9 @@
 
 Point Arbiter at any PDF — it extracts claims, finds contradictions, auto-generates Z3 formal proofs, designs specialist debate agents, and produces a structured verdict with every argument tracked.
 
-<!-- Screenshot: dashboard showing 328 claims extracted with formal math notation -->
-<!-- To see it live: arbiter web --init --from-pdf experiments/ai_layoff_trap/source.pdf --providers "openai:gpt-5.4,anthropic:claude-opus-4-6" --effort high -->
+<p align="center">
+  <img src="docs/screenshots/argdown_output.gif" width="800" alt="Arbiter argdown output showing argument ledger with syntax highlighting" />
+</p>
 
 ## What it does
 
@@ -21,11 +22,15 @@ We ran Arbiter on ["The AI Layoff Trap"](https://arxiv.org/abs/2603.20617) (Falk
 
 **Init** — 280 claims extracted, 17 propositions, 10 assumptions, 7 policy claims identified:
 
-<!-- Screenshot: claims C259-C280 with formal economics notation -->
+<p align="center">
+  <img src="docs/screenshots/argdown_concessions.gif" width="800" alt="Argdown showing concessions and rebuttals with formal math" />
+</p>
 
 **Debate** — 9 specialist agents (Proponent, Skeptic, IO Theorist, Macroeconomist, TaxScholar, LaborEconomist, PublicFinance, CausalInference, Generalist) across 3 providers (OpenAI gpt-5.4, Anthropic Claude Opus 4.6, xAI Grok) debated for 6 rounds:
 
-<!-- Screenshot: agent turn cards with ok/rw badges, hit counts, side colors -->
+<p align="center">
+  <img src="docs/screenshots/dashboard_final.gif" width="800" alt="Dashboard showing completed 6-round debate with agent cards" />
+</p>
 
 **Verdict** — Skeptic wins 2-1. The paper's core theorem holds, but its policy claims overreach:
 
@@ -83,7 +88,7 @@ arbiter web --init --from-pdf paper.pdf
 # Opens http://localhost:8741 with live dashboard
 ```
 
-<!-- Screenshot: live dashboard with argdown syntax highlighting -->
+<!-- Live dashboard auto-refreshes as debate progresses -->
 
 ## How it works
 

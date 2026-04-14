@@ -402,12 +402,15 @@ CLI & 12 commands (Typer) & 873 \\
 \end{table}
 
 \paragraph{Installation and usage.}
-\begin{lstlisting}
+\begin{lstlisting}[language={},keywordstyle={}]
 pip install arbiter-debate[z3,proof,web,pdf]
-arbiter init --from-pdf paper.pdf --providers openai:gpt-5.4,anthropic:claude-opus-4-6
+
+arbiter init --from-pdf paper.pdf \
+  --providers openai:gpt-5.4,anthropic:claude-opus-4-6
+
 arbiter run experiments/output/config.yaml
 arbiter judge experiments/output/
-arbiter web experiments/output/  # live dashboard
+arbiter web experiments/output/
 \end{lstlisting}
 
 %% ============================================================
