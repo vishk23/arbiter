@@ -95,10 +95,12 @@ class JudgePanel:
                 logger.error("No provider for panel member '%s'", member_provider)
                 return member_provider, None
             try:
+                # Pass Pydantic class directly (not dict schema) so providers
+                # can use native structured output with thinking enabled.
                 raw = provider.call_structured(
                     system=system,
                     user=user,
-                    schema=self._verdict_schema,
+                    schema=self._Verdict,
                     max_tokens=_B.xl,
                 )
                 parsed = self._Verdict.model_validate(raw)

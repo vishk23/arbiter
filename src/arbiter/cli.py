@@ -812,3 +812,62 @@ def show_rubric(
     console.print(f"\n  Max total: {sum(c.max_score for c in cfg.judge.rubric)}")
     console.print(f"  Verdict options: {', '.join(cfg.judge.verdict_options)}")
     console.print(f"  Spread threshold: {cfg.judge.spread_threshold}")
+
+
+@app.command()
+def web(
+    config: Optional[Path] = typer.Argument(
+        None, help="Config YAML to run, or output JSON to replay."
+    ),
+    init: bool = typer.Option(False, "--init", help="Run init pipeline instead of debate."),
+    from_pdf: Optional[str] = typer.Option(None, "--from-pdf", help="PDF file for init."),
+    topic: Optional[str] = typer.Option(None, "--topic", help="Topic description for init."),
+    provider: Optional[str] = typer.Option(None, "--provider", help="Provider for init."),
+    model: Optional[str] = typer.Option(None, "--model", help="Model for init."),
+    providers: Optional[str] = typer.Option(None, "--providers", help="Multi-provider init."),
+    effort: str = typer.Option("medium", "--effort", help="Reasoning effort for init."),
+    port: int = typer.Option(8741, "--port", help="Dashboard port."),
+    host: str = typer.Option("127.0.0.1", "--host", help="Dashboard host."),
+    replay: bool = typer.Option(False, "--replay", help="Replay a previous run from JSON."),
+) -> None:
+    """Launch the live web dashboard."""
+    _load_dotenv()
+
+    try:
+        import uvicorn
+        from arbiter.web.app import app as web_app, set_run_config
+    except ImportError:
+        console.print(
+            "[red]Dashboard dependencies not installed. Run:[/red]\n"
+            "  pip install arbiter-debate[dashboard]"
+        )
+        raise typer.Exit(1)
+
+    # Build run config for auto-start
+    run_cfg: dict = {"auto_start": True}
+    if init:
+        run_cfg["mode"] = "init"
+        run_cfg["init_kwargs"] = {
+            "from_pdf": from_pdf,
+            "topic": topic,
+            "provider": provider or "_auto_",
+            "model": model or "",
+            "providers": providers,
+            "effort": effort,
+            "skip_calibration": False,
+            "interactive": False,
+            "output_dir": str(Path(from_pdf).stem + "-web/" if from_pdf else "web-init/"),
+        }
+    elif config and replay:
+        run_cfg["mode"] = "replay"
+        run_cfg["replay_path"] = str(config)
+    elif config:
+        run_cfg["mode"] = "debate"
+        run_cfg["config_path"] = str(config)
+    else:
+        run_cfg["auto_start"] = False  # Just open dashboard, pick later
+
+    set_run_config(run_cfg)
+    console.print(f"[bold green]Dashboard:[/bold green] http://{host}:{port}")
+    console.print("[dim]Press Ctrl+C to stop.[/dim]")
+    uvicorn.run(web_app, host=host, port=port, log_level="warning")

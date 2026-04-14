@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arbiter — Debate Dashboard</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d1117;
+  --bg-secondary: #161b22;
+  --bg-tertiary: #21262d;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --text-muted: #8b949e;
+  --blue: #58a6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --yellow: #d29922;
+  --purple: #d2a8ff;
+  --font-mono: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ── Layout ─────────────────────────────────────────── */
+#app {
+  display: grid;
+  grid-template-rows: 48px 1fr auto;
+  height: 100vh;
+  overflow: hidden;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-secondary);
+}
+
+header .topic-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blue);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+}
+
+header .right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.stage-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.stage-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border);
+  transition: background 0.3s;
+}
+
+.stage-dots .dot.active { background: var(--blue); border-color: var(--blue); }
+.stage-dots .dot.done { background: var(--green); border-color: var(--green); }
+
+#timer {
+  color: var(--text-muted);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* ── Main ───────────────────────────────────────────── */
+main {
+  display: grid;
+  grid-template-columns: 55% 45%;
+  overflow: hidden;
+}
+
+/* Argdown panel */
+#argdown-panel {
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 12px 16px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Right column */
+.right-col {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  overflow: hidden;
+}
+
+/* Status panel */
+#status-panel {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 14px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+#status-panel h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.status-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  font-size: 12px;
+}
+
+.status-step .icon {
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.status-step .icon.done { color: var(--green); }
+.status-step .icon.running { color: var(--blue); }
+.status-step .icon.pending { color: var(--text-muted); }
+
+.status-step .elapsed {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+/* Agent cards */
+#agents-panel {
+  border-bottom: 1px solid var(--border);
+  overflow-y: auto;
+  padding: 10px 14px;
+}
+
+#agents-panel h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.agent-card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 8px;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.agent-card.side-proponent { border-left: 3px solid var(--green); }
+.agent-card.side-skeptic   { border-left: 3px solid var(--red); }
+.agent-card.side-neutral   { border-left: 3px solid var(--yellow); }
+
+.agent-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.agent-card-header:hover { background: var(--bg-tertiary); }
+
+.agent-card-header .name {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.agent-card-header .badges {
+  display: flex;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.badge {
+  padding: 1px 6px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.badge-ok       { background: rgba(63,185,80,0.15); color: var(--green); }
+.badge-violation { background: rgba(248,81,73,0.15); color: var(--red); }
+.badge-hits     { background: rgba(88,166,255,0.15); color: var(--blue); }
+.badge-rewrite  { background: rgba(210,153,34,0.15); color: var(--yellow); }
+
+.agent-card-body {
+  display: none;
+  padding: 8px 10px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 200px;
+  overflow-y: auto;
+  color: var(--text-muted);
+}
+
+.agent-card-body.open { display: block; }
+
+/* Ledger */
+#ledger-panel {
+  padding: 10px 14px;
+}
+
+#ledger-panel h3 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.ledger-bar-container {
+  height: 18px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  background: var(--bg-tertiary);
+}
+
+.ledger-bar-container .seg {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.seg-rebutted  { background: var(--green); }
+.seg-conceded  { background: var(--yellow); }
+.seg-dodged    { background: var(--text-muted); }
+.seg-open      { background: var(--red); }
+
+.ledger-legend {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.ledger-legend span::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+
+.legend-rebutted::before  { background: var(--green); }
+.legend-conceded::before  { background: var(--yellow); }
+.legend-dodged::before    { background: var(--text-muted); }
+.legend-open::before      { background: var(--red); }
+
+/* ── Footer ─────────────────────────────────────────── */
+footer {
+  display: none;
+  border-top: 1px solid var(--border);
+  background: var(--bg-secondary);
+  padding: 10px 16px;
+}
+
+footer.visible { display: block; }
+
+.footer-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+
+.footer-row:last-child { margin-bottom: 0; }
+
+.z3-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.z3-unsat { background: rgba(63,185,80,0.15); color: var(--green); }
+.z3-sat   { background: rgba(210,153,34,0.15); color: var(--yellow); }
+
+.verdict-label {
+  font-weight: 600;
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.verdict-score {
+  color: var(--text);
+  font-size: 13px;
+}
+
+/* ── Argdown syntax highlighting ────────────────────── */
+.ad-statement       { color: #7ee787; }
+.ad-argument        { color: #ff7b72; }
+.ad-tag             { color: var(--purple); }
+.ad-comment         { color: var(--text-muted); font-style: italic; }
+.ad-relation-support { color: #7ee787; }
+.ad-relation-attack  { color: #ff7b72; }
+.ad-section          { color: var(--blue); font-weight: 700; }
+
+/* ── Scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Spinner animation ──────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.icon.running { animation: pulse 1.2s ease-in-out infinite; }
+
+/* ── Waiting message ────────────────────────────────── */
+.waiting-msg {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="topic-name" id="topic-name">Arbiter</div>
+    <div class="right">
+      <div class="stage-dots" id="stage-dots"></div>
+      <div id="timer">00:00</div>
+    </div>
+  </header>
+  <main>
+    <div id="argdown-panel"><span class="waiting-msg">Waiting for events...</span></div>
+    <div class="right-col">
+      <div id="status-panel">
+        <h3>Status</h3>
+        <div id="status-list"></div>
+      </div>
+      <div id="agents-panel">
+        <h3>Agents</h3>
+        <div id="agents-list"></div>
+      </div>
+      <div id="ledger-panel">
+        <h3>Ledger</h3>
+        <div class="ledger-bar-container" id="ledger-bar"></div>
+        <div class="ledger-legend" id="ledger-legend"></div>
+      </div>
+    </div>
+  </main>
+  <footer id="footer">
+    <div class="footer-row" id="z3-row"></div>
+    <div class="footer-row" id="verdict-row"></div>
+  </footer>
+</div>
+
+<script>
+(function() {
+  "use strict";
+
+  // ── State ──────────────────────────────────────────
+  var state = {
+    firstTs: null,
+    phase: "idle",       // idle | init | debate
+    roundCount: 0,
+    maxRounds: 0,
+    timerInterval: null,
+    lastEventTime: 0,
+    waitingTimeout: null,
+    dots: [],
+    ledger: { rebutted: 0, conceded: 0, dodged: 0, open: 0 },
+    argdownRaw: ""       // track raw argdown text for appending
+  };
+
+  // ── DOM refs ───────────────────────────────────────
+  var $topicName   = document.getElementById("topic-name");
+  var $stageDots   = document.getElementById("stage-dots");
+  var $timer       = document.getElementById("timer");
+  var $argdown     = document.getElementById("argdown-panel");
+  var $statusList  = document.getElementById("status-list");
+  var $agentsList  = document.getElementById("agents-list");
+  var $ledgerBar   = document.getElementById("ledger-bar");
+  var $ledgerLegend = document.getElementById("ledger-legend");
+  var $footer      = document.getElementById("footer");
+  var $z3Row       = document.getElementById("z3-row");
+  var $verdictRow  = document.getElementById("verdict-row");
+
+  // ── Timer ──────────────────────────────────────────
+  function startTimer(ts) {
+    if (state.firstTs !== null) return;
+    state.firstTs = ts;
+    state.timerInterval = setInterval(function() {
+      var elapsed = (Date.now() / 1000) - state.firstTs;
+      $timer.textContent = fmtTime(elapsed);
+    }, 500);
+  }
+
+  function fmtTime(s) {
+    var m = Math.floor(s / 60);
+    var sec = Math.floor(s % 60);
+    return (m < 10 ? "0" : "") + m + ":" + (sec < 10 ? "0" : "") + sec;
+  }
+
+  function fmtElapsed(s) {
+    if (s === undefined || s === null) return "";
+    if (s < 1) return (s * 1000).toFixed(0) + "ms";
+    return s.toFixed(1) + "s";
+  }
+
+  // ── Waiting indicator ──────────────────────────────
+  function resetWaiting() {
+    state.lastEventTime = Date.now();
+    clearTimeout(state.waitingTimeout);
+    // Remove any existing waiting message from status
+    var existing = document.getElementById("waiting-status");
+    if (existing) existing.remove();
+
+    state.waitingTimeout = setTimeout(function() {
+      addStatusStep("waiting-status", "pending", "Waiting for events...", "");
+    }, 30000);
+  }
+
+  // ── Stage dots ─────────────────────────────────────
+  function initDots(count) {
+    $stageDots.innerHTML = "";
+    state.dots = [];
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement("div");
+      d.className = "dot";
+      $stageDots.appendChild(d);
+      state.dots.push(d);
+    }
+  }
+
+  function setDot(idx, cls) {
+    if (state.dots[idx]) {
+      state.dots[idx].className = "dot " + cls;
+    }
+  }
+
+  // ── Status steps ───────────────────────────────────
+  function addStatusStep(id, iconCls, text, elapsed) {
+    var existing = document.getElementById("step-" + id);
+    if (existing) {
+      existing.querySelector(".icon").className = "icon " + iconCls;
+      existing.querySelector(".label").textContent = text;
+      existing.querySelector(".elapsed").textContent = elapsed;
+      return;
+    }
+    var el = document.createElement("div");
+    el.className = "status-step";
+    el.id = "step-" + id;
+
+    var iconChar = iconCls === "done" ? "\u2713" : iconCls === "running" ? "\u25CF" : "\u25CB";
+    el.innerHTML =
+      '<span class="icon ' + iconCls + '">' + iconChar + '</span>' +
+      '<span class="label">' + esc(text) + '</span>' +
+      '<span class="elapsed">' + esc(elapsed) + '</span>';
+
+    $statusList.appendChild(el);
+    $statusList.parentElement.scrollTop = $statusList.parentElement.scrollHeight;
+  }
+
+  // ── Argdown highlighting ───────────────────────────
+  function highlightArgdown(text) {
+    var lines = text.split("\n");
+    var out = [];
+    for (var i = 0; i < lines.length; i++) {
+      var line = esc(lines[i]);
+
+      // Section dividers ===
+      if (/^={3,}/.test(lines[i])) {
+        out.push('<span class="ad-section">' + line + '</span>');
+        continue;
+      }
+      // Comments
+      if (/^\s*\/\//.test(lines[i])) {
+        out.push('<span class="ad-comment">' + line + '</span>');
+        continue;
+      }
+      // Support relation: + [id]
+      if (/^\s*\+\s*\[/.test(lines[i])) {
+        out.push('<span class="ad-relation-support">' + line + '</span>');
+        continue;
+      }
+      // Attack relation: - <id>
+      if (/^\s*-\s*</.test(lines[i])) {
+        out.push('<span class="ad-relation-attack">' + line + '</span>');
+        continue;
+      }
+
+      // Inline: statements [id]:
+      line = line.replace(/(\[[^\]]+\]:)/g, '<span class="ad-statement">$1</span>');
+      // Inline: arguments <id>:
+      line = line.replace(/(&lt;[^&]*&gt;:)/g, '<span class="ad-argument">$1</span>');
+      // Inline: #tag
+      line = line.replace(/(#\w+)/g, '<span class="ad-tag">$1</span>');
+
+      out.push(line);
+    }
+    return out.join("\n");
+  }
+
+  // ── Escape HTML ────────────────────────────────────
+  function esc(s) {
+    if (!s) return "";
+    return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+
+  // ── Ledger bar ─────────────────────────────────────
+  function renderLedger(l) {
+    var total = (l.rebutted || 0) + (l.conceded || 0) + (l.dodged || 0) + (l.open || 0);
+    if (total === 0) {
+      $ledgerBar.innerHTML = "";
+      $ledgerLegend.innerHTML = "";
+      return;
+    }
+
+    function pct(v) { return ((v / total) * 100).toFixed(1) + "%"; }
+
+    $ledgerBar.innerHTML =
+      '<div class="seg seg-rebutted" style="width:' + pct(l.rebutted || 0) + '"></div>' +
+      '<div class="seg seg-conceded" style="width:' + pct(l.conceded || 0) + '"></div>' +
+      '<div class="seg seg-dodged" style="width:' + pct(l.dodged || 0) + '"></div>' +
+      '<div class="seg seg-open" style="width:' + pct(l.open || 0) + '"></div>';
+
+    $ledgerLegend.innerHTML =
+      '<span class="legend-rebutted">Rebutted ' + (l.rebutted || 0) + '</span>' +
+      '<span class="legend-conceded">Conceded ' + (l.conceded || 0) + '</span>' +
+      '<span class="legend-dodged">Dodged ' + (l.dodged || 0) + '</span>' +
+      '<span class="legend-open">Open ' + (l.open || 0) + '</span>';
+  }
+
+  // ── Agent card ─────────────────────────────────────
+  function addAgentCard(d) {
+    var side = (d.side || "neutral").toLowerCase();
+    var sideCls = "side-" + (side === "proponent" ? "proponent" : side === "skeptic" ? "skeptic" : "neutral");
+    var validityCls = (d.validity_status === "violation") ? "badge-violation" : "badge-ok";
+    var validityLabel = (d.validity_status === "violation") ? "violation" : "ok";
+
+    var card = document.createElement("div");
+    card.className = "agent-card " + sideCls;
+
+    var header = document.createElement("div");
+    header.className = "agent-card-header";
+    header.innerHTML =
+      '<span class="name">' + esc(d.agent) + ' (R' + d.round + ')</span>' +
+      '<span class="badges">' +
+        '<span class="badge ' + validityCls + '">' + validityLabel + '</span>' +
+        (d.hits_new ? '<span class="badge badge-hits">+' + d.hits_new + ' hits</span>' : '') +
+        (d.hits_addressed ? '<span class="badge badge-ok">addr=' + d.hits_addressed + '</span>' : '') +
+        (d.rewrites ? '<span class="badge badge-rewrite">rw=' + d.rewrites + '</span>' : '') +
+      '</span>';
+
+    var body = document.createElement("div");
+    body.className = "agent-card-body";
+    // Render agent text with LaTeX + markdown
+    // 1. Escape HTML, apply markdown (bold/italic/code)
+    var safeText = (d.text || "")
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>');
+    // 2. Set innerHTML (use white-space:pre-wrap for newlines, no <br> needed)
+    body.style.whiteSpace = 'pre-wrap';
+    body.innerHTML = safeText;
+    // 3. Render KaTeX math (finds \[...\] and \(...\) in the text nodes)
+    if (typeof renderMathInElement !== 'undefined') {
+      try { renderMathInElement(body, {delimiters: [{left:'$$',right:'$$',display:true},{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false},{left:'$',right:'$',display:false}],throwOnError:false}); } catch(e) {}
+    }
+
+    header.addEventListener("click", function() {
+      body.classList.toggle("open");
+    });
+
+    card.appendChild(header);
+    card.appendChild(body);
+    $agentsList.appendChild(card);
+    $agentsList.parentElement.scrollTop = $agentsList.parentElement.scrollHeight;
+  }
+
+  // ── Show footer ────────────────────────────────────
+  function showFooter() {
+    $footer.classList.add("visible");
+  }
+
+  // ── Init-phase agent display ───────────────────────
+  function renderInitAgents(agents) {
+    $agentsList.innerHTML = "";
+    var keys = Object.keys(agents);
+    for (var i = 0; i < keys.length; i++) {
+      var name = keys[i];
+      var info = agents[name];
+      var card = document.createElement("div");
+      var side = (info.side || "neutral").toLowerCase();
+      var sideCls = "side-" + (side === "proponent" ? "proponent" : side === "skeptic" ? "skeptic" : "neutral");
+      card.className = "agent-card " + sideCls;
+      var header = document.createElement("div");
+      header.className = "agent-card-header";
+      header.innerHTML =
+        '<span class="name">' + esc(name) + ' <small style="opacity:0.5">(' + esc(side) + ')</small></span>' +
+        '<span class="badges">' +
+          '<span class="badge badge-ok">' + esc(info.provider || "") + '</span>' +
+        '</span>';
+      card.appendChild(header);
+      $agentsList.appendChild(card);
+    }
+  }
+
+  // ── Event handlers ─────────────────────────────────
+  var handlers = {
+    // ── Init phase ──
+    "init.start": function(d) {
+      state.phase = "init";
+      initDots(6);
+      setDot(0, "active");
+      addStatusStep("init-start", "running", "Init starting (" + (d.providers || []).join(", ") + ")", "");
+    },
+
+    "init.topic": function(d) {
+      $topicName.textContent = d.name || "Arbiter";
+      setDot(0, "done");
+      setDot(1, "active");
+      addStatusStep("init-start", "done", "Init started", "");
+      addStatusStep("init-topic", "done", "Topic: " + (d.name || ""), "");
+      // Show summary in argdown
+      state.argdownRaw = "=== Topic ===\n\n";
+      state.argdownRaw += "[Topic]: " + (d.name || "") + "\n";
+      if (d.summary) state.argdownRaw += "// " + d.summary + "\n";
+      if (d.counter_thesis) state.argdownRaw += "// Counter: " + d.counter_thesis + "\n";
+      $argdown.innerHTML = highlightArgdown(state.argdownRaw);
+    },
+
+    "init.claims": function(d) {
+      setDot(1, "done");
+      setDot(2, "active");
+      addStatusStep("init-claims", "done", "Claims extracted: " + (d.count || (d.claims || []).length), fmtElapsed(d.elapsed));
+
+      state.argdownRaw += "\n\n=== Claims (" + (d.count || (d.claims || []).length) + ") ===\n\n";
+      var claims = d.claims || [];
+      for (var i = 0; i < claims.length; i++) {
+        var c = claims[i];
+        state.argdownRaw += "[" + c.id + "]: " + c.claim;
+        if (c.category) state.argdownRaw += " #" + c.category;
+        if (c.is_formal) state.argdownRaw += " #formal";
+        state.argdownRaw += "\n";
+        if (c.depends_on && c.depends_on.length) {
+          for (var j = 0; j < c.depends_on.length; j++) {
+            state.argdownRaw += "  + [" + c.depends_on[j] + "]\n";
+          }
+        }
+      }
+      $argdown.innerHTML = highlightArgdown(state.argdownRaw);
+      $argdown.scrollTop = $argdown.scrollHeight;
+    },
+
+    "init.contradictions": function(d) {
+      setDot(2, "done");
+      setDot(3, "active");
+      var contras = d.contradictions || [];
+      addStatusStep("init-contra", "done", "Contradictions: " + contras.length, fmtElapsed(d.elapsed));
+
+      state.argdownRaw += "\n\n=== Contradictions (" + contras.length + ") ===\n\n";
+      for (var i = 0; i < contras.length; i++) {
+        var ct = contras[i];
+        state.argdownRaw += "<contra-" + (i+1) + ">: " + ct.contradiction;
+        if (ct.severity) state.argdownRaw += " #" + ct.severity;
+        if (ct.z3_encodable) state.argdownRaw += " #z3";
+        state.argdownRaw += "\n";
+        state.argdownRaw += "  // A: " + ct.claim_a + "\n";
+        state.argdownRaw += "  // B: " + ct.claim_b + "\n\n";
+      }
+      $argdown.innerHTML = highlightArgdown(state.argdownRaw);
+      $argdown.scrollTop = $argdown.scrollHeight;
+    },
+
+    "init.phase_b": function(d) {
+      setDot(3, "done");
+      setDot(4, "active");
+      addStatusStep("init-phase-b", "done",
+        "Phase B: " + (d.gate_rules_count || 0) + " gate rules, " + (d.rubric_count || 0) + " rubric items" +
+        (d.z3 ? ", Z3 enabled" : ""),
+        fmtElapsed(d.elapsed));
+      if (d.agents) renderInitAgents(d.agents);
+    },
+
+    "init.done": function(d) {
+      setDot(4, "done");
+      setDot(5, "done");
+      addStatusStep("init-done", "done", "Init complete", "");
+    },
+
+    // ── Debate phase ──
+    "debate.start": function(d) {
+      state.phase = "debate";
+      state.maxRounds = d.max_rounds || 0;
+      $topicName.textContent = d.topic || $topicName.textContent;
+      initDots(state.maxRounds);
+      addStatusStep("debate-start", "done", "Debate: " + (d.agents || []).join(", ") + " (" + (d.topology || "") + ")", "");
+
+      // Show agent list in agents panel
+      $agentsList.innerHTML = "";
+      var agents = d.agents || [];
+      for (var i = 0; i < agents.length; i++) {
+        var card = document.createElement("div");
+        card.className = "agent-card side-neutral";
+        var h = document.createElement("div");
+        h.className = "agent-card-header";
+        h.innerHTML = '<span class="name">' + esc(agents[i]) + '</span>';
+        card.appendChild(h);
+        $agentsList.appendChild(card);
+      }
+    },
+
+    "debate.round_start": function(d) {
+      state.roundCount = d.round_idx || 0;
+      // Mark previous dots done, current active
+      for (var i = 0; i < state.dots.length; i++) {
+        if (i < state.roundCount) setDot(i, "done");
+        else if (i === state.roundCount) setDot(i, "active");
+      }
+      var ledgerInfo = (d.ledger_total > 0) ? " (" + d.ledger_open + " open / " + d.ledger_total + " hits)" : "";
+      addStatusStep("round-" + d.round_idx, "running",
+        "Round " + d.round_idx + ledgerInfo,
+        d.stale_rounds ? "stale=" + d.stale_rounds : "");
+    },
+
+    "debate.agent_turn": function(d) {
+      addAgentCard(d);
+    },
+
+    "debate.validity_audit": function(d) {
+      addStatusStep("validity-r" + d.round, "done",
+        "Validity R" + d.round + ": " + (d.violations || 0) + " violations, " + (d.rewrites || 0) + " rewrites",
+        "");
+    },
+
+    "debate.argdown": function(d) {
+      $argdown.innerHTML = highlightArgdown(d.argdown_text || "");
+      $argdown.scrollTop = $argdown.scrollHeight;
+      // Update status with hit counts
+      addStatusStep("argdown-hits", "done",
+        "Hits: " + (d.hits_total || 0) + " total, " + (d.hits_open || 0) + " open, " + (d.hits_resolved || 0) + " resolved",
+        "");
+    },
+
+    "debate.ledger_update": function(d) {
+      var items = d.ledger || [];
+      var counts = { rebutted: 0, conceded: 0, dodged: 0, open: 0 };
+      for (var i = 0; i < items.length; i++) {
+        var status = (items[i].status || items[i]).toLowerCase();
+        if (status === "rebutted") counts.rebutted++;
+        else if (status === "conceded") counts.conceded++;
+        else if (status === "dodged") counts.dodged++;
+        else counts.open++;
+      }
+      state.ledger = counts;
+      renderLedger(counts);
+    },
+
+    "debate.finalize": function(d) {
+      showFooter();
+      // Mark all dots done
+      for (var i = 0; i < state.dots.length; i++) setDot(i, "done");
+      addStatusStep("finalize", "done", "Debate finalized", "");
+
+      // Z3 results
+      if (d.z3_results) {
+        var keys = Object.keys(d.z3_results);
+        for (var i = 0; i < keys.length; i++) {
+          var result = d.z3_results[keys[i]];
+          var cls = (typeof result === "string" ? result : (result.status || "")).toUpperCase() === "UNSAT" ? "z3-unsat" : "z3-sat";
+          var label = (typeof result === "string" ? result : (result.status || keys[i])).toUpperCase();
+          var badge = document.createElement("span");
+          badge.className = "z3-badge " + cls;
+          badge.textContent = keys[i] + ": " + label;
+          $z3Row.appendChild(badge);
+        }
+      }
+
+      // Validity stats
+      if (d.validity_stats) {
+        addStatusStep("validity-final", "done",
+          "Validity: " + JSON.stringify(d.validity_stats), "");
+      }
+
+      // Ledger summary
+      if (d.ledger_summary) {
+        renderLedger(d.ledger_summary);
+      }
+
+      // Steelman
+      if (d.steelman) {
+        var sm = document.createElement("div");
+        sm.style.cssText = "margin-top:6px;color:var(--text-muted);font-size:12px;";
+        sm.textContent = "Steelman: " + d.steelman;
+        $verdictRow.appendChild(sm);
+      }
+    },
+
+    "judge.verdict": function(d) {
+      showFooter();
+
+      $verdictRow.innerHTML = "";
+
+      if (d.panel_verdict) {
+        var lbl = document.createElement("span");
+        lbl.className = "verdict-label";
+        lbl.textContent = "Verdict: " + d.panel_verdict;
+        $verdictRow.appendChild(lbl);
+      }
+
+      if (d.criterion_means) {
+        var keys = Object.keys(d.criterion_means);
+        for (var i = 0; i < keys.length; i++) {
+          var s = document.createElement("span");
+          s.className = "verdict-score";
+          s.textContent = keys[i] + ": " + Number(d.criterion_means[keys[i]]).toFixed(2);
+          $verdictRow.appendChild(s);
+        }
+      }
+
+      if (d.per_judge) {
+        var jKeys = Object.keys(d.per_judge);
+        for (var j = 0; j < jKeys.length; j++) {
+          var jb = document.createElement("span");
+          jb.className = "badge badge-ok";
+          jb.textContent = jKeys[j] + ": " + JSON.stringify(d.per_judge[jKeys[j]]);
+          $verdictRow.appendChild(jb);
+        }
+      }
+
+      addStatusStep("verdict", "done", "Verdict: " + (d.panel_verdict || ""), "");
+    }
+  };
+
+  // ── Process a single event ─────────────────────────
+  function processEvent(evt) {
+    if (!evt || !evt.type) return;
+    startTimer(evt.ts || (Date.now() / 1000));
+    resetWaiting();
+
+    var fn = handlers[evt.type];
+    if (fn) {
+      fn(evt.data || {});
+    }
+  }
+
+  // ── SSE connection ─────────────────────────────────
+  function connect() {
+    addStatusStep("sse", "running", "Connecting to /events...", "");
+
+    var source = new EventSource("/events");
+
+    source.onopen = function() {
+      addStatusStep("sse", "done", "Connected", "");
+      resetWaiting();
+    };
+
+    source.onmessage = function(e) {
+      try {
+        var evt = JSON.parse(e.data);
+        processEvent(evt);
+      } catch(err) {
+        // ignore malformed
+      }
+    };
+
+    source.onerror = function() {
+      addStatusStep("sse", "running", "Reconnecting...", "");
+    };
+  }
+
+  // ── Boot ───────────────────────────────────────────
+  connect();
+  resetWaiting();
+})();
+</script>
+</body>
+</html>
