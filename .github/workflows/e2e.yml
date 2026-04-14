@@ -1,0 +1,201 @@
+name: E2E Debate Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      test:
+        description: "Which test to run"
+        type: choice
+        options:
+          - both
+          - bit
+          - iit
+          - bit-init
+          - iit-init
+        default: both
+
+jobs:
+  bit:
+    if: inputs.test == 'both' || inputs.test == 'bit'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[all]"
+
+      - name: Validate config
+        run: arbiter validate experiments/bit_creation_theory/config.yaml
+
+      - name: Calibrate gate
+        run: |
+          arbiter calibrate experiments/bit_creation_theory/config.yaml \
+            --test-cases experiments/bit_creation_theory/gate_tests.yaml
+
+      - name: Run debate
+        run: arbiter -v run experiments/bit_creation_theory/config.yaml
+
+      - name: Find latest output
+        id: find
+        run: |
+          LATEST=$(ls -t experiments/bit_creation_theory/output/debate_*.json 2>/dev/null | grep -v verdict | grep -v argdown | head -1)
+          if [ -z "$LATEST" ]; then
+            LATEST=$(ls -t output/debate_*.json 2>/dev/null | grep -v verdict | head -1)
+          fi
+          echo "path=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "Latest output: $LATEST"
+
+      - name: Judge
+        if: steps.find.outputs.path != ''
+        run: arbiter judge "${{ steps.find.outputs.path }}"
+
+      - name: Export argdown
+        if: steps.find.outputs.path != ''
+        run: arbiter export "${{ steps.find.outputs.path }}" -f argdown
+
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bit-debate-outputs
+          path: |
+            experiments/bit_creation_theory/output/
+            output/
+
+  iit:
+    if: inputs.test == 'both' || inputs.test == 'iit'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[all]"
+
+      - name: Validate config
+        run: arbiter validate experiments/iit/config.yaml
+
+      - name: Run debate
+        run: arbiter -v run experiments/iit/config.yaml
+
+      - name: Find latest output
+        id: find
+        run: |
+          LATEST=$(ls -t experiments/iit/output/debate_*.json 2>/dev/null | grep -v verdict | head -1)
+          if [ -z "$LATEST" ]; then
+            LATEST=$(ls -t output/debate_*.json 2>/dev/null | grep -v verdict | head -1)
+          fi
+          echo "path=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "Latest output: $LATEST"
+
+      - name: Judge
+        if: steps.find.outputs.path != ''
+        run: arbiter judge "${{ steps.find.outputs.path }}"
+
+      - name: Upload outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iit-debate-outputs
+          path: |
+            experiments/iit/output/
+            output/
+
+  bit-init:
+    if: inputs.test == 'bit-init'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[all]"
+
+      - name: Run agentic init from BIT PDF
+        run: |
+          arbiter -v init \
+            --from-pdf experiments/bit_creation_theory/source.pdf \
+            --providers "openai:gpt-5.4,anthropic:claude-opus-4-6,gemini:gemini-3.1-pro-preview,grok:grok-4.20-0309-reasoning" \
+            --effort high \
+            --output-dir experiments/bit-v2-init/ \
+            --non-interactive
+
+      - name: Show generated files
+        run: ls -la experiments/bit-v2-init/
+
+      - name: Validate generated config
+        run: arbiter validate experiments/bit-v2-init/config.yaml
+
+      - name: Show generated config
+        run: cat experiments/bit-v2-init/config.yaml
+
+      - name: Upload init outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bit-v2-init
+          path: experiments/bit-v2-init/
+
+  iit-init:
+    if: inputs.test == 'iit-init'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      XAI_API_KEY: ${{ secrets.XAI_API_KEY }}
+      TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[all]"
+
+      - name: Run agentic init from IIT PDF
+        run: |
+          arbiter -v init \
+            --from-pdf experiments/iit/IIT_4.0.pdf \
+            --providers "openai:gpt-5.4,anthropic:claude-opus-4-6,gemini:gemini-3.1-pro-preview,grok:grok-4.20-0309-reasoning" \
+            --effort high \
+            --output-dir experiments/iit-v2/ \
+            --non-interactive
+
+      - name: Show generated files
+        run: ls -la experiments/iit-v2/
+
+      - name: Validate generated config
+        run: arbiter validate experiments/iit-v2/config.yaml
+
+      - name: Show generated config
+        run: cat experiments/iit-v2/config.yaml
+
+      - name: Upload init outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: iit-v2-init
+          path: experiments/iit-v2/
