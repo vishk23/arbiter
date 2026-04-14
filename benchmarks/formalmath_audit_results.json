@@ -1,0 +1,391 @@
+{
+  "n": 54,
+  "categories": {
+    "TRIVIAL_CERTIFICATE": 25,
+    "CRASH": 4,
+    "PARTIAL": 9,
+    "NUMERICAL_ONLY": 9,
+    "WRONG": 3,
+    "VALID": 4
+  },
+  "results": [
+    {
+      "id": "DEMIMathAnalysis_15",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A finite telescoping/algebraic identity for three terms: the expression \\((b(1)-b(0))/1 + (b(2)-b(1))/2 + (b(3)-b(2))/3\\) is equal to its expanded linear form.",
+      "what_problem_asks": "To prove that if the series \\(\\sum_{n=1}^\\infty n a_n\\) converges, then the series \\(\\sum_{n=1}^\\infty a_n\\) also converges.",
+      "reason": "The certificate only proves a small symbolic identity unrelated to the actual convergence implication. It does not formalize summation by parts, bounded partial sums, or any convergence argument. The real theorem is not proved; at best the code records a telescoping pattern that might be used in such a proof."
+    },
+    {
+      "id": "DEMIMathAnalysis_26",
+      "category": "CRASH",
+      "what_certificate_proves": "No completed certificate is produced; the code stops partway through the second try-block and does not finish a formal proof of the functional equation claim.",
+      "what_problem_asks": "Prove that there do not exist continuous functions f, g, h : R -> R such that h(f(x)+g(y)) = xy for all real x, y.",
+      "reason": "The provided code is incomplete and syntactically/semantically broken in the output context: the execution output is empty, and the script shown is truncated at `checks.append({\"name\"`, so it does not define a finished proof or a runnable verification of the theorem. Even the attempted `kd.prove(Or(x == u, y == v))` is unrelated to the original functional equation and would at best establish a trivial/unjustified auxiliary statement, not the nonexistence of continuous functions satisfying the equation."
+    },
+    {
+      "id": "DEMIMathAnalysis_39",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kdrag proofs are tautological arithmetic/logic statements such as ForAll(m, Implies(m >= 3, 2/m <= 2/m)) and ForAll(x, Implies(And(x >= 0, x <= 1), Or(And(x >= 0, x <= 1), True))). These do not establish existence of the required sequence or its convergence/divergence properties.",
+      "what_problem_asks": "An explicit sequence of continuous functions on [0,1] with 0 <= f_n <= 1, integral tending to 0, and no pointwise convergence anywhere on [0,1].",
+      "reason": "The formal certificates are trivial identities or logical tautologies and do not encode the actual construction or proof of the sequence\u2019s properties. The only substantive part is numerical sampling of one trapezoid, which is not a proof. Therefore the code does not formally prove the problem, and the certificate content is trivial rather than a proof of the theorem."
+    },
+    {
+      "id": "DEMIMathAnalysis_50",
+      "category": "PARTIAL",
+      "what_certificate_proves": "A simple arithmetic lemma: for all integers n>0, 2n-1>0 and 2n-1<2n. The SymPy check also confirms the exact integral identity and its limit, but this is not a formal kd.prove() certificate for the main theorem.",
+      "what_problem_asks": "Show that lim_{n\u2192\u221e} sqrt(n) \u222b_{-\u221e}^{\u221e} (1+x^2)^{-n} dx = sqrt(pi).",
+      "reason": "The code contains one genuine kdrag certificate, but it proves only a trivial supporting inequality, not the stated limit. The main theorem is established by SymPy symbolic evaluation/limit computation and a numerical sanity check, not by the formal certificate. So the proof is not formally complete as a certificate-based proof, but it does more than just unrelated work."
+    },
+    {
+      "id": "DEMIMathAnalysis_61",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kdrag certificate proves only a generic monotonicity/arithmetic tautology: ForAll([u, v, w], Implies(And(u <= v, w >= 0), u <= v + w)). The SymPy certificate proves that (1/2 + 1/3) - 5/6 = 0, which is an unrelated exact arithmetic identity. The numerical check only tests one concrete example of the ratio limit.",
+      "what_problem_asks": "It asks for a general proof that if b_n > 0, sum b_n rho^n diverges, and a_n/b_n -> alpha, then f(x)/g(x) -> alpha as x -> rho^- for arbitrary power series f and g.",
+      "reason": "The formal certificate does not establish the theorem. The kdrag proof is a trivial inequality unrelated to power series limits, the SymPy certificate is just a zero check on a specific rational expression, and the remaining evidence is purely numerical on one example. So the core mathematical claim is not formally proved."
+    },
+    {
+      "id": "DEMIMathAnalysis_75",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "The kdrag certificate only proves the arithmetic lemma that for all nonnegative integers nn, (4*nn + 4) is divisible by 4. The sympy step also symbolically simplifies a derived closed-form expression to 0, but this is not a formal proof certificate for the integral itself.",
+      "what_problem_asks": "It asks to prove that for every non-negative integer n, the integral \u222b_0^\u221e x^n sin(x^(1/4)) exp(-x^(1/4)) dx equals 0.",
+      "reason": "The code does not provide a formal certificate connecting the original integral to the claimed closed form. The key step that the integral equals 4*Im(gamma(k)/(1-I)^k) is only asserted symbolically, not certified. The kdrag proof is only for a trivial divisibility fact, and the remaining verification is symbolic simplification plus one numerical sanity check. Since the actual theorem about the integral is not formally proved, this is best classified as NUMERICAL_ONLY rather than VALID or TRIVIAL_CERTIFICATE."
+    },
+    {
+      "id": "DEMIMathAnalysis_86",
+      "category": "WRONG",
+      "what_certificate_proves": "A trichotomy/tautology certificate about real numbers (e.g. ForAll(a, Or(a <= 0, a > 0))) plus symbolic/numerical checks for the specific function g(x)=x^2.",
+      "what_problem_asks": "A general analysis theorem: for any twice differentiable function f on an open interval I, f is convex iff f''(x) >= 0 on I.",
+      "reason": "The code does not formalize or prove the stated theorem. The only formal-looking certificate is unrelated to convexity/second derivatives and is a trivial real-number tautology. The rest is just a concrete example for x^2 and a numerical midpoint check, which do not establish the general iff statement."
+    },
+    {
+      "id": "aime_all_1994_11",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The formal certificates prove only (1) the algebraic identity 4a+10b+19c = 376+6b+15c under a+b+c=94, and (2) the tautology n = n. They do not formally prove the counting argument that there are 465 distinct heights.",
+      "what_problem_asks": "Count how many different tower heights are possible when 94 bricks of size 4, 10, or 19 inches are stacked, using all 94 bricks; the claimed answer is 465.",
+      "reason": "The nontrivial part of the solution is done by the numerical brute-force enumeration, not by the formal certificate. The first proof is just an algebraic rewrite, and the second is a tautology. So this is not a full formal proof of the theorem, only a trivial certificate plus numerical verification."
+    },
+    {
+      "id": "aime_all_2002_II_6",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "The code performs symbolic arithmetic with SymPy to compute a closed-form value for the finite sum and checks that the resulting rational number lies between 520.5 and 521.5. There is no formal theorem-proving certificate from kd.prove() or a minimal_polynomial argument.",
+      "what_problem_asks": "Determine the integer nearest to 1000\\sum_{n=3}^{10000} 1/(n^2-4), and prove it is 521.",
+      "reason": "The script only uses SymPy to evaluate an algebraic telescoping identity and compare exact rational bounds. It does not contain a formal proof object from kdrag/kd.prove, nor does it mechanically verify the telescoping step in a proof assistant. So it is a correct numerical/symbolic computation, but not a formal certificate. Since the execution output is empty, there is also no evidence of an actual proof run. The mathematical conclusion is 521, but the method is numerical/symbolic only."
+    },
+    {
+      "id": "aime_all_2021_I_10",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A simple linear identity: for integers m,n with n>=m+1, (n+19)-(m+18) = (n-m)+1. This is a tautological arithmetic step and does not establish the sequence characterization or the list of all indices.",
+      "what_problem_asks": "Find and justify the sum of all positive integers j such that a_j can be written as t/(t+1) for some positive integer t; the claimed answer is 59.",
+      "reason": "The only formal proof is a trivial arithmetic identity about one recurrence step. The actual determination of the indices [1,2,8,18,30] and their sum 59 comes from numerical simulation, not from a formal certificate. So the core theorem is not formally proved; the certificate is trivial relative to the problem."
+    },
+    {
+      "id": "hardmath_402",
+      "category": "WRONG",
+      "what_certificate_proves": "The symbolic checks only show (1) a Taylor expansion identity for the arbitrary polynomial x^3+2x^2+2x+2, (2) a dominant-balance algebraic exponent p=1/3 from p-3=4p-4, and (3) the unrelated identity cos(pi)=-1 via a minimal polynomial. None of these certify the claimed solution form to the ODE.",
+      "what_problem_asks": "Find analytical expressions approximating the solution y(x) of the given third-order nonlinear ODE in the small- and large-x regimes, and prove the specific boxed answer.",
+      "reason": "The code never derives or verifies the proposed solution to the ODE, never uses the differential equation or initial conditions in a formal proof, and the displayed checks are unrelated to the boxed expression. The small-x check is just a tautological Taylor expansion of a chosen polynomial, the large-x check is a heuristic exponent balance, and the trig check is irrelevant. So this is not a valid certificate for the theorem."
+    },
+    {
+      "id": "hardmath_49",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "It only attempts to prove two simple inequalities: that the endpoint coefficient f(0.7)/g'(0.7) is negative and that g(0.7) is positive. These are not the asymptotic formula itself, and the code relies on symbolic/numeric endpoint evaluation rather than a formal derivation of the integral asymptotics.",
+      "what_problem_asks": "Derive and prove the asymptotic formula for I(x)=\\int_{0.2}^{0.7}(2.3 t^4-2.4 t^2-0.8\\cos t)e^{x(0.9 t^5+0.9\\cos t)}dt as x\\to\\infty, specifically that I(x)\\approx -5.11 e^{0.88x}/x.",
+      "reason": "The code does not establish a Laplace-method theorem or a formal asymptotic expansion. It only computes endpoint quantities and checks their signs with kd.prove(), while the actual approximation \\u2248 -5.11 e^{0.88x}/x is inferred numerically from these endpoint values. The execution output is empty, and there is no certificate proving the integral asymptotic claim itself."
+    },
+    {
+      "id": "hardmath_886",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "No formal mathematical certificate is actually completed. The code only symbolically substitutes approximate root formulas into the polynomial and records the residual expressions; it does not prove any asymptotic order bounds or use kd.prove() / a minimal polynomial certificate to establish the claimed expansions.",
+      "what_problem_asks": "It asks for asymptotic approximations of all six roots of P(x)=\u03b5x^6-x^4+1 in the limits \u03b5\u21920+ and \u03b5\u2192+\u221e, including O(1) corrections, and to prove the stated root formulas.",
+      "reason": "The script never finishes the purported proof: the comment says 'Optional kd consistency check if available' but no actual kd.prove() call or similar certificate is executed in the shown code. The output only reports 'proved': True with a list of checked substitutions. That is just symbolic/numerical verification structure, not a formal derivation of the asymptotic root formulas or their error terms. Hence it is not VALID; it is at best numerical/symbolic checking only."
+    },
+    {
+      "id": "hardmath_957",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "Only heuristic/numerical sanity checks were performed: the exponent value near t=0.46 is numerically close to 0.40, and the prefactor is numerically close to 1.09. No formal proof certificate establishing the asymptotic formula was completed.",
+      "what_problem_asks": "An analytical asymptotic formula for the integral I(x) as x \u2192 \u221e, specifically to justify I(x) \u2248 1.09 \u221a\u03c0 x^{-1/2} e^{0.40 x}.",
+      "reason": "The code does not produce a formal kd.prove() certificate for the asymptotic statement. The only completed checks are numerical/heuristic, and the one symbolic check explicitly fails because f'(0.46) is not zero. The output reports proved=false and contains only sanity checks, so this is not a validated formal proof."
+    },
+    {
+      "id": "olymid-ref-base_10220",
+      "category": "CRASH",
+      "what_certificate_proves": "No certificate is successfully produced; the code is truncated before completion and does not provide a finished proof object.",
+      "what_problem_asks": "To prove that the Diophantine equation x^2 + y^2 + z^2 = (x-y)(y-z)(z-x) has infinitely many integer solutions.",
+      "reason": "The provided code is incomplete/truncated at the end (`'pas`), so it cannot run to completion. Even ignoring truncation, the attempted proof is suspect: it claims a parametric family but does not clearly establish that the identity holds for infinitely many integers. Since there is no executable successful certificate and the script cannot finish, this is a crash."
+    },
+    {
+      "id": "olymid-ref-base_10534",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kd.prove() call proves only that the specific pair (a,b)=(5,2) satisfies the inequality, i.e. And(11*5*2 <= 5^3-2^3, 5^3-2^3 <= 12*5*2). The other checks are numerical search and exact arithmetic for that candidate only.",
+      "what_problem_asks": "Find all positive integer pairs (a,b) such that 11ab <= a^3-b^3 <= 12ab, and prove the only solution is (5,2).",
+      "reason": "The formal certificate does not establish uniqueness or derive (5,2) from the inequality. It only verifies the candidate solution and uses brute-force finite search to observe that no other solutions appear up to 200. That is not a complete formal proof of the theorem, so the proof is not VALID; however, it is not purely numerical because there is a genuine certificate for the candidate pair. Thus it is best classified as TRIVIAL_CERTIFICATE."
+    },
+    {
+      "id": "olymid-ref-base_10705",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A tautological statement: for all positive a, b, p with a divisibility condition, the conclusion is True. This does not establish any nontrivial property.",
+      "what_problem_asks": "Find all positive integers (a,b) such that (4a+p)/b + (4b+p)/a and a^2/b + b^2/a are integers, and prove the listed finite set of solutions is complete.",
+      "reason": "The kd.prove call only certifies an implication whose conclusion is literally True, so it proves nothing about the characterization of solutions. The rest of the code is symbolic rewriting and numerical checking of example values, which does not constitute a formal proof of completeness. Therefore the formal certificate is trivial and the real theorem is not proved."
+    },
+    {
+      "id": "olymid-ref-base_11345",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kd.prove calls certify only the arithmetic tautology that if n = 100 then 2*n - 3 = 197, i.e. a simple specialization of a formula at n=100.",
+      "what_problem_asks": "Find the maximum possible number of pairs (i,j) among 100 distinct nonnegative integer pairs (a_i,b_i) such that |a_i b_j - a_j b_i| = 1.",
+      "reason": "The proof does not formalize the combinatorial optimization or show an upper bound of 197 for all configurations. It only verifies the arithmetic identity 2*100-3=197 and a numerical sum 99+98=197, which is ancillary to the actual theorem. So the certificate is trivial relative to the problem, while the real mathematical content is unproved."
+    },
+    {
+      "id": "olymid-ref-base_239",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kd.prove calls only prove the instantiated conjunctions And(True, True, True) for the three listed candidate pairs, i.e. that each specific pair satisfies the equation and positivity. This is a trivial certificate for those examples only.",
+      "what_problem_asks": "Find all ordered pairs of positive integers (x,y) satisfying x^3 + y^3 = x^2 + 42xy + y^2, and prove that the only solutions are (22,22), (1,7), and (7,1).",
+      "reason": "The formal certificate does not prove completeness or uniqueness of the solution set. The code relies on a bounded numerical search and a symbolic rewrite note, but neither is a formal proof that no other positive integer solutions exist. So the certificate is trivial/partial evidence for the claimed solutions, not a proof of the full theorem."
+    },
+    {
+      "id": "olymid-ref-base_2736",
+      "category": "PARTIAL",
+      "what_certificate_proves": "The kd.prove() certificate proves only the one-step invariance fact: if x is in [0,1], then f(x)=1-|1-2x| is also in [0,1].",
+      "what_problem_asks": "It asks to prove the full iff statement that the sequence x_{n+1}=1-|1-2x_n| is eventually periodic if and only if a is rational.",
+      "reason": "The formal certificate covers only a small auxiliary lemma about preserving the interval [0,1]. The rest of the code is numerical/sanity checking on a few rational examples and does not establish eventual periodicity for all rational a, nor the converse for irrational a. Therefore the proof is incomplete and only partial."
+    },
+    {
+      "id": "olymid-ref-base_2813",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kd.prove() certificate proves the tautology: if x equals the enumerated minimum and y equals the enumerated maximum, then x + y equals their sum. It does not prove the extremal combinatorial claim itself.",
+      "what_problem_asks": "Find the minimum and maximum possible values of P_A + P_B when {1,2,...,8} is partitioned into two sets A and B, with empty-set product defined as 1. The claimed answers are 402 and 40321.",
+      "reason": "The code computes all 2^8 partitions by brute force, then extracts min and max numerically/symbolically from that enumeration. The kd.prove() step only certifies a trivial identity about already-known values, not the theorem that these are the true extrema. So the core result is established by exhaustive computation, with only a trivial formal certificate attached."
+    },
+    {
+      "id": "olymid-ref-base_3654",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kd.prove certificate only proves the tautological arithmetic statement 2394 == 2394, obtained after computing the divisor-sum of 2009 from its factorization. It does not formalize the floor-sum identity.",
+      "what_problem_asks": "Compute and prove the value of the finite sum \\(\\sum_{k=1}^{2009} k(\\lfloor 2009/k\\rfloor-\\lfloor 2008/k\\rfloor)\\), namely 2394.",
+      "reason": "The actual mathematical result is obtained by numerical/symbolic computation outside the certificate: factorization of 2009, divisor-sum formula, and direct evaluation of the sum. The formal proof step does not establish the key identity relating the floor-difference sum to the divisor sum; it only certifies an already-computed equality. So this is not a full valid proof, but a trivial certificate supporting a computed result."
+    },
+    {
+      "id": "olymid-ref-base_3793",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A formal equality for the specific polynomial identity (x+1)(x+1)(x+1) = x^3 + 3x^2 + 3x + 1, i.e. an expansion/canonical-form check.",
+      "what_problem_asks": "Find the monic cubic p with p(0)=1 such that every zero of p'(x) is also a zero of p(x), and prove that p(x)=(x+1)^3.",
+      "reason": "The certificate only proves that the proposed polynomial expands correctly. It does not formally derive that this is the unique monic cubic satisfying the root-condition on p' or even connect that condition to the candidate, except via informal comments and numerical sanity checks. So the real mathematical work is not certified; the proof is essentially a trivial identity check."
+    },
+    {
+      "id": "olymid-ref-base_3929",
+      "category": "CRASH",
+      "what_certificate_proves": "The code never completes a formal proof; it starts numerical checks and a symbolic minimal_polynomial call, but the script is truncated at `for n in r` before finishing the exhaustive search or producing any certificate.",
+      "what_problem_asks": "Find and prove the smallest integer greater than 10 whose base-17 digit sum equals its base-10 digit sum, namely 153.",
+      "reason": "The provided code is syntactically incomplete/truncated, so it cannot run to completion. There is no finished kd.prove() certificate establishing the theorem, and the intended proof is not executed."
+    },
+    {
+      "id": "olymid-ref-base_4487",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kd.prove certificates prove that if the auxiliary equations a = 1+b+c, d = 4+2b+c, a+d = -b, and a*d = c hold, then c = -3/2. This is an algebraic implication in a simplified system.",
+      "what_problem_asks": "The problem asks to determine P(0) for a quadratic P(x)=x^2+bx+c under the conditions P(P(1))=P(P(2))=0 and P(1) \\neq P(2), and to prove the answer is -3/2.",
+      "reason": "The formal certificates do not derive the auxiliary equations from the original hypotheses in a complete proof. In particular, they assume relationships between a, d, b, c that encode the intended algebraic reasoning rather than proving them from P(P(1))=P(P(2))=0 and P(1) \\neq P(2). The actual conclusion c=-3/2 is then obtained from those assumed relations. The final numerical check is only sanity verification. So the proof is not fully formal for the stated theorem, but the certificate is not merely tautological; it proves a reduced algebraic implication."
+    },
+    {
+      "id": "olymid-ref-base_73",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A standard AM-GM inequality certificate: For all x,y >= 0, xy <= (x^2+y^2)/2. The other successful checks are a trig algebraic-zero identity and one numeric example, neither of which establishes the target inequality.",
+      "what_problem_asks": "Prove the universal inequality (a^2+2)(b^2+2)(c^2+2) >= 9(ab+bc+ca) for all real a,b,c>0.",
+      "reason": "The only formal kd/kdrag certificate shown is the auxiliary AM-GM fact, which is true but far weaker than the target theorem. The trigonometric minimal_polynomial check is unrelated to the inequality, and the numerical test at (1,2,3) is just a sanity check. So the code does not formally prove the stated inequality; at best it proves a trivial auxiliary lemma while relying on non-formal reasoning elsewhere."
+    },
+    {
+      "id": "olymid-ref-base_7654",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kdrag certificate proves a tautological arithmetic statement: if a real number p satisfies 4*p == 1, then p == 1/4. This does not by itself establish the expected minimum of three random variables.",
+      "what_problem_asks": "Compute and justify the expected value of min(a,b,c) for \u0565\u0580\u0565\u0584 independent Uniform(0,1) variables, and prove it equals 1/4.",
+      "reason": "The actual mathematical result is obtained by SymPy integration and a numerical sanity check, not by the formal certificate. The certificate only proves a trivial consequence of the equation 4p=1, which is unrelated to the probabilistic derivation. So this is not a valid formal proof of the theorem, but a trivial certificate attached to a numerically/symbolically computed answer."
+    },
+    {
+      "id": "olymid-ref-base_7873",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "No formal kd.prove() or algebraic certificate is produced; the code only performs a Python loop computing a residue modulo 100 under an extra assumption about the recurrence range.",
+      "what_problem_asks": "Determine the remainder of a_{2006} upon division by 100, for the sequence defined by a_0=21, a_1=35, and a_{n+2}=4a_{n+1}-4a_n+n^2 (as stated) and prove the answer is 0.",
+      "reason": "The code contains only a numerical modular iteration, not a formal proof. It also explicitly notes that the recurrence is stated only for n>=2 and assumes an intended interpretation extending it to all n>=0. Since the conclusion rests entirely on computation and an unstated assumption rather than a certificate proving the theorem, this is numerical-only, not a valid formal proof."
+    },
+    {
+      "id": "olymid-ref-base_8422",
+      "category": "PARTIAL",
+      "what_certificate_proves": "Two elementary arithmetic facts: if n\u22651 and z_n<z_{n+1} then n(z_n\u2212z_{n+1})<0, and if a>b then a\u2212b>0.",
+      "what_problem_asks": "For every strictly increasing infinite sequence of positive integers, prove there exists a unique n\u22651 such that z_n < (z_0+...+z_n)/n \u2264 z_{n+1}.",
+      "reason": "The code only proves standalone inequalities about integers. It does not formalize the sequence, the average, existence of such an n, or uniqueness of n. The main olympiad claim is therefore not certified; only a small ingredient toward a possible sign-change proof is established."
+    },
+    {
+      "id": "olymid-ref-base_8698",
+      "category": "PARTIAL",
+      "what_certificate_proves": "The kdrag certificate only proves the index bound n - m + 1 >= 1 under the assumptions n >= 3, m >= 2, m <= n. The rest is a symbolic simplification and numerical checking of the proposed construction, not a formal proof of the partition property for all m.",
+      "what_problem_asks": "Show that for every integer n >= 3 there exists a set S of 2n positive integers such that for each m=2,3,...,n, S can be split into two equal-sum parts, one part having exactly m elements.",
+      "reason": "The code does not formally prove the main combinatorial claim. It gives a candidate construction and verifies one harmless index-range fact with kd.prove(), while the essential equal-sum partition argument is handled by symbolic manipulation and a single numerical example. That is enough for a sub-result and evidence of the construction, but not a complete formal proof of the theorem."
+    },
+    {
+      "id": "olymid-ref-base_9073",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "No formal mathematical certificate proves the theorem. The only successful check is a numerical sanity test on one sample configuration.",
+      "what_problem_asks": "To prove that for any real numbers x_1,...,x_n in [0,1] with n>=3 and sum s>=3, there exist i<j such that 2^(j-i) x_i x_j > 2^(s-3).",
+      "reason": "The code explicitly says it does not produce a kd.prove() certificate for the theorem, and the formal check is marked failed. The only passed check is a numerical example, which is not a proof. Therefore this is numerical verification only, not a formal proof."
+    },
+    {
+      "id": "olymid-ref-base_9995",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A simple universal arithmetic fact: if a and b are nonnegative, then a + b is nonnegative. The other checks are symbolic/numerical sanity examples (e.g. one concrete polynomial multiplication) and do not prove the theorem.",
+      "what_problem_asks": "To prove that for every real polynomial P(x) positive on x >= 0, there exists a positive integer n such that (1+x)^n P(x) has all nonnegative coefficients.",
+      "reason": "The generated code does not contain a formal proof of the stated theorem. The only actual kd.prove certificate shown is a trivial closure property of nonnegative integers under addition, which is unrelated to the main existence claim. The rest of the output consists of symbolic sanity checks and a single numerical example, so the theorem itself is not formally established."
+    },
+    {
+      "id": "omni_theorem_116",
+      "category": "WRONG",
+      "what_certificate_proves": "A generic theorem that every square is nonnegative, namely ForAll([x, y, z], (x*z + y)**2 >= 0), plus an unrelated symbolic identity sqrt(2)*sqrt(3) - sqrt(6) = 0 and a single numerical check for z^2+2z+5.",
+      "what_problem_asks": "A formal proof that whenever A(x,y)z^2 + B(x,y)z + C(x,y) is nonnegative for all real x,y,z and satisfies B(x,y)^2 - 4A(x,y)C(x,y) = -R(x,y)^2, there exist polynomials F(x,y,z), G(x,y,z) such that F^2 + G^2 = A z^2 + B z + C.",
+      "reason": "The code does not construct F and G, does not use the given discriminant hypothesis in a proof, and proves only unrelated or trivial facts. The kdrag certificate is about a square being nonnegative, which is far weaker and unrelated to the claimed decomposition of the given polynomial into a sum of two squares. The sympy minimal-polynomial check and numerical instance are also unrelated to the theorem. Therefore the proof is not valid and not even a partial proof of the actual statement."
+    },
+    {
+      "id": "omni_theorem_1580",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "A SymPy minimal-polynomial fact: minimal_polynomial(cos(pi/3), x) = 2*x - 1, i.e. cos(pi/3)=1/2.",
+      "what_problem_asks": "Count the real initial values a_0 such that the recurrence a_{n+1}=a_n^3-3a_n^2+3 satisfies a_{2007}=a_0; the claimed answer is 3^{2007}.",
+      "reason": "The code does not construct any formal proof of the recurrence claim or the count of solutions. It only computes a standalone symbolic fact about cos(pi/3), which is unrelated to establishing a_{2007}=a_0 for the given recurrence. There is no kd.prove() certificate, no derivation of the iterate structure, and no enumeration of the 3^{2007} solutions. Thus it is not a valid proof of the problem and is best classified as numerical/symbolic-only checking of an unrelated fact."
+    },
+    {
+      "id": "omni_theorem_1859",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kdrag certificate proves the universal algebraic identity 2*(x+2y-3z)+3*(2x-y+2z) = 8x+y, which is a tautological linear-combination identity. It does not by itself use the given equations x+2y-3z=7 and 2x-y+2z=6 to derive the numerical value.",
+      "what_problem_asks": "Using the two given linear equations, determine the value of 8x+y, and show it equals 32.",
+      "reason": "The formal proof only certifies a rearrangement/identity valid for all x,y,z. The actual conclusion 8x+y=32 comes from substituting the right-hand sides 7 and 6 into that identity via symbolic computation, plus a numerical sanity check. So the certificate is trivial relative to the theorem; it does not formally prove the problem\u2019s core claim on its own."
+    },
+    {
+      "id": "omni_theorem_2669",
+      "category": "VALID",
+      "what_certificate_proves": "The kdrag certificate proves the identity ForAll(x, x*x + 2*x - x*(x + 1) == x), i.e. the expression simplifies to x for all integers x.",
+      "what_problem_asks": "Evaluate x^2 + 2x - x(x+1) at x = 2018 and show the value is 2018.",
+      "reason": "The formal certificate establishes the general algebraic simplification, which directly implies the value at x=2018 is 2018. The numerical check is only supplementary; the core claim is formally proved."
+    },
+    {
+      "id": "omni_theorem_819",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kdrag certificate proves only the unrelated tautological arithmetic statement \u2200n (0 \u2264 n \u2264 6 \u2192 3^n > 0). The rest of the code uses direct finite enumeration to find the seven valid n.",
+      "what_problem_asks": "Count how many integers 1 \u2264 n \u2264 1000 have both n and n^2 with no digit 2 in base 3, and prove the count is 7.",
+      "reason": "The formal proof does not establish the core characterization of mild numbers or why exactly the seven listed values are the only solutions. The actual answer comes from brute-force enumeration over 1..1000, while the only kdrag proof is a trivial positivity lemma unrelated to the theorem. Therefore this is not a valid certificate for the main claim, but a trivial certificate plus numerical/exhaustive search."
+    },
+    {
+      "id": "quantitative_reasoning_zh_blue_155",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A formal certificate that if 99(x-y)^2 >= (1+xy)^2, then 99(x-y)^2 >= 0, plus a symbolic rewrite showing the inequality is algebraically equivalent to 99(x-y)^2 >= (1+xy)^2.",
+      "what_problem_asks": "The largest integer n such that there exist n distinct real numbers x_i with (1+x_ix_j)^2 <= 0.99(1+x_i^2)(1+x_j^2) for every i<j.",
+      "reason": "The certificate only proves an immediate consequence of the rewritten inequality (nonnegativity of a square) and the algebraic equivalence of the rewritten form. It does not prove the key combinatorial/geometric bound on the maximum size n, nor the claimed value 31. The rest is numerical sanity checking and not a full formal proof of the theorem."
+    },
+    {
+      "id": "quantitative_reasoning_zh_blue_700",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kd.prove certificate proves only the tautology ForAll(m, 1 - 2*m*m == 1 - 2*m*m), i.e. a self-equality with no trig content.",
+      "what_problem_asks": "From cos(pi/4 + x) = m, derive the expression for sin(2x), namely 1 - 2m^2.",
+      "reason": "The formal certificate is trivial and unrelated to the trigonometric implication. The rest of the code uses symbolic manipulation and a numerical spot check, but there is no formal proof connecting cos(pi/4 + x)=m to sin(2x)=1-2m^2. So this is not a valid proof of the theorem, only a trivial certificate plus informal computation."
+    },
+    {
+      "id": "theorem_proving_zh_blue_1056",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A formal kdrag certificate of the tautological equality-case statement: under a+b+c=1, it proves (a+b+c)^5 >= 1, which is just 1>=1. It does not address the product over the five x_i or the condition x1x2...x5=1.",
+      "what_problem_asks": "To prove that for positive a,b,c with a+b+c=1 and positive x1,...,x5 with x1x2...x5=1, the product \u220f_{i=1}^5 (a x_i^2 + b x_i + c) is at least 1.",
+      "reason": "The only formal certificate concerns the trivial equality case x_i=1 implicitly, reducing everything to (a+b+c)^5>=1. The rest of the code is just symbolic expansion and numerical checks at sample points. There is no formal proof connecting the general hypothesis x1x2...x5=1 to the desired inequality, so the certificate is trivial relative to the problem."
+    },
+    {
+      "id": "theorem_proving_zh_blue_1166",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "A supporting tautology: ForAll(a, Implies(a > 0, a*a >= 0)), i.e. positive numbers have nonnegative squares.",
+      "what_problem_asks": "For positive real numbers a,b,c with a^2+b^2+c^2=1, prove ab/c + bc/a + ca/b >= sqrt(3).",
+      "reason": "The formal certificate does not prove the target inequality. It only certifies the trivial fact a^2>=0 for positive a. The rest of the code merely checks the equality case numerically/symbolically at a=b=c=1/sqrt(3), which is not a proof of the lower bound for all admissible a,b,c. Therefore the core theorem is not formally established."
+    },
+    {
+      "id": "theorem_proving_zh_blue_1366",
+      "category": "PARTIAL",
+      "what_certificate_proves": "The only formal certificate is the universal inequality 2xy <= x^2 + y^2 for all reals x,y, which is a standard auxiliary lemma.",
+      "what_problem_asks": "To prove Hardy\u2019s inequality for nonnegative a_k: sum_{k=1}^n A_k^2 <= 4 sum_{k=1}^n a_k^2, where A_k=(1/k)sum_{i=1}^k a_i.",
+      "reason": "The code does not produce a formal proof of the target inequality. It only proves an auxiliary arithmetic lemma and then performs a numerical check for one sample sequence, plus a symbolic simplification that is not clearly connected to a full general proof. Since the core theorem is not formally certified, this is not VALID; because it does more than a single trivial tautology but still fails to prove the main statement, the best classification is PARTIAL."
+    },
+    {
+      "id": "theorem_proving_zh_blue_2036",
+      "category": "PARTIAL",
+      "what_certificate_proves": "A symbolic identity about coefficients and a generic universal nonnegativity lemma ((u-v)^2+(v-w)^2+(w-u)^2 \u2265 0). These are auxiliary facts, not the target triangle inequality.",
+      "what_problem_asks": "A proof that for any point P in the plane of triangle A1A2A3, the weighted sum (a2^2+a3^2-a1^2)R1^2 + (a3^2+a1^2-a2^2)R2^2 + (a1^2+a2^2-a3^2)R3^2 is at least 16/3 \u0394^2.",
+      "reason": "The code never formalizes the geometric inequality itself. The symbolic check is only a coefficient identity, and the kd.prove() lemma is a trivial quadratic nonnegativity fact unrelated to the triangle statement. The final 'concrete triangle sanity check' is only numerical. So the proof does not establish the theorem, only some supporting facts."
+    },
+    {
+      "id": "theorem_proving_zh_blue_278",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The certificates prove only small arithmetic/logic lemmas: (1) if two integers differ by at most 1 and sum to 4n, then one of them is 2n or they straddle 2n; (2) a scaffold theorem that is literally True under the stated hypotheses. These do not formalize the combinatorial sliding-window argument needed for the main result.",
+      "what_problem_asks": "To prove that among 6n collinear points colored with 4n blue and 2n green, there exists a segment containing exactly 3n points, of which 2n are blue and n are green.",
+      "reason": "The output shows only auxiliary certificate checks, including one tautological theorem ('... implies True') and an arithmetic lemma. There is no formal certificate connecting the actual coloring of the 6n points to the existence of a 3n-point segment with exactly 2n blue and n green points. So the core theorem is not formally proved; the proof relies on an unformalized combinatorial argument and is therefore only trivial/partial rather than valid."
+    },
+    {
+      "id": "theorem_proving_zh_blue_308",
+      "category": "CRASH",
+      "what_certificate_proves": "Only a trivial certificate was successfully proved: ForAll(m, Implies(m >= 0, m*m <= 2*m*m)). The intended floor-sqrt lemma did not prove due to a TypeError involving integer floor division on a Z3 expression.",
+      "what_problem_asks": "Show that for any family of 3-element subsets of {1,...,n} with pairwise intersections of size at most 1, there exists a subset X of I containing no member of the family and with |X| >= floor(sqrt(2n)).",
+      "reason": "The code does not successfully run to completion: the main certified arithmetic lemma fails with TypeError: unsupported operand type(s) for //: 'ArithRef' and 'int'. The only proved certificate is unrelated/trivial and does not establish the combinatorial theorem. Numerical checks do not count as a formal proof."
+    },
+    {
+      "id": "theorem_proving_zh_blue_42",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The certificates only prove tautological or very basic arithmetic facts, such as 'if x+y=m then x+y=m' and that a specific expression is even under an assumption. They do not construct a partition of 1,2,...,n into k groups of sum m.",
+      "what_problem_asks": "Prove that whenever 1+2+...+n = mk with m>=n, the set {1,2,...,n} can be partitioned into k groups each having sum m.",
+      "reason": "The formal proofs are trivial and unrelated to the full combinatorial existence claim. The output also explicitly says the main theorem is not fully encoded and only a numerical sanity check is provided. So this is not a valid formal proof of the problem, nor just partial subtheorem proof; it is a trivial certificate plus numerical illustration."
+    },
+    {
+      "id": "theorem_proving_zh_blue_574",
+      "category": "PARTIAL",
+      "what_certificate_proves": "The kdrag certificate proves only an algebraic identity: a completion-of-squares formula of the form \\(\\sum x_i^2 - 2P\\sum x_i + nP^2 = \\sum (x_i-P)^2\\) for a fixed 3-variable setup. This is a correct identity but not the optimization statement for general ordered \\(P_i\\) and monotone \\(x_i\\).",
+      "what_problem_asks": "Find real numbers \\(x_1\\ge x_2\\ge \\cdots \\ge x_n\\) minimizing \\(d=\\sum_{i=1}^n (P_i-x_i)^2\\) given \\(P_1\\le P_2\\le\\cdots\\le P_n\\).",
+      "reason": "The code does not prove the full minimization theorem. The only formal proof is a generic algebraic identity, which is far weaker than showing the optimal monotone sequence. The second symbolic check failed, and the remaining evidence is merely a numerical example. So this is a partial proof, not a valid certificate for the problem."
+    },
+    {
+      "id": "u-math_232",
+      "category": "VALID",
+      "what_certificate_proves": "The kdrag certificate proves the algebraic polynomial identity (t^2 - 1)(t^4 + 10 t^2 + 1) = t^6 + 9 t^4 - 9 t^2 - 1 for all t; together with the SymPy symbolic differentiation and simplification, this supports the full derivative formula.",
+      "what_problem_asks": "Compute and prove the derivative of f(x)=(((tan x)^2-1)((tan x)^4+10(tan x)^2+1))/(3(tan x)^3) is (tan x)^4+4(tan x)^2+4/(tan x)^2+1/(tan x)^4+6.",
+      "reason": "The execution output shows SymPy simplified the derivative-minus-expected expression to 0, which directly confirms the claimed derivative identity. The kdrag proof is a genuine universal algebraic certificate for a needed intermediate expansion, not merely a tautology. Since the formal/symbolic check establishes the exact derivative formula, this is not just numerical verification and is sufficient for the core claim."
+    },
+    {
+      "id": "u-math_489",
+      "category": "NUMERICAL_ONLY",
+      "what_certificate_proves": "The kdrag proofs only certify that the specific substitutions x = -4 and x = -3 satisfy the equation (direct equality checks). The SymPy part computes/solves the polynomial and checks the candidate roots, but that is not a formal proof certificate.",
+      "what_problem_asks": "Find all solutions of (x+2)^4 + (x+5)^4 = 17 and prove the answer is exactly x = -4 and x = -3.",
+      "reason": "The code does not provide a formal derivation that these are the only solutions. It relies on SymPy's solve/factor computations and then verifies the two proposed roots individually. The kdrag proof is trivial (implications from x=-4 or x=-3 to the equation) and does not establish completeness. Since no substantive certificate proves the full solution set, this is numerical/symbolic verification only rather than a valid formal proof."
+    },
+    {
+      "id": "u-math_650",
+      "category": "VALID",
+      "what_certificate_proves": "The kdrag certificate proves the algebraic implication that any real x satisfying 2*x*x - x == 1 must have x = 1 or x = -1/2. Together with the symbolic trigonometric classification, this yields the corresponding angles on [0, pi).",
+      "what_problem_asks": "Solve 2(cos(theta))^2 - cos(theta) = 1 for 0 <= theta < pi, and show the solutions are theta = 0 and theta = 2*pi/3.",
+      "reason": "The code formally establishes the polynomial reduction (2x+1)(x-1)=0, the kdrag proof certifies the root set {1, -1/2}, and the final symbolic step maps these cosine values to the unique angles in [0, pi): 0 and 2*pi/3. This matches the full theorem, not just a sub-result or numerical check."
+    },
+    {
+      "id": "u-math_720",
+      "category": "VALID",
+      "what_certificate_proves": "The symbolic certificate proves that the derivative of the claimed antiderivative is exactly the integrand: d/dx(claimed) - 3*x^(-8)*sqrt(9+x^2) simplifies to 0. The direct SymPy integration cross-check also confirms SymPy\u2019s integral matches the claimed expression up to an additive constant.",
+      "what_problem_asks": "Compute the antiderivative of 3 * x^(-8) * sqrt(9+x^2) and show it equals C + 2/1215*(1+9/x^2)^2*sqrt(1+9/x^2) - 1/729*(1+9/x^2)*sqrt(1+9/x^2) - 1/1701*(1+9/x^2)^3*sqrt(1+9/x^2).",
+      "reason": "This is a genuine symbolic verification of the exact antiderivative, not just a numerical check or trivial identity. The code differentiates the claimed formula and obtains the integrand identically, and the integration cross-check agrees. Therefore the proof establishes the requested integral formula."
+    },
+    {
+      "id": "u-math_830",
+      "category": "PARTIAL",
+      "what_certificate_proves": "The kdrag certificates establish some sign implications for the intervals (-5, 3) and (9, \u221e), and that the polynomial is zero at the boundary points -5, 3, and 9.",
+      "what_problem_asks": "Find and prove the full solution set of the inequality 8(x-9)(x+5)(x-3) > 0, namely (-5, 3) \u222a (9, \u221e).",
+      "reason": "The code includes formal kdrag proofs, but they only certify interval-wise sign conditions and boundary evaluations, not a complete derivation that these are exactly the only solution intervals. The remaining confirmation is done by SymPy and numerical sampling, which are not the required formal certificate. So this is more than numerical-only, but it does not fully prove the theorem as stated."
+    },
+    {
+      "id": "u-math_849",
+      "category": "PARTIAL",
+      "what_certificate_proves": "It certifies the algebraic identity 3*(n+1) - 2*n - 1 = n + 2, the base case a(2)=3, and some specific unfoldings a_3=4, a_4=5, a_5=6, a_6=7. It does not formally prove the full induction theorem for all n, because the 'step' certificate only states the implication shape and is not shown to derive the closed form from the recurrence without an induction principle being formally applied.",
+      "what_problem_asks": "Find the first six terms of the sequence and prove the nth-term formula. The intended result is a_1=1, a_2=3, a_3=4, a_4=5, a_5=6, a_6=7, and a_n=n+1 for n>=2.",
+      "reason": "The output includes valid certificates for the base case, the algebraic simplification used in the induction step, and several concrete terms. However, the code does not present a formal induction proof that the closed form holds for all n; it only verifies the step identity and specific instances. So the core theorem is not fully formally proved, only strongly supported by partial certificates plus numerical checking."
+    },
+    {
+      "id": "u-math_925",
+      "category": "TRIVIAL_CERTIFICATE",
+      "what_certificate_proves": "The kdrag certificate only proves a trivial arithmetic tautology: ForAll(a, Implies(a == 0, a + 1 == 1)). The SymPy checks verify that atan(1)=pi/4, atan(sqrt(3))=pi/3, and that a computed annular-sector formula simplifies to pi/8, but this is not a formal proof certificate for the geometry theorem.",
+      "what_problem_asks": "Find the area of the region bounded by the circles x^2+y^2=1 and x^2+y^2=4 and the lines y=x and y=sqrt(3) x, and prove the answer is pi/8.",
+      "reason": "The code does compute the correct area symbolically and confirms it numerically, but the only formal kd.prove/kdrag certificate is unrelated and trivial. The actual geometric argument is done by direct symbolic/numerical calculation rather than a formal proof of the region-area claim, so this is not a valid formal proof."
+    }
+  ]
+}
