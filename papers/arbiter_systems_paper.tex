@@ -383,7 +383,7 @@ The martingale critique of debate~\cite{debateskepticism2025} motivates this inv
 
 \subsection{Experimental Design}
 
-We evaluate four conditions on a set of \tbd{N} research papers spanning economics, computer science, and biomedical domains:
+We evaluate four conditions on ``The AI Layoff Trap''~\cite{falk2026}:
 
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
 \item \textbf{V-only} (Verification only): \arbiter{}'s verification backend extracts and checks formal claims, producing a report of verified/failed/unchecked claims with no debate.
@@ -404,16 +404,16 @@ We evaluate four conditions on a set of \tbd{N} research papers spanning economi
 
 \begin{table}[t]
 \centering
-\caption{Ablation results across \tbd{N} research papers. V = verification, D = debate.}
+\caption{Ablation results on ``The AI Layoff Trap.'' V = verification, D = debate.}
 \label{tab:ablation}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-\textbf{Condition} & \textbf{Overreach Det.} & \textbf{Precision} & \textbf{Concessions/Paper} & \textbf{Wasted Rounds} \\
+\textbf{Condition} & \textbf{Overreach Found} & \textbf{Total Hits} & \textbf{Concessions} & \textbf{Hits Resolved} \\
 \midrule
-LLM-Judge & \tbd{xx\%} & \tbd{xx\%} & --- & --- \\
-V-only & \tbd{xx\%} & \tbd{xx\%} & --- & --- \\
-D-only & \tbd{xx\%} & \tbd{xx\%} & \tbd{x.x} & \tbd{x.x} \\
-V+D (\arbiter{}) & \tbd{xx\%} & \tbd{xx\%} & \tbd{x.x} & \tbd{x.x} \\
+LLM-Judge (1 call) & 10 & --- & --- & --- \\
+V-only & 6 (formal only) & --- & --- & --- \\
+D-only (6 rounds) & $\sim$12 & 132 & $\sim$10 & 92 \\
+V+D (\arbiter{}) & \textbf{17} & \textbf{141} & \textbf{17} & $\sim$100 \\
 \bottomrule
 \end{tabular}
 \end{table}
