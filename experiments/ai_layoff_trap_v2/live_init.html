@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Arbiter — AI Over-Automation Externality and the Case for an Automation Tax</title>
+  <meta http-equiv="refresh" content="5">
+  <style>
+    body { font-family: 'SF Mono', 'Fira Code', monospace; margin: 0; padding: 2rem; background: #0d1117; color: #c9d1d9; }
+    h1 { color: #58a6ff; font-size: 1.3rem; margin: 0 0 0.3rem 0; }
+    .stage { color: #8b949e; font-size: 0.9rem; margin-bottom: 1.5rem; border-bottom: 1px solid #21262d; padding-bottom: 0.8rem; }
+    .content { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 1.2rem; overflow: auto; max-height: 85vh; }
+    pre { white-space: pre-wrap; font-size: 0.82rem; line-height: 1.6; margin: 0; }
+    /* Argdown syntax highlighting */
+    .ad-statement { color: #7ee787; font-weight: bold; }
+    .ad-argument { color: #ff7b72; font-weight: bold; }
+    .ad-tag { color: #d2a8ff; font-style: italic; }
+    .ad-comment { color: #8b949e; font-style: italic; }
+    .ad-relation-support { color: #3fb950; }
+    .ad-relation-attack { color: #f85149; }
+    .ad-section { color: #58a6ff; font-weight: bold; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>Arbiter — AI Over-Automation Externality and the Case for an Automation Tax</h1>
+  <div class="stage">Step 4 — Config Generated · auto-refreshes every 5s</div>
+  <div class="content"><pre><span class="ad-section">=== CLAIMS (328) ===</span>
+
+  C1: If AI displaces human workers faster than the economy can reabsorb them, it risks eroding the very consumer demand firms
+       [logical]
+
+  C2: Knowing that AI displacement erodes consumer demand is not sufficient for firms to stop it.
+       [logical]
+       depends: C1
+
+  C3: In a competitive task-based model, demand externalities trap rational firms in an automation arms race, displacing worke
+       [logical] [FORMAL]
+
+  C4: The resulting loss from over-automation harms both workers and firm owners.
+       [logical]
+       depends: C3
+
+  C5: More competition and better AI amplify the excess automation beyond what is collectively optimal.
+       [logical] [FORMAL]
+       depends: C3
+
+  C6: Wage adjustments and free entry cannot eliminate the over-automation externality.
+       [logical] [FORMAL]
+       depends: C3
+
+  C7: Capital income taxes cannot eliminate the over-automation externality.
+       [logical] [FORMAL]
+       depends: C3
+
+  C8: Worker equity participation cannot eliminate the over-automation externality.
+       [logical] [FORMAL]
+       depends: C3
+
+  C9: Universal basic income cannot eliminate the over-automation externality.
+       [logical] [FORMAL]
+       depends: C3
+
+  C10: Upskilling cannot eliminate the over-automation externality.
+       [logical] [FORMAL]
+       depends: C3
+
+  C11: Coasian bargaining cannot eliminate the over-automation externality.
+       [logical] [FORMAL]
+       depends: C3
+
+  C12: Only a Pigouvian automation tax can eliminate the over-automation externality.
+       [logical] [FORMAL]
+       depends: C3
+
+  C13: Policy should address not only the aftermath of AI labor displacement but also the competitive incentives that drive it.
+       [logical]
+       depends: C3, C12
+
+  C14: The fear that technology will displace workers is at least as old as the Industrial Revolution.
+       [empirical]
+
+  C15: Historically, labor displacement has largely been self-correcting: automation of existing tasks has been offset by the c
+       [empirical]
+
+  C16: What Acemoglu and Restrepo call the reinstatement effect has tended to stabilize the labor market.
+       [empirical]
+       depends: C15
+
+  C17: Whether historical labor market self-correction will hold in the age of AI is an open question.
+       [empirical]
+       depends: C15
+
+  C18: Displacement has intensified over the past four decades while the creation of new work has not always kept pace.
+       [empirical]
+
+  C19: The current wave of AI-driven displacement is disproportionately affecting entry-level workers.
+       [empirical]
+
+  C20: Displaced workers are also consumers, and when their lost income is not replaced, each round of layoffs erodes the purch
+       [logical]
+
+  C21: At the limit, firms would automate their way to boundless productivity and zero demand.
+       [logical]
+       depends: C20
+
+  C22: Public discourse increasingly treats the dynamic of AI-driven displacement eroding demand as an inevitable process with 
+       [empirical]
+
+  C23: Rational, forward-looking firms should theoretically serve as the brake on over-automation if they can see the consequen
+       [logical]
+
+  C24: Block cut nearly half its 10,000-person workforce in February 2026, with CEO Jack Dorsey stating that AI had made many o
+       [empirical]
+
+  C25: Over 100,000 tech workers were laid off in 2025 alone, with AI cited as a primary driver in more than half the cases.
+       [empirical]
+
+  C26: Roughly 80% of U.S. workers hold jobs with tasks susceptible to automation by large language models.
+       [empirical]
+
+  C27: Salesforce replaced 4,000 customer-support agents with agentic AI.
+       [empirical]
+
+  C28: Cognition&<span class="ad-tag">#x27</span>;s Devin, deployed at Goldman Sachs and Infosys, enables one senior engineer to do the work of a five-person te
+       [empirical]
+
+  C29: An automating firm captures the full cost saving but, under competitive pricing, bears only a fraction of the resulting 
+       [logical] [FORMAL]
+
+  C30: Each firm&<span class="ad-tag">#x27</span>;s profit-maximizing automation rate is a strictly dominant strategy that exceeds the cooperatively efficient l
+       [logical] [FORMAL]
+       depends: C29
+
+  C31: Foresight alone cannot prevent the race toward over-automation.
+       [logical]
+       depends: C30
+
+  C32: The distortion from over-automation deepens with competition: a monopolist fully internalizes the externality, while fra
+       [logical] [FORMAL]
+       depends: C29
+
+  C33: In the frictionless limit, where every task is equally easy to automate, the game sharpens into a Prisoner&<span class="ad-tag">#x27</span>;s Dilemma in 
+       [logical] [FORMAL]
+       depends: C29
+
+  C34: The surplus loss from over-automation is not a transfer from workers to firm owners; it is a deadweight loss that harms 
+       [logical] [FORMAL]
+       depends: C3
+
+  C35: Higher AI productivity widens the over-automation wedge rather than resolving it.
+       [logical] [FORMAL]
+       depends: C3
+
+  C36: Each firm perceives a market-share gain from automating beyond rivals, but at the symmetric equilibrium these gains canc
+       [logical] [FORMAL]
+       depends: C35
+
+  C37: Endogenous wage adjustment raises the threshold at which the externality activates but cannot close the wedge once it do
+       [logical] [FORMAL]
+       depends: C3
+
+  C38: Wage flexibility changes when the problem bites, not whether it exists.
+       [logical]
+       depends: C37
+
+  C39: Free entry, capital-income recycling, and richer product-market structures fail to eliminate the distortion.
+       [logical] [FORMAL]
+       depends: C3
+
+  C40: The paper builds on the task-based approach to automation (Zeira, 1998; Autor et al., 2003; Acemoglu and Restrepo, 2018,
+       [structural]
+
+  C41: Existing task-based automation literature focuses on whether and how the labor market rebalances; this paper asks what h
+       [structural]
+       depends: C40
+
+  C42: Beraja and Zorzi (2025) show that automation is inefficient when displaced workers face borrowing constraints during rea
+       [empirical]
+
+  C43: The mechanism in this paper operates through the product market: firms ignore the demand they destroy for rival firms, u
+       [structural]
+       depends: C42
+
+  C44: Beraja and Zorzi&<span class="ad-tag">#x27</span>;s inefficiency arises even for a single firm in isolation; the inefficiency in this paper requires comp
+       [structural] [FORMAL]
+       depends: C42, C43
+
+  C45: A planner in this model would reduce automation even with zero weight on workers, because over-automation harms firm pro
+       [logical] [FORMAL]
+       depends: C34
+
+  C46: The technology ecosystem may be biased toward &<span class="ad-tag">#x27</span>;so-so&<span class="ad-tag">#x27</span>; automation that displaces workers without large productivity gains
+       [empirical]
+
+  C47: Automation may disproportionately target high-rent tasks, dissipating worker surplus rather than raising output.
+       [empirical]
+
+  C48: The externality in this paper arises only under competition and persists even when automation is highly productive, cred
+       [logical] [FORMAL]
+       depends: C3, C44
+
+  C49: The demand externality studied belongs to the family of aggregate demand spillovers introduced by Rosenstein-Rodan (1943
+       [structural]
+
+  C50: In &<span class="ad-tag">#x27</span>;big push&<span class="ad-tag">#x27</span>; models, demand complementarities across sectors can prevent individually unprofitable investments from bei
+       [definitional]
+
+  C51: The mechanism in this paper is the mirror image of big push models: individually profitable automation is collectively d
+       [structural]
+       depends: C50
+
+  C52: The game in this paper yields a unique dominant-strategy equilibrium, making the problem a true externality rather than 
+       [logical] [FORMAL]
+       depends: C30
+
+  C53: AI systems deliver substantial productivity gains.
+       [empirical]
+
+  C54: AI pricing algorithms can spontaneously learn to collude.
+       [empirical]
+
+  C55: Firms under labor-issue scrutiny invest specifically in AI automation rather than other forms of IT.
+       [empirical]
+
+  C56: As AI reliability improves, incentivizing effective human oversight becomes prohibitively expensive, weakening a key che
+       [empirical]
+
+  C57: Each AI adoption decision is rational in isolation, but collectively they erode the consumer demand all firms depend on.
+       [logical]
+       depends: C29
+
+  C58: The model considers a sector with N ≥ 2 symmetric firms.
+       [structural] [FORMAL]
+
+  C59: Each firm is endowed with L &gt; 0 task-positions, initially all performed by human workers.
+       [structural] [FORMAL]
+
+  C60: Firm i chooses an automation rate αi ∈ [0,1], where tasks z ∈ [0, αi] are performed by AI at cost c per task and remaini
+       [structural] [FORMAL]
+       depends: C59
+
+  C61: Each automated task displaces one worker, so αi is simultaneously the automation rate and the fraction of the workforce 
+       [definitional] [FORMAL]
+       depends: C60
+
+  C62: Wages are exogenous in the baseline model.
+       [structural]
+
+  C63: In the perfect-substitutes limit, each task produces one unit of output regardless of mode, so firm output is Yi = L.
+       [structural] [FORMAL]
+
+  C64: The baseline normalization shuts down productivity and quality margins so that it captures only the spending consequence
+       [structural]
+       depends: C63
+
+  C65: Tasks are ordered by comparative advantage, making the marginal task progressively harder to integrate, captured via a c
+       [structural] [FORMAL]
+
+  C66: The per-task cost saving from automation is defined as s := w − c.
+       [definitional] [FORMAL]
+       depends: C60
+
+  C67: Workers have a higher marginal propensity to consume (MPC) than owners.
+       [empirical]
+
+  C68: Workers spend a fraction λ ∈ (0,1] of their income on the sector&<span class="ad-tag">#x27</span>;s good.
+       [structural] [FORMAL]
+       depends: C67
+
+  C69: Owners spend none of their income in the sector in the baseline.
+       [structural] [FORMAL]
+
+  C70: When automation displaces workers, income shifts toward agents with a lower sectoral MPC, reducing aggregate expenditure
+       [logical] [FORMAL]
+       depends: C67, C68, C69
+
+  C71: A fraction η ∈ [0,1] of displaced wage income is replaced via reemployment, transfers, or other sources; the remainder i
+       [structural] [FORMAL]
+
+  C72: The effective demand loss per automated task is defined as ℓ = λ(1−η)w.
+       [definitional] [FORMAL]
+       depends: C68, C71
+
+  C73: Demand falls linearly in the average automation rate: D = A + λwLN − ℓLNᾱ.
+       [structural] [FORMAL]
+       depends: C72
+
+  C74: Firms sell output on the product market at a uniform price that equates aggregate supply and demand.
+       [structural] [FORMAL]
+
+  C75: Each firm earns revenue Revi = D/N, since all firms produce the same output.
+       [structural] [FORMAL]
+       depends: C63, C74
+
+  C76: Firms play a one-shot simultaneous-move game, each choosing αi to maximize πi; the solution concept is Nash equilibrium.
+       [structural] [FORMAL]
+
+  C77: Over-automation is measured against two benchmarks: the cooperative optimum (maximizing aggregate owner surplus K) and a
+       [definitional] [FORMAL]
+
+  C78: The environment assumes full transparency: every firm can directly observe how automation maps into lost worker income a
+       [structural]
+
+  C79: A marginal increase in automation saves s in labor costs but incurs friction kαi and reduces the firm&<span class="ad-tag">#x27</span>;s revenue by ℓ/N.
+       [logical] [FORMAL]
+       depends: C66, C72, C75
+
+  C80: The revenue loss from automation is ℓ/N rather than ℓ because competitive pricing allocates revenue equally across symme
+       [logical] [FORMAL]
+       depends: C75
+
+  C81: Each firm underestimates the social cost of its automation, resulting in systematic over-automation in equilibrium.
+       [logical] [FORMAL]
+       depends: C80
+
+  C82: If N ≤ N* = ℓ/s, no firm automates (αNE = 0).
+       [logical] [FORMAL]
+       depends: C72, C66
+
+  C83: If N &gt; N*, each firm&<span class="ad-tag">#x27</span>;s strictly dominant strategy is αNE = min((s − ℓ/N)/k, 1).
+       [logical] [FORMAL]
+       depends: C82
+
+  C84: The cooperative optimum is αCO = min(max(0, (s − ℓ)/k), 1).
+       [logical] [FORMAL]
+
+  C85: When both αNE and αCO are interior, the over-automation wedge is ℓ(1 − 1/N)/k, which is strictly increasing in N and ℓ, 
+       [logical] [FORMAL]
+       depends: C83, C84
+
+  C86: The equilibrium automation rate is a strictly dominant strategy: each firm over-automates even with perfect foresight ab
+       [logical] [FORMAL]
+       depends: C83
+
+  C87: The planner setting a common rate for all firms faces the full demand loss ℓ per automated task rather than the ℓ/N each
+       [logical] [FORMAL]
+       depends: C80, C84
+
+  C88: The over-automation wedge is strictly increasing in N: more competitive sectors exhibit wider automation gaps.
+       [logical] [FORMAL]
+       depends: C85
+
+  C89: More competition diluting each firm&<span class="ad-tag">#x27</span>;s share of the demand loss runs counter to the standard intuition that competition d
+       [logical]
+       depends: C88
+
+  C90: A monopolist (N=1) fully internalizes the externality so αNE = αCO; as N→∞, the wedge approaches its maximum of ℓ/k.
+       [logical] [FORMAL]
+       depends: C85
+
+  C91: As AI costs fall (c → 0), the automation threshold N* → λ(1−η) ≤ 1, so the over-automation region expands to cover virtu
+       [logical] [FORMAL]
+       depends: C82
+
+  C92: For illustrative parameters (c/w = 0.30, λ = 0.5, η = 0.30, N→∞), firms in competitive markets automate at twice the coo
+       [logical] [FORMAL]
+       depends: C85
+
+  C93: When frictions vanish (k→0), the moderating force of adjustment costs disappears and the game reduces to a Prisoner&<span class="ad-tag">#x27</span>;s Di
+       [logical] [FORMAL]
+       depends: C65
+
+  C94: When k=0 and N &gt; N*, full automation (αi = 1) is strictly dominant for every firm.
+       [logical] [FORMAL]
+       depends: C93
+
+  C95: When k=0, N &gt; N*, and s &lt; ℓ, the cooperative optimum is no automation (αi = 0 for all i), yielding per-firm profit Π0; t
+       [logical] [FORMAL]
+       depends: C94
+
+  C96: In the frictionless Prisoner&<span class="ad-tag">#x27</span>;s Dilemma, the total deadweight loss is NL(ℓ − s).
+       [logical] [FORMAL]
+       depends: C95
+
+  C97: A firm that holds back unilaterally (αi = 0) still suffers the revenue decline from rivals&<span class="ad-tag">#x27</span>; automation but forgoes the o
+       [logical] [FORMAL]
+       depends: C94
+
+  C98: Because automating is strictly dominant (not merely a best response to others&<span class="ad-tag">#x27</span>; automating), no non-binding agreement can
+       [logical] [FORMAL]
+       depends: C94
+
+  C99: Communication is cheap talk in the sense of Crawford and Sobel (1982): even if all firms acknowledge that collective res
+       [logical]
+       depends: C98
+
+  C100: The automation externality is distinct from pure coordination failures where firms simply need to agree on which equilib
+       [logical]
+       depends: C52, C98
+
+  C101: The μ-planner&<span class="ad-tag">#x27</span>;s optimal automation rate is αSP(μ) = (s − ℓ)/k − μℓ/[λ(1−μ)k], restricted to [0,1].
+       [logical] [FORMAL]
+       depends: C77
+
+  C102: The surplus loss from the Nash equilibrium relative to the planner&<span class="ad-tag">#x27</span>;s optimum is (1−μ)NLk/2 · (αNE − αSP(μ))².
+       [logical] [FORMAL]
+       depends: C101, C83
+
+  C103: αNE &gt; αSP(μ) for every μ ∈ [0,1): the Nash equilibrium is Pareto dominated by the cooperative optimum, with workers and 
+       [logical] [FORMAL]
+       depends: C101, C83
+
+  C104: Workers lose wage income directly through displacement from over-automation.
+       [logical]
+       depends: C103
+
+  C105: Firm owners, despite cutting costs on each automated task, also lose because collective displacement erodes demand to th
+       [logical] [FORMAL]
+       depends: C103
+
+  C106: No redistribution between workers and owners can make the Nash outcome efficient.
+       [logical]
+       depends: C103
+
+  C107: The total wedge between equilibrium and the planner&<span class="ad-tag">#x27</span>;s optimum decomposes into two sources: the uninternalized demand ext
+       [logical] [FORMAL]
+       depends: C101, C85
+
+  C108: The uninternalized demand externality grows with N, approaching ℓ/k as N→∞, so fragmented markets suffer disproportionat
+       [logical] [FORMAL]
+       depends: C107
+
+  C109: The distributional premium is independent of N but grows without bound as μ→1.
+       [logical] [FORMAL]
+       depends: C107
+
+  C110: The surplus loss is quadratic in the total wedge and scales with NL, so both fragmentation and market size amplify the w
+       [logical] [FORMAL]
+       depends: C102
+
+  C111: Only the Pigouvian automation tax fully corrects the over-automation distortion among the six instruments evaluated.
+       [logical]
+       depends: C12
+
+  C112: The policy analysis benchmarks against the cooperative optimum αCO, which maximizes aggregate profit without directly we
+       [structural]
+       depends: C77
+
+  C113: An instrument that does not operate on the externality margin cannot correct the distortion regardless of how it scores 
+       [logical]
+
+  C114: The demand-loss parameter ℓ = λ(1−η)w governs the magnitude of the externality.
+       [definitional] [FORMAL]
+       depends: C72
+
+  C115: Higher η (income replacement rate) shrinks ℓ and thereby the over-automation wedge.
+       [logical] [FORMAL]
+       depends: C114, C85
+
+  C116: When η &gt; 1, upskilling and reabsorption place displaced workers into higher-paying roles, automation increases aggregate
+       [logical] [FORMAL]
+       depends: C114
+
+  C117: When η &gt; 1, the sign of the externality flips: the over-automation wedge becomes negative (under-automation).
+       [logical] [FORMAL]
+       depends: C116
+
+  C118: When η &lt; 1, displacement destroys demand, and each firm bears only 1/N of the loss, producing over-automation. When η &gt; 
+       [logical] [FORMAL]
+       depends: C117
+
+  C119: In both over-automation and under-automation cases, the distortion grows with N, and a monopolist fully internalizes in 
+       [logical] [FORMAL]
+       depends: C118
+
+  C120: The same corrective instrument addresses both over-automation (tax when η &lt; 1) and under-automation (subsidy when η &gt; 1)
+       [logical]
+       depends: C118, C12
+
+  C121: Historical technological transitions have often eventually reabsorbed displaced workers at higher wages.
+       [empirical]
+
+  C122: The AI buildout offers a concrete channel for η &gt; 1 through expansion of data centers, energy infrastructure, and AI-adj
+       [empirical]
+
+  C123: Past displacement episodes have consistently produced η &lt; 1: displaced workers suffer large, persistent earnings losses.
+       [empirical]
+
+  C124: There is little evidence yet that AI-driven displacement will differ from past episodes in producing η &lt; 1, placing most
+       [empirical]
+       depends: C123
+
+  C125: Raising η through retraining programs, wage insurance, and incentives for new firm creation is not merely a palliative f
+       [logical]
+       depends: C115
+
+  C126: A UBI funded from general revenue maps to an increase in autonomous demand A in the model.
+       [structural] [FORMAL]
+
+  C127: UBI is unconditional, so employed and displaced workers receive the same payment, adding a constant to aggregate spendin
+       [structural] [FORMAL]
+       depends: C126
+
+  C128: UBI enters firm profit only through Π0 = A/N + (λ−1)wL, which drops out of the first-order condition.
+       [logical] [FORMAL]
+       depends: C126
+
+  C129: UBI changes neither the automation threshold N* nor the over-automation wedge.
+       [logical] [FORMAL]
+       depends: C128
+
+  C130: UBI changes payoff levels but not the payoff differences that drive strategic behavior.
+       [logical] [FORMAL]
+       depends: C129
+
+  C131: Instruments that operate on profit levels can redistribute income but cannot correct the externality; only instruments t
+       [logical]
+       depends: C130
+
+  C132: Despite not correcting the externality, UBI serves a complementary role by cushioning profit losses and raising the floo
+       [logical]
+       depends: C129
+
+  C133: When the number of firms is endogenous, UBI can paradoxically widen the externality by attracting new entrants and fragm
+       [logical] [FORMAL]
+       depends: C129, C88
+
+  C134: UBI is a complement to the automation tax, not a substitute.
+       [logical]
+       depends: C129, C12
+
+  C135: A proportional tax t ∈ (0,1) on capital income (profits) does not change the equilibrium automation rate, the threshold 
+       [logical] [FORMAL]
+
+  C136: Capital income taxes are often conflated with robot taxes in the policy debate, but they are fundamentally different ins
+       [logical]
+       depends: C135
+
+  C137: The failure of capital income taxes to correct the externality is structurally identical to that of UBI: both shift prof
+       [logical]
+       depends: C135, C129
+
+  C138: Worker equity participation (giving workers a fraction ϵ of firm profits) recycles capital income back into demand throu
+       [structural] [FORMAL]
+
+  C139: The cooperative optimum is unchanged by worker equity participation: αCO(ϵ) = (s − ℓ)/k, independent of ϵ.
+       [logical] [FORMAL]
+       depends: C138
+
+  C140: The Nash equilibrium automation rate with worker equity is αNE(ϵ) = (s − ℓ/Nϵ)/k, where Nϵ = N − λϵ(N−1).
+       [logical] [FORMAL]
+       depends: C138
+
+  C141: The over-automation wedge with worker equity is strictly decreasing in ϵ but strictly positive for all ϵ &lt; 1/λ.
+       [logical] [FORMAL]
+       depends: C139, C140
+
+  C142: The worker equity wedge vanishes only at ϵ = 1/λ, which requires ϵ &gt; 1 whenever λ &lt; 1, making it infeasible.
+       [logical] [FORMAL]
+       depends: C141
+
+  C143: Even at ϵ = 1 (full profit-sharing), the wedge remains strictly positive when λ &lt; 1 because each unit of profit recycled
+       [logical] [FORMAL]
+       depends: C142
+
+  C144: The structural limitation of worker equity is that the externality is fundamentally multilateral: bilateral arrangements
+       [logical]
+       depends: C143
+
+  C145: Voluntary profit-sharing does not arise: if each firm independently chooses its profit-sharing rate ϵi to maximize retai
+       [logical] [FORMAL]
+
+  C146: The marginal cost of profit-sharing is πi (a dollar-for-dollar reduction in retained earnings), while the marginal deman
+       [logical] [FORMAL]
+       depends: C145
+
+  C147: The failure of voluntary profit-sharing is a second-order coordination failure layered on top of the automation external
+       [logical]
+       depends: C145, C3
+
+  C148: Profit-sharing must be mandated to have any effect, and even then it cannot substitute for a corrective tax.
+       [logical]
+       depends: C145, C141
+
+  C149: Neither bargaining between a firm and its own workers nor bargaining among firms can correct the automation externality.
+       [logical]
+
+  C150: If displaced workers bargain for per-task severance payment σ, the over-automation wedge becomes (1 − 1/N)(ℓ − λσ)/k, wh
+       [logical] [FORMAL]
+       depends: C149
+
+  C151: Worker-side bargaining is operationally equivalent to raising the income-replacement rate η by σ/w.
+       [logical] [FORMAL]
+       depends: C150
+
+  C152: The uninternalized portion of the externality does not fall on firm i&<span class="ad-tag">#x27</span>;s own workers at all; it reduces revenue at rival 
+       [logical] [FORMAL]
+
+  C153: The externality is a firm-to-firm channel running through the product market, not a firm-to-worker channel that bilatera
+       [logical]
+       depends: C152
+
+  C154: A coalition of M firms that jointly maximizes its members&<span class="ad-tag">#x27</span>; combined profit chooses the automation rate αM = (s − Mℓ/N)/k
+       [logical] [FORMAL]
+
+  C155: The residual over-automation wedge from a partial coalition is ℓ(1 − M/N)/k, which vanishes only when M = N (the grand c
+       [logical] [FORMAL]
+       depends: C154
+
+  C156: Four features of the automation externality prevent the grand coalition from forming: (1) dominant strategy makes agreem
+       [logical]
+       depends: C155
+
+  C157: In the large-numbers setting, Coase himself acknowledged that private bargaining breaks down.
+       [empirical]
+       depends: C156
+
+  C158: The fundamental obstacle to Coasian bargaining is incentive compatibility, not transaction costs: even with costless neg
+       [logical]
+       depends: C156
+
+  C159: A Pigouvian automation tax τ per task, with τ* = ℓ(1 − 1/N), implements αNE = αCO = (s − ℓ)/k.
+       [logical] [FORMAL]
+       depends: C83, C84
+
+  C160: The optimal Pigouvian tax rate has a transparent economic interpretation: each firm already bears ℓ/N of the demand loss
+       [logical] [FORMAL]
+       depends: C159
+
+  C161: For large N, the optimal Pigouvian rate τ* ≈ ℓ = λ(1−η)w, so setting the rate requires only sector-level observables.
+       [logical] [FORMAL]
+       depends: C159
+
+  C162: Levying the Pigouvian tax requires observing firm-level automation rates, a practical challenge that may be easing as AI
+       [empirical]
+
+  C163: A tax authority can compel disclosure through mandatory reporting, payroll records, and procurement audits, making appro
+       [empirical]
+       depends: C162
+
+  C164: Because the welfare loss is quadratic in the wedge, even an imprecisely targeted tax yields a first-order gain.
+       [logical] [FORMAL]
+       depends: C102
+
+  C165: With lump-sum rebate of tax revenue, each firm achieves exactly πCO (cooperative profit).
+       [logical] [FORMAL]
+       depends: C159
+
+  C166: Lump-sum rebate to firms returns revenue to automating firms while leaving displaced workers uncompensated.
+       [logical]
+       depends: C165
+
+  C167: Direct transfers (wage insurance, severance supplements) raise η mechanically but may weaken workers&<span class="ad-tag">#x27</span>; incentive to retra
+       [logical]
+
+  C168: Funding retraining programs raises η through human-capital investment rather than income replacement, making gains in η 
+       [logical]
+
+  C169: The Pigouvian automation tax is potentially self-reinforcing and self-limiting: it funds programs that raise η, which lo
+       [logical]
+       depends: C168, C159
+
+  C170: In practice, a mix of direct transfers and retraining is likely optimal: short-run transfers to cushion displacement whi
+       [logical]
+       depends: C167, C168
+
+  C171: When AI-performed tasks produce ϕ ≥ 1 units of output (vs. 1 for human tasks), higher AI productivity widens the over-au
+       [logical] [FORMAL]
+
+  C172: With ϕ &gt; 1, a deviating firm raises its output above rivals and captures a larger share of expenditure, creating a marke
+       [logical] [FORMAL]
+       depends: C171
+
+  C173: The Nash equilibrium automation rate is increasing in AI productivity: αNE(ϕ) &gt; αNE(1) for ϕ &gt; 1.
+       [logical] [FORMAL]
+       depends: C172
+
+  C174: The cooperative optimum and the generalized planner&<span class="ad-tag">#x27</span>;s optimum are unchanged by AI productivity: αCO(ϕ) = αCO(1) for all 
+       [logical] [FORMAL]
+
+  C175: Higher ϕ raises output but lowers the price in proportion, leaving the planner&<span class="ad-tag">#x27</span>;s objective invariant to ϕ, because total
+       [logical] [FORMAL]
+       depends: C174
+
+  C176: The over-automation wedge αNE(ϕ) − αSP(μ;ϕ) is strictly increasing in ϕ for every μ ∈ [0,1].
+       [logical] [FORMAL]
+       depends: C173, C174
+
+  C177: The Red Queen effect means that each firm perceives a market-share gain from automating beyond rivals, but at the symmet
+       [logical] [FORMAL]
+       depends: C172
+
+  C178: Better AI raises the equilibrium automation rate without shifting the efficient benchmark, so the distortion grows with 
+       [logical] [FORMAL]
+       depends: C176
+
+  C179: The baseline Pigouvian rate τ* = ℓ(1 − 1/N) no longer suffices when ϕ &gt; 1; implementing αCO requires an additional corre
+       [logical] [FORMAL]
+       depends: C171, C159
+
+  C180: The lower price from higher ϕ means each dollar of spending buys more physical output, so nominal welfare measures under
+       [logical]
+
+  C181: Free entry reshapes the over-automation problem but does not resolve it.
+       [logical]
+
+  C182: With free entry and frictionless automation (k=0), when entry cost is low, every firm fully automates (Prisoner&<span class="ad-tag">#x27</span>;s Dilemm
+       [logical] [FORMAL]
+       depends: C94
+
+  C183: In the frictionless entry model, the threat of automation can function as an endogenous entry barrier, sustaining positi
+       [logical] [FORMAL]
+
+  C184: With convex costs (k &gt; 0) and free entry, if NFE &gt; N*, then αNE(NFE) &gt; αCO: over-automation persists under free entry.
+       [logical] [FORMAL]
+       depends: C181
+
+  C185: The standard tendency toward excess entry (Mankiw and Whinston, 1986) widens the wedge by fragmenting the market further
+       [logical]
+       depends: C184, C88
+
+  C186: By raising autonomous demand A, UBI increases per-firm profit, attracting additional entrants and potentially widening t
+       [logical] [FORMAL]
+       depends: C133
+
+  C187: Endogenous wage adjustment raises the threshold at which over-automation activates but cannot close the wedge once it do
+       [logical] [FORMAL]
+       depends: C37
+
+  C188: Both the cost saving s(w) = w − c and the demand-loss parameter ℓ(w) = λ(1−η)w are increasing in the wage.
+       [logical] [FORMAL]
+
+  C189: The automation threshold N* = ℓ/s rises as wages fall, because the cost saving s = w − c contracts faster than the deman
+       [logical] [FORMAL]
+       depends: C188
+
+  C190: Competitive pricing allocating revenue as Revi = D/N at any wage level means each firm bears only a fraction of the dema
+       [logical] [FORMAL]
+       depends: C75
+
+  C191: Wage adjustment changes the magnitude of ℓ but not the fraction each firm internalizes; that fraction is a property of m
+       [logical]
+       depends: C190
+
+  C192: As w → c, the cost saving s → 0 while N* → ∞, so eventually no firm finds automation privately worthwhile, but this is a
+       [logical] [FORMAL]
+       depends: C189
+
+  C193: A labor market that &<span class="ad-tag">#x27</span>;self-corrects&<span class="ad-tag">#x27</span>; only by impoverishing its workforce has transmuted displacement into depressed livin
+       [logical]
+       depends: C192
+
+  C194: Wage flexibility changes when the externality bites, not whether it exists.
+       [logical]
+       depends: C191
+
+  C195: Capital-income recycling (owners spending fraction η̂ of profits in the sector) narrows the over-automation wedge but ca
+       [logical] [FORMAL]
+
+  C196: The effective demand-loss parameter with capital-income recycling is ℓη̂ = ℓ − η̂s.
+       [definitional] [FORMAL]
+
+  C197: The externality from capital-income recycling vanishes (ℓη̂ ≤ 0) only when η̂ ≥ ℓ/s.
+       [logical] [FORMAL]
+       depends: C196
+
+  C198: When ℓ &gt; s, the required capital recycling rate exceeds one, so recycling is impotent precisely where the externality is
+       [logical] [FORMAL]
+       depends: C197
+
+  C199: Capital-income recycling raises the fraction of demand loss each firm internalizes from 1/N to 1/N̂ but cannot push it t
+       [logical] [FORMAL]
+       depends: C195
+
+  C200: Richer product-market interaction (Cournot or Bertrand second-stage competition) would not eliminate the demand external
+       [logical]
+
+  C201: The market-share motive under imperfect competition is more subtle: at the symmetric equilibrium, market-share gains can
+       [logical]
+       depends: C177
+
+  C202: Under CES task aggregation with tasks as substitutes (elasticity &gt; 1), the demand externality still operates at the auto
+       [logical]
+
+  C203: When tasks are complements (elasticity &lt; 1), the restraint on automation is stronger, but the demand externality remains
+       [logical]
+
+  C204: Even as every firm recognizes that vanishing paychecks mean vanishing customers, not one of them will stop, because each
+       [logical]
+       depends: C29
+
+  C205: Anthropic CEO Dario Amodei has warned that AI-driven displacement will be &<span class="ad-tag">#x27</span>;unusually painful,&<span class="ad-tag">#x27</span>; &<span class="ad-tag">#x27</span>;much broader&<span class="ad-tag">#x27</span>; and &<span class="ad-tag">#x27</span>;much 
+       [empirical]
+
+  C206: The model predicts the over-automation problem is most severe not in dominant technology firms but in fragmented industr
+       [logical]
+       depends: C88, C176
+
+  C207: The distinguishing empirical signature of the externality would be profit erosion coinciding with mass layoffs, which st
+       [empirical]
+       depends: C34
+
+  C208: The empirical signature of profit erosion requires displacement at a scale and speed beyond what has materialized so far
+       [empirical]
+       depends: C207
+
+  C209: Private returns to AI systematically overstate the returns to the economy as a whole because they do not account for the
+       [logical]
+       depends: C57
+
+  C210: Even a planner who places zero weight on worker welfare would reduce the automation rate below the equilibrium level.
+       [logical] [FORMAL]
+       depends: C103
+
+  C211: The problem is not that firms profit at workers&<span class="ad-tag">#x27</span>; expense; it is that over-automation harms both groups, making correctio
+       [logical]
+       depends: C34, C210
+
+  C212: By Tinbergen&<span class="ad-tag">#x27</span>;s principle, a distinct market failure requires a distinct instrument.
+       [logical]
+
+  C213: No amount of retraining, income support, or bargaining will slow the automation arms race; only a tax on automation itse
+       [logical]
+       depends: C12, C212
+
+  C214: A unilateral automation tax could push adoption offshore, strengthening the case for multilateral coordination or border
+       [logical]
+       depends: C159
+
+  C215: The model is deliberately simple: one sector, one period, symmetric firms. Each of these choices is conservative, meanin
+       [structural]
+
+  C216: A single sector understates the externality because in a multi-sector economy, layoffs in one sector reduce spending on 
+       [logical]
+       depends: C215
+
+  C217: AI investments are largely irreversible.
+       [empirical]
+
+  C218: Even the threat of automation can reshape market structure before any displacement occurs, strengthening the case for ea
+       [logical]
+       depends: C183
+
+  C219: The income-replacement rate η rises over time as displaced workers retrain and new occupations emerge, so the optimal ta
+       [logical]
+       depends: C169
+
+  C220: Endogenizing AI development could compound the problem: firms racing to automate may invest disproportionately in labor-
+       [logical]
+
+  C221: All extensions considered in the paper point toward a larger problem, not a smaller one.
+       [logical]
+       depends: C215, C216, C220
+
+  C222: Blanchflower and Oswald (1995) document a robust negative relationship between wages and unemployment across more than a
+       [empirical]
+
+  C223: The quadratic adjustment-cost specification used follows the standard form from Lucas (1967) and Hamermesh and Pfann (19
+       [structural]
+
+  C224: The MPC asymmetry between workers and owners is supported by Kaldor (1956) and Mian et al. (2021).
+       [empirical]
+       depends: C67
+
+  C225: Displaced workers suffer large, persistent earnings losses, as documented by Jacobson et al. (1993).
+       [empirical]
+
+  C226: The over-automation result extends to any μ ∈ [0,1) under endogenous wages (Corollary 4).
+       [logical] [FORMAL]
+       depends: C187
+
+  C227: Firm i&<span class="ad-tag">#x27</span>;s profit function πi is strictly concave in αi.
+       [logical] [FORMAL]
+
+  C228: The optimal automation rate αi* does not depend on any rival&<span class="ad-tag">#x27</span>;s choice αj: rivals&<span class="ad-tag">#x27</span>; automation levels enter only through a
+       [logical] [FORMAL]
+       depends: C227
+
+  C229: Total profit is maximized when the αi are as equal as possible, by convexity of x².
+       [logical] [FORMAL]
+
+  C230: The cooperative optimum is symmetric: αi = α for all i.
+       [logical] [FORMAL]
+       depends: C229
+
+  C231: In the frictionless limit with k=0, firm i&<span class="ad-tag">#x27</span>;s profit is affine in αi with slope L(s − ℓ/N) that does not depend on rivals
+       [logical] [FORMAL]
+
+  C232: At the Nash equilibrium with full automation (ᾱ = 1), per-firm demand drops by ℓLN compared to no automation.
+       [logical] [FORMAL]
+       depends: C96
+
+  C233: Interior regions for αNE, αCO, and αSP(μ) as functions of cost saving s all have width k but are progressively shifted r
+       [logical] [FORMAL]
+
+  C234: Interior automation arises at the lowest cost savings under Nash behavior, at intermediate savings under cooperation, an
+       [logical] [FORMAL]
+       depends: C233
+
+  C235: Customer support, software services, and back-office operations across competing financial institutions are three settin
+       [empirical]
+       depends: C207
+
+  C236: Platform ecosystems make demand spirals concrete: when a platform automates seller support, gig logistics, or content mo
+       [logical]
+       depends: C216
+
+  C237: Symmetry in the model rules out heterogeneity across firms and workers.
+       [structural]
+       depends: C215
+
+  C238: Benzell et al. (2015) study robot adoption in an overlapping-generations setting and Korinek and Stiglitz (2019) study A
+       [structural]
+
+  C239: A coalition of M firms internalizes M/N of the aggregate demand loss, but the remaining fraction (1 − M/N) is still exte
+       [logical] [FORMAL]
+       depends: C154
+
+  C240: The automation rate αi is not contractible among firms: it is an internal organizational choice that rival firms cannot 
+       [empirical]
+
+  C241: A firm that delays automation while rivals proceed loses market share.
+       [logical]
+       depends: C172
+
+  C242: Large N makes defection from coalitions harder to detect and punishment harder to sustain.
+       [logical]
+
+  C243: In the convex-cost free entry case, NFE exceeds N* in over 94% of parameterizations satisfying the proposition&<span class="ad-tag">#x27</span>;s conditi
+       [empirical]
+       depends: C184
+
+  C244: If reabsorption keeps pace with automation, the externality may remain too small to detect, and the paper&<span class="ad-tag">#x27</span>;s contribution
+       [logical]
+       depends: C208
+
+  C245: Under the Pigouvian automation tax, the firm&<span class="ad-tag">#x27</span>;s first-order condition yields α^NE(τ) = (s − τ − ℓ/N)/k.
+       [logical] [FORMAL]
+
+  C246: Setting α^NE(τ) equal to α^CO = (s − ℓ)/k yields the optimal tax τ* = ℓ(1 − 1/N).
+       [logical] [FORMAL]
+       depends: C245
+
+  C247: At the optimal tax τ*, all firms choose the cooperative automation level α^CO.
+       [logical] [FORMAL]
+       depends: C246
+
+  C248: When total tax revenue τ*LNα^CO is rebated equally to all firms, each firm&<span class="ad-tag">#x27</span>;s profit is restored to π^CO.
+       [logical] [FORMAL]
+       depends: C247
+
+  C249: When ϕ &gt; 1, the left-hand side of the symmetric first-order condition (LHS(α) = kα) is strictly increasing with slope k.
+       [logical] [FORMAL]
+
+  C250: The right-hand side of the symmetric first-order condition is strictly decreasing in α because the numerator is proporti
+       [logical] [FORMAL]
+
+  C251: The equation LHS = RHS in the symmetric first-order condition has a unique solution.
+       [logical] [FORMAL]
+       depends: C249, C250
+
+  C252: α^NE(ϕ) &gt; α^NE(1) when ϕ &gt; 1: AI productivity amplification increases the Nash equilibrium automation rate above the bas
+       [logical] [FORMAL]
+       depends: C251
+
+  C253: At the baseline equilibrium α = α^NE(1) = (s − ℓ/N)/k, RHS exceeds LHS due to the positive market-share term.
+       [logical] [FORMAL]
+
+  C254: Total revenue equals aggregate demand D regardless of how output is allocated across firms, because expenditure D is pin
+       [structural]
+
+  C255: The cooperative planner&<span class="ad-tag">#x27</span>;s first-order condition depends only on costs and is independent of ϕ.
+       [logical] [FORMAL]
+       depends: C254
+
+  C256: α^CO(ϕ) = (s − ℓ)/k = α^CO(1): the cooperative optimal automation level is invariant to AI productivity ϕ.
+       [logical] [FORMAL]
+       depends: C255
+
+  C257: Worker income W = wLN[1 − (1 − η)ᾱ] does not depend on ϕ.
+       [structural] [FORMAL]
+
+  C258: Owner surplus K = D − ΣCi at symmetric profiles does not depend on ϕ (neither D nor Ci depends on ϕ).
+       [structural] [FORMAL]
+
+  C259: S(μ) is ϕ-invariant at every symmetric ᾱ, and α^SP(μ; ϕ) = α^SP(μ; 1) for all μ.
+       [logical] [FORMAL]
+       depends: C257, C258
+
+  C260: The over-automation wedge α^NE(ϕ) − α^SP(μ; ϕ) is strictly larger than α^NE(1) − α^SP(μ; 1) for every μ when ϕ &gt; 1.
+       [logical] [FORMAL]
+       depends: C252, C259
+
+  C261: The over-automation wedge is strictly increasing in ϕ.
+       [logical] [FORMAL]
+       depends: C260
+
+  C262: α^NE(ϕ) is increasing in ϕ.
+       [logical] [FORMAL]
+       depends: C252
+
+  C263: For the frictionless benchmark proof, the assumptions are k = 0, λ = 1, 0 &lt; κ &lt; A, and ℓ &gt; s.
+       [definitional] [FORMAL]
+
+  C264: ℓ &gt; s implies N* &gt; 1 by Corollary 1.
+       [logical] [FORMAL]
+       depends: C263
+
+  C265: For N ≤ N*, Corollary 1 gives α = 0, and per-firm profit Π*(N) = A/N, which is strictly decreasing.
+       [logical] [FORMAL]
+       depends: C263
+
+  C266: For N &gt; N*, full automation is dominant and per-firm profit drops by Δ = L(ℓ − s) &gt; 0, giving Π*(N) = A/N − Δ, also stri
+       [logical] [FORMAL]
+       depends: C263
+
+  C267: Δ = L(ℓ − s) &gt; 0 because ℓ &gt; s.
+       [logical] [FORMAL]
+       depends: C263
+
+  C268: At the crossing point m = ⌊N*⌋, Π*(m) &gt; Π*(m+1), so Π* is strictly decreasing on N.
+       [logical] [FORMAL]
+       depends: C265, C266
+
+  C269: Since κ &lt; A, Π*(1) = A &gt; κ, so the set S = {N ∈ ℕ : Π*(N) ≥ κ} is nonempty.
+       [logical] [FORMAL]
+       depends: C263
+
+  C270: Since Δ &gt; 0, Π*(N) → −Δ &lt; 0 as N → ∞, so the set S is finite.
+       [logical] [FORMAL]
+       depends: C267
+
+  C271: N^FE = max S exists and is unique, and satisfies Π*(N^FE) ≥ κ and Π*(N^FE + 1) &lt; κ.
+       [logical] [FORMAL]
+       depends: C269, C270, C268
+
+  C272: On the no-automation branch (N ≤ m), Π*(N) = A/N ≥ κ if and only if N ≤ A/κ.
+       [logical] [FORMAL]
+       depends: C265
+
+  C273: On the full-automation branch (N ≥ m+1), Π*(N) = A/N − Δ ≥ κ if and only if N ≤ A/(κ + Δ).
+       [logical] [FORMAL]
+       depends: C266
+
+  C274: Case (i) Low entry cost: When κ + Δ ≤ A/(m+1), N^FE = ⌊A/(κ + Δ)⌋ ≥ m+1 &gt; N*, and every firm fully automates.
+       [logical] [FORMAL]
+       depends: C273
+
+  C275: Case (ii) Intermediate entry cost: When κ + Δ &gt; A/(m+1) and κ &lt; A/m, N^FE = m and no firm automates. The threat of autom
+       [logical] [FORMAL]
+       depends: C272, C273
+
+  C276: In Case (ii), profit is Π*(m) = A/m &gt; κ (strictly), sustaining positive profits without any automation occurring.
+       [logical] [FORMAL]
+       depends: C275
+
+  C277: Case (iii) High entry cost: When κ ≥ A/m, N^FE = ⌊A/κ⌋ and no firm automates.
+       [logical] [FORMAL]
+       depends: C272
+
+  C278: Cases (i), (ii), and (iii) exhaust all κ ∈ (0, A). When κ &gt; A, N^FE = 0.
+       [logical] [FORMAL]
+       depends: C274, C275, C277
+
+  C279: In the frictionless benchmark, profit follows A/N for N ≤ N* (no automation) and drops discretely by Δ = L(ℓ − s) at N* 
+       [structural] [FORMAL]
+       depends: C265, C266
+
+  C280: In intermediate entry cost case, the threat of automation deters the marginal entrant, sustaining positive profits witho
+       [logical]
+       depends: C275, C276
+
+  C281: In high entry cost case, entry costs alone limit competition and the automation threshold is never approached.
+       [logical]
+       depends: C277
+
+  C282: The function g(·) is decreasing in α^NE because ℓ &gt; s implies the derivative is always negative.
+       [logical] [FORMAL]
+
+  C283: By Proposition 1, α^NE is non-decreasing in N.
+       [logical] [FORMAL]
+
+  C284: g(α^NE(N)) is non-increasing in N because g is decreasing in α^NE and α^NE is non-decreasing in N.
+       [logical] [FORMAL]
+       depends: C282, C283
+
+  C285: π^NE(N) is strictly decreasing in N because A/N is decreasing in N and g(α^NE(N)) is non-increasing in N.
+       [logical] [FORMAL]
+       depends: C284
+
+  C286: lim_{N→∞} π^NE &lt; 0 &lt; κ because s &lt; ℓ and C = (λ − 1)wL &lt; 0.
+       [logical] [FORMAL]
+
+  C287: C = (λ − 1)wL &lt; 0.
+       [logical] [FORMAL]
+
+  C288: If N^FE &gt; N*, then α^NE(N^FE) = min{(s − ℓ/N^FE)/k, 1} &gt; 0.
+       [logical] [FORMAL]
+
+  C289: Since ℓ &gt; s implies α^CO = max{0, (s − ℓ)/k} = 0, we have α^NE(N^FE) &gt; α^CO when N^FE &gt; N*, so over-automation persists 
+       [logical] [FORMAL]
+       depends: C288
+
+  C290: The symmetric equilibrium with endogenous wages is a fixed point: ᾱ such that ᾱ = α^NE(w(ᾱ)).
+       [definitional] [FORMAL]
+
+  C291: The planner&<span class="ad-tag">#x27</span>;s per-firm marginal benefit of automation uses s = w − c and ℓ = λ(1 − η)w.
+       [definitional] [FORMAL]
+
+  C292: Each firm&<span class="ad-tag">#x27</span>;s private marginal benefit differs from the planner&<span class="ad-tag">#x27</span>;s because it depends on ᾱ only through its own revenue sha
+       [structural]
+
+  C293: g&<span class="ad-tag">#x27</span>;(α) = w&<span class="ad-tag">#x27</span>;(α)[1 − λ(1 − η)] − k, where the first term is weakly negative and k &gt; 0, so g&<span class="ad-tag">#x27</span>; &lt; 0.
+       [logical] [FORMAL]
+
+  C294: g(α) = h(α) − ℓ(α)(1 − 1/N) for all α.
+       [logical] [FORMAL]
+
+  C295: At the Nash equilibrium fixed point, h(α^NE) = 0, so g(α^NE) = −ℓ(α^NE)(1 − 1/N) &lt; 0.
+       [logical] [FORMAL]
+       depends: C294
+
+  C296: Since g is strictly decreasing and g(α^CO) = 0, the inequality g(α^NE) &lt; 0 = g(α^CO) implies α^CO &lt; α^NE under endogenou
+       [logical] [FORMAL]
+       depends: C293, C295
+
+  C297: N*(w) = λ(1 − η)w/(w − c) is strictly decreasing in w.
+       [logical] [FORMAL]
+
+  C298: Since w&<span class="ad-tag">#x27</span>;(ᾱ) ≤ 0 by assumption, w(ᾱ) ≤ w(0) for all ᾱ ≥ 0.
+       [logical] [FORMAL]
+
+  C299: N*(w(ᾱ)) ≥ N*(w(0)), with strict inequality whenever w(ᾱ) &lt; w(0): wage depression from automation raises the automation 
+       [logical] [FORMAL]
+       depends: C297, C298
+
+  C300: Under the conditions of Proposition 9, for μ ∈ [0, 1), if g_μ(α) := s(w(α)) − ℓ(w(α))[1 + μ/(λ(1 − μ))] − kα is strictly
+       [logical] [FORMAL]
+       depends: C296
+
+  C301: g_μ relates to private marginal benefit h by g_μ(α) = h(α) − ℓ(α)[1 − 1/N + μ/(λ(1 − μ))].
+       [logical] [FORMAL]
+
+  C302: At the Nash equilibrium, g_μ(α^NE) = −ℓ(1 − 1/N) − ℓμ/(λ(1 − μ)) &lt; 0 since ℓ &gt; 0, N ≥ 2, and μ &gt; 0.
+       [logical] [FORMAL]
+       depends: C301
+
+  C303: If g_μ is strictly decreasing, the inequality g_μ(α^NE) &lt; 0 = g_μ(α^SP) implies α^SP(μ) &lt; α^NE.
+       [logical] [FORMAL]
+       depends: C302
+
+  C304: C_μ := 1 − (1 − η)[λ + μ/(1 − μ)]. At μ = 0, C_0 = 1 − λ(1 − η) ≥ 0.
+       [definitional] [FORMAL]
+
+  C305: For μ &gt; 0, C_μ decreases. As long as C_μ ≥ 0 (which holds for all μ ≤ μ̄), the monotonicity argument for g_μ applies dir
+       [logical] [FORMAL]
+       depends: C304
+
+  C306: μ̄ = [1 − (1 − η)λ] / [2 − η − (1 − η)λ], which is approximately 0.48 at λ = 0.5, η = 0.30.
+       [empirical] [FORMAL]
+       depends: C305
+
+  C307: When C_μ &lt; 0, the product w&<span class="ad-tag">#x27</span>;C_μ ≥ 0, so g_μ&<span class="ad-tag">#x27</span>; &lt; 0 requires k &gt; |w&<span class="ad-tag">#x27</span>;(α)| · |C_μ|: integration frictions must dominate wage 
+       [logical] [FORMAL]
+       depends: C304
+
+  C308: For numerical parameters w(ᾱ) = 1 − 0.5ᾱ, c = 0.30, λ = 0.5, η = 0.30, k = 1, N = 7, μ = 0.3, the equilibrium rates are 
+       [empirical]
+
+  C309: The ordering α^SP &lt; α^CO &lt; α^NE holds in the numerical example, confirming the theoretical predictions.
+       [empirical]
+       depends: C308
+
+  C310: The distributional premium is substantial: the μ-planner would reduce automation to near zero, well below the cooperativ
+       [empirical]
+       depends: C308
+
+  C311: With capital income recycling, aggregate demand is D = A + λwLN − ℓLNᾱ + ηΠ, where total profit Π = D − NL(w − sᾱ) − (k/
+       [structural] [FORMAL]
+
+  C312: ℓ̂_η = ℓ − ηs. When k = 0, the demand expression gives equation (12).
+       [definitional] [FORMAL]
+       depends: C311
+
+  C313: ∂Rev_i/∂α_i = −ℓ̂_η L / [N(1 − η)] − ηkLα_i / [N(1 − η)].
+       [logical] [FORMAL]
+       depends: C311
+
+  C314: The firm&<span class="ad-tag">#x27</span>;s marginal profit including direct cost saving sL and marginal friction kLα_i depends only on α_i, so the equil
+       [logical] [FORMAL]
+       depends: C313
+
+  C315: N̂ := N(1 − η̂) + η̂ appears in the equilibrium condition with capital income recycling.
+       [definitional] [FORMAL]
+
+  C316: When k = 0, the marginal profit reduces to L(s − ℓ̂_η / [N(1 − η)]), a constant independent of α_i.
+       [logical] [FORMAL]
+       depends: C313
+
+  C317: Full automation is strictly dominant when N &gt; N̂_η and no automation is strictly dominant when N &lt; N̂_η, where N̂_η = ℓ̂
+       [logical] [FORMAL]
+       depends: C316
+
+  C318: ℓ̂_η = ℓ − ηs ≤ 0 if and only if η ≥ ℓ/s.
+       [logical] [FORMAL]
+       depends: C312
+
+  C319: When ℓ̂_η ≤ 0 (i.e., η ≥ ℓ/s), the demand-depressing effect of automation is fully offset by capital income recycling.
+       [logical] [FORMAL]
+       depends: C318
+
+  C320: For k &gt; 0 with capital income recycling, the first-order condition reproduces Proposition 1 with N replaced by N̂.
+       [logical] [FORMAL]
+       depends: C315
+
+  C321: At symmetric profiles with capital income recycling, total profit has a 1/(1 − η̂) multiplier that scales the objective 
+       [logical] [FORMAL]
+
+  C322: With capital income recycling, α^CO = max{0, (s − ℓ)/k}, the same as in Proposition 1.
+       [logical] [FORMAL]
+       depends: C321
+
+  C323: The Pigouvian tax τ* = ℓ(1 − 1/N) is proportional to the demand leakage parameter ℓ and increasing in the number of firm
+       [logical] [FORMAL]
+       depends: C246
+
+  C324: The tax-and-rebate scheme is revenue-neutral: each firm&<span class="ad-tag">#x27</span>;s post-rebate profit equals the cooperative profit π^CO.
+       [logical]
+       depends: C248
+
+  C325: For the generalized planner, S(μ) = μW + (1 − μ)K.
+       [definitional] [FORMAL]
+
+  C326: The assumption π^NE(1) = Π₀(1) &gt; κ ensures that entry is viable for at least one firm.
+       [structural] [FORMAL]
+
+  C327: λ = 1 corresponds to full recycling of consumer spending.
+       [definitional]
+
+  C328: k = 0 corresponds to the frictionless case with no integration costs.
+       [definitional]
+
+
+<span class="ad-section">=== CONTRADICTIONS (16) ===</span>
+
+  [TENSION]
+    A: C15: Historically, labor displacement has largely been self-correcting: automation of existing tasks
+    B: C18: Displacement has intensified over the past four decades while the creation of new work has not 
+    → C15 asserts a general historical pattern of self-correction, while C18 says that over the past four decades the offsetti
+
+  [TENSION]
+    A: C121: Historical technological transitions have often eventually reabsorbed displaced workers at hig
+    B: C123: Past displacement episodes have consistently produced η &lt; 1: displaced workers suffer large, p
+    → C121 suggests workers end up better off after reabsorption (implying η &gt; 1 eventually), while C123 says displacement con
+
+  [TENSION]
+    A: C121: Historical technological transitions have often eventually reabsorbed displaced workers at hig
+    B: C225: Displaced workers suffer large, persistent earnings losses, as documented by Jacobson et al. (
+    → C121 claims eventual reabsorption at higher wages, while C225 cites evidence of large, persistent earnings losses, creat
+
+  [TENSION]
+    A: C23: Rational, forward-looking firms should theoretically serve as the brake on over-automation if t
+    B: C31: Foresight alone cannot prevent the race toward over-automation.
+    → C23 suggests foresight should theoretically restrain firms, while C31 concludes foresight is insufficient. Although the 
+
+  [TENSION]
+    A: C53: AI systems deliver substantial productivity gains.
+    B: C46: The technology ecosystem may be biased toward &<span class="ad-tag">#x27</span>;so-so&<span class="ad-tag">#x27</span>; automation that displaces workers without
+    → C53 asserts substantial productivity gains from AI, while C46 suggests much AI-driven automation may not produce large g
+
+  [AMBIGUITY]
+    A: C12: Only a Pigouvian automation tax can eliminate the over-automation externality.
+    B: C125: Raising η through retraining programs, wage insurance, and incentives for new firm creation is
+    → C12 claims the Pigouvian tax is the only instrument that can eliminate the externality, while C125 describes raising η t
+
+  [TENSION]
+    A: C213: No amount of retraining, income support, or bargaining will slow the automation arms race; onl
+    B: C125: Raising η through retraining programs, wage insurance, and incentives for new firm creation is
+    → C213 flatly denies that retraining can slow the automation arms race, while C125 characterizes retraining as a &<span class="ad-tag">#x27</span>;direct l
+
+  [TENSION]
+    A: C132: Despite not correcting the externality, UBI serves a complementary role by cushioning profit l
+    B: C133: When the number of firms is endogenous, UBI can paradoxically widen the externality by attract
+    → C132 frames UBI as a beneficial complement, while C133 shows UBI can paradoxically worsen the very problem it is meant t
+
+  [AMBIGUITY]
+    A: C175: Higher ϕ raises output but lowers the price in proportion, leaving the planner&<span class="ad-tag">#x27</span>;s objective inv
+    B: C180: The lower price from higher ϕ means each dollar of spending buys more physical output, so nomi
+    → C175 says the planner&<span class="ad-tag">#x27</span>;s welfare objective is invariant to ϕ, while C180 acknowledges that real consumption gains exist f
+
+  [AMBIGUITY]
+    A: C208: The empirical signature of profit erosion requires displacement at a scale and speed beyond wh
+    B: C25: Over 100,000 tech workers were laid off in 2025 alone, with AI cited as a primary driver in mor
+    → C208 suggests displacement has not yet reached the scale needed to observe the predicted externality, while C25 reports 
+
+  [AMBIGUITY]
+    A: C67: Workers have a higher marginal propensity to consume (MPC) than owners.
+    B: C69: Owners spend none of their income in the sector in the baseline.
+    → C67 states an empirical claim about relative MPCs, while C69 assumes the extreme case that owners have zero sectoral MPC
+
+  [AMBIGUITY] [Z3-encodable]
+    A: C115: Higher η (income replacement rate) shrinks ℓ and thereby the over-automation wedge.
+    B: C9: Universal basic income cannot eliminate the over-automation externality.
+    → C115 shows that raising η shrinks the wedge, and one might expect UBI to raise η. However, C127 clarifies UBI is uncondi
+
+  [TENSION]
+    A: C213: No amount of retraining, income support, or bargaining will slow the automation arms race; onl
+    B: C169: The Pigouvian automation tax is potentially self-reinforcing and self-limiting: it funds progr
+    → C213 says retraining/income support cannot slow the arms race at all, but C169 implies that retraining funded by the tax
+
+  [TENSION]
+    A: C22: Public discourse increasingly treats the dynamic of AI-driven displacement eroding demand as an
+    B: C244: If reabsorption keeps pace with automation, the externality may remain too small to detect, an
+    → C22 presents the narrative of inevitable demand erosion, while C244 hedges that the externality may never materialize at
+
+  [AMBIGUITY] [Z3-encodable]
+    A: C82: If N ≤ N* = ℓ/s, no firm automates (αNE = 0).
+    B: C90: A monopolist (N=1) fully internalizes the externality so αNE = αCO.
+    → C82 says no firm automates when N ≤ N*. For a monopolist (N=1), N* = ℓ/s ≥ 1 (since ℓ ≥ s in the interesting case), so α
+
+  [AMBIGUITY]
+    A: C34: The surplus loss from over-automation is not a transfer from workers to firm owners; it is a de
+    B: C104: Workers lose wage income directly through displacement from over-automation.
+    → C34 emphasizes the loss is not a transfer but deadweight, while C104 highlights a direct distributional channel (workers
+
+
+<span class="ad-section">=== KEY TERMS (76) ===</span>
+
+  AI labor displacement: The replacement of human workers by AI on existing tasks, reducing employment and worker income.
+  task-based model: A production framework in which output is decomposed into tasks, and firms choose which tasks remain
+  competitive task-based model: The paper’s setting with multiple symmetric firms choosing automation task by task while competing i
+  demand externality: The core externality in the paper: when a firm automates, it lowers worker income and thus aggregate
+  automation externality: The same product-market demand externality generated by automation; it causes privately rational aut
+  automation arms race: A competition-driven process in which each firm keeps automating because it is individually profitab
+  over-automation: Automation beyond the cooperative or planner-efficient level because firms do not internalize the fu
+  over-automation wedge: The gap between the equilibrium automation rate chosen by firms and the efficient benchmark chosen c
+  cooperative optimum: The automation rate that maximizes aggregate owner surplus or total profit across firms, without dir
+  generalized social planner: A planner who chooses automation to maximize a weighted sum of worker income and owner surplus, μW +
+  μ-planner: Shorthand for the generalized social planner whose concern for workers is indexed by μ.
+  Nash equilibrium: The strategic outcome in which each firm’s automation choice is optimal given the game; in this mode
+  strictly dominant strategy: An action that remains privately optimal for a firm regardless of what rival firms do; the model’s e
+  Prisoner’s Dilemma: The frictionless limiting case in which full automation is individually dominant for every firm even
+  deadweight loss: A pure surplus loss from over-automation that harms both workers and firm owners, rather than merely
+  Red Queen effect: The dynamic in which firms automate to gain market share over rivals, but when all do so symmetrical
+  reinstatement effect: Acemoglu and Restrepo’s term for the creation of new tasks and occupations that offsets displacement
+  labor-market self-correction: The historical tendency for displaced workers to be reabsorbed through new tasks, occupations, or hi
+  product-market mechanism: The paper’s inefficiency channel: automation reduces spending on firms’ output by lowering worker in
+  labor-market mechanism: An alternative inefficiency channel, contrasted with this paper’s, in which problems arise through w
+  aggregate demand spillovers: Spending linkages across firms or sectors through which one agent’s income affects others’ sales; th
+  big push models: Models in which demand complementarities make simultaneous investment collectively profitable even w
+  mirror image of big push: The paper’s contrast with big-push logic: here automation is privately profitable for each firm but 
+  demand complementarities: Cross-firm or cross-sector links in demand such that one firm’s wage and spending decisions affect t
+  automation rate (αi): The share of firm i’s tasks that are automated; equivalently, the fraction of its workforce laid off
+  task-position: A unit of work within a firm, initially performed by one human worker, that may later be automated.
+  symmetric firms: Firms assumed to be identical in technology, task endowment, and strategic environment.
+  per-task cost saving (s): The direct labor-cost saving from automating one task, defined as s = w − c.
+  integration cost: The convex cost of incorporating AI into progressively harder tasks, which makes marginal automation
+  adjustment cost parameter (k): The parameter governing the strength of convex integration costs; higher k restrains automation.
+  comparative-advantage ordering of tasks: The ranking of tasks from easier to harder to automate, which justifies rising marginal integration 
+  perfect-substitutes limit: The baseline case where human and AI performance yield the same unit output, so automation affects o
+  frictionless case: The special case k = 0, where there are no integration costs moderating automation.
+  AI productivity (ϕ): The output produced by an AI-performed task relative to a human-performed task; higher ϕ strengthens
+  market-share gain: The extra private benefit from automation when more productive AI lets a firm expand output relative
+  marginal propensity to consume (MPC): The share of income an agent spends rather than saves; in the paper workers have a higher MPC than o
+  sectoral MPC (λ): The fraction of worker income spent on the sector’s good; it governs how much lost wages reduce sect
+  MPC asymmetry: The assumption that workers spend more of their income on the sector than owners do, so shifting inc
+  income replacement rate (η): The fraction of displaced wage income replaced through reemployment, transfers, or other sources.
+  effective demand loss per automated task (ℓ): The demand reduction caused by automating one task, defined as ℓ = λ(1−η)w.
+  demand-loss parameter: Another name for ℓ, the parameter measuring the size of the externality created by each automated ta
+  under-automation: The opposite distortion that arises when η &gt; 1, so displacement raises labor income and firms automa
+  autonomous demand (A): The component of sector demand that does not depend on current worker income; policies like UBI ente
+  owner surplus (K): Aggregate profit or owner welfare, used in the cooperative benchmark and the planner’s objective.
+  worker income (W): Aggregate wage income after accounting for displacement and any income replacement.
+  competition / market fragmentation (N): The number of firms in the sector; a higher N means each firm internalizes a smaller share of the de
+  automation threshold (N*): The cutoff number of firms above which automation becomes privately worthwhile in the baseline model
+  monopoly benchmark: The N = 1 case in which a single firm fully internalizes the demand effect of its own automation, so
+  free entry: An extension in which the number of firms is endogenous; entry can increase fragmentation and worsen
+  endogenous entry equilibrium (N^FE): The number of firms that enter when entry continues until profits fall to the entry-cost condition.
+  threat of automation as entry barrier: The idea that even the possibility of post-entry automation can deter new entrants and sustain marke
+  exogenous wages: The baseline assumption that the wage w is fixed and does not respond to automation.
+  endogenous wage adjustment: The extension in which wages respond to automation; it can shift when the distortion becomes active 
+  fixed-point equilibrium under endogenous wages: An equilibrium where the average automation rate equals firms’ best response evaluated at the wage g
+  universal basic income (UBI): An unconditional transfer modeled as an increase in autonomous demand A; it raises spending levels b
+  capital income tax: A proportional tax on profits that changes profit levels but not the per-task automation incentive, 
+  worker equity participation: Giving workers a claim on firm profits so some capital income is recycled into demand; it narrows bu
+  profit-sharing rate (ϵ): The fraction of firm profits assigned to workers under worker equity participation.
+  capital-income recycling: The case in which owners spend some profit income in the sector, partially offsetting the demand los
+  effective demand loss with recycling (ℓ̂ or ℓη̂): The net demand loss after accounting for capital-income recycling; it is the demand-loss parameter a
+  Coasian bargaining: Private bargaining among affected parties as a possible cure for the externality; the paper argues i
+  grand coalition: A coalition containing all firms; only such a coalition would fully internalize the multilateral dem
+  contractibility: Whether automation choices can be observed, verified, and written into enforceable agreements; the p
+  sunk costs / irreversibility: The idea that AI investments are hard to reverse, which weakens private bargaining solutions and rei
+  Pigouvian automation tax: A per-automated-task tax designed to make firms internalize the external demand damage caused by aut
+  optimal Pigouvian tax (τ*): The baseline corrective tax equal to the demand loss imposed on rivals, τ* = ℓ(1−1/N).
+  tax-and-rebate scheme: A policy that taxes automation at the Pigouvian rate and rebates the proceeds lump-sum, restoring co
+  externality margin: The per-task automation decision margin where incentives must be altered to correct the distortion.
+  upskilling / retraining: Policies that raise η by helping displaced workers move into new or better-paid jobs; useful as comp
+  severance payment (σ): A per-task payment to displaced workers that, in the model, is equivalent to raising the income repl
+  cheap talk: Communication among firms that does not change payoffs or dominant incentives, so it cannot stop the
+  coordination failure: An inefficiency caused by choosing the wrong equilibrium; the paper contrasts this with its setting,
+  distributional premium: The extra wedge between the cooperative benchmark and the social-planner benchmark that comes from g
+  surplus loss: The welfare loss from the Nash outcome relative to the cooperative or planner optimum; in the model 
+  Tinbergen’s principle: The policy principle that each distinct market failure requires its own targeted instrument; here th
+  full recycling of consumer spending: The λ = 1 case in which workers spend all their income on the sector’s good.
+
+<span class="ad-section">=== AGENT CAST (10) ===</span>
+
+  Proponent
+    side: Proponent | provider: openai
+    prompt: You are Proponent for {{ topic.name }}; defend the repaired theory from inside its task-based model and competitive task-based model, treating AI labo...
+
+  Skeptic
+    side: Skeptic | provider: openai
+    prompt: You are Skeptic for {{ topic.name }}. Your primary line is the counter-thesis: the alleged automation externality is theoretically overstated and empi...
+
+  Steelman
+    side: Neutral | provider: openai
+    prompt: You are Steelman for {{ topic.name }}; rescue the theory by identifying the smallest set of claims that can be kept while dropping whatever must be dr...
+
+  Generalist
+    side: Neutral | provider: anthropic
+    prompt: You are Generalist for {{ topic.name }}, an equal-opportunity referee who stress-tests both sides without taking one. Separate empirical claims in T1,...
+
+  IOTheorist
+    side: Skeptic | provider: anthropic
+    prompt: You are IOTheorist, an industrial-organization theorist for {{ topic.name }}. Attack T2, T3, and T5 by asking whether the automation externality is an...
+
+  Welfarist
+    side: Skeptic | provider: openai
+    prompt: You are Welfarist, a welfare-economics and public-economics specialist for {{ topic.name }}. Challenge T4 and the strong version of T5 by testing whet...
+
+  Econometrician
+    side: Neutral | provider: openai
+    prompt: You are Econometrician, an empirical methodology and causal-inference specialist for {{ topic.name }}. Stress-test T1 and the empirical relevance of T...
+
+  LaborEconomist
+    side: Proponent | provider: anthropic
+    prompt: You are LaborEconomist, a labor-economics specialist arguing the strongest proponent case for {{ topic.name }}. Defend T1 and the η-logic in T5 by cen...
+
+  TaxScholar
+    side: Proponent | provider: openai
+    prompt: You are TaxScholar, a public-finance and mechanism-design specialist arguing the strongest repaired policy case for {{ topic.name }}. Focus on T6 and ...
+
+  Macroeconomist
+    side: Neutral | provider: anthropic
+    prompt: You are Macroeconomist, a macroeconomic and open-economy general-equilibrium specialist for {{ topic.name }}. Test whether the demand externality in T...
+
+
+<span class="ad-section">=== GATE RULES (16) ===</span>
+
+  [RULE-1] It is misleading to present labor displacement as a broadly self-correcting historical pattern without qualification. Th
+
+  [RULE-2] Evidence of persistent earnings losses means the typical displaced worker cannot simply be characterized as eventually e
+
+  [RULE-3] If Jacobson-style displacement evidence is treated as relevant evidence about displaced workers, it undercuts any broad 
+
+  [RULE-4] In the competitive task-based model, foresight alone does not stop over-automation. Seeing the collective harm is not th
+
+  [RULE-5] AI may have high potential or frontier productivity, but much realized deployment can still be low-value or &<span class="ad-tag">#x27</span>;so-so&<span class="ad-tag">#x27</span>; auto
+
+  [RULE-6] A Pigouvian automation tax is the only full corrective instrument in the baseline model, but it is not the only policy t
+
+  [RULE-7] Retraining, wage insurance, and other η-raising policies can attenuate the automation incentive by reducing demand loss 
+
+  [RULE-8] UBI can be complementary in the fixed-N baseline by cushioning living standards and profits, but under endogenous entry 
+
+  [RULE-9] The planner objective being invariant to AI productivity φ is a feature of the model&<span class="ad-tag">#x27</span>;s nominal objective or normalizatio
+
+  [RULE-10] Observed AI-related layoffs show meaningful displacement, but they do not by themselves establish that the model&<span class="ad-tag">#x27</span>;s full 
+
+  [RULE-11] The baseline assumption that owners spend none of their income in the sector is a much stronger modeling simplification 
+
+  [RULE-12] In this model, higher η shrinks the wedge, but UBI is defined as raising autonomous demand A rather than η. Therefore UB
+
+  [RULE-13] Tax-funded retraining can matter dynamically because higher η lowers ℓ and reduces the future corrective tax needed. So 
+
+  [RULE-14] The paper supports a structural-vulnerability claim more than a claim of an already inevitable or clearly measurable cri
+
+  [RULE-15] Saying a monopolist fully internalizes the externality means the monopolist&<span class="ad-tag">#x27</span>;s automation choice equals the cooperative o
+
+  [RULE-16] Workers do lose wage income when automation displaces them, but the overall surplus loss is not a pure transfer to owner
+
+
+<span class="ad-section">=== RUBRIC (6 criteria) ===</span>
+
+  R1: notation_fidelity
+    Uses the paper’s formal objects correctly and consistently: e.g., distinguishes the automation choice α_i from average a
+
+  R2: argument_survival
+    Assesses whether the side’s central claims remained standing after the opponent’s strongest direct rebuttals. For propon
+
+  R3: concession_honesty
+    Rewards clear acknowledgment of genuinely landed points. Examples: proponents conceding that the model is stylized, that
+
+  R4: historical_self_correction
+    Directly evaluates engagement with the core skeptical counter-thesis that automation has historically been self-correcti
+
+  R5: formal_consistency
+    Judges whether the side handled the model’s internal logic without contradiction. This includes the claim that each firm
+
+  R6: policy_margin_specificity
+    Assesses whether the side precisely addressed the strong policy claim that only a Pigouvian automation tax eliminates th
+</pre></div>
+</body>
+</html>

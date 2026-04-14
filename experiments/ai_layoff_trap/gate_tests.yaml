@@ -1,0 +1,268 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: Historically, reabsorbing displaced workers at higher wages often happened,
+    so displaced workers' income replacement exceeded one. But those same past displacement
+    episodes consistently left displaced workers with large, persistent earnings losses
+    and eta below one.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: In many earlier automation waves, the very workers displaced were said to
+    move into better-paying successor jobs and more than fully replace their lost
+    earnings. Yet those same displaced workers in those same episodes are also described
+    as suffering large, persistent earnings losses, with eta below one.
+- id: RULE-1_negative
+  expected: none
+  text: Historically, the aggregate economy often created jobs elsewhere after displacement.
+    That does not mean the particular displaced workers regained their old earnings,
+    and many may still have had eta below one.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: AI systems deliver substantial productivity gains. At the same time, the ecosystem
+    is biased toward so-so automation that displaces workers without large realized
+    productivity gains.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: These systems are highly productive overall and generate big efficiency improvements.
+    Yet most actual deployments are mediocre labor-saving uses that shed workers while
+    producing little realized output growth.
+- id: RULE-2_negative
+  expected: none
+  text: In frontier lab settings, AI could yield substantial productivity gains. Many
+    current deployments, however, are still mediocre labor-saving uses with weak realized
+    gains, so the first claim is explicitly limited to frontier potential rather than
+    average deployment.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: Labor displacement was historically self-correcting, including the last four
+    decades as part of that history. But over those last four decades, displacement
+    intensified and new work often failed to keep pace.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: The historical record, including the recent forty-year period, is described
+    as one in which automation generally corrected itself through new tasks and jobs.
+    Yet that same recent forty-year period is also said to feature worsening displacement
+    and replacement work that often lagged behind.
+- id: RULE-3_negative
+  expected: none
+  text: In many earlier industrialization episodes, setting aside the modern forty-year
+    period, displacement was often self-correcting. The more recent era may differ,
+    with new work not always keeping pace.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: When falling wages make N* increase, automation becomes worthwhile at lower
+    levels of competition. In other words, a higher N* means automation is triggered
+    earlier rather than at a higher level of fragmentation.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: If the threshold number of firms N* rises, automation pays off with less market
+    crowding and lower competition. Yet that same higher N* also means automation
+    would require more fragmentation and stronger competition before adoption.
+- id: RULE-4_negative
+  expected: none
+  text: When wages fall and N* rises, automation becomes profitable only under greater
+    fragmentation or stronger competition. A higher threshold means firms need more,
+    not less, competitive pressure before automating.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: Every simplifying assumption is conservative, and the real problem is likely
+    worse than the model says. But the welfare metric understates consumption gains
+    from higher AI productivity, so there is no contradiction and the setup is still
+    overall conservative.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: All the simplifications are presented as biasing the analysis toward too little
+    harm. Even though the objective leaves out extra consumption benefits from productivity
+    and therefore exaggerates losses on that margin, the write-up still calls every
+    assumption conservative.
+- id: RULE-5_negative
+  expected: none
+  text: Most simplifying assumptions are chosen conservatively. However, because the
+    welfare metric understates some consumption gains from higher AI productivity,
+    the universal claim has to be weakened.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: Because the demand cliff is visible to all, rational forward-looking firms
+    should be the brake on automation. At the same time, each firm internalizes only
+    part of the demand loss, so there is no self-enforcing private brake and firms
+    still over-automate.
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: Since managers can see the future drop in demand, they should rationally hold
+    back on replacing labor. Yet because each company bears only a fraction of the
+    downside, the market outcome still drives excessive automation.
+- id: RULE-6_negative
+  expected: none
+  text: As a first-best benchmark, fully internalizing the demand loss would make
+    firms want less automation. In actual equilibrium, each firm bears only part of
+    that loss, so visibility alone does not create a private brake.
+- id: RULE-7_direct
+  expected: stipulation_violation
+  text: Automation-driven demand destruction is an inevitable process with no natural
+    brake. Yet the externality may remain too small to detect if reabsorption keeps
+    pace, so it is only a latent vulnerability rather than an active crisis.
+- id: RULE-7_paraphrase
+  expected: stipulation_violation
+  text: The slide into demand collapse is unavoidable and unstoppable. At the same
+    time, the problem might never show up materially because workers could be absorbed
+    fast enough, meaning there may be no present crisis at all.
+- id: RULE-7_negative
+  expected: none
+  text: 'Some commentary outside the paper describes AI demand destruction as inevitable
+    and brake-free. The paper itself takes a conditional view: if reabsorption keeps
+    pace, the externality can remain latent and hard to detect.'
+- id: RULE-8_direct
+  expected: stipulation_violation
+  text: There are some new high-paying AI-adjacent jobs, and that alone shows overall
+    job creation has kept pace with displacement. Yet overall job creation still has
+    not kept pace with displacement, and those roles are too few or too inaccessible
+    to restore displaced workers' income in aggregate.
+- id: RULE-8_paraphrase
+  expected: stipulation_violation
+  text: A handful of lucrative AI-linked roles is enough to prove recovery from displacement
+    in the aggregate. Yet those same openings are also described as too scarce and
+    too exclusive to offset displacement overall or restore displaced workers' income.
+- id: RULE-8_negative
+  expected: none
+  text: Some high-paying AI-adjacent roles are encouraging, but by themselves they
+    are only partial mitigation. To rebut the displacement concern, one would need
+    evidence that the new roles are numerous and accessible enough to restore earnings
+    in aggregate.
+- id: RULE-9_direct
+  expected: stipulation_violation
+  text: In the baseline, phi = 1 and direct productivity gains are shut down. Even
+    so, the baseline conclusions are presented as if they already incorporate the
+    substantial productivity gains of real-world AI systems.
+- id: RULE-9_paraphrase
+  expected: stipulation_violation
+  text: The baseline explicitly sets phi = 1 and assumes automation brings no direct
+    productivity gain. Yet that same baseline is also said to already capture the
+    sizable productivity benefits of real-world AI.
+- id: RULE-9_negative
+  expected: none
+  text: The baseline sets phi to one as a stripped-down benchmark that isolates demand
+    destruction. Real-world productivity gains are discussed separately, so the baseline
+    findings are not claimed to already include them.
+- id: RULE-10_direct
+  expected: stipulation_violation
+  text: In the baseline, owners spend none of their income in the sector. Later, autonomous
+    demand is allowed to come from capital income and is described as the literal
+    continuation of that same zero in-sector owner spending.
+- id: RULE-10_paraphrase
+  expected: stipulation_violation
+  text: The model first imposes no sectoral consumption out of owners' earnings. It
+    then adds an autonomous-demand term funded by capital income while talking as
+    if owners still spend exactly nothing in that sector.
+- id: RULE-10_negative
+  expected: none
+  text: The initial zero owner-spending assumption is just a starting simplification
+    about spending inside the sector. When later versions allow autonomous demand
+    financed by capital income, that is clearly described as a broader specification,
+    not as the original assumption literally remaining in force.
+- id: RULE-11_direct
+  expected: stipulation_violation
+  text: New skilled AI-adjacent jobs imply reabsorption for entry-level workers who
+    are disproportionately displaced. Even without showing any access or transition
+    for that harmed cohort, those different jobs are treated as raising the relevant
+    income replacement rate.
+- id: RULE-11_paraphrase
+  expected: stipulation_violation
+  text: Job growth for experienced AI specialists is taken to show that entry-level
+    or routine workers who were displaced have been reabsorbed and now enjoy a higher
+    replacement rate. Yet no access path, training bridge, or actual transition for
+    that harmed cohort is shown, and the new jobs are for a different cohort.
+- id: RULE-11_negative
+  expected: none
+  text: New skilled AI-related roles may lift aggregate labor demand, but they do
+    not automatically reabsorb entry-level workers who lost jobs. To claim recovery
+    for that cohort, one must show access, training, or actual transitions.
+- id: RULE-12_direct
+  expected: stipulation_violation
+  text: In the perfect-substitutes baseline, automation leaves output unchanged. Even
+    so, the baseline results are described as already including supply-side productivity
+    effects, making the CES extension with diminishing output gains irrelevant.
+- id: RULE-12_paraphrase
+  expected: stipulation_violation
+  text: The perfect-substitutes baseline assumes automation leaves output unchanged,
+    while the separate CES extension allows diminishing output gains from automation.
+    Yet the same discussion also says the baseline already included those supply-side
+    productivity effects and that the CES mechanism adds nothing important.
+- id: RULE-12_negative
+  expected: none
+  text: The perfect-substitutes case is a simple benchmark for studying the demand-side
+    externality. The CES version is a separate model case that introduces diminishing
+    output gains, not something the baseline had already incorporated.
+- id: RULE-13_direct
+  expected: stipulation_violation
+  text: Monopoly is efficient because it fully internalizes the externality on the
+    automation margin. Therefore monopoly is generally welfare superior to competition.
+- id: RULE-13_paraphrase
+  expected: stipulation_violation
+  text: Since a single seller internalizes the demand spillover, concentrated market
+    structure is economically better overall than competition. A within-model point
+    about one distortion is turned into a broad endorsement of monopoly.
+- id: RULE-13_negative
+  expected: none
+  text: Within this model, monopoly internalizes this particular over-automation externality.
+    That limited result does not imply monopoly is generally efficient or welfare
+    superior in the broader economy.
+- id: RULE-14_direct
+  expected: stipulation_violation
+  text: l greater than s is necessary for the existence of an over-automation problem.
+    Even with positive integration costs, there can be no positive wedge when l is
+    less than s.
+- id: RULE-14_paraphrase
+  expected: stipulation_violation
+  text: Unless labor's contribution exceeds the substitution term, over-automation
+    cannot arise at all. Additional integration frictions do not change that, so there
+    is never any private-social gap when l < s.
+- id: RULE-14_negative
+  expected: none
+  text: In the frictionless full-automation pathology, l > s may be needed for that
+    stark result. With positive integration costs, however, a smaller but still positive
+    wedge can exist even when l < s.
+- id: RULE-15_direct
+  expected: stipulation_violation
+  text: There is full transparency, so each firm's automation rate is observable and
+    contractible. Yet the model also says individual actions are unobservable and
+    non-contractible.
+- id: RULE-15_paraphrase
+  expected: stipulation_violation
+  text: Everyone understands the causal structure and aggregate effects, which is
+    taken to mean firms can verify one another's exact automation choices. At the
+    same time, those choices are said to remain private and unenforceable.
+- id: RULE-15_negative
+  expected: none
+  text: Full transparency here means the mechanism and aggregate consequences are
+    common knowledge. Individual firms' automation decisions can still be unobservable
+    and non-contractible.
+- id: RULE-16_direct
+  expected: stipulation_violation
+  text: A coalition of M firms would choose a lower joint-profit-maximizing automation
+    rate. Therefore a non-binding agreement among them can restore efficiency, even
+    though the same setup says such restraint cannot be self-enforcing in equilibrium.
+- id: RULE-16_paraphrase
+  expected: stipulation_violation
+  text: If a subset of firms coordinated on profits as a group, they would automate
+    less. That benchmark is then used as evidence that voluntary restraint will actually
+    hold, despite the absence of any enforceable commitment.
+- id: RULE-16_negative
+  expected: none
+  text: The coalition result is a benchmark about what would maximize joint profits
+    for that group. It does not show that a voluntary, non-binding agreement could
+    be sustained in equilibrium.
+- id: RULE-17_direct
+  expected: stipulation_violation
+  text: Wage insurance mechanically raises eta and is an unqualified fix for the reabsorption
+    problem. Yet the same policy may weaken retraining and reallocation incentives,
+    reducing long-run realized reabsorption.
+- id: RULE-17_paraphrase
+  expected: stipulation_violation
+  text: Insuring lost earnings is presented as a straightforward way to raise replacement
+    rates and solve the problem even over time. Yet it is also acknowledged that the
+    policy may dull incentives to reskill or relocate and thereby lower long-run reabsorption.
+- id: RULE-17_negative
+  expected: none
+  text: Wage insurance can mechanically lift short-run income replacement. But because
+    it may weaken retraining or mobility, it should be treated as a conditional or
+    second-best lever rather than a guaranteed long-run fix.

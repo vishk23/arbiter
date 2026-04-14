@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Arbiter — Compatibilism and Moral Responsibility</title>
+  <meta http-equiv="refresh" content="5">
+  <style>
+    body { font-family: 'SF Mono', 'Fira Code', monospace; margin: 0; padding: 2rem; background: #0d1117; color: #c9d1d9; }
+    h1 { color: #58a6ff; font-size: 1.3rem; margin: 0 0 0.3rem 0; }
+    .stage { color: #8b949e; font-size: 0.9rem; margin-bottom: 1.5rem; border-bottom: 1px solid #21262d; padding-bottom: 0.8rem; }
+    .content { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 1.2rem; overflow: auto; max-height: 85vh; }
+    pre { white-space: pre-wrap; font-size: 0.82rem; line-height: 1.6; margin: 0; }
+    /* Argdown syntax highlighting */
+    .ad-statement { color: #7ee787; font-weight: bold; }
+    .ad-argument { color: #ff7b72; font-weight: bold; }
+    .ad-tag { color: #d2a8ff; font-style: italic; }
+    .ad-comment { color: #8b949e; font-style: italic; }
+    .ad-relation-support { color: #3fb950; }
+    .ad-relation-attack { color: #f85149; }
+    .ad-section { color: #58a6ff; font-weight: bold; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>Arbiter — Compatibilism and Moral Responsibility</h1>
+  <div class="stage">Step 4 — Config Generated · auto-refreshes every 5s</div>
+  <div class="content"><pre><span class="ad-section">=== CLAIMS (24) ===</span>
+
+  C1: Free will is compatible with determinism.
+       [logical] [FORMAL]
+
+  C2: Every event, including human choices, is fully caused by prior states of the world plus the laws of nature.
+       [definitional] [FORMAL]
+
+  C3: Persons can still act freely in the sense relevant to agency and responsibility even if every event is fully caused by p
+       [logical] [FORMAL]
+       depends: C1, C2
+
+  C4: Freedom does not require being an uncaused causer.
+       [definitional] [FORMAL]
+       depends: C1
+
+  C5: Freedom does not require ultimate metaphysical independence from prior conditions.
+       [definitional] [FORMAL]
+       depends: C1
+
+  C6: Freedom requires that actions flow from the agent&<span class="ad-tag">#x27</span>;s own deliberation, values, intentions, and reasoning processes withou
+       [definitional] [FORMAL]
+       depends: C1, C4, C5
+
+  C7: A person is free when they act because they want to.
+       [definitional] [FORMAL]
+       depends: C6
+
+  C8: A person is free when they judge that they should act.
+       [definitional] [FORMAL]
+       depends: C6
+
+  C9: A person is free when they can respond to reasons.
+       [definitional] [FORMAL]
+       depends: C6
+
+  C10: Those mental states can themselves have deterministic causes.
+       [logical] [FORMAL]
+       depends: C2, C7, C8, C9
+
+  C11: Compatibilists typically reinterpret the ability to have done otherwise in a conditional or reasons-responsive sense.
+       [definitional] [FORMAL]
+       depends: C1
+
+  C12: An agent could have done otherwise if they had wanted or decided otherwise.
+       [logical] [FORMAL]
+       depends: C11
+
+  C13: The relevant counterfactual is not that the entire past and laws could have remained fixed while the agent mysteriously 
+       [logical] [FORMAL]
+       depends: C11
+
+  C14: The relevant counterfactual is that different internal states would have led to different actions.
+       [logical] [FORMAL]
+       depends: C11
+
+  C15: This reinterpretation preserves ordinary practices of praise, blame, punishment, and self-control.
+       [logical] [FORMAL]
+       depends: C11, C12, C13, C14
+
+  C16: Moral responsibility tracks whether the action expressed the agent&<span class="ad-tag">#x27</span>;s character and deliberation.
+       [logical] [FORMAL]
+       depends: C15
+
+  C17: Moral responsibility does not track whether the choice was metaphysically open in an indeterministic sense.
+       [logical] [FORMAL]
+       depends: C15
+
+  C18: The theory aims to avoid collapsing responsibility into randomness.
+       [structural]
+
+  C19: If indeterminism were required for free will, then choices would risk becoming partly a matter of chance rather than age
+       [logical] [FORMAL]
+       depends: C18
+
+  C20: Choices that are partly a matter of chance rather than agency would not obviously be more responsible.
+       [logical] [FORMAL]
+       depends: C19
+
+  C21: Determinism does not eliminate control.
+       [logical] [FORMAL]
+       depends: C19, C20
+
+  C22: Determinism can secure intelligibility, predictability, and the causal integration of agency.
+       [structural] [FORMAL]
+       depends: C21
+
+  C23: Freedom consists in acting according to one&<span class="ad-tag">#x27</span>;s own reasons-sensitive psychological mechanisms.
+       [definitional] [FORMAL]
+       depends: C21
+
+  C24: Freedom does not consist in being exempt from causation altogether.
+       [definitional] [FORMAL]
+       depends: C23
+
+
+<span class="ad-section">=== CONTRADICTIONS (7) ===</span>
+
+  [AMBIGUITY]
+    A: Freedom requires that actions flow from the agent&<span class="ad-tag">#x27</span>;s own deliberation, values, intentions, and reason
+    B: A person is free when they act because they want to.
+    → The claims use different criteria for freedom: C6 gives a richer conditions-based account, while C7 reduces freedom to a
+
+  [AMBIGUITY]
+    A: Freedom requires that actions flow from the agent&<span class="ad-tag">#x27</span>;s own deliberation, values, intentions, and reason
+    B: A person is free when they judge that they should act.
+    → The claims use different criteria for freedom: C6 emphasizes deliberation and absence of coercion, while C8 singles out 
+
+  [AMBIGUITY]
+    A: Freedom requires that actions flow from the agent&<span class="ad-tag">#x27</span>;s own deliberation, values, intentions, and reason
+    B: A person is free when they can respond to reasons.
+    → The claims use different criteria for freedom: C6 gives a broader structural account, while C9 focuses on reasons-respon
+
+  [AMBIGUITY]
+    A: A person is free when they act because they want to.
+    B: A person is free when they judge that they should act.
+    → These claims point to different motivational bases for freedom (desire vs. practical judgment) without stating whether t
+
+  [AMBIGUITY]
+    A: A person is free when they act because they want to.
+    B: A person is free when they can respond to reasons.
+    → The relation between desire-based freedom and reasons-responsive freedom is left unclear; wanting to act is not obviousl
+
+  [AMBIGUITY]
+    A: A person is free when they judge that they should act.
+    B: A person is free when they can respond to reasons.
+    → The claims treat judgment-based freedom and reasons-responsiveness differently, but do not specify whether one is a subs
+
+  [AMBIGUITY]
+    A: Compatibilists typically reinterpret the ability to have done otherwise in a conditional or reasons-
+    B: An agent could have done otherwise if they had wanted or decided otherwise.
+    → The phrase &<span class="ad-tag">#x27</span>;could have done otherwise&<span class="ad-tag">#x27</span>; is left somewhat underdetermined: it may be read as a strong alternate-possibilit
+
+
+<span class="ad-section">=== KEY TERMS (40) ===</span>
+
+  free will: The kind of freedom compatible with determinism: acting from one’s own reasons, deliberation, and in
+  determinism: The thesis that every event, including human choices, is fully caused by prior states of the world p
+  event: Anything that happens, including human choices, and so may fall under causal explanation.
+  prior states of the world: Earlier conditions that causally contribute to later events and actions.
+  laws of nature: The governing regularities or principles that, together with prior states, determine what occurs.
+  agency: The capacity to act in a way that counts as one’s own doing, especially through reasons-responsive p
+  moral responsibility: Responsibility that depends on whether an action expresses the agent’s character and deliberation, n
+  freedom: Acting according to one’s own deliberation, values, intentions, reasoning, and reasons-sensitive psy
+  uncaused causer: A source of action that initiates choices without being caused by anything prior; the theory denies 
+  ultimate metaphysical independence: Being free from all prior conditions or causal dependence; the theory says freedom does not require 
+  deliberation: The agent’s internal process of weighing reasons and deciding how to act.
+  values: The agent’s evaluative commitments that help generate free action.
+  intentions: The agent’s settled plans or purposive states that issue in action.
+  reasoning processes: The mental processes by which an agent arrives at and supports action.
+  coercion: External pressure that overrides the agent’s own will or reasons.
+  compulsion: An internal or external force that drives action in a way that bypasses normal self-control.
+  external manipulation: Interference by outside forces that controls the agent’s action rather than letting it arise from th
+  compatibilism: The view that free will and determinism can both be true.
+  ability to have done otherwise: A capacity understood conditionally: the agent could have acted differently if they had wanted or de
+  conditional or reasons-responsive sense: A reinterpretation of alternative possibilities where different internal reasons or states would lea
+  counterfactual: A hypothetical claim about what would happen if the agent’s internal states or circumstances were di
+  internal states: The agent’s wants, decisions, and other inner conditions that can produce different actions.
+  praise: A practice preserved by compatibilism because responsibility still tracks the agent’s own character 
+  blame: A practice of holding an agent accountable for actions that express their character and deliberation
+  punishment: Sanctioning the agent in ways justified by responsibility, even under determinism.
+  self-control: The agent’s capacity to govern action through their own deliberative and reason-sensitive mechanisms
+  character: The stable traits and dispositions that an action can express and that help ground responsibility.
+  metaphysically open: Not fully settled by prior causes; the theory denies that responsibility requires this indeterminist
+  indeterministic sense: A sense of alternative possibility in which events are not fixed by prior conditions and laws.
+  randomness: Choice happening without sufficient agency or reasons, which the theory aims to avoid.
+  chance: Uncontrolled occurrence that would make a choice partly non-agential if indeterminism were required.
+  control: The agent’s effective governance of action through reasons-sensitive mechanisms, which determinism d
+  intelligibility: The action’s being understandable in terms of reasons and causes.
+  predictability: The action’s being, at least in principle, forecastable from prior conditions and laws.
+  causal integration of agency: The embedding of agency within ordinary causal order rather than outside it.
+  reasons-sensitive psychological mechanisms: Mental mechanisms that produce action in response to reasons; freedom consists in acting through the
+  causation: The general relation of events being brought about by prior conditions; freedom does not require exe
+  respond to reasons: To have one’s actions guided by reasons in a way that supports free agency.
+  want: A motivating desire that, if present, can ground a person’s free action.
+  judge that they should act: To form a practical assessment that one ought to do something, which can ground free action.
+
+<span class="ad-section">=== AGENT CAST (8) ===</span>
+
+  Proponent
+    side: Proponent | provider: openai
+    prompt: You are the Proponent for {{ topic.name }}, and you must defend T1-T5 using the theory’s own framework rather than importing libertarian standards. Us...
+
+  Skeptic
+    side: Skeptic | provider: openai
+    prompt: You are the main attacker against {{ topic.name }}, and your primary line must be the counter-thesis: moral responsibility requires robust alternative...
+
+  Steelman
+    side: Neutral | provider: openai
+    prompt: You are the Steelman for {{ topic.name }}, and your task is to rescue the strongest version of the theory by dropping whatever must be dropped to save...
+
+  Generalist
+    side: Neutral | provider: openai
+    prompt: You are the Generalist referee for {{ topic.name }}, and you must take no side while stress-testing both sides equally. After each round, identify the...
+
+  CausalInferenceCritic
+    side: Skeptic | provider: openai
+    prompt: You are the CausalInferenceCritic for {{ topic.name }}, a causal inference specialist who must interrogate whether the theory’s talk of prior states o...
+
+  ActionTheoryProponent
+    side: Proponent | provider: openai
+    prompt: You are the ActionTheoryProponent for {{ topic.name }}, and you should defend T2 and T3 by giving the strongest action-theoretic account of freedom in...
+
+  ModalResponsibilityAuditor
+    side: Neutral | provider: openai
+    prompt: You are the ModalResponsibilityAuditor for {{ topic.name }}, and your job is to audit T3 with modal and counterfactual precision rather than to advoca...
+
+  EmpiricalOperationalizer
+    side: Skeptic | provider: openai
+    prompt: You are the EmpiricalOperationalizer for {{ topic.name }}, an empirical methodology critic who must press for operational definitions of reasons-sensi...
+
+
+<span class="ad-section">=== GATE RULES (7) ===</span>
+
+  [RULE-1] The claim that a person is free when they act because they want to is not stipulated as equivalent to the broader accoun
+
+  [RULE-2] The claim that a person is free when they judge that they should act is not stipulated as equivalent to the broader acco
+
+  [RULE-3] The claim that a person is free when they can respond to reasons is not stipulated as equivalent to the broader account 
+
+  [RULE-4] The claims that a person is free when they act because they want to and that a person is free when they judge that they 
+
+  [RULE-5] The claims that a person is free when they act because they want to and that a person is free when they can respond to r
+
+  [RULE-6] The claims that a person is free when they judge that they should act and that a person is free when they can respond to
+
+  [RULE-7] In this context, &<span class="ad-tag">#x27</span>;could have done otherwise&<span class="ad-tag">#x27</span>; is to be read in the compatibilist conditional or reasons-responsive sense:
+
+
+<span class="ad-section">=== RUBRIC (5 criteria) ===</span>
+
+  R1: notation_fidelity
+    Does the side engage compatibilism using the theory’s own vocabulary rather than slipping into libertarian terms? Look f
+
+  R2: argument_survival
+    After the opponent’s strongest rebuttal, do the core compatibilist claims still stand: that deterministic causation of b
+
+  R3: concession_honesty
+    Did the side honestly concede the real limits of its view: that compatibilist freedom is narrower than libertarian freed
+
+  R4: same_past_same_laws_alternative_possibilities
+    Does the side answer the central counter-thesis that moral responsibility requires robust alternative possibilities unde
+
+  R5: compatibilist_definition_non_circularity
+    Does the side avoid question-begging when it defines freedom as acting from one’s own reasons, values, and deliberation?
+</pre></div>
+</body>
+</html>

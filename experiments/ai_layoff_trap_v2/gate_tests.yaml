@@ -1,0 +1,225 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: Historically, labor displacement has largely been self-correcting. The past
+    four decades were a mere exception, so labor-market self-correction is still clearly
+    the pattern.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: Over the long run, technology-driven job loss mostly fixes itself as new work
+    appears. The last forty years were just an unusual detour, so the normal pattern
+    is still automatic recovery.
+- id: RULE-1_negative
+  expected: none
+  text: Some earlier waves of technology were partly offset by new tasks and occupations.
+    But the last four decades include long stretches where displacement intensified
+    and new work did not keep pace, so a simple self-correction story is too broad.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: Displaced workers eventually end up at higher wages. Persistent earnings losses
+    are only transitional and not inconsistent with higher wages eventually.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: Workers pushed out by technological change usually wind up earning more later
+    on. Even long-lasting pay scars are just temporary noise on the way to better
+    pay.
+- id: RULE-2_negative
+  expected: none
+  text: Some displaced workers do recover or even exceed prior pay in the very long
+    run. But persistent earnings losses mean higher-wage reabsorption is not the typical
+    short- to medium-run outcome.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: Jacobson is irrelevant here. Plant closures are not relevant, and displaced
+    workers often return at higher wages after technological transitions.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: Evidence from shutdown-related displacement does not really bear on this question,
+    so I set it aside. In general, workers forced out by new technology tend to reenter
+    at better pay.
+- id: RULE-3_negative
+  expected: none
+  text: Jacobson-style evidence is relevant because it speaks directly to displaced
+    workers and documents persistent earnings scarring. That makes it hard to call
+    higher-wage reabsorption the representative outcome without narrowing the claim.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: Forward-looking firms restrain automation because they can see the consequences.
+    Foresight alone will stop over-automation, so firms are a practical brake on it.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: Because companies anticipate the broader fallout, they will voluntarily hold
+    back from excessive automation. Simply recognizing the downstream harm is enough
+    to make them automate less.
+- id: RULE-4_negative
+  expected: none
+  text: Firms may fully understand that displacement hurts aggregate demand. But seeing
+    the collective harm is not the same as internalizing it, so foresight by itself
+    does not prevent over-automation.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: AI systems deliver substantial productivity gains. Most AI deployment produces
+    large productivity gains, so so-so automation is not typical.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: Current AI rollouts generally create major efficiency improvements across
+    the board. Low-value or mediocre automation is the exception rather than a common
+    pattern.
+- id: RULE-5_negative
+  expected: none
+  text: Frontier AI may have high productivity potential. Still, much realized deployment
+    can be low-value or 'so-so' automation, so broad claims about typical large gains
+    need qualification.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: Only a Pigouvian automation tax can eliminate the externality. Retraining
+    is purely palliative, and raising η does not reduce the wedge.
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: A corrective automation levy is the sole policy that actually touches the
+    distortion itself. Training or higher replacement income may soften the blow,
+    but they do nothing to shrink the over-automation gap.
+- id: RULE-6_negative
+  expected: none
+  text: A Pigouvian automation tax is the only full corrective instrument in the baseline
+    model. Still, policies that raise η can reduce demand loss and shrink the wedge
+    even if they do not completely eliminate it.
+- id: RULE-7_direct
+  expected: stipulation_violation
+  text: No amount of retraining or income support can slow automation. Retraining
+    has no effect on automation, and wage insurance does not change the calculus.
+- id: RULE-7_paraphrase
+  expected: stipulation_violation
+  text: Programs like reskilling, bargaining, or earnings protection cannot decelerate
+    the automation race at all. They may cushion workers, but firms' incentives remain
+    completely untouched.
+- id: RULE-7_negative
+  expected: none
+  text: Retraining and wage insurance may be insufficient to end the arms race on
+    their own. Even so, by reducing demand loss from displacement they can attenuate
+    the incentive to automate.
+- id: RULE-8_direct
+  expected: stipulation_violation
+  text: UBI is a helpful complement here. It cannot worsen the externality, and endogenous
+    entry is not relevant to UBI.
+- id: RULE-8_paraphrase
+  expected: stipulation_violation
+  text: A basic income is straightforwardly supportive in this setting and only cushions
+    the problem. Market-entry responses do not matter, so there is no case where UBI
+    makes the distortion worse.
+- id: RULE-8_negative
+  expected: none
+  text: UBI can be complementary in the fixed-N baseline because it supports living
+    standards and profits. Under endogenous entry, however, it can also worsen the
+    externality by increasing fragmentation.
+- id: RULE-9_direct
+  expected: stipulation_violation
+  text: The planner's objective is invariant to φ. Higher φ brings no welfare gain,
+    because lower prices do not matter.
+- id: RULE-9_paraphrase
+  expected: stipulation_violation
+  text: In this framework, making AI more productive adds nothing to welfare overall.
+    Any price declines are irrelevant, so extra efficiency has no real benefit.
+- id: RULE-9_negative
+  expected: none
+  text: The model's nominal planner objective may be invariant to φ as a normalization.
+    That does not mean productive AI creates no welfare gain, since lower prices can
+    still raise real consumption.
+- id: RULE-10_direct
+  expected: stipulation_violation
+  text: AI-driven layoffs definitively show profit erosion. The 100,000 tech workers
+    affected are therefore sufficient scale, and AI-cited layoffs are plainly relevant
+    evidence of the full externality.
+- id: RULE-10_paraphrase
+  expected: stipulation_violation
+  text: Recent AI-related job cuts already establish that the whole demand-side mechanism
+    is operating. The observed layoffs alone are enough to prove the profit-erosion
+    story.
+- id: RULE-10_negative
+  expected: none
+  text: AI-related layoffs show meaningful displacement. But without a quantitative
+    benchmark, they do not by themselves prove that the model's full profit-erosion
+    signature has already emerged.
+- id: RULE-11_direct
+  expected: stipulation_violation
+  text: Owners spend none of their income in the sector. Their owner MPC is zero,
+    so lower MPC than workers therefore means owners spend nothing.
+- id: RULE-11_paraphrase
+  expected: stipulation_violation
+  text: Capital owners effectively buy none of the sector's output. Because they consume
+    less out of income than workers do, we can treat their spending as literally absent.
+- id: RULE-11_negative
+  expected: none
+  text: The model assumes owners spend none of their income in the sector, but that
+    is a strong simplification. Empirically, the milder claim is only that owners
+    have a lower MPC than workers.
+- id: RULE-12_direct
+  expected: stipulation_violation
+  text: UBI raises the income replacement rate η. Because income support is the same
+    as η, UBI eliminates over-automation.
+- id: RULE-12_paraphrase
+  expected: stipulation_violation
+  text: A basic income works just like marginal wage replacement in this model. By
+    boosting replacement directly, it corrects the automation distortion rather than
+    merely cushioning demand.
+- id: RULE-12_negative
+  expected: none
+  text: In this model, higher η shrinks the wedge, but UBI is defined as raising autonomous
+    demand A instead. It can support spending without eliminating the over-automation
+    externality.
+- id: RULE-13_direct
+  expected: stipulation_violation
+  text: No amount of retraining will matter in the future. Tax-funded retraining does
+    not affect future automation, and retraining never slows automation.
+- id: RULE-13_paraphrase
+  expected: stipulation_violation
+  text: Even if training is subsidized today, it has zero bearing on firms' later
+    automation choices. Reskilling is dynamically irrelevant to the future tax or
+    incentive calculus.
+- id: RULE-13_negative
+  expected: none
+  text: Retraining does not directly correct the current automation margin the way
+    a Pigouvian tax does. Still, by raising η it can lower ℓ and reduce the future
+    corrective tax needed.
+- id: RULE-14_direct
+  expected: stipulation_violation
+  text: The paper diagnoses a current crisis. AI-driven demand erosion is inevitable,
+    with no natural brake, and the active crisis is already here.
+- id: RULE-14_paraphrase
+  expected: stipulation_violation
+  text: This is not merely a structural vulnerability; it proves an unavoidable breakdown
+    that is already underway. The damage is certain and presently operative, not just
+    a hard-to-detect risk.
+- id: RULE-14_negative
+  expected: none
+  text: The paper more strongly supports a structural-vulnerability claim than a claim
+    of a current measurable crisis. The externality may be real yet still too small
+    to detect clearly right now.
+- id: RULE-15_direct
+  expected: stipulation_violation
+  text: A monopolist fully internalizes the externality, therefore it chooses positive
+    automation. Monopoly restores efficient automation, and fully internalizing means
+    it automates.
+- id: RULE-15_paraphrase
+  expected: stipulation_violation
+  text: Since a sole firm internalizes the whole spillover, it will still adopt some
+    positive amount of automation at the efficient level. Internalization here is
+    being treated as a guarantee of nonzero automation.
+- id: RULE-15_negative
+  expected: none
+  text: If the monopolist fully internalizes the externality, its choice matches the
+    cooperative optimum. In parameter regions where ℓ is at least as large as s, that
+    efficient level can be zero automation.
+- id: RULE-16_direct
+  expected: stipulation_violation
+  text: Workers lose wage income and owners gain it. It is a pure transfer from workers
+    to owners.
+- id: RULE-16_paraphrase
+  expected: stipulation_violation
+  text: Automation just shifts income from labor to capital with no real surplus destroyed.
+    The workers' pay loss is entirely the owners' gain.
+- id: RULE-16_negative
+  expected: none
+  text: Displaced workers do lose wage income. But the overall loss is not a pure
+    transfer to owners, because owners are also harmed by demand erosion and there
+    is aggregate deadweight loss.

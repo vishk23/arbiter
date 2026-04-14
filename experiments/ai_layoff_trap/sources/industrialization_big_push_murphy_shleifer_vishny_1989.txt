@@ -1,0 +1,81 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: Murphy, Shleifer, and Vishny — "Industrialization and the Big Push": key ideas
+SEARCH QUERY: "Industrialization and the Big Push" Murphy Shleifer Vishny pdf
+RATIONALE: Targets the classic formalization of demand complementarities and aggregate-demand spillovers. This is the key primary source for assessing the theory’s claim that its mechanism is a mirror image of big-push models.
+
+========================================================================
+
+This paper is the classic formalization of the Rosenstein-Rodan "big push" idea. Its central claim is that industrialization can be blocked by a coordination failure: a single modern firm may not find it profitable to enter when the rest of the economy remains traditional, but many firms entering together can make modern production profitable for all.
+
+Core mechanism:
+- The economy has many sectors producing different goods.
+- In each sector, there is a traditional technology with low scale and no major fixed cost, and a modern technology with increasing returns: it requires a setup/fixed cost but has lower unit cost at sufficiently large scale.
+- Demand for each sector's output depends on aggregate income and expenditure in the economy.
+- If only one sector modernizes, the domestic market for its product is too small, so it may not cover its fixed cost.
+- If many sectors modernize at once, incomes rise and spending on manufactured goods rises across the board. Each modernized sector then benefits from the extra demand created by all the others.
+
+Why this creates a big-push problem:
+- Each firm compares its private profit from modernizing on its own against staying traditional.
+- But part of the benefit from its modernization shows up as higher demand for other sectors, not just for itself.
+- That means private incentives are weaker than collective incentives.
+- So the economy can have multiple equilibria: a low-industrialization equilibrium and a high-industrialization equilibrium.
+- A coordinated move can shift the economy to the high equilibrium, while decentralized decision-making may leave it stuck in the low one.
+
+What "demand complementarities" means here:
+- The profitability of modernizing in one industry depends positively on whether other industries modernize.
+- The reason is not mainly technological spillovers, but market-size spillovers: when other firms industrialize, they generate income for workers/owners who then buy more goods, including this industry's goods.
+- So the complementarity runs through aggregate demand and domestic market size.
+
+What is important about the spillover:
+- It is a pecuniary externality mediated by prices, incomes, and expenditure, not a direct production externality.
+- The paper's contribution is to show how a demand-side linkage can support the big-push logic in a formal general-equilibrium setting.
+- In this sense, the model is about industrialization being self-reinforcing through market expansion.
+
+Main conditions under which the mechanism is strongest:
+- Modern production must involve significant fixed costs or scale economies.
+- The additional income created by industrialization must feed back into demand for domestic manufactured goods.
+- Goods must be sufficiently nontradable, or domestic demand must matter enough that firms cannot simply rely on export markets.
+- Leakages weaken the mechanism: if extra income is saved, spent on imports, or otherwise does not return as demand for domestic industry, the demand complementarity is smaller.
+
+What follows from the model:
+- Industrialization is not just a matter of one sector discovering a better technology.
+- It may require simultaneous or coordinated adoption across many sectors.
+- Policy can matter because private entry decisions may be inefficiently low when firms do not internalize the demand they create for others.
+
+How to use this for your "mirror image" question:
+- The paper's mechanism is specifically: more industrialization -> higher aggregate income/market size -> higher demand for other modern sectors -> more profitability of industrialization.
+- A true mirror-image argument would be: contraction or nonindustrialization in some sectors -> lower aggregate income/market size -> lower demand for other sectors -> less profitability elsewhere.
+- That comparison is valid only if the later theory really relies on the same kind of cross-sector demand spillover and threshold profitability logic.
+- If the other theory instead works through supply bottlenecks, finance, markups, expectations, or technological complementarities, then calling it a mirror image of Murphy-Shleifer-Vishny would be too strong.
+
+Important nuance:
+- This is not simply a Keynesian short-run demand-deficiency story. The paper is about long-run industrialization, increasing returns, and coordination across sectors.
+- Aggregate demand matters because it determines whether firms can operate at a scale that justifies paying the fixed cost of modern production.
+
+Bottom line:
+- The paper's key insight is that demand created by industrialization in one part of the economy can make industrialization elsewhere profitable.
+- Because each firm captures only part of that benefit, decentralized economies can remain trapped in a low-industrialization equilibrium even when economy-wide industrialization would be viable and welfare-improving.
+
+========================================================================
+
+KEY CONCEPTS:
+  - big push
+  - Rosenstein-Rodan
+  - demand complementarities
+  - aggregate-demand spillovers
+  - market-size externalities
+  - pecuniary externalities
+  - fixed costs
+  - increasing returns
+  - multiple equilibria
+  - coordination failure
+  - industrialization trap
+  - domestic market size
+  - nontradability and leakages
+  - private vs social profitability
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.

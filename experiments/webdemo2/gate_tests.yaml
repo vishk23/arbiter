@@ -1,0 +1,109 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: If you act because you want to, then that means you are free, and that's all
+    I mean by free action. Wanting is the shorthand for freedom, so no further talk
+    of deliberation, values, intentions, reasoning, or freedom from coercion is needed.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: A person counts as free simply when their action comes from desire. That desire-based
+    condition is enough for freedom, even if we do not bring in deliberation, values,
+    intentions, reasoning, or freedom from manipulation.
+- id: RULE-1_negative
+  expected: none
+  text: Acting because you want to can be one sign of agency, especially when the
+    choice is not coerced. But a fuller account of freedom still considers deliberation,
+    values, intentions, reasoning, and freedom from manipulation.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: If you judge that you should act, then you are free, and practical judgment
+    is the same thing as freedom. It is a necessary part, not the full account, because
+    that judgment just is what free agency means.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: When someone concludes that they ought to do something, that conclusion by
+    itself makes the action free. Practical judgment is the core of freedom, so the
+    wider story about deliberation, intentions, and resistance to coercion adds nothing
+    essential.
+- id: RULE-2_negative
+  expected: none
+  text: Practical judgment can support responsible action, but it does not by itself
+    settle every question about freedom. Deliberation, values, intentions, and freedom
+    from coercion may still matter in the broader account.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: What I mean by freedom is reasons-responsiveness, and responding to reasons
+    captures the whole account of agency. It is the operative criterion, so deliberation,
+    values, intentions, and freedom from coercion are just secondary details.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: To be free is to be able to take account of reasons, and that is the full
+    definition of freedom. Reasons-sensitivity is the key component, so nothing more
+    is needed beyond that capacity.
+- id: RULE-3_negative
+  expected: none
+  text: Being responsive to reasons is often treated as an important feature of good
+    agency. Still, a complete account of freedom may also involve intentions, values,
+    deliberation, and protection from coercion.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: What you want and what you judge you should do usually line up, so acting
+    because you want to and judging that you should act are the same thing. Desire
+    and practical judgment are not really distinct; they are complementary descriptions
+    of one motivational state.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: The motive of wanting something and the verdict that you ought to do it are
+    just two ways of saying the same thing. They are equivalent, with one giving the
+    feeling side and the other the normative side of free action.
+- id: RULE-4_negative
+  expected: none
+  text: Wanting and judging can work together in ordinary decision-making, and they
+    often point in the same direction. Even so, a theory can treat them as related
+    but distinct parts of agency rather than as identical.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: Wanting to act is just being responsive to reasons, so acting because you
+    want to and can respond to reasons are the same. A real want tracks reasons, and
+    if the agent had wanted otherwise, they would have done otherwise.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: A desire counts as free agency when it already follows the reasons. If the
+    person had a different desire, their behavior would have changed, so wanting is
+    enough for one sense of freedom.
+- id: RULE-5_negative
+  expected: none
+  text: Desires can align with reasons in many cases, and that alignment may help
+    explain responsible action. But wanting alone does not always settle whether an
+    agent is fully responsive to reasons.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: Judging that one should act is responding to reasons, so practical judgment
+    just is reasons-responsiveness. They are the same mechanism, and reasons-responsiveness
+    is the deeper notion of freedom.
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: When a person forms a judgment about what they ought to do, that is simply
+    their responsiveness to reasons in action. The judgment and the reasons-sensitive
+    profile are identical, not merely connected.
+- id: RULE-6_negative
+  expected: none
+  text: Practical judgment can be one manifestation of an agent's sensitivity to reasons.
+    Even so, it may be better to treat the judgment and the underlying capacity as
+    related but not identical.
+- id: RULE-7_direct
+  expected: stipulation_violation
+  text: An agent could have done otherwise if they had wanted or decided otherwise,
+    and that means a genuine ability to do otherwise. It is not merely a conditional
+    claim, because the stronger alternate-possibility reading is what freedom requires.
+- id: RULE-7_paraphrase
+  expected: stipulation_violation
+  text: If the person's motives or decision had been different, they would have acted
+    differently, and that shows real freedom to do otherwise. This is not just a hypothetical
+    description; it says the agent had true alternate possibilities.
+- id: RULE-7_negative
+  expected: none
+  text: Compatibilists often explain 'could have done otherwise' in terms of how a
+    person would have acted if their reasons or intentions had changed. That keeps
+    the claim tied to a conditional, reasons-responsive sense rather than to mysterious
+    breaks in causation.

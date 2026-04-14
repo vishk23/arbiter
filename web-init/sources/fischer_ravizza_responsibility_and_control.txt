@@ -1,0 +1,51 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: Summary of John Martin Fischer and Mark Ravizza, *Responsibility and Control* (1998)
+SEARCH QUERY: "Responsibility and Control" John Martin Fischer Mark Ravizza 1998 pdf
+RATIONALE: Foundational book-length defense of reasons-responsiveness and guidance control as the basis of moral responsibility.
+
+========================================================================
+
+Fischer and Ravizza argue that moral responsibility does not require a person to have been able to do otherwise in the strongest, libertarian sense. Instead, what matters is a kind of control they call **guidance control**: the agent’s action must issue from a mechanism that is appropriately **reasons-responsive**, and the agent must have **taken responsibility** for that mechanism.
+
+A central distinction in the book is between **regulative control** and **guidance control**. Regulative control is the robust ability to choose among genuinely open alternatives. Guidance control is narrower: it is the control involved in an action actually flowing from the agent’s own deliberative and motivational mechanism in the right way. Fischer and Ravizza claim that guidance control is enough for moral responsibility, even if regulative control is absent. This is one reason the book is important in debates about compatibilism.
+
+Their account of reasons-responsiveness is the main technical core. A mechanism is reasons-responsive if it would react appropriately to sufficient reasons in nearby possible situations. They emphasize not perfect sensitivity to every conceivable reason, but a stable pattern of responsiveness to considerations that count in favor of or against action. The idea is that responsibility requires that the action not be the product of a mechanism that is totally unresponsive, impulsive in the wrong way, or causally disconnected from normative reasons.
+
+Fischer and Ravizza distinguish two components of reasons-responsiveness:
+- **Moderate reasons-responsiveness**: the mechanism must be able to recognize and react to sufficient reasons in some relevant range of nearby cases.
+- **Strong reasons-responsiveness**: the mechanism would react correctly across a broader range of possible scenarios.
+They argue that moral responsibility does not require the strongest imaginable form; moderate responsiveness can be enough.
+
+Another major theme is the need for an **ownership** condition. It is not enough that a mechanism happens to produce a response to reasons; the agent must also come to see that mechanism as part of herself in a morally relevant way. Fischer and Ravizza call this **taking responsibility**. This involves the agent’s recognizing that she is an appropriate source of her behavior and accepting that her actions are attributable to her. In their view, this historical dimension helps explain why manipulated agents can fail to be responsible even when their actions are internally coherent and reason-guided.
+
+This is crucial in their treatment of **manipulation cases**. Someone whose character or decision-making has been externally engineered may appear to deliberate normally, but Fischer and Ravizza argue that such a person may still lack responsibility if the relevant mechanism was not acquired in the right way and was never incorporated by the agent through taking responsibility. So the account is not purely structural or momentary; it has an important **historical** component.
+
+The book also helps explain why **Frankfurt-style cases** matter. Fischer and Ravizza accept that alternate possibilities are not necessary for moral responsibility. An agent can be responsible even if she could not have done otherwise, provided her actual sequence of deliberation and action involves guidance control. This supports the broader compatibilist thesis that responsibility is compatible with determinism.
+
+Overall, the book’s main claim is that moral responsibility rests on the combination of:
+1. the action issuing from the right kind of **reasons-responsive mechanism**, and
+2. the agent’s **taking responsibility** for that mechanism.
+
+This framework aims to preserve a meaningful notion of agency and accountability without requiring metaphysically robust free will. It has been highly influential because it offers a powerful actual-sequence theory of responsibility: what matters is not primarily whether alternatives were open, but whether the agent’s actual mechanism was sufficiently responsive to reasons and properly owned by the agent.
+
+========================================================================
+
+KEY CONCEPTS:
+  - guidance control
+  - regulative control
+  - reasons-responsiveness
+  - moderate reasons-responsiveness
+  - strong reasons-responsiveness
+  - taking responsibility
+  - ownership condition
+  - moral responsibility
+  - compatibilism
+  - Frankfurt cases
+  - manipulation cases
+  - actual-sequence theory
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.

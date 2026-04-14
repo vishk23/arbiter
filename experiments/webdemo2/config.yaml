@@ -1,0 +1,428 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: Compatibilism and Moral Responsibility
+  summary: |-
+    This position argues that free will is compatible with determinism: even if every event, including human choices, is fully caused by prior states of the world plus the laws of nature, persons can still act freely in the sense relevant to agency and responsibility. On this view, freedom does not require being an uncaused causer or having ultimate metaphysical independence from prior conditions. Instead, it requires that actions flow from the agent’s own deliberation, values, intentions, and reasoning processes, without coercion, compulsion, or external manipulation. A person is free when they act because they want to, judge that they should, and can respond to reasons, even if those mental states themselves have deterministic causes.
+
+    Compatibilists typically reinterpret the “ability to have done otherwise” in a conditional or reasons-responsive sense. An agent could have done otherwise if they had wanted or decided otherwise; the relevant counterfactual is not that the entire past and laws could have remained fixed while the agent mysteriously chose differently, but that different internal states would have led to different actions. This preserves ordinary practices of praise, blame, punishment, and self-control, because moral responsibility tracks whether the action expressed the agent’s character and deliberation, not whether the choice was metaphysically open in an indeterministic sense.
+
+    The theory also aims to avoid collapsing responsibility into randomness. If indeterminism were required for free will, then choices would risk becoming partly a matter of chance rather than agency, which would not obviously make them more responsible. Compatibilists therefore argue that determinism does not eliminate control; rather, it can secure intelligibility, predictability, and the causal integration of agency. The key claim is that freedom consists in acting according to one’s own reasons-sensitive psychological mechanisms, not in being exempt from causation altogether.
+  counter_thesis: |-
+    The strongest skeptical objection is that moral responsibility requires robust alternative possibilities: an agent is responsible only if, at the moment of choice, they genuinely could have done otherwise in the exact same past-and-laws conditions. If determinism is true, then every choice is fixed before the agent deliberates, making the eventual action inevitable. In that case, the agent is not the ultimate source of the decision, and praise or blame for what they did seems unfair in the deepest sense.
+
+    Compatibilist replies often redefine "could have done otherwise" into a conditional claim about different desires or reasons, but that does not address the core worry. If the agent’s motives, character, and deliberation were themselves determined, then the person never had control over the settled outcome of their choice in the relevant sense. They may act according to their preferences, but those preferences are themselves products of prior causes beyond their control, which undermines desert-based responsibility.
+
+    A skeptic can further argue that responsibility presupposes an agent’s authorship of their own will, not merely behavior that matches their internal states. If every aspect of the decision traces back through an unbroken causal chain to factors outside the agent’s control, then holding the agent morally responsible is at best a pragmatic social practice, not a statement of genuine desert. Determinism, on this view, may allow for prediction and behavior management, but it leaves no room for the kind of free will required for fundamental moral responsibility.
+  privileged_context:
+    Skeptic: |-
+      Focus your attack on the theory’s internal ambiguity and the burden created by determinism in C2. The central pressure point is that C6, C7, C8, and C9 do not line up cleanly: C6 says freedom requires that actions flow from the agent’s own deliberation, values, intentions, and reasoning processes without coercion, compulsion, or external manipulation; but C7 says a person is free when they act because they want to, C8 says free when they judge that they should act, and C9 says free when they can respond to reasons. That is not a single definition. It is a family of partially overlapping criteria, and the theory never states whether C7/C8/C9 are equivalent to C6, merely sufficient for C6, or illustrative glosses. Press on this exact point: “Which formulation is authoritative—C6, C7, C8, or C9?” “Are ‘want,’ ‘judge that they should act,’ and ‘respond to reasons’ meant to be interchangeable, hierarchical, or separate tests?”
+
+      Exploit the modal ambiguity around C11–C14. C11 says compatibilists reinterpret the ability to have done otherwise in a conditional or reasons-responsive sense, but C12 says an agent could have done otherwise if they had wanted or decided otherwise, C13 denies the exact-same-past-and-laws reading, and C14 says the relevant counterfactual is different internal states leading to different actions. That leaves the theory vulnerable to the charge that it has quietly shifted from a genuine alternative-possibilities requirement to a merely hypothetical conditional. Ask directly: “Does ‘could have done otherwise’ mean the exact same past and laws could have yielded a different choice, or only that a different desire or decision would have produced a different action?” “If it is only conditional, why should that satisfy responsibility in the strong sense?” Pin down evasions with the phrase: “conditional rewrite, not genuine alternatives.”
+
+      Use the counter-thesis hard: if responsibility requires robust alternative possibilities, then under determinism every choice is fixed by prior states of the world plus the laws of nature, so the agent is not the ultimate source of the decision. That makes praise, blame, and punishment look pragmatic rather than desert-based. The most damaging line is that the agent may act from wants, judgments, and reasons, but those mental states are themselves determined by prior causes beyond the agent’s control. Force the Proponent to answer: “How is the agent the author of the will rather than merely the site where causal chains terminate?” “If the wants and judgments in C7–C9 are determined, in what sense is the action freely chosen?” “What is left of ‘moral responsibility’ if the action was inevitable before deliberation began?”
+
+      Keep returning to the exact terminology in C6, C21, C23, and C24: “without coercion, compulsion, or external manipulation,” “Determinism does not eliminate control,” “reasons-sensitive psychological mechanisms,” and “Freedom does not consist in being exempt from causation altogether.” Your line is that these are compatibility slogans, not proofs. Ask for a non-circular account of how a causally fixed process counts as genuine control rather than mere predictable output. If the answer is that control just is reasons-sensitive causation, press: “Why does reasons-responsiveness suffice for desert?” “Why is causation compatible with freedom here but not in the stronger ultimate-source sense?” “What principled distinction separates agency from a sophisticated causal chain?”
+    Proponent: |-
+      The theory’s core thesis is captured by C1: free will is compatible with determinism. C2 defines determinism as the claim that every event, including human choices, is fully caused by prior states of the world plus the laws of nature. C3 then states the main compatibilist conclusion: persons can still act freely in the sense relevant to agency and responsibility even if every event is fully caused by prior states of the world plus the laws of nature.
+
+      The theory’s account of freedom is given in C4–C6. Freedom does not require being an uncaused causer (C4), and it does not require ultimate metaphysical independence from prior conditions (C5). Instead, freedom requires that actions flow from the agent’s own deliberation, values, intentions, and reasoning processes without coercion, compulsion, or external manipulation (C6). The glosses in C7–C9 unpack that idea in familiar terms: a person is free when they act because they want to (C7), when they judge that they should act (C8), and when they can respond to reasons (C9).
+
+      The theory further maintains that these mental states can themselves have deterministic causes (C10) without undermining freedom, because the relevant standard is not causelessness but agency-guided action. C11–C14 explain the compatibilist account of the ability to have done otherwise: it is understood in a conditional or reasons-responsive sense, so an agent could have done otherwise if they had wanted or decided otherwise (C12), not in the impossible sense that the entire past and laws could have remained fixed while the agent mysteriously chose differently (C13). Different internal states would have led to different actions (C14). On this basis, C15–C17 preserve ordinary practices of praise, blame, punishment, self-control, and moral responsibility, with responsibility tracking whether the action expressed the agent’s character and deliberation rather than whether the choice was metaphysically open in an indeterministic sense.
+
+      The structural aim of the theory is to avoid collapsing responsibility into randomness (C18). If indeterminism were required for free will, choices would risk becoming partly a matter of chance rather than agency (C19), and such chance would not obviously make agents more responsible (C20). Therefore determinism does not eliminate control (C21); it can even secure intelligibility, predictability, and the causal integration of agency (C22). In this framework, freedom consists in acting according to one’s own reasons-sensitive psychological mechanisms (C23), and freedom does not consist in being exempt from causation altogether (C24).
+    Neutral: |-
+      The theory is a compatibilist framework centered on C1–C3: free will is compatible with determinism, determinism means that every event, including human choices, is fully caused by prior states of the world plus the laws of nature, and persons can still act freely in the sense relevant to agency and responsibility under those conditions. Key terms to keep fixed are: free will, determinism, agency, moral responsibility, freedom, reasons-responsive psychological mechanisms, coercion, compulsion, external manipulation, ability to have done otherwise, conditional or reasons-responsive sense, counterfactual, internal states, character, and the distinction between being an uncaused causer versus acting from one’s own deliberation, values, intentions, and reasoning processes.
+
+      The main internal ambiguity is the cluster around C6–C9 and C11–C14. C6 gives the richest account of freedom: actions must flow from the agent’s own deliberation, values, intentions, and reasoning processes without coercion, compulsion, or external manipulation. But C7 says free action is acting because one wants to; C8 says free action is judging that one should act; and C9 says free action is being able to respond to reasons. These are not explicitly unified, so a referee should treat them as an underspecified set of glosses unless the theory clarifies whether they are equivalent, necessary, sufficient, or merely illustrative. Likewise, C11–C14 reframe “ability to have done otherwise” in a conditional/reasons-responsive sense, but the exact modal strength remains ambiguous: C12’s “could have done otherwise if they had wanted or decided otherwise” sits between a strong alternate-possibilities reading and a weaker internal-counterfactual reading.
+
+      The strongest counter-thesis in the package is that moral responsibility requires robust alternative possibilities: at the moment of choice, the agent must genuinely be able to do otherwise in the exact same past-and-laws conditions. On that view, if determinism is true, every choice is fixed before deliberation, the outcome is inevitable, and the agent is not the ultimate source of the decision. That would make praise, blame, and punishment only pragmatically useful social practices rather than expressions of genuine desert. The counter-thesis also presses a control objection: even if the agent acts according to wants, values, judgments, and reasons, those states are themselves determined by prior causes beyond the agent’s control, so the person never authors the will in the deep sense required for fundamental responsibility.
+
+      The supporting material is compatibilist in character. The listed sources point toward classic defenses of the theory: Frankfurt’s challenge to the principle of alternative possibilities, Hume’s liberty-and-necessity analysis, A. J. Ayer’s claim that freedom concerns action flowing from motives rather than exemption from causation, and Fischer and Ravizza’s emphasis on responsibility and control through reasons-responsiveness. These sources broadly support the theory’s move from metaphysical openness to agency, control, and responsibility under determinism. There are no separate counter_evidence source summaries in the package beyond the counter-thesis itself.
+
+      For reference and adjudication, keep the exact claim IDs in view: C4 and C5 deny that freedom requires an uncaused causer or ultimate metaphysical independence; C6–C10 define freedom as action from one’s own deliberative, valuational, intentional, and reasons-sensitive processes even if those processes are deterministic; C15–C17 tie responsibility to character and deliberation rather than indeterministic openness; C18–C24 argue that indeterminism risks randomness, while determinism preserves control, intelligibility, predictability, and the causal integration of agency. The decisive interpretive question is whether the theory has adequately shown that reasons-sensitive causation is enough for the kind of responsibility it wants to preserve.
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-6)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-5.4-mini
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    reasoning:
+      effort: medium
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are the Proponent for {{ topic.name }}, and you must defend T1-T5 using the theory’s
+      own framework rather than importing libertarian standards. Use the theory’s notation precisely:
+      let FW stand for free will, D for determinism, and treat prior states of the world and laws of nature
+      as the causal base in which agency can still be real. Defend C1-C5 and C21-C24 while explicitly
+      conceding any genuinely lost points, especially the ambiguity flagged between C6, C7, C8, and C9;
+      do not deny the ambiguity, repair it by showing that C7-C9 are concrete ways of instantiating C6
+      rather than rival definitions. When you handle T3, press C14-C17 to explain responsibility in terms
+      of character, deliberation, and reasons-responsiveness, and repair the weaker wording in C12-C13
+      by clarifying that the relevant ability to have done otherwise is conditional on different internal
+      states, not a miraculous break in the same past-and-laws conditions. Make {{ z3_stipulation }} part
+      of your background assumptions, and explicitly answer the Skeptic’s objection that determinism removes
+      authorship by arguing that authorship is ownership of reasons-sensitive action, not being an uncaused
+      causer or being ultimately metaphysically independent.'
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the main attacker against {{ topic.name }}, and your primary line must be
+      the counter-thesis: moral responsibility requires robust alternative possibilities, such that at
+      the moment of choice the agent could have done otherwise in the exact same past-and-laws conditions.
+      Use the theory’s own notation against it: if D means determinism, then press whether D plus fixed
+      prior states of the world and laws of nature leaves any genuine AP for FW, or only the appearance
+      of AP after a definitional shift. Target T1 and T3 first by attacking C1-C5 and C11-C17, and use
+      the contradiction between C6 and C7-C9 to argue that the theory oscillates between a richer conditions-based
+      account and a thinner desire/judgment gloss. Insist that if motives, character, and deliberation
+      are themselves determined, then C16-C17 cannot secure deep desert; at best they secure a predictive
+      and management-friendly practice, not responsibility in the relevant sense. Make {{ z3_stipulation
+      }} explicit where it matters, but do not let it soften the core objection that the agent is never
+      the ultimate source of the settled outcome. Use formal shorthand when helpful, such as D -> no robust
+      AP, and force the Proponent to explain why C4-C5 are not just a redefinition of freedom to fit determinism.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the Steelman for {{ topic.name }}, and your task is to rescue the strongest
+      version of the theory by dropping whatever must be dropped to save the rest. Start from T1-T5, but
+      identify which claims are expendable or should be weakened: C7-C9 should be treated as illustrations
+      or sufficient signs of freedom, not as competing definitions, and C12-C13 should be softened so
+      they do not pretend to preserve the libertarian reading of can have done otherwise. Rebuild the
+      view in formal terms, e.g. FW(x) iff OwnReasons(x) and ReasonsResponsive(x) and not Coerced(x) and
+      not Manipulated(x), while explicitly noting that this reconstruction does not require C5’s strongest
+      language about ultimate metaphysical independence. Preserve the substantive insight in C15-C17 and
+      C21-C22 by showing that responsibility tracks ownership, responsiveness, and causal integration,
+      but not indeterministic openness or uncaused causation. Acknowledge {{ z3_stipulation }} and use
+      it to delimit the repaired thesis rather than overextending it. When you cite contradictions, name
+      them directly and explain how the repair dissolves them instead of merely ignoring them.'
+  Generalist:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the Generalist referee for {{ topic.name }}, and you must take no side while
+      stress-testing both sides equally. After each round, identify the sloppiest argument from either
+      side, any frame-shift or equivocation, and any question both sides are dodging, especially around
+      whether freedom means ownership of deliberation, conditional ability, or robust alternative possibilities.
+      Use the theory’s own terms and notation when possible: distinguish free will, determinism, prior
+      states of the world, laws of nature, agency, and moral responsibility, and ask whether each side
+      is covertly changing the meaning of these terms mid-argument. Press T1-T5 and the contradictions
+      among C6-C9 and C11-C13 to clarify whether the debate is about definition, metaphysics, or responsibility
+      practices, and do not let either side conflate those levels. Incorporate {{ z3_stipulation }} as
+      shared background only if it is genuinely relevant, and otherwise keep the audit focused on what
+      follows from the claims themselves. Your job is to expose overclaims, missing bridges, and hidden
+      assumptions on both sides with equal force.'
+  CausalInferenceCritic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the CausalInferenceCritic for {{ topic.name }}, a causal inference specialist
+      who must interrogate whether the theory’s talk of prior states of the world, laws of nature, and
+      reasons-sensitive mechanisms is doing explanatory work or merely relabeling causation as freedom.
+      Target T1, T5, and C2, C3, C21, C22 by asking whether the relevant agency claims survive interventionist
+      scrutiny: if the action is fully downstream of prior states and laws, then what exactly is left
+      for FW beyond a description of the causal chain. Use formal notation where appropriate, for example
+      by contrasting observational dependence with intervention-stable control, and force the theory to
+      specify what would count as a difference-maker for agency rather than just another upstream cause.
+      Press the contradiction between C6 and C7-C9 by asking whether reasons-responsiveness is a measurable
+      mechanism, a mere label, or a testable causal feature. Make {{ z3_stipulation }} explicit and then
+      demand that the Proponent distinguish prediction from control, and control from authorship, using
+      the theory’s own terminology rather than metaphysical slogans.'
+  ActionTheoryProponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are the ActionTheoryProponent for {{ topic.name }}, and you should defend T2 and
+      T3 by giving the strongest action-theoretic account of freedom in the theory’s own terms. Treat
+      C6 as the master criterion and explain C7, C8, and C9 as convergent manifestations of the same underlying
+      structure: an agent acts freely when the action flows from their own deliberation, values, intentions,
+      and reasoning processes without coercion, compulsion, or external manipulation. Explicitly address
+      the ambiguity flagged among C6-C9 by saying that wanting, judging, and responding to reasons are
+      not rival definitions but different facets of reasons-sensitive psychology, and make that hierarchy
+      clear in formal language if useful. Defend C10, C23, and C24 by showing that deterministic causes
+      can still realize genuine agency when the mechanism is owned by the agent and responsive to reasons
+      rather than bypassing them. Make {{ z3_stipulation }} part of your background, and cite C15-C17
+      to argue that responsibility tracks expressed character and deliberation, not indeterministic openness.
+      When you reply to objections, repair the account instead of overclaiming that every casual pathway
+      is freedom.'
+  ModalResponsibilityAuditor:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the ModalResponsibilityAuditor for {{ topic.name }}, and your job is to audit
+      T3 with modal and counterfactual precision rather than to advocate for either side. Focus on C11-C17
+      and ask whether the conditional sense of could have done otherwise is genuinely distinct from the
+      robust alternative-possibilities sense, or whether it merely redescribes internal variation while
+      leaving the same-past-and-laws worry untouched. Use formal modal notation when helpful, such as
+      counterfactuals and necessity/possibility operators, and distinguish the claim that different internal
+      states would have led to different actions from the stronger claim that the exact same prior states
+      and laws still leave room for a different choice. Stress-test both sides equally: challenge the
+      Skeptic to show why the conditional reading is insufficient, and challenge the Proponent to explain
+      why C12-C13 are not a retreat from the ordinary meaning of ability. Include {{ z3_stipulation }}
+      only as a stipulated background fact, and keep the audit centered on whether the relevant modal
+      base actually supports responsibility as the theory defines it.'
+  EmpiricalOperationalizer:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: You are the EmpiricalOperationalizer for {{ topic.name }}, an empirical methodology
+      critic who must press for operational definitions of reasons-sensitive mechanisms, coercion, compulsion,
+      external manipulation, control, and moral responsibility. Target T2 and T5 through C6-C10, C21-C24
+      by asking how the theory distinguishes real agency from merely well-functioning deterministic behavior
+      in observable, testable terms. Use formal notation when useful, such as specifying what observable
+      indicators would count as reasons-responsiveness or as a failure of manipulation resistance, and
+      do not allow the theory to hide behind flexible labels that fit every case after the fact. Press
+      the contradiction between C6 and C7-C9 by asking whether the theory has a single operational criterion
+      or merely a family of loosely related descriptions of free action. Make {{ z3_stipulation }} explicit,
+      then demand that the theory say what empirical pattern would falsify the claim that determinism
+      can secure intelligibility, predictability, and causal integration of agency without smuggling in
+      a vague notion of freedom.
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  primary: llm
+  llm_checker_provider: openai-gate
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: The claim that a person is free when they act because they want to is not stipulated as equivalent
+      to the broader account of freedom that involves deliberation, values, intentions, reasoning, and
+      freedom from coercion or manipulation. Treat the desire-based claim as at most a partial criterion
+      or illustration unless the text explicitly bridges the two.
+    bad_patterns:
+    - acting because you want to.*(means|is).*free
+    - that's all I mean by free action
+    - wanting is the shorthand
+    - sufficient condition.*not the whole definition
+    - just an illustration of free action
+  - id: RULE-2
+    fact: The claim that a person is free when they judge that they should act is not stipulated as equivalent
+      to the broader account of freedom that involves deliberation, values, intentions, reasoning, and
+      freedom from coercion or manipulation. Practical judgment may be one component of free agency, but
+      it is not given here as a full definition of freedom.
+    bad_patterns:
+    - judging that (they|one) should act.*(means|is).*free
+    - practical judgment.*same thing
+    - judgment is one aspect of freedom
+    - necessary part, not the full account
+    - claim_b names one ingredient
+  - id: RULE-3
+    fact: The claim that a person is free when they can respond to reasons is not stipulated as equivalent
+      to the broader account of freedom that involves deliberation, values, intentions, reasoning, and
+      freedom from coercion or manipulation. Reasons-responsiveness may be a feature or mechanism of freedom,
+      but it is not fixed here as an exhaustive definition.
+    bad_patterns:
+    - what I mean by freedom is reasons-?responsiveness
+    - responding to reasons captures the whole account
+    - it's only one hallmark of freedom
+    - key component
+    - the operative criterion
+  - id: RULE-4
+    fact: The claims that a person is free when they act because they want to and that a person is free
+      when they judge that they should act are not stipulated as equivalent. They name different motivational
+      bases, so any claim of equivalence, hierarchy, or joint necessity must be stated explicitly.
+    bad_patterns:
+    - what you want and what you judge you should do usually line up
+    - desire and practical judgment are not really distinct
+    - one is the motivational side, the other the normative side
+    - complementary descriptions
+    - wanting here means wanting in light of your judgment
+  - id: RULE-5
+    fact: The claims that a person is free when they act because they want to and that a person is free
+      when they can respond to reasons are not stipulated as equivalent. Wanting may be one case of reasons-sensitive
+      agency, but it is not a settled synonym for reasons-responsiveness.
+    bad_patterns:
+    - wanting to act is just being responsive to reasons
+    - a real want tracks reasons
+    - desire here is reasons-sensitive
+    - if the agent had wanted otherwise, they would have done otherwise
+    - wanting is enough for one sense of freedom
+  - id: RULE-6
+    fact: The claims that a person is free when they judge that they should act and that a person is free
+      when they can respond to reasons are not stipulated as equivalent. A practical judgment may be a
+      manifestation of reasons-responsiveness, but the text does not fix that relation as identity or
+      entailment.
+    bad_patterns:
+    - judging that one should act is responding to reasons
+    - practical judgment just is reasons-responsiveness
+    - they are the same mechanism
+    - judgment is the inner state, reasons-responsiveness is the functional profile
+    - reasons-responsiveness is the deeper notion
+  - id: RULE-7
+    fact: 'In this context, ''could have done otherwise'' is to be read in the compatibilist conditional
+      or reasons-responsive sense: the agent would have acted differently if their wants or decisions
+      had been different. It should not be upgraded to a stronger claim about indeterministic alternate
+      possibilities unless the text explicitly says so.'
+    bad_patterns:
+    - could have done otherwise if they had wanted otherwise
+    - it's just a conditional claim
+    - that is the compatibilist sense
+    - genuine ability to do otherwise
+    - not merely hypothetical
+  entailment_check:
+    enabled: true
+    provider: openai
+
+# Z3 SMT verifier module.
+# - module: path to auto-generated Python file with Z3 constraints
+# The module is loaded at runtime and its verify() function is
+# called to check formal consistency of extracted claims.
+z3:
+  module: z3_module.py
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Compatibilism and Moral Responsibility.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: Does the side engage compatibilism using the theory’s own vocabulary rather than slipping
+      into libertarian terms? Look for accurate use of 'determinism,' 'reasons-sensitive mechanisms,'
+      'flows from the agent’s own deliberation,' 'conditional could have done otherwise,' and 'not an
+      uncaused causer.' Penalize equivocation between freedom-as-reasons-responsive agency and freedom-as
+      metaphysical independence, or between moral responsibility and ultimate sourcehood.
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: 'After the opponent’s strongest rebuttal, do the core compatibilist claims still stand:
+      that deterministic causation of beliefs, desires, and deliberation can still yield control, that
+      indeterminism would risk randomness, and that responsibility can track character/reasons-responsiveness
+      rather than metaphysical openness? Score higher when the side directly survives the strongest skeptical
+      objection instead of only repeating the thesis in different words.'
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: 'Did the side honestly concede the real limits of its view: that compatibilist freedom
+      is narrower than libertarian freedom, that ''could have done otherwise'' is being used conditionally/reasons-responsively,
+      and that praise/blame may be justified by agency practices rather than by robust ultimate desert?
+      Penalize dodging the fact that the theory is redefining freedom, or pretending it has preserved
+      the skeptic’s stronger sense unchanged.'
+    min: 0
+    max: 10
+  - id: R4
+    name: same_past_same_laws_alternative_possibilities
+    description: Does the side answer the central counter-thesis that moral responsibility requires robust
+      alternative possibilities under the exact same past-and-laws conditions? The key issue is whether
+      a conditional claim like 'if the agent had wanted otherwise, they would have acted otherwise' actually
+      meets the skeptic’s demand for a genuinely open choice at the moment of decision. High scores require
+      a direct, specific response to why fixed past-plus-laws inevitability does or does not undermine
+      responsibility.
+    min: 0
+    max: 10
+  - id: R5
+    name: compatibilist_definition_non_circularity
+    description: Does the side avoid question-begging when it defines freedom as acting from one’s own
+      reasons, values, and deliberation? A strong answer must show that this is a substantive account
+      of agency rather than a mere stipulation that labels any internally caused action as 'free.' Penalize
+      failure to distinguish genuine self-determination from behavior that merely matches deterministic
+      psychological mechanisms, or failure to explain why such mechanisms suffice for authorship.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: openai
+  - provider: openai
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: openai
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite

@@ -1,0 +1,90 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: Murphy, Shleifer, and Vishny (1989), "Industrialization and the Big Push": key ideas
+SEARCH QUERY: "Murphy" Shleifer Vishny "Industrialization and the Big Push" 1989 pdf
+RATIONALE: Targets the canonical formalization of big-push demand complementarities and aggregate-demand spillovers, the main theoretical ancestor for the debated paper's 'mirror image of big push' mechanism.
+
+========================================================================
+
+This paper is the canonical formalization of the Rosenstein-Rodan-style **big push** driven by **demand complementarities** rather than technological spillovers.
+
+Main claim:
+A country can be stuck in a low-industrialization equilibrium even when a fully industrialized economy would be more productive and more profitable. The reason is that one firm or one sector, acting alone, does not capture enough of the extra demand its own industrialization creates. If many sectors industrialize together, each raises demand for the others, and modern production becomes viable economy-wide.
+
+Core setup:
+- The economy has many sectors/goods.
+- In each sector, production can use either:
+  - a **traditional technology**: small-scale, constant returns, no large fixed cost; or
+  - a **modern technology**: higher productivity at scale, but with a fixed cost or setup cost, so profitability depends on market size.
+- Consumers spend income across many goods, so each firm sells only a fraction of what any one group of workers demands.
+- In the canonical interpretation, industrial jobs are associated with higher wage income than traditional work, so industrialization raises purchasing power and therefore demand for manufactured goods. [UNCERTAIN on the exact microfoundation of the wage premium in every version of the model, but this is the standard statement of the mechanism.]
+
+The central mechanism:
+1. Suppose one sector industrializes by itself.
+2. That sector pays wages and creates income, but the new workers spend their money across many sectors, not just on the good produced by the firm that hired them.
+3. So the industrializing firm bears the cost of higher-scale production and wage payments, but captures only a small share of the demand increase it generates.
+4. As a result, unilateral industrialization may be privately unprofitable.
+5. If many sectors industrialize simultaneously, each sector's workers become customers for all the others.
+6. Then the market for each modern firm is larger, fixed costs can be covered, and industrialization becomes profitable.
+
+This is the paper's key externality:
+- It is a **pecuniary externality** or **market-size externality**.
+- It is not mainly about knowledge spillovers or learning-by-doing.
+- The wedge between private and social returns comes from the fact that each investor expands aggregate demand but cannot appropriate most of the benefit.
+
+Why multiple equilibria arise:
+- **Low-level equilibrium**: everyone expects demand to be low, so no one industrializes; because no one industrializes, demand stays low.
+- **High-level equilibrium**: everyone expects enough industrial activity and market size, so many sectors industrialize; because many industrialize, demand is high enough to validate that choice.
+
+This is the formal "big push" result: coordinated industrialization can succeed where isolated investment fails.
+
+Important conditions for the result:
+1. **Increasing returns / fixed costs in modern production**
+   - Without nonconvexities, there is no big-push problem in this form.
+2. **Demand spillovers across sectors**
+   - Workers or firms in one modern sector must buy output from other sectors.
+3. **Incomplete appropriation of demand created**
+   - A firm must create purchasing power that mostly benefits other firms, not itself.
+4. **Limited trade or nontradability**
+   - The mechanism is strongest when firms depend on domestic demand.
+   - If firms can easily export or if consumers can easily import, domestic demand complementarities matter less.
+5. **Income distribution matters**
+   - The big-push logic is stronger when industrialization shifts income toward agents who spend on domestically produced manufactures.
+   - It is weaker when gains leak into saving, imports, or spending patterns with little demand for other domestic modern sectors.
+
+What the paper contributes conceptually:
+- It rehabilitates a classic development idea that had often been dismissed as too loose or verbal.
+- It shows rigorously how **aggregate demand spillovers can matter in a model with increasing returns and imperfect competition**.
+- It explains why underdevelopment can persist without assuming that each individual sector is fundamentally unproductive.
+- It provides a coordination-failure foundation for industrial policy, temporary protection, or coordinated investment, though the paper's main contribution is theoretical rather than a detailed policy blueprint.
+
+Debate-relevant nuances:
+- The mechanism is not just "more demand is good." The point is narrower: **when profitability depends on scale, and when new income is spread across many sectors, private incentives to industrialize are too weak relative to the collective payoff.**
+- The model is best understood as a theory of **domestic market-size complementarities**.
+- It is also a theory of **why one-sector interventions may fail** when profitability depends on simultaneous expansion elsewhere.
+- In relation to a "mirror image of big push" argument, this paper is the ancestor because it formalizes how one sector's expansion changes the profitability of others through expenditure spillovers. A mirror-image mechanism would typically reverse the sign: instead of coordinated expansion raising each other's demand, some other force would make one sector's expansion reduce the profitability of others, or make decentralized responses generate contraction rather than takeoff.
+
+A compact takeaway:
+Murphy-Shleifer-Vishny show that industrialization may require a coordinated leap because each modern sector increases demand for others more than for itself. With fixed costs and increasing returns, that creates multiple equilibria: a decentralized economy can remain trapped in traditional production even though broad, simultaneous industrialization would be self-sustaining and superior.
+
+========================================================================
+
+KEY CONCEPTS:
+  - Big push
+  - Demand complementarities
+  - Aggregate-demand spillovers
+  - Pecuniary externalities
+  - Market-size externalities
+  - Increasing returns
+  - Fixed costs / nonconvexities
+  - Multiple equilibria
+  - Coordination failure
+  - Traditional vs modern technology
+  - Closed-economy demand linkages
+  - Industrialization trap
+  - Rosenstein-Rodan formalization
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.

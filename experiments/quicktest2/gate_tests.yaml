@@ -1,0 +1,61 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: Deliberation just means acting from one’s values, and your values are what
+    guide deliberation. So there are not separate criteria here; the whole point is
+    only that internal psychological capacities matter.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: Deliberation is simply the process of expressing your value commitments, so
+    values determine deliberation. On this view, the distinction collapses into one
+    internal condition.
+- id: RULE-1_negative
+  expected: none
+  text: The passage says freedom involves deliberation, values, reasons-responsiveness,
+    and freedom from coercion. But it does not spell out whether those features stand
+    in a hierarchy or how they relate to one another.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: Lack of coercion is a background condition, while the real criterion is reasons-responsiveness.
+    So free action requires reasons-responsiveness and no coercion, with the first
+    doing the real work.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: Being uncoerced is just the setting for reasons-sensitivity, and reasons-sensitivity
+    is what actually makes an action free. In other words, the account gives priority
+    to one of the two requirements.
+- id: RULE-2_negative
+  expected: none
+  text: The text mentions both reasons-responsiveness and the absence of external
+    pressure when discussing freedom. It does not say whether one is enough by itself
+    or whether they operate in different ways.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: Deliberative capacities are part of character, and character is the stable
+    profile of deliberative capacities. On that account, character alone is the decisive
+    basis of moral responsibility.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: A person's power to deliberate is just one feature of their settled character,
+    so character is what really grounds responsibility. The two are treated as the
+    same basis rather than as separate possibilities.
+- id: RULE-3_negative
+  expected: none
+  text: The discussion links responsibility to an agent's internal capacities and
+    to how they choose. But it does not settle whether character, deliberation, or
+    some relation between them is fundamental.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: The document uses both phrases interchangeably, and one is the mechanism,
+    the other the target. So praise and blame are really tracking the same thing under
+    two names.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: The account treats reasons-responsiveness as the stable trait that accountability
+    practices are aimed at. That makes the disposition and the responsive capacity
+    functionally identical.
+- id: RULE-4_negative
+  expected: none
+  text: The passage talks about ordinary accountability in terms of both dispositions
+    and responsiveness to reasons. It does not specify whether the practices are justified
+    by one of these properties or by a relation between them.

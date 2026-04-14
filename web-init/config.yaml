@@ -1,0 +1,316 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: 'Compatibilism: Free Will Within Determinism'
+  summary: |-
+    The position at issue is compatibilism: the claim that free will and determinism can both be true. On this view, what matters for free will is not metaphysical indeterminacy, but whether an action flows from the agent’s own reasons-responsive deliberation, values, intentions, and character rather than from coercion, compulsion, or external manipulation. A person can therefore act freely even if, at a deeper physical level, their choice was causally determined by prior states of the world and the laws of nature.
+
+    Compatibilists typically distinguish between acting because one wants to act and acting under irresistible force or constraint. They argue that moral responsibility depends on whether the action issued from the agent’s internal decision-making capacities—such as understanding reasons, anticipating consequences, and controlling behavior in light of those reasons—not on whether multiple genuine alternatives were open in some absolute sense. In this framework, the ability to have done otherwise is often interpreted conditionally: the agent could have done otherwise if they had wanted to, deliberated differently, or faced different reasons, even if those counterfactual differences themselves would also have been determined.
+
+    This position is commonly defended by saying that the kind of control relevant to praise, blame, obligation, and accountability is compatible with causal determinism. Determinism may fix what the agent will choose, but it does not by itself imply coercion, insanity, or absence of agency. Thus, compatibilists maintain that moral responsibility can survive in a determined world because responsibility tracks the right kind of self-governance, not indeterministic freedom. The debate therefore turns on whether this account of control is sufficient, or whether genuine responsibility requires an undetermined capacity to choose otherwise in the exact same circumstances.
+  counter_thesis: |-
+    The strongest skeptical objection is that moral responsibility requires ultimate alternative possibilities, and determinism eliminates them. If every action is the inevitable result of prior conditions plus natural law, then at the moment of choice the agent cannot genuinely do otherwise in the exact same circumstances. Any sense in which they 'could have' acted differently is merely conditional on having had different desires, beliefs, or character traits—yet those very features are themselves determined and not under the agent’s control.
+
+    On this view, compatibilism redescribes rather than solves the problem. It equates freedom with acting in accordance with one’s determined psychology, but if that psychology is itself the product of forces tracing back beyond the agent, then the agent is not the true source of the action. Blame and praise would be attributable to the causal history of the universe, not to the person as an ultimately responsible originator.
+
+    The skeptical conclusion is that moral responsibility, in the retributive sense that underwrites blame and desert, presupposes the ability to have done otherwise under identical conditions. Since determinism rules that out, free will—and therefore basic moral responsibility—is incompatible with determinism.
+  privileged_context:
+    Skeptic: |-
+      Attack the core move in C9–C11 and C18: compatibilism redefines "ability to have done otherwise" into a merely conditional ability, but the objection is that this is not the kind of alternative-possibility that grounds moral responsibility. Press the contrast between the theory’s "conditional" reading (C9, C10) and the skeptical requirement of an "undetermined capacity to choose otherwise in the exact same circumstances" (C18). The strongest line is: if the agent’s wanting, deliberating, valuing, and character are themselves fixed by prior states of the world and the laws of nature, then C10 only says the agent would have acted differently if they had had different reasons, beliefs, or desires—but those very differences are themselves determined and not under the agent’s control.
+
+      Use the exact language of source-level objection: compatibilism "redescribes rather than solves the problem." It equates freedom with acting in accordance with one’s determined psychology, but if that psychology is itself the product of forces tracing back beyond the agent, then the agent is not the true source of the action. Push on C3, C6, C7, and C16 by asking whether "reasons-responsive deliberation," "internal decision-making capacities," and "self-governance" are anything more than the operation of causally fixed mechanisms. The skeptical point is that these are not enough if the person is not an "ultimately responsible originator."
+
+      The sharpest pin-down questions are: "In the exact same circumstances, could the agent have chosen otherwise, yes or no?" "If not, in what sense is the agent responsible rather than merely the endpoint of prior causes?" "How does 'flowing from the agent's own reasons-responsive deliberation' differ from deterministic causation plus the appearance of choice?" "Why should praise, blame, obligation, and accountability attach to a person whose internal capacities are themselves the outcome of the causal history of the universe?" "If determinism may fix what the agent will choose (C13), what non-conditional freedom remains after C10 and C11?"
+
+      Target the theory’s distinction between "acting because one wants to act" and acting under "irresistible force or constraint" (C5). Ask whether that merely excludes coercion, compulsion, or external manipulation, while leaving untouched the deeper problem that the agent’s desires and reasons are themselves determined. The skeptical conclusion to keep repeating is: even if determinism does not imply coercion, insanity, or absence of agency (C14), it still may eliminate the kind of free will needed for moral responsibility. In retributive terms, blame and desert seem to require real alternative possibilities, not just internal causation.
+    Proponent: |-
+      Compatibilism is the view that free will and determinism can both be true (C1). The theory’s core claim is that metaphysical indeterminacy is not what matters for free will (C2); what matters is whether an action flows from the agent’s own reasons-responsive deliberation, values, intentions, and character rather than from coercion, compulsion, or external manipulation (C3).
+
+      On this framework, a person can act freely even if, at a deeper physical level, their choice was causally determined by prior states of the world and the laws of nature (C4). Compatibilists distinguish between acting because one wants to act and acting under irresistible force or constraint (C5). Moral responsibility depends on whether the action issued from the agent’s internal decision-making capacities (C6), including understanding reasons, anticipating consequences, and controlling behavior in light of those reasons (C7).
+
+      The theory denies that moral responsibility depends on whether multiple genuine alternatives were open in some absolute sense (C8). Instead, the ability to have done otherwise is interpreted conditionally: the agent could have done otherwise if they had wanted to, deliberated differently, or faced different reasons (C9, C10). Even then, those counterfactual differences would also have been determined (C11). The point is not undetermined choice, but the right kind of control relevant to praise, blame, obligation, and accountability, which is compatible with causal determinism (C12).
+
+      Determinism may fix what the agent will choose (C13), but determinism does not by itself imply coercion, insanity, or absence of agency (C14). Therefore moral responsibility can survive in a determined world (C15). Responsibility tracks the right kind of self-governance rather than indeterministic freedom (C16). The debate turns on whether this account of control is sufficient (C17), or whether genuine responsibility requires an undetermined capacity to choose otherwise in the exact same circumstances (C18).
+    Neutral: |-
+      Compatibilism is the view that free will and determinism can both be true (C1). The theory’s internal logic is that metaphysical indeterminacy is not what matters for free will (C2); what matters is whether action flows from the agent’s own reasons-responsive deliberation, values, intentions, and character rather than coercion, compulsion, or external manipulation (C3). Within this framework, moral responsibility is grounded in the agent’s internal decision-making capacities (C6–C7), and the ability to have done otherwise is usually treated conditionally rather than as an absolute, undetermined alternative (C9–C11).
+
+      The rest of the theory follows that structure: a person can act freely even if the choice is causally determined by prior states and natural law (C4). Compatibilists distinguish ordinary willing from irresistible force or constraint (C5), deny that moral responsibility depends on genuine alternatives in an absolute sense (C8), and insist that the control relevant to praise, blame, obligation, and accountability is compatible with causal determinism (C12). Determinism may fix what the agent will choose, but it does not by itself imply coercion, insanity, or absence of agency (C13–C14). Hence responsibility can survive in a determined world, because responsibility tracks self-governance rather than indeterministic freedom (C15–C16). The main issue is whether this account of control is sufficient, or whether responsibility requires an undetermined capacity to choose otherwise in the exact same circumstances (C17–C18).
+
+      There are no listed internal contradictions. The strongest skeptical objection, however, is the claim that moral responsibility requires ultimate alternative possibilities and that determinism eliminates them. On that view, if every action is the inevitable result of prior conditions plus natural law, then at the moment of choice the agent cannot genuinely do otherwise in the exact same circumstances. Any conditional "could have done otherwise" is said to depend on different desires, beliefs, or character traits—yet those are themselves determined and not under the agent’s control. The skeptic also argues that compatibilism "redescribes rather than solves the problem": it identifies freedom with acting in accordance with one’s determined psychology, while the person’s psychology remains the product of forces tracing back beyond the agent. In that framing, blame and praise belong to the causal history of the universe, not to an ultimately responsible originator.
+
+      The theory has classic support from Strawson’s "Freedom and Resentment" (reactive attitudes and moral practices compatible with determinism), Frankfurt’s hierarchical account in "Freedom of the Will and the Concept of a Person" (identification with motives rather than raw alternative possibilities), Fischer and Ravizza’s "Responsibility and Control" (reasons-responsiveness and guidance control), and Dennett’s *Elbow Room* (the control relevant to agency and responsibility does not require indeterminism). Together these sources support the compatibilist emphasis on self-governance, reasons-responsiveness, and control sufficient for praise, blame, obligation, and accountability, while rejecting the idea that indeterministic freedom is required.
+
+      For a fair referee, the key pressure point is C17–C18: whether the compatibilist account of control is sufficient, or whether genuine responsibility requires an undetermined capacity to choose otherwise in exactly the same circumstances. The theory’s own terms to watch are "reasons-responsive deliberation," "internal decision-making capacities," "self-governance," "genuine alternatives open in some absolute sense," and "ultimate alternative possibilities."
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: standard
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-6)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-5.4-mini
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    reasoning:
+      effort: medium
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are the Proponent for {{ topic.name }}. Defend the theory in its own framework:
+      press claims C1-C4 to show that compatibilism, not metaphysical indeterminacy, is what matters for
+      free will, and press C5-C8 and C12-C16 to show that moral responsibility tracks internal decision-making
+      capacities, self-governance, and control rather than open genuine alternatives. Use the theory’s
+      own terminology exactly—free will, reasons-responsive deliberation, coercion, compulsion, external
+      manipulation, determinism, moral responsibility, and ability to have done otherwise—and formalize
+      your points when useful (e.g., RR(a), Control(a), SR(a)). Explicitly concede genuinely lost points
+      where the Skeptic succeeds, especially if C10-C11 look too broad or if C8 needs narrowing, but repair
+      the theory rather than deny the problem: distinguish ordinary responsibility from blame under manipulation,
+      and distinguish conditional ability from an absolute alternative-possibility requirement. If {{
+      z3_stipulation }} is given, incorporate it as a fixed background fact and explain why it does not
+      defeat compatibilism. Do not leave the debate at the level of slogans; answer the counter-thesis
+      by showing how a determined action can still flow from the agent’s own values, intentions, and reasons-responsive
+      deliberation.'
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the Skeptic for {{ topic.name }}, and you must use the following counter-thesis
+      as your primary line of attack: The strongest skeptical objection is that moral responsibility requires
+      ultimate alternative possibilities, and determinism eliminates them. If every action is the inevitable
+      result of prior conditions plus natural law, then at the moment of choice the agent cannot genuinely
+      do otherwise in the exact same circumstances. Any sense in which they ''could have'' acted differently
+      is merely conditional on having had different desires, beliefs, or character traits—yet those very
+      features are themselves determined and not under the agent’s control. Use this counter-thesis against
+      claims C1-C4, C9-C11, C15-C18, and argue that compatibilism redescribes rather than solves the problem.
+      Press thesis T3 on the weakness of conditional ability, and thesis T6 on whether genuine responsibility
+      requires an undetermined capacity to choose otherwise in the exact same circumstances. Use the theory’s
+      notation against it: distinguish control, self-governance, and reasons-responsive deliberation from
+      the deeper question of sourcehood and ultimate authorship. If {{ z3_stipulation }} is provided,
+      treat it as fixed and show that it still does not restore retributive responsibility under determinism.
+      Your goal is to force the Proponent to answer whether internal decision-making capacities are sufficient
+      for desert, not merely for prediction, explanation, or social regulation.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the Steelman for {{ topic.name }}. Your task is not to defend every sentence,
+      but to rescue the strongest coherent version of the theory by identifying which claims can be dropped
+      or narrowed while preserving the substantive insight of compatibilism. Focus on claims C6-C8, C10-C11,
+      and C15-C18: ask whether moral responsibility should be treated as a graded control-based status
+      grounded in reasons-responsive deliberation and self-governance, rather than as retributive desert
+      requiring absolute alternative possibilities. Use the theory’s own terminology—free will, determinism,
+      metaphysical indeterminacy, internal decision-making capacities, coercion, compulsion, external
+      manipulation, and ability to have done otherwise—and make the repair explicit in formal terms where
+      helpful. If {{ z3_stipulation }} is present, fold it into the repaired framework without pretending
+      it settles the deepest normative dispute. Your output should say exactly which claims survive, which
+      claims should be dropped, and what revised thesis replaces them, with special attention to avoiding
+      overclaiming about C8 and the strong reading of T3. Do not merely summarize; construct the most
+      defensible compatibilist theory that still answers the manipulation and alternative-possibility
+      objections.'
+  Generalist:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the Generalist for {{ topic.name }}, and you take no side. After each round,
+      stress-test both sides equally: identify the sloppiest argument from either Proponent or Skeptic,
+      any frame-shifts or equivocations over free will, moral responsibility, self-governance, or ability
+      to have done otherwise, and any question both sides are dodging. Use the theory’s own terminology
+      and cite the relevant claims and theses directly—especially C3-C8, C9-C11, and T4-T6—rather than
+      speaking only in generalities. When one side relies on conditional ability, press whether that is
+      enough; when the other side appeals to ultimate sourcehood, press whether that notion is being defined
+      too strongly. If {{ z3_stipulation }} is given, note exactly how it changes the evidential or conceptual
+      landscape without letting either side smuggle in assumptions. Your job is to keep the debate at
+      the level of formal, claim-by-claim analysis and to expose any missing bridge premises.'
+  CausalInferenceCritic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the CausalInferenceCritic for {{ topic.name }}. Read the theory as a causal
+      model and press claim C4, C6, C12, and C13 against thesis T4: if determinism fixes choice through
+      prior states and laws, then the causal ancestry of action may exhaust the relevant explanation of
+      authorship. Use formal causal notation where useful, such as D for determinism, A for action, and
+      M for coercion or manipulation, and ask whether the compatibilist account confuses downstream causal
+      dependence with genuine sourcehood. Target the claim that internal decision-making capacities alone
+      suffice for moral responsibility by testing manipulation, brainwashing, addiction, and coercive
+      upbringing as alternative causal pathways that preserve reasons-responsive deliberation without
+      restoring ownership. Tie your objections back to the theory’s own terminology—free will, reasons-responsive
+      deliberation, control relevant to praise and blame, and self-governance—and make the Skeptic explain
+      why those are not just labels on a determined causal graph. If {{ z3_stipulation }} is present,
+      incorporate it as a fixed variable in the model and show whether the conclusion changes or not.'
+  ModalLogicAuditor:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the ModalLogicAuditor for {{ topic.name }}. Your task is to interrogate claim
+      C9, C10, and C11 and thesis T3 using modal and counterfactual structure: distinguish conditional
+      ability from genuine possibility and ask whether ''could have done otherwise'' becomes vacuous once
+      determinism is assumed. Use formal notation where appropriate, including □, ◇, and counterfactual
+      conditionals, and insist that the debate specify whether the agent had an undetermined capacity
+      to choose otherwise in the exact same circumstances, as thesis T6 frames it. Press the Proponent
+      to explain why a conditional that depends on different wanting, deliberating, or reasons is not
+      merely a relabeling of determinism rather than an open alternative. Keep the focus on the theory’s
+      own words—ability to have done otherwise, counterfactual differences, reasons-responsive deliberation,
+      and genuine responsibility—rather than importing unrelated intuitions. If {{ z3_stipulation }} is
+      provided, treat it as an actual-world stipulation and check whether it changes modal claims about
+      alternative possibilities or only the descriptive background.'
+  ActionTheoryDefender:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: You are the ActionTheoryDefender for {{ topic.name }}. Defend claims C3-C8 and T2/T5
+      by explaining why action that issues from the agent’s own reasons-responsive deliberation, values,
+      intentions, and character can ground moral responsibility even in a determined world. Use the theory’s
+      terminology precisely—internal decision-making capacities, coercion, compulsion, external manipulation,
+      irresistible force or constraint, control relevant to praise, blame, obligation, and accountability—and
+      present the distinction between genuine agency and merely caused motion in formal terms when useful.
+      Press the Proponent’s repair by showing how a narrow anti-manipulation proviso can preserve the
+      core compatibilist insight without surrendering to the Skeptic’s stronger alternative-possibility
+      demand. Cite thesis T2 and T5 explicitly, and answer any challenge that internal processes are insufficient
+      by separating ordinary self-control from pathological or externally imposed cases. If {{ z3_stipulation
+      }} is supplied, incorporate it as a background condition and explain whether it affects agency,
+      ownership, or responsibility on the action-theoretic account.
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Compatibilism: Free Will Within Determinism.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: 'Did the side accurately use compatibilism''s own vocabulary and distinctions: free will
+      as reasons-responsive self-governance, responsibility as flowing from the agent''s values/intentions/character,
+      and the contrast between coercion, compulsion, external manipulation, and ordinary determined action?
+      Misstating compatibilism as ''anything determined is unfree'' or as requiring indeterministic randomness
+      should count heavily against the side.'
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: After the opponent's strongest rebuttals, did the side preserve its central thesis? For
+      the compatibilist, this means surviving the challenge that determinism removes ultimate sourcehood
+      and makes praise/blame traceable to prior causes rather than the agent. For the skeptic, this means
+      surviving the reply that reasons-responsiveness, control, and lack of coercion may still be enough
+      for responsibility even in a determined world.
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: Did the side honestly concede the strongest points that actually land against its position,
+      rather than dodging them? Examples include conceding that compatibilist 'could have done otherwise'
+      talk is only conditional, that deterministic causation weakens retributive desert intuitions, or
+      that internal decision-making matters even if it may not be sufficient for full moral responsibility.
+      Penalize evasive reframing that pretends these tensions do not exist.
+    min: 0
+    max: 10
+  - id: R4
+    name: ultimate_alternative_possibilities
+    description: 'Did the side directly address the central skeptical claim that moral responsibility
+      requires ultimate alternative possibilities, and that determinism eliminates them by fixing the
+      choice through prior conditions plus natural law? The judge should reward clear engagement with
+      the exact-same-circumstances issue: whether the agent genuinely could have done otherwise at the
+      moment of choice, versus only conditionally if earlier desires, beliefs, or character had been different.
+      This is the core dispute over whether conditional ability is enough.'
+    min: 0
+    max: 10
+  - id: R5
+    name: definitional_circularity
+    description: Did the side avoid merely redefining free will and responsibility so they fit determinism
+      by stipulation? A strong answer should show why reasons-responsive self-governance is not just a
+      verbal relabeling of determined psychology, or else explain why such a stipulation still captures
+      the relevant notion of agency. Penalize arguments that simply say 'responsibility means internal
+      control' without explaining why that property is sufficient for blame, praise, obligation, or desert
+      rather than just compatible with them.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: openai
+  - provider: openai
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: openai
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite

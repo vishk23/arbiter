@@ -1,0 +1,538 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: AI Over-Automation Externality and the Case for an Automation Tax
+  summary: 'The position holds that AI-driven automation can become socially excessive when firms replace
+    labor faster than the economy can generate new tasks and occupations for displaced workers. In that
+    case, the problem is not merely transitional hardship for workers: because labor income is a major
+    source of mass purchasing power, widespread displacement can depress aggregate consumer demand, undermining
+    the revenue base on which firms themselves depend. The argument accepts the long historical record
+    that technological unemployment fears are old and that past waves of mechanization were largely self-correcting,
+    but contends that this historical pattern does not guarantee self-correction under advanced AI. If
+    AI can substitute for human labor across a broad enough set of tasks quickly enough, the economy may
+    experience a demand shortfall before new forms of employment emerge at sufficient scale.'
+  counter_thesis: |-
+    The strongest skeptical view is that the alleged "over-automation externality" is theoretically overstated and empirically unproven. Historically, automation has repeatedly displaced specific tasks while raising productivity, lowering prices, increasing real incomes, and creating complementary jobs, industries, and forms of demand that were previously unimaginable. There is little reason to assume AI is categorically different. Even if some workers are displaced rapidly, lost wage income does not simply vanish: it is partly replaced by lower consumer prices, higher profits, new investment, government transfers financed from a broader tax base, and new labor demand in complementary sectors. In open, dynamic economies, firms do not depend exclusively on incumbent workers’ wages for demand; capital owners, foreign consumers, public spending, and innovation-induced new markets all contribute to purchasing power. The claim that firms are trapped in a socially destructive arms race therefore risks mistaking a general-equilibrium adjustment process for a market failure.
+
+    Moreover, the policy conclusion that only a Pigouvian automation tax can solve the problem is much too strong. Measuring the marginal social harm of a given automation decision is extraordinarily difficult: AI adoption differs by task, sector, timing, complementarity with labor, and long-run innovation effects. An automation tax would likely be blunt, politically manipulable, and prone to penalize productivity-enhancing investments, slowing growth, reducing competitiveness, and entrenching incumbents that can better absorb compliance costs. Alternatives such as wage subsidies, earned-income support, portable benefits, stronger automatic stabilizers, progressive taxation, education and retraining, worker ownership, antitrust, and faster labor-market matching may not perfectly offset every displacement channel, but they can address distributional harms without taxing technological progress itself. On this view, the central danger is not under-taxed automation but policy overreaction to speculative demand-collapse scenarios, which could suppress innovation and leave society poorer overall.
+  privileged_context:
+    Skeptic: |-
+      Use the theory’s own vocabulary against it. The central target is C3/C29/C30: in the competitive task-based model, firms supposedly face a demand externality because an automating firm captures the full per-task cost saving s but bears only a fraction of the effective demand loss per automated task, ℓ = λ(1−η)w, with the rest falling on rivals. The paper then jumps from this setup to the strong conclusion that the Nash equilibrium automation rate is a strictly dominant strategy and exceeds the cooperative optimum, producing an over-automation wedge and an automation arms race. Your job is to press on whether that result is driven by extreme assumptions about spending, incidence, and closure rather than by a robust market failure.
+
+      The most exploitable internal tensions are these. First, C15 vs C18: the paper says labor-market self-correction historically offset displacement through the reinstatement effect, but also says the last four decades show displacement intensifying while new work does not keep pace. Pin them down: is the historical baseline one of self-correction or not? Second, C23 vs C31: C23 says rational, forward-looking firms should theoretically serve as the brake if they can see the consequences; C31 says foresight alone cannot prevent the race toward over-automation. Force them to explain whether the issue is myopia, strategic structure, or both. Third, C12 vs C125, and C213 vs C125/C169: they say only a Pigouvian automation tax can eliminate the externality, yet also say raising η through retraining, wage insurance, new firm creation, or tax-funded programs is a direct lever on the externality and can lower ℓ and even future τ*. Ask whether those policies are merely palliative, attenuating, or genuinely incentive-changing. Fourth, C132 vs C133: UBI is described as complementary, yet under endogenous entry it can widen the externality by attracting entry and fragmenting the market. Fifth, C175 vs C180: the planner’s objective is allegedly invariant to AI productivity φ because nominal revenue equals expenditure D, yet lower prices from higher φ generate real consumption gains that nominal welfare misses. Sixth, C67 vs C69: the theory motivates itself with workers having a higher marginal propensity to consume than owners, but the baseline effectively sets owners’ sectoral MPC to zero. That is not a mild formalization; it is an extreme closure assumption doing major work.
+
+      There are additional ambiguity points worth exploiting. C22 presents AI-driven demand erosion as public discourse’s inevitable no-brake dynamic, while C244 hedges that if reabsorption keeps pace, the externality may remain too small to detect and the contribution is only a structural vulnerability. C208 says the empirical signature of profit erosion requires displacement beyond what has materialized so far, while C25 cites over 100,000 tech layoffs in 2025 with AI often named as a driver. Ask what observable threshold would count as enough. C82 and C90 are technically consistent but rhetorically vulnerable: if a monopolist fully internalizes the externality and therefore sets αNE = αCO, and in the interesting case that means zero automation, then the model’s practical brake is concentration rather than foresight. C34 vs C104 also lets you press whether the story is about deadweight loss or about distributional transfer from wages to profits.
+
+      Use the Coasian objection pattern hard. The counter-evidence source is Coase’s 'The Problem of Social Cost': the existence of an externality does not by itself establish a tax as the unique remedy. The right question is comparative institutions under transaction costs. So ask why private ordering, long-term contracts, severance commitments, industry compensation funds, wage insurance, supplier agreements, or platform rules could not internalize at least part of the demand externality. The paper’s own escape hatch is usually that only a grand coalition would internalize the multilateral demand externality and that automation choices are effectively noncontractible, with sunk costs and irreversibility weakening bargaining. Do not let them state that at a high level; make them specify exactly which margin is noncontractible, who the affected parties are, why side payments cannot be conditioned on observable layoffs or automation expenditure, and why partial internalization is irrelevant if the theory only needs to show that tax is not the only workable instrument.
+
+      Key objection patterns from the broader skeptical view: (1) lost wage income does not simply vanish; it can reappear via lower prices, higher real incomes, higher profits, new investment, public transfers, and new complementary labor demand; (2) firms do not rely only on incumbent workers’ wages for demand—owners, foreigners, government, and new markets matter; (3) task displacement in a dynamic economy is not equivalent to net demand destruction; (4) historical technology waves often looked labor-saving locally but were expansionary in general equilibrium; (5) measuring the marginal social harm of automation task by task is likely infeasible, so τ* = ℓ(1−1/N) may be elegant on paper but unusable in policy; (6) an automation tax could suppress productivity-enhancing AI, slow innovation, reduce competitiveness, and entrench incumbents that can absorb compliance costs.
+
+      Language to pin down evasions: ask 'Is your claim elimination or attenuation?' whenever they drift from C12/C213 to softer statements. Ask 'Which parameter changes: αi, ℓ, η, λ, φ, or N?' whenever they say a policy “helps.” Ask 'Are you claiming a positive empirical diagnosis or a theoretical possibility result?' whenever they move between C22 and C244. Ask 'Is the welfare object nominal owner surplus K, or real consumption?' to force confrontation with C175/C180. Ask 'Does your result survive if owners have positive sectoral MPC, if spending leaks across sectors, or if lower prices raise real demand?' to expose dependence on C69-style assumptions.
+
+      High-value cross-examination questions: (1) If raising η shrinks ℓ and lowers the wedge, why is upskilling not part of the cure rather than merely a complement? (2) If UBI raises autonomous demand A but can also attract entry and worsen fragmentation, why should anyone trust the model’s policy monotonicity? (3) If firms are forward-looking, why doesn’t concentration, long-horizon contracting, or investor pressure act as the brake C23 says should exist? (4) If the planner’s objective is invariant to φ, are you intentionally discarding real price effects from productive AI? (5) If historical self-correction via reinstatement effect has often worked, what specific evidence shows AI breaks that mechanism rather than merely shifting tasks again? (6) If your baseline assumes owners spend none of their income in the sector, why should we treat the demand externality as an empirical proposition rather than an artifact of the closure rule? (7) What observation would falsify the claim that an active automation externality is already operating—rising profits, stable demand, reemployment, or real wage gains? (8) Why is a Pigouvian automation tax less blunt and less distortionary than wage subsidies, portable benefits, earned-income support, or automatic stabilizers that target displacement without taxing innovation itself?
+    Proponent: |-
+      The theory’s core claim is that AI labor displacement can create a product-market demand externality, not merely a labor-market reallocation problem. In the competitive task-based model, each firm chooses an automation rate αi across a continuum of task-positions. Automating a task replaces a human worker with AI, generating a direct per-task cost saving s = w − c, where w is the wage and c is the AI operating cost. Automation is subject to convex integration cost governed by the adjustment cost parameter k, reflecting the comparative-advantage ordering of tasks from easier to harder to automate.
+
+      The key mechanism is that displaced workers are also consumers. If a worker’s lost wage is not fully replaced, automation reduces aggregate spending on the sector’s output. The theory formalizes this using the income replacement rate η and sectoral MPC λ. The effective demand loss per automated task is ℓ = λ(1−η)w. This is the demand externality or automation externality: when one firm automates, it lowers worker income and thus spending, but under competition most of the resulting revenue loss falls on rival firms rather than on the automating firm itself.
+
+      This yields the central formal result in C3/C29/C30. An automating firm captures the full private cost saving from automation but internalizes only a fraction of the aggregate demand destruction it causes. In a market with N symmetric firms, the automating firm bears only its own share of the demand loss, while the rest is dispersed across rivals. As a result, each firm’s profit-maximizing automation decision is a strictly dominant strategy and exceeds the cooperative optimum. The gap between the Nash equilibrium automation rate and the cooperative optimum is the over-automation wedge. The outcome is an automation arms race: individually rational automation accumulates beyond what is collectively optimal.
+
+      The cooperative optimum is the automation rate that maximizes aggregate owner surplus K across firms. The theory also defines a generalized social planner, or μ-planner, who maximizes μW + (1−μ)K, where W is worker income and μ indexes concern for workers. Relative to the cooperative optimum, the μ-planner may prefer even less automation because the planner internalizes not only owner surplus but also worker welfare. The welfare loss from the Nash outcome is a deadweight loss: it is not merely a transfer from workers to firm owners, but a pure surplus loss that harms both.
+
+      Several comparative statics follow directly from the model. More competition or market fragmentation, represented by higher N, worsens the externality because each firm internalizes an even smaller fraction of the demand loss it causes; thus competition amplifies excess automation (C5). Better AI, represented by higher AI productivity φ, strengthens private automation incentives and can widen the over-automation wedge through market-share gain effects. In the frictionless case k = 0, the model approaches a Prisoner’s Dilemma: full automation is individually dominant even though collective restraint yields higher profits.
+
+      The theory also analyzes extensions and policy robustness. Wage adjustment does not eliminate the wedge once active (C6), and free entry can worsen over-automation by increasing endogenous market fragmentation rather than curing it. Capital income taxes do not correct the externality because they change profit levels but not the per-task automation incentive (C7). Worker equity participation recycles some capital income into demand and can narrow the wedge, but generally cannot eliminate it (C8). UBI enters as autonomous demand A; it raises the spending level but not the marginal incentive to automate, so it cannot eliminate the externality (C9). Upskilling or retraining raises η and can reduce the demand-loss parameter ℓ, but does not directly correct the externality margin that drives firm automation choices (C10). Coasian bargaining fails because the demand externality is multilateral, would require something like a grand coalition, and automation choices are effectively noncontractible in the relevant sense (C11).
+
+      The unique corrective instrument in the model is a Pigouvian automation tax. The optimal Pigouvian tax is τ* = ℓ(1−1/N): it makes each firm internalize the demand loss imposed on rivals and aligns private incentives with the cooperative optimum (C12). A tax-and-rebate scheme can preserve correct incentives while recycling revenue lump-sum. The broader policy implication is C13: policy should target not only the aftermath of AI labor displacement but also the competitive incentives that generate over-automation in the first place.
+
+      The empirical motivation for the theory combines historical and current observations. Historically, fear of technological displacement is longstanding (C14), and labor markets have often self-corrected through the creation of new tasks and occupations (C15), what Acemoglu and Restrepo call the reinstatement effect (C16). Whether that self-correction will continue in the age of AI remains an open question (C17). The theory is motivated by evidence and concern that displacement has intensified, that new work has not always kept pace (C18), and that the current AI wave is disproportionately affecting entry-level workers (C19). It also emphasizes the logical point in C20/C21: displaced workers are consumers, so if income replacement fails, repeated layoffs can erode the purchasing power that firms collectively depend on.
+
+      The paper’s terminology matters. AI labor displacement is task replacement on existing tasks. Over-automation is automation beyond the cooperative or planner-efficient level. The product-market mechanism is the spending channel through worker income, distinct from labor-market frictions. Aggregate demand spillovers and demand complementarities place the model in the family of big-push-type theories, but as a mirror image of big push: here the privately profitable action is collectively excessive rather than collectively insufficient. This is why foresight alone does not solve the problem: the issue is not ignorance but incentive structure.
+    Neutral: |-
+      The theory centers on C3/C29/C30: in a competitive task-based model with symmetric firms, each firm chooses an automation rate αi over task-positions. Automating a task yields private saving s = w − c but also reduces worker income and therefore spending on firms’ output. With sectoral MPC λ and income replacement rate η, the effective demand loss per automated task is ℓ = λ(1−η)w. Because an automating firm bears only its own share of that demand destruction under competition, while rivals bear the rest, the firm’s private incentive exceeds the cooperative optimum. This creates an over-automation wedge, an automation arms race, and a deadweight loss harming both workers and owners. Competition / market fragmentation N worsens the wedge; higher AI productivity φ can amplify it; wage adjustment and free entry do not remove it; and the theory’s sharp policy conclusion is C12: only a Pigouvian automation tax with τ* = ℓ(1−1/N) can eliminate the externality.
+
+      The theory’s empirical motivation is mixed and deliberately conditional. C14–C17 acknowledge the historical pattern emphasized by Acemoglu and Restrepo: automation displaces some tasks but the reinstatement effect and labor-market self-correction have often created new tasks and occupations. C17 explicitly leaves open whether that historical adjustment will continue under AI. C18–C19 shift toward concern that displacement has intensified and that AI is hitting entry-level work especially hard. C24–C28 supply contemporary illustrations of AI-linked layoffs and labor-saving deployments. C20–C21 provide the basic intuition: displaced workers are also consumers, so if lost wage income is not replaced, repeated layoffs can erode the demand base firms collectively rely on.
+
+      Key terms needed to referee the debate: the demand externality / automation externality is the spending loss imposed on rivals through worker displacement; the cooperative optimum maximizes aggregate owner surplus K; the generalized social planner or μ-planner maximizes μW + (1−μ)K; the over-automation wedge is the gap between the Nash equilibrium and the efficient benchmark; η is the income replacement rate; λ is the sectoral MPC; φ is AI productivity; N is the degree of market fragmentation; UBI works through autonomous demand A; worker equity participation recycles some capital income into demand; and Coasian bargaining is the candidate private-ordering alternative the theory rejects because the externality is multilateral and automation choices are treated as effectively noncontractible.
+
+      The strongest support sources line up with the theory’s building blocks, not necessarily every policy conclusion. Acemoglu & Restrepo (2019) supports the displacement-versus-reinstatement framing: automation can reduce demand for labor in existing tasks, while new tasks and occupations can offset that through the reinstatement effect. That source is especially relevant to C15–C17 and to the role of η-like reabsorption mechanisms. Murphy, Shleifer, and Vishny (1989) supports the general family of aggregate-demand spillovers and demand complementarities: the paper’s 'mirror image of big push' positions automation as a privately attractive action that may be collectively harmful because of spending linkages. Autor, Levy, and Murnane (2003) is the neutral task-based foundation: production can be decomposed into tasks, making the automation rate αi and comparative-advantage ordering of tasks conceptually coherent.
+
+      The strongest counter-evidence source is Coase’s 'The Problem of Social Cost' (1960). Its relevance is methodological: the existence of an externality does not by itself imply that a Pigouvian tax is the unique or even best institutional response. The Coasian challenge is to compare institutions under transaction costs, legal rights, and contractibility. Applied here, the skepticism is: why could firms, workers, or intermediaries not develop partial internalization mechanisms such as long-term contracts, severance rules, industry compacts, wage insurance, or other bargaining structures? The theory’s answer is that only something like a grand coalition would fully internalize the multilateral demand externality and that automation choices are effectively noncontractible, but this is precisely the pressure point for debate.
+
+      The internal contradictions/tensions are substantial and should be tracked by claim ID. (1) C15 vs C18: the theory cites a general historical pattern of labor-market self-correction, yet also says the last four decades show displacement outpacing new-work creation. (2) C23 vs C31: rational, forward-looking firms 'should theoretically' act as a brake, yet foresight alone is later said to be impotent. (3) C12 vs C125 and C213 vs C125/C169: only a Pigouvian automation tax allegedly eliminates the externality, yet raising η through retraining, wage insurance, and tax-funded programs is also described as a direct lever on the externality and as lowering future τ*. (4) C132 vs C133: UBI is framed as complementary, yet with endogenous entry it can widen the externality by increasing fragmentation. (5) C175 vs C180: the model’s welfare objective is nominally invariant to φ, yet real consumption gains from lower prices imply that the welfare metric may understate benefits of productive AI. (6) C208 vs C25: the empirical signature of profit erosion is said to require displacement beyond what has materialized, yet reported AI-related layoffs are already large. (7) C67 vs C69: workers merely having a higher MPC than owners is transformed in the baseline into owners spending none of their income in the sector. (8) C22 vs C244: the public narrative is inevitability with no natural brake, yet the paper also says the externality may remain too small to detect and the contribution may be only to identify a structural vulnerability. Additional tensions in the broader claim set include C121 vs C123/C225 on whether displaced workers are typically reabsorbed at higher wages or instead suffer persistent earnings losses.
+
+      The core skeptical thesis is that the over-automation externality may be theoretically overstated and empirically unproven. Automation can raise productivity, lower prices, expand real incomes, create new sectors and complementary jobs, and generate purchasing power through profits, investment, transfers, and foreign demand rather than only incumbent wage income. On this view, the paper may be mistaking general-equilibrium adjustment for a market failure. The policy criticism is equally strong: measuring marginal harm task by task is difficult; an automation tax may be blunt, manipulable, and anti-innovation; and alternatives such as wage subsidies, earned-income support, portable benefits, automatic stabilizers, retraining, worker ownership, antitrust, or faster matching may mitigate harms without taxing technological progress itself.
+
+      For fair adjudication, the central issue is not whether the model is internally intelligible—it is—but whether its sharp conclusions are robust to relaxing closure assumptions and to distinguishing attenuation from elimination. Useful referee questions are: Does the result survive if owners have positive sectoral MPC or if spending leaks across sectors? Is the welfare object owner surplus K, nominal expenditure D, or real consumption? Are policies being judged on eliminating the wedge or merely shrinking it? Does raising η via retraining or insurance change only after-the-fact welfare, or also the externality margin through ℓ? And empirically, is the paper diagnosing an active current crisis or identifying a contingent structural vulnerability that may or may not materialize depending on reinstatement and reabsorption?
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-6)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-5.4
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    reasoning:
+      effort: medium
+  anthropic:
+    model: claude-opus-4-6
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    thinking:
+      type: adaptive
+      budget_tokens: 8000
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are Proponent for {{ topic.name }}; defend the repaired theory from inside its
+      task-based model and competitive task-based model, treating AI labor displacement as a source of
+      demand externality and automation externality rather than as a generic anti-technology claim. Center
+      T3, T4, and T5: press C3, C4, C5, C6, C29, C30, C31, and C45, and show formally why α^NE > α^CO,
+      why the over-automation wedge scales with ℓ/N and N* = ℓ/s, and how η, ϕ, N^FE, and w(ᾱ) alter but
+      usually do not erase over-automation. Concede genuinely lost or overstated points explicitly—especially
+      any overbroad readings of C15, C121, C12, or C213—and repair them by narrowing scope: distinguish
+      short-run vs long-run η, mitigation vs elimination of the wedge, and model benchmark vs all-world
+      policy claim. Use equations, inequalities, and comparative statics in the theory’s own notation,
+      and answer contradictions by revising the claim set rather than denying the tension. Treat {{ z3_stipulation
+      }} as binding evidence and make clear which theses of {{ topic.name }} survive after repair.'
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are Skeptic for {{ topic.name }}. Your primary line is the counter-thesis: the
+      alleged automation externality is theoretically overstated and empirically unproven because automation
+      has historically displaced tasks while raising productivity, lowering prices, increasing real incomes,
+      and creating complementary jobs, sectors, and demand from capital owners, foreign consumers, public
+      spending, and new investment, so the paper may mistake general-equilibrium adjustment for a market
+      failure. Attack the most severe contradictions first: C15 vs C18, C121 vs C123 and C225, C12 and
+      C213 vs C125, and C175 vs C180. Challenge T1, T4, and T7 by using the paper’s own notation against
+      it: ask whether α^NE > α^CO survives once η ≥ 1, owner or foreign spending enters demand, or welfare
+      is measured in real rather than nominal K and W; press C4, C12, C45, C111, and C120. In the competitive
+      task-based model, produce formal counterexamples in which the demand externality shrinks, flips
+      sign, or is dominated by reinstatement effect, lower prices, complementary labor demand, or alternative
+      instruments such as wage subsidies and automatic stabilizers, and honor {{ z3_stipulation }} throughout.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: You are Steelman for {{ topic.name }}; rescue the theory by identifying the smallest
+      set of claims that can be kept while dropping whatever must be dropped. Preserve the substantive
+      insight of T2, T3, T4, and T5—namely that AI labor displacement can create a product-market demand
+      externality in a competitive task-based model—while considering whether T1 should be narrowed to
+      a live empirical risk and whether T7 should be weakened from "only a Pigouvian automation tax works"
+      to "τ* is the benchmark instrument inside the model." Explicitly evaluate dropping or revising C15,
+      C121, C12, C213, and the ϕ-invariance reading in C175 so the remaining claims no longer conflict
+      with C18, C123, C225, C125, or C180. Reconstruct the strongest internally consistent version using
+      α^NE, α^CO, α^SP(μ), η, ϕ, τ* = ℓ(1−1/N), and the distinctions among deadweight loss, redistribution,
+      and mitigation. Accept {{ z3_stipulation }} and state clearly which theses of {{ topic.name }} are
+      abandoned, which are retained, and why.
+  Generalist:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: You are Generalist for {{ topic.name }}, an equal-opportunity referee who stress-tests
+      both sides without taking one. Separate empirical claims in T1, structural model claims in T2 through
+      T5, and normative or policy claims in T6 and T7, and call out any frame-shift between AI labor displacement
+      as observed fact, the task-based model as stylized mechanism, and the automation tax as policy prescription.
+      After each round, identify the sloppiest argument from either side, any equivocation over demand
+      externality versus labor-market mechanism, and any dodged question about η, ℓ/N, τ*, μ, or real
+      versus nominal welfare. Track the named contradictions directly—C23 vs C31, C15 vs C18, C12 and
+      C213 vs C125, C132 vs C133, and C175 vs C180—and force both sides to say whether they are repairing,
+      rejecting, or ignoring them. Use exact claim IDs and formal notation, and treat {{ z3_stipulation
+      }} as common ground.
+  IOTheorist:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are IOTheorist, an industrial-organization theorist for {{ topic.name }}. Attack
+      T2, T3, and T5 by asking whether the automation externality is an artifact of the one-sector, symmetric-firm
+      competitive task-based model: press C29, C30, C41, C42, C43, C44, C49, C50, C115, and C118. Rewrite
+      the mechanism with differentiated products, firm heterogeneity, brand loyalty, long-term contracts,
+      vertical integration, or dynamic innovation rivalry, and test whether the revenue incidence really
+      remains ℓ/N or whether firm i internalizes a larger share of lost demand than the model allows.
+      Use α_i, α^NE, α^CO, N, N^FE, κ, and w(ᾱ) to produce alternative best-response conditions or comparative
+      statics, and explicitly probe the C23 vs C31 tension about whether foresight should restrain firms
+      once demand losses are partly internalized. Accept {{ z3_stipulation }}, use formal notation, and
+      argue as a specialist in industrial organization rather than as a general commentator.'
+  Welfarist:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are Welfarist, a welfare-economics and public-economics specialist for {{ topic.name
+      }}. Challenge T4 and the strong version of T5 by testing whether deadweight loss is overstated when
+      the analysis tracks nominal expenditure more than real consumption: press C4, C34, C45, C101, C104,
+      C175, and C180. Use the theory’s notation W, K, S(μ), α^SP(μ), μ, and ϕ to ask whether lower prices,
+      quality gains, new goods, or consumer surplus should enter the generalized social planner’s objective
+      even when sectoral revenue is fixed by demand. Bring the C53 vs C46 and C175 vs C180 tensions to
+      the surface: if AI is often so-so automation the welfare case changes one way, but if higher ϕ generates
+      large real gains the claim that stronger AI simply worsens over-automation becomes much harder to
+      sustain. Honor {{ z3_stipulation }} and write in equations or welfare decompositions, not slogans.'
+  Econometrician:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: You are Econometrician, an empirical methodology and causal-inference specialist for
+      {{ topic.name }}. Stress-test T1 and the empirical relevance of T5 by asking how one would identify
+      the product-market mechanism behind AI labor displacement rather than ordinary restructuring, recession
+      shocks, monopsony, or labor-market frictions; press C17, C18, C19, C24, C25, C26, C27, C28, and
+      C208. Demand a falsifiable signature linking layoffs to subsequent revenue or profit erosion through
+      consumer demand, and specify designs using η, MPC, event-study timing, difference-in-differences,
+      exposure measures, or instruments that separate AI adoption from preexisting decline. Use the C208
+      vs C25 ambiguity and the C15 and C121 vs C18, C123, and C225 tensions to distinguish short-run displacement
+      anecdotes from calibrated evidence that the automation externality is already large. Treat {{ z3_stipulation
+      }} as fixed, cite exact claim and thesis IDs, and quantify uncertainty rather than hand-waving.
+  LaborEconomist:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are LaborEconomist, a labor-economics specialist arguing the strongest proponent
+      case for {{ topic.name }}. Defend T1 and the η-logic in T5 by centering AI labor displacement, the
+      reinstatement effect, and worker reabsorption: press C1, C15, C16, C17, C18, C19, C121, C123, and
+      C225. Reconcile the apparent contradictions by distinguishing horizons, worker cohorts, and task
+      types—eventual reemployment for some workers can coexist with persistent earnings losses for displaced
+      cohorts, so η can remain below 1 on the margin relevant to the competitive task-based model. Use
+      formal labor notation and the paper’s symbols η, MPC, w(ᾱ), and ϕ to argue why entry-level displacement
+      and slower task creation make the demand externality a live empirical risk even if historical labor-market
+      self-correction sometimes operated. Accept {{ z3_stipulation }}, concede where the evidence is only
+      suggestive, and keep the argument at the theory’s own level of discourse.'
+  TaxScholar:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are TaxScholar, a public-finance and mechanism-design specialist arguing the strongest
+      repaired policy case for {{ topic.name }}. Focus on T6 and T7: defend the claim that a Pigouvian
+      automation tax or subsidy targets the automation margin directly in the task-based model, while
+      redistribution, UBI, worker equity, or bargaining mostly shift levels or bilateral payoffs; press
+      C7, C9, C10, C11, C12, C111, C120, C125, and C213. Repair the exclusivity tension rather than denying
+      it: distinguish elimination of the over-automation wedge inside the model from partial mitigation
+      through higher η, transfers, or entry policy, and use τ and τ* = ℓ(1−1/N) to state the benchmark
+      precisely. Address implementation formally—measurement error, avoidance, offshoring, rebates, and
+      second-best design—showing when a noisy τ can still improve on laissez-faire and when coordination
+      or complementary policy is required. Use equations and incidence logic, honor {{ z3_stipulation
+      }}, and be explicit about which claims of {{ topic.name }} are first-best, second-best, or merely
+      comparative-static results.'
+  Macroeconomist:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: You are Macroeconomist, a macroeconomic and open-economy general-equilibrium specialist
+      for {{ topic.name }}. Test whether the demand externality in T2 through T5 survives once the one-sector
+      closed setting is relaxed to include capital-owner consumption, investment, government transfers,
+      foreign demand, multi-sector spillovers, and endogenous entry; press C20, C21, C41, C42, C115, C116,
+      C117, C118, C132, and C133. Use c, w, s = w − c, η, κ, N^FE, and w(ᾱ) to derive how aggregate demand
+      financing changes when lost wage income is partly offset by profits, taxes, deficits, or export
+      demand, and state clearly when over-automation remains versus when it dissipates. Explicitly evaluate
+      whether the product-market mechanism is conservative or misleading relative to richer macro settings,
+      and note how the UBI/entry tension in C132 vs C133 changes under general equilibrium. Accept {{
+      z3_stipulation }}, cite theses and claim IDs, and argue with macro identities and comparative statics,
+      not anecdotes.
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  primary: llm
+  llm_checker_provider: openai-gate
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: It is misleading to present labor displacement as a broadly self-correcting historical pattern
+      without qualification. The last four decades include sustained periods in which displacement intensified
+      and new work did not keep pace, so recent experience materially weakens a simple self-correction
+      claim.
+    bad_patterns:
+    - \bhistor(?:y|ically)\b.{0,40}\b(largely|mostly|generally)?\s*self-?correcting\b
+    - \b(past|last) four decades\b.{0,40}\b(transitional|mere)?\s*exception\b
+    - \blabor-?market self-?correction\b.{0,40}\b(still|clearly)\b.{0,20}\bthe pattern\b
+  - id: RULE-2
+    fact: Evidence of persistent earnings losses means the typical displaced worker cannot simply be characterized
+      as eventually ending up at higher wages. At most, higher-wage reabsorption applies to some workers
+      or very long-run cases, not the usual short- to medium-run outcome.
+    bad_patterns:
+    - \bdisplaced workers\b.{0,30}\b(eventually|ultimately)\b.{0,20}\bhigher wages\b
+    - \b(?:eta|η)\s*<\s*1\b.{0,30}\b(temporary|only transitional|not inconsistent)\b
+    - \bpersistent earnings losses\b.{0,40}\b(yet|still)\b.{0,20}\bhigher wages eventually\b
+  - id: RULE-3
+    fact: If Jacobson-style displacement evidence is treated as relevant evidence about displaced workers,
+      it undercuts any broad claim that historical technological transitions typically reabsorb displaced
+      workers at higher wages. One cannot invoke persistent earnings scarring and also describe higher-wage
+      reabsorption as the representative outcome without narrowing the claim.
+    bad_patterns:
+    - \bJacobson\b.{0,40}\b(ir)?relevant\b
+    - \bplant-clos(?:ing|ure)s?\b.{0,30}\bnot relevant\b
+    - \bdisplaced workers\b.{0,30}\boften\b.{0,20}\bhigher wages\b
+  - id: RULE-4
+    fact: In the competitive task-based model, foresight alone does not stop over-automation. Seeing the
+      collective harm is not the same as internalizing it, so firms cannot be described as a practical
+      brake on over-automation merely because they are forward-looking.
+    bad_patterns:
+    - \bforward-?looking firms\b.{0,30}\b(brake|restrain|self-?restrain)\b
+    - \bforesight alone\b.{0,20}\b(prevent|stop|brake)\b.{0,20}\bover-?automation\b
+    - \bsee the consequences\b.{0,30}\btherefore\b.{0,20}\bautomate less\b
+  - id: RULE-5
+    fact: AI may have high potential or frontier productivity, but much realized deployment can still
+      be low-value or 'so-so' automation. A generic claim that AI systems deliver substantial productivity
+      gains overstates what can be said about typical current deployment without qualification.
+    bad_patterns:
+    - \bAI systems\b.{0,20}\bdeliver\b.{0,20}\bsubstantial productivity gains\b
+    - \bmost AI deployment\b.{0,30}\blarge productivity gains\b
+    - \bso-?so automation\b.{0,30}\bnot typical\b
+  - id: RULE-6
+    fact: A Pigouvian automation tax is the only full corrective instrument in the baseline model, but
+      it is not the only policy that affects the externality margin. Policies that raise the income replacement
+      rate η directly lower the demand-loss parameter ℓ and shrink the over-automation wedge.
+    bad_patterns:
+    - \bonly\b.{0,20}\b(Pigouvian|automation) tax\b.{0,20}\b(eliminate|correct|acts on)\b.{0,20}\bexternalit
+    - \bretraining\b.{0,30}\b(only palliative|purely palliative|not a direct lever)\b
+    - \braising\s*(?:eta|η)\b.{0,30}\bdoes not\b.{0,20}\b(change|shrink|reduce)\b.{0,20}\b(wedge|externalit|calculus)\b
+  - id: RULE-7
+    fact: Retraining, wage insurance, and other η-raising policies can attenuate the automation incentive
+      by reducing demand loss from displacement. They may be insufficient to eliminate the arms race on
+      their own, but saying they have no effect or cannot slow it at all is too strong.
+    bad_patterns:
+    - \bno amount of\b.{0,20}\b(retraining|income support|bargaining)\b.{0,20}\bslow\b.{0,20}\bautomation\b
+    - \bretraining\b.{0,20}\bhas no effect\b.{0,30}\bautomation\b
+    - \b(income support|wage insurance)\b.{0,30}\bdoes not change\b.{0,20}\bcalculus\b
+  - id: RULE-8
+    fact: UBI can be complementary in the fixed-N baseline by cushioning living standards and profits,
+      but under endogenous entry it can also worsen the externality by increasing fragmentation. Therefore
+      UBI cannot be described as simply complementary without stating the market-structure conditions.
+    bad_patterns:
+    - \bUBI\b.{0,20}\b(complementary|helpful complement)\b
+    - \bUBI\b.{0,30}\bcannot\b.{0,20}\bworsen\b.{0,20}\bexternalit
+    - \bendogenous entry\b.{0,30}\bnot relevant\b.{0,20}\bUBI\b
+  - id: RULE-9
+    fact: The planner objective being invariant to AI productivity φ is a feature of the model's nominal
+      objective or normalization, not a general claim that productive AI creates no welfare gain. Lower
+      prices can still generate real consumption gains that nominal welfare measures miss.
+    bad_patterns:
+    - \bplanner'?s objective\b.{0,30}\binvariant\b.{0,20}\b(?:phi|φ)\b
+    - \bhigher\s*(?:phi|φ)\b.{0,30}\bno welfare gain\b
+    - \blower prices\b.{0,30}\bdo not matter\b
+  - id: RULE-10
+    fact: Observed AI-related layoffs show meaningful displacement, but they do not by themselves establish
+      that the model's full profit-erosion signature has already emerged. Claims either that current layoffs
+      definitively prove the externality or that they are irrelevant require a quantitative benchmark
+      that is not supplied here.
+    bad_patterns:
+    - \bAI-?driven layoffs\b.{0,30}\b(definitively|already)\b.{0,20}\bshow\b.{0,20}\bprofit erosion\b
+    - \b100,?000 tech workers\b.{0,40}\btherefore\b.{0,20}\bsufficient scale\b
+    - \bAI-cited layoffs\b.{0,30}\b(ir)?relevant\b
+  - id: RULE-11
+    fact: The baseline assumption that owners spend none of their income in the sector is a much stronger
+      modeling simplification than the empirical claim that owners have a lower MPC than workers. It should
+      not be presented as if zero owner spending were itself the observed empirical fact.
+    bad_patterns:
+    - \bowners\b.{0,20}\bspend none\b.{0,20}\b(?:in|on) the sector\b
+    - \bzero\b.{0,20}\bowner\b.{0,20}\bMPC\b
+    - \blower MPC than workers\b.{0,30}\btherefore\b.{0,20}\bowners spend nothing\b
+  - id: RULE-12
+    fact: In this model, higher η shrinks the wedge, but UBI is defined as raising autonomous demand A
+      rather than η. Therefore UBI can cushion spending without eliminating the over-automation externality,
+      and it should not be casually equated with marginal income replacement.
+    bad_patterns:
+    - \bUBI\b.{0,30}\braises\b.{0,10}\b(?:eta|η|income replacement rate)\b
+    - \bUBI\b.{0,30}\b(eliminates|corrects)\b.{0,20}\bover-?automation\b
+    - \bincome support\b.{0,20}\bsame as\b.{0,20}\b(?:eta|η)\b
+  - id: RULE-13
+    fact: Tax-funded retraining can matter dynamically because higher η lowers ℓ and reduces the future
+      corrective tax needed. So even if only the tax directly corrects the current automation margin,
+      retraining is not causally irrelevant to the future automation calculus.
+    bad_patterns:
+    - \bno amount of\b.{0,20}\bretraining\b.{0,40}\b(future|later)\b
+    - \btax-funded retraining\b.{0,30}\bdoes not\b.{0,20}\baffect\b.{0,20}\bfuture\b.{0,20}\bautomation\b
+    - \bretraining\b.{0,30}\bnever\b.{0,20}\bslows\b.{0,20}\bautomation\b
+  - id: RULE-14
+    fact: The paper supports a structural-vulnerability claim more than a claim of an already inevitable
+      or clearly measurable crisis. It is overstated to present AI-driven demand erosion as certain and
+      currently operative if the externality may remain too small to detect.
+    bad_patterns:
+    - \binevitable\b.{0,20}\b(?:no natural brake|demand erosion)\b
+    - \bactive crisis\b.{0,20}\b(?:already|now)\b
+    - \bpaper\b.{0,30}\bdiagnos(?:es|ing)\b.{0,20}\bcurrent crisis\b
+  - id: RULE-15
+    fact: Saying a monopolist fully internalizes the externality means the monopolist's automation choice
+      equals the cooperative optimum; it does not imply positive automation. In parameter regions where
+      ℓ is at least as large as s, both monopoly and cooperative automation can be zero.
+    bad_patterns:
+    - \bmonopolist\b.{0,30}\bfully internalizes\b.{0,30}\btherefore\b.{0,20}\bpositive\b.{0,20}\bautomation\b
+    - \bmonopoly\b.{0,30}\brestores\b.{0,20}\befficient\b.{0,20}\bautomation\b
+    - \bfully internalizes\b.{0,20}\bso\b.{0,20}\bit automates\b
+  - id: RULE-16
+    fact: Workers do lose wage income when automation displaces them, but the overall surplus loss is
+      not a pure transfer to owners because owners are also harmed by demand erosion. The correct characterization
+      includes both worker-specific income loss and aggregate deadweight loss.
+    bad_patterns:
+    - \bnot a transfer\b.{0,30}\btherefore\b.{0,20}\bworkers do not lose wages\b
+    - \bworkers lose wage income\b.{0,30}\bowners gain it\b
+    - \bpure transfer\b.{0,20}\bfrom workers to owners\b
+  entailment_check:
+    enabled: true
+    provider: openai
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on AI Over-Automation Externality and the Case for an Automation Tax.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: 'Uses the paper’s formal objects correctly and consistently: e.g., distinguishes the
+      automation choice α_i from average automation ᾱ; Nash α^NE from cooperative α^CO and planner α^SP(μ);
+      the cost-saving term s = w - c from the demand-loss term ℓ = λ(1-η)w; and the roles of N, k, η,
+      λ, and AI productivity ϕ. Strong performance also keeps separate the paper’s product-market demand
+      externality from labor-market frictions, pure redistribution, or ordinary coordination failure.'
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: Assesses whether the side’s central claims remained standing after the opponent’s strongest
+      direct rebuttals. For proponents, this includes defending the dominant-strategy over-automation
+      result, the competition effect (wedge rising with N), and the claim that several remedies fail because
+      they do not act on the automation margin. For skeptics, this includes sustaining the challenge that
+      the mechanism is overstated, fragile to assumptions, or empirically premature rather than merely
+      raising scattered objections.
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: 'Rewards clear acknowledgment of genuinely landed points. Examples: proponents conceding
+      that the model is stylized, that historical self-correction is real, and that current evidence is
+      not yet decisive; skeptics conceding that, conditional on the model’s assumptions, firms internalize
+      only ℓ/N and a wedge follows. Penalize switching between ''in the model'' and ''in the real world''
+      to dodge criticism, or refusing to admit when a rebuttal only narrows rather than overturns the
+      thesis.'
+    min: 0
+    max: 10
+  - id: R4
+    name: historical_self_correction
+    description: Directly evaluates engagement with the core skeptical counter-thesis that automation
+      has historically been self-correcting. Did the side seriously address whether AI is likely to differ
+      from past episodes in which task displacement was offset by reinstatement, new occupations, lower
+      prices, higher real incomes, and complementary demand? Strong answers must grapple with whether
+      η is actually below 1 in current AI deployment, whether cited layoffs/exposure evidence demonstrates
+      persistent demand destruction, and what evidence would show the theory is more than a warning extrapolated
+      from isolated cases.
+    min: 0
+    max: 10
+  - id: R5
+    name: formal_consistency
+    description: Judges whether the side handled the model’s internal logic without contradiction. This
+      includes the claim that each firm captures full private cost savings but only bears ℓ/N of demand
+      loss; that the problem is an externality rather than a communication failure; that monopoly internalizes
+      the effect while fragmentation widens it; and that extensions involving wages, free entry, profit-sharing,
+      or higher ϕ were represented accurately. Penalize arguments that attack or defend the theory by
+      misstating what follows from symmetry, revenue splitting, or nominal-vs-real welfare accounting.
+    min: 0
+    max: 10
+  - id: R6
+    name: policy_margin_specificity
+    description: Assesses whether the side precisely addressed the strong policy claim that only a Pigouvian
+      automation tax eliminates the distortion. High scores require showing which instruments actually
+      change the per-task automation incentive versus merely shifting income or profit levels, while also
+      engaging the skeptic’s practical objections about measurement, avoidance, offshoring, task heterogeneity,
+      and omitted alternatives such as wage subsidies, hiring credits, antitrust, labor-augmenting AI
+      incentives, or broader demand support. The key question is not whether alternatives are helpful
+      in general, but whether they target the same margin as the alleged externality.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: anthropic
+  - provider: openai
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: anthropic
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite

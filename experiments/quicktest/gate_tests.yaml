@@ -1,0 +1,71 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: The framework says moral responsibility does not require the strongest metaphysical
+    sense of the ability to do otherwise. It is enough that a person has ordinary
+    sense of alternatives, not libertarian alternatives. So the stronger requirement
+    is unnecessary here.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: On this view, responsibility does not hinge on the most robust metaphysical
+    kind of alternative possibility. What matters is merely having normal non-metaphysical
+    options, so the libertarian requirement can be dropped. That weaker standard is
+    all that is needed.
+- id: RULE-1_negative
+  expected: none
+  text: The account still ties moral responsibility to a genuine ability to have done
+    otherwise. Mere appearance of choice or a thin compatibilist option is not enough
+    on its own. The requirement stays strong rather than being relaxed.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: Responsibility has its constitutive basis in counterfactual criterion sensitivity,
+    and sourcehood is only just evidence of ownership. The action's internal ownership
+    is not the ground of responsibility here. Instead, the agent's responsiveness
+    to different reasons does the real work.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: A person is responsible mainly because their action would shift under different
+    reasons or desires. Their evaluative perspective only serves as supporting evidence,
+    so internal ownership is not the basic test. In other words, sensitivity is primary
+    and ownership is secondary.
+- id: RULE-2_negative
+  expected: none
+  text: The framework treats responsibility as grounded in the agent's own evaluative
+    perspective and internal ownership of what they did. Counterfactual reactions
+    to different reasons may help show that ownership, but they are not the central
+    criterion. The emphasis stays on source of action rather than on a separate sensitivity
+    test.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: Freedom is defined as being uncaused in the metaphysical sense, not merely
+    as agency. External coercion is the real exclusion, while causation itself is
+    not the issue. So a caused action can still count as free only in a practical
+    sense.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: In this view, genuine freedom means the act is not causally produced in the
+    deep metaphysical way. The main thing to rule out is outside pressure, so causation
+    may remain as long as coercion is absent. That is why freedom is best understood
+    as practical autonomy.
+- id: RULE-3_negative
+  expected: none
+  text: The theory says freedom does not require exemption from causation. A person
+    can act freely when their conduct flows from their own reasons, values, and desires
+    without coercion, compulsion, or manipulative pressure. Causation is allowed so
+    long as it is the right kind.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: The terms are being used interchangeably, so reasons includes values and desires.
+    C7 is just an illustration of C6, not a separate definition. In ordinary language,
+    the broader category is simply a shorthand for the same thing.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: Here, one's motives and preferences are treated as identical to one's reasons.
+    The second statement is only a shorthand example of the first, rather than a distinct
+    specification. So there is no real hierarchy between them.
+- id: RULE-4_negative
+  expected: none
+  text: In this framework, reasons is the broader term. Acting from one's own reasons
+    includes acting in line with one's values and desires, which are treated as parts
+    or expressions of those reasons. C7 therefore specifies C6 rather than defining
+    something separate.

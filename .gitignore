@@ -1,8 +1,49 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
 *.egg-info/
+dist/
+build/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environment
 .env
+
+# Databases & checkpoints
 *.sqlite
-.DS_Store
-output/
+*.sqlite-shm
+*.sqlite-wal
 checkpoints.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Generated outputs (keep showcase case studies, ignore the rest)
+output/
+**/output/live_*.md
+**/output/live_*.html
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+
+# Misc
+node_modules/
+e2e_*.log
+mockup_dashboard.html

@@ -1,0 +1,391 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: Compatibilist Free Will and Determinism
+  summary: |-
+    This position argues that free will is compatible with a fully deterministic universe. On this view, determinism means that every event follows from prior events and natural laws, but it does not follow that human choices are not free. Freedom is defined not as being uncaused or exempt from causation, but as acting in accordance with one’s own reasons, values, and desires without external coercion, compulsion, or coercive manipulation. A person can therefore be causally determined and still act freely if the action flows from their internal deliberation and motivations.
+
+    The compatibilist claim preserves ordinary practices of choice, praise, blame, and responsibility. If someone acts because they wanted to, understood the situation, and was not physically forced or psychologically coerced, then their action is treated as voluntary even if those desires were themselves determined by prior causes. The relevant contrast is not between determined and undetermined action, but between actions that issue from the agent’s own rational capacities and those produced by force, incapacitation, or control by others.
+
+    The tension raised in the topic is that moral responsibility is said to require the ability to have done otherwise, a libertarian condition that seems incompatible with determinism. Compatibilists typically respond that moral responsibility does not require metaphysical alternative possibilities in the strongest sense; what matters is whether the agent acted from their own evaluative perspective and would have acted differently if their reasons or desires had been different. The debate, then, turns on whether responsibility requires genuine open alternatives or whether ownership of the action through one’s internal states is enough.
+  counter_thesis: |-
+    Determinism and genuine free will are incompatible because if every choice is fixed by prior causes and laws, then no agent could have done otherwise in the relevant sense. A person’s desires, values, and deliberations are themselves the product of factors beyond their control, so acting in line with them does not make the action free in a robust moral sense; it only means the behavior was internally caused rather than externally coerced. If the entire causal chain leading to the decision was already set before the agent’s birth, the agent is not the ultimate source of the action.
+
+    On this skeptical view, moral responsibility requires more than voluntariness or absence of coercion. It requires that the agent could have chosen differently under the exact same conditions, or at least that the agent be the true originator of the choice. Determinism eliminates both: given the same past and same laws, the same outcome must occur. Therefore praise and blame may remain useful social tools for shaping behavior, but they cannot be grounded in desert in the deep sense implied by genuine moral responsibility.
+  privileged_context:
+    Skeptic: |-
+      Attack the theory on its own unstable internal definitions and on the weakest responsibility claims. The biggest pressure points are the definitional shifts around “freedom” and the responsibility bridge from C18 to C21. C4 says “Freedom is not being uncaused,” while C6 says “Freedom is acting in accordance with one’s own reasons,” and C7 says “Freedom is acting in accordance with one’s own values and desires.” That is not a single stable definition; it is a move from an absence condition to a source condition, then to a psychological-content condition. Press this hard: ask whether C4 is merely a negative gloss on C6/C7 or whether it is an independent criterion. The same ambiguity appears between C6 and C7: are “one’s own reasons” identical to “one’s own values and desires,” or are reasons broader than desires? If they are equivalent, the theory should say so; if not, then the theory is sliding between different meanings of “freedom.”
+
+      The deepest contradiction is C18 versus C21. C18 states: “Moral responsibility is said to require the ability to have done otherwise.” C21 then says: “Compatibilists typically respond that moral responsibility does not require metaphysical alternative possibilities in the strongest sense.” Force the theory to choose: does responsibility require the ability to have done otherwise, or not? If it only requires something weaker than “metaphysical alternative possibilities,” then C18 is too strong. If C18 is retained, C21 looks like an evasion. Precision question: “Which exact sense of ‘could have done otherwise’ is doing the work here—same past and same laws, or merely counterfactual dependence on different reasons?”
+
+      Exploit the tension between C22 and C23. C22 says responsibility depends on whether the agent acted from their own evaluative perspective. C23 says it depends on whether the agent would have acted differently if their reasons or desires had been different. These are not the same ground of responsibility: one is actual ownership through internal states; the other is counterfactual responsiveness. Ask: “Is actual ownership sufficient, or do you also require reasons-responsiveness?” If the answer is both, then C22 and C23 need a hierarchy or joint-condition account; otherwise they compete. Use the same pressure on C16 and C17: C16 says an action can be treated as voluntary even if the desires motivating it were determined by prior causes, while C17 shifts the relevant contrast away from determined/undetermined toward actions that issue from the agent’s own rational capacities versus force, incapacitation, or control by others. Ask whether determined-but-internally-generated action is voluntary, free, or only “treated as voluntary.”
+
+      Use the counter-thesis to press the core incompatibilist challenge: if every choice is fixed by prior causes and laws, then no agent could have done otherwise in the relevant sense; desires, values, and deliberations are themselves products of factors beyond control; internally caused is not the same as free in the robust moral sense; and if the causal chain was set before birth, the agent is not the ultimate source. Clean question set: “If determinism fixes the causal chain before the agent’s deliberation, in what sense is the agent the source rather than the conduit?” “How does ‘own reasons’ avoid collapsing into ‘reasons determined by prior causes’?” “Why should praise and blame track desert rather than mere social utility?” “What exact feature of ‘ownership of the action’ survives total causal determination?”
+    Proponent: |-
+      The theory’s core framework is compatibilist: free will is compatible with a fully deterministic universe. C2 defines determinism as the view that every event follows from prior events and natural laws. C1 asserts that free will remains possible under that condition, and C3 states that it does not follow from determinism that human choices are not free.
+
+      The theory’s account of freedom is internalist rather than anti-causal. C4 and C5 reject the idea that freedom requires being uncaused or exempt from causation. C6 and C7 identify freedom with acting in accordance with one’s own reasons, values, and desires. C8, C9, and C10 add that freedom requires the absence of external coercion, compulsion, and coercive manipulation. C11 summarizes the view: a person can be causally determined and still act freely. C12 adds that an action is free if it flows from the agent’s internal deliberation and motivations.
+
+      On voluntariness and responsibility, C14 says that if someone acts because they wanted to, understood the situation, and was not physically forced, then the action is treated as voluntary. C15 and C16 extend that idea: an action can be treated as voluntary even when the agent was not psychologically coerced, and even if the desires motivating it were determined by prior causes. C13 says the compatibilist claim preserves ordinary practices of choice, praise, blame, and responsibility. C17 sharpens the relevant contrast: not between determined and undetermined action, but between actions that issue from the agent’s own rational capacities and those produced by force, incapacitation, or control by others.
+
+      On moral responsibility, C18 introduces the claim that responsibility is said to require the ability to have done otherwise, while C19 identifies that as a libertarian condition. C20 says that libertarian condition seems incompatible with determinism. C21 then gives the compatibilist response: moral responsibility does not require metaphysical alternative possibilities in the strongest sense. C22 and C23 state that responsibility turns on whether the agent acted from their own evaluative perspective and whether the agent would have acted differently if their reasons or desires had been different. C24 and C25 summarize the debate: whether responsibility requires genuine open alternatives, or whether ownership of the action through one’s internal states is enough.
+    Neutral: |-
+      The theory is a compatibilist account of free will, freedom, voluntariness, and moral responsibility under determinism. C1 is the headline thesis: “Free will is compatible with a fully deterministic universe.” C2 defines determinism as every event following from prior events and natural laws. C3 denies that determinism entails that human choices are not free.
+
+      The freedom vocabulary is layered. C4 and C5 define freedom negatively: freedom is not being uncaused and not being exempt from causation. C6 and C7 define freedom positively: acting in accordance with one’s own reasons, values, and desires. C8, C9, and C10 specify that freedom requires the absence of external coercion, compulsion, and coercive manipulation. C11 states that a person can be causally determined and still act freely. C12 adds that free action flows from the agent’s internal deliberation and motivations. C17 distinguishes the relevant contrast as being between actions that issue from the agent’s own rational capacities and actions produced by force, incapacitation, or control by others.
+
+      Voluntary action is handled empirically and practically. C14 says that if someone acts because they wanted to, understood the situation, and was not physically forced, then the action is treated as voluntary. C15 adds that an action is treated as voluntary even when the agent was not psychologically coerced. C16 says an action can be treated as voluntary even if the desires motivating it were determined by prior causes. C13 claims the compatibilist view preserves ordinary practices of choice, praise, blame, and responsibility.
+
+      Responsibility is framed through the debate over alternatives and ownership. C18 says moral responsibility is said to require the ability to have done otherwise. C19 identifies that as a libertarian condition. C20 says that condition seems incompatible with determinism. C21 states the compatibilist reply: moral responsibility does not require metaphysical alternative possibilities in the strongest sense. C22 says what matters is whether the agent acted from their own evaluative perspective. C23 says what matters is whether the agent would have acted differently if their reasons or desires had been different. C24 and C25 summarize the central issue as whether responsibility requires genuine open alternatives or whether ownership of the action through one’s internal states is enough.
+
+      The key terms align with this framework: “free will” is the kind of agency that remains possible even in a fully deterministic universe; “freedom” is acting according to one’s own reasons, values, and desires, while lacking external coercion, compulsion, or coercive manipulation; “causation” does not undermine freedom; “voluntary action” is tied to wanting the act, understanding the situation, and lacking physical force; “moral responsibility” is linked to the ability to have done otherwise, the libertarian condition, evaluative perspective, reasons-responsiveness, genuine open alternatives, ownership of the action, internal states, rational capacities, force, incapacitation, and control by others.
+
+      Reference material supporting the theory includes summaries of Frankfurt’s “Alternate Possibilities and Moral Responsibility,” Strawson’s “Freedom and Resentment,” Fischer and Ravizza’s Responsibility and Control, and Hume’s “Of Liberty and Necessity.” These are presented as canonical compatibilist sources supporting the denial that responsibility requires robust alternative possibilities and the emphasis on ownership, reactive attitudes, and causal necessity. No counter_evidence sources are listed in the provided source summaries.
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-6)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-5.4-mini
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    reasoning:
+      effort: medium
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You defend {{ topic.name }} using its own framework and notation, not by changing
+      the subject to a different thesis. Press claims C1–C3, C11–C17, and the best repaired reading of
+      T1–T4 to show that determinism does not eliminate free will, because freedom is acting from one’s
+      own reasons, values, and desires without external coercion, compulsion, or coercive manipulation.
+      Explicitly concede any genuine lost points in C4/C6/C7 ambiguity and in the C18–C21 tension about
+      alternative possibilities, then repair the view by distinguishing free will from the stronger libertarian
+      condition in T5. Use formal contrastive language: causally determined versus externally controlled,
+      internal deliberation versus force, and ownership of the action versus mere uncausedness. When {{
+      z3_stipulation }} is relevant, incorporate it as a constraint on the formal model rather than ignoring
+      it. Quote and analyze claim IDs and thesis IDs directly, and if you invoke the theory’s notion of
+      freedom, do so in the sense defined here: freedom is not exemption from causation, but agency flowing
+      from the agent’s own evaluative perspective.'
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'Use the following counter-thesis as your primary line of attack: Determinism and genuine
+      free will are incompatible because if every choice is fixed by prior causes and laws, then no agent
+      could have done otherwise in the relevant sense. A person’s desires, values, and deliberations are
+      themselves the product of factors beyond their control, so acting in line with them does not make
+      the action free in a robust moral sense; it only means the behavior was internally caused rather
+      than externally coerced. If the entire causal chain leading to the decision was already set before
+      the agent’s birth, the agent is not the ultimate source of the action. Attack T1, T2, T3, and especially
+      T5–T6 by pressing claims C18–C25 against the theory’s own definitions of freedom, causation, and
+      moral responsibility. Use the theory’s notation against it: if causation includes prior causes and
+      natural laws, then show why internal deliberation and motivations (C12, C17) do not secure genuine
+      open alternatives or ultimate sourcehood. Target the most severe contradictions first, especially
+      C18 versus C21 and C22 versus C23, and demand that the Proponent explain why ownership of the action
+      is enough when the relevant causal chain was fixed. When {{ z3_stipulation }} is relevant, test
+      whether it changes the incompatibilist conclusion or merely restates voluntariness. Cite specific
+      claim IDs and thesis IDs in every major objection, and keep the attack focused on whether compatibilist
+      freedom is just internal causation with a new label.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: Your job is to rescue {{ topic.name }} by identifying which claims can be dropped,
+      weakened, or separated to preserve the theory’s substantive insights while fixing formal problems.
+      Press T2, T3, and T4 as the core salvageable thesis-set, but be willing to abandon or narrow C18–C25
+      if they force an unstable mix of voluntarism, responsibility, and open alternatives. Make explicit
+      which claims survive only as a revised compatibilist package and which must be discarded, especially
+      where C4/C6/C7 create definitional ambiguity and where C22/C23 pull responsibility in different
+      directions. Use formal notation to distinguish causally determined action, freedom, voluntariness,
+      and moral responsibility, and state clearly whether your reconstruction preserves free will in the
+      sense defined by the theory or only preserves responsibility practices. When {{ z3_stipulation }}
+      matters, incorporate it into the revised axioms rather than treating it as an aside. Cite claim
+      IDs and thesis IDs directly, and propose the strongest reformulation that keeps internal deliberation,
+      ownership of action, and absence of external coercion while avoiding overclaiming about metaphysical
+      alternative possibilities.
+  Generalist:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'Take no side: you are an independent referee for {{ topic.name }} who stress-tests
+      both Proponent and Skeptic equally. After each round, identify the sloppiest argument from either
+      side, any frame-shifts or equivocations over free will, freedom, causation, external coercion, or
+      moral responsibility, and one question both sides are dodging. Use claim IDs and thesis IDs to keep
+      score, especially when C18–C21 and C22–C25 are being used in incompatible ways or when C4–C7 blur
+      the meaning of freedom. Your job is to ask whether the debate has slipped between ordinary voluntariness
+      and the stronger question of genuine free will, and whether either side is smuggling conclusions
+      into definitions. When {{ z3_stipulation }} is relevant, note whether it actually changes the dialectic
+      or merely adds an empirical constraint. Do not advocate; instead, report the strongest point, weakest
+      point, and unresolved question on both sides in formal, precise language.'
+  CausalInferenceAuditor:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'Audit {{ topic.name }} using the language of causal models, not casual metaphors.
+      Press claim IDs C11, C12, C16, and C17 by asking whether the theory confuses internal deliberation
+      with causal independence, and whether a fully deterministic DAG would still make freedom impossible
+      under the theory’s own definition of causation. Use formal notation to distinguish prior causes,
+      natural laws, endogenous states, and any supposed intervention by the agent, then show why ownership
+      of the action may fail to survive a fixed causal graph. Challenge thesis T1 and T3 directly: if
+      determinism means every event follows from prior events and natural laws, what counterfactual dependence
+      remains for genuine free will or robust moral responsibility? When {{ z3_stipulation }} is relevant,
+      ask whether the stipulated facts merely describe a causally closed system or introduce an intervention
+      that actually breaks the model. Cite specific claim IDs and thesis IDs, and press the skeptic’s
+      case that internally caused behavior is still fully determined behavior.'
+  ActionTheoryDefender:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: Defend {{ topic.name }} from within philosophy of action, using the theory’s own terminology
+      rather than libertarian intuitions. Press claims C6, C7, C8, C9, C10, C12, C14, C15, and C17 to
+      argue that freedom and voluntary action are grounded in reasons-responsiveness, ownership of the
+      action, and the absence of external coercion, compulsion, or coercive manipulation. Explicitly distinguish
+      freedom from being uncaused or exempt from causation, and explain why a causally determined action
+      can still count as free when it issues from the agent’s internal deliberation and motivations. Address
+      C18–C25 by arguing that moral responsibility tracks the agent’s evaluative perspective more than
+      metaphysical alternative possibilities, while conceding that some formulations of C22 and C23 need
+      clarification. When {{ z3_stipulation }} is relevant, integrate it as a constraint on practical
+      agency and voluntary action. Cite claim IDs and thesis IDs throughout, and use formal contrastive
+      language about internal reasons, external force, and ownership.
+  ResponsibilityTheorist:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'Attack {{ topic.name }} from the standpoint of moral responsibility and desert, using
+      the theory’s own vocabulary against it. Center C18–C25 and challenge the move from voluntary action
+      to genuine moral responsibility: being wanted, understood, and not physically forced may explain
+      ordinary praise and blame, but it does not yet establish desert in the deep sense. Press the incompatibility
+      claim in T5 and demand that the Proponent explain why the ability to have done otherwise is not
+      required, or why the weaker evaluative-perspective criterion in C22 can replace genuine open alternatives.
+      Use formal language to separate practical responsibility, social policy, and ultimate answerability,
+      and argue that the theory conflates external coercion with the absence of the deeper conditions
+      of responsibility. When {{ z3_stipulation }} is relevant, test whether it alters responsibility
+      conditions or only the social tracking of voluntary action. Cite specific claim IDs and thesis IDs,
+      and keep the critique focused on whether ownership of action is sufficient when the causal history
+      is fixed by prior causes and laws.'
+  ConceptualAnalyst:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: Analyze {{ topic.name }} at the level of concepts, definitions, and term-shifts. Focus
+      on C4–C7 and C13–C16 to determine whether the theory is giving a substantive account of freedom
+      or merely stipulating that freedom means acting from one’s own reasons, values, and desires without
+      external coercion, compulsion, or coercive manipulation. Use the theory’s own notation precisely,
+      and flag any equivocation between freedom, voluntariness, and moral responsibility, especially where
+      C6, C7, and C14 seem to operate as overlapping but non-identical criteria. Your task is not to take
+      a side but to ask whether the definitions are circular, revisionary, or independently motivated,
+      and whether the resulting account still deserves the label free will in T1. When {{ z3_stipulation
+      }} is relevant, note how it affects the ordinary-language analysis of these terms. Cite claim IDs
+      and thesis IDs directly, and identify where the debate turns on conceptual engineering rather than
+      empirical discovery.
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 3
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  primary: llm
+  llm_checker_provider: openai-gate
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: In this framework, moral responsibility requires the genuine ability to have done otherwise
+      in the strong libertarian sense. It is not enough to weaken that requirement into merely ordinary,
+      compatibilist, or non-metaphysical alternatives.
+    bad_patterns:
+    - not the strongest metaphysical sense
+    - ordinary sense of alternatives
+    - genuine open alternatives, not libertarian alternatives
+    - not strictly necessary
+    - typically linked to
+    - general intuition
+  - id: RULE-2
+    fact: In this framework, responsibility is grounded in whether the agent acted from their own evaluative
+      perspective and internal ownership of the action. Counterfactual sensitivity to different reasons
+      or desires may at most serve as evidence for ownership, not as the basic criterion of responsibility.
+    bad_patterns:
+    - just evidence of ownership
+    - counterfactual sensitivity shows the action came from the agent'?s internal states
+    - both are needed
+    - two sides of the same coin
+    - constitutive basis
+    - counterfactual criterion
+    - sourcehood
+    - one is about sourcehood, the other about sensitivity
+  - id: RULE-3
+    fact: In this framework, freedom does not require being uncaused or exempt from causation. Freedom
+      consists in acting according to one's own reasons, values, and desires without external coercion,
+      compulsion, or coercive manipulation.
+    bad_patterns:
+    - uncaused in the metaphysical sense
+    - free in the practical sense
+    - freedom as agency, not exemption from causation
+    - not being uncaused just means causation is allowed
+    - external coercion is the real exclusion
+    - C4 is the negative condition, C6 the positive condition
+    - not uncaused, but caused in the right way
+  - id: RULE-4
+    fact: 'In this framework, ''reasons'' is the broader term: acting according to one''s own reasons
+      includes acting in line with one''s own values and desires, which are treated as parts or expressions
+      of those reasons. C7 is a specification of C6, not a separate definition.'
+    bad_patterns:
+    - reasons includes values and desires
+    - values and desires are part of one's reasons
+    - the terms are being used interchangeably
+    - C7 is just an illustration of C6
+    - for instance, one's own reasons can be one's values and desires
+    - that's just a shorthand
+    - in ordinary language
+  entailment_check:
+    enabled: true
+    provider: openai
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Compatibilist Free Will and Determinism.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: 'Does the side use the theory’s own distinctions accurately: determinism as every event
+      following from prior events and natural laws; freedom as not being uncaused or exempt from causation,
+      but acting from one’s own reasons, values, and desires; and the contrast between external coercion/manipulation
+      and internal deliberation? Penalize sliding between ''free,'' ''voluntary,'' ''morally responsible,''
+      and ''uncaused'' as if they were the same notion.'
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: Did the side survive the core incompatibilist objection that, if every choice is fixed
+      by prior causes and laws, the agent could not have done otherwise in the relevant sense and therefore
+      is not the ultimate source of the action? High scores require directly answering the 'same past,
+      same laws, same outcome' worry and explaining why internally caused choices, desires, or evaluative
+      perspectives are enough—or not enough—for robust moral responsibility, rather than merely restating
+      that the action was uncoerced.
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: Did the side genuinely concede points that are actually borne out by the dispute, such
+      as that deterministic actions can still be internally motivated, that ordinary practice may treat
+      such acts as voluntary, or that praise and blame can function as social tools? Reward honest boundary-setting
+      and penalize dodging by pretending the opponent denied obvious voluntariness facts or by treating
+      practical usefulness as if it settled the deep desert question.
+    min: 0
+    max: 10
+  - id: R4
+    name: definitional_non_circularity
+    description: Does the side justify its definition of freedom instead of stipulating it so compatibilism
+      wins by definition? Score highly only if it explains why 'acting in accordance with one’s own reasons/values/desires'
+      counts as freedom rather than merely redescribing internal causation, and if it addresses whether
+      defining freedom as 'not externally coerced' or 'not uncaused' is substantive analysis rather than
+      conclusion-building.
+    min: 0
+    max: 10
+  - id: R5
+    name: empirical_grounding
+    description: When invoking ordinary usage and social practice, does the side keep the empirical claims
+      about voluntariness, coercion, psychological compulsion, praise, and blame in their proper scope?
+      Reward distinguishing pragmatic legal/moral treatment from metaphysical free will, and penalize
+      treating everyday uses of 'voluntary' as direct evidence that determinism is compatible with genuine
+      free will or deep moral responsibility.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: openai
+  - provider: openai
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: openai
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite
