@@ -56,7 +56,8 @@ def test_minimal_valid_config():
         },
     }
     cfg = ArbiterConfig.model_validate(raw)
-    assert cfg.topology == "standard"
+    assert cfg.topology == "gated"  # prod default
+    assert cfg.gate is not None  # auto-created for gated topology
     assert len(cfg.agents) == 2
 
 

@@ -52,7 +52,7 @@ def find_sources(
     claims:
         Extracted claims (each has ``id``, ``claim``, ``category``, etc.).
     key_terms:
-        Seed terms dict, e.g. ``{"G": "The universal BIT DAG..."}``.
+        Seed terms dict, e.g. ``{"term": "definition..."}``.
     output_dir:
         Directory to write source files into (created if missing).
     provider:
@@ -250,8 +250,8 @@ def _generate_queries(
         theory.
 
         Rules:
-        1. Target real, well-known sources -- e.g. "Pearl Causality 2009
-           DAG axioms", "Jung Synchronicity 1952 definition".
+        1. Target real, well-known sources -- canonical papers, textbooks,
+           or authoritative definitions from the relevant field.
         2. Do NOT generate queries for the theory itself (it is the
            subject of debate, not a source).
         3. Each query should target a DIFFERENT source or authority.

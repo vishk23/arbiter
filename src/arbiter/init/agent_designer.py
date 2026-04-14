@@ -281,12 +281,11 @@ def design_agents(
         10. CRITICAL — UNCITED BUT RELEVANT FIELDS: The theory may use
            concepts from academic traditions it does NOT explicitly cite.
            You MUST identify these and design specialists for them.
-           Examples: a theory using "synchronicity" or "archetypal
-           convergence" without citing Jung still needs a Jungian
-           psychology specialist; a theory using DAG notation without
-           citing Pearl still needs a causal inference specialist; a
-           theory making consciousness claims without citing Tononi/IIT
-           still needs a consciousness studies specialist.
+           Examples: a theory using "synchronicity" without citing Jung
+           still needs a Jungian psychology specialist; a theory using
+           causal graphs without citing Pearl still needs a causal
+           inference specialist; a theory invoking quantum mechanics
+           without citing standard QM literature still needs a physicist.
            Ask yourself: "What expert, reading this theory, would
            immediately recognize concepts from their field being used
            (correctly or incorrectly) WITHOUT attribution?" Design an

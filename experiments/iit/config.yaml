@@ -356,9 +356,6 @@ gate:
       physical properties of a Φ-structure.
     Substrate of Consciousness: Entity that satisfies both axioms of phenomenal properties
       and postulates of physical properties.
-  entailment_check:
-    enabled: true
-    provider: openai
 judge:
   system_prompt: 'You are an expert judge evaluating a multi-agent debate on Integrated
     Information Theory (IIT) 4.0.

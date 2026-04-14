@@ -58,6 +58,9 @@ Prioritized by impact. Check off as completed.
 
 ## P3 — Architecture improvements
 
+- [ ] **T66** Remove legacy `primary: regex` gate mode. LLM-primary is the only mode used. Remove `_check_regex_primary()`, `entailment_checker.py`, `consistency_checker.py`, and the regex-mode code path in `validity_gate.py`. Keep `PatternChecker` as the additive layer only.
+- [ ] **T67** Ledger enforcement counts array length not valid entries. `graph.py:243` counts `len(hits_addressed)` including malformed entries (strings, nulls). Should count only valid dicts with required fields.
+- [ ] **T68** Ledger enforcement re-prompt is fire-once. If agent still doesn't comply after retry, non-compliant output is accepted silently. Consider logging a warning or adding a second attempt.
 - [x] **T43** Custom provider plugin system. `plugin: module:ClassName` in provider config. Supports Mistral, Cohere, Together, etc.
 - [x] **T44** LLM-primary gate replaced regex as primary checker. 100% recall/specificity vs 94% with regex. Catches paraphrases natively.
 - [ ] **T45** Configurable graph topology via YAML. Power users define custom debate flows (e.g. "3 rounds parallel critique → 2 rounds head-to-head → steelman"). Currently limited to 3 presets.

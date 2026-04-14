@@ -16,7 +16,10 @@ from rich.prompt import Confirm, Prompt
 from rich.table import Table
 
 from arbiter.config import TokenBudgets
+from arbiter.export.live_html import write_live_html, format_claims_view, format_agents_view, format_init_argdown
 from arbiter.schemas import TopicResult
+from arbiter.init.formal_model_extractor import extract_formal_model
+from arbiter.web.event_bus import get_bus
 
 if TYPE_CHECKING:
     from arbiter.providers.base import BaseProvider
@@ -428,11 +431,25 @@ def run_init(
     )
     provider_for_sources = provider  # cheapest task, any provider
 
+    # Log provider assignments so failures are traceable
+    def _plabel(p: "BaseProvider") -> str:
+        return f"{p.__class__.__name__.replace('Provider', '')}({p.model})"
+
+    console.print(
+        f"  Provider assignments:\n"
+        f"    claims/Z3:  {_plabel(provider_for_claims)}\n"
+        f"    agents:     {_plabel(provider_for_agents)}\n"
+        f"    gate:       {_plabel(provider_for_gate)}\n"
+        f"    rubric:     {_plabel(provider_for_rubric)}\n"
+        f"    sources:    {_plabel(provider_for_sources)}"
+    )
+
     # -- 2. Get topic text -----------------------------------------------------
     source_text: str | None = None
     topic_name: str = ""
     topic_summary: str = ""
     counter_thesis: str | None = None
+    live_html = out_dir / "live_init.html"
 
     if from_pdf:
         console.print(f"\n[bold blue]Step 1:[/bold blue] Reading PDF: {from_pdf}")
@@ -450,6 +467,7 @@ def run_init(
         counter_thesis = topic_info.get("counter_thesis")
         console.print(f"  Topic: [bold]{topic_name}[/bold]")
         console.print(f"  Summary: {topic_summary[:200]}...")
+        get_bus().emit("init.topic", "init", {"name": topic_name, "summary": topic_summary[:500], "counter_thesis": (counter_thesis or "")[:500]})
         if counter_thesis:
             console.print(f"  Counter-thesis: {counter_thesis[:200]}...")
     else:
@@ -478,10 +496,49 @@ def run_init(
 
         t0 = time.time()
         claims = extract_claims(source_text, provider_for_claims)
-        console.print(f"  Found [bold]{len(claims)}[/bold] claims ({time.time() - t0:.1f}s).")
+        elapsed_claims = time.time() - t0
+        console.print(f"  Found [bold]{len(claims)}[/bold] claims ({elapsed_claims:.1f}s).")
+
+        # Show claim summary
+        if claims:
+            by_cat: dict[str, int] = {}
+            n_formal = 0
+            for c in claims:
+                cat = c.get("category", "other")
+                by_cat[cat] = by_cat.get(cat, 0) + 1
+                if c.get("is_formal"):
+                    n_formal += 1
+            console.print(
+                f"    Categories: {', '.join(f'{cat}={n}' for cat, n in sorted(by_cat.items()))}"
+            )
+            console.print(f"    Formal (Z3-encodable): {n_formal}")
+            # Show first 5 claims
+            for c in claims[:5]:
+                console.print(f"    [dim]{c['id']}: {c['claim'][:100]}[/dim]")
+            if len(claims) > 5:
+                console.print(f"    [dim]... and {len(claims) - 5} more[/dim]")
+
+        # Live HTML: show claims as argdown
+        live_html = out_dir / "live_init.html"
+        write_live_html(live_html, topic_name or "Init", "Step 2 — Claims Extracted",
+                        format_init_argdown(claims))
+        console.print(f"  [dim]Live view: {live_html}[/dim]")
+        get_bus().emit("init.claims", "init", {"claims": [{"id": c["id"], "claim": c["claim"][:150], "category": c.get("category", ""), "is_formal": c.get("is_formal", False)} for c in claims], "count": len(claims), "elapsed": elapsed_claims})
+
+        if not claims:
+            console.print(
+                "[bold red]ERROR:[/bold red] No claims extracted from PDF. "
+                "This usually means:\n"
+                "  1. The LLM's thinking/reasoning consumed all output tokens\n"
+                "  2. The PDF contains scanned images instead of extractable text\n"
+                "  3. Pydantic validation failed on the LLM response\n"
+                f"  Provider used: {_plabel(provider_for_claims)}\n"
+                "  Check verbose logs for 'Pydantic validation failed' or 'Response received (N chars)'"
+            )
+            raise SystemExit(1)
 
         # Derive topic info from the first few claims if from PDF
-        if not topic_name:
+        if not topic_name and claims:
             # Use the LLM to name the topic from the claims
             t0 = time.time()
             claims_text = "\n".join(
@@ -503,7 +560,44 @@ def run_init(
 
         t0 = time.time()
         claims = extract_claims(topic_summary, provider)
-        console.print(f"  Generated [bold]{len(claims)}[/bold] claims ({time.time() - t0:.1f}s).")
+        elapsed_claims = time.time() - t0
+        console.print(f"  Generated [bold]{len(claims)}[/bold] claims ({elapsed_claims:.1f}s).")
+
+        # Live HTML + event bus for topic path
+        write_live_html(live_html, topic_name or "Init", "Step 2 — Claims Extracted",
+                        format_init_argdown(claims))
+        get_bus().emit("init.claims", "init", {"claims": [{"id": c["id"], "claim": c["claim"][:150], "category": c.get("category", ""), "is_formal": c.get("is_formal", False)} for c in claims], "count": len(claims), "elapsed": elapsed_claims})
+
+    # -- 2b. Extract formal model (if paper has formal claims) ----------------
+    formal_model: dict | None = None
+    has_formal = any(c.get("is_formal") for c in claims) if claims else False
+
+    if has_formal:
+        console.print("\n[bold blue]Step 2b:[/bold blue] Extracting formal model structure")
+        t0 = time.time()
+        formal_model = extract_formal_model(claims, source_text, provider_for_claims)
+        elapsed_fm = time.time() - t0
+        if formal_model and formal_model.get("propositions"):
+            n_a = len(formal_model.get("assumptions", []))
+            n_p = len(formal_model.get("propositions", []))
+            n_eq = len(formal_model.get("equations", []))
+            n_pol = len(formal_model.get("policies", []))
+            console.print(
+                f"  Formal model: {n_a} assumptions, {n_p} propositions, "
+                f"{n_eq} equations, {n_pol} policies ({elapsed_fm:.1f}s)"
+            )
+            for p in formal_model.get("propositions", [])[:5]:
+                console.print(f"    {p['id']}: {p['text'][:100]}")
+            get_bus().emit("init.formal_model", "init", {
+                "assumptions": len(formal_model.get("assumptions", [])),
+                "propositions": len(formal_model.get("propositions", [])),
+                "equations": len(formal_model.get("equations", [])),
+                "policies": len(formal_model.get("policies", [])),
+                "elapsed": elapsed_fm,
+            })
+        else:
+            console.print(f"  No formal propositions found ({elapsed_fm:.1f}s)")
+            formal_model = None
 
     # -- Interactive: show claims -----------------------------------------------
     if claims and interactive:
@@ -548,8 +642,23 @@ def run_init(
         console.print(f"  Analysis complete ({time.time() - t0:.1f}s)")
 
         console.print(f"  Contradictions: [bold]{len(contradictions)}[/bold]")
+        for c in contradictions[:3]:
+            sev = c.get("severity", "?")
+            z3 = " [Z3]" if c.get("z3_encodable") else ""
+            console.print(f"    [{sev}{z3}] {c.get('contradiction', '')[:120]}")
+        if len(contradictions) > 3:
+            console.print(f"    ... and {len(contradictions) - 3} more")
         console.print(f"  Key terms: [bold]{len(key_terms)}[/bold]")
+        if key_terms:
+            console.print(f"    {', '.join(list(key_terms.keys())[:8])}")
         console.print(f"  Attack angles: [bold]{len(sides_info.get('attack_angles', []))}[/bold]")
+        for a in sides_info.get("attack_angles", [])[:3]:
+            console.print(f"    - {a.get('name', '?')}: {a.get('description', '')[:100]}")
+        get_bus().emit("init.contradictions", "init", {"contradictions": [{"claim_a": c.get("claim_a", "")[:100], "claim_b": c.get("claim_b", "")[:100], "contradiction": c.get("contradiction", "")[:150], "severity": c.get("severity", ""), "z3_encodable": c.get("z3_encodable", False)} for c in contradictions], "key_terms": dict(list(key_terms.items())[:20]), "attack_angles": [{"name": a.get("name", ""), "description": a.get("description", "")[:100]} for a in sides_info.get("attack_angles", [])], "elapsed": time.time() - t0})
+
+        # Live HTML: update with contradictions as argdown
+        write_live_html(live_html, topic_name, "Step 3 — Analysis Complete",
+                        format_init_argdown(claims, contradictions))
 
     # -- 4b. Consolidate claims into core theses --------------------------------
     consolidated_theses: list[dict] = []
@@ -571,21 +680,16 @@ def run_init(
                 _show_theses(consolidated_theses)
 
     # -- Interactive: show contradictions ----------------------------------------
-    use_z3 = False
+    # Always attempt Z3 when contradictions exist — the Z3 generator is the
+    # right component to decide what's encodable (not the contradiction extractor).
+    # z3_encodable flag on contradictions is a hint, not a gate.
+    use_z3 = bool(contradictions)
     if contradictions and interactive:
         _show_contradictions(contradictions)
-        z3_encodable = [c for c in contradictions if c.get("z3_encodable")]
-        if z3_encodable:
-            use_z3 = Confirm.ask(
-                f"  {len(z3_encodable)} contradiction(s) are Z3-encodable. Generate Z3 module?",
-                default=True,
-            )
-        else:
-            console.print("  [dim]No Z3-encodable contradictions found. Skipping Z3.[/dim]")
-    elif contradictions:
-        # Non-interactive: auto-generate Z3 if encodable contradictions exist
-        z3_encodable = [c for c in contradictions if c.get("z3_encodable")]
-        use_z3 = bool(z3_encodable)
+        use_z3 = Confirm.ask(
+            f"  {len(contradictions)} contradiction(s) found. Attempt Z3 formal verification?",
+            default=True,
+        )
 
     # -- 5. Determine topology --------------------------------------------------
     has_formal = any(c.get("is_formal") for c in claims) if claims else False
@@ -718,6 +822,7 @@ def run_init(
                     z3_out = str(out_dir / "z3_module.py")
                     return generate_z3_module(
                         contradictions, claims, provider_for_z3, z3_out,
+                        formal_model=formal_model,
                     )
                 except Exception as exc:
                     logger.warning("Z3 generation failed: %s", exc)
@@ -813,7 +918,39 @@ def run_init(
             rubric = result
         elif name == "privileged_context" and result:
             privileged_context = result
-    console.print(f"  Phase B complete ({time.time() - t0_phase_b:.1f}s)")
+    elapsed_b = time.time() - t0_phase_b
+    console.print(f"  Phase B complete ({elapsed_b:.1f}s)")
+    console.print(
+        f"    Z3: {'generated' if z3_module_path else 'skipped/failed'} | "
+        f"Agents: {len(agents_result)} | "
+        f"Gate rules: {len(gate_rules.get('stipulated_rules', [])) if gate_rules else 0} | "
+        f"Rubric: {len(rubric)} criteria | "
+        f"Privileged ctx: {len(privileged_context)} sides"
+    )
+    get_bus().emit("init.phase_b", "init", {"agents": {k: {"side": v.get("side", ""), "provider": v.get("provider", "")} for k, v in agents_result.items()}, "gate_rules_count": len(gate_rules.get("stipulated_rules", [])) if gate_rules else 0, "rubric_count": len(rubric), "z3": bool(z3_module_path), "elapsed": elapsed_b})
+    # Show agent cast
+    if agents_result:
+        console.print("    [bold]Agent cast:[/bold]")
+        for name, acfg in agents_result.items():
+            console.print(
+                f"      {name} ({acfg.get('side', '?')}) → {acfg.get('provider', '?')}"
+            )
+    # Show gate rules
+    if gate_rules and gate_rules.get("stipulated_rules"):
+        console.print("    [bold]Gate rules:[/bold]")
+        for r in gate_rules["stipulated_rules"][:5]:
+            console.print(f"      [{r.get('id', '?')}] {r.get('fact', '')[:100]}")
+    # Show rubric
+    if rubric and rubric != _DEFAULT_RUBRIC:
+        console.print("    [bold]Rubric:[/bold]")
+        for r in rubric[:5]:
+            console.print(f"      {r.get('id', '?')}: {r.get('name', '?')} — {r.get('description', '')[:80]}")
+
+    # Live HTML: update with agents + gate + rubric
+    if claims:
+        body = format_claims_view(claims, contradictions, key_terms)
+        body += "\n\n" + format_agents_view(agents_result, gate_rules, rubric)
+        write_live_html(live_html, topic_name, "Step 4 — Config Generated", body)
 
     # Fall back to defaults if agent design produced nothing
     if not agents_result:
@@ -825,8 +962,9 @@ def run_init(
     # If Z3 failed, downgrade to standard if no gate rules either
     if topology == "gated" and not gate_rules and not z3_module_path:
         console.print(
-            "  [yellow]No gate rules or Z3 module generated. "
-            "Falling back to standard topology.[/yellow]"
+            "[bold yellow]WARNING:[/bold yellow] Topology downgrade: "
+            "gated → standard (no gate rules or Z3 module generated). "
+            "Check Phase B logs for failures."
         )
         topology = "standard"
 
@@ -979,6 +1117,7 @@ def run_init(
 
         load_config(Path(config_path))
         console.print("  [green]Config validation passed.[/green]")
+        get_bus().emit("init.done", "init", {"config_path": config_path})
     except Exception as exc:
         console.print(f"  [yellow]Config validation warning: {exc}[/yellow]")
         console.print(
