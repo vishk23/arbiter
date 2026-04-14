@@ -2,19 +2,19 @@
   "benchmark": "FormalMATH-kd-v3",
   "model": "gpt-5.4-mini",
   "seed": 42,
-  "n_problems": 20,
-  "proved": 15,
-  "certified": 7,
+  "n_problems": 30,
+  "proved": 25,
+  "certified": 14,
   "failed": 5,
-  "rate": 75.0,
-  "certified_rate": 35.0,
+  "rate": 83.33333333333334,
+  "certified_rate": 46.666666666666664,
   "sota_comparison": {
     "kimina_prover_lean4": 16.46
   },
-  "partial": true,
+  "partial": false,
   "attempts_per_problem": 3,
   "repairs_per_attempt": 2,
-  "timestamp": "2026-04-14T15:33:33.409060+00:00",
+  "timestamp": "2026-04-14T15:36:44.144263+00:00",
   "domain_breakdown": {
     "Integration": {
       "proved": 1,
@@ -47,10 +47,10 @@
       "rate": 0.0
     },
     "Mathematics": {
-      "proved": 6,
-      "total": 8,
-      "certified": 3,
-      "rate": 75.0
+      "proved": 9,
+      "total": 11,
+      "certified": 4,
+      "rate": 81.81818181818183
     },
     "sequences_series": {
       "proved": 1,
@@ -92,6 +92,48 @@
       "proved": 1,
       "total": 1,
       "certified": 0,
+      "rate": 100.0
+    },
+    "Convex Functions": {
+      "proved": 1,
+      "total": 1,
+      "certified": 1,
+      "rate": 100.0
+    },
+    "polynomial_roots_corrections": {
+      "proved": 1,
+      "total": 1,
+      "certified": 0,
+      "rate": 100.0
+    },
+    "algebra": {
+      "proved": 1,
+      "total": 1,
+      "certified": 1,
+      "rate": 100.0
+    },
+    "Series of Functions": {
+      "proved": 1,
+      "total": 1,
+      "certified": 1,
+      "rate": 100.0
+    },
+    "differential_calc": {
+      "proved": 1,
+      "total": 1,
+      "certified": 1,
+      "rate": 100.0
+    },
+    "Improper Integrals": {
+      "proved": 1,
+      "total": 1,
+      "certified": 1,
+      "rate": 100.0
+    },
+    "Approximation by Polynomials": {
+      "proved": 1,
+      "total": 1,
+      "certified": 1,
       "rate": 100.0
     }
   },
@@ -335,6 +377,126 @@
       "domain": "Mathematics -> Applied Mathematics -> Math Word Problems; Mathematics -> Number Theory -> Other;",
       "top_domain": "Mathematics",
       "source": "aime"
+    },
+    {
+      "id": "olymid-ref-base_239",
+      "status": "proved",
+      "output": "",
+      "has_certificate": false,
+      "attempt": 1,
+      "sympy_hint": true,
+      "time_s": 24.19613480567932,
+      "domain": "Mathematics -> Algebra -> Equations and Inequalities -> Polynomial Equations;",
+      "top_domain": "Mathematics",
+      "source": "olympid"
+    },
+    {
+      "id": "DEMIMathAnalysis_86",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'kdrag_trichotomy_certificate', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'Obtained certificate: |= ForAll(a, Or(a <= 0, a > 0))'}, {'name': 'symbolic_example_second_derivative_nonnegative', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': \"For g(x)=x^2, g''(x)=2 and SymPy confirms g''(x)-2 == 0.\"}, {'name': 'numerical_midpoint_convexity_for_square', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Checked x=1.25, y=-0.75: f(x)+f(y)=2.125, 2f((x+y)/2)=0.125.'}], 'details': 'All checks passed.'}\n",
+      "has_certificate": true,
+      "attempt": 1,
+      "sympy_hint": true,
+      "time_s": 11.555501222610474,
+      "domain": "Convex Functions",
+      "top_domain": "Convex Functions",
+      "source": "DEMIMATH"
+    },
+    {
+      "id": "hardmath_886",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': ['small_root_0', 'small_root_1', 'small_root_2', 'small_root_3', 'small_root_4', 'small_root_5', 'large_root_0', 'large_root_1', 'large_root_2', 'large_root_3', 'large_root_4', 'large_root_5']}\n",
+      "has_certificate": false,
+      "attempt": 1,
+      "sympy_hint": false,
+      "time_s": 37.507676124572754,
+      "domain": "polynomial_roots_corrections",
+      "top_domain": "polynomial_roots_corrections",
+      "source": "hardmath"
+    },
+    {
+      "id": "u-math_830",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'kdrag_sign_analysis_and_boundaries', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'Certified sign implications for intervals (-5, 3) and (9, \u221e); boundary points evaluate to 0. Proof objects: Proof, Proof, Proof.'}, {'name': 'sympy_solution_set_match', 'passed': True, 'backend': 'sympy', 'proof_type': 'numerical', 'details': 'SymPy computed solution set Union(Interval.open(-5, 3), Interval.open(9, oo)); expected Union(Interval.open(-5, 3), Interval.open(9, oo)); match=True.'}, {'name': 'numerical_sign_sanity', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': \"Sample values: {'-6': -1080.0, '-4': 728.0, '0': 1080.0, '4': -360.0, '10': 840.0}; expected sign pattern matches (-\u221e,-5), (-5,3), (3,9), (9,\u221e).\"}]}\n",
+      "has_certificate": true,
+      "attempt": 2,
+      "sympy_hint": true,
+      "time_s": 19.553269863128662,
+      "domain": "algebra",
+      "top_domain": "algebra",
+      "source": "u-math"
+    },
+    {
+      "id": "DEMIMathAnalysis_61",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'kdrag_order_monotonicity_certificate', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'kd.prove returned proof: |= ForAll([u, v, w], Implies(And(u <= v, w >= 0), u <= v + w))'}, {'name': 'sympy_algebraic_zero_certificate', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'minimal_polynomial((1/2+1/3)-5/6, x) returned x; certificate verifies exact zero.'}, {'name': 'numerical_sanity_ratio_example', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'At x=0.999, truncated ratio f/g \u2248 2.00691467, target alpha=2.0.'}]}\n",
+      "has_certificate": true,
+      "attempt": 1,
+      "sympy_hint": false,
+      "time_s": 16.46731209754944,
+      "domain": "Series of Functions",
+      "top_domain": "Series of Functions",
+      "source": "DEMIMATH"
+    },
+    {
+      "id": "u-math_232",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'sympy_derivative_identity', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'Simplified derivative difference to: 0'}, {'name': 'kdrag_polynomial_expansion', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'Obtained proof object: |= ForAll(t,\\n       (t*t - 1)*(t**4 + 10*t*t + 1) ==\\n       t**6 + 9*t**4 - 9*t*t - 1)'}, {'name': 'numerical_sanity_at_1_7', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'lhs=2535.66503702276633305996560360, rhs=2535.66503702276633305996560360'}]}\n",
+      "has_certificate": true,
+      "attempt": 1,
+      "sympy_hint": true,
+      "time_s": 11.184300899505615,
+      "domain": "differential_calc",
+      "top_domain": "differential_calc",
+      "source": "u-math"
+    },
+    {
+      "id": "olymid-ref-base_9995",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'nonnegative_addition_certificate', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'kd.prove returned proof: |= ForAll([a, b], Implies(And(a >= 0, b >= 0), a + b >= 0))'}, {'name': 'symbolic_zero_certificate', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'minimal_polynomial(zero_expr, y) == y is True; computed y'}, {'name': 'numerical_sanity_example_polynomial', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': '(1+x)(x^2-x+1) = x**3 + 1; coefficients = [1, 0, 0, 1]'}, {'name': 'quadratic_factor_mechanism_sanity', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'Verified a representative quadratic factor has nonnegative coefficient behavior for a concrete n.'}]}\n",
+      "has_certificate": true,
+      "attempt": 1,
+      "sympy_hint": false,
+      "time_s": 12.98098611831665,
+      "domain": "Mathematics -> Algebra -> Polynomial Operations -> Other;",
+      "top_domain": "Mathematics",
+      "source": "olympid"
+    },
+    {
+      "id": "DEMIMathAnalysis_50",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'kdrag_arithmetic_support_lemma', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': '|= ForAll(n, Implies(n > 0, And(2*n - 1 > 0, 2*n - 1 < 2*n)))'}, {'name': 'sympy_exact_integral_and_limit', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'limit=sqrt(pi), expected=sqrt(pi)'}, {'name': 'numerical_sanity_check', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'n=20 value=1.80657610919123223780502485170, sqrt(pi)=1.77245385090551602729816748334'}]}\n",
+      "has_certificate": true,
+      "attempt": 1,
+      "sympy_hint": true,
+      "time_s": 11.540035009384155,
+      "domain": "Improper Integrals",
+      "top_domain": "Improper Integrals",
+      "source": "DEMIMATH"
+    },
+    {
+      "id": "omni_theorem_1580",
+      "status": "proved",
+      "output": "",
+      "has_certificate": false,
+      "attempt": 1,
+      "sympy_hint": true,
+      "time_s": 20.378577947616577,
+      "domain": "Mathematics -> Algebra -> Algebra -> Polynomial Operations",
+      "top_domain": "Mathematics",
+      "source": "omni"
+    },
+    {
+      "id": "DEMIMathAnalysis_75",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'symbolic_closed_form_is_zero', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'simplified expression = 0'}, {'name': 'divisibility_of_exponent', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'kd.prove returned: |= ForAll(nn, Implies(nn >= 0, (4*nn + 4)%4 == 0))'}, {'name': 'numerical_sanity_n0', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'n=0 integral \u2248 0'}]}\n",
+      "has_certificate": true,
+      "attempt": 2,
+      "sympy_hint": true,
+      "time_s": 25.368242263793945,
+      "domain": "Approximation by Polynomials",
+      "top_domain": "Approximation by Polynomials",
+      "source": "DEMIMATH"
     }
   ]
 }
