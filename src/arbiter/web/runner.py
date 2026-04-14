@@ -87,7 +87,7 @@ def run_debate_background(
 
             cfg = load_config(Path(config_path))
             engine = DebateEngine(cfg)
-            result = engine.run()
+            engine.run()
             bus.emit(
                 "debate.done",
                 "debate",

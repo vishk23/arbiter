@@ -7,9 +7,8 @@ subsequent agents see only genuinely-open hits.
 
 from __future__ import annotations
 
-import pytest
 
-from arbiter.ledger.ops import add_hit, resolve_hit, open_hits, ledger_grew
+from arbiter.ledger.ops import add_hit, resolve_hit, ledger_grew
 from arbiter.ledger.parser import parse_ledger_block
 from arbiter.agents.context import _open_hits_for
 
@@ -46,10 +45,10 @@ class TestOpenHitsFor:
 
     def test_all_sides_see_theory_hits(self):
         ledger = self._make_ledger()
-        pro_hits = _open_hits_for(ledger, "Proponent")
-        skep_hits = _open_hits_for(ledger, "Skeptic")
+        _open_hits_for(ledger, "Proponent")
+        _open_hits_for(ledger, "Skeptic")
         # Theory hits visible to both
-        theory_in_pro = [h for h in _open_hits_for(ledger, "Proponent") if h["against"] == "Theory"]
+        [h for h in _open_hits_for(ledger, "Proponent") if h["against"] == "Theory"]
         # Actually Theory hits are only for the exact match — let me check
         # Theory hits should show for everyone since we include "Theory" in the match
         all_theory = [h for h in ledger if h["against"] == "Theory"]

@@ -144,34 +144,22 @@ arbiter init --from-pdf paper.pdf
 
 ## Architecture
 
-```mermaid
-graph TD
-    subgraph "arbiter init"
-        PDF[PDF] --> Claims[Claim Extraction]
-        Claims --> FM[Formal Model]
-        FM --> Analysis[Contradictions + Terms]
-        Analysis --> |parallel| Z3[Z3 Proofs]
-        Analysis --> |parallel| Agents[Agent Design]
-        Analysis --> |parallel| Gate[Gate Rules]
-        Analysis --> |parallel| Rubric[Rubric]
-        Z3 & Agents & Gate & Rubric --> Config[config.yaml]
-    end
-
-    subgraph "arbiter run"
-        Config --> Round[Round]
-        Round --> |per turn| GateCheck{Gate}
-        GateCheck --> |pass| Ledger[Ledger]
-        GateCheck --> |fail| Rewrite[Rewrite]
-        Rewrite --> GateCheck
-        Ledger --> MidJudge[Mid-Judge]
-        MidJudge --> |continue| Round
-        MidJudge --> |done| Final[Steelman + Export]
-    end
-
-    subgraph "arbiter judge"
-        Final --> Panel[Judge Panel]
-        Panel --> V[Verdict + Scores]
-    end
+```
+arbiter init ─── PDF ──→ Claims ──→ Formal Model ──→ Contradictions
+                                         │
+                         ┌───────────────┼───────────────┐
+                         ▼               ▼               ▼
+                      Z3 Proofs    Agent Design     Gate Rules ──→ config.yaml
+                                                        
+arbiter run ─── config.yaml ──→ Round ──→ Gate ──→ Ledger ──→ Mid-Judge ──→ Round
+                                   ▲       │                                  │
+                                   │    Rewrite                          converged?
+                                   └───────┘                                  │
+                                                                         Steelman
+                                                                              │
+arbiter judge ────────────────────────────────────────────────────── Judge Panel
+                                                                         │
+                                                                    Verdict + Scores
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the full module map and design decisions.

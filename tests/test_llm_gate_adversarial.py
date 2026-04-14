@@ -240,14 +240,14 @@ class TestLLMGateAdversarial:
         specificity = tn / total_neg if total_neg else 1.0
 
         print(f"\n{'='*60}")
-        print(f"ADVERSARIAL LLM GATE RESULTS")
+        print("ADVERSARIAL LLM GATE RESULTS")
         print(f"{'='*60}")
         print(f"  Sneaky violations: {total_pos} (TP={tp}, FN={fn})")
         print(f"  Tricky non-violations: {total_neg} (TN={tn}, FP={fp})")
         print(f"  Recall:      {recall:.2%}")
         print(f"  Specificity: {specificity:.2%}")
         if failures:
-            print(f"\n  Failures:")
+            print("\n  Failures:")
             for f in failures:
                 print(f"    - {f}")
         print(f"{'='*60}")

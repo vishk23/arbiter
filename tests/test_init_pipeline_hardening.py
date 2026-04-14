@@ -1,7 +1,5 @@
 """Tests for init pipeline hardening: fail-loud on 0 claims, provider logging."""
 
-from unittest.mock import MagicMock, patch
-import pytest
 
 
 class TestExtractClaimsFailLoud:

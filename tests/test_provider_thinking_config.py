@@ -5,7 +5,7 @@ forgets to apply thinking/reasoning config, causing the model to exhaust
 output budget on thinking with nothing left for the actual response.
 """
 
-from unittest.mock import MagicMock, patch, PropertyMock
+from unittest.mock import MagicMock, patch
 import pytest
 
 from arbiter.config import ProviderConfig

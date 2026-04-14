@@ -226,7 +226,7 @@ class TestLLMGateCalibration:
         precision = tp / (tp + fp) if (tp + fp) else 1.0
 
         print(f"\n{'='*60}")
-        print(f"LLM GATE CALIBRATION RESULTS")
+        print("LLM GATE CALIBRATION RESULTS")
         print(f"{'='*60}")
         print(f"  Positive cases: {total_pos} (TP={tp}, FN={fn})")
         print(f"  Negative cases: {total_neg} (TN={tn}, FP={fp})")
@@ -234,7 +234,7 @@ class TestLLMGateCalibration:
         print(f"  Specificity: {specificity:.2%}")
         print(f"  Precision:   {precision:.2%}")
         if failures:
-            print(f"\n  Failures:")
+            print("\n  Failures:")
             for f in failures:
                 print(f"    - {f}")
         print(f"{'='*60}")

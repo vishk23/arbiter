@@ -588,7 +588,7 @@ class DebateEngine:
                         side = h.get("against", "?")
                         by_side[side] = by_side.get(side, 0) + 1
                 lines.append(
-                    f"  open by side: "
+                    "  open by side: "
                     + ", ".join(f"{s}={c}" for s, c in sorted(by_side.items()))
                 )
 

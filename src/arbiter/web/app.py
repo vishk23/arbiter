@@ -7,7 +7,6 @@ plus REST endpoints for controlling runs.
 from __future__ import annotations
 
 import asyncio
-import json
 import queue
 import threading
 from pathlib import Path

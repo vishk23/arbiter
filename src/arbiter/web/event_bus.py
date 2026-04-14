@@ -7,7 +7,6 @@ queue. Zero cost when no subscribers — emit() is a no-op.
 
 from __future__ import annotations
 
-import json
 import queue
 import threading
 import time
