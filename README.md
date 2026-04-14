@@ -13,7 +13,7 @@ Point Arbiter at any PDF — it extracts claims, finds contradictions, generates
 > **Benchmark**: 244/244 (100%) on miniF2F with 89.3% machine-verified proof certificates using Claude Sonnet 4.5 — vs 55.7% for MiniF2F-Dafny with the same model. See [benchmark results](papers/arbiter_paper.pdf) for details.
 
 <p align="center">
-  <img src="docs/screenshots/argdown_output.gif" width="800" alt="Arbiter argdown output showing argument ledger with syntax highlighting" />
+  <img src="https://raw.githubusercontent.com/vishk23/arbiter/main/docs/screenshots/argdown_output.gif" width="800" alt="Arbiter argdown output showing argument ledger with syntax highlighting" />
 </p>
 
 ## What it does
@@ -31,13 +31,13 @@ We ran Arbiter on ["The AI Layoff Trap"](https://arxiv.org/abs/2603.20617) (Falk
 **Init** — 280 claims extracted, 17 propositions, 10 assumptions, 7 policy claims identified:
 
 <p align="center">
-  <img src="docs/screenshots/argdown_concessions.gif" width="800" alt="Argdown showing concessions and rebuttals with formal math" />
+  <img src="https://raw.githubusercontent.com/vishk23/arbiter/main/docs/screenshots/argdown_concessions.gif" width="800" alt="Argdown showing concessions and rebuttals with formal math" />
 </p>
 
 **Debate** — 9 specialist agents (Proponent, Skeptic, IO Theorist, Macroeconomist, TaxScholar, LaborEconomist, PublicFinance, CausalInference, Generalist) across 3 providers (OpenAI gpt-5.4, Anthropic Claude Opus 4.6, xAI Grok) debated for 6 rounds:
 
 <p align="center">
-  <img src="docs/screenshots/dashboard_final.gif" width="800" alt="Dashboard showing completed 6-round debate with agent cards" />
+  <img src="https://raw.githubusercontent.com/vishk23/arbiter/main/docs/screenshots/dashboard_final.gif" width="800" alt="Dashboard showing completed 6-round debate with agent cards" />
 </p>
 
 **Verdict** — Skeptic wins 2-1. The paper's core theorem holds, but its policy claims overreach:
