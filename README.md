@@ -1,12 +1,12 @@
-# Arbiter
+# Arbiter — Formally Verified Multi-Agent Debate for Research Papers
 
 [![PyPI](https://img.shields.io/pypi/v/arbiter-debate)](https://pypi.org/project/arbiter-debate/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
-**Formally verified multi-agent debates on academic papers.**
+**An open-source AI tool that reads academic papers, formally verifies their mathematical claims using Z3/Knuckledragger proof certificates, and stages structured multi-agent debates to separate what a paper proves from what it claims.**
 
-Point Arbiter at any PDF — it extracts claims, finds contradictions, generates verified proofs (Knuckledragger + SymPy + Z3), designs specialist debate agents, and produces a structured verdict with every argument tracked.
+Point Arbiter at any PDF — it extracts claims, finds contradictions, generates verified proofs (Knuckledragger + SymPy + Z3), designs specialist debate agents across multiple LLM providers (OpenAI, Anthropic, Google, Grok), and produces a structured verdict with every argument tracked.
 
 > **Paper**: [Arbiter: Formally Verified Multi-Agent Debate for Research Claim Evaluation](papers/arbiter_systems_paper.pdf)
 >
