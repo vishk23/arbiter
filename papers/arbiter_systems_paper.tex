@@ -42,7 +42,8 @@ We present \arbiter{}, an open-source framework (11K~LOC Python, 7~LLM providers
 In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4, Grok~4), which produced 141~argument hits across 54~turns over 6~rounds.
 The debate surfaced 17~author concessions---revealing that the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) is mathematically correct, but its headline policy claims (``only a Pigouvian tax can fix over-automation'') extend far beyond the mathematics.
 We argue that multi-agent debate with formal verification is strictly more powerful than either component alone, and present ablation evidence supporting this claim.
-On the miniF2F benchmark, the verification backend achieves 244/244 (100\%) with 89.3\% machine-verified certificates---compared to 55.7\% for MiniF2F-Dafny with the same model---serving as supporting evidence for the backend's reliability.
+On the miniF2F benchmark, the verification backend produces proof certificates that survive automated audit at rates between 7--26\%---far below the 83--100\% reported by standard benchmarks---revealing that LLM theorem-proving metrics are systematically inflated.
+We report these findings transparently; the verification backend is a work in progress, and honest measurement is a prerequisite to improvement.
 Code and all experimental artifacts are available at \url{https://github.com/vishk23/arbiter}.
 \end{abstract}
 
@@ -459,29 +460,46 @@ The backend implements a Z3 verification suite covering six check types: proof v
 
 \begin{table}[t]
 \centering
-\caption{miniF2F benchmark results (244 problems). Certificate rate = fraction with machine-verified Z3 proofs.}
+\caption{miniF2F benchmark results (244 problems). ``Checker-passing'' = fraction passing automated Z3 check. ``Audit-surviving'' = fraction found genuinely valid (non-trivial, faithful to original claim) under manual audit. The gap between these columns is the core problem.}
 \label{tab:minif2f}
-\begin{tabular}{@{}lcc@{}}
+\begin{tabular}{@{}lccc@{}}
 \toprule
-\textbf{System / Model} & \textbf{Accuracy} & \textbf{Certificate Rate} \\
+\textbf{System / Model} & \textbf{Accuracy} & \textbf{Checker-Passing} & \textbf{Audit-Surviving} \\
 \midrule
-\arbiter{} + Claude Sonnet 4.5 & 244/244 (100\%) & 89.3\% \\
-\arbiter{} + GPT-5.4 & 244/244 (100\%) & 87.1\% \\
-\arbiter{} + Grok 4 & 244/244 (100\%) & 84.6\% \\
+\arbiter{} + Claude Sonnet 4.5 & 244/244 (100\%) & 89.3\% & $\sim$26\% \\
+\arbiter{} + GPT-5.4 & 244/244 (100\%) & 87.1\% & $\sim$19\% \\
+\arbiter{} + Grok 4 & 244/244 (100\%) & 84.6\% & $\sim$14\% \\
 \midrule
-MiniF2F-Dafny + Claude Sonnet 4.5 & 136/244 (55.7\%) & 55.7\% \\
-AlphaProof (reported) & --- & --- \\
+MiniF2F-Dafny + Claude Sonnet 4.5 & 136/244 (55.7\%) & 55.7\% & --- \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Table~\ref{tab:minif2f} shows the verification backend's performance on miniF2F.
 The 100\% accuracy across all models reflects the backend's design: it combines LLM-generated proof sketches with Z3's sound verification, so incorrect proofs are rejected rather than accepted.
-The certificate rate---the fraction of correct answers backed by machine-verified Z3 proofs---varies by model, with Claude Sonnet~4.5 achieving the highest rate (89.3\%).
+The ``checker-passing'' rate---the fraction of correct answers backed by a Z3 proof that passes the automated checker---varies by model, with Claude Sonnet~4.5 achieving the highest rate (89.3\%).
+However, the ``audit-surviving'' column tells the real story: when proofs are manually audited for genuine validity (non-trivial, faithful to the original claim), the rate drops to 14--26\%.
+The gap between checker-passing and audit-surviving rates reveals that LLMs are adept at producing proofs that satisfy automated checkers without actually proving the intended claim.
+See Section~\ref{sec:verification}.3 for a detailed breakdown.
 
 These results serve as \emph{supporting evidence} for the backend's reliability, not as the paper's primary contribution.
 The miniF2F benchmark consists of competition-mathematics problems; the claims in research papers are typically less technically difficult but embedded in more complex domain context.
 The backend's value in \arbiter{} is not that it solves hard theorems but that it provides \emph{trusted stipulations} that ground multi-agent debate.
+
+\subsection{Audit Findings: Honest Assessment}
+
+Three independent audits of the verification backend revealed that our initial benchmark numbers were systematically inflated.
+We report these findings transparently:
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+\item \textbf{Z3-only proofs}: 74\% of Z3-only proof certificates were found to be invalid upon manual audit---vacuously true, tautological, or relying on unconstrained solver behavior.
+\item \textbf{Knuckledragger certificates}: Knuckledragger's layered proof structure catches many vacuous proofs, but LLMs systematically prove trivial lemmas (e.g., verifying $x > 0 \Rightarrow x > 0$) rather than the substantive claims they are prompted with.
+\item \textbf{FormalMATH}: On a rigorous audit against the FormalMATH benchmark, only 7.4\% of generated proofs were genuinely valid---i.e., both non-trivial and faithful to the original claim.
+\end{itemize}
+
+\noindent The verification backend is a work in progress.
+The high ``accuracy'' numbers reported by standard benchmarks (including our own initial miniF2F results in Table~\ref{tab:minif2f}) reflect the ease of generating proofs that \emph{pass} an automated checker, not proofs that are \emph{meaningful}.
+Closing this gap---between checker-passing and genuinely-valid---is our primary verification research agenda going forward.
 
 
 %% ============================================================
@@ -492,6 +510,13 @@ The backend's value in \arbiter{} is not that it solves hard theorems but that i
 \arbiter{} is most effective on papers that contain formal models---mathematical proofs, equilibrium analyses, statistical derivations---alongside broader claims that extend beyond the formal results.
 This describes a large fraction of economics, theoretical CS, and quantitative social science papers.
 \arbiter{} is less useful for purely empirical papers without formal structure, though the debate engine alone still provides value.
+
+\paragraph{Honest Accounting of Benchmark Claims.}
+Our benchmark numbers were initially inflated.
+Three independent audits revealed that 74\% of Z3-only proofs and 93\% of Knuckledragger-certified proofs are invalid or trivial.
+We report these findings transparently.
+The case study (Section~\ref{sec:casestudy}) remains our strongest contribution---its 17~concessions are independently verifiable by reading the debate transcript, not dependent on benchmark methodology.
+The verification backend adds value to the debate pipeline even at current reliability levels (it correctly verified the AI Layoff Trap's core theorem, which grounded the entire debate), but we do not claim it is a solved problem.
 
 \paragraph{Limitations.}
 Several limitations merit acknowledgment.
