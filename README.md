@@ -2,7 +2,11 @@
 
 **Formally verified multi-agent debates on academic papers.**
 
-Point Arbiter at any PDF — it extracts claims, finds contradictions, auto-generates Z3 formal proofs, designs specialist debate agents, and produces a structured verdict with every argument tracked.
+Point Arbiter at any PDF — it extracts claims, finds contradictions, generates verified proofs (Knuckledragger + SymPy + Z3), designs specialist debate agents, and produces a structured verdict with every argument tracked.
+
+> **Paper**: [Arbiter: Formally Verified Multi-Agent Debate for Research Claim Evaluation](papers/arbiter_systems_paper.pdf)
+>
+> **Benchmark**: 244/244 (100%) on miniF2F with 89.3% machine-verified proof certificates using Claude Sonnet 4.5 — vs 55.7% for MiniF2F-Dafny with the same model. See [benchmark results](papers/arbiter_paper.pdf) for details.
 
 <p align="center">
   <img src="docs/screenshots/argdown_output.gif" width="800" alt="Arbiter argdown output showing argument ledger with syntax highlighting" />
@@ -172,13 +176,31 @@ graph TD
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the full module map and design decisions.
 
-## Z3 Verification Suite
+## Formal Verification
 
-When a paper contains formal propositions, Arbiter generates Z3 checks that go beyond contradiction detection:
+Arbiter uses three verification backends, with the LLM selecting the right one per claim:
+
+| Backend | What it handles | Proof certificate |
+|---------|----------------|-------------------|
+| **[Knuckledragger](https://github.com/philzook58/knuckledragger)** | Integer constraints, polynomial inequalities, divisibility, induction | `kd.Proof` object (tamper-proof, Z3-verified) |
+| **SymPy** | Trig identities, recurrences, series, symbolic algebra | `minimal_polynomial == x` (rigorous algebraic zero) |
+| **Z3** (raw) | Counterexample search, optimization, boundary analysis | SAT model extraction |
+
+### Benchmark results
+
+| Benchmark | Sonnet 4.5 | gpt-5.4-mini |
+|-----------|-----------|-------------|
+| miniF2F (244 problems) | **100% proved, 89.3% certified** | 88.9% proved, 74.2% certified |
+| ProofNet (50 problems) | 100% proved, 94% certified | 88% proved, 66% certified |
+| MATH Level 5 (50 problems) | 100% proved, 90% certified | 84% proved, 60% certified |
+
+Comparison: MiniF2F-Dafny achieves 55.7% with the same Sonnet 4.5 model using Dafny proofs.
+
+### Verification check types
 
 | Check Type | What it does | Example |
 |-----------|-------------|---------|
-| **Proof verification** | Encode assumptions + ¬proposition, check UNSAT | "α_NE > α_CO" → PROVEN |
+| **Proof verification** | Encode assumptions + negated proposition, check UNSAT | "α_NE > α_CO" → PROVEN |
 | **Counterexample** | Extract concrete values when proof fails | "At N=1, η=0.92: wedge = 0" |
 | **Sensitivity** | Drop each assumption, find load-bearing ones | "N > 1 is LOAD-BEARING" |
 | **Boundary** | Find where results flip | "Wedge positive iff η < 0.83" |
