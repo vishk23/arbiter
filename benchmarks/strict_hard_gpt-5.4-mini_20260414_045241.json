@@ -1,0 +1,365 @@
+{
+  "benchmark": "miniF2F-strict",
+  "model": "gpt-5.4-mini",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "strictly_proved": 2,
+  "incomplete": 28,
+  "failed_check": 5,
+  "errors": 0,
+  "strict_rate": 5.714285714285714,
+  "timestamp": "2026-04-14T05:00:48.446446+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 6.128681898117065
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 5.33082389831543
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 9.383793830871582
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 12.224445819854736
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 8.951786994934082
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "strictly_proved",
+      "output": "{'name': 'PROOF: original equation has no real root-product other than 20', 'result': 'UNSAT', 'expected': 'UNSAT', 'passed': True, 'check_type': 'proof'}\n{'name': 'VACUITY: original equation has a consistent solution set', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'vacuity'}\n{'name': 'WITNESS: y = 10 satisfies the transformed equation', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'witness'}\n",
+      "has_proof": true,
+      "has_vacuity": true,
+      "has_witness": true,
+      "attempts": 1,
+      "time_s": 16.93204927444458
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "strictly_proved",
+      "output": "[{'name': 'WITNESS: concrete solution satisfies the derived equations', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'witness'}, {'name': 'VACUITY: derived trigonometric constraints are consistent', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'vacuity'}, {'name': 'PROOF: no model exists with csc x + cot x different from 29/15', 'result': 'UNSAT', 'expected': 'UNSAT', 'passed': True, 'check_type': 'proof'}]\n",
+      "has_proof": true,
+      "has_vacuity": true,
+      "has_witness": true,
+      "attempts": 1,
+      "time_s": 8.384482860565186
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "failed_check",
+      "output": "{'name': 'PROOF: KL + MN is prime (negation of claim)', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'passed': False, 'check_type': 'proof'}\n{'name': 'VACUITY: assumptions are consistent', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'vacuity'}\n{'name': 'WITNESS: concrete satisfying instance', 'result': 'UNSAT', 'expected': 'SAT', 'passed': False, 'check_type': 'witness'}\n",
+      "has_proof": true,
+      "has_vacuity": true,
+      "has_witness": true,
+      "attempts": 1,
+      "time_s": 36.88097381591797
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 6.4722580909729
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "failed_check",
+      "output": "{'name': 'PROOF: periodicity exists', 'result': 'UNSAT', 'expected': 'UNSAT', 'passed': True, 'check_type': 'proof'}\n{'name': 'VACUITY: assumptions are consistent', 'result': 'UNKNOWN', 'expected': 'SAT', 'passed': False, 'check_type': 'vacuity'}\n{'name': 'WITNESS: constant periodic sample', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'witness'}\n",
+      "has_proof": true,
+      "has_vacuity": true,
+      "has_witness": true,
+      "attempts": 1,
+      "time_s": 18.72063899040222
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 6.1139068603515625
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 6.035345792770386
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 3.5592739582061768
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 187.1193389892578
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 4.795938014984131
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 7.017852067947388
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 4.448670864105225
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 4.056198835372925
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 6.072946071624756
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "failed_check",
+      "output": "[{'name': 'PROOF: negate log_z w = 60', 'result': 'UNSAT', 'expected': 'UNSAT', 'passed': True, 'check_type': 'proof'}, {'name': 'VACUITY: assumptions are consistent', 'result': 'UNSAT', 'expected': 'SAT', 'passed': False, 'check_type': 'vacuity'}, {'name': 'WITNESS: concrete solution with log_z w = 60', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'witness'}]\n",
+      "has_proof": true,
+      "has_vacuity": true,
+      "has_witness": true,
+      "attempts": 1,
+      "time_s": 10.490107774734497
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 6.2277891635894775
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 11.32183289527893
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "failed_check",
+      "output": "{'name': 'PROOF: uniqueness of x1 for monotone bounded recurrence', 'result': 'UNSAT', 'expected': 'UNSAT', 'passed': True, 'check_type': 'proof'}\n{'name': 'VACUITY: assumptions for uniqueness are consistent', 'result': 'UNKNOWN', 'expected': 'SAT', 'passed': False, 'check_type': 'vacuity'}\n{'name': 'WITNESS: finite-prefix increasing sequence example', 'result': 'UNSAT', 'expected': 'SAT', 'passed': False, 'check_type': 'witness'}\n",
+      "has_proof": true,
+      "has_vacuity": true,
+      "has_witness": true,
+      "attempts": 1,
+      "time_s": 28.796273946762085
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 4.952162027359009
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 8.19957971572876
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 5.625982046127319
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 4.508050918579102
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 5.833335876464844
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 4.511531829833984
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 6.584841012954712
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 5.191230297088623
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 5.6512229442596436
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 5.559708833694458
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "incomplete_checks",
+      "output": "",
+      "has_proof": false,
+      "has_vacuity": false,
+      "has_witness": false,
+      "attempts": 1,
+      "time_s": 4.748439073562622
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "failed_check",
+      "output": "{'name': 'PROOF: show a^12 - 144a^-1 = 233', 'result': 'UNSAT', 'expected': 'UNSAT', 'passed': True, 'check_type': 'proof'}\n{'name': 'VACUITY: assumptions are consistent', 'result': 'SAT', 'expected': 'SAT', 'passed': True, 'check_type': 'vacuity'}\n{'name': 'WITNESS: a = (1+sqrt(5))/2', 'result': 'UNSAT', 'expected': 'SAT', 'passed': False, 'check_type': 'witness'}\n",
+      "has_proof": true,
+      "has_vacuity": true,
+      "has_witness": true,
+      "attempts": 2,
+      "time_s": 9.618700742721558
+    }
+  ]
+}

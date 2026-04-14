@@ -9,6 +9,15 @@ description = "Formally verified multi-agent debates"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.11"
+authors = [
+    {name = "Vishnu Kchitti", email = "vishk23@github.com"},
+]
+
+[project.urls]
+Homepage = "https://github.com/vishk23/arbiter"
+Repository = "https://github.com/vishk23/arbiter"
+Issues = "https://github.com/vishk23/arbiter/issues"
+
 keywords = ["debate", "multi-agent", "formal-verification", "z3", "llm", "ai-safety"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -35,11 +44,13 @@ dependencies = [
 
 [project.optional-dependencies]
 z3 = ["z3-solver>=4.13"]
+proof = ["knuckledragger>=0.2"]
 web = ["tavily-python>=0.5"]
 pdf = ["pymupdf4llm>=0.0.17"]
 ollama = ["ollama>=0.4"]
+dashboard = ["fastapi>=0.115", "uvicorn[standard]>=0.32"]
 dev = ["pytest>=8", "pytest-timeout>=2", "ruff"]
-all = ["arbiter-debate[z3,web,pdf,ollama,dev]"]
+all = ["arbiter-debate[z3,proof,web,pdf,ollama,dashboard,dev]"]
 
 [project.scripts]
 arbiter = "arbiter.cli:app"

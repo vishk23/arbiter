@@ -1,0 +1,278 @@
+{
+  "benchmark": "miniF2F-knuckledragger",
+  "model": "gpt-4o",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "proved": 12,
+  "certified": 6,
+  "failed": 5,
+  "errors": 18,
+  "rate": 34.285714285714285,
+  "certified_rate": 17.142857142857142,
+  "timestamp": "2026-04-14T06:01:50.916299+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "proved",
+      "output": "",
+      "has_certificate": false,
+      "attempts": 3,
+      "time_s": 25.839081048965454
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "failed_check",
+      "output": "{'proved': False, 'checks': [{'name': 'Z3-Encoding of f(x) + f(x-1) = x^2', 'passed': False, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'model is not available'}, {'name': 'Numerical Check of f(94) % 1000', 'passed': False, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'f(94) % 1000 = 613, expected 561'}]}\n",
+      "has_certificate": true,
+      "attempts": 2,
+      "time_s": 41.31872606277466
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'Minimal Polynomial Check', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'x'}, {'name': 'Numerical Value Check', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Numerical value: 0.500000000000000'}]}\n",
+      "has_certificate": false,
+      "attempts": 1,
+      "time_s": 4.2726006507873535
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'Functional Equation Proof', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'The proof is valid: |= ForAll([a, b], f(2*a) + 2*f(b) == f(f(a + b)))'}, {'name': 'Numerical Sanity Check', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Check on f(1) = 5 passed successfully.'}]}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 6.201121807098389
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/tactics.py\", line 315, in prove\n    pf = kd.kernel.prove(\n         ^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/kernel.py\", line 161, in prove\n    raise LemmaError(\"prove\", thm, res)\nkdrag.kernel.LemmaError: ('prove', ForAll([a_0,\n        a_1,\n        a_2,\n        a_3,\n        a_4,\n        a_5,\n        a_6,\n        a_7,\n    ",
+      "attempts": 3,
+      "time_s": 16.783400774002075
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "failed_check",
+      "output": "Verification Result: {'proved': False, 'checks': [{'name': 'discriminant_positive', 'passed': False, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': \"(x**2 + 18*x + 30 == 10, 'Countermodel', [x = 0])\"}, {'name': 'product_of_roots_sympy', 'passed': True, 'backend': 'sympy', 'proof_type': 'symbolic_zero', 'details': 'Product of roots is 20'}, {'name': 'numerical_sanity_check', 'passed': False, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Roots: -10.0000, -9.0000. Product: 90.0000'}]}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 7.371696710586548
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "proved",
+      "output": "m + n = 2.93333333333333\n",
+      "has_certificate": false,
+      "attempts": 2,
+      "time_s": 15.911864995956421
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp59w1wqd_.py\", line 57, in <module>\n    result = verify()\n             ^^^^^^^^\n  File \"/tmp/tmp59w1wqd_.py\", line 19, in verify\n    kl_mn_expr = Plus(K*L, M*N)\n                 ^^^^^^^^^^^^^^\nTypeError: Plus() takes 1 positional argument but 2 were given\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 17.02852201461792
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR:   File \"/tmp/tmpiode9eg4.py\", line 55\n    ```\n    ^\nSyntaxError: invalid syntax\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 16.59932804107666
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpaqb87gyb.py\", line 30, in <module>\n    numerical_details = (\"Numerical check passed\" if numerical_passed else \"Numerical check failed\")\n                                                     ^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/sympy/core/relational.py\", line 516, in __bool__\n    raise TypeError(\"cannot determine truth value of Relational\")\nTypeError: cannot determine truth value of ",
+      "attempts": 3,
+      "time_s": 15.35932207107544
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpykearuxo.py\", line 6, in <module>\n    x = kd.Real('x')\n        ^^^^^^^\nAttributeError: module 'kdrag' has no attribute 'Real'\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 19.052835941314697
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp4d3es0z9.py\", line 101, in <module>\n    verification_checks = verify()\n                          ^^^^^^^^\n  File \"/tmp/tmp4d3es0z9.py\", line 15, in verify\n    f = Function('f', IntSort(), IntSort(), lambda n: If(n % 3 == 0, n // 3, (n // 3) + 1))\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/smt.py\", line 299, ",
+      "attempts": 3,
+      "time_s": 22.35794425010681
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "proved",
+      "output": "Proved: True\n{'name': 'aime_1987_p5_proof', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': '|= ForAll([x, y],\\n       Implies(y*y + 3*x*x*y*y == 30*x*x + 517,\\n               3*x*x*y*y == 588))'}\n{'name': 'aime_1987_p5_numerical_verification', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Evaluated 3*x^2*y^2 at x=2, y=7: 588'}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 5.333056926727295
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR:   File \"/tmp/tmpceyf2zir.py\", line 7\n    neg_a12, neg_a13, neg_a21, neg_a23, neg_a31, neg_a32 = \n                                                           ^\nSyntaxError: invalid syntax\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 17.666791915893555
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "proved",
+      "output": "Proved: True\nCheck: Irreducibility using gcd proof, Passed: True, Details: Proof using kdrag that gcd(21n + 4, 14n + 3) = 1 for all n natural.\nCheck: Numerical sanity check, Passed: True, Details: Numerical check at n = 10: gcd between 214 and 143 is 1.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 5.291736602783203
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR:   File \"/tmp/tmpe987zg74.py\", line 39\n    numerical_sanity_check = Rational(52, 38) * Rational(38, 24) * Rational(24, 10) * \\  \n                                                                                       ^\nSyntaxError: unexpected character after line continuation character\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 18.099704027175903
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp60gilsuf.py\", line 20, in <module>\n    numerical_val_check = final_expr.subs(x, numerical_x_val)\n                          ^^^^^^^^^^^^^^^\nAttributeError: 'BoolRef' object has no attribute 'subs'\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 14.697383880615234
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "failed_check",
+      "output": "Verification result: {'proved': False, 'checks': [{'name': 'Check if (1, 1) is a solution', 'passed': False, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'Could not prove (1, 1) is a solution.'}, {'name': 'Check if (16, 2) is a solution', 'passed': False, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'Could not prove (16, 2) is a solution.'}, {'name': 'Check if (27, 3) is a solution', 'passed': False, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'Could not prove (27, 3) is a solution.'}, {'name': 'Numerical check for (16, 2)', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Verified 16**4 == 2**16'}]}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 6.434084892272949
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "proved",
+      "output": "Prove ax^5 + by^5 = 20 with conditions: Passed\nNumerical sanity check: Passed\nOverall proof succeeded.\n",
+      "has_certificate": false,
+      "attempts": 2,
+      "time_s": 10.895210981369019
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/tactics.py\", line 315, in prove\n    pf = kd.kernel.prove(\n         ^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/kernel.py\", line 161, in prove\n    raise LemmaError(\"prove\", thm, res)\nkdrag.kernel.LemmaError: ('prove', ForAll([x, y, z, w],\n       Implies(And(x > 1,\n                   y > 1,\n                   z > 1,\n         ",
+      "attempts": 3,
+      "time_s": 20.911329984664917
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "failed_check",
+      "output": "{'proved': False, 'checks': [{'name': 'kdrag_proof', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': 'Proof completed with kd.prove'}, {'name': 'numerical_check', 'passed': False, 'backend': 'numerical', 'proof_type': 'numerical', 'details': \"module 'kdrag' has no attribute 'evaluate'\"}]}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 5.076372861862183
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp8l1uzrfb.py\", line 26, in <module>\n    sym_f = simplify(sympy_f(4, 1981))  # Manually evaluate for specific case\n                     ^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp8l1uzrfb.py\", line 24, in sympy_f\n    return sympy_f(x_value - 1, sympy_f(x_value, y_value - 1))\n                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmp8l1uzrfb.py\", line 24, in sympy_f\n    return sympy_f(x_value - 1, sympy_f(x_value, y_value -",
+      "attempts": 3,
+      "time_s": 16.821129083633423
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "failed_check",
+      "output": "{'proved': False, 'checks': [{'name': 'Existence of Unique x1', 'passed': False, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': \"(And(ForAll(n, x(n + 1) == x(n)*(x(n) + ToReal(1/n))),\\n    And(x(1) == x1, x1 > 0, x1 < 1),\\n    ForAll(n,\\n           Implies(n >= 1,\\n                   And(x(n) > 0,\\n                       x(n) < x(n + 1),\\n                       x(n + 1) < 1)))), 'Countermodel', [x = [else -> 0], div0 = [else -> 0], mod0 = [else -> 0]])\"}, {'name': 'Numerical Check for x1=0.5', 'passed': False, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Checked values: [0.5, 0.75, 0.9375, 1.19140625, 1.7173004150390625]'}]}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 7.2065348625183105
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'Triangle inequality proof', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': '|= Implies(And(a > 0,\\n            b > 0,\\n            c > 0,\\n            a + b > c,\\n            b + c > a,\\n            c + a > b),\\n        a**2*b*(a - b) + b**2*c*(b - c) + c**2*a*(c - a) >=\\n        0)'}, {'name': 'Numerical sanity check', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'Evaluated example gives 34'}]}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 4.7087249755859375
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'f(x) is 30-x for given conditions', 'passed': True, 'backend': 'kdrag', 'proof_type': 'certificate', 'details': '|= ForAll([x, p],\\n       Implies(And(p > 0, p < 15, p <= x, x <= 15),\\n               If(x - p > 0, x - p, -(x - p)) +\\n               If(x - 15 > 0, x - 15, -(x - 15)) +\\n               If(x - (p + 15) > 0,\\n                  x - (p + 15),\\n                  -(x - (p + 15))) ==\\n               30 - x))'}, {'name': 'Numerical check at p=10, x=15', 'passed': True, 'backend': 'numerical', 'proof_type': 'numerical', 'details': 'f(15) = 15, expected 15'}]}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 4.685932874679565
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "execution_error",
+      "error": "TIMEOUT after 90s",
+      "attempts": 3,
+      "time_s": 106.36566185951233
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp6s5p_w9i.py\", line 17, in <module>\n    @kd.prove\n     ^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/tactics.py\", line 341, in prove\n    raise e\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/tactics.py\", line 315, in prove\n    pf = kd.kernel.prove(\n         ^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/kernel.py\", lin",
+      "attempts": 3,
+      "time_s": 104.50976705551147
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp6i480ldj.py\", line 55, in <module>\n    result = verify()\n             ^^^^^^^^\n  File \"/tmp/tmp6i480ldj.py\", line 16, in verify\n    inductive_assumption = ForAll(n, Implies(n >= 1, f(n) == n))\n                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/smt.py\", line 195, in ForAll\n    if any(v.assumes is not None for v in vs):\n       ^^^^^^^^^^^^^^^^^",
+      "attempts": 3,
+      "time_s": 16.10953187942505
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "proved",
+      "output": "SymPy simplification proof: Failed\nDetails: SymPy simplification yielded: a**2*(-a + b + c) - 3*a*b*c + b**2*(a - b + c) + c**2*(a + b - c)\n",
+      "has_certificate": false,
+      "attempts": 3,
+      "time_s": 12.813607215881348
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp0f2dxwo_.py\", line 18, in <module>\n    inequality = ForAll([a], Implies(And(0 <= a, a < sqrt(9)), lhs < rhs))\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/smt.py\", line 195, in ForAll\n    if any(v.assumes is not None for v in vs):\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python",
+      "attempts": 3,
+      "time_s": 13.581769943237305
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "proved",
+      "output": "Proof successful? False\nverify_given_expr1 : Failed\nDetails: Expression did not simplify to the given value\nverify_expr2 : Failed\nDetails: Expression did not simplify to the calculated target value\nnumerical_sanity_check : Failed\nDetails: Value at t=1/4 did not match expected: 0.0233963883369338\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 7.82037091255188
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/tactics.py\", line 315, in prove\n    pf = kd.kernel.prove(\n         ^^^^^^^^^^^^^^^^\n  File \"/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/kdrag/kernel.py\", line 161, in prove\n    raise LemmaError(\"prove\", thm, res)\nkdrag.kernel.LemmaError: ('prove', ForAll([a, b, c, d, k, m],\n       Implies(And(a*d == b*c,\n                   ToReal(a + d) == 2**k,\n        ",
+      "attempts": 3,
+      "time_s": 17.75660490989685
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "proved",
+      "output": "Arithmetic progression symbolic solution: Failed - Solved a_1 using SymPy, found a_1 = -47.1020408163265\nSum of even-indexed terms: Failed - Computed sum of even-indexed terms as 93.\n",
+      "has_certificate": false,
+      "attempts": 2,
+      "time_s": 10.407209157943726
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "execution_error",
+      "error": "TIMEOUT after 90s",
+      "attempts": 3,
+      "time_s": 108.90698480606079
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp5azi6v7o.py\", line 6, in <module>\n    x = kd.Real('x')\n        ^^^^^^^\nAttributeError: module 'kdrag' has no attribute 'Real'\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 19.49489998817444
+    }
+  ]
+}

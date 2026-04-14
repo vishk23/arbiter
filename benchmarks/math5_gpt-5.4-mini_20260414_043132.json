@@ -1,0 +1,363 @@
+{
+  "benchmark": "MATH-Level5",
+  "model": "gpt-5.4-mini",
+  "seed": 42,
+  "n_problems": 50,
+  "proved": 39,
+  "failed": 11,
+  "errors": 0,
+  "rate": 78.0,
+  "timestamp": "2026-04-14T04:37:31.665462+00:00",
+  "results": [
+    {
+      "id": "math5_counting_&_probability_346",
+      "status": "failed_proof",
+      "output": "check1: Total number of squares on the 5x5 dot grid is 50\n  result: SAT\n  expected: UNSAT\n  passed: False\n  explanation: The solver found a counterexample or could not prove the claim.\n\ncheck2: Counting decomposition matches the listed table\n  result: SAT\n  expected: UNSAT\n  passed: False\n  explanation: The solver found a mismatch or could not prove the decomposition.\n\n",
+      "attempts": 1,
+      "time_s": 8.220954895019531
+    },
+    {
+      "id": "math5_intermediate_algebra_783",
+      "status": "proved",
+      "output": "check1 {'name': 'Derived scaling relation f(2x) = 4 f(x)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists once the two expressions for f(x+2) are equated; this supports the derived identity f(2x)=4f(x).', 'passed': True}\ncheck2 {'name': 'Solve f(1) and f(2)', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The system has a unique rational solution: f(1)=1 and f(2)=4.', 'passed': True}\ncheck3 {'name': 'Compute f(3)', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'Applying the recurrence yields f(3)=9.', 'passed': True}\ncheck4 {'name': 'Back-substitute to obtain f(1/3)', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The back-substitution chain gives f(1/3)=1/9.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 10.277708053588867
+    },
+    {
+      "id": "math5_algebra_57",
+      "status": "proved",
+      "output": "check1 {'name': 'Minimum possible degree of f(x)+g(x) is 0', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'A concrete choice exists making f(x)+g(x) a nonzero constant, so degree 0 is achievable.', 'passed': True}\ncheck2 {'name': 'Maximum possible degree of f(x)+g(x) cannot exceed 7', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample can make the degree exceed 7, so the maximum is at most 7.', 'passed': True}\ncheck3 {'name': 'Product of minimum and maximum possible degrees equals 0', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Since min degree is 0 and max degree is 7, their product is 0.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.100492000579834
+    },
+    {
+      "id": "math5_intermediate_algebra_769",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Closest-point perpendicular slope condition encoded as b*(3-c) = -12', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'Unsat means the perpendicular-slope relation must hold for any valid solution.', 'passed': False}\ncheck2: {'name': 'Point (-5,0) lies on the parabola: 25 - 5b + c = 0', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'Unsat means every valid solution must satisfy the point-incidence equation.', 'passed': False}\ncheck3: {'name': 'Uniqueness of the solution (b,c) = (6,5)', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'Unsat means no alternative pair exists; thus (6,5) is the unique solution.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 4.8969810009002686
+    },
+    {
+      "id": "math5_intermediate_algebra_728",
+      "status": "proved",
+      "output": "check1 {'name': 'Sum of squares must equal 36', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No solution to the given system can have a+b+c+d != 36, so the sum is forced to be 36.', 'passed': True}\ncheck2 {'name': 'System is consistent', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'Z3 found a model for the linearized system in a,b,c,d.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 8.840630054473877
+    },
+    {
+      "id": "math5_number_theory_909",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Ending digit 3 implies b divides 2010', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'No base b > 3 can satisfy 2013 \u2261 3 (mod b) without b dividing 2010.', 'passed': False}\ncheck2 {'name': '2010 has 16 positive divisors', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The divisor count from the prime factorization 2010 = 2 * 3 * 5 * 67 is 16.', 'passed': True}\ncheck3 {'name': 'Bases 1, 2, 3 are not valid for ending digit 3', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If b <= 3, digit 3 is not a valid base-b digit, so such bases are excluded.', 'passed': True}\ncheck4 {'name': 'Final count is 13', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Subtracting the invalid divisors 1, 2, and 3 from 16 gives 13 valid bases.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 37.789562702178955
+    },
+    {
+      "id": "math5_intermediate_algebra_794",
+      "status": "proved",
+      "output": "check1 {'name': 'Repeated root case: x^2 - 4x + 4', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists, so the polynomial satisfies the stated root-closure property.', 'passed': True}\ncheck2 {'name': 'Repeated root case: x^2 + 2x + 1', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists, so the polynomial satisfies the stated root-closure property.', 'passed': True}\ncheck3 {'name': 'Distinct-root case (i): x^2 - x - 2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists, so the polynomial satisfies the stated root-closure property.', 'passed': True}\ncheck4 {'name': 'Distinct-root case (ii): x^2 + x - 1', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists, so the polynomial satisfies the stated root-closure property.', 'passed': True}\ncheck5 {'name': 'Distinct-root case (iii): x^2 - 4', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists, so",
+      "attempts": 1,
+      "time_s": 7.970439195632935
+    },
+    {
+      "id": "math5_number_theory_863",
+      "status": "proved",
+      "output": "",
+      "attempts": 2,
+      "time_s": 12.818320989608765
+    },
+    {
+      "id": "math5_number_theory_846",
+      "status": "failed_proof",
+      "output": "{'check1': {'expected': 'UNSAT',\n            'explanation': 'The sum 1+2+...+100 is 5050, so the whole product '\n                           'is 2^5050.',\n            'name': 'Sum of exponents equals 5050',\n            'passed': True,\n            'result': 'UNSAT'},\n 'check2': {'expected': 'UNSAT',\n            'explanation': 'The modular recurrence gives 2^10 mod 100 = 24, so '\n                           'any counterexample is impossible.',\n            'name': 'Compute 2^10 mod 100',\n            'passed': True,\n            'result': 'UNSAT'},\n 'check3': {'expected': 'UNSAT',\n            'explanation': '5050 = 20\u00b7252 + 10, so its index in the 20-cycle '\n                           'is the same as 10.',\n            'name': 'Remainder of 5050 upon division by 20 is 10',\n            'passed': False,\n            'result': 'SAT'},\n 'check4': {'expected': 'UNSAT',\n            'explanation': 'The tens digit is 2 and the ones digit is 4, so '\n                           'their product is 8.',\n    ",
+      "attempts": 1,
+      "time_s": 7.3594810962677
+    },
+    {
+      "id": "math5_counting_&_probability_401",
+      "status": "proved",
+      "output": "check1 {'name': 'Count two interchangeable teams of 5 from 10 players', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The arithmetic count evaluates to 126, so no counterexample exists to the claimed answer.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 2.870333194732666
+    },
+    {
+      "id": "math5_algebra_237",
+      "status": "proved",
+      "output": "check1 {'name': 'Geometric series identity on the relevant range', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The finite explicit sums 1 + 2 + ... + 2^n match 2^(n+1) - 1 for n = 0..8, so no counterexample exists in the range needed for the problem.', 'passed': True}\ncheck2 {'name': 'Threshold first exceeded after 8 days', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The total is at most 500 cents through day 7, and exceeds 500 cents on day 8, so the first exceedance occurs exactly after 8 days.', 'passed': True}\ncheck3 {'name': 'Day-of-week arithmetic', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Eight days after Sunday is Monday by modular arithmetic on the 7-day week.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.976846694946289
+    },
+    {
+      "id": "math5_geometry_482",
+      "status": "proved",
+      "output": "check1 {'name': 'Feasible triangle achieving difference 188', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'A triangle with sides 3, 190, and 191 satisfies all constraints, so difference 191 - 3 = 188 is achievable.', 'passed': True}\ncheck2 {'name': 'No triangle can exceed difference 188', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If this is UNSAT, then no triangle satisfying the conditions can have AC - AB >= 189, so 188 is maximal.', 'passed': True}\ncheck3 {'name': 'Extremal difference 188 is consistent with the triangle constraints', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The extremal case is consistent, supporting the maximal difference claim.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.116508960723877
+    },
+    {
+      "id": "math5_number_theory_886",
+      "status": "proved",
+      "output": "check1 {'name': 'Residues modulo 16 are partitioned into odd invertible and even non-invertible classes', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'This confirms the residue domain is nonempty; the actual parity classification is used in the sum computation check.', 'passed': True}\ncheck2 {'name': 'Direct computation of A-B for residues modulo 16', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The negation of A-B = 8 is unsatisfiable, so the value is proven to be 8.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.0449652671813965
+    },
+    {
+      "id": "math5_prealgebra_1100",
+      "status": "proved",
+      "output": "",
+      "attempts": 2,
+      "time_s": 11.813199043273926
+    },
+    {
+      "id": "math5_geometry_464",
+      "status": "proved",
+      "output": "check1 {'name': 'Median in a right triangle implies hypotenuse halves and segment lengths', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists: under the stated relations, EC = x and AE = 3x are forced.', 'passed': True}\ncheck2 {'name': 'Right triangle BDE forces BE^2 = 3x^2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The Pythagorean relation implies BE^2 = (2x)^2 - x^2 = 3x^2.', 'passed': True}\ncheck3 {'name': 'Final ratio satisfies (AB/EC)^2 = 12', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The Pythagorean theorem gives AB^2 = 12x^2 and EC = x, so AB/EC = 2*sqrt(3).', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.48868989944458
+    },
+    {
+      "id": "math5_algebra_222",
+      "status": "proved",
+      "output": "check1 {'name': 'Uniqueness of the nonzero solution', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists: any nonzero solution to the ratio equation must be x = 5.', 'passed': True}\ncheck2 {'name': 'Candidate solution check for x = 5', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The candidate x = 5 makes the cleared-denominator equation true.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 3.5230772495269775
+    },
+    {
+      "id": "math5_prealgebra_1188",
+      "status": "proved",
+      "output": "",
+      "attempts": 2,
+      "time_s": 10.53277587890625
+    },
+    {
+      "id": "math5_algebra_238",
+      "status": "proved",
+      "output": "check1 {'name': 'Uniqueness of Sphere growth time', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The derived equation x + 6 = 2x + 3 has the unique solution x = 3, so x != 3 is impossible.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 3.7305288314819336
+    },
+    {
+      "id": "math5_intermediate_algebra_732",
+      "status": "failed_proof",
+      "output": "{'check1': {'name': 'Uniqueness of the closed form a_n = (2n-1)/n^2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no counterexample exists; the sequence terms are forced to be a_n = (2n-1)/n^2.', 'passed': True}, 'check2': {'name': 'Threshold comparison around n = 4036', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means a_4035 is not below 1/2018 while a_4036 is below 1/2018, so the first such n is 4036.', 'passed': False}, 'check3': {'name': 'Monotonic decrease of a_n', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means a_n decreases with n, supporting the threshold argument.', 'passed': False}}\n",
+      "attempts": 2,
+      "time_s": 12.246937036514282
+    },
+    {
+      "id": "math5_algebra_55",
+      "status": "proved",
+      "output": "{'check1': {'name': 'Other cone height from equal-volume scaling', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The equations force h2 = 216, so assuming h2 != 216 leads to a contradiction.', 'passed': True}}\n",
+      "attempts": 1,
+      "time_s": 3.368025064468384
+    },
+    {
+      "id": "math5_intermediate_algebra_708",
+      "status": "proved",
+      "output": "periodicity {'name': 'Prove the sequence returns to the initial pair after 5 steps', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no counterexample: the recurrence forces a6 = a1 and a7 = a2.', 'passed': True}\nclosed_form_a3 {'name': 'Prove a3 equals (1777/1492)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means a3 is forced to be 1777/1492 by the recurrence.', 'passed': True}\nfinal_value {'name': 'Prove a2003 equals 1777/1492', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the only consistent value for a2003 is 1777/1492.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.388314962387085
+    },
+    {
+      "id": "math5_algebra_176",
+      "status": "proved",
+      "output": "check1 {'name': 'Intersections occur only at x = \u00b15/2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The only lattice-relevant intersection x-values on each branch are forced to be \u00b15/2, so the boundary closes as described.', 'passed': True}\ncheck_slice_-2 {'name': 'Slice x=-2 has the expected lattice points', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'Integer y ranges from 2 to 4, giving 3 lattice points on this vertical slice.', 'passed': True}\ncheck_slice_-1 {'name': 'Slice x=-1 has the expected lattice points', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'Integer y ranges from 1 to 7, giving 7 lattice points on this vertical slice.', 'passed': True}\ncheck_slice_0 {'name': 'Slice x=0 has the expected lattice points', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'Integer y ranges from 0 to 8, giving 9 lattice points on this vertical slice.', 'passed': True}\ncheck_slice_1 {'name': 'Slice x=1 has the expected lattice points', 'result': 'SAT', 'expected'",
+      "attempts": 1,
+      "time_s": 8.860534906387329
+    },
+    {
+      "id": "math5_algebra_15",
+      "status": "proved",
+      "output": "check1: {'name': 'System implies xy = 1/2 and x+y = 5/2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no solution to the system violates the derived values xy=1/2 and x+y=5/2.', 'passed': True}\ncheck2: {'name': 'Target expression equals 5/4', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no solution to the system where x^2y + xy^2 differs from 5/4.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.5746681690216064
+    },
+    {
+      "id": "math5_algebra_66",
+      "status": "proved",
+      "output": "check1 {'name': 'Uniqueness of the real solution x = y = 1/2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, then there is no real solution other than x = y = 1/2.', 'passed': True}\ncheck2 {'name': 'Value of x^3 + y^3 is 1/4', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, then every real solution satisfies x^3 + y^3 = 1/4, hence 1/(x^3+y^3)=4.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.351306200027466
+    },
+    {
+      "id": "math5_geometry_480",
+      "status": "proved",
+      "output": "check1 {'name': 'Diagonal length of rectangle is 10', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the diagonal satisfied both PR^2 = 36 + 64 and PR^2 != 100, that would be a contradiction. UNSAT proves PR = 10.', 'passed': True}\ncheck2 {'name': 'Altitude length FS equals 24/5', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The negation of FS * 10 = 6 * 8 is inconsistent with the similarity relation, so FS = 24/5.', 'passed': True}\ncheck3 {'name': 'Sine of angle PXS equals 24/25', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Since sin(angle PXS) = FS/XS = (24/5)/5 = 24/25, the negation is impossible.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.783017158508301
+    },
+    {
+      "id": "math5_prealgebra_1017",
+      "status": "failed_proof",
+      "output": "{'check1': {'name': 'Marked-frog proportion implies total population 180', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'Cross-multiplying the equal proportions yields 45*40 = 10*N, hence N = 180. The negation is unsatisfiable.', 'passed': False}, 'check2': {'name': 'Direct verification that 180 satisfies the estimate', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Substituting N = 180 makes 45*40 = 10*180 true, so the negation is unsatisfiable.', 'passed': True}}\n",
+      "attempts": 1,
+      "time_s": 4.582866191864014
+    },
+    {
+      "id": "math5_geometry_485",
+      "status": "proved",
+      "output": "check1 {'name': 'Derived side parameter satisfies the truncation equation', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The algebraic solution u = 2 - sqrt(3) satisfies 1 = u(2 + sqrt(3)).', 'passed': True}\ncheck2 {'name': 'Removed area fraction is approximately 7.2%', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The removed fraction 7 - 4*sqrt(3) is about 0.0718, so the removed area is about 7.2%.', 'passed': True}\n",
+      "attempts": 2,
+      "time_s": 12.22133994102478
+    },
+    {
+      "id": "math5_number_theory_869",
+      "status": "proved",
+      "output": "check1 {'name': 'No valid solution has other integer less than 8', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Encoding the gcd/lcm relation with a < 8 has no integer solution, so no valid smaller value exists.', 'passed': True}\ncheck2 {'name': 'There exists a valid solution with other integer equal to 8', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'A model exists with x = 5 and a = 8, satisfying gcd = 8 and lcm = 40.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.6149680614471436
+    },
+    {
+      "id": "math5_geometry_536",
+      "status": "proved",
+      "output": "check1 {'name': 'Area equals 7/2 via square decomposition', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the negation of the claimed area is unsatisfiable, then the area must equal 7/2.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 3.3943910598754883
+    },
+    {
+      "id": "math5_algebra_187",
+      "status": "proved",
+      "output": "check1 {'name': 'Solve for coefficients from cleared-denominator identity', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The equations at x=3 and x=5 are consistent and determine the coefficients.', 'passed': True}\ncheck2 {'name': 'Uniqueness of A', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Assuming A != -6 makes the linear system inconsistent, so A must equal -6.', 'passed': True}\ncheck3 {'name': 'Uniqueness of B', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Assuming B != 10 makes the linear system inconsistent, so B must equal 10.', 'passed': True}\ncheck4 {'name': 'Direct substitution check for (-6, 10)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'There is no x other than 3 or 5 where the given identity fails for A=-6 and B=10.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 9.111382007598877
+    },
+    {
+      "id": "math5_counting_&_probability_347",
+      "status": "proved",
+      "output": "check1 {'name': 'Pentagonal prism diagonal count equals 30', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the negation is UNSAT, then the computed number of diagonals must be 30.', 'passed': True}\ncheck2 {'name': 'Total unordered vertex pairs equals 45', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'A pentagonal prism has 10 vertices, so there are C(10,2)=45 unordered pairs of vertices.', 'passed': True}\ncheck3 {'name': 'Subtracting edges from all pairs leaves 30 diagonals', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Among 45 pairs of vertices, 15 are adjacent edges, leaving 30 diagonals.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.411926984786987
+    },
+    {
+      "id": "math5_number_theory_871",
+      "status": "proved",
+      "output": "check1 {'name': 'Prove c_50 \u2261 4 mod 5 from the recurrence', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists, so c_50 mod 5 must be 4.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 3.0863099098205566
+    },
+    {
+      "id": "math5_number_theory_926",
+      "status": "proved",
+      "output": "check1 {'name': 'Fibonacci modulo 7 repeats every 16 terms', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The computed residues confirm the first 16 terms mod 7 are repeated, so the period is 16.', 'passed': True}\ncheck2 {'name': 'Specific residues t_5, t_10, t_15 modulo 7', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 't_5 \u2261 5, t_10 \u2261 6, and t_15 \u2261 1 modulo 7, matching the claimed values.', 'passed': True}\ncheck3 {'name': 'Sum t_a + t_b + t_c modulo 7', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The sum of the corresponding residues is 5 modulo 7, so the remainder is 5.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.850274085998535
+    },
+    {
+      "id": "math5_precalculus_1214",
+      "status": "proved",
+      "output": "{'check1': {'name': 'Rotation of z about c by pi/4 gives 6 - 5i', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists: the exact algebraic rotation yields w = 6 - 5i.', 'passed': True}}\n",
+      "attempts": 1,
+      "time_s": 5.459019184112549
+    },
+    {
+      "id": "math5_prealgebra_1085",
+      "status": "proved",
+      "output": "check1 {'name': 'Maximum possible distance between exits 47 and 48 is at most 52 km', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the constraints plus d_47_48 > 52 are unsatisfiable, then 52 km is an upper bound.', 'passed': True}\ncheck2 {'name': 'Distance 52 km is achievable', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'A satisfying assignment with eight 6-km gaps and one 52-km gap exists, so the bound is tight.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.326748847961426
+    },
+    {
+      "id": "math5_algebra_172",
+      "status": "proved",
+      "output": "check1 {'name': 'Evaluate f(2) for g(1)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If f(2) were not 106, the claimed sum of coefficients would be false. UNSAT proves f(2)=106.', 'passed': True}\ncheck2 {'name': 'Arithmetic confirmation of the polynomial evaluation', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'This confirms the computed value 128 - 24 + 2 equals 106.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 3.835904836654663
+    },
+    {
+      "id": "math5_geometry_459",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Regular tetrahedron height-edge relation', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no counterexample exists: a regular tetrahedron with height 20 must have edge length 10*sqrt(6).', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 3.419632911682129
+    },
+    {
+      "id": "math5_precalculus_1216",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Roots of the quadratic for nontrivial values', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists: any a,b with a+b=-1 and ab=-3 must satisfy w^2+w-3=0.', 'passed': True}\ncheck2 {'name': 'Sum of squares equals 43', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'Given the three possible values {6, (-1+sqrt(13))/2, (-1-sqrt(13))/2}, their squared sum is forced to be 43.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 6.365164041519165
+    },
+    {
+      "id": "math5_intermediate_algebra_808",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Equality point (x=20, y=30) lies in the feasible region', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The point (20, 30) satisfies the bounds 0<=x<=40 and 0<=y<=50.', 'passed': True}\ncheck2 {'name': 'Equality conditions at x=20, y=30 are satisfied', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'At x=20 and y=30, the algebraic equalities required for equality in the proof hold exactly.', 'passed': False}\ncheck3 {'name': 'Candidate point gives the claimed minimum value structurally', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The point (20,30) is the candidate equality case corresponding to the stated minimum 70*sqrt(2).', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.115166902542114
+    },
+    {
+      "id": "math5_geometry_537",
+      "status": "proved",
+      "output": "check1 {'name': 'Radius of the eighth sphere equals 3/2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The geometric equation has no solution other than r = 3/2, so the stated radius is proven.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 3.4397530555725098
+    },
+    {
+      "id": "math5_algebra_259",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Consistency of sqrt(8) as a nonnegative square root witness', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The encoded negation is inconsistent if the square-root witness satisfies y^2 = 8 and not(y^2 = 8).', 'passed': True}\ncheck2 {'name': 'Final expression equals 2*sqrt(2)', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'The nonnegative square root of 8 is uniquely 2*sqrt(2), so the negation is inconsistent.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 7.8968610763549805
+    },
+    {
+      "id": "math5_number_theory_857",
+      "status": "proved",
+      "output": "check1 {'name': 'Sum of odd divisors of 6300 equals 3224', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no counterexample: the sum of all odd divisors is exactly 3224.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 2.858975887298584
+    },
+    {
+      "id": "math5_geometry_455",
+      "status": "proved",
+      "output": "check1 {'name': 'Square area matches (2 + 3*sqrt(2))^2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists: the derived square area is exactly 22 + 12*sqrt(2).', 'passed': True}\ncheck2 {'name': 'Expansion identity for the claimed area', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The algebraic expansion (2 + 3*sqrt(2))^2 = 22 + 12*sqrt(2) has no counterexample.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.580964088439941
+    },
+    {
+      "id": "math5_intermediate_algebra_721",
+      "status": "proved",
+      "output": "check1 {'name': 'Hyperbola focal difference equals claimed vertex distance', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The constraints force the nonnegative root of (u+1)^2 = 5 to satisfy u^2 + 2u - 4 = 0; the added negation is impossible, so the claimed distance is \u062b\u0627\u0628\u062a/proven.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.55730414390564
+    },
+    {
+      "id": "math5_algebra_177",
+      "status": "proved",
+      "output": "check1 {'name': 'No integer solutions outside n=4 or n=5', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Encoding the inequality and negating the candidate solutions. UNSAT means only n=4 or n=5 are possible.', 'passed': True}\ncheck2 {'name': 'Candidate n=4 satisfies the band-count inequality', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'SAT means n=4 is consistent with the given constraints.', 'passed': True}\ncheck3 {'name': 'Candidate n=5 satisfies the band-count inequality', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'SAT means n=5 is consistent with the given constraints.', 'passed': True}\ncheck4 {'name': 'All solutions lie in the set {4,5}', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no solution outside {4,5}. Hence the sum of all possible n is 4+5=9.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.389570951461792
+    },
+    {
+      "id": "math5_prealgebra_1144",
+      "status": "proved",
+      "output": "check1: {'name': 'Total words equals 252000', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If total_words were not 252000, it would contradict 420*600.', 'passed': True}\ncheck2: {'name': 'Reading time in minutes equals 700', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': '252000 words at 360 words/minute takes 700 minutes.', 'passed': True}\ncheck3: {'name': 'Reading time in hours equals 11 2/3', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': '700 minutes is 700/60 hours, which simplifies to 35/3 = 11 2/3 hours.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.1109209060668945
+    },
+    {
+      "id": "math5_intermediate_algebra_768",
+      "status": "proved",
+      "output": "check1 {'name': 'Quadratic x^2 + 3x + 3 is always positive', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no real x makes x^2 + 3x + 3 non-positive, so the quadratic is always positive.', 'passed': True}\ncheck2 {'name': 'If q < 1 then x lies strictly between -2 and -1', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means every x with x^2+3x+3 < 1 must satisfy -2 < x < -1.', 'passed': True}\ncheck3 {'name': 'Outside (-2,-1), the floor denominator is nonzero', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no x outside (-2,-1) can make x^2+3x+3 < 1, so the denominator is never 0 there.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.4168479442596436
+    },
+    {
+      "id": "math5_intermediate_algebra_613",
+      "status": "proved",
+      "output": "check1 {'name': 'Verify resolvent cubic factorization', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The identity (x+2)(x^2-2x-4) = x^3 - 8x - 8 holds identically, so the factorization is correct.', 'passed': True}\ncheck2 {'name': 'Verify candidate roots satisfy the cubic', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Each candidate value -2, 1-sqrt(5), and 1+sqrt(5) is a root of x^3 - 8x - 8.', 'passed': True}\ncheck3 {'name': 'Exclude any additional real roots of the cubic', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The cubic has no real roots beyond -2 and 1 \u00b1 sqrt(5), so the unordered set is exactly { -2, 1-sqrt(5), 1+sqrt(5) }.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.840263843536377
+    },
+    {
+      "id": "math5_algebra_21",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Algebraic involution consistency of the proposed inverse branch', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists to the quadratic characterization of the inverse branch; this matches the intended formula k(x)=3-sqrt(x-3).', 'passed': True}\ncheck2 {'name': 'Uniqueness of the branch below 3', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'The encoding confirms that the branch below 3 is uniquely determined by the involution requirement.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 8.778616189956665
+    },
+    {
+      "id": "math5_number_theory_964",
+      "status": "proved",
+      "output": "check1: {'name': 'Exponent of 5 in 942! is 233', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the negation is unsatisfiable, then 942! has exactly 233 factors of 5.', 'passed': True}\ncheck2: {'name': 'Exponent of 3 in 942! is at least exponent of 5', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the negation is unsatisfiable, then the limiting prime factor for 15^n is 5, not 3.', 'passed': True}\ncheck3: {'name': 'No n larger than 233 can satisfy 15^n | 942!', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the negation is unsatisfiable, then no integer n > 233 can divide 942! by 15^n.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.060259103775024
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "model": "gpt-5.4-mini",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "proved": 23,
+  "failed_proof": 12,
+  "errors": 0,
+  "rate": 65.71428571428571,
+  "retries": 2,
+  "z3_timeout": 60,
+  "no_hints": true,
+  "temperature": null,
+  "timestamp": "2026-04-14T04:54:11.611882+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "proved",
+      "output": "candidate_248: {'name': 'Verify (2,4,8) satisfies the divisibility condition', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The tuple (2,4,8) should satisfy (p-1)(q-1)(r-1) | pqr-1.', 'passed': True}\ncandidate_3515: {'name': 'Verify (3,5,15) satisfies the divisibility condition', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The tuple (3,5,15) should satisfy (p-1)(q-1)(r-1) | pqr-1.', 'passed': True}\nuniqueness_of_solutions: {'name': 'No other integer triples satisfy the divisibility condition', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'A satisfying assignment would be a counterexample to the theorem; UNSAT proves only the two listed triples occur.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.542935132980347
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "proved",
+      "output": "check1 {'name': 'Consistency of f(19)=94 with recurrence-derived initial value', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The computed recurrence value for f(19) matches 94, so no counterexample exists.', 'passed': True}\ncheck2 {'name': 'Remainder of f(94) modulo 1000 is 561', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The recurrence forces f(94) to have remainder 561 upon division by 1000.', 'passed': True}\ncheck3 {'name': 'Final computed remainder', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'Direct computation gives f(94) = 4561, so the remainder mod 1000 is 561.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.0974180698394775
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Negation of the target trigonometric identity is inconsistent with the exact algebraic model', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, there is no algebraic model of the 7th-root cosine relations where the identity fails.', 'passed': False}\ncheck2 {'name': 'Target identity is consistent with the exact algebraic model', 'result': 'UNSAT', 'expected': 'SAT', 'explanation': 'If SAT, the exact algebraic constraints admit the claimed value.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 7.241687059402466
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Candidate solution f(n) = -2n satisfies the functional equation', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists; the identity holds for all integers a and b.', 'passed': False}\ncheck2 {'name': 'Involution consistency of the candidate solution', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The proposed function composes with itself to 4n, confirming internal consistency.', 'passed': True}\ncheck3 {'name': 'Uniqueness sanity check for the derived constants', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The derived values are consistent and distinct as required.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.214091062545776
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Counterexample to the claimed upper bound', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'UNSAT means no sequence with sum of squares 1 can make the expression reach or exceed 12/25, so the strict inequality is proven.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 33.81539034843445
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "proved",
+      "output": "check1 {'name': 'Product of real roots must equal 20', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no pair of real roots satisfying the equation with product not equal to 20, so the product of the real roots is 20.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.373586893081665
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "proved",
+      "output": "check1 {'name': 'Derive sec x - tan x from sec x + tan x', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The identity (sec x + tan x)(sec x - tan x) = 1 forces sec x - tan x = 7/22 when sec x + tan x = 22/7.', 'passed': True}\ncheck2 {'name': 'Reduced fraction for csc x + cot x and sum m+n', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The reciprocal expression matches the same value 22/7 in this configuration, so the lowest terms are 22/7 and m+n = 29.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.463772773742676
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "proved",
+      "output": "",
+      "attempts": 2,
+      "time_s": 14.344406127929688
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "proved",
+      "output": "check1 {'name': 'Arithmetic consequence for the claimed reduced fraction', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The encoded arithmetic witness is satisfiable; this module records the conclusion as requested.', 'passed': True}\ncheck2 {'name': 'Final answer equals 177', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'This check confirms the requested final numeric conclusion is 177.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.787892818450928
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "proved",
+      "output": "check1 {'name': 'Values of f are confined to [0,1]', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The only way the square root in the functional equation is real for all x is when each value f(x) lies in [0,1].', 'passed': True}\ncheck2 {'name': 'The transformation cannot escape the interval [1/2,1]', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'This encodes the fact that the recurrence sends every admissible value into the compact interval [1/2,1].', 'passed': True}\ncheck3 {'name': 'Existence of a positive candidate period b', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'A positive witness b = 4a is consistent with the claimed periodicity conclusion.', 'passed': True}\ncheck4 {'name': 'No arithmetic counterexample to b = 4a', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The arithmetic witness b = 4a is internally consistent, so the negation is contradictory.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 9.319127082824707
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "proved",
+      "output": "domain {'name': 'Domain of the nested radicals', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The radicals are simultaneously defined only when -1 <= x <= 3.', 'passed': True}\nlower_interval {'name': 'No counterexample below the claimed upper bound', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'There is no x in [-1, 1 - sqrt(127)/32) violating the inequality.', 'passed': True}\nupper_interval {'name': 'No point at or above the threshold satisfies the inequality', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'There is no x in [1 - sqrt(127)/32, 3] satisfying the inequality.', 'passed': True}\nendpoint_sanity {'name': 'Endpoint x = -1 satisfies the inequality', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'At x = -1, the expression equals sqrt(2), which is greater than 1/2.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.405732870101929
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Uniqueness of f(1982) under the given constraints', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no model satisfies the stated constraints with f(1982) != 660, so f(1982)=660 is forced.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 4.574859142303467
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "proved",
+      "output": "check1 {'name': 'Find integer solutions and compute 3x^2 y^2', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'Found a model x=2, y=7, giving 3x^2 y^2 = 588.', 'passed': True}\ncheck2 {'name': 'No counterexample to 3x^2 y^2 = 588', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no integer counterexample; therefore 3x^2 y^2 must equal 588.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.399961948394775
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "proved",
+      "output": "check1 {'name': 'No nontrivial solution exists', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no assignment satisfying the coefficient conditions, the system, and a nonzero solution; hence only the trivial solution exists.', 'passed': True}\ncheck2 {'name': 'Trivial solution is consistent', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'SAT confirms that x1 = x2 = x3 = 0 satisfies the homogeneous system for some coefficients meeting the assumptions.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.956779956817627
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "proved",
+      "output": "{'check1': {'name': 'No common divisor greater than 1 exists', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no n and d>1 dividing both numerator and denominator, so the fraction is irreducible for all natural n.', 'passed': True}}\n",
+      "attempts": 2,
+      "time_s": 5.931642770767212
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'f(14,52) must equal 364', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'The negation of f(14,52)=364 is inconsistent with the functional constraints, so the value is proven to be 364.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 5.911318063735962
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "proved",
+      "output": "",
+      "attempts": 1,
+      "time_s": 7.539474964141846
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Verify the listed solutions satisfy the equation', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The candidate pairs (1,1), (16,2), and (27,3) each satisfy x^(y^2) = y^x.', 'passed': True}\ncheck2 {'name': 'Search for bounded counterexamples to the classification', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'No additional bounded counterexamples were found beyond the listed pairs.', 'passed': False}\ncheck3 {'name': 'The theorem statement target (formalized as expected UNSAT)', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'Full variable-exponent reasoning is outside the direct integer arithmetic fragment used here.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 7.746441841125488
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "proved",
+      "output": "check1 {'name': 'Prove ax^5 + by^5 = 20', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the system has no model with ax^5 + by^5 != 20, then the value is forced to be 20.', 'passed': True}\ncheck2 {'name': 'Original system consistency', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'The given equations should admit at least one real solution.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.6589319705963135
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "proved",
+      "output": "check1 {'name': 'Derive log_z w = 60 from the logarithm equations', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the negation is unsatisfiable, then log_z w must equal 60.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.563308954238892
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "proved",
+      "output": "check1 {'name': 'Prove the weighted sum equals 334', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists; therefore the target expression must equal 334.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 5.212193012237549
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "proved",
+      "output": "check1 {'name': 'Determine f(4,1981) from the recurrence', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The recurrence determines f(x,y)=x+y+1, so f(4,1981)=1986. The solver is used to check consistency of the claimed value.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.47134804725647
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'No valid sequence can start with x1 <= 0', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'Any solution must have x1 > 0; otherwise the first inequality 0 < x1 already fails.', 'passed': False}\ncheck2 {'name': 'No valid sequence can start with x1 >= 1', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If x1 >= 1, then x2 = x1(x1+1) >= 2, contradicting x2 < 1.', 'passed': True}\ncheck3 {'name': 'No positive fixed point for the n=1 update rule', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The equation t = t(t+1) has only t = 0, so no positive stationary start is possible.', 'passed': True}\ncheck4 {'name': 'Injectivity of the first update on (0,1)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Different x1 in (0,1) cannot yield the same x2 under x2 = x1(x1+1).', 'passed': True}\ncheck5 {'name': 'Finite-prefix consistency check', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'The strict inequalities are highly restrictive; this boun",
+      "attempts": 1,
+      "time_s": 9.816593885421753
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "proved",
+      "output": "check1 {'name': 'Inequality is nonnegative for all triangle side lengths', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no triangle with the expression negative, so the inequality holds.', 'passed': True}\ncheck2 {'name': 'Equality holds for equilateral triangles', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means when a=b=c, the expression is forced to be 0.', 'passed': True}\ncheck3 {'name': 'No non-equilateral equality case exists', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means equality cannot occur unless a=b=c.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.636667966842651
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "proved",
+      "output": "check1 {'name': 'Expression reduces to 30 - x on the given interval', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists; the absolute-value expression equals 30 - x for all 0 < p < 15 and p <= x <= 15.', 'passed': True}\ncheck2 {'name': 'No value below 15 occurs on the interval', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'No admissible x makes f(x) smaller than 15.', 'passed': True}\ncheck3 {'name': 'At x = 15, the value is exactly 15', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Substituting x = 15 gives f(15) = 15 for every 0 < p < 15.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 7.291893005371094
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "failed_proof",
+      "output": "{'check1': {'expected': 'UNSAT',\n            'explanation': 'The modular residue pattern generated by the '\n                           'recurrence has no zero term, so a counterexample '\n                           'to non-divisibility by 5 does not exist in the '\n                           'checked state space.',\n            'name': 'Residue pattern for the sequence modulo 5 has no zero '\n                    'terms (computed recurrence witness)',\n            'passed': False,\n            'result': 'SAT'}}\n",
+      "attempts": 1,
+      "time_s": 7.616245985031128
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Prove that f(84) equals 997', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'UNSAT means no model satisfies the recurrence axioms with f(84) != 997, so f(84)=997 is proven.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 32.84747290611267
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "proved",
+      "output": "check1 {'name': 'No finite-prefix counterexample to f(n)=n under f(n+1) > f(f(n))', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no finite-prefix model violating identity while respecting the growth condition, supporting the theorem that the only total positive-integer solution is f(n)=n.', 'passed': True}\ncheck2 {'name': 'No 2-cycle witness', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT indicates that a simple nontrivial cycle cannot satisfy the required strict inequalities, which is consistent with the theorem.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 8.189873218536377
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "proved",
+      "output": "{'check1': {'name': 'Prove a^2(b+c-a)+b^2(c+a-b)+c^2(a+b-c) <= 3abc for triangle sides', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no triangle side lengths violate the inequality, so the inequality is proven.', 'passed': True}}\n",
+      "attempts": 1,
+      "time_s": 2.873141050338745
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'No counterexample for -1/2 <= x < 0', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means every admissible x in [-1/2, 0) satisfies the inequality.', 'passed': True}\ncheck2 {'name': 'No counterexample for x > 2', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means every admissible x > 2 satisfies the inequality.', 'passed': False}\ncheck3 {'name': 'No solutions in the interval 0 < x <= 2', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no solution in the excluded middle interval.', 'passed': False}\ncheck4 {'name': 'Boundary point x = 0 is excluded', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT here indicates the equation model does not admit x=0 as a valid solution point for the original fraction.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 9.363954067230225
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'Verify algebraic form leading to k+m+n=27', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'No counterexample exists for the derived algebraic target, so the claimed value k+m+n=27 is confirmed.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 6.021619081497192
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "proved",
+      "output": "check1 {'name': 'No counterexample with a > 1 under the stated constraints', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': \"UNSAT means Z3 found no model with a > 1 satisfying oddness, ordering, ad = bc, and the power-of-two sum conditions, so the theorem 'a = 1' holds.\", 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 25.06506109237671
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "proved",
+      "output": "check1 {'name': 'Prove the even-indexed sum equals 93', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the assumptions force the even-indexed sum to be exactly 93.', 'passed': True}\n",
+      "attempts": 2,
+      "time_s": 7.802130222320557
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "proved",
+      "output": "check1: {'name': 'No counterexample to dyadic cancellation core', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The encoded counterexample constraints are inconsistent, matching the proof obligation that the theorem has no counterexample in the abstracted core.', 'passed': True}\ncheck2: {'name': 'Non-multiple-of-pi counterexample is impossible in abstract form', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The abstract negation is inconsistent, reflecting that the theorem rules out non-multiple separations.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 6.404599189758301
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "failed_proof",
+      "output": "check1 {'name': 'No counterexample to E = 233 under the given conditions', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'UNSAT means every model satisfying the conditions forces a^{12} - 144 a^{-1} = 233.', 'passed': False}\ncheck2 {'name': 'Derived cubic relation x^3 - 2x^2 - 1 = 0 for x = a^2', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the assumptions force the cubic relation used to identify the unique value.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 7.961308002471924
+    }
+  ]
+}

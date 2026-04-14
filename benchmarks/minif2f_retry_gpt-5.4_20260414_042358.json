@@ -1,0 +1,91 @@
+{
+  "model": "gpt-5.4",
+  "retried": 12,
+  "proved": 8,
+  "results": [
+    {
+      "id": "aime_1983_p1",
+      "status": "proved",
+      "output": "check1: {'name': 'Derived identity z^120 = w^2 from the logarithm conditions', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, then no x,y,z,w satisfying the given logarithmic equations can violate z^120 = w^2. This establishes the key algebraic consequence needed for the answer.', 'passed': True}\ncheck2: {'name': 'Final result w = z^60, equivalently log_z w = 60', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, then every positive solution with x,y,z > 1 must satisfy w = z^60. Since z > 1, this is exactly the statement log_z w = 60.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 12.823113918304443
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Ravi substitution identity', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the cyclic expression equals 2*(xy^3 + yz^3 + zx^3 - xyz(x+y+z)) for all x,y,z under the substitution a=y+z, b=z+x, c=x+y.', 'passed': True}\ncheck2: {'name': 'SOS identity for transformed inequality', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the transformed expression is exactly 1/2\u00b7[xy(y-z)^2 + yz(z-x)^2 + zx(x-y)^2], hence nonnegative when x,y,z > 0.', 'passed': False}\ncheck3: {'name': 'Nonnegativity of transformed inequality', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no positive x,y,z make xy^3 + yz^3 + zx^3 < xyz(x+y+z); therefore the transformed inequality always holds.', 'passed': True}\ncheck4: {'name': 'Equality case in Ravi variables', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means equality in the transformed inequality is possible only when x=y=z.', 'passed': True}\ncheck5: {'name': 'Equilater",
+      "attempts": 1,
+      "time_s": 16.224559783935547
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "proved",
+      "output": "finite_prefix_unique_identity_N1: UNSAT (expected UNSAT) passed=True\nOn the finite domain {1,...,1}, the constraints force f(i)=i for all i; no non-identity model exists.\nfinite_prefix_unique_identity_N2: UNSAT (expected UNSAT) passed=True\nOn the finite domain {1,...,2}, the constraints force f(i)=i for all i; no non-identity model exists.\nfinite_prefix_unique_identity_N3: UNSAT (expected UNSAT) passed=True\nOn the finite domain {1,...,3}, the constraints force f(i)=i for all i; no non-identity model exists.\nfinite_prefix_unique_identity_N4: UNSAT (expected UNSAT) passed=True\nOn the finite domain {1,...,4}, the constraints force f(i)=i for all i; no non-identity model exists.\nfinite_prefix_unique_identity_N5: UNSAT (expected UNSAT) passed=True\nOn the finite domain {1,...,5}, the constraints force f(i)=i for all i; no non-identity model exists.\nfinite_prefix_unique_identity_N6: UNSAT (expected UNSAT) passed=True\nOn the finite domain {1,...,6}, the constraints force f(i)=i for all i; no n",
+      "attempts": 2,
+      "time_s": 36.07059192657471
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'No nontrivial integer solutions when e >= 0', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': \"UNSAT means the key reduced equation e + m = 2*m*t^e has no solution for e >= 0, so the proof's positive/nonnegative e cases are impossible.\", 'passed': False}\ncheck2: {'name': 'e = -1 gives only (t,m)=(4,2) or (3,3)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no other integer pair with t>=2,m>=1 satisfying the e=-1 case, so this branch yields exactly the candidates leading to (16,2) and (27,3).', 'passed': True}\ncheck3: {'name': 'e = -2 gives only (t,m)=(2,2)', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the e=-2 branch has exactly one integer solution, corresponding again to (x,y)=(16,2).', 'passed': False}\ncheck4: {'name': 'For e <= -3 there is no new solution beyond the overlap (t,k,m)=(2,3,4)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the deep negative-e branch contributes no ne",
+      "attempts": 1,
+      "time_s": 28.70884108543396
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "failed_proof",
+      "output": "check1: Odd factor of a power of two must be 1\n  result: UNSAT\n  expected: UNSAT\n  passed: True\n  explanation: If a>1 is odd and q is a power of two, then q*a cannot itself be a power of two. This captures the final decisive step q*a=2^(m-2), forcing a=1.\ncheck2: Claimed infinite family satisfies all conditions\n  result: UNSAT\n  expected: UNSAT\n  passed: True\n  explanation: No violating instance exists among sampled members of the closed-form family; this confirms the construction matches the problem constraints.\ncheck3: Finite-range counterexample search\n  result: UNKNOWN\n  expected: UNSAT\n  passed: False\n  explanation: Within a broad finite search range, Z3 finds no counterexample with a != 1. This computational sanity check is consistent with the theorem.\n",
+      "attempts": 1,
+      "time_s": 61.47943091392517
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Ordering inequalities from K>L>M>N', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no counterexample exists: necessarily KL+MN > KM+LN > KN+LM under the given strict order.', 'passed': True}\ncheck2: {'name': 'Derived quadratic identity', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the hypothesis algebraically forces L^2+LN+N^2 = K^2-KM+M^2.', 'passed': True}\ncheck3: {'name': 'Product factorization identity', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the product identity always holds, so KM+LN divides (KL+MN)(KN+LM).', 'passed': True}\ncheck4: {'name': 'A prime KL+MN cannot be divisible by KM+LN', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'UNSAT means that since 1 < KM+LN < KL+MN, the number KL+MN cannot be prime and simultaneously be a multiple of KM+LN.', 'passed': False}\ncheck5: {'name': 'Prime assumption leads to impossible divisibility', 'result': 'UNSAT', 'expected': 'UNSAT', 'e",
+      "attempts": 1,
+      "time_s": 48.11119794845581
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "proved",
+      "output": "check1: {'name': 'P_n has zero constant term and nonnegative coefficients for n=1..5', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'This confirms on initial cases the structural claim used in the proof: the iterates are polynomials with zero constant term and nonnegative coefficients.', 'passed': True, 'details': [{'n': 1, 'constant_zero': True, 'nonnegative_other_coeffs': True, 'degree': 1}, {'n': 2, 'constant_zero': True, 'nonnegative_other_coeffs': True, 'degree': 2}, {'n': 3, 'constant_zero': True, 'nonnegative_other_coeffs': True, 'degree': 4}, {'n': 4, 'constant_zero': True, 'nonnegative_other_coeffs': True, 'degree': 8}, {'n': 5, 'constant_zero': True, 'nonnegative_other_coeffs': True, 'degree': 16}]}\ncheck2: {'name': 'Strict increase of P_n on [0,\u221e) for n=1..5', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'We asked Z3 for a counterexample x<y with P_n(x) >= P_n(y). UNSAT means no such counterexample exists, so P_n is strictly increasing on the tested range of ",
+      "attempts": 1,
+      "time_s": 41.61803388595581
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "proved",
+      "output": "{\n  \"check1\": {\n    \"expected\": \"SAT\",\n    \"explanation\": \"SAT means the equation is consistent; e.g. f(x)=2x is a solution.\",\n    \"name\": \"Functional equation is satisfiable\",\n    \"passed\": false,\n    \"result\": \"UNKNOWN\"\n  },\n  \"check2\": {\n    \"expected\": \"UNSAT\",\n    \"explanation\": \"UNSAT means affine solutions of slope 2 require c=0.\",\n    \"name\": \"No nonzero-shift affine solution f(x)=2x+c\",\n    \"passed\": false,\n    \"result\": \"SAT\"\n  },\n  \"check3\": {\n    \"expected\": \"UNSAT\",\n    \"explanation\": \"UNSAT means there is no counterexample, so f(x)=2x is a valid solution.\",\n    \"name\": \"Function f(x)=2x satisfies the equation\",\n    \"passed\": true,\n    \"result\": \"UNSAT\"\n  },\n  \"check4\": {\n    \"expected\": \"SAT\",\n    \"explanation\": \"SAT means f(x)=0 is also a solution, showing uniqueness of 2x is false.\",\n    \"name\": \"Zero function also satisfies the equation\",\n    \"passed\": true,\n    \"result\": \"SAT\"\n  }\n}\n",
+      "attempts": 2,
+      "time_s": 64.8280131816864
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "proved",
+      "output": "check1: {'name': 'f(84) is uniquely forced to be 997', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If assuming f(84) != 997 is inconsistent with the defining equations, then no counterexample exists and f(84)=997 is proven.', 'passed': True}\ncheck2: {'name': 'Key cycle reduction gives f(998)=997, hence f^3(1004)=997', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The recurrence forces f(998)=997. Since f(1004)=1001 and f(1001)=998, we get f^3(1004)=f(998)=997.', 'passed': True}\ncheck3: {'name': 'Iteration count in the lifting step is y=185', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': \"The equality 84 + 5(y-1) = 1004 holds for y=185, matching the hint's number of iterated applications.\", 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 13.674218893051147
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "proved",
+      "output": "check1:\n  name: All real solutions satisfy x^2 + 18x + 20 = 0\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no real counterexample: every real solution of the original radical equation must satisfy x^2 + 18x + 20 = 0.\n  passed: True\ncheck2:\n  name: Every root of x^2 + 18x + 20 = 0 is a genuine solution of the radical equation\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no root of x^2 + 18x + 20 = 0 is extraneous; each has a nonnegative square-root witness satisfying the original equation.\n  passed: True\ncheck3:\n  name: The two real roots have product 20\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there do not exist two distinct roots of x^2 + 18x + 20 = 0 whose product is anything other than 20.\n  passed: True\ncheck4:\n  name: The reduced quadratic has two distinct real roots\n  result: SAT\n  expected: SAT\n  explanation: SAT means the reduced quadratic has two distinct real roots, so the original equation has two real roots and th",
+      "attempts": 1,
+      "time_s": 18.38720989227295
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "proved",
+      "output": "check1:\n  name: On the admissible range f(x) in [1/2,1], the second iterate equals f(x)\n  result: UNSAT\n  expected: UNSAT\n  explanation: The negation of 1/2 + (f(x)-1/2) = f(x) on the range forced by the functional equation has no solution. Hence f(x+2a)=f(x) algebraically, so 2a is a period.\n  passed: True\ncheck2:\n  name: Candidate period b = 2a is positive\n  result: UNSAT\n  expected: UNSAT\n  explanation: Assuming a>0, the negation of 2a>0 is impossible. Thus the period b=2a is positive.\n  passed: True\ncheck3:\n  name: Existence of a positive candidate period\n  result: UNSAT\n  expected: UNSAT\n  explanation: Since b=2a and a>0, a positive candidate period exists. Combined with the algebraic iterate check, this proves the statement.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 17.997375011444092
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "proved",
+      "output": "check1:\n  name: tan x is uniquely determined as 435/308\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no values of sec x and tan x satisfy sec x + tan x = 22/7 and sec^2 x - tan^2 x = 1 while having tan x different from 435/308. Hence tan x = 435/308 is proven.\n  passed: True\ncheck2:\n  name: positive value of csc x + cot x is 29/15\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no positive value y other than 29/15 satisfying the identity relating y = csc x + cot x to cot x = 308/435. Thus csc x + cot x = 29/15.\n  passed: True\ncheck3:\n  name: final sum m+n equals 44\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means m = 29 and n = 15 force m+n = 44, so the required answer is 044.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 13.713252067565918
+    }
+  ]
+}

@@ -1,0 +1,258 @@
+{
+  "model": "claude-sonnet-4-5-20250514",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "proved": 0,
+  "failed_proof": 0,
+  "errors": 35,
+  "rate": 0.0,
+  "timestamp": "2026-04-14T04:38:29.371178+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33byN1rWFtR7Kpt63Lr'}",
+      "attempts": 0,
+      "time_s": 0.14958691596984863
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33byceDkQHLFd1PWFA7'}",
+      "attempts": 0,
+      "time_s": 0.05787801742553711
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33bysGgEhAp597pxhUT'}",
+      "attempts": 0,
+      "time_s": 0.06019711494445801
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33bzP2UvrFkQmK1h5Ud'}",
+      "attempts": 0,
+      "time_s": 0.16495513916015625
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33bzsJPmRnBPxLcvvRs'}",
+      "attempts": 0,
+      "time_s": 0.09487414360046387
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c1Q3yHA56796JE3CE'}",
+      "attempts": 0,
+      "time_s": 0.10265207290649414
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c1mcvgczwFpr5N6RK'}",
+      "attempts": 0,
+      "time_s": 0.12020087242126465
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c2BfwmNV73DgcZ9x4'}",
+      "attempts": 0,
+      "time_s": 0.06409096717834473
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c2VXhcxTk3saxmeLN'}",
+      "attempts": 0,
+      "time_s": 0.10092878341674805
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c2tbH9x1vJFp4yjx6'}",
+      "attempts": 0,
+      "time_s": 0.06791925430297852
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c3BhsCc1hPdeCpgNY'}",
+      "attempts": 0,
+      "time_s": 0.10448789596557617
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c3dEwNB93odEvnxw5'}",
+      "attempts": 0,
+      "time_s": 0.06083488464355469
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c3tsAxiX8pYbERmfr'}",
+      "attempts": 0,
+      "time_s": 0.0634150505065918
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c4AEjYRMHtVcNdcp1'}",
+      "attempts": 0,
+      "time_s": 0.07552480697631836
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c4UqNZNezHbxdkj5E'}",
+      "attempts": 0,
+      "time_s": 0.058151960372924805
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c4khyuiTKySyqyxk7'}",
+      "attempts": 0,
+      "time_s": 0.08265113830566406
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c582wSWLwo9WetGXo'}",
+      "attempts": 0,
+      "time_s": 0.09248614311218262
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c5VMv5ft8xt4thbCJ'}",
+      "attempts": 0,
+      "time_s": 0.07134604454040527
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c5nDjiKCTkgEhyKNc'}",
+      "attempts": 0,
+      "time_s": 0.06365013122558594
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c646EHCMSJXRzkszE'}",
+      "attempts": 0,
+      "time_s": 0.05629372596740723
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c6HjZts5JKKtGoDNe'}",
+      "attempts": 0,
+      "time_s": 0.07082176208496094
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c6bauaSM3aih9eK7b'}",
+      "attempts": 0,
+      "time_s": 0.058274030685424805
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c6rDLwjVFHHvGuiAw'}",
+      "attempts": 0,
+      "time_s": 0.07495379447937012
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c7BJwyv6yd4NVZcqV'}",
+      "attempts": 0,
+      "time_s": 0.06142711639404297
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c7k3ZTHgZEtAqAyhh'}",
+      "attempts": 0,
+      "time_s": 0.14084219932556152
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c839tSV2xmEgEMqnu'}",
+      "attempts": 0,
+      "time_s": 0.06625199317932129
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c8KGv2bwEJJN6SP1C'}",
+      "attempts": 0,
+      "time_s": 0.055661916732788086
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c8c8cmr1woNjHG7dx'}",
+      "attempts": 0,
+      "time_s": 0.16900897026062012
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c9HZQVQWZpsvwbWrn'}",
+      "attempts": 0,
+      "time_s": 0.11348891258239746
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33c9n5gPo9CH1hVqtzV'}",
+      "attempts": 0,
+      "time_s": 0.076934814453125
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33cAB97ipsb6KFx73bN'}",
+      "attempts": 0,
+      "time_s": 0.07908892631530762
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33cAT1SUNycS38GeX3G'}",
+      "attempts": 0,
+      "time_s": 0.06230878829956055
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33cAiPA4miZyunZUjHV'}",
+      "attempts": 0,
+      "time_s": 0.06197094917297363
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33cB1k2MVpdWMvN2KhR'}",
+      "attempts": 0,
+      "time_s": 0.07153820991516113
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "generation_error",
+      "error": "Error code: 404 - {'type': 'error', 'error': {'type': 'not_found_error', 'message': 'model: claude-sonnet-4-5-20250514'}, 'request_id': 'req_011Ca33cBHNMbk9X7qxTxgo2'}",
+      "attempts": 0,
+      "time_s": 0.0667579174041748
+    }
+  ]
+}

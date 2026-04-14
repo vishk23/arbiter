@@ -1,0 +1,258 @@
+{
+  "model": "gpt-4o",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "proved": 15,
+  "failed_proof": 9,
+  "errors": 11,
+  "rate": 42.857142857142854,
+  "timestamp": "2026-04-14T04:53:53.678448+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "proved",
+      "output": "Check: Verify if (p - 1)(q - 1)(r - 1) divides pqr - 1 implies (p, q, r) = (2, 4, 8) or (3, 5, 15)\nResult: UNSAT\nExpected: UNSAT\nExplanation: If the divisibility condition holds, only the tuples (2, 4, 8) or (3, 5, 15) should satisfy.\nPassed: True\n",
+      "attempts": 1,
+      "time_s": 5.336978912353516
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "proved",
+      "output": "Check: Remainder of f(94) when divided by 1000 is 561\nResult: sat\nExpected: sat\nExplanation: Prove the remainder is 561.\nPassed: Yes\n\n",
+      "attempts": 1,
+      "time_s": 3.052847146987915
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Prove expression: cos(pi/7) - cos(2pi/7) + cos(3pi/7) = 1/2', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'The cosine combination equals 1/2, no counterexample exists.', 'passed': False}\n",
+      "attempts": 3,
+      "time_s": 11.50373387336731
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "proved",
+      "output": "{'check1': {'expected': 'UNSAT',\n            'explanation': 'The proposed function f(x) = 2x + c is consistent '\n                           'with the given equation,         meaning it '\n                           'satisfies f(2a) + 2f(b) = f(f(a + b)) for all '\n                           'integers a and b.',\n            'name': 'Verify f(x) = 2x + c satisfies the functional equation',\n            'passed': True,\n            'result': 'unsat'}}\n",
+      "attempts": 1,
+      "time_s": 3.9335741996765137
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "execution_error",
+      "error": "TIMEOUT after 60s",
+      "attempts": 3,
+      "time_s": 131.45401692390442
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "failed_proof",
+      "output": "{'check1': {'expected': 'SAT',\n            'explanation': 'Transforming and squaring should show if the '\n                           'equation has valid roots.',\n            'name': 'Verify the real roots of the equation by transformation '\n                    'and squaring.',\n            'passed': False,\n            'result': 'UNKNOWN'},\n 'check2': {'expected': 'SAT',\n            'explanation': 'Product of roots for x^2 + 18x + 20 = 0 via '\n                           \"Vieta's Formula matches the expected product 20.\",\n            'name': \"Verify product of roots using Vieta's Formula for \"\n                    'simplified equation.',\n            'passed': True,\n            'result': 'SAT'}}\n",
+      "attempts": 2,
+      "time_s": 9.527559041976929
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "failed_proof",
+      "output": "check1: Verify tan(x)\n  Result: sat\n  Passed: True\n  Explanation: Correct calculation for tan(x): 435/308\ncheck2: Verify m+n = 44\n  Result: sat\n  Passed: False\n  Explanation: m+n should be 44, got: 1369\n",
+      "attempts": 2,
+      "time_s": 12.037368059158325
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpyfakslco.py\", line 1, in <module>\n    from z3 import Int, Solver, And, Or, Not, is_prime, sat, unsat\nImportError: cannot import name 'is_prime' from 'z3' (/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/z3/__init__.py)\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 72.11940503120422
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Verification of m+n = 177', 'result': 'UNSAT', 'expected': 'SAT', 'explanation': 'Check that the tangents match and m+n = 177 is achievable.', 'passed': False}\n",
+      "attempts": 3,
+      "time_s": 12.68339991569519
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpleyubanv.py\", line 9, in <module>\n    f = Function('f', Real(), Real())\n                      ^^^^^^\nTypeError: Real() missing 1 required positional argument: 'name'\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 12.869893789291382
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "failed_proof",
+      "output": "Prove the solution set is [\u22121, 1 - sqrt(127)/32) for the inequality.:\n Result: UNKNOWN\n Expected: UNSAT\n Explanation: If result is UNSAT, then the proven solution is [\u22121, 1 - sqrt(127)/32) as there are no counterexamples.\n Passed: False\n\n",
+      "attempts": 1,
+      "time_s": 4.473820209503174
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmp8n56rf1b.py\", line 50, in <module>\n    results = verify()\n              ^^^^^^^^\n  File \"/tmp/tmp8n56rf1b.py\", line 21, in verify\n    Or((f[m+n] - f[m] - f[n]) == 0, \n        ~^^^^^\nTypeError: list indices must be integers or slices, not ArithRef\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 14.42989706993103
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "proved",
+      "output": "check1: {'name': 'Check value of 3x^2 y^2', 'result': 'SAT', 'expected': '588', 'explanation': 'Solution found: x = 2, y = 7, 3x^2 y^2 = 588', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 2.9519598484039307
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "proved",
+      "output": "{'check1': {'name': 'Uniqueness of zero solution for the system of linear equations', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The solution x1 = x2 = x3 = 0 is the only solution possible, no non-trivial solution exists.', 'passed': True}}\n",
+      "attempts": 1,
+      "time_s": 4.6726508140563965
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpqnskwixz.py\", line 52, in <module>\n    result = verify()\n             ^^^^^^^^\n  File \"/tmp/tmpqnskwixz.py\", line 34, in verify\n    gcd_cond = gcd_expr(numerator, denominator) == 1\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpqnskwixz.py\", line 12, in gcd_expr\n    return gcd_recursive(a, b)\n           ^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpqnskwixz.py\", line 10, in gcd_recursive\n    return If(b == 0, a, gcd_recursi",
+      "attempts": 3,
+      "time_s": 15.622895956039429
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "proved",
+      "output": "Proof that f(14, 52) = 364: FAIL\nResult: SAT, Expected: UNSAT\nExplanation: There is a contradiction showing the statement was false.\n\n",
+      "attempts": 2,
+      "time_s": 15.683871984481812
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpzt2mgduw.py\", line 43, in <module>\n    results = verify()\n              ^^^^^^^^\n  File \"/tmp/tmpzt2mgduw.py\", line 27, in verify\n    x_val = float(x_val)\n            ^^^^^^^^^^^^\nValueError: could not convert string to float: '14.69536?'\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 13.178945064544678
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "execution_error",
+      "error": "TIMEOUT after 60s",
+      "attempts": 3,
+      "time_s": 133.5521469116211
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "proved",
+      "output": "{'check1': {'expected': 'SAT',\n            'explanation': 'Calculated ax^5 + by^5 = 20, Expected = 20.',\n            'name': 'Validation of ax^5 + by^5',\n            'passed': True,\n            'result': 'SAT'}}\n",
+      "attempts": 1,
+      "time_s": 5.828871965408325
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "proved",
+      "output": "Check log_z(w) = 60: Passed\n  Result   : UNSAT\n  Expected : UNSAT\n  Explanation: This proves that log_z(w) = 60.\n",
+      "attempts": 2,
+      "time_s": 8.203500032424927
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "proved",
+      "output": "Prove that 16x_1 + 25x_2 + 36x_3 + 49x_4 + 64x_5 + 81x_6 + 100x_7 = 334.: \n Result: unsat \n Expected: UNSAT \n Explanation: The analytical solution shows that f(4) must be 334 given the constraints. UNSAT confirms no counterexamples exist. \n Passed: True\n\n",
+      "attempts": 1,
+      "time_s": 7.3419880867004395
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "failed_proof",
+      "output": "{'check1': {'expected': 'SAT',\n            'explanation': 'Checking if the value of f(4, 1981) satisfies the '\n                           'expected recursive definition and equals '\n                           '2^(2^(2^2)) - 3.',\n            'name': 'Verify f(4, 1981) = 2^(2^(2^2)) - 3',\n            'passed': False,\n            'result': 'UNSAT'}}\n",
+      "attempts": 3,
+      "time_s": 15.900782108306885
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "proved",
+      "output": "Check x1 = 0.1: Passed\nCheck x1 = 0.3: Passed\nCheck x1 = 0.5: Passed\nCheck x1 = 0.7: Passed\nCheck x1 = 0.9: Passed\nUnique solution existence check: Passed\n",
+      "attempts": 1,
+      "time_s": 6.02521824836731
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "failed_proof",
+      "output": "check1: Non-negative Triangle Inequality Proof\nResult: SAT\nExpected: UNSAT\nExplanation: The inequality a^2 b(a-b) + b^2 c(b-c) + c^2 a(c-a) >= 0 is proved by Ravi substitution and can be rewritten as xy^3 + yz^3 + zx^3 >= xyz(x+y+z) under conditions x, y, z > 0. By Cauchy-Schwarz inequality, this holds true, with equality when the triangle is equilateral.\nPassed: False\n\n",
+      "attempts": 1,
+      "time_s": 5.6430230140686035
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "proved",
+      "output": "check1: {'name': 'Check expression for f(x) simplifies to 30-x on interval', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'f(x) should simplify to 30-x in the interval.', 'passed': True}\ncheck2: {'name': 'Check minimum value of f(x) is 15', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The minimum value of f(x) is 15 at x=15.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 4.818763971328735
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR:   File \"/tmp/tmp8ssfeg4z.py\", line 33\n    'explanation': ('The expression sum^n_{k=0}binom(2n+1,2k+1) * 2^(3k) '\\n                       'is proven not to be divisible by 5 for all integers n >= 0.'),\n                                                                           ^\nSyntaxError: unexpected character after line continuation character\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 14.8907310962677
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Verification of f(84) equals 997', 'result': 'UNSAT', 'expected': 'SAT', 'explanation': 'The solver did not find any model, which is unexpected.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 3.9694972038269043
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpn7ms_48d.py\", line 38, in <module>\n    results = verify()\n              ^^^^^^^^\n  File \"/tmp/tmpn7ms_48d.py\", line 6, in verify\n    f = Function('f', Int(), Int())\n                      ^^^^^\nTypeError: Int() missing 1 required positional argument: 'name'\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 13.215728044509888
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "proved",
+      "output": "check1: {'name': 'IMO 1964 P2 - Prove Triangle Inequality', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The given inequality holds for any triangle. Checking the negation results in UNSAT, meaning that the original inequality is valid and cannot be violated.', 'passed': True}\n",
+      "attempts": 2,
+      "time_s": 7.675049781799316
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "proved",
+      "output": "{\n  \"check1\": {\n    \"name\": \"Verify the range of x for which 4x^2 / (1 - sqrt(2x + 1))^2 < 2x + 9\",\n    \"result\": \"unknown\",\n    \"expected\": \"UNSAT\",\n    \"explanation\": \"The inequality holds for -1/2 <= x < 45/8 except x = 0.\",\n    \"passed\": false\n  }\n}\n",
+      "attempts": 1,
+      "time_s": 4.249744892120361
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "failed_proof",
+      "output": "{'check1': {'name': 'Check m+n+k equals 27', 'result': 'UNSAT', 'expected': 'SAT with m+n+k = 27', 'explanation': 'The solver could not find a solution satisfying all conditions.', 'passed': False}}\n",
+      "attempts": 2,
+      "time_s": 10.794297933578491
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "execution_error",
+      "error": "TIMEOUT after 60s",
+      "attempts": 3,
+      "time_s": 196.9958851337433
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "proved",
+      "output": "Verify the sum of arithmetic sequence even terms: UNSAT\nExplanation: The sum of even indexed terms satisfies the expected condition.\nPassed: True\n",
+      "attempts": 3,
+      "time_s": 15.128306865692139
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpeo8gstkq.py\", line 1, in <module>\n    from z3 import Solver, Real, Int, Pi, Cos, sat, unsat\nImportError: cannot import name 'Pi' from 'z3' (/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/z3/__init__.py)\n\nSTDOUT: ",
+      "attempts": 3,
+      "time_s": 12.084967136383057
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "proved",
+      "output": "{'check1': {'name': 'Verify a^3 - 2a - 1 = 0 under the given conditions implies a = phi', 'result': 'SAT', 'expected': 'SAT', 'explanation': 'We expect to find that the given conditions lead to a polynomial a = phi as a solution.', 'passed': True}}\n",
+      "attempts": 1,
+      "time_s": 4.36080527305603
+    }
+  ]
+}

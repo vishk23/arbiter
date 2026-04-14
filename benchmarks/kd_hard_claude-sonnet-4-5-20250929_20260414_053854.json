@@ -1,0 +1,296 @@
+{
+  "benchmark": "miniF2F-knuckledragger",
+  "model": "claude-sonnet-4-5-20250929",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "proved": 34,
+  "certified": 29,
+  "failed": 1,
+  "errors": 0,
+  "rate": 97.14285714285714,
+  "certified_rate": 82.85714285714286,
+  "timestamp": "2026-04-14T06:04:13.154343+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "proved",
+      "output": "Proof valid: True\n\u2713 solution_2_4_8: (2,4,8): 63 / 21 = 3\n\u2713 solution_3_5_15: (3,5,15): 224 / 112 = 2\n\u2713 no_solution_p_ge_5: Proved no solution exists with p >= 5: |= Not(Exists([p, q, r, n],\n           And(p >= 5,\n               q > p,\n               r > q,\n               n >= 1,\n               p*q*r - 1 == n*(p - 1)*(q - 1)*(r - 1))))\n\u2713 no_solution_n_eq_1: Proved n=1 impossible: |= Not(Exists([p, q, r],\n           And(p > 1,\n               q > p,\n               r > q,\n               p*q*r - 1 == (p - 1)*(q - 1)*(r - 1))))\n\u2713 exhaustive_search: Found solutions: {(3, 5, 15), (2, 4, 8)}, Expected: {(3, 5, 15), (2, 4, 8)}\n\u2713 unique_r_for_2_4: Proved r=8 is unique for (2,4,r): |= ForAll(r, Implies(And(r > 4, 8*r - 1 == 3*(r - 1)), r == 8))\n\u2713 unique_r_for_3_5: Proved r=15 is unique for (3,5,r): |= ForAll(r,\n       Implies(And(r > 5, 15*r - 1 == 8*(r - 1)), r == 15))\n\u2713 no_other_p2_solution: Proved (2,4,8) is only p=2 solution: |= Not(Exists([q, r, n],\n           And(q > 2,\n               r > q,\n               n >= 1,\n               2*q*r - 1 == n*1*(q - 1)*(r - 1),\n               Or(q != 4, r != 8))))\n\u2713 no_other_p3_solution: Proved (3,5,15) is only p=3 solution: |= Not(Exists([q, r, n],\n           And(q > 3,\n               r > q,\n               n >= 1,\n               3*q*r - 1 == n*2*(q - 1)*(r - 1),\n               Or(q != 5, r != 15))))\n\u2713 no_solution_p_eq_4: Proved no solution with p=4: |= Not(Exists([q, r, n],\n           And(q > 4,\n               r > q,\n               n >= 1,\n       ",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 36.74690818786621
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks (6 total):\n\u2713 recurrence_relation_algebraic [kdrag]: Verified recurrence relation f(x) = x^2 - f(x-1): |= ForAll([x, f_x, f_x_minus_1],\n       Implies(f_\n\u2713 telescoping_sum_symbolic [sympy]: Verified sum(21 to 94) = 4255 = 4255\n\u2713 telescope_identity [kdrag]: Verified a^2 - (a-1)^2 = a + (a-1): |= ForAll([a, b], Implies(b == a - 1, a*a - b*b == a + b))\n\u2713 numerical_calculation [numerical]: Calculated f(94) = 4561, remainder mod 1000 = 561\n\u2713 arithmetic_sum_formula [kdrag]: Verified arithmetic sum: |= True\n\u2713 remainder_verification [kdrag]: Verified 4561 mod 1000 = 561: |= True\n\n=== PROOF COMPLETE ===\nThe remainder when f(94) is divided by 1000 is 561.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 31.086791276931763
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n\u2713 symbolic_minimal_polynomial (sympy, symbolic_zero):\n  Minimal polynomial of (cos(\u03c0/7) - cos(2\u03c0/7) + cos(3\u03c0/7) - 1/2) is x. Since mp == x, the expression equals exactly 0, proving the identity.\n\u2713 hint_verification (sympy, symbolic_zero):\n  Verified both forms are equal (mp=x) and that S*2*sin(\u03c0/7) = sin(\u03c0/7) (mp=x), confirming S=1/2.\n\u2713 numerical_verification_100_digits (numerical, numerical):\n  Computed to 100 digits: 0.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000. Target: 0.5. Error: 0 < 1e-90.\n\u2713 alternative_form_proof (sympy, symbolic_zero):\n  Minimal polynomial of (cos(\u03c0/7) + cos(3\u03c0/7) + cos(5\u03c0/7) - 1/2) is x. This alternative form also equals 1/2 exactly.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 22.196300745010376
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "proved",
+      "output": "Proof status: FAILED\n\nChecks (5 total):\n  \u2717 derive_substitution_a0 [kdrag]\n    Failed to derive substitution: Timeout. Maybe you have given `prove` too many or not enough lemmas?\n  \u2713 verify_solution_satisfies_equation [kdrag]\n    Proved: f(x)=2x+c satisfies functional equation for all integers a,b,c. Proof: |= ForAll([a, b, c],\n       2*2*a + c + 2*(2*b + c) == 2*(2*(a + b) + c) + c)\n  \u2713 verify_uniqueness [kdrag]\n    Proved: functional equation implies f(x)=2x+c on range. Proof: |= Implies(ForAll(x, f(0) + 2*f(x) == f(f(x))),\n        ForAll(x,\n               Implies(Exists(y, f(y) == x),\n                       f(x) == 2*x + f(0))))\n  \u2713 numerical_verification [numerical]\n    Verified f(x)=2x+3 on 5 test cases: [(0, 0), (1, 2), (-1, 3), (5, -2), (10, 10)]\n  \u2713 symbolic_verification [sympy]\n    Symbolic simplification confirms LHS - RHS = 0\n\nConclusion: All functions f: Z -> Z satisfying f(2a) + 2f(b) = f(f(a+b))\nare exactly those of the form f(x) = 2x + c for any integer constant c.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 37.410895109176636
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "proved",
+      "output": "Proof status: \u2717 FAILED\n\nChecks (7 total):\n1. \u2713 bound_inequality_symbolic [sympy, symbolic_zero]\n   Verified sqrt(2)/3 < 12/25 symbolically. Difference = 12/25 - sqrt(2)/3 \u2248 0.008595479209\n2. \u2713 bound_inequality_numerical [numerical, numerical]\n   sqrt(2)/3 \u2248 0.4714045208, 12/25 = 0.4800000000, difference \u2248 0.0085954792\n3. \u2713 cauchy_schwarz_structure [kdrag, certificate]\n   Verified basic Cauchy-Schwarz structure for n=3 case: |= ForAll([a1, a2, a3],\n       Implies(a1*a1 + a2*a2 + a3*a3 == 1,\n               (a1*a1*a2 + a2*a2*a3 + a3*a3*a1)*\n               (a1*a1*a2 + a2*a2*a3 + a3*a3*a1) >=\n               0))\n4. \u2713 am_gm_inequality [kdrag, certificate]\n   Verified AM-GM inequality: 2xy \u2264 x\u00b2 + y\u00b2. Proof: |= ForAll([x, y], 2*x*y <= x*x + y*y)\n5. \u2717 small_case_verification [sympy, symbolic_zero]\n   For n=2, max(S) = sqrt(2)/2 = 0.7071067812 < 12/25 = 0.4800000000\n6. \u2713 bound_computation [sympy, symbolic_zero]\n   Verified (sqrt(2)/3)\u00b2 = 2/9 exactly. Minimal polynomial: x\n7. \u2713 implication_verification [sympy, symbolic_zero]\n   Verified (3S)\u00b2 \u2264 2 \u27f9 S \u2264 sqrt(2)/3. sqrt(2/9) = sqrt(2)/3\n\nFinal result: False\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 36.93330502510071
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks (6):\n  \u2713 substitution_yields_y_10 [kdrag/certificate]\n    Proved that valid y satisfying y^2 = 4(y+15) and y >= 0 must equal 10. Proof: |= ForAll(y, Implies(And(y >= 0, y*y == 4*(y + 15)), y == 10))\n  \u2713 equation_equivalence [kdrag/certificate]\n    Proved x^2+18x+30=10 iff x^2+18x+20=0. Proof: |= ForAll(x, (x*x + 18*x + 30 == 10) == (x*x + 18*x + 20 == 0))\n  \u2713 vieta_product_equals_20 [kdrag/certificate]\n    Proved by Vieta's formulas that product of roots = 20. Proof: |= ForAll([x1, x2],\n       Implies(And(x1*x1 + 18*x1 + 20 == 0,\n                   x2*x2 + 18*x2 + 20 == 0,\n                   x1 != x2),\n...\n  \u2713 discriminant_positive [kdrag/certificate]\n    Proved discriminant 244 > 0, so roots are real. Proof: |= True\n  \u2713 numerical_product_verification [sympy/numerical]\n    SymPy roots: [-9 - sqrt(61), -9 + sqrt(61)], product = 20 \u2248 20.000000000000000000000000000000000000000000000000, equals 20: True\n  \u2713 roots_satisfy_original_equation [sympy/numerical]\n    Root -16.81024968: LHS=10.000000000000000000000000000000000000000000000000, RHS=10.000000000000000000000000000000000000000000000000, matches=True; Root -1.189750324: LHS=10.000000000000000000000000000...\n\nFinal result: Product of real roots = 20\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 33.197072982788086
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n\u2713 derive_tan_x (sympy/symbolic_zero): Derived tan(x) = 435/308 from sec(x) + tan(x) = 22/7 using Pythagorean identity. Expected: 435/308\n\u2713 verify_pythagorean_sec (sympy/symbolic_zero): Verified sec^2(x) - (1 + tan^2(x)) = 0. sec(x) = 533/308\n\u2713 derive_csc_plus_cot (sympy/symbolic_zero): Derived csc(x) + cot(x) = 29/15 from cot(x) = 308/435 using Pythagorean identity\n\u2713 verify_answer (sympy/symbolic_zero): m/n = 29/15, m+n = 44. Expected: 29/15, sum=44\n\u2713 numerical_verification (numerical/numerical): At x=0.954691: sec+tan=3.1428571429 (expected 3.1428571429), csc+cot=1.9333333333 (expected 1.9333333333)\n\u2713 algebraic_certificate (sympy/symbolic_zero): Verified y=29/15 satisfies quadratic: residual = 0\n\u2713 verify_pythagorean_csc (sympy/symbolic_zero): Verified csc^2(x) - (1 + cot^2(x)) = 0. csc(x) = 533/435\n\n=== PROOF COMPLETE ===\nGiven: sec(x) + tan(x) = 22/7\nDerived: tan(x) = 435/308 using sec^2(x) = 1 + tan^2(x)\nDerived: cot(x) = 308/435\nDerived: csc(x) + cot(x) = 29/15 using csc^2(x) = 1 + cot^2(x)\nAnswer: m + n = 29 + 15 = 44\n",
+      "has_certificate": false,
+      "attempts": 1,
+      "time_s": 38.40330219268799
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n  \u2713 algebraic_identity_derivation (kdrag, certificate)\n    Proved: constraint implies L^2+LN+N^2 = K^2-KM+M^2. Proof: |= ForAll([K, L, M, N],\n       Implies(And(K > 0,\n                   L > 0,\n                   M > 0,\n                   N > 0,\n                   K > L,\n                   L > M,\n                   M > N,\n                   (K + L - M + N)*(-K + L + M + N) ==\n                   K*M + L*N),\n               L*L + L*N + N*N == K*K - K*M + M*M))\n  \u2713 factorization_identity (kdrag, certificate)\n    Proved: (KM+LN)(L^2+LN+N^2) = (KL+MN)(KN+LM). Proof: |= ForAll([K, L, M, N],\n       Implies(And(K > 0,\n                   L > 0,\n                   M > 0,\n                   N > 0,\n                   L*L + L*N + N*N == K*K - K*M + M*M),\n               (K*M + L*N)*(L*L + L*N + N*N) ==\n               (K*L + M*N)*(K*N + L*M)))\n  \u2713 ordering_inequalities (kdrag, certificate)\n    Proved: KL+MN > KM+LN > KN+LM. Proofs: |= ForAll([K, L, M, N],\n       Implies(And(K > L, L > M, M > N, N > 0),\n               K*L + M*N > K*M + L*N)), |= ForAll([K, L, M, N],\n       Implies(And(K > L, L > M, M > N, N > 0),\n               K*M + L*N > K*N + L*M))\n  \u2713 compositeness_argument (kdrag, certificate)\n    Logical argument: (KM+LN)|(KL+MN)(KN+LM) with KL+MN>KM+LN>KN+LM forces KL+MN composite. If KL+MN were prime, (KM+LN)|(KN+LM) required, but KM+LN>KN+LM, contradiction.\n  \u2713 numerical_verification (numerical, numerical)\n    Example: K=11, L=9, M=5, N=1. KL+MN=104, factors={2:",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 42.563621044158936
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "proved",
+      "output": "Proved: True\n\u2713 numerical_sum_verification: Numerical: sum=22.903765548431, tan(175/2\u00b0)=22.903765548431, error=7.11e-15\n\u2713 symbolic_telescoping_identity: Telescoping identity verified: sin(5k)sin(5) = [cos(5k-5)-cos(5k+5)]/2, diff=0\n\u2713 symbolic_final_identity: Final identity verified: (1+cos5\u00b0)/sin5\u00b0 = tan(175\u00b0/2), diff=-0E-136\n\u2713 verify_coprime_and_bound: gcd(175,2)=1, 175/2=87.5<90: True\n\u2713 verify_answer: m + n = 175 + 2 = 177\n\u2713 rigorous_symbolic_proof: Rigorous algebraic verification: sum = tan(175\u00b0/2), verified to 100 digits\n",
+      "has_certificate": false,
+      "attempts": 1,
+      "time_s": 35.85470223426819
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "proved",
+      "output": "Proof status: FAILED\n\nChecks (4):\n\n\u2713 algebraic_identity (kdrag, certificate)\n  Proved f(x+a)(1-f(x+a)) = 1/4 - (f(x)-f(x)^2) using Z3. Proof: |= ForAll([f_x, f_xa],\n       Implies(And(f_x >= 0,\n                   f_x <= 1,\n                   f_xa == 1/2 + (f_x - f_x*f_x)**(1/2)),\n               f_xa*(1 - f_xa) == 1/4 - (f_x - f_x*f_x)))\n\n\u2713 period_relation_symbolic (sympy, symbolic_zero)\n  Verified f(x+2a) composition for v < 1/2: difference = 0\n\n\u2717 numerical_periodicity (numerical, numerical)\n  Verified f(x+2a)=f(x) numerically for 5 test values\n\n\u2713 sqrt_identity_rigorous (sympy, symbolic_zero)\n  Proved sqrt identity via minimal polynomial: x\n\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 43.76858115196228
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n  [PASS] critical_point_quadratic (sympy/symbolic_zero)\n      Verified x = 1 - sqrt(127)/32 satisfies 1024x^2 - 2048x + 897 = 0. Simplified: 0\n  [PASS] critical_point_value (sympy/symbolic_zero)\n      Verified f(1 - sqrt(127)/32) = 1/2. Difference: 0\n  [PASS] domain_upper_bound (kdrag/certificate)\n      Proved domain constraint: x <= 1. Proof: |= ForAll(x,\n       Implies(And(x >= -1, x <= 3, 3 - x >= x + 1), x <= 1))\n  [PASS] critical_point_in_domain (numerical/numerical)\n      x_crit = 0.6478303853 is in [-1, 1]: True\n  [PASS] boundary_left (numerical/numerical)\n      At x = -1: f(-1) = 1.414214 > 0.5: True\n  [PASS] just_below_critical (numerical/numerical)\n      At x = 0.646830: f(x) = 0.500715 > 0.5: True\n  [PASS] just_above_critical (numerical/numerical)\n      At x = 0.648830: f(x) = 0.499284 <= 0.5: True\n  [PASS] other_root_outside_domain (numerical/numerical)\n      Other root x = 1.3521696147 > 1: True\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 34.067312717437744
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "proved",
+      "output": "Proved: True\nCheck f1_contradiction: PASS\n  Details: Proved f(1) >= 1 leads to contradiction (Z3: unsat)\nCheck f1982_value: PASS\n  Details: f(1982) = floor(1982/3) = 660, expected 660\n",
+      "has_certificate": false,
+      "attempts": 2,
+      "time_s": 48.73987793922424
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks (7 total):\n  \u2713 diophantine_constraint_implies_result [kdrag]\n    Z3 proved: if y^2 + 3x^2y^2 = 30x^2 + 517, then 3x^2y^2 = 588. Proof object: |= ForAll([x, y],\n       Implies(y*y + 3*x*x*y*y == 30*x*x + 517,\n               3*x*x*y*y == 588))\n  \u2713 factorization_equivalence [kdrag]\n    Z3 proved factored form (3x^2+1)(y^2-10)=507 is equivalent to original. Proof: |= ForAll([x, y],\n       ((3*x*x + 1)*(y*y - 10) == 507) ==\n       (y*y + 3*x*x*y*y == 30*x*x + 517))\n  \u2713 three_x_squared_plus_one_not_divisible_by_3 [kdrag]\n    Z3 proved 3x^2+1 is never divisible by 3. Proof: |= ForAll(x, (3*x*x + 1)%3 != 0)\n  \u2713 solution_x2_4_y2_49_gives_588 [kdrag]\n    Z3 proved: if equation holds with x^2=4, y^2=49, then 3x^2y^2=588. Proof: |= ForAll([x, y],\n       Implies(And(y*y + 3*x*x*y*y == 30*x*x + 517,\n                   x*x == 4,\n                   y*y == 49),\n               3*x*x*y*y == 588))\n  \u2713 factorization_507 [sympy]\n    SymPy confirmed 507 = 3 * 13^2. Factors: {3: 1, 13: 2}\n  \u2713 numerical_verification_x2_y7 [numerical]\n    x=2, y=7: LHS=637, RHS=637, 3x^2y^2=588. Equation holds: True\n  \u2713 numerical_verification_xneg2_yneg7 [numerical]\n    x=-2, y=-7: LHS=637, RHS=637, 3x^2y^2=588. All solutions give same result.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 31.2905170917511
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "proved",
+      "output": "Theorem proved: True\n\nCheck results:\n\u2713 kdrag_determinant_nonzero (kdrag)\n  Proved: if coefficients satisfy row-sum-positive condition, then equal non-zero variables lead to non-zero equation value. Proof certificate: Proof\n\u2713 kdrag_all_positive_contradiction (kdrag)\n  Proved: under all-positive case with ordering, third equation cannot be zero. Proof certificate: Proof\n\u2713 kdrag_all_negative_contradiction (kdrag)\n  Proved: under all-negative case with ordering, third equation cannot be zero. Proof certificate: Proof\n\u2713 numerical_concrete_example (sympy)\n  Concrete example verified: determinant = 16, only trivial solution exists\n\u2713 sympy_determinant_structure (sympy)\n  Determinant expression: a11*a22*a33 - a11*a23*a32 - a12*a21*a33 + a12*a23*a31 + a13*a21*a32 - a13*a22*a31. Under conditions (a-c), system is non-degenerate.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 39.63551473617554
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "proved",
+      "output": "Proof SUCCEEDED\n\nChecks:\n  \u2713 kdrag_gcd_proof [kdrag/certificate]\n    Z3 certified proof: |= ForAll([n, d],\n       Implies(And(n >= 0,\n                   d > 0,\n                   (21*n + 4)%d == 0,\n                   (14*n + 3)%d == 0),\n               d == 1)). For all n>=0, any positive common divisor of 21n+4 and 14n+3 must equal 1.\n  \u2713 sympy_gcd_symbolic [sympy/symbolic_zero]\n    SymPy symbolic GCD computation: gcd(21n+4, 14n+3) = 1 (symbolically verified)\n  \u2713 numerical_concrete_cases [numerical/numerical]\n    Tested n in [0, 1, 2, 5, 10, 100, 1000, 12345]: all have gcd=1\n  \u2713 euclidean_algorithm_steps [sympy/symbolic_zero]\n    Euclidean algorithm verified: (21n+4, 14n+3) = (7n+1, 14n+3) = (7n+1, 1) = 1\n\nOverall: PROVED\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 27.256119966506958
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "proved",
+      "output": "Proved: True\n\u2713 telescoping_product_symbolic: Telescoping product: 364 == 364: True\n\u2713 gcd_invariant: All intermediate GCDs equal 2 (final base case): True\n\u2713 telescoping_cancellation: Numerator/denominator = 364, equals 364: True\n\u2713 functional_equation_check: Functional equation 52*f(14,38) = 38*364: 13832 = 13832, True\n\u2713 numerical_verification: Direct computation gives 364, expected 364: True\n",
+      "has_certificate": false,
+      "attempts": 1,
+      "time_s": 31.21461510658264
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "proved",
+      "output": "All checks passed: True\n  substitution_algebra: PASS\n    Proved substitution simplifies to -64a + 640 = 0, yielding a = 10. Certificates: |= (a - 16)*(a - 40) + a*(a - 40) - 2*a*(a - 16) == -64*a + 640, |= True\n  back_substitution_x13: PASS\n    Proved x=13 satisfies x^2 - 10x - 29 = 10. Certificate: |= True\n  x13_positive: PASS\n    Proved x=13 is positive. Certificate: |= True\n",
+      "has_certificate": true,
+      "attempts": 3,
+      "time_s": 56.035786151885986
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "proved",
+      "output": "Proof valid: True\n\nChecks (11 total):\n\u2713 verify_claimed_solutions [numerical]\n  Verified (1,1), (16,2), (27,3) satisfy x^(y^2) = y^x: True\n\u2713 prove_1_1_solution [kdrag]\n  Proved (1,1) is a solution via Z3\n\u2713 prove_16_2_solution [kdrag]\n  Proved 16^4 = 2^16 (i.e., (16,2) is a solution)\n\u2713 prove_27_3_solution [kdrag]\n  Proved 3^27 = 3^27 (i.e., (27,3) is a solution)\n\u2713 prove_key_equation_16_2 [kdrag]\n  Proved m*t^(2n) = n*t^m for (16,2): 16 = 16\n\u2713 prove_key_equation_27_3 [kdrag]\n  Proved m*t^(2n) = n*t^m for (27,3): 27 = 27\n\u2713 exhaustive_search_small_range [numerical]\n  Found solutions in range [1,100)x[1,20): [(1, 1), (16, 2), (27, 3)]. Expected: [(1, 1), (16, 2), (27, 3)]. Match: True\n\u2713 prove_e_positive_impossibility [kdrag]\n  Proved example case for e>0: 2*2*1 > 1+1\n\u2713 prove_e_neg1_case_t3m3 [kdrag]\n  Proved m(t-2)=t for (t,m)=(3,3)\n\u2713 prove_e_neg1_case_t4m2 [kdrag]\n  Proved m(t-2)=t for (t,m)=(4,2)\n\u2713 prove_e_neg2_case [kdrag]\n  Proved m(t^2-2)=2t^2 for (t,m)=(2,4)\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 45.72444200515747
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "proved",
+      "output": "Verification result: False\n\nDetailed checks:\n\u2717 recurrence_S_equals_neg14 [kdrag, certificate]\n  Failed to prove S = -14: (And(7*S == 16 + 3*P, 16*S == 42 + 7*P) == (S == -14), 'Countermodel', [P = 0, S = -14])\n\u2713 recurrence_P_equals_neg38 [kdrag, certificate]\n  Proved P = -38 from S = -14: |= Implies(And(7*S_val == 16 + 3*P_val,\n            16*S_val == 42 + 7*P_val,\n            S_val == -14),\n        P_val == -38)\n\u2713 final_result_s5_equals_20 [kdrag, certificate]\n  Proved ax^5 + by^5 = 20 from recurrence: |= Implies(And(s4_var == 42,\n            s3_var == 16,\n            S_var == -14,\n            P_var == -38,\n            s5_var == s4_var*S_var - P_var*s3_var),\n        s5_var == 20)\n\u2713 numerical_verification [sympy, numerical]\n  Numerical: s5 = 42*(-14) - (-38)*16 = 20, expected 20\n\u2713 linear_system_unique_solution [kdrag, certificate]\n  Proved unique solution S=-14, P=-38: |= Implies(And(7*S_sys == 16 + 3*P_sys,\n            16*S_sys == 42 + 7*P_sys),\n        And(S_sys == -14, P_sys == -38))\n\nFinal: ax^5 + by^5 = 020 is NOT PROVED\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 32.655012130737305
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "proved",
+      "output": "Proof verified: True\n\nDetailed checks:\n\u2713 symbolic_algebraic_derivation (sympy, symbolic_zero):\n  Derived z = w^(1/60) from logarithm constraints. Exponent calculation: 1/12 - 1/24 - 1/40 = 1/60 = 1/60, so log_z(w) = 60.\n\u2713 constraint_verification (sympy, symbolic_zero):\n  Verified that z = w^(1/60) satisfies (xyz)^12 = w. Simplified expression: 0\n\u2713 numerical_verification (numerical, numerical):\n  Concrete test with w=2^120: log_z(w) = 60.0000000000, expected 60. All constraint checks: True\n\u2713 alternative_numerical_test (numerical, numerical):\n  Alternative test with w=e^120: log_z(w) = 60.0000000000\n\n============================================================\nTHEOREM PROVED: log_z(w) = 60\n============================================================\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 36.09028387069702
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n  [PASS] sympy_solve_abc (sympy/symbolic_zero)\n       Solved linear system: a=50, b=-139, c=90. Expected a=50, b=-139, c=90.\n  [PASS] sympy_verify_residuals (sympy/symbolic_zero)\n       Residuals: r1=0, r2=0, r3=0. All must be 0.\n  [PASS] compute_f4 (sympy/symbolic_zero)\n       f(4) = 16*50 + 4*-139 + 90 = 334. Expected 334.\n  [PASS] kdrag_unique_solution (kdrag/certificate)\n       Proved existence of solution (a=50, b=-139, c=90) satisfying the system. Proof object: |= Exists([a, b, c],\n       And(And(a + b + c == 1,\n               4*a + 2*b + c == 12,\n               9*a + 3*b + c == 123),\n           a == 50,\n           b == -139,\n           c == 90))\n  [PASS] kdrag_f4_equals_334 (kdrag/certificate)\n       Proved that if a=50, b=-139, c=90, then f(4)=16a+4b+c=334. Proof object: |= ForAll([a, b, c],\n       Implies(And(a == 50, b == -139, c == 90),\n               16*a + 4*b + c == 334))\n  [PASS] numerical_sanity (numerical/numerical)\n       Numerical check: f(1)=1 (expect 1), f(2)=12 (expect 12), f(3)=123 (expect 123), f(4)=334 (expect 334)\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 28.373167276382446
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "proved",
+      "output": "Proof verification: FAILED\n\nChecks (8 total):\n  [PASS] base_case_f0 (kdrag)\n      Verified f(0,y) = y+1 produces valid output\n  [PASS] f1_pattern (kdrag)\n      Verified f(1,y) = y+2 pattern holds (y+2 >= 2 for y >= 0)\n  [PASS] f2_recurrence (kdrag)\n      Verified f(2,y) = 2y+3 satisfies recurrence relation\n  [PASS] numerical_verification (numerical)\n      Verified f(1,y)=y+2, f(2,y)=2y+3, and f(3,0..2) match pattern. f(3,0)=5, f(3,1)=13, f(3,2)=29\n  [PASS] f3_base (kdrag)\n      Verified f(3,0) = 2^3 - 3 = 5\n  [FAIL] f4_0_value (numerical)\n      f(4,0) = 13, expected 2^16 - 3 = 65533\n  [PASS] tower_structure (symbolic)\n      Verified that f(4,1981) has the form of a power tower of 2s minus 3. The exact count is 1984 or 1985 twos depending on counting convention.\n  [PASS] final_answer (symbolic)\n      Verified f(4,1981) = (power tower of 1984 twos) - 3, matching the expected 1984 twos\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 56.46924185752869
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "proved",
+      "output": "Verification result: FAILED\n\nDetailed checks (7 total):\n\n\u2717 Check 1: recurrence_increasing_condition\n  Backend: kdrag\n  Proof type: certificate\n  Details: Failed to prove increasing condition: SympifyError: x > 0\n\n\u2717 Check 2: boundary_case_x_n_equals_1_minus_1_over_n\n  Backend: kdrag\n  Proof type: certificate\n  Details: Failed to prove boundary case: SympifyError: n_val >= 1\n\n\u2717 Check 3: difference_propagation_inequality\n  Backend: kdrag\n  Proof type: certificate\n  Details: Failed to prove difference propagation: SympifyError: n_val >= 1\n\n\u2717 Check 4: lower_bound_sequence_increases\n  Backend: kdrag\n  Proof type: certificate\n  Details: Failed to prove lower bound increase: No implementation of getitem for sort Bool. Register a definition via getitem.register(Bool, your_code)\n\n\u2717 Check 5: numerical_sequence_verification\n  Backend: numerical\n  Proof type: numerical\n  Details: Computed 20 terms starting from x_1=0.64. Increasing: False, Bounded in (0,1): False, Above 1-1/n: True. Final value: inf\n\n\u2713 Check 6: polynomial_positive_coefficients\n  Backend: sympy\n  Proof type: symbolic_zero\n  Details: Verified P_2 and P_3 have non-negative coefficients. P_2 = x1**2 + 1.0*x1, P_3 degree = 4\n\n\u2717 Check 7: uniqueness_difference_bound\n  Backend: kdrag\n  Proof type: certificate\n  Details: Failed to prove uniqueness bound: SympifyError: n_val >= 1\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 230.6230001449585
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "proved",
+      "output": "Proof status: FAILED\n\nChecks (5 total):\n  [FAIL] ravi_substitution_transform (sympy, symbolic_zero)\n      Verified Ravi substitution transforms original to x*y^3 + y*z^3 + z*x^3 - xyz(x+y+z). Minimal polynomial: w - x**3*z + x**2*y*z - x*y**3 + x*y**2*z + x*y*z**2 - y*z**3\n  [PASS] cauchy_schwarz_verification (sympy, numerical)\n      Verified Cauchy-Schwarz inequality at test points: [(1, 1, 1), (1, 2, 3), (2, 3, 5)]. All passed: True\n  [PASS] z3_main_inequality (kdrag, certificate)\n      Z3 proved: ForAll x,y,z>0: xy^3 + yz^3 + zx^3 >= xyz(x+y+z). Proof: |= ForAll([x, y, z],\n       Implies(And(x > 0, y > 0, z > 0),\n               x*y**3 + y*z**3 + z*x**3 >= x*y*z*(x + y + z)))\n  [PASS] equality_case_equilateral (sympy, symbolic_zero)\n      Verified equality holds when x=y=z (equilateral triangle). Minimal polynomial: w\n  [PASS] numerical_sanity_checks (numerical, numerical)\n      Tested original inequality on 4 triangles. All non-negative: True\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 37.61398100852966
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n\u2713 abs_value_x_minus_p_nonnegative (kdrag/certificate)\n  Proved |x-p| = x-p in interval [p,15] since x-p >= 0\n\u2713 abs_value_x_minus_15_nonnegative (kdrag/certificate)\n  Proved |x-15| = 15-x in interval [p,15] since 15-x >= 0\n\u2713 abs_value_x_minus_p_minus_15_positive (kdrag/certificate)\n  Proved |x-p-15| = p+15-x in interval [p,15] since p+15-x > 0\n\u2713 sum_simplification (kdrag/certificate)\n  Proved f(x) = (x-p)+(15-x)+(p+15-x) = 30-x in interval [p,15]\n\u2713 minimum_at_x_15 (kdrag/certificate)\n  Proved 30-x >= 15 for all x in [p,15], so minimum is 15 at x=15\n\u2713 minimum_value_equals_15 (kdrag/certificate)\n  Proved f(15) = 30-15 = 15\n\u2713 numerical_verification (numerical/numerical)\n  Verified f(15)=15 and it's the minimum for p in {1, 5, 7.5, 10, 14}\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 32.57495093345642
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "proved",
+      "output": "All checks passed: True\n  quadratic_non_residue_mod5: PASS\n    Proved 3 is not a quadratic residue mod 5: |= ForAll(x, Implies(And(x >= 0, x < 5), (x*x)%5 != 3))\n  norm_equation_impossibility: PASS\n    Proved norm equation implies alpha != 0 (mod 5): |= ForAll([alpha, beta],\n       Implies(And(alpha >= 0,\n                   alpha < 5,\n                   beta >= 0,\n                   beta < 5,\n                   (alpha*alpha - 2*beta*beta)%5 == 4),\n               alpha != 0))\n  small_case_verification: PASS\n    Verified for n in [0, 20]: all sums not divisible by 5\n",
+      "has_certificate": true,
+      "attempts": 2,
+      "time_s": 69.65311598777771
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "proved",
+      "output": "Proved: True\n\u2713 base_case_verification: Verified f(n)=n-3 for n>=1000 using Z3 proofs: f(1004)=1001, f(1003)=1000, f(1002)=999, f(1001)=998, f(1000)=997\n\u2713 iteration_count: Verified that 185 iterations of +5 are needed: 84 + 5*(185-1) = 1004\n\u2713 computational_verification: Computed f(84) = 997, expected 997\n\u2713 reduction_path: Verified f^185(1004) = f^3(1004) = 997 via period-2 pattern: 185 = 3 + 2*91\n\u2713 arithmetic_check: Verified 84 + 5*184 = 1004 (starting point reaches base case)\n",
+      "has_certificate": false,
+      "attempts": 1,
+      "time_s": 31.656898975372314
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n\u2717 f(1)=1_necessity (kdrag/certificate)\n  Failed: Timeout. Maybe you have given `prove` too many or not enough lemmas?\n\u2713 identity_satisfies_inequality (kdrag/certificate)\n  Proved f(n)=n satisfies f(n+1)>f(f(n))\n\u2713 descent_argument (kdrag/certificate)\n  Proved descent property: f(k)>k leads to decreasing sequence\n\u2717 cannot_be_less_than_n (kdrag/certificate)\n  Failed: Timeout. Maybe you have given `prove` too many or not enough lemmas?\n\u2713 numerical_verification (numerical/numerical)\n  Identity function verified for n=1..5\n\u2717 uniqueness_of_identity (kdrag/certificate)\n  Z3 timeout or limitation - proof requires induction over infinite domain. Theorem is true but beyond Z3's capabilities for uninterpreted functions.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 46.33909296989441
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "proved",
+      "output": "Proved: False\n\nChecks:\n\u2713 triangle_existence (kdrag/certificate): Triangle inequality constraints are satisfiable: |= Exists([a, b, c],\n       And(a > 0,\n           b\n\u2713 amgm_step (kdrag/certificate): AM-GM inequality verified: |= ForAll([x, y, z],\n       Implies(And(x >= 0, y >= 0, z >= 0),\n        \n\u2717 substitution_equivalence (sympy/symbolic_zero): Substitution mismatch: -6*x*y*z\n\u2713 main_inequality (kdrag/certificate): Main theorem proven: |= ForAll([a, b, c],\n       Implies(And(a > 0,\n                   b > 0,\n      \n\u2713 numerical_verification (numerical/numerical): (3.0,4.0,5.0): 168.000000 <= 180.000000 \u2713; (5.0,5.0,5.0): 375.000000 <= 375.000000 \u2713; (2.0,3.0,4.0):\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 27.987929821014404
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "proved",
+      "output": "Proved: True\n\nsubstitution_simplification:\n  Passed: True\n  Backend: sympy\n  Type: symbolic_zero\n  Details: Verified: 2x+1 = a^2 when x = -1/2 + a^2/2 (minimal polynomial is zero)\n\ninequality_simplification:\n  Passed: True\n  Backend: sympy\n  Type: symbolic_zero\n  Details: Verified: LHS = (a+1)^2 and RHS = a^2 + 8\n\nsolve_for_a:\n  Passed: True\n  Backend: kdrag\n  Type: certificate\n  Details: Z3 certificate: (a+1)^2 < a^2 + 8 AND a >= 0 implies a < 7/2\n\nreverse_implication:\n  Passed: True\n  Backend: kdrag\n  Type: certificate\n  Details: Z3 certificate: 0 <= a < 7/2 implies (a+1)^2 < a^2 + 8\n\nconvert_to_x_bounds:\n  Passed: True\n  Backend: sympy\n  Type: symbolic_zero\n  Details: Verified: a=7/2 gives x=45/8, a=0 gives x=-1/2\n\nx_zero_indeterminate:\n  Passed: True\n  Backend: sympy\n  Type: symbolic_zero\n  Details: Verified: at x=0, denominator = 0 (indeterminate)\n\nnumerical_samples:\n  Passed: True\n  Backend: numerical\n  Type: numerical\n  Details: x=-1/2: LHS=1.0000, RHS=8.0000, holds=True, expected=True, match=True; x=1: LHS=7.4641, RHS=11.0000, holds=True, expected=True, match=True; x=2: LHS=10.4721, RHS=13.0000, holds=True, expected=True, match=True; x=5: LHS=18.6332, RHS=19.0000, holds=True, expected=True, match=True\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 41.521998167037964
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "failed_check",
+      "output": "Proved: False\n[FAIL] algebraic_derivation (kdrag/certificate)\n  Failed: name 'Rational' is not defined\n[PASS] sympy_u_value_verification (sympy/symbolic_zero)\n  Verified sqrt(5/2)-1 satisfies u^2+2u=3/2 via minimal_polynomial: x == x is True\n[PASS] final_answer_verification (sympy/symbolic_zero)\n  Verified (1-sin(t))(1-cos(t)) = 13/4 - sqrt(10) via minimal_polynomial: x == x is True\n[PASS] answer_sum (numerical/numerical)\n  k=10, m=13, n=4, sum=27, target=27: True\n[PASS] numerical_sanity (numerical/numerical)\n  Numerical check: result=0.0877223398, target=0.0877223398, error=2.22e-16, passed=True\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 33.93296980857849
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "proved",
+      "output": "Proved: False\n\nChecks:\n\u2717 key_algebraic_implication [kdrag]\n  Failed: Timeout. Maybe you have given `prove` too many or not enough lemmas?\n\u2717 power_of_2_bound [kdrag]\n  Failed: Timeout. Maybe you have given `prove` too many or not enough lemmas?\n\u2713 solution_family_verification [numerical]\n  Verified solution family (1, 2^(m-1)-1, 2^(m-1)+1, 2^(2m-2)-1) for m=3,4,5\n\u2717 odd_divisor_of_power_of_2 [kdrag]\n  Failed: Timeout. Maybe you have given `prove` too many or not enough lemmas?\n\u2713 numerical_m3_case [numerical]\n  m=3: (a,b,c,d)=(1,3,5,15), k=4. All conditions: True\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 40.79195713996887
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "proved",
+      "output": "Proof status: FAILED\n\nChecks:\n  \u2713 numerical_verification (numerical)\n    Computed a_1=-47.1020408163, even sum=93.0000000000, target=93\n  \u2713 kdrag_algebraic_proof (kdrag)\n    Z3 verified: Given total sum = 137 and AP with d=1, even-indexed sum = 93. Proof object: |= ForAll([a1, even_sum],\n       Implies(And(49*(2*a1 + 97) == 137,\n                   even_sum == 49*(a1 + 49)),\n               even_sum == 93))\n  \u2713 kdrag_hint_approach (kdrag)\n    Z3 verified hint approach: 2*S - 49 = 137 implies S = 93. Proof: |= ForAll(even_sum_var,\n       Implies(2*even_sum_var - 49 == 137,\n               even_sum_var == 93))\n  \u2717 sympy_symbolic_verification (sympy)\n    Symbolic computation: a1=-47.10204081632653, even_sum=93.00000000000009, difference from 93: 8.52651282912120E-14\n\nConclusion: The answer is 093, and this has been NOT VERIFIED.\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 32.93448090553284
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "proved",
+      "output": "Proof verification: PASSED\n\nDetailed checks:\n\u2713 period_2pi_verification (sympy)\n  Verified f(x + 2\u03c0) = f(x) symbolically. Difference: 0\n\u2713 numerical_zero_verification (numerical)\n  f(1.5708) = 1.15e-16, f(4.7124) = -3.44e-16, x2-x1 = 3.1416 = \u03c0\n\u2713 algebraic_structure_verification (sympy)\n  Verified that f(x) has the form A*cos(x) + B*sin(x) = R*cos(x-\u03c6), so zeros are separated by \u03c0\n\u2713 integer_multiple_verification (kdrag)\n  Proved that 2k form is subset of m form: |= ForAll(k, Exists(m, m == 2*k))\n\u2713 linear_combination_structure (sympy)\n  Verified f(x) expands to A*cos(x) + B*sin(x) form\n\nOverall: 5/5 checks passed\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 40.91895508766174
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "proved",
+      "output": "Proved: True\n\nChecks:\n\u2713 golden_ratio_equation (sympy, symbolic_zero)\n  Verified phi^2 - phi - 1 = 0 via minimal_polynomial: x == x\n\u2713 range_constraint (numerical, numerical)\n  Verified 2 < a^2 < 3: a^2 = 2.618033988749895\n\u2713 fractional_part_equality (numerical, numerical)\n  Verified <a^(-1)> = <a^2>: 0.618033988749895 \u2248 0.618033988749895\n\u2713 cubic_equation (sympy, symbolic_zero)\n  Verified a^3 - 2a - 1 = 0 via minimal_polynomial: x == x\n\u2713 final_answer_symbolic (sympy, symbolic_zero)\n  Verified a^12 - 144*a^(-1) - 233 = 0 via minimal_polynomial: x == x\n\u2713 final_answer_numerical (numerical, numerical)\n  Numerical check: a^12 - 144*a^(-1) = 233.000000000000000 \u2248 233\n\u2713 kdrag_range_verification (kdrag, certificate)\n  kdrag verified: a^2 - a - 1 = 0 \u2227 a > 0 \u27f9 2 < a^2 < 3\n\u2713 kdrag_cubic_identity (kdrag, certificate)\n  kdrag verified: a^2 = a + 1 \u27f9 a^3 = 2a + 1\n",
+      "has_certificate": true,
+      "attempts": 1,
+      "time_s": 26.829389095306396
+    }
+  ]
+}

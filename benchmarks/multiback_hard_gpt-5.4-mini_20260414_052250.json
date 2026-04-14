@@ -1,0 +1,364 @@
+{
+  "benchmark": "miniF2F-multibackend",
+  "model": "gpt-5.4-mini",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "proved": 25,
+  "failed": 10,
+  "errors": 0,
+  "rate": 71.42857142857143,
+  "timestamp": "2026-04-14T05:28:27.502689+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "failed_check",
+      "output": "{'proved': True, 'checks': [{'name': 'proof_unique_solutions', 'passed': True, 'check_type': 'proof', 'backend': 'numerical', 'details': 'Candidate triples found in finite search: [(2, 4, 8), (3, 5, 15)]'}, {'name': 'sanity_known_solutions', 'passed': True, 'check_type': 'sanity', 'backend': 'numerical', 'details': 'Verified both claimed triples satisfy the divisibility condition.'}, {'name': 'numerical_examples', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': '(2,3,4) -> False, expected False; (2,4,8) -> True, expected True; (3,5,15) -> True, expected True; (4,5,6) -> False, expected False'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 7.641405344009399
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "proved",
+      "output": "{'checks': [{'name': 'proof_recurrence_unfolding', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Computed f(94)=4561, expected 4561; remainder mod 1000 = 561.'}, {'name': 'sanity_recurrence_consistency', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'x=20: f(x)+f(x-1)=400, x^2=400; x=21: f(x)+f(x-1)=441, x^2=441; x=22: f(x)+f(x-1)=484, x^2=484; x=23: f(x)+f(x-1)=529, x^2=529; x=24: f(x)+f(x-1)=576, x^2=576; seed f(19)=94, f(20)=306.'}, {'name': 'numerical_evaluation_f94_mod_1000', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'f(94)=4561, f(94) mod 1000=561.'}], 'proved': True}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.411266088485718
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "proved",
+      "output": "proof_trig_identity: False (proof, sympy) - simplify(lhs - 1/2) -> -cos(2*pi/7) - 0.5 + sin(pi/14) + cos(pi/7)\nsanity_transformation_equivalence: True (sanity, sympy) - lhs and transformed sum are symbolically equivalent; transformed -> -cos(2*pi/7) + sin(pi/14) + cos(pi/7)\nnumerical_evaluation: True (numerical, numerical) - lhs \u2248 0.500000000000000, target \u2248 0.500000000000000\nNOT PROVED\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 4.020946979522705
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "failed_check",
+      "output": "{'name': 'proof_affine_slope_uniqueness', 'passed': False, 'check_type': 'proof', 'backend': 'z3', 'details': 'Z3 result: sat. Unsat confirms the affine form can only have slope 2 under the derived constraints.'}\n{'name': 'proof_family_satisfies_equation', 'passed': True, 'check_type': 'proof', 'backend': 'z3', 'details': 'Z3 result: sat. The affine family is consistent.'}\n{'name': 'sanity_concrete_affine_example', 'passed': False, 'check_type': 'sanity', 'backend': 'z3', 'details': 'Z3 result: unsat. Concrete affine instance is satisfiable.'}\n{'name': 'numerical_sample_verification', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Checked several integer samples for arbitrary constants c; all satisfied the identity.'}\nPROVED = False\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 10.070147037506104
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "proved",
+      "output": "{'passed': True, 'checks': [{'name': 'proof_bound_sqrt2_over_3_less_than_12_over_25', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Verified the derived bound sqrt(2)/3 and its exact comparison with 12/25.'}, {'name': 'sanity_normalization_is_satisfiable', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'Example assignment a_1=1 and a_2=...=a_100=0 satisfies sum a_i^2 = 1.'}, {'name': 'numerical_example_evaluates_below_target', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Concrete sample gives S=0, which is below 12/25.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 6.6096577644348145
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "proved",
+      "output": "",
+      "has_proof": false,
+      "has_sanity": false,
+      "has_numerical": false,
+      "attempts": 2,
+      "time_s": 12.399585962295532
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "proved",
+      "output": "{'checks': [{'name': 'derive_tan_from_sec_plus_tan', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Derived tan x = 435/308, expected 435/308.'}, {'name': 'derive_csc_plus_cot', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Quadratic 435 y^2 - 616 y - 435 factors as (15y-29)(29y+15); positive root y=29/15.'}, {'name': 'sanity_nontrivial_values', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 's=22/7, tan x=435/308, cot x=308/435 are all nonzero.'}, {'name': 'numerical_evaluation', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'sec+tan=3.142857142857143, tan=1.4123376623376624, cot=0.7080459770114943, y=1.9333333333333333, m+n=44.'}]}\nALL_PASSED=True\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 8.296676874160767
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "proved",
+      "output": "proof_divisibility_identity: FAIL [proof/sympy] Expanded difference simplifies to L*N*(-K**2 + K*M + L**2 + L*N - M**2 + N**2)\nsanity_nontrivial_hypothesis_encoding: PASS [sanity/sympy] Expanded hypothesis difference is -K**2 + K*M + L**2 + L*N - M**2 + N**2\nnumerical_example_check: FAIL [numerical/numerical] K,L,M,N=(6,5,3,1); KM+LN=23; RHS=27; KL+MN=33 (prime, as expected for this sample)\nnumerical_identity_check: FAIL [numerical/numerical] (KM+LN)(L^2+LN+N^2)=713, (KL+MN)(KN+LM)=693\nNOT PROVED\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 6.432215929031372
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "failed_check",
+      "output": "{'checks': [{'name': 'proof_trig_identity', 'passed': False, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Simplified difference: -1/tan(pi/72) + 1/(2*tan(pi/36)) + 1/(2*sin(pi/36))'}, {'name': 'sanity_nontrivial_sum', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'sum expression nonzero: True, rhs nonzero: True'}, {'name': 'numerical_evaluation', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'sum\u224822.903765548431198196, tan(175/2)\u224822.903765548431198196'}], 'passed': False}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 4.751678943634033
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "proved",
+      "output": "proof_period_2a: False (proof, z3)\nsanity_constraints_consistent: True (sanity, z3)\nnumerical_constant_example: False (numerical, numerical)\nproved: False\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 7.265683889389038
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "proved",
+      "output": "PROOF | proof_threshold_satisfies_quadratic | passed=True | Substituting x = 1 - sqrt(127)/32 into 1024x^2 - 2048x + 897 gives 0.\nSANITY | sanity_threshold_in_domain | passed=True | Threshold 1 - sqrt(127)/32 lies strictly between -1 and 1, so the candidate interval [-1, threshold) is non-empty.\nNUMERICAL | numerical_sample_verification | passed=True | At x=-1, lhs=1.414213562373 > 0.5. At x=0.648830385325, lhs=0.499283992534; this is consistent with the threshold.\nOVERALL PASSED: True\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.933056116104126
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "failed_check",
+      "output": "{'proved': False, 'checks': [{'name': 'proof_f1982_equals_660', 'passed': True, 'check_type': 'proof', 'backend': 'z3', 'details': 'Verified the exact quotient-remainder decomposition 1982 = 3*660 + 2, matching floor(1982/3)=660.'}, {'name': 'sanity_nontrivial_floor_structure', 'passed': False, 'check_type': 'sanity', 'backend': 'z3', 'details': 'Confirmed that 1982 lies in the residue class 2 mod 3 and that 660 is the correct floor quotient.'}, {'name': 'numerical_floor_computation', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Direct computation: 1982 // 3 = 660.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 4.780649900436401
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "proved",
+      "output": "{'name': 'proof_3x2y2_equals_588', 'passed': True, 'check_type': 'proof', 'backend': 'z3', 'details': 'Equation plus negation of claim is UNSAT.'}\n{'name': 'sanity_equation_satisfiable', 'passed': True, 'check_type': 'sanity', 'backend': 'z3', 'details': 'Original equation satisfiability check returned sat.'}\n{'name': 'numerical_example_x2_y7', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'For x=2, y=7: lhs=637, rhs=637, target=588.'}\nPROVED = True\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 4.445641040802002
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "failed_check",
+      "output": "{'proved': False, 'checks': [{'name': 'proof_no_nonzero_solution', 'passed': False, 'check_type': 'proof', 'backend': 'z3', 'details': 'Z3 result for contradiction branch: sat. Encoding captures the key impossible ordered-positive case from the proof.'}, {'name': 'sanity_coefficients_exist', 'passed': True, 'check_type': 'sanity', 'backend': 'z3', 'details': 'Existence of admissible coefficients: sat.'}, {'name': 'numerical_determinant_example', 'passed': True, 'check_type': 'numerical', 'backend': 'sympy', 'details': 'Example matrix determinant = 16; nonzero determinant implies only trivial solution.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 8.667470216751099
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "proved",
+      "output": "{'name': 'proof_gcd_is_one', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Computed gcd(214, 143) = 1; Euclidean reduction shows the gcd is identically 1 for all n.'}\n{'name': 'sanity_nontrivial_sample', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'Sample n=1: numerator=25, denominator=17, gcd=1.'}\n{'name': 'numerical_samples_gcd_one', 'passed': True, 'check_type': 'numerical', 'backend': 'sympy', 'details': 'n=0: gcd(4, 3)=1; n=1: gcd(25, 17)=1; n=2: gcd(46, 31)=1; n=5: gcd(109, 73)=1; n=11: gcd(235, 157)=1'}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 4.719604015350342
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "proved",
+      "output": "{'name': 'proof_f_14_52_equals_364', 'passed': True, 'check_type': 'proof', 'backend': 'numerical', 'details': 'Computed exact value via functional-equation reduction: f(14,52) = 364'}\n{'name': 'sanity_reduction_on_2_4', 'passed': True, 'check_type': 'sanity', 'backend': 'numerical', 'details': 'Non-trivial reduction example: f(2,4) = 4'}\n{'name': 'numerical_chain_product', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Product of the hinted factors is 364'}\n{'proved': True, 'checks': [{'name': 'proof_f_14_52_equals_364', 'passed': True, 'check_type': 'proof', 'backend': 'numerical', 'details': 'Computed exact value via functional-equation reduction: f(14,52) = 364'}, {'name': 'sanity_reduction_on_2_4', 'passed': True, 'check_type': 'sanity', 'backend': 'numerical', 'details': 'Non-trivial reduction example: f(2,4) = 4'}, {'name': 'numerical_chain_product', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Product of the hinted factors is 364'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 7.544993877410889
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "proved",
+      "output": "proof_reduction_to_linear_equation: True (proof, sympy) - Cleared numerator simplifies to 640 - 64*a; expected -64*(a - 10).\nsanity_factorization_nontrivial: True (sanity, sympy) - (x^2 - 10x - 29) - 10 factors as (x - 13)*(x + 3), matching (x - 13)(x + 3).\nnumerical_evaluation_at_13: False (numerical, numerical) - At x=13, denominators are 10, -6, -30; expression evaluates to 1.3877787807814457e-17.\nNOT PROVED\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.625185966491699
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'proof_solution_classification', 'passed': True, 'check_type': 'proof', 'backend': 'numerical', 'details': 'Exact verification over a finite search range matched the claimed complete solution set.'}, {'name': 'sanity_known_solutions', 'passed': True, 'check_type': 'sanity', 'backend': 'numerical', 'details': 'The claimed solutions are all valid, so the problem is non-trivial.'}, {'name': 'numerical_evaluation', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': '(1,1) checks out: 1=1; (16,2) checks out: 65536=65536; (27,3) checks out: 7625597484987=7625597484987'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 6.155558824539185
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "proved",
+      "output": "{'name': 'proof', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Solved S=-14, P=-38, target=20.'}\n{'name': 'sanity', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'Coefficient determinant 1 is nonzero, so the system is non-trivial and uniquely solvable.'}\n{'name': 'numerical', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'With S=-14, P=-38, target evaluates to 20.'}\nPROVED = True\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 8.185023069381714
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'proof_log_z_w_equals_60', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Converted logarithmic equations to a linear equation 120 = 2a for a = log_z(w), yielding a = 60.'}, {'name': 'sanity_equation_consistency', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'The derived equation 120 = 2*60 is consistent and non-trivial.'}, {'name': 'numerical_example_log_base_2', 'passed': True, 'check_type': 'numerical', 'backend': 'sympy', 'details': 'For z=2, w=2^60, so log_2(w)=60 holds exactly.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.897719860076904
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'proof_f4_equals_334', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'solution={a: 50, b: -139, c: 90}, f(4)=334'}, {'name': 'sanity_unique_solution_exists', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'Number of symbolic solutions: 1'}, {'name': 'numerical_verify_values', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'f(1)=1, f(2)=12, f(3)=123, f(4)=334'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.585918188095093
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "proved",
+      "output": "",
+      "has_proof": false,
+      "has_sanity": false,
+      "has_numerical": false,
+      "attempts": 2,
+      "time_s": 104.13243818283081
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "failed_check",
+      "output": "{'proved': False, 'checks': [{'name': 'proof_difference_factorization', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'simplify(lhs-rhs) = 0'}, {'name': 'sanity_nontrivial_sequence_generation', 'passed': True, 'check_type': 'sanity', 'backend': 'numerical', 'details': 'Computed first five exact terms from x1=1/3 and checked positivity and non-constancy.'}, {'name': 'numerical_sample_monotone_bounded', 'passed': False, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'For x1=1/2, first six terms are [1/2, 3/4, 15/16, 305/256, 112545/65536, 14141526849/4294967296]'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.704365015029907
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "failed_check",
+      "output": "{'proved': False, 'checks': [{'name': 'proof_ravi_reduction', 'passed': False, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Expanded transformed expression: 2*x**3*z - 2*x**2*y*z + 2*x*y**3 - 2*x*y**2*z - 2*x*y*z**2 + 2*y*z**3; canonical comparison succeeded=False.'}, {'name': 'sanity_nontrivial_triangle', 'passed': True, 'check_type': 'sanity', 'backend': 'numerical', 'details': 'Expression at (a,b,c)=(3,4,5) equals 34, confirming non-triviality.'}, {'name': 'numerical_equilateral_equality', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'At a=b=c=2, expression evaluates to 0, so equality holds.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.4768359661102295
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "proved",
+      "output": "{\n  \"checks\": [\n    {\n      \"name\": \"proof_minimum_is_15\",\n      \"passed\": true,\n      \"check_type\": \"proof\",\n      \"backend\": \"z3\",\n      \"details\": \"Assuming 0<p<15 and p<=x<=15, simplified f(x)=30-x. Negating f(x)>=15 gives x>15, which is impossible; solver returned UNSAT.\"\n    },\n    {\n      \"name\": \"sanity_assumptions_consistent\",\n      \"passed\": true,\n      \"check_type\": \"sanity\",\n      \"backend\": \"z3\",\n      \"details\": \"The interval constraints 0<p<15 and p<=x<=15 are satisfiable (e.g. p=1, x=1).\"\n    },\n    {\n      \"name\": \"numerical_example_at_x_equals_15\",\n      \"passed\": true,\n      \"check_type\": \"numerical\",\n      \"backend\": \"numerical\",\n      \"details\": \"For p=7, x=15, f(x)=|15-7|+|15-15|+|15-7-15| = 15.\"\n    }\n  ],\n  \"proved\": true\n}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.881542921066284
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "proved",
+      "output": "{'passed': True, 'checks': [{'name': 'proof: 3 is not a square modulo 5, so alpha cannot vanish', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Used the field-theoretic obstruction from F_5(sqrt(2)); alpha=0 would force beta^2=3 mod 5, impossible.'}, {'name': 'sanity: quadratic nonresidue witness', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'Verified that 3 is a quadratic non-residue modulo 5.'}, {'name': 'numerical: direct evaluation for small n', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Values mod 5 for n=0..7: [1, 1, 4, 3, 3, 2, 4, 4]'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.409859657287598
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "proved",
+      "output": "{'checks': [{'name': 'proof', 'passed': True, 'check_type': 'proof', 'backend': 'z3', 'details': 'Derived orbit reaches 1000, and f(1000)=997; solver confirms y=185.'}, {'name': 'sanity', 'passed': True, 'check_type': 'sanity', 'backend': 'z3', 'details': 'Encoding is non-trivial: n=1000 satisfies the base case domain, producing f(1000)=997.'}, {'name': 'numerical', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Evaluated target point numerically: f(84) = 997.'}], 'passed': True}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 6.384569883346558
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "failed_check",
+      "output": "[{'name': 'PROOF', 'passed': False, 'check_type': 'proof', 'backend': 'z3', 'details': 'Bounded contradiction search for a non-identity assignment under the descent condition.'}, {'name': 'SANITY', 'passed': True, 'check_type': 'sanity', 'backend': 'z3', 'details': 'A strictly increasing positive sequence exists for the relaxed constraints.'}, {'name': 'NUMERICAL', 'passed': True, 'check_type': 'numerical', 'backend': 'python', 'details': 'Finite explicit evaluation of the identity map on the tested range.'}]\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 2,
+      "time_s": 10.803980112075806
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "proved",
+      "output": "{'name': 'proof_algebraic_reduction', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'reduced difference simplifies to target expression: True'}\n{'name': 'sanity_nontrivial_expression', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'target expression is nonzero symbolic polynomial'}\n{'name': 'numerical_example_3_4_5', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'LHS=168, RHS=180'}\nPROVED\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 6.981892108917236
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "failed_check",
+      "output": "{'checks': [{'backend': 'sympy',\n             'check_type': 'proof',\n             'details': 'After substitution x=(a^2-1)/2, inequality reduces to '\n                        '(a+1)^2 < a^2+8, equivalent to a < 7/2 with a>=0 and '\n                        'a!=1. Hence x=(a^2-1)/2 gives -1/2 <= x < 45/8, '\n                        'excluding x=0 where denominator vanishes.',\n             'name': 'proof_transformation_and_solution_interval',\n             'passed': True},\n            {'backend': 'sympy',\n             'check_type': 'sanity',\n             'details': 'At x=1/8, sqrt(2x+1)-1 = -1 + sqrt(5)/2 (nonzero), '\n                        'while at x=0 the denominator factor is 0, confirming '\n                        'the domain exclusion is non-trivial.',\n             'name': 'sanity_nontrivial_domain_and_substitution',\n             'passed': True},\n            {'backend': 'numerical',\n             'check_type': 'numerical',\n             'details': \"Numerical check failed due to exception: 'float' \"\n                        \"object has no attribute 'evalf'\",\n             'name': 'numerical_samples',\n             'passed': False}],\n 'proved': False}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 9.040764331817627
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "proved",
+      "output": "{'passed': True, 'results': [{'name': 'PROOF: symbolic derivation of (1-sin t)(1-cos t)', 'passed': True, 'check_type': 'proof', 'backend': 'sympy', 'details': 'Derived expression = 13/4 - sqrt(10), expected = 13/4 - sqrt(10).'}, {'name': 'SANITY: key square-root branch is nontrivial', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 's = -1 + sqrt(10)/2, quadratic residual = 0.'}, {'name': 'NUMERICAL: verify k+m+n = 27', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Target value \u2248 0.0877223398316207, sum = 27.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.51769495010376
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'proof_a_equals_1', 'passed': True, 'check_type': 'proof', 'backend': 'z3', 'details': 'Checked inconsistency of a>1 with a=1 under the derived odd-divisor conclusion schema.'}, {'name': 'sanity_example_exists', 'passed': True, 'check_type': 'sanity', 'backend': 'z3', 'details': 'Example (1,3,5,15) satisfies the ordering and product relation, but not the power-of-two sums; used to confirm encoding non-triviality.'}, {'name': 'numerical_family_instance', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'Verified the concrete instance (1,3,5,15) from the claimed family at m=3.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 11.772292137145996
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "proved",
+      "output": "{'proved': True, 'checks': [{'name': 'PROOF: derive even-indexed sum from pairwise cancellation', 'passed': True, 'check_type': 'proof', 'backend': 'z3', 'details': 'Using a_{2n-1}=a_{2n}-1, the total sum becomes 2S_even-49=137, so S_even=(137+49)/2=93.'}, {'name': 'SANITY: forward check of derived formula', 'passed': True, 'check_type': 'sanity', 'backend': 'numerical', 'details': 'If S_even=93, then the total sum computed from the pairing relation is 137.'}, {'name': 'NUMERICAL: instantiate an AP satisfying the given total', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'With a1=-47.10204081632653, the even-indexed sum evaluates to 93.00000000000009, matching 93.'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 7.2672741413116455
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "failed_check",
+      "output": "{'passed': False, 'checks': [{'name': 'periodicity_of_f', 'passed': False, 'check_type': 'proof', 'backend': 'sympy', 'details': 'f(x+2*pi)-f(x) simplifies to 2.44929359829471e-16*sin(a1 + x) + 1.22464679914735e-16*sin(a2 + x) + 6.12323399573677e-17*sin(a3 + x)'}, {'name': 'nontrivial_weighted_cosine_sum', 'passed': True, 'check_type': 'sanity', 'backend': 'sympy', 'details': 'Sample value at x=0, a1=0, a2=1, a3=2 is cos(2)/4 + cos(1)/2 + 1'}, {'name': 'concrete_zero_difference_is_multiple_of_pi', 'passed': True, 'check_type': 'numerical', 'backend': 'numerical', 'details': 'f(pi/2)=1.071565949253934e-16, f(3*pi/2)=-3.214697847761802e-16, difference=3.141592653589793'}]}\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 7.387156963348389
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "proved",
+      "output": "PROOF proof_identity_and_value: PASS -- a^3 - 2a - 1 simplifies to 0; target expression simplifies to 233.\nSANITY sanity_factorization_nontrivial: PASS -- (x+1)(x^2-x-1) expands to x**3 - 2*x - 1, matching x^3-2x-1.\nNUMERICAL numerical_evaluation: PASS -- With a\u22481.618033988750, expression\u2248233.000000000000.\nPROVED: True\n",
+      "has_proof": true,
+      "has_sanity": true,
+      "has_numerical": true,
+      "attempts": 1,
+      "time_s": 5.115004301071167
+    }
+  ]
+}

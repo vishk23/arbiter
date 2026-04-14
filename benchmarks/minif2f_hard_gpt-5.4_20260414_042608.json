@@ -1,0 +1,258 @@
+{
+  "model": "gpt-5.4",
+  "tier": "hard",
+  "seed": 42,
+  "n_problems": 35,
+  "proved": 24,
+  "failed_proof": 6,
+  "errors": 5,
+  "rate": 68.57142857142857,
+  "timestamp": "2026-04-14T04:42:58.759050+00:00",
+  "results": [
+    {
+      "id": "imo_1992_p1",
+      "status": "proved",
+      "output": "check1: {'name': 'For p>=5, 2(p-1)(q-1)(r-1) > pqr', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no integers p>=5<q<r violate the inequality, so any divisibility solution must have p<=4.', 'passed': True}\ncheck2: {'name': 'Case n=1 impossible', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there are no integers 1<p<q<r satisfying the expanded n=1 equation, so n=1 cannot occur.', 'passed': True}\ncheck3: {'name': 'Case p=4 has no solutions', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no q,r,n satisfy the divisibility equation when p=4, so p=4 is impossible.', 'passed': True}\ncheck4: {'name': 'Case p=3 yields only (3,5,15)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the only solution with p=3 is exactly q=5, r=15 and quotient n=2.', 'passed': True}\ncheck5: {'name': 'Case p=2 yields only (2,4,8)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the only solution with p=2 is ",
+      "attempts": 1,
+      "time_s": 26.439783811569214
+    },
+    {
+      "id": "aime_1994_p3",
+      "status": "proved",
+      "output": "check1: {'name': 'Computed value f(94) is 4561', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'We compute the integer-indexed recurrence from f(19)=94 up to f(94). If asserting f(94) != 4561 is UNSAT, then f(94)=4561 is proved.', 'passed': True}\ncheck2: {'name': 'Remainder of f(94) upon division by 1000 is 561', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If the negation rem != 561 is UNSAT under rem = f(94) mod 1000, then the remainder must be 561.', 'passed': True}\ncheck3: {'name': 'Symbolic recurrence forces f(94)=4561 uniquely', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'The recurrence at integer inputs, together with f(19)=94, determines all later values. If F(94) != 4561 is UNSAT, then every model satisfying the recurrence has F(94)=4561.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 15.431174993515015
+    },
+    {
+      "id": "imo_1963_p5",
+      "status": "proved",
+      "output": "check1:\n  name: Trig identity implies cos(pi/7)-cos(2pi/7)+cos(3pi/7) = 1/2\n  result: UNSAT\n  expected: UNSAT\n  explanation: The constraints encode the proof identities: 2*S*sin(pi/7) simplifies to sin(6pi/7), and sin(6pi/7)=sin(pi/7)>0. Therefore S must equal 1/2. If Z3 finds the negation S != 1/2 unsatisfiable, the identity is proven.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 11.711617231369019
+    },
+    {
+      "id": "imo_2019_p1",
+      "status": "execution_error",
+      "error": "TIMEOUT after 60s",
+      "attempts": 1,
+      "time_s": 78.75472712516785
+    },
+    {
+      "id": "imosl_2007_algebra_p6",
+      "status": "proved",
+      "output": "check1:\n  name: AM-GM bound: with x,y >= 0 and x+y=1, one has 4xy <= 1\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no nonnegative x,y summing to 1 can violate 4xy <= 1, i.e. xy <= 1/4.\n  passed: True\ncheck2:\n  name: Derived bound: 1 + 4xy <= 2\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the quantity 1 + 4xy cannot exceed 2 when x+y=1 and x,y are nonnegative.\n  passed: True\ncheck3:\n  name: Numeric strictness: 2 < (36/25)^2\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT confirms 2 is strictly less than 1296/625 = (36/25)^2, which yields S < 12/25 from (3S)^2 <= 2.\n  passed: True\ncheck4:\n  name: Combined contradiction: 1 + 4xy < (36/25)^2\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the upper bound appearing in the proof is always strictly below (36/25)^2, so any S with (3S)^2 bounded by that quantity must satisfy S < 12/25.\n  passed: True\ncheck5:\n  name: Final implication: if 9S^2 <= 1+4xy and x+y=1, then S < 12/25\n  result: UNSAT",
+      "attempts": 1,
+      "time_s": 20.507774829864502
+    },
+    {
+      "id": "aime_1983_p3",
+      "status": "failed_proof",
+      "output": "check1:\n  name: Any real solution of the radical equation satisfies x^2 + 18x + 20 = 0\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no real counterexample: every real solution of the original equation must satisfy x^2 + 18x + 20 = 0.\n  passed: True\ncheck2:\n  name: Any two real roots of x^2 + 18x + 20 = 0 have product 20\n  result: SAT\n  expected: UNSAT\n  explanation: UNSAT means no pair of roots of the quadratic can have product different from 20, so the product is 20.\n  passed: False\ncheck3:\n  name: The quadratic x^2 + 18x + 20 = 0 has two distinct real roots\n  result: SAT\n  expected: SAT\n  explanation: SAT means there exist two distinct real numbers satisfying the quadratic, so the real roots are genuine and distinct.\n  passed: True\ncheck4:\n  name: Every real root of x^2 + 18x + 20 = 0 satisfies the original radical equation\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no quadratic root fails the original equation; together with Check 1, the tw",
+      "attempts": 1,
+      "time_s": 16.42863392829895
+    },
+    {
+      "id": "aime_1991_p9",
+      "status": "proved",
+      "output": "check1: {'name': 'tan value forced by sec+tan and Pythagorean identity', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, there is no counterexample: any real sec,tan satisfying sec+tan=22/7 and sec^2=1+tan^2 must have tan=435/308.', 'passed': True}\ncheck2: {'name': 'derived quadratic for csc+cot', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, then every y=csc+cot consistent with csc^2=1+cot^2 and cot=308/435 satisfies 435y^2-616y-435=0.', 'passed': True}\ncheck3: {'name': 'unique positive value of csc+cot', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, then the only positive root of the derived quadratic is y=29/15.', 'passed': True}\ncheck4: {'name': 'final arithmetic m+n', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If UNSAT, then with y=29/15 in lowest terms, m+n must equal 44.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 15.757407903671265
+    },
+    {
+      "id": "imo_2001_p6",
+      "status": "execution_error",
+      "error": "TIMEOUT after 60s",
+      "attempts": 1,
+      "time_s": 89.01240181922913
+    },
+    {
+      "id": "aime_1999_p11",
+      "status": "proved",
+      "output": "check1:\n  name: If the angle is 175/2 degrees, then m+n=177\n  result: UNSAT\n  expected: UNSAT\n  explanation: We encode the negation of the desired arithmetic conclusion: m=175, n=2, but m+n is not 177. Z3 finds this impossible, so the conclusion m+n=177 is proven.\n  passed: True\ncheck2:\n  name: 175 and 2 are relatively prime\n  result: UNSAT\n  expected: UNSAT\n  explanation: To show gcd(175,2)=1, we ask for a common divisor greater than 1. Z3 proves none exists.\n  passed: True\ncheck3:\n  name: The angle 175/2 is less than 90 degrees\n  result: UNSAT\n  expected: UNSAT\n  explanation: We negate the inequality 175/2 < 90. Since 87.5 < 90 is true, the negation is impossible.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 12.521593809127808
+    },
+    {
+      "id": "imo_1968_p5_1",
+      "status": "proved",
+      "output": "check1: {'name': 'From reality of sqrt term, function values lie in [0,1]', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If y - y^2 >= 0 then y must satisfy 0 <= y <= 1. UNSAT means no counterexample exists.', 'passed': True}\ncheck2: {'name': 'Any value of the form 1/2 + sqrt(...) is at least 1/2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Since a square root is nonnegative, 1/2 + sqrt(...) cannot be less than 1/2. UNSAT proves this.', 'passed': True}\ncheck3: {'name': 'Algebraic identity for the second shift radicand', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': \"UNSAT means 1/4 - (y-y^2) always equals (1/2-y)^2, matching the proof's computation.\", 'passed': True}\ncheck4: {'name': 'Second application returns the same value once the intermediate value is at least 1/2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT proves that for any z >= 1/2, 1/2 + |z-1/2| = z, which is the key final step.', 'passed': True}\ncheck5: {'name': 'Chosen pe",
+      "attempts": 1,
+      "time_s": 22.104475021362305
+    },
+    {
+      "id": "imo_1962_p2",
+      "status": "proved",
+      "output": "check1:\n  name: Original inequality implies x is in the claimed interval\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no real x satisfies the inequality while lying outside the claimed set [-1, 1-sqrt(127)/32).\n  passed: True\ncheck2:\n  name: Every x in the claimed interval satisfies the original inequality\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no x in the claimed set for which the inequality fails.\n  passed: True\ncheck3:\n  name: The boundary point is excluded because the inequality is strict\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no point in [-1,1] with p(x)=0 satisfies the strict inequality; hence the right endpoint is excluded.\n  passed: True\ncheck4:\n  name: Left endpoint x = -1 satisfies the inequality\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means at x=-1 the inequality does hold, so the interval is closed on the left.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 16.492088079452515
+    },
+    {
+      "id": "imo_1982_p1",
+      "status": "execution_error",
+      "error": "TIMEOUT after 60s",
+      "attempts": 1,
+      "time_s": 87.54727697372437
+    },
+    {
+      "id": "aime_1987_p5",
+      "status": "proved",
+      "output": "check1:\n  name: All integer solutions force 3x^2 y^2 = 588\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no integer counterexample exists: whenever y^2 + 3x^2 y^2 = 30x^2 + 517 holds, the value 3x^2 y^2 must be 588.\n  passed: True\ncheck2:\n  name: There exists an integer solution with value 588\n  result: SAT\n  expected: SAT\n  explanation: SAT means there exists an integer solution of the equation with 3x^2 y^2 = 588. Example model: x = -2, y = -7.\n  passed: True\ncheck3:\n  name: Factorization forces 3x^2 + 1 = 13\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no integer solution to the original equation for which the factor 3x^2 + 1 is anything other than 13.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 11.460160970687866
+    },
+    {
+      "id": "imo_1965_p2",
+      "status": "proved",
+      "output": "check1:\n  name: No nonzero solution exists under the IMO 1965 P2 coefficient conditions\n  result: UNSAT\n  expected: UNSAT\n  explanation: We encode all coefficient sign conditions, positivity of each row sum, and the three homogeneous equations. Then we ask whether there exists a nonzero solution (x1, x2, x3). If Z3 returns UNSAT, no such counterexample exists, so the only solution is x1 = x2 = x3 = 0.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 9.022664070129395
+    },
+    {
+      "id": "imo_1959_p1",
+      "status": "proved",
+      "output": "check1:\n  name: No common divisor greater than 1 for 21n+4 and 14n+3\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no natural number n and integer d > 1 dividing both numerator and denominator, so the fraction is irreducible for every natural n.\n  passed: True\ncheck2:\n  name: Euclidean algorithm contradiction: any common divisor would divide 1\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no integer d > 1 can satisfy the divisibility chain leading to d | 1. This matches the Euclidean algorithm proof that the gcd is 1.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 11.239881992340088
+    },
+    {
+      "id": "aime_1988_p8",
+      "status": "proved",
+      "output": "check1:\n  name: Uniqueness of f(14,52) from the given functional constraints\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the finite system of equations implied by the axioms along the reduction chain has no solution with f(14,52) different from 364, so f(14,52)=364 is proved.\n  passed: True\ncheck2:\n  name: Consistency witness for f(14,52)=364\n  result: SAT\n  expected: SAT\n  explanation: SAT means the recurrence, symmetry, and diagonal constraints are jointly consistent with f(14,52)=364.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 14.182104110717773
+    },
+    {
+      "id": "aime_1990_p4",
+      "status": "proved",
+      "output": "check1:\n  name: Transformed rational equation uniquely implies a = 10\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no value a (with nonzero denominators) satisfying the transformed equation other than a = 10.\n  passed: True\ncheck2:\n  name: Quadratic obtained from a = 10 has only roots 13 and -3\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means x^2 - 10x - 29 = 10 has no roots besides 13 and -3.\n  passed: True\ncheck3:\n  name: Original equation has unique positive solution x = 13\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no positive solution to the original equation other than x = 13.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 15.328503608703613
+    },
+    {
+      "id": "imo_1997_p5",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Only (1,1) occurs when y=1', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Assuming y=1 forces x=1, so there is no counterexample with y=1 and x!=1.', 'passed': True}\ncheck2: {'name': 'No reduced solutions with e >= 0', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'The reduced equation e+m=2mt^e has no integer solution for e=0 or e>0 with t>=2,m>=1.', 'passed': False}\ncheck3: {'name': 'For e = -1, only (t,m)=(3,3) or (4,2)', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Any integer solution of t(m-1)=2m with t>=2,m>=1 is one of the two listed pairs.', 'passed': True}\ncheck4: {'name': 'For e = -2, only (t,m)=(2,2)', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'The only integer solution of t^2(m-2)=2m with t>=2,m>=1 is (2,2).', 'passed': False}\ncheck5: {'name': 'For e <= -3, only exceptional reduced triple is (t,k,m)=(2,3,4)', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'No integer solution exists for t^k(m-k)=2m wit",
+      "attempts": 1,
+      "time_s": 213.16408014297485
+    },
+    {
+      "id": "aime_1990_p15",
+      "status": "proved",
+      "output": "check1:\n  name: Derived linear system uniquely gives S = -14 and P = -38\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no solution to the given equations and derived identities with S,P different from (-14,-38); hence S=-14 and P=-38 are forced.\n  passed: True\ncheck2:\n  name: Target value ax^5 + by^5 equals 20\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no real a,b,x,y satisfying the system can have ax^5+by^5 different from 20; therefore the value is uniquely 20.\n  passed: True\ncheck3:\n  name: Direct identity-based proof that ax^5 + by^5 = 20\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the original equations together with the power-sum identities admit no counterexample to ax^5+by^5=20.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 15.590458154678345
+    },
+    {
+      "id": "aime_1983_p1",
+      "status": "proved",
+      "output": "check1:\n  name: Given log relations imply z^60 = w, hence log_z w = 60\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no positive reals x,y,z,w with the stated conditions can violate z^60 = w. Therefore log_z w = 60 is proven.\n  passed: True\ncheck2:\n  name: Common-power elimination yields z^120 = w^2\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the three exponential equations force z^120 = w^2. Since z,w > 1 here, this is equivalent to z^60 = w and thus log_z w = 60.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 14.012105941772461
+    },
+    {
+      "id": "aime_1989_p8",
+      "status": "proved",
+      "output": "check1:\n  name: Direct proof that the target linear combination equals 334\n  result: UNSAT\n  expected: UNSAT\n  explanation: If UNSAT, then no real values x1..x7 can satisfy the three given equations while making the requested expression differ from 334, so the value is forced to be 334.\n  passed: True\ncheck2:\n  name: Quadratic extrapolation from f(1)=1, f(2)=12, f(3)=123 gives f(4)=334\n  result: UNSAT\n  expected: UNSAT\n  explanation: If UNSAT, then any quadratic function matching the three given values at 1, 2, and 3 must take value 334 at 4.\n  passed: True\ncheck3:\n  name: Original expression family is quadratic in k and therefore forces the fourth value\n  result: UNSAT\n  expected: UNSAT\n  explanation: If UNSAT, then the sums indeed fit a quadratic in k with the given first three values, and the fourth value must therefore be 334.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 18.391263961791992
+    },
+    {
+      "id": "imo_1981_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpz0yxzwgm.py\", line 160, in <module>\n    res = verify()\n          ^^^^^^^^\n  File \"/tmp/tmpz0yxzwgm.py\", line 81, in verify\n    recur12.append(f[(1, y + 1)] == f[(0, f[(1, y)])])\n                                    ~^^^^^^^^^^^^^^^^\nKeyError: (0, f_1_0)\n\nSTDOUT: ",
+      "attempts": 1,
+      "time_s": 34.110817670822144
+    },
+    {
+      "id": "imo_1985_p6",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'growth_equivalence_n_1', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means for n=1 and x>0, x(x+1/1)>x is exactly equivalent to x>1-1/1.', 'passed': True}\ncheck2: {'name': 'growth_equivalence_n_2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means for n=2 and x>0, x(x+1/2)>x is exactly equivalent to x>1-1/2.', 'passed': True}\ncheck3: {'name': 'growth_equivalence_n_3', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means for n=3 and x>0, x(x+1/3)>x is exactly equivalent to x>1-1/3.', 'passed': True}\ncheck4: {'name': 'threshold_order_n_2', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no counterexample to a_2 < b_2; hence the interval (a_2, b_2) is nonempty.', 'passed': True}\ncheck5: {'name': 'threshold_order_n_3', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no counterexample to a_3 < b_3; hence the interval (a_3, b_3) is nonempty.', 'passed': True}\ncheck6:",
+      "attempts": 1,
+      "time_s": 38.42424297332764
+    },
+    {
+      "id": "imo_1983_p6",
+      "status": "failed_proof",
+      "output": "check1:\n  name: Ravi substitution algebraic identity\n  result: SAT\n  expected: UNSAT\n  explanation: UNSAT means the original cyclic expression is identically equal to xy^3 + yz^3 + zx^3 - xyz(x+y+z) after substituting a=y+z, b=z+x, c=x+y.\n  passed: False\ncheck2:\n  name: Core inequality in Ravi variables\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no positive x,y,z violate (xy^3 + yz^3 + zx^3)(x+y+z) >= xyz(x+y+z)^2, hence xy^3 + yz^3 + zx^3 >= xyz(x+y+z).\n  passed: True\ncheck3:\n  name: Equality holds when x = y = z\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means for every positive t, substituting x=y=z=t makes the transformed expression exactly 0, so equality is attained.\n  passed: True\ncheck4:\n  name: Equality case gives equilateral triangle\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means x=y=z forces a=b=c, so the equality case from Ravi variables corresponds to an equilateral triangle.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 14.327611923217773
+    },
+    {
+      "id": "aime_1983_p2",
+      "status": "proved",
+      "output": "check1:\n  name: Absolute-value simplification on p <= x <= 15\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no counterexample: for all 0 < p < 15 and p <= x <= 15, the expression equals 30 - x.\n  passed: True\ncheck2:\n  name: No value below 15 occurs on the interval\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means f(x) is never less than 15 for any 0 < p < 15 and any x in [p, 15].\n  passed: True\ncheck3:\n  name: The value 15 is attained at x = 15\n  result: SAT\n  expected: SAT\n  explanation: SAT means the bound 15 is achieved; indeed when x = 15, f(15) = 15 for every 0 < p < 15.\n  passed: True\n  model: {'x': '15'}\n",
+      "attempts": 1,
+      "time_s": 12.244882106781006
+    },
+    {
+      "id": "imo_1974_p3",
+      "status": "proved",
+      "output": "check1: {'name': '3 is not a quadratic residue modulo 5', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no beta in F_5 with beta^2 = 3, which is exactly the contradiction needed in the field-theoretic proof.', 'passed': True}\ncheck2: {'name': 'Alpha cannot be zero under the norm equation', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no alpha,beta in F_5 satisfy alpha=0 together with alpha^2 - 2 beta^2 = -1, so the coefficient alpha is nonzero mod 5. This proves the transformed sum is nonzero mod 5.', 'passed': True}\ncheck3: {'name': 'Direct finite residue check for initial values', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means no counterexample was found among n=0..19; this is consistent with the algebraic proof and provides a concrete sanity check.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 19.296880960464478
+    },
+    {
+      "id": "aime_1984_p7",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Closed form satisfies the functional equation for all integers', 'result': 'SAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no integer counterexample: the candidate function F(n)=n-3 for n>=1000 and F(n)=997 for n<1000 satisfies the given recursive definition everywhere.', 'passed': False}\ncheck2: {'name': 'Value at 84 is 997', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means the closed form forces F(84)=997, so the requested value is 997.', 'passed': True}\ncheck3: {'name': 'All integers below 1000 map to 997 in the closed form', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'UNSAT means there is no integer m<1000 with F(m) different from 997; hence in particular F(84)=997.', 'passed': True}\n",
+      "attempts": 1,
+      "time_s": 10.962565183639526
+    },
+    {
+      "id": "imo_1977_p6",
+      "status": "execution_error",
+      "error": "EXIT 1\nSTDERR: Traceback (most recent call last):\n  File \"/tmp/tmpafzru5xc.py\", line 115, in <module>\n    results = verify()\n              ^^^^^^^^\n  File \"/tmp/tmpafzru5xc.py\", line 106, in verify\n    c = _check_finite_prefix_identity(N)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/tmpafzru5xc.py\", line 38, in _check_finite_prefix_identity\n    s.add(Implies(And(f[n] >= 1, f[n] <= N + 1), f[n + 1] > f[f[n]]))\n                                                            ~^^^^^^\nKeyError: ",
+      "attempts": 1,
+      "time_s": 19.57151484489441
+    },
+    {
+      "id": "imo_1964_p2",
+      "status": "proved",
+      "output": "check1:\n  name: AM-GM core inequality after triangle-side substitution\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there are no nonnegative x, y, z with x^2y + x^2z + y^2x + y^2z + z^2x + z^2y < 6xyz; hence the transformed inequality holds for all x, y, z >= 0.\n  passed: True\ncheck2:\n  name: Algebraic equivalence of original inequality and transformed inequality\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the two polynomial expressions are identically equal under the substitution a=x+y, b=x+z, c=y+z, so proving the transformed inequality proves the original one.\n  passed: True\ncheck3:\n  name: No counterexample to the original inequality for triangle sides via substitution\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no nonnegative x, y, z produce triangle sides a=x+y, b=x+z, c=y+z violating the inequality, hence the stated inequality holds for all triangle sides.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 17.1929669380188
+    },
+    {
+      "id": "imo_1960_p2",
+      "status": "proved",
+      "output": "check1:\n  name: Candidate solution set is exactly x >= -1/2, x < 45/8, x != 0\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no valid x for which the proposed solution predicate differs from itself; this sanity check fixes the target set.\n  passed: True\ncheck2:\n  name: All x in the proposed set satisfy the transformed inequality (a+1)^2 < a^2+8\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no x in the proposed set can violate the equivalent inequality after substituting 2x+1 = a^2 with a >= 0.\n  passed: True\ncheck3:\n  name: No valid x with x >= 45/8 satisfies the inequality\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no valid counterexample at or above 45/8; hence x < 45/8 is necessary.\n  passed: True\ncheck4:\n  name: x = 0 is excluded because the denominator is zero\n  result: SAT\n  expected: SAT\n  explanation: SAT confirms that x = 0 indeed makes the denominator vanish, so the original expression is undefined there and mus",
+      "attempts": 1,
+      "time_s": 19.02515721321106
+    },
+    {
+      "id": "aime_1995_p7",
+      "status": "proved",
+      "output": "check1:\n  name: Given conditions force sin(t)+cos(t) to be the feasible root\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no s,c on the unit circle satisfying (1+s)(1+c)=5/4 can violate the characterization 2u^2+4u-3=0 with u=s+c>-1; hence sin(t)+cos(t)=sqrt(5/2)-1.\n  passed: True\ncheck2:\n  name: Target expression equals 13/4 - sqrt(10)\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means every valid s,c forces y=(1-s)(1-c) to satisfy (y-13/4)^2=10 with y<13/4, i.e. y=13/4-sqrt(10).\n  passed: True\ncheck3:\n  name: Final value k+m+n equals 27\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the extracted integers k=10, m=13, n=4 necessarily give k+m+n=27.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 18.62079620361328
+    },
+    {
+      "id": "imo_1984_p6",
+      "status": "proved",
+      "output": "check1:\n  name: No counterexample exists with a > 1\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the derived arithmetic constraints from the IMO proof cannot hold with a > 1; therefore a must equal 1.\n  passed: True\ncheck2:\n  name: Claimed solution family satisfies the original conditions\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no violation exists: the family (1,2^(m-1)-1,2^(m-1)+1,2^(2m-2)-1) indeed satisfies all required equations and inequalities on the encoded range.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 27.823230981826782
+    },
+    {
+      "id": "aime_1984_p1",
+      "status": "proved",
+      "output": "check1:\n  name: Given total sum implies first term is -46\n  result: UNSAT\n  expected: UNSAT\n  explanation: If assuming the 98-term sum is 137 leads to no model with a1 != -46, then a1 must equal -46.\n  passed: True\ncheck2:\n  name: Even-indexed sum is 93\n  result: UNSAT\n  expected: UNSAT\n  explanation: If there is no arithmetic progression with common difference 1 and 98-term sum 137 for which the even-indexed sum differs from 93, then the desired sum is proven to be 93.\n  passed: True\ncheck3:\n  name: Pairing identity yields 137 = 2*(even sum) - 49\n  result: UNSAT\n  expected: UNSAT\n  explanation: This encodes the hint's identity. UNSAT means the given total cannot fail to equal 2 times the even-term sum minus 49.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 11.808696031570435
+    },
+    {
+      "id": "imo_1969_p2",
+      "status": "failed_proof",
+      "output": "check1: {'name': 'Arithmetic form of the conclusion is logically consistent only as equality', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'Assuming x2 - x1 equals m*pi and simultaneously does not equal m*pi is impossible. This verifies the exact target form of the conclusion once the trigonometric part supplies existence of an integer m.', 'passed': True}\ncheck2: {'name': 'Integer-multiple-of-pi differences are symmetric', 'result': 'UNSAT', 'expected': 'UNSAT', 'explanation': 'If x2 - x1 is an integer multiple of pi, then x1 - x2 is also an integer multiple of pi (with the negated integer).', 'passed': True}\ncheck3: {'name': 'Any even multiple of pi is an integer multiple of pi', 'result': 'UNKNOWN', 'expected': 'UNSAT', 'explanation': 'This matches the proof hint: obtaining x2 - x1 = 2k*pi immediately implies x2 - x1 = m*pi by taking m = 2k.', 'passed': False}\n",
+      "attempts": 1,
+      "time_s": 18.29670524597168
+    },
+    {
+      "id": "aime_1997_p9",
+      "status": "proved",
+      "output": "check1:\n  name: Derive golden-ratio equation from fractional-part condition\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means the assumptions force a^2 - a - 1 = 0, so the positive solution is the golden ratio.\n  passed: True\ncheck2:\n  name: Prove a^12 - 144/a equals 233 for the positive root\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means no positive real root of a^2 - a - 1 = 0 makes the expression differ from 233, so the value is 233.\n  passed: True\ncheck3:\n  name: Direct proof from original conditions that the value is 233\n  result: UNSAT\n  expected: UNSAT\n  explanation: UNSAT means there is no positive real satisfying the given conditions for which a^12 - 144/a is not 233.\n  passed: True\n",
+      "attempts": 1,
+      "time_s": 13.75229525566101
+    }
+  ]
+}
