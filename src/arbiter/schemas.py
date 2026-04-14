@@ -341,6 +341,61 @@ class CalibrationCheckResult(BaseModel):
     reason: str
 
 
+# -- formal model extraction -----------------------------------------------
+
+
+class FormalAssumption(BaseModel):
+    """An assumption or premise the paper states or takes for granted."""
+
+    id: str                          # A1, A2, ...
+    text: str                        # Natural language statement
+    formal_expression: str = ""      # Math notation if present
+    claim_ids: list[str] = []        # Back-references to ExtractedClaim IDs
+    z3_hint: str = ""                # "Real inequality", "ForAll", "Bool", etc.
+
+
+class FormalProposition(BaseModel):
+    """A formal result the paper claims to prove."""
+
+    id: str                          # P1, P2, ...
+    text: str
+    formal_expression: str = ""
+    assumes: list[str] = []          # FormalAssumption IDs this depends on
+    claim_ids: list[str] = []
+    proof_sketch: str = ""           # How the paper argues for it
+
+
+class ModelEquation(BaseModel):
+    """A mathematical equation or function in the paper's model."""
+
+    id: str                          # EQ1, EQ2, ...
+    name: str                        # e.g. "demand function", "profit function"
+    expression: str                  # The equation in pseudo-math
+    variables: list[str] = []        # Variable names used
+    z3_type_hint: str = ""           # "Real", "Int", "Bool", etc.
+
+
+class PolicyClaim(BaseModel):
+    """A normative recommendation with a claimed effect."""
+
+    id: str                          # POL1, POL2, ...
+    policy: str                      # What is recommended
+    claimed_effect: str              # What the paper says it achieves
+    mechanism: str = ""              # How it enters the model
+    assumes: list[str] = []          # FormalAssumption IDs it depends on
+    claim_ids: list[str] = []
+
+
+class FormalModelResult(BaseModel):
+    """Complete formal structure extracted from a paper."""
+
+    assumptions: list[FormalAssumption]
+    propositions: list[FormalProposition]
+    equations: list[ModelEquation]
+    policies: list[PolicyClaim] = []
+    parameter_names: list[str] = []  # N, phi, eta, lambda, etc.
+
+
 # -- pipeline: topic -------------------------------------------------------
 
 class TopicResult(BaseModel):
