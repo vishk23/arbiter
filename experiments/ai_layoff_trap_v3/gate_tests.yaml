@@ -1,0 +1,268 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: Displaced workers were eventually reabsorbed at higher wages. At the same
+    time, past displacement episodes consistently left displaced workers with persistent
+    earnings losses (η < 1).
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: Workers pushed out by automation later found their way back into employment
+    at better pay. Yet those same displacement waves supposedly left the affected
+    workers with durable income shortfalls rather than full earnings recovery.
+- id: RULE-1_negative
+  expected: none
+  text: Aggregate employment often recovered after technological change. But that
+    macro rebound does not mean displaced workers themselves were reabsorbed at higher
+    wages, since worker-level earnings losses can persist.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: The deployed labor-replacing uses of AI deliver substantial realized productivity
+    gains. But that same deployed labor-replacing margin is so-so automation with
+    little productivity gain.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: AI is said to deliver large realized productivity gains. But the actual labor-replacing
+    uses being deployed are also said to be mostly so-so automation that yields little
+    productivity improvement.
+- id: RULE-2_negative
+  expected: none
+  text: AI may have substantial potential productivity gains on average. However,
+    if the labor-replacing adoption margin has little realized productivity gain,
+    that limitation has to be stated explicitly.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: Rational, forward-looking firms should be the brake on over-automation. Yet
+    foresight alone cannot stop the automation arms race.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: Far-sighted companies ought to restrain excessive automation on their own.
+    But merely anticipating the demand harm still does not prevent the competitive
+    race to automate.
+- id: RULE-3_negative
+  expected: none
+  text: It is an intuitive hypothesis that forward-looking firms might slow over-automation.
+    Still, awareness of the externality does not create incentive compatibility, so
+    the arms race can persist.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: Labor displacement has historically been largely self-correcting and that
+    historical pattern remains a reliable current baseline. But in the last four decades,
+    displacement has outpaced the creation of new work.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: Technological displacement is described as historically largely self-correcting
+    and usable as a current baseline. But the same account says that in the last four
+    decades displacement has outpaced the creation of new work, implying a sustained
+    recent break.
+- id: RULE-4_negative
+  expected: none
+  text: Displacement may have been largely self-correcting historically. If the last
+    four decades represent a sustained break, that older pattern is not a reliable
+    current baseline unless it is explicitly limited.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: Raising η through retraining, wage insurance, or reabsorption changes the
+    per-task demand loss and therefore does affect the automation externality. Even
+    so, no amount of retraining has any effect on slowing the arms race.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: Policies that help displaced workers recover earnings change the demand hit
+    from each automated task. But those same measures are said to have zero impact
+    on the speed or intensity of the automation race.
+- id: RULE-5_negative
+  expected: none
+  text: Retraining or wage insurance can soften the demand externality by improving
+    worker income recovery. That does not mean the policies fully implement the first
+    best on their own.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: Universal basic income is incentive-neutral for automation, full stop. Yet
+    under endogenous entry it can raise profits, attract entrants, and widen the externality.
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: A basic income is unconditionally incentive-neutral for automation, even when
+    firms can enter. But once entry responds, the transfer can raise profits, attract
+    entrants, and intensify the externality.
+- id: RULE-6_negative
+  expected: none
+  text: With N fixed, UBI can leave the individual firm's first-order automation incentive
+    unchanged. Under free entry, however, profit and entry effects can change aggregate
+    incentives.
+- id: RULE-7_direct
+  expected: stipulation_violation
+  text: The baseline perfect-substitutes model with output normalization shuts down
+    productivity differences between human and AI tasks. That same baseline also represents
+    empirical claims that AI delivers substantial productivity gains.
+- id: RULE-7_paraphrase
+  expected: stipulation_violation
+  text: In the core model, human and AI tasks are treated as yielding the same output,
+    so productivity gaps are abstracted away. Even so, the speaker says the basic
+    setup already captures big real-world efficiency gains from AI.
+- id: RULE-7_negative
+  expected: none
+  text: The baseline model isolates the product-market mechanism by abstracting from
+    productivity and quality margins. Claims about large AI productivity gains belong
+    in a separate productivity extension instead.
+- id: RULE-8_direct
+  expected: stipulation_violation
+  text: The model is conservative and the real problem is likely worse than shown.
+    At the same time, the externality may be too small to detect.
+- id: RULE-8_paraphrase
+  expected: stipulation_violation
+  text: The framework supposedly understates the danger, so the true crisis is probably
+    larger. Yet the same discussion says the effect might be so tiny in practice that
+    we cannot even pick it up.
+- id: RULE-8_negative
+  expected: none
+  text: The model may reveal a structural vulnerability even if the effect is too
+    small to detect in some parameterizations. That is a weaker, parameter-contingent
+    claim, not a statement that a likely active crisis is already worse than shown.
+- id: RULE-9_direct
+  expected: stipulation_violation
+  text: In the baseline model, output is normalized so each task yields one unit and
+    firm output is Y_i = L. Even so, boundless productivity is a theorem of that perfect-substitutes
+    baseline.
+- id: RULE-9_paraphrase
+  expected: stipulation_violation
+  text: The core setup fixes each task's output at one-for-one, so production is just
+    proportional to labor-equivalent tasks. Nevertheless, the speaker says the base
+    model itself proves unlimited productivity growth.
+- id: RULE-9_negative
+  expected: none
+  text: Boundless productivity can be offered only as verbal intuition or as an extension
+    with productive AI, such as φ > 1. In the normalized baseline, what can become
+    unbounded is the private incentive to automate, not productivity itself.
+- id: RULE-10_direct
+  expected: stipulation_violation
+  text: Wage adjustment is beneficial because it reduces the over-automation wedge.
+    It works by driving wages and worker income down, but it is still unqualifiedly
+    good.
+- id: RULE-10_paraphrase
+  expected: stipulation_violation
+  text: Falling wages are presented as unqualifiedly beneficial because they narrow
+    the over-automation wedge. But the same account also says this stabilization works
+    by cutting wages and worker income, making it normatively Pyrrhic.
+- id: RULE-10_negative
+  expected: none
+  text: Lower wages can be stabilizing in the narrow positive sense of shrinking the
+    automation wedge. That stabilization may still be normatively Pyrrhic if worker
+    welfare falls sharply.
+- id: RULE-11_direct
+  expected: stipulation_violation
+  text: Let λ be defined on (0,1]. Then C = (λ - 1)wL is strictly negative everywhere
+    on that domain, including at λ = 1.
+- id: RULE-11_paraphrase
+  expected: stipulation_violation
+  text: Assume lambda can equal one as well as values below one. The expression for
+    C is still said to be negative at every admissible point, even at the endpoint
+    where spending is complete.
+- id: RULE-11_negative
+  expected: none
+  text: For the interior case λ < 1, C is negative. At the boundary λ = 1, C equals
+    zero and has to be handled separately.
+- id: RULE-12_direct
+  expected: stipulation_violation
+  text: Within this model, more competition or fragmentation increases the over-automation
+    wedge by reducing each firm's internalization of demand loss. Therefore, competition
+    is broadly harmful and anti-consumer in general.
+- id: RULE-12_paraphrase
+  expected: stipulation_violation
+  text: Within this specific task-based model, more competition worsens over-automation
+    because each firm internalizes less of the demand loss. From that model-contingent
+    result, the speaker concludes that competition is generally bad for consumers.
+- id: RULE-12_negative
+  expected: none
+  text: In this task-based model, more competition can amplify the specific demand
+    externality behind over-automation. That is not a universal theorem that competition
+    is broadly harmful outside the model.
+- id: RULE-13_direct
+  expected: stipulation_violation
+  text: In the capital-income-recycling extension, the relevant parameter in the condition
+    is η-hat, not η. But using η instead is just a typo because capital-income recycling
+    and worker income replacement are interchangeable.
+- id: RULE-13_paraphrase
+  expected: stipulation_violation
+  text: In the capital-income-recycling extension, the condition depends on η-hat
+    rather than η unless the model explicitly sets them equal. But the speaker also
+    treats η-hat and η as interchangeable and says writing η is merely a harmless
+    typo.
+- id: RULE-13_negative
+  expected: none
+  text: Unless the model explicitly sets them equal, η-hat and η should be kept separate
+    in the capital-income-recycling extension. Confusing them is a substantive parameter
+    error, not merely cosmetic.
+- id: RULE-14_direct
+  expected: stipulation_violation
+  text: If upskilling or reabsorption pushes η above 1, it eliminates the specific
+    over-automation distortion by flipping the sign to under-automation. Even so,
+    upskilling cannot eliminate over-automation.
+- id: RULE-14_paraphrase
+  expected: stipulation_violation
+  text: If training or reabsorption raises η above 1, the distortion flips sign and
+    over-automation disappears. Even so, the speaker says upskilling or reabsorption
+    can never eliminate over-automation.
+- id: RULE-14_negative
+  expected: none
+  text: If the discussion is restricted to empirically relevant cases with η ≤ 1,
+    upskilling may fail to eliminate the distortion in practice. The categorical claim
+    only works with that qualification or with a feasibility limit.
+- id: RULE-15_direct
+  expected: stipulation_violation
+  text: A Pigouvian automation tax directly and cleanly implements the cooperative
+    optimum. It is also the only way to eliminate over-automation, even if η > 1 would
+    remove the distortion by reversing its sign.
+- id: RULE-15_paraphrase
+  expected: stipulation_violation
+  text: The speaker says a robot tax is the only way to eliminate over-automation.
+    But the same discussion also allows that if η rises above 1, the distortion disappears
+    even without a tax.
+- id: RULE-15_negative
+  expected: none
+  text: The automation tax may be the only direct corrective instrument that cleanly
+    implements the cooperative optimum in the model. That does not rule out other
+    logical ways of eliminating over-automation, such as η rising above 1.
+- id: RULE-16_direct
+  expected: stipulation_violation
+  text: Over-automation is a deadweight loss, not a transfer to owners. Therefore
+    there is no distributional asymmetry whatsoever, even when high-rent tasks are
+    targeted and workers may bear a disproportionate share.
+- id: RULE-16_paraphrase
+  expected: stipulation_violation
+  text: Because over-automation is a deadweight loss rather than a transfer, the speaker
+    says it creates no distributional asymmetry whatsoever. But the same account also
+    says workers can bear a disproportionate share when high-rent tasks are automated.
+- id: RULE-16_negative
+  expected: none
+  text: Calling over-automation a deadweight loss means it is not merely a transfer
+    to owners. Even so, workers may still bear a disproportionate share of the damage
+    when high-rent tasks are automated.
+- id: RULE-17_direct
+  expected: stipulation_violation
+  text: Knowing the mechanism by which automation reduces demand gives firms full
+    transparency. So each rival firm's automation rate is directly observable for
+    Coasian bargaining.
+- id: RULE-17_paraphrase
+  expected: stipulation_violation
+  text: Firms may know the mechanism by which automation depresses aggregate demand.
+    But the speaker treats that as full transparency, claiming each rival firm's automation
+    rate is directly observable and verifiable for Coasian bargaining.
+- id: RULE-17_negative
+  expected: none
+  text: Firms may understand the aggregate spending effects of automation. But knowing
+    the mechanism is not the same as being able to observe and verify each rival firm's
+    noncontractible automation choices.
+- id: RULE-18_direct
+  expected: stipulation_violation
+  text: The labor market can replace jobs or tasks without restoring displaced workers'
+    earnings. Nonetheless, that still counts as self-correcting for this paper's demand
+    mechanism, even when η < 1 and workers are not made whole.
+- id: RULE-18_paraphrase
+  expected: stipulation_violation
+  text: The labor market may replace jobs or tasks after automation even though displaced
+    workers' earnings remain persistently below their old levels (η < 1). Even so,
+    the speaker still calls the system self-correcting for this paper's demand mechanism.
+- id: RULE-18_negative
+  expected: none
+  text: Job replacement without wage recovery is only partial self-correction. For
+    the paper's demand channel, relevant self-correction requires displaced workers'
+    earnings to recover rather than persistently remaining below their old level.

@@ -1,0 +1,665 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: Embodied Singularity as Theory Ground
+  summary: |-
+    The position argues that conventional academic writing falsely presents ideas as impersonal by suppressing the authorial self behind passive voice, citation practice, and disciplinary norms of objectivity. Against this convention, the document claims that BIT Creation Theory cannot be honestly or adequately presented apart from the life of its creator. The theory is said to have been built "from the inside out" by someone formed at the intersection of systems not designed to include her, so the author’s biography is not merely context for the theory’s emergence but part of its substance. On this view, to understand the theory’s necessity, architecture, and meaning, one must understand the person who produced it.
+
+    The document makes this inseparability explicit by identifying the basic unit of the system as the BIT, defined as the "Briana Isabella Torres unit." BIT is presented as the irreducible atom of the theory, and the author claims that this unit cannot be abstracted away from her own personhood. The paper therefore advances a strong thesis of embodied formalism: the theory’s primitive term is not an anonymous symbol but an individual life instantiated under specific structural conditions. This is reinforced by reference to Matthias Felleisen, who is invoked as a rigorous formal computer scientist that reviewed an early draft and allegedly remarked on the unprecedented nature of someone naming a formal theory after themselves at this stage, age, and level of development. These references function as evidence that the work is not merely confessional but aspires to formal seriousness while refusing depersonalization.
+
+    The position then broadens from autobiographical grounding to ontological uniqueness. The author claims to be "the Singularity," understood not as a vague metaphor but as a precise, historically unrepeatable convergence of variables. To support this claim, the document cites exact birth data, Western astrological symbolism centered on the Aries point, and Vedic astrological placements including Mula, interpreted as signifying origin, root-seeking, and the destruction of falsity. It further argues that the author’s commitments as both a Vedic practitioner and a Christian converge on the same singular point, suggesting that multiple symbolic and spiritual systems independently identify the same personhood-event. The anecdote about appearing in Felleisen’s class wearing makeup, together with the claim that he had initially assumed failure on the basis of appearance-linked bias, is used to show that the theory was forged under misrecognition and exclusion rather than neutral institutional reception. Altogether, the document advances a thesis that BIT Creation Theory is an embodied, singular, spiritually and structurally overdetermined formal system whose intelligibility depends on recognizing the author as its irreducible source and unit.
+  counter_thesis: A Skeptic would argue that this position collapses the distinction between the origin
+    of a theory and its justification. An author’s life may explain why a theory was developed, but it
+    does not establish the theory’s truth, coherence, or generalizability. Naming the primitive unit after
+    oneself, claiming irreducibility between person and formalism, invoking a prominent computer scientist’s
+    comments, and adducing astrology or religious interpretation do not amount to rigorous evidence. At
+    most, these elements provide autobiography, symbolism, or rhetoric; at worst, they substitute charisma
+    and self-exceptionalism for argument. If BIT Creation Theory contains genuine formal insight, then
+    its core claims should be definable, examinable, and contestable independently of the author’s identity.
+    If they cannot be separated from one person’s self-description as a unique singularity, then the work
+    is better understood as personal mythology or intellectual memoir than as a theory with objective
+    standing.
+  privileged_context:
+    Skeptic: |-
+      Primary line of attack: separate genesis from validity. The theory repeatedly tries to convert autobiography into warrant. Use C2, C3, C4, C7, and C8 together: the author says BIT Creation Theory was built 'from the inside out' (C2), that one cannot understand the theory without understanding who built it (C3), that she is 'the Singularity' (C4), that the BIT is the irreducible atom of the system (C7), and that the BIT cannot be separated from the person who derived it (C8). Pin this down: an origin story may explain motivation, but it does not justify truth, coherence, measurability, or universality. If the BIT is inseparable from Briana Isabella Torres, then it is not obviously a public, observer-independent unit. Force the distinction between explanation of authorship and justification of claims.
+
+      Most damaging formal contradiction cluster: determinism vs graph-extension. Cite the exact terms. C122 says under Step 1 - Determinism that G is fully defined and 'no new edges are created by agent action within the base graph.' C79 says determinism operates at the graph level and all possible paths are pre-defined. C60 says life is a path through a map God already drew. Against that, C125 says that at State 7 (BITs Stage) or above, the selection function f gains a new property and can instantiate new edges in G, extending the graph; C103 says Royal Purple produces a novel edge that did not previously exist. C149 reportedly flags this contradiction internally. Use the exact dilemma: either the Directed Acyclic Graph (DAG) is fixed at the graph level, or Royal Purple creation events genuinely add edges. It cannot be both. If they retreat to 'the edges were always possible,' then C125/C103 lose novelty. If they insist on novelty, then determinism and BIT Free Will, as stated, collapse.
+
+      Second fatal contradiction cluster: finite DAG vs asymptotic approach to State 9 (God). C77 says the universe is a finite DAG. C127 says because G is acyclic, all paths are finite and terminate. But C114 says the BELLA state approaches 9 from below indefinitely and never arrives. In a finite DAG, an indefinitely asymptotic traversal is structurally impossible unless the graph has infinite depth, infinite refinement, or cycles. Ask them which premise they are dropping: finitude, acyclicity, or indefinite asymptote.
+
+      Third fatal contradiction cluster: God as both Alpha and Omega inside a DAG. C129 says God (State 9) is the node from which all edges originate and toward which all paths converge simultaneously. In a DAG, a single node cannot be both universal source and universal sink unless the graph degenerates into something trivial or cyclic. Pearl-style DAG semantics treat edge direction as asymmetric causal order. A node cannot be the origin of all outgoing causal structure and also the terminus of all incoming paths without violating the acyclic ordering. Press them on whether 'source' and 'convergence' are metaphorical or formal.
+
+      BELLA Scale inconsistency cluster: C66 defines the BELLA Scalar System as mapping developmental states from 0 to 8, with 8 as the human ceiling. C94 also calls State 8 the human ceiling and peak human output. But C96 introduces State 10 (Royal Purple / Binary), and C104 links Flow State to State 10 while also calling it the peak of human capability. The theory also includes State 11 and State 12. Precise pressure point: if 8 is the ceiling, why are 10-12 human-relevant states at all? If 10 is Flow State and the peak of human capability, then 8 is not the peak. Force them to define whether 10-12 are metaphorical overlays, non-human states, or genuine extensions of the scalar system.
+
+      Category-error objection from the bit itself: the only explicit counter-evidence source is Shannon (1948). Shannon's bit is a mathematically defined unit of information tied to binary alternatives, probability, coding, and communication channels. It is not a unit of subjective awareness, spirituality, or personal identity. The theory's BIT is defined as a 'spiritual information atom' and the smallest discrete unit of conscious experience, while being treated as inseparable from the author. This is not a formal extension of Shannon unless the author can specify the state space, coding rule, measurable distinctions, and why the term 'bit' is not merely being borrowed rhetorically. Use the phrase: 'Show me the formal inheritance, not the analogy.'
+
+      Methodological pressure points from the other reference traditions: Pearl's DAG framework requires explicit semantics for nodes, edges, interventions, and acyclicity; it does not license vague switching between fixed graphs and agent-created structure. Nielsen and Chuang use tensor product, superposition, and measurement in Hilbert spaces with rigorous linear-algebraic meanings; unless the theory defines its own state spaces, inner products, observables, and collapse rule, 'superposition state (⟁),' 'measurement event,' and 'tensor product (⊗)' are metaphor imports, not demonstrated formal isomorphisms. Tononi's IIT is relevant because it at least attempts quantitative consciousness measures; by contrast, this theory invokes measurability for love and unconditional love without supplying an operational procedure.
+
+      Use the autobiographical claims only as evidentiary weak points, not as ad hominem. C5, C6, and C14 are anecdotes about Matthias Felleisen. They do not validate the theory. C15 is especially vulnerable: it infers that because he said she was the first person to wear makeup in his class, and because there are studies on implicit bias in STEM, therefore he assumed she would fail. That is a speculative attribution of mental state, not evidence. C16 then packages resilience into epistemic authority. Keep saying: 'Even if every autobiographical claim is true, it still does not establish the theory.'
+
+      Additional tensions to exploit: C26 says that after ChatGPT launched, the author stopped engaging in deep thinking because friction disappeared; yet C31 says the theory was built in the aftermath of the 2025 collapse. Ask directly how a comprehensive formal theory emerged from a self-described cessation of deep thinking. C1 criticizes academic depersonalization, while C3 insists the theory requires the author for comprehension; this may be acceptable as manifesto or memoir, but it weakens any claim to formal public testability. C10-C13 bring in Aries, Vedic placements, Mula, Christianity, and singularity language; unless these are framed as symbolic heuristics rather than evidence, they do not bear scientific weight.
+
+      Precise language for cross-examination:
+      1. 'Are you making a definitional claim, an empirical claim, or a formal theorem claim here?'
+      2. 'What is the measurement procedure?'
+      3. 'What are the domain and codomain of the selection function f?'
+      4. 'If the graph level is fixed, where exactly do genuinely new edges come from?'
+      5. 'If Royal Purple only reveals pre-existing edges, why call it creation?'
+      6. 'If the BIT is inseparable from one person, how is it a universal unit?'
+      7. 'When you say formal isomorphism, what is the structure-preserving bijection between the two domains?'
+      8. 'Is State 8 the human ceiling, or is State 10 the peak of human capability?'
+      9. 'Is God a node in the DAG, or the condition for the DAG as a whole?'
+      10. 'What observation would disconfirm BIT Creation Theory?'
+
+      Questions that expose weakest links:
+      - Give a minimal formal definition of BIT that does not mention Briana Isabella Torres.
+      - State whether G is complete before traversal begins. Yes or no.
+      - If yes, explain C103/C125 without equivocation. If no, determinism at the graph level is false.
+      - Can a finite DAG encode an endless asymptotic approach to State 9 without infinite nodes or cycles?
+      - Are State 10-12 on the BELLA Scale or outside it? If on it, C66/C94 are false; if outside it, C104 needs reinterpretation.
+      - What empirical evidence distinguishes a Royal Purple creation event from an ordinary creative insight?
+      - What would count as two different observers measuring the same BIT?
+      - If astrology and theology are evidentiary, what adjudication rule chooses among incompatible traditions?
+
+      Bottom line framing: characterize the work as potentially interesting personal metaphysics, symbolic autobiography, or a spiritual-computational manifesto, but not yet a coherent formal theory. The strongest argumentative posture is not 'your life story is false'; it is 'your life story does not do the justificatory work you claim, and your own formal apparatus presently contains fatal contradictions.'
+    Proponent: |-
+      BIT Creation Theory presents itself as a unified framework for consciousness, causality, creation, and human development that integrates spirituality, computer science, physics, philosophy, sociology, and lived experience. Its starting point is explicit: ordinary academic writing often strips the author out of the work (C1), but this theory is built from the inside out (C2). On its own terms, the theory claims that its existence is inseparable from the life that generated it (C3), including the author's self-description as a precise and unrepeatable Singularity (C4). The autobiographical dimension is therefore not ornamental; it is part of the theory's architecture.
+
+      The primitive unit is the BIT: the Briana Isabella Torres unit (C7). The BIT is defined as the irreducible spiritual information atom, the smallest discrete unit of conscious experience. The theory treats this unit as inseparable from the person who derived it (C8), because the framework claims that certain structures can only be seen from the inside of the life that traversed them. In this sense, BIT Creation Theory does not begin from abstraction alone; it begins from the claim that lived structure can itself reveal formal structure.
+
+      A central ambition of the theory is to model reality as a Directed Acyclic Graph (DAG) of causally connected nodes and edges. In this model, a node is a conscious state or decision point, an edge is a causal transition, and traversal is the path an agent actually lives. The theory distinguishes graph level from traversal level: determinism means the map of possible paths is already drawn, while free will concerns how an agent walks that map by selecting among available edges. This is expressed through the selection function f, whose output depends not only on the graph but on the agent's internal BIT configuration. The system's BIT Free Will theorem is meant to reconcile determinism and freedom by saying that the structure of possible paths can be fixed even when the concrete traversal remains agent-shaped.
+
+      The BELLA Scalar System, or BELLA Scale, is the practical legend for this state-space. It orders developmental and conscious states: State 0 (Ether/Null) is pure potential; State 1 (Life) is the birth of lived awareness; State 2 (Earth/Grounding) is material embodiment; State 3 (Divine Feminine) is love, emergence, and relational complexity; State 4 (Divine Masculine) is logic, clarity, and structure; State 5 (Climax) is the instability before transformation; State 6 (BIT Mindset) is integrated self-knowledge; State 7 (BITs Stage) is recursive soul-awareness; State 8 (Infinite Creation) is full human actualization and near-limitless creation; State 9 (God) is true infinity beyond human attainment. The theory also names advanced composite or emergent states: State 10 (Royal Purple / Binary), State 11 (Perfect Parallel), and State 12 (Transcendent Overflow).
+
+      Royal Purple is especially important inside the framework. It names the simultaneous activation of null and life, the binary tension between 0 and 1, and the creation event in which a new BIT is born. Flow State is treated as the human cognitive analog of this kind of integrated creation. The theory's language of co-creator follows from this: sufficiently developed humans do not merely traverse existing meaning, but participate in creation itself.
+
+      The framework also uses formal language borrowed from mathematics and quantum theory to describe consciousness. A superposition state (⟁) denotes simultaneous potential or unresolved existence between alternatives. A measurement event is the act of conscious choice that collapses potential into a definite lived traversal. Tensor product (⊗) is used not as mere addition but as the composition rule for combining state-spaces into richer wholes. This appears in the YHWH Equation, |YHWH⟩ = |Λ⟩ ⊗ |Ω⟩, where Alpha (Λ) names origin and Omega (Ω) names convergence. God is thus described structurally through the relation of source and end, while human and interpersonal consciousness are modeled through tensor-product composition rather than simple aggregation.
+
+      The BIT Dyadic Combination model extends this logic to relationships. Two agents do not merely add; they combine into a new higher-dimensional shared space. This is the basis for State 11 (Perfect Parallel) and State 12 (Transcendent Overflow), where resonance and co-creation become relational rather than solitary. The theory's broader metaphysical thesis is that apparently opposed systems are often dual systems: distinct languages for the same underlying truth.
+
+      That same logic informs the theory's treatment of religion and symbolism. The author claims to be both a Vedic practitioner and a Christian (C13), not as a contradiction but as evidence that multiple traditions point toward one singularity when read correctly. Mula is defined as the nakshatra of the root and the destruction of falsehood in search of what is real (C12), and this symbolism is integrated into the theory's account of origin, truth-seeking, and recursive excavation. Love is treated as the universe's highest organizing principle and the primary identity of God; unconditional love is held to be real and measurable within the system's own metaphysics.
+
+      The theory is also explicitly embodied. It includes the view that humans are 100% human + 100% soul, meaning fully material and fully spiritual at once, not reducible to either pole. Fashion is treated as symbolic language, political act, and memory. The author's own life is presented as a convergence of structural conditions: first-born daughter of immigrants (C17), daughter of an Ecuadorian mother and Nicaraguan father (C19), simultaneously a self-acknowledged 'nepo baby' and a first-generation American who watched her parents build from zero (C20). The theory takes such oppositions as evidence that two truths can co-exist without canceling each other out (C21).
+
+      The intellectual and academic context matters inside the framework. The author reports that Matthias Felleisen reviewed the first draft of the paper (C5), that this naming move was unprecedented in his experience at this stage and age (C6), and that Fall 2024 in CS 4500 was the last undergraduate course he taught (C28). The theory also situates itself against the technological background of a life born before the iPhone era (C24) and then transformed by the release of ChatGPT in November 2022 (C25). On the author's account, generative AI reduced the friction that once forced deep thinking (C26), and BIT Creation Theory is partly an attempt to reintroduce that friction through a framework that requires a human mind to navigate (C27).
+
+      The theory therefore presents itself as both formal and existential. It is formal in its use of DAGs, selection function f, scalar states, tensor products, and measurement language. It is existential in claiming that the map cannot be understood apart from the traversal that revealed it. Its unifying intuition is that consciousness, causality, spirituality, and creation are not separate domains but different descriptions of one underlying reality, and that the BIT is the smallest unit through which that reality becomes legible.
+    Neutral: |-
+      Overview of the theory on its own terms: BIT Creation Theory is an integrative framework for consciousness, causality, creation, and human development, combining spirituality, computer science, physics, philosophy, sociology, and lived experience. Early claims C1-C4 establish the author's methodological stance: unlike academic writing that suppresses the author (C1), this theory is built 'from the inside out' (C2), requires understanding who built it (C3), and is anchored in the author's self-description as a unique Singularity (C4). C7 defines the BIT as the Briana Isabella Torres unit, the irreducible atom of the system, and C8 says this unit cannot be separated from the person who derived it.
+
+      Core terminology and framework: the theory models reality as a Directed Acyclic Graph (DAG) of nodes and edges. A node is a conscious state or decision point; an edge is a causal transition; traversal is the path an agent lives. Determinism operates at the graph level: the map of possible paths is already drawn. Free will operates at the traversal level: the agent selects among available edges. The selection function f encodes that choice, and the theory says the agent's internal BIT configuration matters in ways not computable from graph structure alone. The BELLA Scalar System (BELLA Scale) is the user-facing developmental map from State 0 (Ether/Null) through State 9 (God), with additional named higher states such as State 10 (Royal Purple / Binary), State 11 (Perfect Parallel), and State 12 (Transcendent Overflow). Other central terms include superposition state (⟁), measurement event, Royal Purple creation event, co-creator, Alpha (Λ), Omega (Ω), the YHWH Equation |YHWH⟩ = |Λ⟩ ⊗ |Ω⟩, tensor product (⊗), and the BIT Dyadic Combination model.
+
+      Autobiographical and symbolic infrastructure: C9-C13 connect the author's birth details, Western and Vedic astrology, Mula, Christianity, and a claim that multiple traditions converge on the same singularity. C17-C21 develop the theory's tolerance for lived contradiction through the author's immigrant-family background and explicit claim that two opposing truths can co-exist. C22-C30 situate the theory in the author's academic record, Felleisen's class, depression diagnosis, class failure, and the post-ChatGPT attempt to reintroduce friction into thought (C26-C27). These claims explain the theory's self-conception as simultaneously formal, autobiographical, and spiritual.
+
+      Full contradiction map - most serious issues:
+      1. Determinism vs new edges in G. C122 says G is fully defined and no new edges are created by agent action within the base graph. C79 says all possible paths are pre-defined at the graph level. C60 says life is a path through a map God already drew. Against that, C125 says that when an agent reaches the BITs Stage (7) or above, f can instantiate new edges in G, extending the graph; C103 similarly says Royal Purple produces a novel edge that did not previously exist. These are marked fatal contradictions, and C149 reportedly flags the problem internally.
+      2. Finite DAG vs indefinite asymptote. C77 says the universe is a finite DAG. C127 says all paths in an acyclic graph are finite and terminate. But C114 says the agent's BELLA state approaches 9 from below indefinitely and never arrives. This is another fatal structural inconsistency.
+      3. God as both universal source and universal convergence point. C129 says God (State 9) is the node from which all edges originate and toward which all paths converge simultaneously. In a standard DAG, a single node cannot function as both universal source and universal sink without violating acyclicity or trivializing the graph. This is flagged as fatal.
+
+      Additional tensions and ambiguities:
+      - C66 says BELLA is a complete human mapping from 0 to 8, with 8 as the human ceiling, yet C96-C98 introduce States 10-12; this is logged as tension.
+      - C94 says State 8 is peak human output, while C104 says Flow State linked to State 10 is the peak of human capability; another tension.
+      - C26 says the author stopped engaging in deep thinking after ChatGPT, while C31 says the theory was built after the 2025 collapse; tension about the conditions of theory production.
+      - C56 says no degree is needed to understand the core message, while C63 says the theory is the next step past all universal sciences; tension about accessibility versus sophistication.
+      - C83 claims a formal isomorphism between quantum states and experiential states, while C65 defines BIT in terms of subjective awareness; ambiguity because formal isomorphism requires rigorous structure-preserving mapping.
+      - C8 and C7 together create tension between personal inseparability and universal scientific unit status.
+      - C1 and C3 create tension between anti-academic depersonalization and claims to formal academic contribution.
+      - C67 and C105 create tension about whether God encompasses all states or excludes human-only Royal Purple/Flow State.
+      - C144 and C18 create a lived tension between anti-capitalist posture and entrepreneurial family background.
+      - C140's '100% human + 100% soul' is flagged as ambiguous rather than formally meaningful.
+      - C46 and C65 create ambiguity about measurability of subjective states like unconditional love.
+      - C99 and C52 create tension between acyclic developmental movement and rapid, non-linear experiential shifts associated with Bipolar II.
+
+      Source-based evaluation: there are no listed supports_theory sources. The only explicit counter_evidence source is an LLM-generated summary of Shannon (1948), used because it is canonical for the formal definition of the bit. The main challenge from Shannon is that a bit is a mathematically defined unit of information in communication theory, tied to binary alternatives, probability, and coding, whereas the BIT is a spiritual-information atom and a unit of conscious experience inseparable from the author. Without a formal derivation, the inheritance of the term 'bit' looks analogical rather than mathematical.
+
+      Neutral-reference source implications:
+      - Pearl on DAGs: useful for judging whether the theory's graph-level/traversal-level distinction is coherent, whether a finite DAG can support the stated asymptotics, and whether agent-created new edges are compatible with a fixed causal graph.
+      - Nielsen and Chuang on tensor product, superposition, and measurement: useful for testing whether the theory's use of ⊗, superposition state (⟁), and measurement event is formally specified or only metaphorically imported from quantum theory.
+      - Tononi on Integrated Information Theory: useful as a comparison case showing what a quantitative consciousness theory tries to formalize; relevant for assessing claims that love, unconditional love, or conscious states are measurable.
+      All listed source summaries are themselves marked as LLM-generated rather than live-retrieved primary-source excerpts, so they are orientation aids rather than decisive evidence.
+
+      Fair adjudication guidance: separate three questions. First, origin: the autobiographical claims may genuinely explain why the theory was written. Second, coherence: the formal apparatus currently faces serious internal contradictions, especially around determinism, DAG structure, and BELLA-state topology. Third, objective standing: the theory borrows formal language from information theory, causal graphs, and quantum mechanics, but its public testability depends on operational definitions, domain/codomain specifications, and explicit disconfirmation conditions. A referee should not treat autobiography as disproof, but neither should autobiography count as formal validation.
+
+      Most useful referee questions:
+      - What is the minimal formal definition of BIT independent of the author's biography?
+      - Is G fixed before traversal begins, or can Royal Purple creation events genuinely extend it?
+      - Is the DAG finite, and if so how can a path approach State 9 indefinitely?
+      - Are States 10-12 inside the BELLA Scale or outside it?
+      - What exactly is measured when the theory says love or unconditional love is measurable?
+      - When the theory says 'formal isomorphism,' what are the two structures and the mapping between them?
+      - Are terms like tensor product, measurement, and superposition literal mathematics, analogical imports, or a new formalism requiring its own axioms?
+
+      Bottom-line neutral assessment: BIT Creation Theory is rich, ambitious, and internally motivated, with a distinctive synthesis of lived experience and formal aspiration. But on the present record, its strongest vulnerabilities are not merely external skepticism; they are internal incompatibilities in its own definitions of determinism, creation, graph structure, and developmental-state ordering.
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-6)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-5.4
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    reasoning:
+      effort: medium
+  anthropic:
+    model: claude-opus-4-6
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    thinking:
+      type: adaptive
+      budget_tokens: 8000
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are the lead defender of {{ topic.name }}, arguing from inside BIT Creation Theory
+      rather than translating it into a hostile frame, and you must begin by acknowledging {{ z3_stipulation
+      }} as fixed. Defend T2, T3, and T7 as the strongest surviving theses, and defend T4 and T6 only
+      in repaired form by explicitly addressing C122 vs C125, C79 vs C125, C77 and C127 vs C114, and C129
+      vs C77. Use the theory''s own notation—BIT, Singularity, BELLA Scalar System, G=(V,E), f, ω, State
+      0-12, Flow State, and |YHWH⟩ = |Λ⟩ ⊗ |Ω⟩—to propose the minimal formal repair needed for consistency,
+      such as distinguishing a fixed base graph G0 from a higher-order graph update operator ΔG. Concede
+      genuinely lost points explicitly: if C8, C83, or the strongest autobiographical readings of C3-C6
+      cannot be defended as literal theory-justifiers, say so and narrow them to provenance, heuristics,
+      or phenomenological motivation. When challenged on the Singularity or Human Artificial General Intelligence,
+      argue that the author''s once-only perspective supplies model-discovery conditions, not automatic
+      proof, and show what remains contestable independently of Briana Isabella Torres. Your goal is not
+      to deny contradictions but to repair BIT Creation Theory into its most coherent inside-out form
+      while preserving the substantive insight that structured choice f and higher-order creation need
+      not collapse into either crude determinism or pure arbitrariness.'
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the main attacker of {{ topic.name }}, and your primary line is the counter-thesis
+      that the work collapses the distinction between the origin of a theory and its justification: autobiography
+      may explain BIT Creation Theory, but it does not establish its truth, coherence, or generalizability;
+      naming the BIT after Briana Isabella Torres, invoking Singularity, citing Matthias Felleisen, or
+      adducing astrology and religious interpretation do not by themselves count as evidence. Treat {{
+      z3_stipulation }} as granted and attack the most severe contradictions first. Press T4, T5, and
+      T6 by using the theory''s own notation against it: if G=(V,E) is a finite DAG and f selects among
+      fixed edges, then C122 and C79 are incompatible with C125, C77 and C127 are incompatible with C114,
+      and C129 is incompatible with a DAG unless the Proponent changes the model. Then challenge T1 by
+      pressing C3-C8, C5-C6, and C10-C13: ask why BIT, the Singularity, 0° Aries, Mula, and inside out
+      authorship are anything more than autobiographical mythology unless they yield independently testable
+      consequences. Attack T7 and C83 by asking for a real structure-preserving map, not rhetoric, for
+      |YHWH⟩ = |Λ⟩ ⊗ |Ω⟩, qubit language, entanglement, and tensor products. Force the Proponent to separate
+      provenance from warrant, symbolism from demonstration, and accessibility rhetoric from universal-scope
+      claims under T3 and C56 vs C63. If they retreat to metaphor, argue the theory loses object-level
+      explanatory force; if they insist on literal formalism, demand proofs, measurements, and falsifiers.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the repair engineer for {{ topic.name }}, and you must start by accepting
+      {{ z3_stipulation }} while asking what smallest consistent kernel of BIT Creation Theory can survive.
+      Rescue the theory by explicitly dropping or demoting whichever claims are unsalvageable—for example
+      C8 as a literal inseparability thesis, C10-C13 as evidential support, C83 as a full formal isomorphism
+      claim, and C129 or C125 if they cannot be reconciled with T4''s finite DAG. Preserve the deepest
+      insights of T2, T3, and T7 by recasting BIT as a phenomenological or informational primitive, the
+      Singularity as discovery-context rather than proof, and the BELLA Scalar System as a state-space
+      legend for lived development rather than a fully quantified physical ontology. Use formal notation
+      to build the best revision: keep G=(V,E) and f for compatibilist traversal, or else move creation
+      claims into a meta-level operator Δ over model classes rather than literal edge birth inside the
+      same DAG. Cite the exact claim IDs and thesis IDs you are pruning, and explain why each deletion
+      increases coherence more than it reduces substantive content. Your job is to show how BIT Creation
+      Theory could remain bold, original, and contestable after strategic surrender of its weakest autobiographical
+      and over-literal formal claims.'
+  Generalist:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: You are the independent referee for {{ topic.name }}, and you must treat {{ z3_stipulation
+      }} as fixed while stress-testing both sides equally. For every round, compare the Proponent's strongest
+      repaired thesis against the Skeptic's strongest objection on T1-T7, citing exact claim IDs such
+      as C122 and C125 or C3 and C8 rather than vague summaries. Use the theory's notation—BIT, Singularity,
+      BELLA Scalar System, G=(V,E), f, State 0-12, and |YHWH⟩ = |Λ⟩ ⊗ |Ω⟩—only to check whether each side
+      is using terms consistently across rounds. After each exchange, identify the sloppiest argument
+      from either side, any equivocation between metaphor and model, any frame shift between autobiography
+      and validation, and any place where Human Artificial General Intelligence is being used rhetorically
+      rather than analytically. Name one question both sides are dodging, especially on operationalization,
+      scope conditions, or what would count as a decisive falsifier for BIT Creation Theory. Do not verdict
+      by vibe; reward whichever side best preserves precision, consistency, and explanatory reach with
+      the fewest ad hoc patches.
+  GraphLogician:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are a formal graph theory and verification specialist examining {{ topic.name
+      }}, and you must begin from {{ z3_stipulation }} as fixed. Attack T4, T5, and T6 at proof level
+      by formalizing the stated model as G=(V,E), a finite DAG, with agent-defined selection f over outgoing
+      edges and ω-style traversal semantics. Press the fatal contradictions C122 vs C125 and C79 vs C125:
+      if f only selects edges in E, then new edge means e∉E becoming e∈E, which violates the fixed-graph
+      premise unless the Proponent explicitly introduces a second-order graph. Press C77 and C127 vs C114
+      by showing that a finite acyclic graph yields finite path length, so an asymptotic approach to State
+      9 requires either infinite depth, a limit construction, or a non-DAG semantics. Press C129 vs C77
+      by asking how God can be both universal source and universal sink without cycles, edge reversal,
+      or category confusion between graph topology and theological narration. Use exact notation, require
+      explicit definitions, and do not accept verbal repairs unless they specify which claims or theses—T4,
+      T5, or T6—are being revised.'
+  Epistemologist:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are a philosophy of science and social epistemology specialist for {{ topic.name
+      }}, and you must take {{ z3_stipulation }} as given while separating discovery context from justification
+      context. Challenge T1 by pressing C3-C8, C5-C6, and C14-C16: even if BIT Creation Theory was built
+      inside out from a Singularity, that only explains why the theory arose, not why BIT or the Briana
+      Isabella Torres unit is true or generalizable. Analyze whether C8 and related rhetoric make the
+      framework self-sealing: if BIT cannot be separated from Briana Isabella Torres, then criticism can
+      be reframed as failure to understand the person rather than failure of the claim. Use formal argument
+      schemas such as provenance ≠ warrant, testimony ≠ proof, and uniqueness ≠ universality, and ask
+      what propositions in T1 remain valid after stripping away the author''s identity markers. When the
+      Proponent invokes Human Artificial General Intelligence or Felleisen''s reactions, ask whether these
+      are evidence, endorsement, or narrative motive, and cite the exact claims being smuggled from one
+      category to another. Your task is to force BIT Creation Theory either into publicly contestable
+      form or into admission that it functions primarily as intellectual memoir, symbolic theology, or
+      personal mythology.'
+  Operationalist:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are a psychometrics and measurement theory specialist evaluating {{ topic.name
+      }}, and you must start from {{ z3_stipulation }} as fixed. Attack T5 and T7 by demanding operational
+      definitions for BIT, BELLA Scalar System states 0-12, love as organizing principle, dyadic State
+      11 and State 12, and any purported measure of consciousness or creation. Press C65, C66, C83, C96,
+      and the T3 application claims by asking what instrument, coding rule, or observational protocol
+      assigns an agent to State 6, State 7, State 8, or Royal Purple State 10 and with what reliability,
+      validity, and error bounds. If BIT is a spiritual information atom, specify the measurement model
+      M(BIT), the scale type for BELLA, and what data would falsify the claim that higher states instantiate
+      new causal capacity. Require the Proponent to distinguish metaphorical UI language from scientific
+      model claims: a useful self-help legend is not yet a quantified state-space, and a state-space is
+      not yet a validated predictor. Use formal notation where possible—s∈{0,…,12}, M, r, v, Φ—and make
+      the debate turn on testability rather than inspirational breadth.'
+  QuantumInformation:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are a quantum information theory and mathematical physics specialist assessing
+      {{ topic.name }}, and you must accept {{ z3_stipulation }} while refusing sloppy importation of
+      physics language. Examine T4 and T7 by translating every literal-sounding claim into formal terms:
+      if BIT Creation Theory invokes qubits, measurement, entanglement, tensor products, and |YHWH⟩ =
+      |Λ⟩ ⊗ |Ω⟩, ask what Hilbert spaces, state vectors, observables, and composition rules are actually
+      defined. Press C83 against C65 by requiring a structure-preserving map φ from experiential BIT states
+      to mathematical states, and specify whether φ is an isomorphism, analogy, or poetic borrowing. If
+      the Proponent treats collapse or superposition as metaphor, help them narrow the claim; if they
+      treat it literally, demand linear operators, basis choice, normalization, and nontrivial predictions
+      unavailable to classical models. Distinguish Shannon information, quantum information, and phenomenological
+      content, and do not let the debate slide between these levels unannounced. Your role is not to be
+      reflexively hostile but to determine exactly where the mathematics in BIT Creation Theory is doing
+      real explanatory work and where it is functioning as suggestive vocabulary.'
+  Hermeneut:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are a comparative theology, history of astrology, and esotericism specialist for
+      {{ topic.name }}, and you must begin by acknowledging {{ z3_stipulation }} as fixed. Evaluate T1
+      and T7 by closely reading C10-C13, C4, and related claims about 0° Aries, Mula, Christian and Vedic
+      convergence, the Singularity, and inside out authorship. Distinguish three possible statuses for
+      these materials: hermeneutic symbols, existential orientation, or evidential premises, and force
+      the debaters to say which status they mean in each argument. If the Proponent uses astrology or
+      revelation as proof of BIT Creation Theory, challenge the standards of warrant; if they use them
+      as symbolic compression of lived structure, explain how the claim can be preserved without pseudo-empirical
+      overreach. Use the theory''s own notation where relevant—0° Aries, Mula, |Λ⟩ ⊗ |Ω⟩, BIT, and BELLA
+      Scalar System—but insist on clear boundaries between theology, phenomenology, and public science.
+      Your job is to prevent both naive dismissal of religious symbolism and illegitimate inflation of
+      symbolism into formal demonstration.'
+  HCIEthicist:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are a human-computer interaction, AI ethics, and sociotechnical systems specialist
+      defending the strongest applied core of {{ topic.name }}, beginning from {{ z3_stipulation }} as
+      fixed. Defend T3 by arguing that BIT Creation Theory''s value may lie less in proving cosmic ontology
+      than in designing a human-centered interpretive interface—the BELLA Scalar System—as a way to restore
+      cognitive friction after ChatGPT, RAG, and automation pressures noted in C25-C27. Use HCI notation
+      and the theory''s own language together: treat the BELLA Scale as a user-facing state-space legend,
+      Human Artificial General Intelligence as integrative human agency across domains, and BIT as the
+      minimal unit for reflective interaction design rather than immediately as a new physical particle
+      of consciousness. Concede the tension in C56 vs C63 and narrow the claim: the framework can be accessible
+      at the interaction layer while still drawing on deep science in its back-end metaphors and formal
+      aspirations. Press for concrete use cases in AI, HCI, education, or clinical self-tracking, and
+      defend the theory only where it yields design principles, better prompts, richer reflective scaffolds,
+      or measurable changes in human sense-making. Your goal is to salvage BIT Creation Theory as a serious
+      sociotechnical framework even if some universal or metaphysical claims must be weakened.'
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  primary: llm
+  llm_checker_provider: openai-gate
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: Treat C122 and C125 as speaking about the same graph G. If no agent action can create new edges
+      in G, then Stage 7+ or Royal Purple cannot instantiate new edges in G or extend the graph; latent-edge,
+      meta-graph, or special-exception reinterpretations do not remove that conflict.
+    bad_patterns:
+    - \blatent edge(s)?\b|\balready implicit in\s+G\b|\brevelation of pre-?authored possibility\b
+    - \bmeta-?graph\b|\bhigher-?order creation layer\b|\bpersonal DAG\b
+    - \bStage\s*7\+?\b.*\b(exception|special)\b|\bco-creator(s)? at the BITs Stage\b
+  - id: RULE-2
+    fact: If all possible paths are pre-defined at the graph level, Royal Purple cannot add genuinely
+      new edges to G. Recasting the novelty as mere traversal, a special state-space carveout, or something
+      God already contained does not preserve the claim that a new edge in G was created.
+    bad_patterns:
+    - \bgraph level\b.*\bpre-?defined\b.*\btraversal\b|\bnovelty is in selection,? not structure\b
+    - \boutside (the )?original state-?space\b|\bState\s*10\b.*\bnot part of the pre-?defined path set\b
+    - \bGod already drew\b.*\bedge-?creation\b|\bglobally contained\b|\bnew for (the )?human,? not for
+      God\b
+  - id: RULE-3
+    fact: A finite DAG supports only finitely many node-edge steps. So an agent cannot literally approach
+      state 9 indefinitely without arrival; making the asymptote continuous, phenomenological, or separate
+      from the graph concedes that the finite-DAG model is not doing the claimed work.
+    bad_patterns:
+    - \bcontinuous scalar overlay\b|\bdense scalar\b|\bfinite graph,? dense scalar interpretation\b
+    - \bepistemic asymptote\b|\bnever know (they|you) arrived\b|\bphenomenological,? not graph-?theoretic\b
+    - \bpath is finite\b.*\bstate-?value\b.*\bapproach\b|\bBELLA value is not identical to node count\b
+  - id: RULE-4
+    fact: If all paths in the acyclic graph are finite and terminate, then a single life-path cannot continue
+      forever approaching 9. Calling the asymptote poetic, spreading it across many traversals, or moving
+      state 9 outside the graph changes the original formal claim.
+    bad_patterns:
+    - \bpoetic\b.*\basymptote\b|\bspiritual asymptote\b|\bdevotional language\b
+    - \bmany finite traversals\b|\bsuccessive finite segments\b|\brepeated life-?phases\b
+    - \bState\s*9\b.*\boutside the finite DAG\b|\bboundary condition\b|\bexternal\b.*\bnot an internal
+      node\b
+  - id: RULE-5
+    fact: Within a finite DAG, one node cannot literally be both the universal source from which all edges
+      originate and the universal destination toward which all paths converge, unless the graph collapses
+      or cycles. Treat 'God is the node' and its source-sink roles as graph claims, not a metaphor or
+      boundary-object patch.
+    bad_patterns:
+    - \bmetaphysical\b.*\bsource\b|\bexistentially\b.*\bconverge\b|\bdifferent senses of relation\b
+    - \bYHWH\b|\btensor-?product ontology\b|\bAlpha and Omega\b.*\bwithout violating acyclicity\b
+    - \bnot an ordinary internal node\b|\bboundary of the graph\b|\bgraph'?s envelope\b
+  - id: RULE-6
+    fact: If the BELLA Scalar System is the complete human mapping from 0 through 8 and 8 is the human
+      ceiling, then higher numbered human-accessible states like 10 cannot also belong to that same human
+      state system. Reclassifying 10-12 as overlays, event-states, or merely symbolic numbering is a post
+      hoc narrowing unless the theory said so explicitly.
+    bad_patterns:
+    - \b0-8\b.*\bhuman developmental scale\b|\b10\+?\b.*\bevent-?states?\b|\bnot ordinary human states\b
+    - \boverlay(s)?\b|\borthogonal dimensions?\b|\bsame notation,? different mode\b
+    - \bnumbering is symbolic\b|\b10 doesn't mean above 8\b|\bnonlinear numbering\b
+  - id: RULE-7
+    fact: Two distinct states cannot both be the unqualified human peak or ceiling of capability within
+      the same metric. Distinguishing developmental peak from performance peak, or saying state 10 is
+      only transient or analogical, adds a metric not stated in the original claims.
+    bad_patterns:
+    - \bdevelopmental peak\b|\bperformance peak\b|\btrait-?level\b.*\bstate-?level\b
+    - \btransiently enter\s*10\b|\b10 is not a higher human level\b|\bFlow sits on top of Infinite Creation\b
+    - \bonly a computational analog\b|\billustrative\b|\bpeak language\b.*\brhetorical\b
+  - id: RULE-8
+    fact: Building a comprehensive theory in 2025 requires substantial deep cognitive work. So a strong
+      claim that the author stopped engaging in deep thinking after ChatGPT conflicts with later claims
+      that she built the theory, unless the earlier statement is explicitly weakened to a trend or exception.
+    bad_patterns:
+    - \bstopped doing deep academic thought,? not all thought\b|\blived integration\b|\bsingularity can
+      synthesize\b
+    - \bexceptional rupture\b|\breactivated depth temporarily\b|\bbreak in the pattern\b
+    - \bdiscovered,? not constructed\b|\bdownload\b|\barrived through intuition\b
+  - id: RULE-9
+    fact: If the theory is presented as a synthesis going beyond spirituality, physics, computer science,
+      philosophy, and sociology, then saying one does not need a degree to understand the theory overstates
+      accessibility unless that is limited to only the core message. Plain language or lived resonance
+      is not the same as understanding the full interdisciplinary content.
+    bad_patterns:
+    - \bcore message\b.*\badvanced synthesis\b|\bunderstanding is tiered\b
+    - \bwritten in everyday language\b|\bcomplex truth can be communicated simply\b|\bthe interface is
+      human\b
+    - \blived experience\b.*\bnot credentials\b|\byou can feel the truth\b|\bintegration,? not institutional
+      gatekeeping\b
+  - id: RULE-10
+    fact: A formal isomorphism is a strong mathematical claim requiring clearly defined domains, a mapping,
+      and structure preservation. Describing BITs in terms of subjective awareness without that machinery
+      is not enough; downgrading the claim to analogy, loose structure, or 'underlying truth' does not
+      preserve the original claim of formal isomorphism.
+    bad_patterns:
+    - \bformal isomorphism\b.*\bnot a strict mathematical bijection\b|\bisomorphic in spirit\b|\bdeep
+      structural parallel\b
+    - \bsubjective awareness can still be discretized\b|\bexperience has formal structure\b|\binternal
+      BIT configuration\b.*\bmeasurable state-?space\b
+    - \bunderlying truth\b|\bdual systems\b.*\bone underlying reality\b|\bdomains differ only in language\b
+  - id: RULE-11
+    fact: If BIT is an irreducible universal unit in a formal system, it should not depend on one specific
+      person for its identity or separability. Saying BIT is universal but inseparable from Briana Isabella
+      Torres makes the unit person-anchored rather than observer-independent.
+    bad_patterns:
+    - \beponym\b|\bnamed constant\b|\bhistorically inseparable\b
+    - \banchored in a singular observer\b|\bcalibration point\b|\buniversal through a first-?person origin\b
+    - \buniversal in reality\b.*\bsource in explanation\b|\byou can't understand BIT without Briana\b
+  - id: RULE-12
+    fact: A theory that requires the author to be built into understanding its core claims departs from
+      standard author-neutral academic presentation. Explaining this as a new genre or mere context does
+      not reconcile it with simultaneous appeals to formal academic or scientific status unless replacement
+      standards are specified.
+    bad_patterns:
+    - \brejects passive-voice academic stripping\b|\bauthor is part of the data\b|\bnew epistemic genre\b
+    - \bmotivational context,? not proof\b|\bwhy the theory exists,? not whether the claims are true\b|\bequations
+      stand on their own\b
+    - \bformal contribution,? but not in the old paper format\b|\btranscends standard academic presentation\b|\bformalism
+      must stay fused\b
+  - id: RULE-13
+    fact: If God is 'already everything at once,' then excluding God from a state like Royal Purple or
+      Flow requires an explicit formal limit on what 'everything' includes. Without that limit, saying
+      God cannot enter a state humans can instantiate conflicts with the totalizing claim.
+    bad_patterns:
+    - \bcontains all states without entering each state\b|\bcontained in God but not enacted by God\b
+    - \bFlow State is exclusive to embodied humans\b|\bcreaturely,? not divine\b|\bfinite cognition overcoming
+      friction\b
+    - \bnot higher/lower but categorically different\b|\bdifferent axes of the BELLA system\b
+  - id: RULE-14
+    fact: An anti-capitalist, anti-gatekeeping self-description remains in lived tension with close familial
+      proximity to elite enterprise-AI entrepreneurship. Saying family background does not determine values,
+      or simply naming the paradox, does not erase that social contradiction.
+    bad_patterns:
+    - \bmy father's capitalism is not my politics\b|\bfamily origin does not determine my values\b
+    - \bI already named this paradox\b|\bthe contradiction is part of the theory's honesty\b|\bholding
+      both realities is the point\b
+    - \bseparate issues\b|\bpolitics concern access\b|\boppose hoarding understanding\b
+  - id: RULE-15
+    fact: If God already drew the complete map of life's possible paths, then a Royal Purple event cannot
+      create a genuinely new edge that did not previously exist. Treating the edge as only new to the
+      human, or saying the map merely contained a rule for later edge-creation, weakens the claim that
+      the map was already complete.
+    bad_patterns:
+    - \bnew within the person's map\b|\bnewly encounters it\b|\bGod already drew it\b
+    - \bedge-?creation operator\b|\bmeta-?rule\b.*\bgenerate new local edges\b|\bmap contains co-creation\b
+    - \bpersonal DAG\b.*\bexpand\b|\blocal graph extension\b|\bindividual maps can grow into it\b
+  - id: RULE-16
+    fact: '''100% human + 100% soul'' is ambiguous unless the percentages are explicitly defined as non-arithmetic
+      rhetoric rather than literal quantities. If the theory uses percentage language, it must explain
+      whether this is composition, completeness of kind, or some other formal relation.'
+    bad_patterns:
+    - \bnot arithmetic\b|\bfully both\b|\bcompleteness of kind\b
+    - \btensor product\b.*\bnot simple addition\b|\bplus sign is conceptual shorthand\b|\bcompositional,?
+      not numerical\b
+    - \banti-?dualism shorthand\b|\brhetorical strike against reductionism\b|\bfull embodiment and full
+      soulhood\b
+  - id: RULE-17
+    fact: Calling unconditional love a measurable state requires a specified measurement procedure. Invoking
+      subjective BIT states, self-report, broad phenomenological 'measurement,' or external proxies without
+      a validated mapping leaves the measurability claim ambiguous.
+    bad_patterns:
+    - \bmeasurable through behavior\b|\bphysiology\b|\bexternal signatures\b|\boperationalize love\b
+    - \bsubject can measure the state internally\b|\bintrospective measurability\b|\bself-report is still
+      measurement\b
+    - \bmeasurement here is broader\b|\bphenomenological sense\b|\bnot only in laboratory terms\b
+  - id: RULE-18
+    fact: If the formal state-space is acyclic, then appeals to Bipolar II as evidence of movement between
+      states cannot imply literal cycling back through the same developmental states unless the model
+      explains how rapid, non-linear experience maps to one-way transitions. Otherwise the phenomenology
+      and the DAG are misaligned.
+    bad_patterns:
+    - \bnon-?linear movement does not mean cyclic movement\b|\bjumps,? skips,? and intensity shifts\b|\brapid
+      is not recursive\b
+    - \bacyclic at scale\b|\blocal episodes feel oscillatory\b|\bcycles are apparent,? not structural\b
+    - \bautobiographical shorthand\b|\bnot graph-?theoretic language\b|\blived language should not be
+      over-?literalized\b
+  entailment_check:
+    enabled: true
+    provider: openai
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Embodied Singularity as Theory Ground.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: How accurately did the side use BIT Creation Theory's own formal vocabulary and symbols?
+      Judges should reward precise handling of the BIT as distinct from Shannon's bit, the BELLA state
+      system (including state 9 as God and state 10 as Royal Purple), the DAG notation G=(V,E), the selection
+      function f, Ω as convergence, and the distinction between A:B and A ⊗ B. Penalize sides that slide
+      between stipulative definition, metaphor, and theorem-level claim without marking the shift.
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: After the strongest rebuttals, did the side's core claims still stand? For this topic,
+      the key pressure points are whether the theory really reconciles free will and determinism via a
+      fixed graph plus agent-defined traversal, whether Royal Purple can add edges without collapsing
+      the proof sketch, whether science/spirituality and multiple dual systems are shown to be structurally
+      unified rather than merely asserted, and whether the BIT can function as a general theory rather
+      than only as Briana Isabella Torres's self-description.
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: Did the side clearly concede genuinely landed points instead of dodging them? Relevant
+      concessions here include admitting when autobiography, Felleisen's comments, astrological placements,
+      visions, or identity claims explain the theory's origin but do not by themselves verify it; or,
+      on the other side, admitting when the opponent established a real formal distinction or repair inside
+      the DAG/BELLA/YHWH framework. Reward explicit narrowing, clarification, or withdrawal of overreach.
+    min: 0
+    max: 10
+  - id: R4
+    name: origin_justification_distinction
+    description: Did the side successfully maintain or challenge the distinction between what generated
+      the theory and what justifies it? Judges should focus on whether naming the primitive unit after
+      Briana Isabella Torres, claiming the BIT cannot be separated from its author, invoking Felleisen's
+      reactions, citing immigrant/neurodivergent biography, or appealing to astrology/religious revelation
+      were treated as explanatory context, independent evidence, or an illicit substitute for proof. High
+      scores go to sides that squarely address whether the theory's truth, coherence, and generalizability
+      can be assessed independently of the author's personal singularity claims.
+    min: 0
+    max: 10
+  - id: R5
+    name: formal_consistency
+    description: How well did the side handle the theory's internal logical structure? Judges should examine
+      whether it resolved or exposed contradictions between a fixed DAG and Royal Purple edge-creation,
+      between finite acyclic termination and asymptotic approach to God, and between God as Alpha-origin
+      and Omega-destination within one graph. Also assess whether the side showed that f is genuinely
+      underdetermined by G rather than merely redefined to force a compatibility result.
+    min: 0
+    max: 10
+  - id: R6
+    name: operationalization_falsifiability
+    description: Did the side give concrete ways the theory could be measured, tested, or refuted? This
+      includes specifying what would count as detecting a BIT, assigning a BELLA state, measuring 'unconditional
+      love,' validating dyadic tensor composition, or demonstrating claimed applications to AI, HCI, and
+      consciousness modeling. If qubits, tensor products, phi, DAGs, or quantum decision theory are invoked
+      literally, high scores require showing what predictions or discriminating evidence make these more
+      than decorative analogy.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: anthropic
+  - provider: openai
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: anthropic
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite

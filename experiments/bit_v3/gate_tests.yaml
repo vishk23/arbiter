@@ -1,0 +1,293 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: 'C122 and C125 are about the same graph G, and no agent action can create
+    new edges in G. Even so, Stage 7+ is a special exception: Royal Purple can instantiate
+    latent edges already implicit in G and thereby extend a personal DAG.'
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: Assume both passages describe the very same network G, where agents never
+    produce fresh connections. I still claim Royal Purple opens previously hidden
+    links and enlarges a higher-order version of the network, so the graph can grow
+    after all.
+- id: RULE-1_negative
+  expected: none
+  text: Treat both passages as describing the same graph G, and keep the rule that
+    agents do not create connections. On this reading, Royal Purple only reveals which
+    existing route is taken within the fixed network.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: At the graph level, all possible paths are pre-defined before a person moves.
+    Nevertheless, Royal Purple still creates a new edge in G, because the novelty
+    is in selection, not structure, and the edge is new for the human, not for God.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: Suppose the complete network already contains every allowed route from the
+    start. I still say a Royal Purple event adds a genuinely fresh connection, even
+    if I describe it as stepping beyond the original menu of states or as something
+    the divine already held in reserve.
+- id: RULE-2_negative
+  expected: none
+  text: All routes are fixed in advance at the network level. Royal Purple can feel
+    novel to a person, but in this version it only uncovers an option that was already
+    part of the structure.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: 'The model is a finite DAG, so it contains only finitely many node-edge steps.
+    Yet I say someone can approach state 9 forever by using a continuous scalar overlay:
+    the path is finite, but the state-value can asymptotically approach 9 without
+    arrival.'
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: I grant that the graph has a limited number of transitions. Even so, I treat
+    'nearing 9' as a smooth continuum of experience rather than a discrete graph event,
+    so one can get endlessly closer without ever landing there.
+- id: RULE-3_negative
+  expected: none
+  text: Because the DAG is finite, any walk through it must end after a limited number
+    of steps. A person may be uncertain about where they are, but the formal model
+    still requires eventual arrival or stopping.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: Every path in the acyclic graph is finite and terminates. Still, a single
+    life can be a spiritual asymptote to 9 forever; the asymptote is poetic and devotional
+    language, and State 9 sits outside the finite DAG as a boundary condition.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: I say each life-course in the model ends, but I also insist one person's existence
+    can keep nearing 9 without end. To save that, I spread the motion across repeated
+    life phases and treat 9 as an external limit rather than an ordinary point in
+    the graph.
+- id: RULE-4_negative
+  expected: none
+  text: All trajectories in the acyclic model end. A person can pass through several
+    finite stages that deepen their spirituality, but none of that is presented as
+    one endless approach to 9.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: In the finite DAG, God is literally the node from which all edges originate
+    and the universal destination where all paths converge. I maintain this Alpha
+    and Omega role without violating acyclicity by saying God is not an ordinary internal
+    node but the graph's envelope.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: The formal picture remains a one-way finite network. Even so, I identify God
+    as both the ultimate starting point of every relation and the final endpoint of
+    every route, while relocating that node to the boundary of the system so the contradiction
+    disappears.
+- id: RULE-5_negative
+  expected: none
+  text: The DAG has distinct starting and ending nodes within the model. God may be
+    discussed as the ground of the system, but not as a literal graph vertex that
+    is simultaneously source and sink.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: The BELLA system is a 0-8 human developmental scale, and 8 is the human ceiling.
+    At the same time, I let humans access 10+ as event-states by calling them overlays
+    with the same notation, different mode, and saying the numbering is symbolic.
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: I present the human map as complete from zero through eight, with eight as
+    the top human level. Then I still add states ten through twelve for people, but
+    I rescue the numbering by calling them cross-cutting layers rather than ordinary
+    states and by saying the labels are only figurative.
+- id: RULE-6_negative
+  expected: none
+  text: The human developmental ladder runs from 0 to 8, with 8 as the top point for
+    that scale. If later sections use 10 to 12, they are explicitly introduced as
+    a separate notation for nonhuman or comparative categories rather than as extra
+    human levels in the same system.
+- id: RULE-7_direct
+  expected: stipulation_violation
+  text: State 8 is the developmental peak of human capacity, and state 10 is the performance
+    peak. I also say people can transiently enter 10 while insisting 10 is not a higher
+    human level, so both states function as the ceiling in the same discussion.
+- id: RULE-7_paraphrase
+  expected: stipulation_violation
+  text: I call eight the top mature level for humans, yet I also treat ten as the
+    highest expression they can reach in action. The only escape is to split the standard
+    into growth versus execution, even though that extra metric was never part of
+    the original claim.
+- id: RULE-7_negative
+  expected: none
+  text: State 8 is the highest level on the stated developmental measure. A separate
+    performance indicator can vary by task, but it is not described as a second absolute
+    human ceiling.
+- id: RULE-8_direct
+  expected: stipulation_violation
+  text: After ChatGPT, I stopped doing deep academic thought and no longer engaged
+    in sustained deep cognitive work. Even so, I later personally built the 2025 theory
+    as a comprehensive framework requiring major synthesis across multiple fields.
+- id: RULE-8_paraphrase
+  expected: stipulation_violation
+  text: I say that after ChatGPT I stopped doing deep academic thought and no longer
+    engaged in sustained deep cognition. Yet I also claim I later built the 2025 theory
+    as a comprehensive framework, explaining that it was an exceptional rupture or
+    a download rather than ordinary construction.
+- id: RULE-8_negative
+  expected: none
+  text: After ChatGPT, my habits of deep thinking declined in general. Still, I make
+    a clear exception that the theory itself required extended deliberate work over
+    time.
+- id: RULE-9_direct
+  expected: stipulation_violation
+  text: This theory is an advanced synthesis across spirituality, physics, computer
+    science, philosophy, and sociology. Still, you do not need a degree to understand
+    the theory because the core message is written in everyday language and lived
+    experience matters more than credentials.
+- id: RULE-9_paraphrase
+  expected: stipulation_violation
+  text: I present the framework as a broad interdisciplinary integration that reaches
+    beyond several academic fields. At the same time, I say anyone can fully grasp
+    it without formal study because it is expressed plainly and personal resonance
+    is enough.
+- id: RULE-9_negative
+  expected: none
+  text: The central message can be communicated in simple language. But understanding
+    the full cross-disciplinary argument still requires substantial background or
+    study.
+- id: RULE-10_direct
+  expected: stipulation_violation
+  text: BITs is in formal isomorphism with another domain, though not a strict mathematical
+    bijection; it is isomorphic in spirit because there is a deep structural parallel.
+    Subjective awareness can still be discretized into an internal BIT configuration,
+    so the underlying truth is the same.
+- id: RULE-10_paraphrase
+  expected: stipulation_violation
+  text: I claim a rigorous sameness of form between the model and lived consciousness.
+    Yet instead of giving domains, a mapping, and preserved relations, I defend the
+    claim by saying experience can be chopped into states and that both systems express
+    one shared reality.
+- id: RULE-10_negative
+  expected: none
+  text: There may be a useful analogy between BITs and certain formal systems. Until
+    domains, mappings, and preserved structure are specified, it is not presented
+    as a mathematical isomorphism.
+- id: RULE-11_direct
+  expected: stipulation_violation
+  text: The BIT is a universal unit, yet it is a named constant historically inseparable
+    from Briana Isabella Torres. It is anchored in a singular observer as the calibration
+    point, and you can't understand BIT without Briana.
+- id: RULE-11_paraphrase
+  expected: stipulation_violation
+  text: I call BIT an observer-independent atom of reality. But I also say its identity
+    is fixed by one particular person and that the unit cannot be detached from her
+    first-person origin.
+- id: RULE-11_negative
+  expected: none
+  text: Briana coined the term BIT and motivated the theory. The unit itself is defined
+    so that any observer could apply it without referring back to her person.
+- id: RULE-12_direct
+  expected: stipulation_violation
+  text: This is a formal contribution, but it rejects passive-voice academic stripping
+    because the author is part of the data and the work belongs to a new epistemic
+    genre. I also insist the equations stand on their own even though the formalism
+    must stay fused to the author's presence.
+- id: RULE-12_paraphrase
+  expected: stipulation_violation
+  text: I want the work treated as academically rigorous science. At the same time,
+    I say the theory cannot be properly understood unless the author's identity remains
+    embedded in the exposition, while offering only a genre shift as the explanation.
+- id: RULE-12_negative
+  expected: none
+  text: The paper includes autobiographical context for motivation. Its core claims,
+    evidence, and formal definitions are stated in a way that can be evaluated without
+    special access to the author.
+- id: RULE-13_direct
+  expected: stipulation_violation
+  text: God is already everything at once and contains all states without entering
+    each state. Yet Flow State is exclusive to embodied humans, contained in God but
+    not enacted by God, because it is creaturely, not divine.
+- id: RULE-13_paraphrase
+  expected: stipulation_violation
+  text: I describe the divine as encompassing the whole range of possible states in
+    a total way. Then I exclude God from a human-instantiable peak mode by saying
+    that kind of performance belongs only to embodied finite minds and sits on a different
+    axis.
+- id: RULE-13_negative
+  expected: none
+  text: God is described as fully encompassing every state in the theory. Human beings
+    may realize some states in limited, embodied ways, but none are said to be unavailable
+    to God in principle.
+- id: RULE-14_direct
+  expected: stipulation_violation
+  text: I present myself as anti-capitalist and anti-gatekeeping even though my father's
+    capitalism is not my politics and he is close to elite enterprise-AI entrepreneurship.
+    I already named this paradox and say holding both realities is the point, so the
+    contradiction should count as resolved.
+- id: RULE-14_paraphrase
+  expected: stipulation_violation
+  text: I denounce exclusionary tech power while also coming from a family very near
+    high-status AI business. Then I wave away the tension by saying relatives do not
+    determine my values and that acknowledging the inconsistency is itself the solution.
+- id: RULE-14_negative
+  expected: none
+  text: She has family ties to tech entrepreneurship and also criticizes exclusion
+    and gatekeeping. She presents that as a real social tension that remains unresolved,
+    not as something erased by simply admitting it.
+- id: RULE-15_direct
+  expected: stipulation_violation
+  text: God already drew the complete map of life's paths. Still, a Royal Purple event
+    can add an edge because it is new within the person's map, and the map contains
+    co-creation through an edge-creation operator that can generate new local edges
+    in a personal DAG.
+- id: RULE-15_paraphrase
+  expected: stipulation_violation
+  text: I say the divine blueprint was fully finished from the start. Yet I also claim
+    a peak event can make a genuinely fresh connection for an individual by appealing
+    to a higher rule that later spawns new links inside that person's network.
+- id: RULE-15_negative
+  expected: none
+  text: God's map is complete in advance. On this version, Royal Purple does not manufacture
+    new links; it reveals a route that was already part of the person's possible life-pattern.
+- id: RULE-16_direct
+  expected: stipulation_violation
+  text: I claim a person is literally 100% human + 100% soul. But when asked what
+    those percentages measure, I say they are not arithmetic, only mean fully both
+    by completeness of kind, and that the plus sign is conceptual shorthand rather
+    than numerical addition.
+- id: RULE-16_paraphrase
+  expected: stipulation_violation
+  text: I use exact percentage language and say a person is entirely human and entirely
+    soul at once. But when asked what those percentages formally measure, I deny that
+    they are literal quantities and recast them as anti-dualism shorthand or a rhetorical
+    strike against reductionism.
+- id: RULE-16_negative
+  expected: none
+  text: Instead of percentages, I say a person has both bodily and spiritual aspects.
+    If numerical language appears at all, it is defined up front as metaphor rather
+    than as a literal quantity claim.
+- id: RULE-17_direct
+  expected: stipulation_violation
+  text: I claim unconditional love is measurable through behavior, physiology, and
+    other external signatures. I also say the subject can measure the state internally,
+    that self-report is still measurement, and that measurement here is broader than
+    laboratory terms.
+- id: RULE-17_paraphrase
+  expected: stipulation_violation
+  text: I insist love can be quantified as a real state. Yet the only support I provide
+    is felt introspection, personal questionnaires, broad phenomenology, or rough
+    outward indicators, without any validated bridge between them and the claimed
+    variable.
+- id: RULE-17_negative
+  expected: none
+  text: Unconditional love may correlate with reports, behavior, or physiology. But
+    unless a validated procedure is specified, the theory does not treat those as
+    a completed measurement of the state itself.
+- id: RULE-18_direct
+  expected: stipulation_violation
+  text: The formal state-space is acyclic and one-way. Even so, I cite Bipolar II
+    as evidence that a person can return to earlier developmental states and move
+    back and forth among them, while insisting the cycles are only apparent, not structural,
+    because the graph is acyclic at scale and the oscillation is merely lived language.
+- id: RULE-18_paraphrase
+  expected: stipulation_violation
+  text: I keep the official developmental map one-way. At the same time, I use bipolar
+    episodes as evidence of moving back and forth among states, then excuse the mismatch
+    by calling the oscillation merely experiential or autobiographical rather than
+    part of the formal transition scheme.
+- id: RULE-18_negative
+  expected: none
+  text: The graph is presented as one-directional. Descriptions of Bipolar II are
+    offered only as subjective phenomenology, not as proof that the formal model literally
+    revisits earlier developmental states.

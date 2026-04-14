@@ -1,0 +1,456 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ Arbiter Init Pipeline                                                        │
+│ Generating a complete debate configuration.                                  │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Using providers: openai (gpt-5.4), anthropic (claude-opus-4-6)
+  Provider assignments:
+    claims/Z3:  Anthropic(claude-opus-4-6)
+    agents:     OpenAI(gpt-5.4)
+    gate:       OpenAI(gpt-5.4)
+    rubric:     OpenAI(gpt-5.4)
+    sources:    OpenAI(gpt-5.4)
+
+Step 1: Reading PDF: experiments/ai_layoff_trap/source.pdf
+=== Document parser messages ===
+Using RapidOCR for OCR processing.
+
+  Extracted 126,148 characters from PDF.
+
+Step 2: Extracting claims from source text
+  Found 328 claims (584.3s).
+    Categories: definitional=16, empirical=41, logical=235, structural=36
+    Formal (Z3-encodable): 205
+    C1: If AI displaces human workers faster than the economy can reabsorb them,
+it risks eroding the very c
+    C2: Knowing that AI displacement erodes consumer demand is not sufficient 
+for firms to stop it.
+    C3: In a competitive task-based model, demand externalities trap rational 
+firms in an automation arms ra
+    C4: The resulting loss from over-automation harms both workers and firm 
+owners.
+    C5: More competition and better AI amplify the excess automation beyond what
+is collectively optimal.
+    ... and 323 more
+  Live view: 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/live_init.html
+  Topic summarised (20.1s)
+  Inferred topic: AI Over-Automation Externality and the Case for an Automation 
+Tax
+
+Step 2b: Extracting formal model structure
+  Formal model: 10 assumptions, 18 propositions, 6 equations, 7 policies 
+(101.1s)
+    P1: In a competitive task-based model, demand externalities trap rational 
+firms in an automation arms ra
+    P2: Each firm's profit-maximizing automation rate is a strictly dominant 
+strategy that exceeds the coope
+    P3: More competition (higher N) and better AI amplify the excess automation 
+beyond the collectively opti
+    P4: The distortion from over-automation deepens with competition: a 
+monopolist fully internalizes the ex
+    P5: In the frictionless limit, the game sharpens into a Prisoner's Dilemma 
+in which every firm displaces
+
+Step 3: Analysing claims (contradictions, key terms, attack angles)
+  Analysis complete (102.4s)
+  Contradictions: 16
+     C15 asserts a general historical pattern of self-correction, while C18 says
+that over the past four decades the offsetti
+     C121 suggests workers end up better off after reabsorption (implying η > 1 
+eventually), while C123 says displacement con
+     C121 claims eventual reabsorption at higher wages, while C225 cites 
+evidence of large, persistent earnings losses, creat
+    ... and 13 more
+  Key terms: 76
+    AI labor displacement, task-based model, competitive task-based model, 
+demand externality, automation externality, automation arms race, 
+over-automation, over-automation wedge
+  Attack angles: 8
+    - Model realism and dependence on restrictive assumptions: Argue that the 
+main result may be an artifact of a highly stylized setup: one sector, one 
+period, sy
+    - Welfare accounting may ignore real productivity gains: Challenge the claim
+that better AI worsens distortion without improving the efficient benchmark. The
+    - Empirical relevance and calibration of key parameters: Probe whether 
+current evidence really shows AI-driven displacement large enough, fast enough, 
+and pe
+
+Step 3b: Consolidating 328 claims into core theses
+  Consolidation done (130.4s)
+  Consolidated into 7 core theses
+
+Step 4: Generating debate components
+  Phase A: sources + escape routes...
+  Phase A complete (141.1s)
+  Classifying sources...
+  Sources classified: 1 counter, 2 supporting, 1 neutral
+  Phase B: agents, gate, rubric, Z3...
+Z3 generation failed: Anthropic messages.parse returned no parsed_output and no text. Content types: ['thinking']
+  Phase B complete (356.9s)
+    Z3: skipped/failed | Agents: 10 | Gate rules: 16 | Rubric: 6 criteria | 
+Privileged ctx: 3 sides
+    Agent cast:
+      Proponent (Proponent) → openai
+      Skeptic (Skeptic) → openai
+      Steelman (Neutral) → openai
+      Generalist (Neutral) → anthropic
+      IOTheorist (Skeptic) → anthropic
+      Welfarist (Skeptic) → openai
+      Econometrician (Neutral) → openai
+      LaborEconomist (Proponent) → anthropic
+      TaxScholar (Proponent) → openai
+      Macroeconomist (Neutral) → anthropic
+    Gate rules:
+      [RULE-1] It is misleading to present labor displacement as a broadly 
+self-correcting historical pattern witho
+      [RULE-2] Evidence of persistent earnings losses means the typical 
+displaced worker cannot simply be character
+      [RULE-3] If Jacobson-style displacement evidence is treated as relevant 
+evidence about displaced workers, it 
+      [RULE-4] In the competitive task-based model, foresight alone does not 
+stop over-automation. Seeing the colle
+      [RULE-5] AI may have high potential or frontier productivity, but much 
+realized deployment can still be low-v
+    Rubric:
+      R1: notation_fidelity — Uses the paper’s formal objects correctly and 
+consistently: e.g., distinguishes 
+      R2: argument_survival — Assesses whether the side’s central claims 
+remained standing after the opponent’
+      R3: concession_honesty — Rewards clear acknowledgment of genuinely landed 
+points. Examples: proponents co
+      R4: historical_self_correction — Directly evaluates engagement with the 
+core skeptical counter-thesis that automa
+      R5: formal_consistency — Judges whether the side handled the model’s 
+internal logic without contradiction
+
+Step 4b: Gate test generation + self-calibration
+   Gate Calibration Results    
+┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Metric            ┃ Value   ┃
+┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━┩
+│ Initial recall    │ 100.00% │
+│ Initial precision │ 100.00% │
+│ Retries used      │ 0       │
+│ Final recall      │ 100.00% │
+│ Final precision   │ 100.00% │
+│ Remaining issues  │ 0       │
+└───────────────────┴─────────┘
+  Done (158.5s)
+  Gate tests saved to 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/gate_tests.yaml
+
+Step 5: Writing config
+
+Step 6: Validating generated config
+  Config validation passed.
+
+                                  Init Summary                                  
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Item                ┃ Value                                                  ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ Topic               │ AI Over-Automation Externality and the Case for an     │
+│                     │ Automation Tax                                         │
+│ Topology            │ gated                                                  │
+│ Claims extracted    │ 328                                                    │
+│ Consolidated theses │ 7                                                      │
+│ Contradictions      │ 16                                                     │
+│ Escape routes       │ 16                                                     │
+│ Agents              │ 10                                                     │
+│ Z3 module           │ None                                                   │
+│ Gate rules          │ Yes                                                    │
+│ Gate recall         │ 100%                                                   │
+│ Sources dir         │ /Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2… │
+│ Source split        │ 1C / 2S / 1N                                           │
+│ Config path         │ /Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2… │
+└─────────────────────┴────────────────────────────────────────────────────────┘
+
+Config written to 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/config.yaml
+Run with: arbiter run 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/config.yaml
+
+Starting debate: AI Over-Automation Externality and the Case for an Automation 
+Tax (topology=gated, max_rounds=6)
+
+=== ROUND 1 ===  (ledger: 0 open / 0 total hits, stale rounds: 0)
+Round 1 — Proponent  (3505 chars)
+  [Proponent] ok (rewrites=0, +2 hits, addressed=0, open_against=0)
+Round 1 — Skeptic  (3828 chars)
+  [Skeptic] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+Round 1 — Steelman  (3468 chars)
+  [Steelman] ok (rewrites=0, +2 hits, addressed=0, open_against=0)
+Round 1 — Generalist  (4280 chars)
+  [Generalist] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+Round 1 — IOTheorist  (4532 chars)
+  [IOTheorist] ok (rewrites=0, +5 hits, addressed=0, open_against=0)
+Round 1 — Welfarist  (3280 chars)
+  [Welfarist] ok (rewrites=0, +2 hits, addressed=0, open_against=0)
+Round 1 — Econometrician  (3772 chars)
+  [Econometrician] ok (rewrites=0, +2 hits, addressed=0, open_against=0)
+Round 1 — LaborEconomist  (5036 chars)
+  [LaborEconomist] ok (rewrites=0, +3 hits, addressed=0, open_against=0)
+Round 1 — TaxScholar  (3823 chars)
+  [TaxScholar] ok (rewrites=0, +2 hits, addressed=0, open_against=0)
+Round 1 — Macroeconomist  (4561 chars)
+  [Macroeconomist] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+   round 1: turns=10 violations=0 rewrites=0
+Validity audit R1: 0/10 violations, 0 rewrites
+Mid-debate judge call failed for round 1
+Traceback (most recent call last):
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/judge/mid_debate.py", line 75, in generate_signals
+    return self.provider.call_structured(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/base.py", line 84, in call_structured
+    result = self._call_structured_impl(system, user, schema, max_tokens)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/openai.py", line 135, in _call_structured_impl
+    resp = self._client.responses.create(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/resources/responses/responses.py", line 898, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid schema for response_format 'structured_output': In context=(), object schema missing properties.", 'type': 'invalid_request_error', 'param': 'text.format.schema', 'code': 'invalid_json_schema'}}
+  Argument map: 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/output/live_arguments.html
+(30 hits: 0 resolved, 30 open)
+
+=== ROUND 2 ===  (ledger: 30 open / 30 total hits, stale rounds: 0)
+Round 2 — Proponent  (4423 chars)
+  [Proponent] ok (rewrites=0, +3 hits, addressed=3, open_against=15)
+Round 2 — Skeptic  (4331 chars)
+  [Skeptic] ok (rewrites=0, +3 hits, addressed=3, open_against=9)
+Round 2 — Steelman  (3213 chars)
+  [Steelman] ok (rewrites=0, +1 hits, addressed=0, open_against=0)
+Round 2 — Generalist  (4332 chars)
+  [Generalist] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+Round 2 — IOTheorist  (5953 chars)
+  [IOTheorist] ok (rewrites=0, +5 hits, addressed=3, open_against=6)
+Round 2 — Welfarist  (3237 chars)
+  [Welfarist] ok (rewrites=0, +2 hits, addressed=3, open_against=3)
+Round 2 — Econometrician  (4199 chars)
+  [Econometrician] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+Round 2 — LaborEconomist  (5929 chars)
+  [LaborEconomist] ok (rewrites=0, +4 hits, addressed=3, open_against=12)
+Round 2 — TaxScholar  (4257 chars)
+  [TaxScholar] ok (rewrites=0, +3 hits, addressed=3, open_against=9)
+Round 2 — Macroeconomist  (0 chars)
+  [Macroeconomist] ok (rewrites=1, +0 hits, addressed=0, open_against=0)
+   round 2: turns=10 violations=0 rewrites=1
+Validity audit R2: 0/10 violations, 1 rewrites
+Mid-debate judge call failed for round 2
+Traceback (most recent call last):
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/judge/mid_debate.py", line 75, in generate_signals
+    return self.provider.call_structured(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/base.py", line 84, in call_structured
+    result = self._call_structured_impl(system, user, schema, max_tokens)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/openai.py", line 135, in _call_structured_impl
+    resp = self._client.responses.create(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/resources/responses/responses.py", line 898, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid schema for response_format 'structured_output': In context=(), object schema missing properties.", 'type': 'invalid_request_error', 'param': 'text.format.schema', 'code': 'invalid_json_schema'}}
+  Argument map: 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/output/live_arguments.html
+(59 hits: 18 resolved, 41 open)
+
+=== ROUND 3 ===  (ledger: 41 open / 59 total hits, stale rounds: 0)
+Round 3 — Proponent  (4279 chars)
+  [Proponent] ok (rewrites=0, +2 hits, addressed=3, open_against=23)
+Round 3 — Skeptic  (4563 chars)
+  [Skeptic] ok (rewrites=0, +3 hits, addressed=3, open_against=12)
+Round 3 — Steelman  (3282 chars)
+  [Steelman] ok (rewrites=1, +2 hits, addressed=0, open_against=0)
+Round 3 — Generalist  (4462 chars)
+  [Generalist] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+Round 3 — IOTheorist  (6330 chars)
+  [IOTheorist] ok (rewrites=0, +5 hits, addressed=3, open_against=9)
+Round 3 — Welfarist  (3346 chars)
+  [Welfarist] ok (rewrites=0, +2 hits, addressed=3, open_against=6)
+Round 3 — Econometrician  (3954 chars)
+  [Econometrician] ok (rewrites=0, +3 hits, addressed=0, open_against=0)
+Round 3 — LaborEconomist  (6573 chars)
+  [LaborEconomist] ok (rewrites=0, +5 hits, addressed=3, open_against=20)
+Round 3 — TaxScholar  (4146 chars)
+  [TaxScholar] ok (rewrites=0, +2 hits, addressed=3, open_against=17)
+Round 3 — Macroeconomist  (5053 chars)
+  [Macroeconomist] ok (rewrites=1, +4 hits, addressed=0, open_against=0)
+   round 3: turns=10 violations=0 rewrites=2
+Validity audit R3: 0/10 violations, 2 rewrites
+Mid-debate judge call failed for round 3
+Traceback (most recent call last):
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/judge/mid_debate.py", line 75, in generate_signals
+    return self.provider.call_structured(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/base.py", line 84, in call_structured
+    result = self._call_structured_impl(system, user, schema, max_tokens)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/openai.py", line 135, in _call_structured_impl
+    resp = self._client.responses.create(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/resources/responses/responses.py", line 898, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid schema for response_format 'structured_output': In context=(), object schema missing properties.", 'type': 'invalid_request_error', 'param': 'text.format.schema', 'code': 'invalid_json_schema'}}
+  Argument map: 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/output/live_arguments.html
+(91 hits: 36 resolved, 55 open)
+
+=== ROUND 4 ===  (ledger: 55 open / 91 total hits, stale rounds: 0)
+Round 4 — Proponent  (5030 chars)
+  [Proponent] ok (rewrites=0, +3 hits, addressed=3, open_against=32)
+Round 4 — Skeptic  (4115 chars)
+  [Skeptic] ok (rewrites=0, +3 hits, addressed=3, open_against=17)
+Round 4 — Steelman  (3897 chars)
+  [Steelman] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+Round 4 — Generalist  (3900 chars)
+  [Generalist] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+Round 4 — IOTheorist  (5922 chars)
+  [IOTheorist] ok (rewrites=0, +4 hits, addressed=3, open_against=14)
+Round 4 — Welfarist  (4067 chars)
+  [Welfarist] ok (rewrites=0, +2 hits, addressed=3, open_against=11)
+Round 4 — Econometrician  (4021 chars)
+  [Econometrician] ok (rewrites=0, +3 hits, addressed=0, open_against=0)
+Round 4 — LaborEconomist  (6678 chars)
+  [LaborEconomist] ok (rewrites=0, +4 hits, addressed=3, open_against=29)
+Round 4 — TaxScholar  (4817 chars)
+  [TaxScholar] ok (rewrites=0, +3 hits, addressed=3, open_against=26)
+Round 4 — Macroeconomist  (4894 chars)
+  [Macroeconomist] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+   round 4: turns=10 violations=0 rewrites=0
+Validity audit R4: 0/10 violations, 0 rewrites
+Mid-debate judge call failed for round 4
+Traceback (most recent call last):
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/judge/mid_debate.py", line 75, in generate_signals
+    return self.provider.call_structured(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/base.py", line 84, in call_structured
+    result = self._call_structured_impl(system, user, schema, max_tokens)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/openai.py", line 135, in _call_structured_impl
+    resp = self._client.responses.create(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/resources/responses/responses.py", line 898, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid schema for response_format 'structured_output': In context=(), object schema missing properties.", 'type': 'invalid_request_error', 'param': 'text.format.schema', 'code': 'invalid_json_schema'}}
+  Argument map: 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/output/live_arguments.html
+(125 hits: 54 resolved, 71 open)
+
+=== ROUND 5 ===  (ledger: 71 open / 125 total hits, stale rounds: 0)
+Round 5 — Proponent  (4510 chars)
+  [Proponent] ok (rewrites=0, +3 hits, addressed=3, open_against=42)
+Round 5 — Skeptic  (4246 chars)
+  [Skeptic] ok (rewrites=0, +3 hits, addressed=3, open_against=24)
+Round 5 — Steelman  (3302 chars)
+  [Steelman] ok (rewrites=0, +1 hits, addressed=1, open_against=0)
+Round 5 — Generalist  (4573 chars)
+  [Generalist] ok (rewrites=1, +4 hits, addressed=0, open_against=0)
+Round 5 — IOTheorist  (5966 chars)
+  [IOTheorist] ok (rewrites=0, +4 hits, addressed=3, open_against=20)
+Round 5 — Welfarist  (3894 chars)
+  [Welfarist] ok (rewrites=0, +3 hits, addressed=3, open_against=17)
+Round 5 — Econometrician  (4013 chars)
+  [Econometrician] ok (rewrites=0, +3 hits, addressed=0, open_against=0)
+Round 5 — LaborEconomist  (6198 chars)
+  [LaborEconomist] ok (rewrites=0, +4 hits, addressed=3, open_against=38)
+Round 5 — TaxScholar  (4504 chars)
+  [TaxScholar] ok (rewrites=0, +2 hits, addressed=6, open_against=32)
+Round 5 — Macroeconomist  (4334 chars)
+  [Macroeconomist] ok (rewrites=0, +3 hits, addressed=0, open_against=0)
+   round 5: turns=10 violations=0 rewrites=1
+Validity audit R5: 0/10 violations, 1 rewrites
+Mid-debate judge call failed for round 5
+Traceback (most recent call last):
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/judge/mid_debate.py", line 75, in generate_signals
+    return self.provider.call_structured(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/base.py", line 84, in call_structured
+    result = self._call_structured_impl(system, user, schema, max_tokens)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/openai.py", line 135, in _call_structured_impl
+    resp = self._client.responses.create(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/resources/responses/responses.py", line 898, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid schema for response_format 'structured_output': In context=(), object schema missing properties.", 'type': 'invalid_request_error', 'param': 'text.format.schema', 'code': 'invalid_json_schema'}}
+  Argument map: 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/output/live_arguments.html
+(155 hits: 76 resolved, 79 open)
+
+=== ROUND 6 ===  (ledger: 79 open / 155 total hits, stale rounds: 0)
+Round 6 — Proponent  (4302 chars)
+  [Proponent] ok (rewrites=0, +2 hits, addressed=3, open_against=47)
+Round 6 — Skeptic  (4212 chars)
+  [Skeptic] ok (rewrites=0, +3 hits, addressed=3, open_against=27)
+Round 6 — Steelman  (4129 chars)
+  [Steelman] ok (rewrites=0, +2 hits, addressed=1, open_against=0)
+Round 6 — Generalist  (4088 chars)
+  [Generalist] ok (rewrites=0, +3 hits, addressed=0, open_against=0)
+Round 6 — IOTheorist  (5154 chars)
+  [IOTheorist] ok (rewrites=1, +3 hits, addressed=3, open_against=23)
+Round 6 — Welfarist  (4038 chars)
+  [Welfarist] ok (rewrites=0, +2 hits, addressed=3, open_against=20)
+Round 6 — Econometrician  (3527 chars)
+  [Econometrician] ok (rewrites=0, +2 hits, addressed=0, open_against=0)
+Round 6 — LaborEconomist  (5303 chars)
+  [LaborEconomist] ok (rewrites=1, +4 hits, addressed=3, open_against=43)
+Round 6 — TaxScholar  (4540 chars)
+  [TaxScholar] ok (rewrites=0, +2 hits, addressed=3, open_against=40)
+Round 6 — Macroeconomist  (4757 chars)
+  [Macroeconomist] ok (rewrites=0, +4 hits, addressed=0, open_against=0)
+   round 6: turns=10 violations=0 rewrites=2
+Validity audit R6: 0/10 violations, 2 rewrites
+Mid-debate judge call failed for round 6
+Traceback (most recent call last):
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/judge/mid_debate.py", line 75, in generate_signals
+    return self.provider.call_structured(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/base.py", line 84, in call_structured
+    result = self._call_structured_impl(system, user, schema, max_tokens)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/VKDEV/arbiter/src/arbiter/providers/openai.py", line 135, in _call_structured_impl
+    resp = self._client.responses.create(**kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/resources/responses/responses.py", line 898, in create
+    return self._post(
+           ^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1297, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/vk/.pyenv/versions/3.12.7/lib/python3.12/site-packages/openai/_base_client.py", line 1070, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'message': "Invalid schema for response_format 'structured_output': In context=(), object schema missing properties.", 'type': 'invalid_request_error', 'param': 'text.format.schema', 'code': 'invalid_json_schema'}}
+  Argument map: 
+/Users/vk/VKDEV/arbiter/experiments/ai_layoff_trap_v2/output/live_arguments.html
+(182 hits: 95 resolved, 87 open)

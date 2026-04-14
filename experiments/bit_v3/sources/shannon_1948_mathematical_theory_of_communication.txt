@@ -1,0 +1,110 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: Claude Shannon (1948), "A Mathematical Theory of Communication": key ideas, especially the formal definition of the bit
+SEARCH QUERY: Claude Shannon "A Mathematical Theory of Communication" 1948 Bell System Technical Journal PDF bit definition
+RATIONALE: Canonical primary source for the formal definition of the bit, needed to assess the theory's claim that BIT extends Shannon information into subjective experience.
+
+========================================================================
+
+Shannon’s 1948 paper establishes a mathematical framework for communication by separating the engineering problem of transmitting symbols from questions of meaning. The central idea is that a communication system can be analyzed in terms of statistical structure: a source produces messages, those messages are encoded into signals, the signals pass through a channel that may introduce noise, and a receiver attempts to reconstruct the message.
+
+For your purpose, the most important point is this: in Shannon’s theory, a bit is not a unit of subjective experience or meaning. It is a unit for measuring information as statistical uncertainty or choice.
+
+Core framework
+1. Communication model
+Shannon idealizes communication as a system with a source, transmitter, channel, receiver, and destination. This lets him analyze communication independently of the content’s semantic meaning.
+
+2. Semantics is set aside
+A foundational claim of the paper is that the semantic aspects of communication are not part of the engineering problem Shannon is addressing. His theory measures how much uncertainty is associated with possible messages and what rates of reliable transmission are possible, not what messages mean or how they feel to a subject.
+
+3. Information as uncertainty
+The amount of information associated with a source depends on the probabilities of its possible outputs. More unpredictability means more information; more redundancy or predictability means less.
+
+Formal definition of entropy
+Shannon introduces a measure of uncertainty for a set of possible events with probabilities p1, p2, ..., pn:
+
+H = -K Σ pi log pi
+
+where K is a positive constant depending on the choice of units, and the logarithm base determines the unit of measurement.
+
+This quantity is now called Shannon entropy. It is the average uncertainty, or equivalently the average information produced by the source, under the probabilistic model.
+
+Why this formula?
+Shannon motivates this form by requiring that the uncertainty measure satisfy standard conditions:
+- it should vary continuously with the probabilities,
+- for equally likely alternatives, it should increase as the number of alternatives increases,
+- it should satisfy a consistency or grouping property: making a choice in stages should yield the same total uncertainty as treating it as one compound choice.
+
+Under these conditions, the logarithmic form is the natural solution.
+
+Definition of the bit in this source
+The bit is the unit obtained when the logarithm in Shannon’s entropy formula is taken in base 2. In that case:
+- one bit corresponds to the information associated with choosing between two equally likely alternatives,
+- more generally, an event of probability p carries information log2(1/p), and the average over events is the entropy measured in bits.
+
+So the bit in Shannon’s original framework is a unit of statistical information, defined by binary logarithms. It quantifies reduction of uncertainty, not meaning, value, consciousness, or experience.
+
+A good way to state the definition faithfully is:
+- A bit is the amount of information needed to distinguish between two equiprobable alternatives.
+- Equivalently, it is the unit in which Shannon entropy is measured when logarithms are taken to base 2.
+
+[UNCERTAIN] The paper itself refers to the base-2 unit as the “binary digit,” and also notes the shorter term “bit.” I am not giving the exact wording without checking the PDF text directly.
+
+Other major ideas in the paper
+1. Source and source entropy
+A source emits symbols according to some statistical law. The entropy gives the average information per symbol. For dependent sources, Shannon also analyzes sequences and defines an entropy rate.
+
+2. Redundancy
+Natural languages and many real sources are redundant: not all symbol sequences are equally likely. Redundancy means actual messages can often be compressed because they contain statistical regularities.
+
+3. Coding and compression
+A key implication of the theory is that messages from a source can be encoded efficiently, approaching the source entropy as the minimum average number of binary digits per symbol under ideal coding. This is the basis of information compression.
+
+4. Noisy channels and capacity
+Shannon defines channel capacity as the maximum rate at which information can be transmitted with arbitrarily low error, given suitable coding. This is one of the paper’s most influential claims: noise imposes a limit, but within that limit reliable communication is theoretically possible.
+
+5. Equivocation and noise
+In noisy communication, uncertainty at the receiver about what was sent can be analyzed probabilistically. Shannon introduces measures for the information lost or obscured by noise.
+
+What the paper does and does not claim
+What it does claim:
+- Information can be rigorously quantified in terms of probability and uncertainty.
+- The same mathematical framework applies across many communication systems.
+- Efficient coding and reliable communication can be studied independently of semantics.
+
+What it does not claim:
+- That information in this sense is identical to meaning.
+- That a bit measures qualitative experience, consciousness, or subjectivity.
+- That subjective states can be read off directly from Shannon entropy alone.
+
+Relevance to evaluating the claim that “BIT extends Shannon information into subjective experience”
+If someone says a later theory extends Shannon information into subjective experience, the important baseline is that Shannon himself does not do this. His theory is deliberately non-semantic and non-phenomenological. The bit, in the canonical 1948 sense, is a formal unit of probabilistic discrimination or uncertainty reduction.
+
+So any move from Shannon information to subjective experience is an additional philosophical or scientific thesis, not something already contained in the original definition of the bit.
+
+In debate-ready form
+- Shannon’s bit is a mathematical unit, not a phenomenological one.
+- It is defined by base-2 logarithmic measurement of uncertainty.
+- One bit = the information in a choice between two equally likely options.
+- Shannon explicitly brackets meaning; his theory concerns transmission and coding, not experience.
+- Therefore, any theory claiming to connect bits to subjective experience is going beyond Shannon, not merely restating him.
+
+========================================================================
+
+KEY CONCEPTS:
+  - communication model: source-transmitter-channel-receiver-destination
+  - semantic aspects are bracketed from the engineering theory
+  - information as uncertainty or unpredictability
+  - Shannon entropy: H = -K Σ pi log pi
+  - axiomatic motivation: continuity, monotonicity for equiprobable cases, grouping property
+  - bit as the base-2 unit of information
+  - one bit as a choice between two equally likely alternatives
+  - entropy rate for stochastic sources
+  - redundancy and compressibility
+  - channel capacity and reliable communication under noise
+  - distinction between Shannon information and subjective experience
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.
