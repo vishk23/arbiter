@@ -68,17 +68,14 @@ def load_readme() -> str:
 
 
 def load_repo_structure() -> str:
-    """Get a tree-like view of the repo."""
-    lines = []
-    skip = {'.git', '__pycache__', '.pytest_cache', 'node_modules', '*.egg-info',
-            '.venv', 'venv', 'dist', 'build', '.mypy_cache'}
-    for p in sorted(ROOT.rglob('*')):
-        if any(s in str(p) for s in skip):
-            continue
-        if p.is_file():
-            rel = str(p.relative_to(ROOT))
-            lines.append(rel)
-    return '\n'.join(lines[:150])
+    """Get a tree-like view of the tracked repo files (git ls-files)."""
+    import subprocess
+    result = subprocess.run(
+        ['git', 'ls-files'],
+        cwd=ROOT, capture_output=True, text=True
+    )
+    lines = [l for l in result.stdout.strip().split('\n') if l]
+    return '\n'.join(lines[:200])
 
 
 def load_paper(tex_path: str) -> str:

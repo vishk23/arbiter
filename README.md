@@ -4,9 +4,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
-**An open-source AI tool that reads academic papers, formally verifies their mathematical claims using Z3/Knuckledragger proof certificates, and stages structured multi-agent debates to separate what a paper proves from what it claims.**
+**An open-source AI tool for auditing research papers with formal or quantitative models. Arbiter extracts claims, attempts machine verification of encodable mathematical claims using Z3/Knuckledragger, and stages structured multi-agent debates to expose the gap between what a paper proves and what it claims.**
 
-Point Arbiter at any PDF — it extracts claims, finds contradictions, generates verified proofs (Knuckledragger + SymPy + Z3), designs specialist debate agents across multiple LLM providers (OpenAI, Anthropic, Google, Grok), and produces a structured verdict with every argument tracked.
+Works best on papers with explicit formal models — economics, theoretical CS, mechanism design, quantitative social science, optimization. Claim extraction and formalization are LLM-driven (untrusted heuristics); proof certificates are machine-checked (trusted). See [trust model](#trust-model) below.
+
+Point Arbiter at a PDF — it extracts claims, finds contradictions, generates Z3/Knuckledragger proof certificates for encodable claims, designs specialist debate agents across multiple LLM providers (OpenAI, Anthropic, Google, Grok), and produces a structured verdict with every argument tracked.
 
 > **Paper**: [Arbiter: Formally Verified Multi-Agent Debate for Research Claim Evaluation](papers/arbiter_systems_paper.pdf)
 >
@@ -180,13 +182,15 @@ Arbiter uses three verification backends, with the LLM selecting the right one p
 
 ### Benchmark results
 
-| Benchmark | Sonnet 4.5 | gpt-5.4-mini |
-|-----------|-----------|-------------|
-| miniF2F (244 problems) | **100% proved, 89.3% certified** | 88.9% proved, 74.2% certified |
-| ProofNet (50 problems) | 100% proved, 94% certified | 88% proved, 66% certified |
-| MATH Level 5 (50 problems) | 100% proved, 90% certified | 84% proved, 60% certified |
+| Benchmark | Model | Checker-passing | Audit-surviving (genuine valid) |
+|-----------|-------|----------------|---------------------------------|
+| miniF2F (244) | Sonnet 4.5 | 89.3% | ~26% (full set), ~13% (hard tier) |
+| miniF2F (244) | gpt-5.4-mini | 82.8% | ~13-26% (estimated) |
+| MiniF2F-Dafny | Sonnet 4.5 | 55.7% | — (not audited) |
 
-Comparison: MiniF2F-Dafny achieves 55.7% with the same Sonnet 4.5 model using Dafny proofs.
+**The gap between checker-passing and audit-surviving is the core finding** — see [audit paper](papers/arbiter_paper.pdf) for the full 202-problem taxonomy. Certification does not mean the encoded claim is faithful to the original theorem.
+
+Reproducibility: gpt-5.4-mini, temperature 1.0, up to 3 retries, 60s Z3 timeout. Full prompt templates in `benchmarks/`.
 
 ### Verification check types
 
@@ -225,6 +229,23 @@ judge:
 ```
 
 See [`experiments/ai_layoff_trap_v3/config.yaml`](experiments/ai_layoff_trap_v3/config.yaml) for a complete example.
+
+## Trust Model
+
+Not all steps in Arbiter are equally trustworthy. Here is an honest breakdown:
+
+| Step | Trust level | Notes |
+|------|-------------|-------|
+| PDF parsing | **Untrusted heuristic** | OCR errors, layout issues common |
+| Claim extraction | **Untrusted heuristic** | LLM may miss claims or split incorrectly |
+| Formalization (Z3/SymPy) | **Untrusted heuristic** | LLM may encode wrong claim; see [audit paper](papers/arbiter_paper.pdf) |
+| Knuckledragger `kd.Proof` | **Machine-checked** | Tamper-proof; if it exists, the encoded claim was verified by Z3 |
+| Raw Z3 UNSAT | **Diagnostic** | Only as trustworthy as the encoding |
+| SymPy simplification | **Symbolic, not logical** | Correct algebra ≠ logical proof |
+| Debate gate | **Heuristic** | LLM classifier; reduces but doesn't eliminate bad arguments |
+| Multi-provider judge panel | **Heuristic** | Correlated LLMs; better than single-model, not independent adjudication |
+
+**The central open problem**: how faithfully does LLM-generated Z3 code represent the intended mathematical claim? Our audit ([paper](papers/arbiter_paper.pdf)) finds ~13–26% of generated Z3 proofs are genuinely valid after checking encodings. Closing this gap is the active research frontier.
 
 ## Contributing
 
