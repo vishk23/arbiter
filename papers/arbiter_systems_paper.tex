@@ -39,12 +39,12 @@
 Research papers routinely overreach beyond their evidence.
 The replication crisis (36\% of landmark results replicate), tripling retraction rates, and growing skepticism toward LLM-as-judge evaluation demand tools that distinguish what a paper \emph{proves} from what it \emph{claims}.
 We present \arbiter{}, an open-source framework (11K~LOC Python, 7~LLM providers) that implements a complete PDF-to-verdict pipeline: it reads academic papers, extracts formal claims, generates machine-verified proofs via Knuckledragger (Z3) and SymPy, stages multi-agent debates with argumentative validity enforcement, and produces verdicts from a multi-lab judicial panel.
-In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4, Grok~4), which produced 141~argument hits across 54~turns over 6~rounds.
+In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4.6, Grok~4.20), which produced 141~argument hits across 54~turns over 6~rounds.
 The debate surfaced 17~Proponent concessions (the Proponent agent argues for the paper's claims)---revealing that the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) is mathematically correct, but its headline policy claims (``only a Pigouvian tax can fix over-automation'') extend far beyond the mathematics.
 We argue that multi-agent debate with formal verification is strictly more powerful than either component alone, and present ablation evidence supporting this claim.
 As a byproduct of building the verification backend, we characterize failure modes in LLM-generated Z3 proofs and report certificate validity rates for our own pipeline; we find that Z3-based proof generation requires careful audit, as LLMs frequently produce encodings that are technically satisfiable but do not faithfully represent the mathematical claim.
 We report these findings transparently; the verification backend is a work in progress, and honest measurement is a prerequisite to improvement.
-Code and all experimental artifacts are available at \url{https://github.com/vishk23/arbiter}. All experiments were conducted in April 2026 using frontier models available at that time (GPT-5.4, Claude Opus 4, Grok~4).
+Code and all experimental artifacts are available at \url{https://github.com/vishk23/arbiter}. All experiments were conducted in April 2026 using frontier models available at that time (GPT-5.4, Claude Opus 4.6, Grok~4.20).
 \end{abstract}
 
 %% ============================================================
@@ -270,7 +270,7 @@ This case study is the paper's showpiece: it demonstrates how \arbiter{} moves f
 
 The system selected 9 specialist agents:
 \emph{Proponent}, \emph{Skeptic}, \emph{Steelman}, \emph{Generalist}, \emph{IndustrialOrganization} (IO), \emph{Macroeconomist}, \emph{PublicFinance}, \emph{CausalInference}, and \emph{LaborEconomist}.
-Three providers were assigned: GPT-5.4 (OpenAI), Claude Opus~4 (Anthropic), and Grok~4 (xAI).
+Three providers were assigned: GPT-5.4 (OpenAI), Claude Opus~4.6 (Anthropic), and Grok~4.20 (xAI).
 
 The debate ran for \textbf{6 rounds}, producing \textbf{54 turns}, \textbf{141 argument hits}, \textbf{0 gate violations} in the final transcript (8 rewrites occurred during the debate), and \textbf{17 Proponent concessions}.
 
@@ -285,9 +285,9 @@ The debate ran for \textbf{6 rounds}, producing \textbf{54 turns}, \textbf{141 a
 \toprule
 \textbf{Judge (Provider)} & \textbf{Proponent} & \textbf{Skeptic} & \textbf{Winner} \\
 \midrule
-Grok 4 (xAI) & 39 & 51 & Skeptic \\
+Grok 4.20 (xAI) & 39 & 51 & Skeptic \\
 GPT-5.4 (OpenAI) & 42 & 50 & Skeptic \\
-Claude Opus 4 (Anthropic) & 37 & 35 & Proponent \\
+Claude Opus 4.6 (Anthropic) & 37 & 35 & Proponent \\
 \midrule
 \textbf{Majority} & & & \textbf{Skeptic (2--1)} \\
 \bottomrule
@@ -295,7 +295,7 @@ Claude Opus 4 (Anthropic) & 37 & 35 & Proponent \\
 \end{table}
 
 Table~\ref{tab:verdict} shows the judicial panel's scores.
-The Skeptic won 2--1, with Grok~4 and GPT-5.4 ruling for the Skeptic and Claude Opus~4 narrowly favoring the Proponent.
+The Skeptic won 2--1, with Grok~4.20 and GPT-5.4 ruling for the Skeptic and Claude Opus~4.6 narrowly favoring the Proponent.
 Critically, \emph{all three judges agreed} that the paper's core theorem---that the Nash equilibrium automation level exceeds the cooperative optimum ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$) when $\eta < 1$ and $N > 1$---is mathematically correct.
 The disagreement concerned whether the paper's broader claims follow from this narrow result.
 
@@ -468,7 +468,7 @@ The backend implements a Z3 verification suite covering six check types: proof v
 \midrule
 \arbiter{} + Claude Sonnet 4.5 & 244/244 (100\%) & 89.3\% & $\sim$26\% \\
 \arbiter{} + GPT-5.4 & 244/244 (100\%) & 87.1\% & $\sim$19\% \\
-\arbiter{} + Grok 4 & 244/244 (100\%) & 84.6\% & $\sim$14\% \\
+\arbiter{} + Grok 4.20& 244/244 (100\%) & 84.6\% & $\sim$14\% \\
 \midrule
 MiniF2F-Dafny + Claude Sonnet 4.5 & 136/244 (55.7\%) & 55.7\% & --- \\
 \bottomrule
