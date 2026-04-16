@@ -40,7 +40,7 @@ Research papers routinely overreach beyond their evidence.
 The replication crisis (36\% of landmark results replicate), tripling retraction rates, and growing skepticism toward LLM-as-judge evaluation demand tools that distinguish what a paper \emph{proves} from what it \emph{claims}.
 We present \arbiter{}, an open-source framework (11K~LOC Python, 7~LLM providers) that implements a complete PDF-to-verdict pipeline: it reads academic papers, extracts formal claims, generates machine-verified proofs via Knuckledragger (Z3) and SymPy, stages multi-agent debates with argumentative validity enforcement, and produces verdicts from a multi-lab judicial panel.
 In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4, Grok~4), which produced 141~argument hits across 54~turns over 6~rounds.
-The debate surfaced 17~author concessions---revealing that the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) is mathematically correct, but its headline policy claims (``only a Pigouvian tax can fix over-automation'') extend far beyond the mathematics.
+The debate surfaced 17~Proponent concessions (the Proponent agent argues for the paper's claims)---revealing that the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) is mathematically correct, but its headline policy claims (``only a Pigouvian tax can fix over-automation'') extend far beyond the mathematics.
 We argue that multi-agent debate with formal verification is strictly more powerful than either component alone, and present ablation evidence supporting this claim.
 As a byproduct of building the verification backend, we characterize failure modes in LLM-generated Z3 proofs and report certificate validity rates for our own pipeline; we find that Z3-based proof generation requires careful audit, as LLMs frequently produce encodings that are technically satisfiable but do not faithfully represent the mathematical claim.
 We report these findings transparently; the verification backend is a work in progress, and honest measurement is a prerequisite to improvement.
@@ -78,7 +78,7 @@ This transforms debate from a persuasion game into a structured audit.
 \noindent\textbf{Contributions.}
 \begin{itemize}[leftmargin=*,itemsep=2pt]
 \item The first end-to-end PDF-to-verdict system combining formal verification with multi-agent debate for research claim evaluation.
-\item An extended case study demonstrating that \arbiter{} uncovers 17~concessions in a published economics paper, revealing a significant gap between its formal results and policy claims.
+\item An extended case study demonstrating that \arbiter{} elicits 17~Proponent-agent concessions when evaluating a published economics paper, revealing a significant gap between its formal results and policy claims. (The Proponent agent argues for the paper's position; concessions reflect positions the paper's own logic cannot defend under adversarial scrutiny.)
 \item Evidence that debate with verification outperforms either component alone, and outperforms LLM-as-judge baselines.
 \item An open-source system (11K~LOC) supporting 7~LLM providers, a web dashboard, and multiple export formats.
 \end{itemize}
