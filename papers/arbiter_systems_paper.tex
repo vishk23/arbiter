@@ -184,7 +184,7 @@ Successfully verified claims become \emph{stipulations}---debate-time constraint
 Failed verifications become \emph{challenge points}---targets for skeptical agents.
 
 The agentic initialization also generates \emph{pre-filled engagement templates}: structured argument starters that ensure each specialist agent engages with the claims most relevant to its expertise.
-In experiments, agentic initialization produces debate configurations that exceed manually crafted setups on argument diversity and concession yield.
+In our AI Layoff Trap case study, the agentic initialization produced configurations covering more domain-specialist angles than our manual baseline, contributing to higher concession yield; this comparison is informal and not controlled.
 
 
 \subsection{Phase 2: Validity-Enforced Debate}
@@ -378,8 +378,9 @@ Every claim beyond this---inevitability, uniqueness of the Pigouvian tax, urgenc
 \section{Ablation: Debate + Verification > Either Alone}
 \label{sec:ablation}
 
-A central claim of this paper is that combining multi-agent debate with formal verification is strictly more valuable than either alone.
+A motivating hypothesis of this paper is that combining multi-agent debate with formal verification is more valuable than either alone.
 The martingale critique of debate~\cite{debateskepticism2025} motivates this investigation: if debate alone is unreliable, what does verification add?
+\textbf{Caveat:} This ablation is conducted on a single paper (AI Layoff Trap); all results should be treated as pilot findings, not statistically conclusive evidence. Multi-paper evaluation is ongoing.
 
 \subsection{Experimental Design}
 
@@ -488,13 +489,13 @@ The backend's value in \arbiter{} is not that it solves hard theorems but that i
 
 \subsection{Audit Findings: Honest Assessment}
 
-Three independent audits of the verification backend revealed that our initial benchmark numbers were systematically inflated.
+Three complementary audits of our own verification pipeline (all self-audits---we did not audit other systems' proof files) revealed that our initial benchmark numbers were systematically inflated.
 We report these findings transparently:
 
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-\item \textbf{Z3-only proofs}: 74\% of Z3-only proof certificates were found to be invalid upon manual audit---vacuously true, tautological, or relying on unconstrained solver behavior.
-\item \textbf{Knuckledragger certificates}: Knuckledragger's layered proof structure catches many vacuous proofs, but LLMs systematically prove trivial lemmas (e.g., verifying $x > 0 \Rightarrow x > 0$) rather than the substantive claims they are prompted with.
-\item \textbf{FormalMATH}: On a rigorous audit against the FormalMATH benchmark, only 7.4\% of generated proofs were genuinely valid---i.e., both non-trivial and faithful to the original claim.
+\item \textbf{Z3-only proofs}: 70\% of Z3-only proofs were found invalid (74\% including partial proofs) upon semi-automated audit (LLM-assisted classification)---vacuously true (contradictory premises), trivial arithmetic tails, wrong encodings, or crashes. See companion paper~\cite{arbiterpaperA} for full taxonomy.
+\item \textbf{Knuckledragger certificates}: Knuckledragger prevents assumed-conclusion failures by construction, but our pipeline responds by proving trivial lemmas (e.g., \texttt{kd.prove(x <= x)}) rather than the intended theorem. Vacuous proofs from contradictory premises are \emph{not} prevented by certificates.
+\item \textbf{FormalMATH} (different benchmark, different pipeline---not directly comparable to miniF2F numbers): On a rigorous audit, only 7.4\% of generated certificates were genuinely valid---i.e., both non-trivial and faithful to the original claim.
 \end{itemize}
 
 \noindent The verification backend is a work in progress.
@@ -513,7 +514,7 @@ This describes a large fraction of economics, theoretical CS, and quantitative s
 
 \paragraph{Honest Accounting of Benchmark Claims.}
 Our benchmark numbers were initially inflated.
-Audits of our own pipeline revealed that 70\% of Z3-only proofs (74\% including partial) and 93\% of Knuckledragger-certified proofs are invalid or trivial.
+Audits of our own pipeline revealed that 70\% of Z3-only proofs are invalid (74\% including partial), and on FormalMATH only 7.4\% of Knuckledragger certificates were genuinely valid.
 We report these findings transparently.
 The case study (Section~\ref{sec:casestudy}) remains our strongest contribution---its 17~concessions are independently verifiable by reading the debate transcript, not dependent on benchmark methodology.
 The verification backend adds value to the debate pipeline even at current reliability levels (it correctly verified the AI Layoff Trap's core theorem, which grounded the entire debate), but we do not claim it is a solved problem.
@@ -536,7 +537,7 @@ Benchmarking against SciFact and QuAD will establish comparisons with the claim-
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have presented \arbiter{}, the first system that implements a complete PDF-to-verdict pipeline for research claim evaluation, combining formal verification with multi-agent debate.
+We have presented \arbiter{}, an open-source system implementing a complete PDF-to-verdict pipeline for research claim evaluation, combining formal verification with multi-agent debate.
 Our case study on \emph{The AI Layoff Trap} demonstrates the pipeline's ability to distinguish what a paper proves from what it claims: the core theorem is mathematically correct, but 17~concessions reveal that the paper's policy claims---inevitability of over-automation, uniqueness of the Pigouvian tax solution, urgency of intervention---extend far beyond what the formal model supports.
 
 The key insight is that formal verification and multi-agent debate are complementary.

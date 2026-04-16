@@ -10,7 +10,7 @@ Point Arbiter at any PDF — it extracts claims, finds contradictions, generates
 
 > **Paper**: [Arbiter: Formally Verified Multi-Agent Debate for Research Claim Evaluation](papers/arbiter_systems_paper.pdf)
 >
-> **Benchmark**: 244/244 (100%) on miniF2F with 89.3% machine-verified proof certificates using Claude Sonnet 4.5 — vs 55.7% for MiniF2F-Dafny with the same model. See [benchmark results](papers/arbiter_paper.pdf) for details.
+> **Benchmark**: 244/244 on miniF2F, 89.3% checker-passing certificates (Claude Sonnet 4.5). **Important**: our audit finds ~13–26% of Z3 proofs are genuinely valid after checking encodings — the gap between checker-passing and genuinely-valid is the core finding of our audit paper. See [benchmark paper](papers/arbiter_paper.pdf) for full taxonomy.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/vishk23/arbiter/main/docs/screenshots/argdown_output.gif" width="800" alt="Arbiter argdown output showing argument ledger with syntax highlighting" />

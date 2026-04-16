@@ -64,7 +64,7 @@ Be direct and honest. This person wants real feedback, not encouragement."""
 
 
 def load_readme() -> str:
-    return (ROOT / "README.md").read_text()[:6000]
+    return (ROOT / "README.md").read_text()
 
 
 def load_repo_structure() -> str:
@@ -82,7 +82,7 @@ def load_repo_structure() -> str:
 
 
 def load_paper(tex_path: str) -> str:
-    return (ROOT / tex_path).read_text()[:12000]
+    return (ROOT / tex_path).read_text()
 
 
 def get_provider(name: str, model: str):
@@ -108,7 +108,7 @@ def get_provider(name: str, model: str):
 
 def run_review(provider_name: str, model: str, system: str, user: str) -> str:
     p = get_provider(provider_name, model)
-    return p.call_with_retry(system, user, max_tokens=1800)
+    return p.call_with_retry(system, user, max_tokens=3000)
 
 
 def section(title: str):
