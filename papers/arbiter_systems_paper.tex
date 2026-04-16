@@ -26,7 +26,7 @@
 \newcommand{\tbd}[1]{\textcolor{red}{\textbf{[TBD: #1]}}}
 \newcommand{\arbiter}{\textsc{Arbiter}}
 
-\title{Arbiter: From PDF to Verdict --- Formally Verified Debate\\for Research Claim Evaluation}
+\title{Arbiter: From PDF to Verdict --- Formal Verification Stipulations\\for Multi-Agent Research Claim Debate}
 
 \author{Vishnu Kchitti}
 
@@ -38,10 +38,10 @@
 \begin{abstract}
 Research papers routinely overreach beyond their evidence.
 The replication crisis (36\% of landmark results replicate), tripling retraction rates, and growing skepticism toward LLM-as-judge evaluation demand tools that distinguish what a paper \emph{proves} from what it \emph{claims}.
-We present \arbiter{}, an open-source framework (11K~LOC Python, 7~LLM providers) that implements a complete PDF-to-verdict pipeline: it reads academic papers, extracts formal claims, generates machine-verified proofs via Knuckledragger (Z3) and SymPy, stages multi-agent debates with argumentative validity enforcement, and produces verdicts from a multi-lab judicial panel.
-In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4.6, Grok~4.20), which produced 141~argument hits across 54~turns over 6~rounds.
+We present \arbiter{}, an open-source framework (11K~LOC Python, 7~LLM providers) that implements a complete PDF-to-verdict pipeline: it reads academic papers with formal or quantitative claims, extracts those claims, attempts machine verification via Knuckledragger (Z3) and SymPy, stages multi-agent debates with argumentative validity enforcement, and produces verdicts from a multi-provider evaluation panel.
+In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4.6, Grok~4.20), which produced 141~substantive argument exchanges across 54~turns over 6~rounds (``argument hits'' counts distinct claims advanced or rebutted per turn, not correctness).
 The debate surfaced 17~Proponent concessions (the Proponent agent argues for the paper's claims)---revealing that the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) is mathematically correct, but its headline policy claims (``only a Pigouvian tax can fix over-automation'') extend far beyond the mathematics.
-We argue that multi-agent debate with formal verification is strictly more powerful than either component alone, and present ablation evidence supporting this claim.
+In an ablation study on the same paper, debate with verification elicits more concessions and catches more overreach than either component alone; we treat this as preliminary evidence pending evaluation across more papers.
 As a byproduct of building the verification backend, we characterize failure modes in LLM-generated Z3 proofs and report certificate validity rates for our own pipeline; we find that Z3-based proof generation requires careful audit, as LLMs frequently produce encodings that are technically satisfiable but do not faithfully represent the mathematical claim.
 We report these findings transparently; the verification backend is a work in progress, and honest measurement is a prerequisite to improvement.
 Code and all experimental artifacts are available at \url{https://github.com/vishk23/arbiter}. All experiments were conducted in April 2026 using frontier models available at that time (GPT-5.4, Claude Opus 4.6, Grok~4.20).
@@ -72,14 +72,14 @@ This transforms debate from a persuasion game into a structured audit.
 \item \textbf{Agentic Initialization.} Given a PDF, \arbiter{} extracts assumptions, propositions, equations, and policy claims, then selects specialist debate agents and providers automatically.
 \item \textbf{Formally Verified Stipulations.} Knuckledragger (Z3) and SymPy verify quantitative claims, producing proof certificates that become debate stipulations---facts no agent may contest.
 \item \textbf{Validity-Enforced Debate.} A layered gate system rejects fallacious, circular, or unsupported arguments before they enter the debate transcript. Agents that fail the gate must rewrite.
-\item \textbf{Multi-Lab Judicial Panel.} Three frontier models from different providers independently score the debate, reducing single-model bias.
+\item \textbf{Multi-Provider Evaluation Panel.} Three frontier models from different providers independently score the debate, reducing single-model bias. Providers are correlated but not identical; cross-provider disagreement is itself a signal.
 \end{enumerate}
 
 \noindent\textbf{Contributions.}
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-\item The first end-to-end PDF-to-verdict system combining formal verification with multi-agent debate for research claim evaluation.
-\item An extended case study demonstrating that \arbiter{} elicits 17~Proponent-agent concessions when evaluating a published economics paper, revealing a significant gap between its formal results and policy claims. (The Proponent agent argues for the paper's position; concessions reflect positions the paper's own logic cannot defend under adversarial scrutiny.)
-\item Evidence that debate with verification outperforms either component alone, and outperforms LLM-as-judge baselines.
+\item A PDF-to-verdict pipeline that combines formal verification stipulations with multi-agent debate for research claim evaluation---to our knowledge, no prior open system integrates both components.
+\item An extended case study on a published economics paper~\cite{falk2026} in which \arbiter{} elicits 17~Proponent-agent concessions (the Proponent agent argues for the paper's position; concessions reflect positions the paper's own logic cannot defend under adversarial scrutiny), surfacing a gap between the formal model and the headline policy claims.
+\item Ablation evidence on the same paper that debate with verification elicits more overreach concessions than debate alone or a single LLM-as-judge call. A broader multi-paper evaluation is ongoing.
 \item An open-source system (11K~LOC) supporting 7~LLM providers, a web dashboard, and multiple export formats.
 \end{itemize}
 
@@ -513,7 +513,7 @@ This describes a large fraction of economics, theoretical CS, and quantitative s
 
 \paragraph{Honest Accounting of Benchmark Claims.}
 Our benchmark numbers were initially inflated.
-Three independent audits revealed that 74\% of Z3-only proofs and 93\% of Knuckledragger-certified proofs are invalid or trivial.
+Audits of our own pipeline revealed that 70\% of Z3-only proofs (74\% including partial) and 93\% of Knuckledragger-certified proofs are invalid or trivial.
 We report these findings transparently.
 The case study (Section~\ref{sec:casestudy}) remains our strongest contribution---its 17~concessions are independently verifiable by reading the debate transcript, not dependent on benchmark methodology.
 The verification backend adds value to the debate pipeline even at current reliability levels (it correctly verified the AI Layoff Trap's core theorem, which grounded the entire debate), but we do not claim it is a solved problem.
@@ -524,7 +524,7 @@ First, the verification backend operates within the scope of Z3's decidable frag
 We deliberately chose Knuckledragger over Lean or HoTT-based systems for accessibility and integration, accepting this scope limitation.
 Second, agentic initialization depends on LLM extraction quality; extraction errors propagate through the pipeline.
 Third, the gate model, while highly calibrated, may miss novel forms of fallacious reasoning not represented in its training distribution.
-Fourth, our ablation study is preliminary; a full evaluation across diverse domains with expert annotations is ongoing.
+Fourth, our case study evaluation covers one paper; generalization claims are necessarily limited until evaluation across more papers is complete (ongoing). Fifth, our ablation is conducted on the same single paper, so the finding that V+D outperforms D-only or LLM-judge should be treated as a pilot result, not a statistically robust conclusion.
 
 \paragraph{Future Work.}
 Near-term priorities include progressive RAG (retrieving external evidence during debate rather than only at initialization), Debate-SFT (fine-tuning debate agents on transcripts from high-quality debates), and sketch proofs (allowing the verification backend to verify proof outlines rather than requiring full formalization).
