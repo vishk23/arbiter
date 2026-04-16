@@ -42,7 +42,7 @@ We present \arbiter{}, an open-source framework (11K~LOC Python, 7~LLM providers
 In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4, Grok~4), which produced 141~argument hits across 54~turns over 6~rounds.
 The debate surfaced 17~author concessions---revealing that the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) is mathematically correct, but its headline policy claims (``only a Pigouvian tax can fix over-automation'') extend far beyond the mathematics.
 We argue that multi-agent debate with formal verification is strictly more powerful than either component alone, and present ablation evidence supporting this claim.
-On the miniF2F benchmark, the verification backend produces proof certificates that survive automated audit at rates between 7--26\%---far below the 83--100\% reported by standard benchmarks---revealing that LLM theorem-proving metrics are systematically inflated.
+As a byproduct of building the verification backend, we characterize failure modes in LLM-generated Z3 proofs and report certificate validity rates for our own pipeline; we find that Z3-based proof generation requires careful audit, as LLMs frequently produce encodings that are technically satisfiable but do not faithfully represent the mathematical claim.
 We report these findings transparently; the verification backend is a work in progress, and honest measurement is a prerequisite to improvement.
 Code and all experimental artifacts are available at \url{https://github.com/vishk23/arbiter}.
 \end{abstract}
