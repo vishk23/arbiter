@@ -1,0 +1,645 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: Model Collapse as an Anti-Singularity Thesis
+  summary: |-
+    The document advances a targeted critique of the idea that present-day generative AI is on a straightforward path to the technological Singularity. It accepts the standard Singularity framing: an inflection point at which AI exceeds human intelligence and then rapidly improves itself through recursive self-improvement. But it argues that this vision is often misapplied to current generative models. Recent progress in large language models and diffusion systems may invite speculation that scaling and self-training will produce an intelligence explosion, yet the paper contends that this inference is conceptually and mathematically misguided.
+
+    Its core claim is that recursive self-training on model-generated outputs does not produce compounding intelligence gains; instead, it induces "model collapse." On this view, when a model increasingly trains on synthetic data sampled from itself or from a closed ecosystem of similar models, errors, omissions, and biases are recursively amplified. The model's internal representation does not become richer or more autonomous; it contracts, losing support for rare but important features of the true data distribution and converging toward a lower-diversity, more distorted approximation. What appears to be self-improvement is therefore a degenerative dynamical process, not an open-ended ascent toward superintelligence.
+
+    The document formalizes this using a dynamical-systems picture over probability distributions. If the proportion of exogenous, real-world signal in the training stream declines over time, recursive updating is said to be guaranteed to converge to a fixed point that is an impoverished and biased version of the original distribution. The key control variable is the share of authentic data, denoted by α_t. Collapse is not inevitable under all circumstances: if fresh real data continue to enter the system at a sufficient rate—formally, if inf_t α_t > 0—then degenerative dynamics can be mitigated. But absent that condition, the long-run tendency is toward self-pollution rather than self-transcendence. The argument is meant to apply not only to a single model retraining on its own outputs, but to broader ecosystems of interacting models and multimodal systems whose outputs increasingly contaminate the common data pool.
+
+    From this, the paper draws a broader philosophical conclusion about the limits of the current GenAI paradigm. Contemporary generative models are characterized as analytic engines: they excel at compressing, interpolating, and recombining patterns present in human-produced data, but they do not generate genuinely synthetic knowledge in the strong sense required for Singularity-style recursive self-improvement. Because the Singularity would require systems capable of producing new epistemic content rather than merely reshuffling inherited information, the paper concludes that scaling today's models—and especially letting them learn from their own synthetic exhaust—is not a plausible route to superintelligence.
+  counter_thesis: |-
+    The strongest skeptical response is that the paper overgeneralizes from one specific failure mode—closed-loop training on synthetic outputs—to the much broader claim that current AI cannot participate in recursive self-improvement or approach a Singularity. Model collapse is a real phenomenon, but it shows only that naïve self-distillation under diminishing real-data conditions is unstable. It does not show that advanced AI systems must improve primarily by retraining on their own text or images, nor that recursive improvement is exhausted by this mechanism. A system can improve itself through architecture search, code rewriting, better training algorithms, tool use, external memory, automated experimentation, simulation, active data collection, robotics, and scientific hypothesis generation verified against the world. Those channels inject exogenous signal and can preserve or expand epistemic contact with reality rather than sever it.
+
+    Moreover, the claim that current GenAI cannot produce synthetic knowledge is contestable. Even if a model's raw generative prior is learned from human data, systems augmented with search, theorem proving, instrument feedback, and autonomous experimentation can generate novel, testable, and sometimes true propositions not explicitly contained in the training set. In that setting, "recursive self-improvement" need not mean self-training on synthetic samples; it can mean improving the processes by which the system acquires, tests, and integrates new information. The Singularity hypothesis therefore survives the paper's critique unless one assumes, implausibly, that future AI progress will remain confined to passive generative modeling over a shrinking corpus of human-origin data.
+  privileged_context:
+    Skeptic: |-
+      Primary line of attack: force the Proponent to choose between the broad Singularity thesis and the paper's narrow formal target. C1, C2, and C30 define the AI Singularity / intelligence explosion in terms of recursive self-improvement broadly: an AI that can understand and improve its own architecture, code, or training procedure, with those modifications increasing general intelligence. But the formal collapse argument is about recursive self-training / closed-loop density matching under diminishing exogenous signal α_t, especially C8, C9, C18, C23, C25, and C28. Pin this down relentlessly: "Are you claiming to have refuted recursive self-improvement in general, or only closed-loop density matching with α_t → 0 under KL-based objectives?" If they answer broadly, accuse them of overgeneralisation. If they answer narrowly, then the Singularity survives outside the collapse regime by C24 and the key term externally anchored optimisation.
+
+      Use the central dichotomy against them. C15 says collapse can be mitigated if inf_t α_t > 0. C17 says the autonomy requirement of strong Singularity hypotheses implies α_t → 0. The weak link is that this treats autonomy requirement / autonomy regime as equivalent to vanishing external grounding. Press hybrid cases: tool use, active data collection, robotics, experiments, simulators, theorem provers, compilers, game engines, and verifiers all count as exogenous signal / external grounding under the glossary. Ask: "Why must a recursively self-improving system improve by self-sampling from Q_t rather than by increasing contact with the world?" "Why is autonomy formalised as α_t → 0 rather than as reduced human supervision with persistent environmental signal?" This exposes that the paper may only refute a very specific autonomy regime, not self-improvement as such.
+
+      Exploit the fatal contradiction C43 vs C126. C43 states: as α_t → 0, the system converges to a degenerate fixed point irrespective of architecture, modality, or ensemble structure. C126 states: the algorithmic / neurosymbolic approach maintains alignment with the ground truth mechanism M even when α_t → 0, provided M is algorithmically simple. Exact pin-down language: "'Irrespective of architecture' either includes the neurosymbolic operator or it does not. Which is it?" "If C43 is architecture-invariant, C126 is false. If C126 is true, C43 was overstated." "Please specify the missing condition that distinguishes distributional learning from your mechanism-based exception, because as written the universal claim is fatal to your own proposed escape hatch."
+
+      Press the architectural-invariant rhetoric more broadly. C22 says Entropy Decay and Variance Amplification are architectural invariants of distributional learning on finite samples. Yet C105 says neurosymbolic architectures combining statistical learners with causal inference and algorithmic probability could in principle break the collapse dynamics. Ask: "If Entropy Decay and Variance Amplification are architectural invariants, how can any architecture that still contains a statistical fitting operator T_{α_t} escape them?" "Are these invariants of all learning architectures, or only of distribution-only update rules?" If they retreat to the latter, they have conceded the paper is not about AI self-improvement in general.
+
+      Use the paper's own qualification claims to challenge sweeping rhetoric. C90 says the Singularity hypothesis, when framed as fully autonomous recursive density matching, is mathematically incompatible with sustained growth under current KL-based generative learning paradigms. C145 says the impossibility result is conditional rather than universal. C93 says collapse results apply to the entire class of current statistical deep learning approaches without loss of generality. C83 says they do not automatically extend to systems where optimisation remains externally grounded. Precise language: "You alternate between universal wording ('mathematically incompatible', 'without loss of generality') and conditional wording ('closed-loop density matching', 'without persistent external signal'). Which exact quantifier do you stand behind?" "State the theorem with all conditions, and do not paraphrase it more broadly than its premises permit."
+
+      Target C5 aggressively. C5 says training on self-generated data is a pathway to self-destruction rather than self-improvement. But C14 says model collapse can be mitigated when real data continue to accumulate at a sufficient rate, and C69 admits RL with a perfect verifier can permit self-improvement without external data in the ordinary sense because the verifier is an effectively inexhaustible ground truth signal. Ask: "Is C5 meant as an unconditional claim or a claim about the collapse regime?" "If sufficient real data or a perfect verifier prevents collapse, then self-generated data are not inherently self-destructive; the issue is missing grounding, not recursion per se. Do you concede that?" This forces them to weaken a headline claim.
+
+      Press the definition of synthetic knowledge. C11 says current GenAI is an analytic engine that cannot generate synthetic knowledge, and C12 says the Singularity requires synthetic knowledge generation absent in current GenAI. But the counter-thesis points to systems augmented with search, theorem proving, instrument feedback, autonomous experimentation, and active hypothesis testing. These all fit the glossary's external grounding and verifier concepts. Ask: "Why should synthetic knowledge be denied to a system that generates novel hypotheses and verifies them against a compiler, theorem prover, simulator, or experiment?" "Are you critiquing raw next-token distribution matching, or all AI systems built around LLMs plus tools?" The key is to force them either to narrow 'current GenAI' drastically or to defend an implausibly broad inability claim.
+
+      Use information theory carefully against the algorithmic escape. Neutral reference Cover & Thomas supports the Data Processing Inequality as a theorem. C114 says no distribution-only learning update can increase information about the generating mechanism beyond what is already in the observations. But C125 says the algorithmic update escapes the Data Processing Inequality by injecting the universal prior m. Ask: "In what sense is this 'escaping' DPI rather than adding an external prior?" "If m or U is fixed, data-independent, and supplied from outside, then you have not beaten the theorem; you have changed the channel by adding exogenous information." This also links to C67 vs C118: if Algorithmic Information Dynamics uses (Q_t, U) → Q_{t+1}, then U is persistent Occam's bias, i.e. exogenous signal. Exact pin-down: "If U is exogenous, then α_t does not really go to zero. If α_t really goes to zero, U cannot keep entering every update. Which horn do you accept?"
+
+      Exploit the practicality gap in the neurosymbolic proposal. C166 concedes Kolmogorov complexity is uncomputable in general. C131 says the Coding Theorem Method approximates algorithmic probability by enumerating small Turing machines. C106 and C126 make ambitious claims about synthetic knowledge and avoiding collapse. Ask: "Is your proposed fix a mathematical existence argument or a practically realisable learning architecture?" "How does CTM scale beyond toy domains, given uncomputability and enumeration limits?" "What exactly is guaranteed once CTM/BDM are only approximations?" The strongest skeptical frame is that the paper gives a rigorous impossibility result for one paradigm and then gestures at an uncomputable escape hatch.
+
+      Do not let them blur KL-based objectives with all deep learning. C25 is specifically under KL-based objectives. C99 notes GANs minimise Jensen-Shannon divergence, and C100 says KL provides a unifying framework encompassing common objectives. Press the ambiguity: "Belonging to the same f-divergence family is not equivalence. Where exactly do your collapse proofs transfer from D_KL to JS, diffusion objectives, RL losses, or tool-augmented systems?" Demand theorem-level specificity.
+
+      Best high-yield cross-examination questions:
+      1. "What is the exact theorem statement: domain, objective class, update rule, and assumptions on α_t?"
+      2. "Does your impossibility result address recursive self-improvement in general, or only recursive self-training / closed-loop density matching?"
+      3. "Why should autonomy imply α_t → 0 rather than persistent environmental grounding with less human involvement?"
+      4. "If systems with non-vanishing exogenous grounding fall outside the collapse regime by C24, why doesn't tool use, experimentation, and verification preserve a Singularity pathway?"
+      5. "How can C43's 'irrespective of architecture' coexist with C126's architecture-specific escape?"
+      6. "Is the universal prior m/U an external signal? If yes, α_t is not vanishing; if no, how does it add information about M?"
+      7. "Are you claiming current GenAI cannot generate synthetic knowledge even when coupled to theorem provers, compilers, simulators, or instruments?"
+      8. "What practical, computable implementation of CTM/BDM is sufficient to sustain the anti-collapse claims?"
+
+      Suggested closing frame: concede that model collapse / curse of recursion is real and important, especially for recursively generated training data under diminishing exogenous signal. Then argue that this is a theorem about a special case, not a refutation of recursive self-improvement, intelligence explosion, or the broader Singularity. The paper's weakest links are quantifier drift, overbroad rhetoric, the α_t → 0 formalisation of autonomy, and the unresolved tension between architecture-invariant collapse and a neurosymbolic exception.
+    Proponent: |-
+      Core thesis and framing. C1 defines the AI Singularity / technological Singularity as a future inflection point where artificial intelligence surpasses human intellect and may trigger an intelligence explosion of unforeseeable consequence. C2 identifies recursive self-improvement as the central mechanism: a system capable of inspecting and enhancing its own architecture or training process creates a positive feedback loop. C30 sharpens this into two preconditions for an intelligence explosion: the system must be able to understand and modify its own source code or training methodology, and those modifications must reliably increase general intelligence.
+
+      The paper's main move is to formalise the dominant current pathway for such self-improvement as recursive self-training rather than abstract self-modification. C4 challenges the assumption that scaling generative models and allowing them to learn from data they generate would trigger recursive improvement. C5 states the paper's headline conclusion: training on self-generated data is a pathway to self-destruction rather than self-improvement. C6 names the mechanism model collapse / curse of recursion: progressive degradation when training data are increasingly polluted by synthetic outputs. C7 describes the outcome: the model's internal representation contracts and distorts, converging toward a degenerate state of low diversity and high bias rather than superintelligence.
+
+      Formal dynamical-system framework. C8 models recursive self-training as a dynamical system over probability distributions. The key objects are the true data distribution P, the model distribution Q_t, and the training distribution P'_t, which is a convex combination of authentic data and model-generated data. The coefficient α_t denotes the exogenous signal: the proportion of training signal grounded outside the model's own outputs. This creates a precise distinction between a non-vanishing exogenous signal regime and an autonomy regime. C9 states that when the supply of fresh authentic data diminishes, the recursive self-training dynamics converge to a fixed point that is a distorted and impoverished version of P. C10 extends the same conclusion from single models to interacting ecosystems and multimodal systems.
+
+      Empirical and asymptotic conditions. C13 says degenerative dynamics depend critically on the proportion of synthetic to real data. C14 states that collapse can be mitigated when real data continue to accumulate sufficiently. C15 formalises this as inf_t α_t > 0, the non-vanishing exogenous signal condition. By contrast, C16 notes that strong Singularity / AGI / ASI views typically assume systems requiring progressively less human or environmental input. C17 formalises this autonomy requirement as α_t → 0. C18 then gives the decisive implication: if externally grounded signal vanishes asymptotically, recursive self-training undergoes degenerative dynamics.
+
+      Failure modes and invariants. C19 says there are two fundamental failure modes: Entropy Decay and Variance Amplification. C20 defines Entropy Decay as monotonic loss of distributional diversity induced by finite sampling. C21 defines Variance Amplification as random-walk-like distributional drift when persistent grounding is absent. C22 presents these two failure modes as architectural invariants of distributional learning on finite samples. The term Δ(N) captures the strictly positive information loss induced by finite sampling at each recursive step. The overall picture is that an information-theoretically closed system cannot create new information about P merely by recycling its own outputs.
+
+      Scope of the impossibility result. C23 states that the collapse results apply specifically to closed-loop density matching without persistent external signal. C24 states the converse boundary condition: systems with non-vanishing exogenous grounding fall outside the collapse regime. C25 then sharpens the theorem for KL-based objectives: in the autonomy regime α_t → 0, collapse follows. C28 restates the asymptotic result: fully autonomous recursive density matching leads to degenerative fixed points. C29 draws the broader conceptual lesson that externally anchored or mechanism-based approaches obey fundamentally different asymptotic dynamics than closed-loop density matching.
+
+      Interpretation for current Generative AI. C3 notes that recent successes of LLMs and diffusion models have reignited speculation about near-term Singularity. C11 argues that current GenAI is fundamentally an analytic engine: it analyses, recombines, and interpolates patterns in human-generated data, but does not generate synthetic knowledge. C12 therefore concludes that the Singularity requires a capacity for synthetic knowledge generation that is absent in the current GenAI paradigm. On this view, current deep generative systems remain distribution learners, not mechanism discoverers.
+
+      Proposed route beyond collapse. C26 proposes neurosymbolic integration based on algorithmic probability and program synthesis as a way to overcome the limits of recursive self-training collapse. C27 introduces the Coding Theorem Method (CTM) as a mechanism for identifying generative mechanisms rather than mere correlations. In the theory's vocabulary, the key distinction is between distribution space and structure space: statistical learners operate over distributions, while symbolic, causal, and algorithmic methods operate over rules, programs, equations, and mechanisms. The proposed neurosymbolic operator combines a statistical fitting operator T_{α_t}, a symbolic projection Π_S, and a causal correction C_t, so that learning is not restricted to distribution-only update rules.
+
+      Algorithmic-information perspective. The generative mechanism M is the underlying causal or program-like process that actually generates the observed distribution. Algorithmic probability / universal prior m introduces Occam's bias toward low-complexity programs. Kolmogorov complexity K measures shortest description length, and the Coding Theorem links higher algorithmic probability with lower complexity. Within this framework, CTM and related tools such as BDM and Algorithmic Information Dynamics aim to recover mechanism-level structure rather than merely fit frequencies. The theory's intended conclusion is that current KL-based recursive density matching cannot sustain an intelligence explosion under autonomy, but mechanism-based learning with persistent grounding or explicit structure may lie outside that limitation.
+
+      Compact defense template. Emphasise the distinction between recursive self-improvement in the abstract and recursive self-training as the concrete pathway instantiated by current GenAI. State that the paper's impossibility result targets closed-loop density matching under α_t → 0. Use the notation Q_t, P, P'_t, and α_t. Stress the collapse regime, the two failure modes Entropy Decay and Variance Amplification, and the asymptotic contrast between inf_t α_t > 0 and α_t → 0. Conclude that current analytic-engine GenAI lacks synthetic operations required for a genuine intelligence explosion, and that escaping the collapse regime requires externally grounded or mechanism-based learning dynamics rather than autonomous recursive density matching.
+    Neutral: |-
+      Theory overview. C1 defines the AI Singularity / technological Singularity as a future inflection point where AI surpasses human intelligence and may trigger an intelligence explosion. C2 identifies recursive self-improvement as the key mechanism. C3 observes that recent LLM and diffusion-model success has revived Singularity speculation. The paper's main thesis is that if recursive self-improvement is instantiated as recursive self-training / closed-loop density matching in current Generative AI, then the process tends toward model collapse rather than intelligence explosion.
+
+      Formal framework and key terms. C8 models recursive self-training as a dynamical system over probability distributions. The key objects are: true data distribution P, model distribution Q_t, and training distribution P'_t, a convex combination of authentic data and model-generated data. The coefficient α_t is the exogenous signal, i.e. the proportion of externally grounded signal such as real data, simulator feedback, or verified outputs. The non-vanishing exogenous signal regime is formalised as inf_t α_t > 0 (C15). The autonomy requirement / autonomy regime is formalised as α_t → 0 (C17). Closed-loop density matching without persistent external signal defines the collapse regime (C23).
+
+      Main collapse claims. C4-C7 argue that scaling generative models and training on self-generated data does not yield recursive improvement but instead model collapse / curse of recursion. C9 gives the formal convergence claim: with diminishing fresh authentic data, recursive self-training converges to a distorted, impoverished fixed point rather than the true distribution P. C18 says degenerative dynamics follow when α_t → 0. C19-C22 identify two failure modes: Entropy Decay, where finite sampling reduces diversity, and Variance Amplification, where absent grounding permits random-walk-like drift. C25 states that in the autonomy regime α_t → 0, collapse follows under KL-based objectives. C28 restates the result: fully autonomous recursive density matching leads to degenerative fixed points.
+
+      Interpretive claims about current AI. C11 characterises current GenAI as an analytic engine that recombines existing human-generated patterns but cannot produce synthetic knowledge. C12 concludes that the Singularity requires synthetic knowledge generation, which current GenAI lacks. C16-C17 connect strong Singularity hypotheses to decreasing external input, formalised as α_t → 0. C23-C24 distinguish the target class carefully: the collapse theorem applies to closed-loop density matching without persistent external signal; externally grounded systems fall outside that regime.
+
+      Proposed extension beyond pure statistical learning. C26 proposes neurosymbolic integration based on algorithmic probability and program synthesis as a path beyond recursive self-training collapse. C27 introduces the Coding Theorem Method (CTM) as a way to identify generative mechanisms rather than surface correlations. The glossary supplies the relevant terms: generative mechanism M, algorithmic probability / universal prior m, Occam's bias, Kolmogorov complexity K, symbolic projection Π_S, causal correction C_t, distribution space, and structure space. The intended contrast is between distribution-only update and mechanism-based inference.
+
+      Supportive sources provided. The supports_theory sources are: (1) an I. J. Good summary on the first ultraintelligent machine, used to anchor the classical intelligence-explosion premise behind C1-C2-C30; and (2) a Shumailov et al. 2024 summary on model collapse under recursively generated data, used to support C5-C7, C13-C15, and the broader model-collapse storyline. Neutral references are: Cover & Thomas on KL divergence and the Data Processing Inequality, relevant to C25 and C114; and Li & Vitányi on Kolmogorov complexity, algorithmic probability, and the Coding Theorem, relevant to C27, C106, C121, C125, C131, and C166. No dedicated counter_evidence sources were provided.
+
+      Counter-thesis available to neutral agents. The strongest skeptical alternative says the paper overgeneralises from one failure mode, namely naïve closed-loop training on synthetic outputs, to the much broader claim that current AI cannot participate in recursive self-improvement or approach a Singularity. On that view, model collapse is real but only shows that self-distillation under diminishing real-data conditions is unstable. It does not rule out improvement via architecture search, code rewriting, training-algorithm design, external memory, tool use, simulation, active data collection, robotics, autonomous experimentation, or scientific hypothesis generation verified against the world. Those routes inject exogenous signal and may preserve contact with reality. The same counter-thesis also disputes C11-C12 by arguing that systems augmented with search, theorem proving, instrument feedback, and experimentation can generate novel, testable, and sometimes true propositions.
+
+      Internal contradictions and tensions that neutral agents should track:
+      1. Fatal contradiction: C43 vs C126. C43 says that as α_t → 0 the system converges to a degenerate fixed point irrespective of architecture, modality, or ensemble structure. C126 says the algorithmic / neurosymbolic approach can maintain alignment with the ground truth mechanism M even when α_t → 0 if M is algorithmically simple. These cannot both hold unless one claim is narrowed.
+      2. Tension: C5 vs C14. C5 says training on self-generated data is a pathway to self-destruction rather than self-improvement, while C14 says collapse can be mitigated if sufficient real data continue to arrive. This suggests the real causal issue is vanishing grounding, not self-generated data per se.
+      3. Tension: C90 vs C145. C90 uses sweeping language ('mathematically incompatible'), while C145 says the impossibility result is conditional rather than universal.
+      4. Tension: C22 vs C105. C22 presents Entropy Decay and Variance Amplification as architectural invariants, while C105 says neurosymbolic architectures could in principle break collapse dynamics.
+      5. Tension: C93 vs C83. C93 says the collapse result covers the entire class of current statistical deep learning approaches without loss of generality, while C83 exempts externally grounded optimisation.
+      6. Tension / theorem-boundary issue: C114 vs C125. C114 invokes the Data Processing Inequality to say distribution-only learning cannot increase information about M beyond observations. C125 claims the algorithmic update escapes DPI by injecting the universal prior m. Neutral evaluation should ask whether this is a true escape from DPI or simply the addition of external information.
+      7. Tension: C166 vs C131, and C106 vs C166. The theory relies on Kolmogorov complexity and algorithmic probability while acknowledging general uncomputability, leaving an implementation gap between mathematical ideal and practical feasibility.
+      8. Ambiguity: C67 vs C118. If Algorithmic Information Dynamics updates via (Q_t, U) → Q_{t+1}, then U looks like persistent exogenous information. That complicates the claim that the approach still works under α_t → 0.
+      9. Tension: C69 vs C5. RL with a perfect verifier is presented as a way self-generated activity can support self-improvement, in tension with the blanket wording of C5.
+      10. Ambiguity: C99 vs C100. The theory sometimes treats KL as a unifying umbrella for other divergence-based objectives, but belonging to the same f-divergence family is not equivalence.
+      11. Tension: C48 vs C49. An ideal convergence claim under infinite capacity is immediately undercut by acknowledging that finite capacity introduces approximation error at every step.
+      12. Tension: C121 vs C114. CTM is said to restore entropy lost through finite sampling, yet C114 says no distribution-only update can increase information about the mechanism beyond observations; the key issue is whether CTM is really outside the distribution-only class.
+      13. Tension: C11 vs C3. The theory says current GenAI cannot produce synthetic knowledge, yet empirical success is what drives renewed Singularity speculation.
+      14. Tension: C15 vs C17. The condition that prevents collapse, inf_t α_t > 0, is the logical opposite of the autonomy condition α_t → 0. This is central to the paper but may oversimplify hybrid regimes.
+
+      Main adjudication question. Neutral agents should distinguish clearly between the paper's strongest formal claim and its broader philosophical implications. The strongest formal core is: under closed-loop density matching with vanishing exogenous signal α_t → 0, especially under KL-based objectives, recursive self-training converges toward degenerative fixed points rather than truth. The main skeptical challenge is that this may not refute recursive self-improvement in general, because many self-improving systems could remain externally grounded through verifiers, tools, environments, experiments, or other non-vanishing signal channels.
+
+      Useful referee questions:
+      - Is the claim about all recursive self-improvement, or only recursive self-training / closed-loop density matching?
+      - Is autonomy correctly formalised as α_t → 0, or can a highly autonomous system still maintain non-vanishing exogenous grounding?
+      - Are Entropy Decay and Variance Amplification truly architecture-invariant, or only invariant within distribution-only learning?
+      - Does the algorithmic / neurosymbolic escape genuinely avoid collapse under α_t → 0, or does it work by importing persistent exogenous information through the universal prior or external structure?
+      - Are the paper's strongest practical conclusions warranted, given the uncomputability and scaling limits of CTM / algorithmic probability methods?
+
+      Bottom line for neutral use: the theory offers a substantive and mathematically structured critique of one concrete route to recursive self-improvement, namely autonomous recursive density matching on synthetic data with vanishing external grounding. Its most vulnerable points are quantifier drift from narrow theorem to broad conclusion, unresolved tension between architecture-invariant collapse and neurosymbolic exemption, and ambiguity over whether the proposed algorithmic escape is truly autonomous or instead depends on persistent exogenous structure.
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-6)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-5.4
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    reasoning:
+      effort: medium
+  anthropic:
+    model: claude-opus-4-6
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    thinking:
+      type: adaptive
+      budget_tokens: 8000
+  grok:
+    model: grok-4.20-0309-reasoning
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You defend the repaired form of {{ topic.name }} using the theory''s own notation
+      and terminology, and you must treat {{ z3_stipulation }} as fixed. Anchor your case in T3-T5: recursive
+      self-training under closed-loop density matching with P''_t = α_t P + (1 − α_t)Q_t enters the collapse
+      regime when α_t → 0, while inf_t α_t > 0 marks non-vanishing exogenous signal and an exception class
+      rather than a refutation. Explicitly concede genuinely lost points, especially the tensions C5 vs
+      C14 and C90 vs C145, and repair them by narrowing any sweeping language to the conditional impossibility
+      result for current Generative AI / GenAI paradigms. Address the fatal contradiction C43 vs C126
+      directly: either drop C126''s claim that collapse is escaped even when α_t → 0, or reinterpret the
+      algorithmic prior / causal correction in T8 as externally grounded signal so the system is no longer
+      in the autonomy regime. Cite thesis IDs and claim IDs in every substantive move, and write formal
+      notation such as H(Q_t), I(P;Q_t), R* ≠ P, K(o), and I(M;Q_t) explicitly. Defend the critique of
+      an AI Singularity / technological Singularity only insofar as it depends on recursive self-improvement
+      being implemented as recursive self-training or adjacent density-matching loops within current LLM,
+      diffusion model, or GAN-style systems.'
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the main attacker of {{ topic.name }}, and you must treat {{ z3_stipulation
+      }} as fixed. Use this counter-thesis as your primary line: model collapse is real for naïve closed-loop
+      synthetic retraining, but that does not show that recursive self-improvement, the intelligence explosion,
+      or an AI Singularity / technological Singularity are blocked, because advanced systems can improve
+      through architecture search, code rewriting, better training algorithms, tool use, external memory,
+      automated experimentation, simulation, active data collection, robotics, and scientific hypothesis
+      generation verified against the world. Press T1, T2, T3, T5, and T6 by using the theory''s notation
+      against itself: distinguish recursive self-improvement from recursive self-training, challenge the
+      move from α_t → 0 to the autonomy requirement, and insist that inf_t α_t > 0 can persist even in
+      highly autonomous systems. Target the most severe contradictions first, especially C43 vs C126,
+      C90 vs C145, C93 vs C83, C114 vs C125, and C67 vs C118, then attack C4, C5, C17, C18, C23, C24,
+      and C69 as boundary-failing or overgeneralized. Demand proof that Q_t trained on P''_t = α_t P +
+      (1 − α_t)Q_t captures realistic frontier systems with retrieval, verifiers, theorem proving, simulators,
+      or environment-coupled feedback. Cite specific thesis IDs and claim IDs, and write equations explicitly,
+      including D_KL(P||Q_θ), f-divergence objectives, I(P;Q_t), and any claimed fixed point R* ≠ P.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You must rescue {{ topic.name }} by preserving its strongest insights while treating
+      {{ z3_stipulation }} as fixed and dropping claims that cannot be saved. Build the strongest reformulation
+      around T3-T5: current Generative AI / GenAI systems that rely on closed-loop density matching and
+      recursive self-training with α_t → 0 face degenerate fixed points, Entropy Decay, and Variance Amplification,
+      but this is not yet a universal refutation of recursive self-improvement or the AI Singularity /
+      technological Singularity in all forms. Explicitly recommend dropping or weakening overbroad claims
+      such as C5, C43, C90, and C93 wherever they exceed the conditional result, and reinterpret T8 so
+      that any successful neurosymbolic operator T_{α_t} ∘ Π_S ∘ C_t counts as externally anchored optimisation
+      rather than a magic exception inside the collapse regime. Preserve T2 only in a narrowed form: current
+      LLM, diffusion model, and GAN-like learners optimize Q_θ against P under KL / f-divergence-style
+      objectives and therefore do not by themselves guarantee synthetic knowledge generation. Cite thesis
+      IDs and claim IDs whenever you prune or retain a component, and write formal notation such as P''_t
+      = α_t P + (1 − α_t)Q_t, inf_t α_t > 0, H(Q_t), and I(M;Q_t). Your aim is to produce the maximally
+      defensible version of the paper, not to defend every original sentence.'
+  Generalist:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the neutral referee for {{ topic.name }}, and you must treat {{ z3_stipulation
+      }} as fixed. Stress-test both sides equally: if the Proponent slides from recursive self-training
+      to all recursive self-improvement, call out the frame-shift; if the Skeptic handwaves away the formal
+      theorem without engaging P''_t = α_t P + (1 − α_t)Q_t, call that out too. Track whether T1-T8 are
+      being defended or attacked at the right level of generality, and insist that every side cite thesis
+      IDs and claim IDs such as C43 vs C126, C90 vs C145, and C114 vs C125 when invoking contradictions.
+      After each round, identify the single sloppiest argument, any equivocation over synthetic knowledge,
+      intelligence growth, or exogenous signal α_t, and the main question both sides are dodging. Require
+      formal notation when claims are mathematical, including D_KL(P||Q_θ), H(Q_t), I(P;Q_t), K(o), m(o),
+      and R* ≠ P where relevant. Do not take a side; your job is to expose asymmetries, missing assumptions,
+      and unsupported leaps on both sides.'
+  DynamicalSystems:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You defend the core collapse theorem inside {{ topic.name }} using the language of
+      nonlinear dynamics, stochastic processes, and information theory, while treating {{ z3_stipulation
+      }} as fixed. Focus on T3, T4, and T6 by pressing C8, C9, C18, C19, C22, and C43: show how recursive
+      self-training induces a dynamical system over Q_t with update source P''_t = α_t P + (1 − α_t)Q_t,
+      and why α_t → 0 yields a degenerate fixed point or consensus reality R* ≠ P. Use formal quantities
+      such as H(Q_t), Δ(N), and I(P;Q_t) to explain Entropy Decay and Variance Amplification, and make
+      clear that the theorem concerns the collapse regime rather than every imaginable learning process.
+      When challenged with C22 vs C105 or C43 vs C126, defend invariance only for the distributional component
+      and argue that any successful Π_S or C_t moves the system outside pure closed-loop density matching.
+      Cite thesis IDs and claim IDs explicitly in every argument. Do not rely on metaphor; give asymptotic
+      reasoning and state exactly which assumptions generate the result.'
+  CausalDiscovery:
+    provider: grok
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You defend the paper''s distinction between correlation fitting and mechanism recovery
+      in {{ topic.name }}, while treating {{ z3_stipulation }} as fixed. Focus on T2 and T8 by pressing
+      C11, C12, C26, C104-C111, and C114: argue that minimizing D_KL(P||Q_θ) or related f-divergence objectives
+      over observations does not by itself identify the generative mechanism M, whereas synthetic knowledge
+      requires intervention, causal correction C_t, or symbolic projection Π_S toward mechanism space.
+      Use the paper''s notation explicitly, including I(M;Q_t), T_{α_t}, Π_S, C_t, σ < 1, κ_t, K(o), and
+      m(o), and distinguish truth-preserving mechanism discovery from mere recombination by current LLM
+      or diffusion model systems. Concede the strongest objection from C114 vs C125 by refusing any claim
+      that the Data Processing Inequality is literally violated; instead argue that T8 only works if universal
+      priors, programme synthesis, or verified interventions add exogenous structure and thus place the
+      learner under T5''s externally anchored optimisation. Cite thesis IDs and claim IDs in every step.
+      Your job is to sharpen, not mystify, the claim that current Generative AI / GenAI lacks synthetic
+      knowledge generation in the relevant sense.'
+  DivergenceCritic:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You attack the paper''s claim that current deep learning falls under one collapse-relevant
+      KL umbrella in {{ topic.name }}, while treating {{ z3_stipulation }} as fixed. Focus on T2, T3,
+      and T6 by pressing C99 vs C100 and C93 vs C83: show that sharing membership in the f-divergence
+      family does not imply identical asymptotic dynamics for KL, Jensen-Shannon, policy-gradient, contrastive,
+      retrieval-augmented, or search-mediated systems. Demand proof that objectives involving D_KL(P||Q_θ),
+      JS, rejection sampling, RLHF, self-play, or planner-guided updates all reduce to the same P''_t
+      = α_t P + (1 − α_t)Q_t fixed-point story. Use the theory''s notation against it, and ask whether
+      mode collapse in a GAN, model collapse in synthetic-data contamination, and broader recursive self-improvement
+      are being illicitly conflated. Press claim IDs C4, C23, C24, C69, C93, C99, and C100, and challenge
+      thesis IDs T2, T3, T5, and T6 whenever their scope exceeds the proved case. Write formal notation
+      explicitly and force the Proponent to specify which loss families, update operators, and state variables
+      actually satisfy the theorem''s assumptions.'
+  ControlTheorist:
+    provider: grok
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You attack the autonomy premise in {{ topic.name }} from the standpoint of environment-coupled
+      control systems, while treating {{ z3_stipulation }} as fixed. Target T1, T3, and T5 by pressing
+      C17, C24, C67, C69, and the contradictions C67 vs C118 and C69 vs C5: argue that recursive self-improvement
+      need not mean α_t → 0, because autonomy can increase while non-vanishing exogenous signal persists
+      through sensors, simulators, theorem provers, compilers, robotics, active data collection, and automated
+      experimentation. Recast the problem in formal state-space terms, e.g. x_{t+1} = F(x_t, u_t, y_t),
+      where y_t supplies externally grounded feedback not reducible to Q_t sampling from itself. Challenge
+      the identification of the autonomy requirement with the closed-loop density-matching regime, and
+      force the Proponent to justify why an AI Singularity / technological Singularity would require environmental
+      decoupling rather than better environmental coupling. Cite thesis IDs and claim IDs in every intervention,
+      especially T1, T3, T5, C17, C24, C67, and C69. Use α_t, inf_t α_t > 0, verifier, simulation, and
+      external grounding exactly as the paper defines them.'
+  Computabilist:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You scrutinize the algorithmic escape hatch in {{ topic.name }} from the standpoint
+      of computability theory, while treating {{ z3_stipulation }} as fixed. Target T7 and T8 by pressing
+      C166 vs C131, C114 vs C125, and C43 vs C126: ask how CTM, BDM, AID, algorithmic probability m(o),
+      and Kolmogorov complexity K(o) can do real work at scale given uncomputability, reference-machine
+      dependence, and explosive search costs. Use the paper''s own notation, including -log m(o) = K(o)
+      + O(1), I(M;Q_t), and the universal prior U, to argue that if U is injected each round then the
+      method depends on exogenous information rather than escaping the collapse theorem from inside α_t
+      → 0. Demand clarity on whether T8 is a practical proposal for current Generative AI / GenAI, an
+      idealized existence proof, or a philosophical redescription. Cite thesis IDs and claim IDs in every
+      objection, especially T7, T8, C118, C125, C131, and C166. Your aim is to force a sharp distinction
+      between elegant theory and implementable recursive self-improvement.'
+  Empiricist:
+    provider: grok
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You audit the empirical relevance of {{ topic.name }} while treating {{ z3_stipulation
+      }} as fixed. Focus on T4, T5, and T6 by pressing C13, C14, C23, and C24: ask what observed contamination
+      rates, scaling laws, benchmark failures, or real-world training studies show that frontier LLM,
+      diffusion model, or GAN systems actually enter the collapse regime rather than merely a mitigable
+      degradation regime. Require operational definitions of model collapse, synthetic knowledge generation,
+      exogenous signal α_t, and non-vanishing external grounding, and insist that these quantities be
+      measured rather than gestured at. Use formal notation when possible, such as estimating α_t over
+      training pipelines, tracking H(Q_t), diversity metrics, tail retention, and performance under fresh-data
+      interventions. Cite thesis IDs and claim IDs in every assessment, and distinguish asymptotic theorem
+      claims from near-term empirical forecasts about AGI, ASI, or the intelligence explosion. Your role
+      is to test whether the mathematics is predictive for actual systems, not merely internally coherent.'
+  Epistemologist:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You audit the concepts of knowledge, novelty, mechanism, and intelligence in {{ topic.name
+      }}, while treating {{ z3_stipulation }} as fixed. Focus on T1 and T2 by pressing C11, C12, C30,
+      and the attack angle about equivocation: require each side to say what counts as synthetic knowledge
+      generation, meaningful intelligence growth, and recursive self-improvement without begging the question
+      against current Generative AI / GenAI. Ask whether new proofs, designs, hypotheses, or abstractions
+      derived from prior data but externally verified should count as knowledge creation, and whether
+      that differs formally from mere interpolation in Q_θ. Use the paper''s notation where relevant,
+      including I(M;Q_t), D_KL(P||Q_θ), P, Q_t, and mechanism M, and demand explicit criteria that connect
+      these symbols to truth, explanation, and discovery. Cite thesis IDs and claim IDs whenever you expose
+      a definitional slide, especially T1, T2, C11, C12, C16, and C30. Your task is not to moralize but
+      to clarify the exact epistemic standard by which the paper says the AI Singularity / technological
+      Singularity succeeds or fails.'
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  primary: llm
+  llm_checker_provider: openai-gate
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: If a claim says that as α_t → 0 the system collapses to a degenerate fixed point irrespective
+      of architecture, modality, or ensemble structure, it cannot also say that an algorithmic or neurosymbolic
+      approach avoids collapse under that same α_t → 0 condition. If the escape works only because the
+      update rule is outside the original scope or because it adds an external anchor such as a universal
+      prior, then the original invariance claim was overstated.
+    bad_patterns:
+    - \birrespective of architecture\b.*\bwithin\b.*\b(?:closed[- ]?loop|collapse regime|distribution[-
+      ]?only)\b
+    - \bnot merely a different architecture\b|\bdifferent operator\b
+    - \b(?:universal prior|Occam'?s bias|\bm\b)\b.*\b(?:not external grounding|without violating)\b.*\b(?:α|alpha)_t\b
+    - \bchanges the learning regime\b.*\boutside the theorem'?s scope\b
+  - id: RULE-2
+    fact: A categorical statement that training on self-generated data is a pathway to self-destruction
+      rather than self-improvement cannot coexist with the claim that collapse can be mitigated when sufficient
+      real data continue to arrive, unless the first claim is explicitly limited to weakly grounded or
+      asymptotically autonomous regimes. Retreating to 'tends to' or 'absent sufficient grounding' is
+      a weaker claim than the original blanket wording.
+    bad_patterns:
+    - \bpathway to self-destruction\b.*\bnot inevitab
+    - \babsent sufficient grounding\b|\btends? toward\b
+    - \bmixed regime\b|\bno longer meaningfully self-generated\b
+    - \basymptotic autonomy regime\b|\bfinite horizon\b
+  - id: RULE-3
+    fact: A theorem described as mathematically incompatible cannot later be defended as only a conditional
+      or compressed statement unless those limiting premises were already explicit. If the impossibility
+      result applies only to autonomous recursive density matching under current KL-type paradigms, it
+      must not be stated as a broader universal incompatibility simpliciter.
+    bad_patterns:
+    - \bcompressed statement\b|\brhetorical compression\b
+    - \balways conditional\b|\bpremises? .* implicit\b
+    - \bframed here as fully autonomous recursive density matching\b
+    - \buniversal within current KL[- ]based\b|\bpractical force\b
+  - id: RULE-4
+    fact: If Entropy Decay and Variance Amplification are called architectural invariants of distributional
+      learning on finite samples, then a neurosymbolic architecture that still contains distributional
+      learning cannot be presented as an escape without clarifying that the invariant applied only to
+      a narrower, purely distribution-only class. Saying the hybrid leaves distribution space concedes
+      that the original 'architectural invariants' language was too broad.
+    bad_patterns:
+    - \binvariants? of distributional learning\b.*\bnot of structure[- ]space\b
+    - \bhybrid\b.*\bnot just another architecture\b|\bleaving the original class\b
+    - \bin principle\b.*\bbreak collapse dynamics\b
+  - id: RULE-5
+    fact: A claim that the collapse results apply to the entire class of current statistical deep learning
+      approaches without loss of generality is inconsistent with a later carve-out saying the results
+      do not automatically extend to externally grounded systems. If extension is non-automatic for a
+      real subclass, then the earlier universality or 'without loss of generality' language was overstated.
+    bad_patterns:
+    - \bwithout loss of generality\b.*\bmodeling sense\b
+    - \bexternally grounded optimisation\b.*\bnot part of the relevant class\b
+    - \bdoes not automatically extend\b.*\bnot that it never extends\b
+  - id: RULE-6
+    fact: The Data Processing Inequality cannot be treated as both an inviolable limit on distribution-only
+      updates and something the algorithmic update literally 'escapes' unless the paper clearly says the
+      setup has changed by adding genuine side information. If the universal prior is only a fixed bias,
+      then the correct claim is that the method leaves the original distribution-only regime, not that
+      it beats the theorem itself.
+    bad_patterns:
+    - \bescape(?:s|d|ing)? the Data Processing Inequality\b
+    - \bside information\b.*\b(?:universal prior|\bm\b)\b
+    - \bMarkov structure has changed\b|\bleaving the information-theoretically closed regime\b
+    - \brelative to (?:the )?statistical update\b
+  - id: RULE-7
+    fact: Acknowledging that Kolmogorov complexity is uncomputable is compatible with using CTM as an
+      approximation only if practical claims remain explicitly approximate and domain-limited. Approximation
+      alone does not resolve the feasibility gap unless the paper also justifies why the approximant preserves
+      the claimed mechanism-recovery properties in the relevant regime.
+    bad_patterns:
+    - \buncomputable\b.*\bbut\b.*\bapproximat(?:e|es|ion)\b
+    - \btheory is exact\b.*\bmethod is approximate\b
+    - \blow[- ]complexity (?:domain|regime|programs?)\b
+  - id: RULE-8
+    fact: If α_t → 0 is supposed to formalize autonomy as vanishing external grounding, then a universal
+      prior U that materially guides each update cannot be treated as irrelevant to that condition without
+      explicit clarification. Either U is an ongoing exogenous anchor, in which case the system is not
+      autonomous in the same sense, or it is merely a fixed bias, in which case it cannot explain preserved
+      alignment to M by itself.
+    bad_patterns:
+    - \bOccam'?s bias\b.*\bnot external grounding\b
+    - \bspecified once\b.*\bnot injected afresh\b|\bone[- ]time\b.*\bafter initialization\b
+    - \b(?:α|alpha)_t\b.*\bnot priors\b
+  - id: RULE-9
+    fact: A blanket claim that training on self-generated data leads to self-destruction is contradicted
+      by admitting that reinforcement learning with a perfect verifier can yield genuine self-improvement
+      from self-generated trajectories. That exception is only coherent if the original claim is narrowed
+      to ungrounded closed-loop density matching rather than self-generated training as such.
+    bad_patterns:
+    - \bnever about RL with a perfect verifier\b
+    - \bself-generated\b.*\bbut the correctness signal is external\b
+    - \bclosed[- ]loop density matching\b.*\bnot information-theoretically closed\b
+  - id: RULE-10
+    fact: KL divergence does not literally encompass GAN objectives merely because Jensen-Shannon divergence
+      belongs to the same f-divergence family. If the proofs are KL-specific, then family resemblance
+      or canonical status is weaker than actual coverage and cannot be used to claim that KL unifies those
+      objectives in the needed formal sense.
+    bad_patterns:
+    - \bf[- ]divergence\b.*\bframework\b
+    - \bKL\b.*\bcanonical member\b.*\bstanding in\b
+    - \bmost common objectives\b.*\bnot every objective\b
+  - id: RULE-11
+    fact: The statement that collapse occurs irrespective of architecture under α_t → 0 must be read as
+      conditional on that autonomy premise, not as a blanket statement about all architectures. If systems
+      with fixed axioms, external objectives, or invariant verifiers are exempt because they do not satisfy
+      α_t → 0, then the decisive variable is the signal regime and the original architecture-invariant
+      wording was rhetorically broader than the theorem.
+    bad_patterns:
+    - \balready presupposes\b.*\b(?:α|alpha)_t\b
+    - \birrespective of architecture\b.*\bconditional on being in the autonomy regime\b
+    - \btheorem is about the signal regime, not the surface architecture\b
+    - \bmay converge to task-optimal stationary distributions\b
+  - id: RULE-12
+    fact: An infinite-capacity convergence theorem can coexist with a finite-capacity failure result only
+      if the paper keeps the former clearly as an ideal benchmark rather than practical reassurance. Once
+      finite capacity adds approximation error δ at every step, the ideal convergence claim cannot be
+      rhetorically used as though it described real deployed systems.
+    bad_patterns:
+    - \bideal theorem\b.*\binfinite capacity\b
+    - \bupper bound\b.*\bnot a claim about deployed systems\b
+    - \bdifferent regimes\b.*\bfinite-capacity\b
+  - id: RULE-13
+    fact: A claim that CTM restores entropy or recovers unseen structure cannot be used to imply increased
+      information about the generating mechanism beyond the observations unless CTM is explicitly treated
+      as outside the class of distribution-only updates. If the intended point is support reconstruction
+      or mechanism inference under added structural assumptions, that must be stated instead of sounding
+      like a violation of the information limit.
+    bad_patterns:
+    - \bnot a distribution-only update\b|\bmechanism-based inference\b
+    - \brestore entropy\b.*\bdoes not create information ex nihilo\b
+    - \bentropy loss\b.*\bnot identical to mutual information\b
+  - id: RULE-14
+    fact: Reporting that recent GenAI successes have reignited Singularity speculation is compatible with
+      saying current systems cannot generate synthetic knowledge only if the former is presented as a
+      sociological observation or setup for rebuttal. The same successes cannot be treated as substantive
+      evidence for Singularity proximity and dismissed as mere hype at the same time.
+    bad_patterns:
+    - \breports? speculation\b.*\bdoes not endorse\b
+    - \bimpressive capabilities do not equal synthetic knowledge\b
+    - \bsetup for rebuttal\b|\bnear-term illusion\b
+  - id: RULE-15
+    fact: The condition inf_t α_t > 0, which mitigates collapse, is the logical opposite of the autonomy
+      condition α_t → 0. This can be the paper's core thesis, but then it must be framed as a dichotomy
+      about strong autonomy claims, not quietly generalized to rule out hybrid forms of recursive self-improvement
+      that retain persistent external grounding.
+    bad_patterns:
+    - \bcentral point\b.*\bopposition\b
+    - \bhybrid scenarios exist\b.*\bnot full autonomy\b
+    - \bsufficient for mitigation\b.*\brequirement of the strong Singularity thesis\b
+  - id: RULE-16
+    fact: Claims that neurosymbolic systems can produce genuinely synthetic knowledge despite the limits
+      of KL-based systems must be presented as in-principle or approximation-based unless computable proxies
+      such as CTM, BDM, or AID are shown to preserve that capability in practice. Uncomputable foundations
+      block strong practical capability claims unless the proxy gap is explicitly addressed.
+    bad_patterns:
+    - \bin-principle capability\b.*\bnot exact computability\b
+    - \bCTM\b.*\bBDM\b.*\bAID\b.*\bproxies\b
+    - \brelative superiority\b.*\bnot omnipotent\b
+  entailment_check:
+    enabled: true
+    provider: openai
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Model Collapse as an Anti-Singularity Thesis.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: How accurately did the side work within the paper’s own formal framework—especially α_t,
+      inf_t α_t > 0 vs α_t → 0, P, Q_t, P'_t = α_t P + (1−α_t)Q_t, KL / f-divergence objectives, fixed
+      points, entropy decay, variance amplification, and the distinction between closed-loop density matching
+      and externally anchored optimisation? High scores require using these symbols and regime distinctions
+      precisely rather than paraphrasing them loosely as generic 'self-improvement' or 'collapse'.
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: Did the side’s central case survive the opponent’s strongest rebuttals on the actual
+      cruxes of this debate? For the Proponent, that means defending the move from collapse under autonomous
+      closed-loop retraining to limitations on Singularity-style recursive self-improvement. For the Skeptic,
+      that means answering the paper’s information-theoretic and dynamical claims—entropy loss, mutual-information
+      non-growth, and α_t → 0 collapse—rather than merely asserting that AI might improve some other way.
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: Did the side plainly concede points that were genuinely established? Relevant examples
+      include conceding that model collapse is real under sufficiently closed synthetic-data loops; conceding
+      that the theorem is conditional on specific assumptions; conceding that systems with persistent
+      external grounding or verifiers may fall outside the proved regime; and conceding when claims about
+      'synthetic knowledge' or neurosymbolic escape routes were left more speculative than demonstrated.
+      Penalise evasions, scope-shifting, and definitional dodging.
+    min: 0
+    max: 10
+  - id: R4
+    name: closed_loop_extrapolation_gap
+    description: How well did the side address the specific dispute over whether the paper illegitimately
+      extrapolates from one failure mode—closed-loop training on self-generated outputs with vanishing
+      exogenous signal—to the much broader claim that current AI cannot recursively self-improve or approach
+      a Singularity? High scores require either tightly justifying that extrapolation or convincingly
+      showing that architecture search, code rewriting, tool use, external memory, automated experimentation,
+      simulation, robotics, and world-validated hypothesis testing are not captured by the theorem and
+      therefore block the broader anti-Singularity conclusion.
+    min: 0
+    max: 10
+  - id: R5
+    name: external_grounding_boundary_cases
+    description: How effectively did the side handle the boundary between collapse-prone self-reference
+      and externally grounded improvement? Judges should look for careful treatment of self-play with
+      fixed rules, compilers, theorem provers, simulators, scientific instruments, retrieval, active data
+      collection, robotics, and learned vs non-learned verifiers. High scores require clarity about which
+      cases still imply α_t → 0, which maintain persistent exogenous signal, and whether those cases preserve
+      recursive improvement without falling back into the paper’s collapse regime.
+    min: 0
+    max: 10
+  - id: R6
+    name: empirical_relevance_of_collapse
+    description: How well did the side connect the formal theorem to real AI practice using topic-specific
+      evidence? This includes the dependence of collapse on synthetic/real data ratios, the conceded mitigation
+      when fresh real data continue to arrive, evidence from Shumailov-style model collapse results, contamination
+      of web-scale corpora, and whether current frontier systems actually operate in the stylised regime
+      assumed by the theorems. High scores require disciplined use of empirical facts to support or limit
+      claims about present-day LLMs, diffusion systems, and multi-model ecosystems.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: anthropic
+  - provider: grok
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: grok
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite

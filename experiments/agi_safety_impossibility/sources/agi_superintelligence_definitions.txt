@@ -1,0 +1,116 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: Key ideas from Meredith Ringel Morris et al., “Levels of AGI,” and Nick Bostrom’s definition of superintelligence
+SEARCH QUERY: "Levels of AGI" Morris pdf OR "Nick Bostrom" Superintelligence definition virtually all domains
+RATIONALE: Targets two widely cited primary authorities for formalizing AGI/superintelligence levels and definitions, directly relevant to the theory’s proposed AGI definition.
+
+========================================================================
+
+Here is a faithful debate-oriented summary of the two commonly cited authorities.
+
+1. “Levels of AGI” (Meredith Ringel Morris et al.)
+
+Core purpose:
+- The paper’s main aim is to make discussion of AGI more precise and less rhetorical.
+- It argues that “AGI” is often used too loosely, so researchers should separate:
+  1) how broad a system’s capabilities are, and
+  2) how strong its performance is relative to humans.
+
+Central idea:
+- The paper proposes a framework for classifying AI systems by levels rather than treating AGI as a single binary threshold.
+- The framework is meant to operationalize progress toward AGI in a way that is more measurable and comparable.
+
+Key structure of the framework:
+- Breadth/generalization dimension:
+  - Distinguishes narrow systems from more general systems.
+  - A genuinely more general system can perform across many tasks or domains, especially novel ones, rather than excelling only in a single benchmark or modality.
+- Performance level dimension:
+  - Distinguishes systems by how well they perform compared with humans.
+  - The core comparison is not just whether a model can do a task at all, but whether it performs at novice, competent, expert, or beyond-human levels.
+
+Widely cited takeaway:
+- AGI should not be defined only as “can do many tasks.”
+- It should also involve human-comparable or better performance across a wide range of economically or cognitively meaningful tasks.
+- This avoids calling a system “AGI” merely because it shows some flexibility while still being weak or brittle.
+
+Important distinctions the paper emphasizes:
+- Narrow vs general capability:
+  - A system that is excellent in one domain is still narrow, even if it exceeds humans there.
+- Generality vs autonomy [UNCERTAIN if framed exactly this way in every section]:
+  - A system may have broad capabilities but still require substantial human scaffolding.
+  - So claims about AGI should not blur together competence, reliability, and independence.
+- Benchmark success vs real-world competence:
+  - Passing tests is not the same as robustly handling open-ended, real-world tasks.
+- Human-level vs superhuman:
+  - The paper treats these as separate levels, not a single category.
+
+Why this matters for AGI debates:
+- It gives a non-binary vocabulary: instead of asking “is this AGI or not?”, one can ask what level of breadth and performance a system has reached.
+- It pushes debate toward explicit standards: broad coverage, human-relative performance, and robustness across tasks.
+- It resists inflated claims based on isolated demos.
+
+Practical implication:
+- Under this framework, a system would count as more AGI-like only if it combines:
+  - broad applicability across many domains/tasks, and
+  - human-level or higher performance across that broad range.
+- A narrow superhuman system or a broad but weak system would not by itself satisfy the strongest AGI claim.
+
+2. Nick Bostrom, Superintelligence
+
+Core definition:
+- Bostrom’s widely cited definition is that superintelligence is an intellect that greatly exceeds human cognitive performance in virtually all domains of interest.
+
+What is doing the work in that definition:
+- “Greatly exceeds human cognitive performance”:
+  - Superintelligence is not just slightly better than humans; it is substantially above the human range.
+- “Virtually all domains of interest”:
+  - The superiority must be broad, not narrow.
+  - This excludes systems that are merely extraordinary in one or a few specialized areas.
+- “Intellect”:
+  - The focus is on general cognitive power, not just speed, memory, or one benchmark result in isolation.
+
+Implications of Bostrom’s definition:
+- Breadth is essential:
+  - A chess engine or protein-folding model would not qualify as superintelligence merely by being superhuman in its niche.
+- Human comparison is the baseline:
+  - The definition uses human cognitive performance as the reference point.
+- The standard is domain-general competence:
+  - “Virtually all domains of interest” implies near-comprehensive superiority across the kinds of tasks that matter for science, strategy, social interaction, planning, invention, and problem-solving.
+
+How this relates to AGI:
+- Bostrom’s definition is usually read as describing a level beyond AGI.
+- In broad debate terms:
+  - AGI = approximately human-level general intelligence across many domains.
+  - Superintelligence = far above humans across almost all such domains.
+- So Bostrom’s definition is not mainly a definition of AGI itself; it is a definition of a stronger, post-AGI condition.
+
+Bostrom’s broader conceptual framing:
+- He also distinguishes forms of superintelligence such as speed, collective, and quality superintelligence [UNCERTAIN if you need this level of detail for your use case].
+- The key idea is that superintelligence can arise not only from “thinking like a human but more,” but from multiple ways of surpassing human cognition.
+
+Most relevant debate takeaway:
+- If your theory needs a formal threshold for superintelligence, Bostrom gives a very strong breadth-based criterion: beyond-human performance in almost every cognitively relevant domain.
+- If your theory needs a graded framework for AGI, “Levels of AGI” is more useful because it explicitly separates breadth and capability level and avoids a simple yes/no label.
+
+Bottom-line comparison:
+- “Levels of AGI” = a staged taxonomy for talking about progress toward general intelligence.
+- Bostrom’s “superintelligence” = a high-end endpoint where a system is vastly better than humans across nearly all domains that matter.
+
+If useful, I can also turn this into a 1-paragraph debate card, a comparison table, or a citation-safe definition section for a paper or brief.
+
+========================================================================
+
+KEY CONCEPTS:
+  - AGI should be treated as a graded spectrum, not a binary label
+  - The Morris et al. framework separates breadth of capability from level of performance
+  - A system is not AGI-like merely because it is broad; it must also be human-level or better across many tasks
+  - Benchmark success does not automatically equal robust real-world general intelligence
+  - Bostrom defines superintelligence as intellect that greatly exceeds humans in virtually all domains of interest
+  - Bostrom’s definition is broad and domain-general, not narrow or task-specific
+  - Superintelligence is typically understood as a level beyond AGI, not identical to AGI
+  - For debate, Morris et al. are useful for levels/taxonomy, while Bostrom is useful for the upper-bound definition
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.

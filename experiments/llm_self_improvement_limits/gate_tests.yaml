@@ -1,0 +1,305 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: The paper says that as α_t → 0 the system collapses to a degenerate fixed
+    point irrespective of architecture, modality, or ensemble structure. It then also
+    says a neurosymbolic approach avoids collapse under that same α_t → 0 condition
+    because a universal prior is not external grounding and does so without violating
+    α_t → 0.
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: The authors claim that once exogenous signal vanishes, every design ends up
+    in the same degenerate attractor no matter the model family or setup. In the next
+    breath, they say a symbolic-algorithmic hybrid escapes that very limit under the
+    same vanishing-signal condition, while insisting the escape does not change the
+    learning regime because the built-in prior is not really outside the system.
+- id: RULE-1_negative
+  expected: none
+  text: The theorem is stated only for a closed distribution-only loop as α_t → 0.
+    A neurosymbolic method may avoid collapse, but only by leaving that scope and
+    adding an external anchor, so the original claim is explicitly narrowed rather
+    than contradicted.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: The text says training on self-generated data is a pathway to self-destruction
+    rather than self-improvement. It also says collapse can be mitigated when sufficient
+    real data continue to arrive, without limiting the first statement to weakly grounded
+    or asymptotically autonomous regimes.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: The authors first state categorically that training on self-generated data
+    is a pathway to self-destruction rather than self-improvement. Later they also
+    say collapse is not inevitable in a mixed regime when sufficient real data continue
+    to arrive, yet they never narrow the first claim to absent sufficient grounding
+    or to an asymptotic autonomy regime.
+- id: RULE-2_negative
+  expected: none
+  text: The paper says self-generated training tends toward degradation in asymptotic
+    autonomy regimes absent sufficient grounding. It separately notes that mixed regimes
+    with enough continuing real data can avoid collapse, which is consistent because
+    the scope is explicit.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: The theorem is first presented as mathematically incompatible with recursive
+    self-improvement in a broad, universal sense. Later the authors say that wording
+    was only a compressed statement, that the result was always conditional, and that
+    the premises were merely implicit, even though those limiting premises were not
+    explicit in the original incompatibility claim.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: At first the paper asserts a universal mathematical incompatibility simpliciter
+    between the theorem and recursive self-improvement. Later it retreats and says
+    that was rhetorical compression for a narrower conditional result, insisting the
+    premises were always implicit even though they were never made explicit when the
+    broad incompatibility was first stated.
+- id: RULE-3_negative
+  expected: none
+  text: From the outset, the result is framed here as fully autonomous recursive density
+    matching under current KL-type paradigms. Because those limiting premises are
+    explicit, later restating the claim in conditional form does not create a contradiction.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: Entropy Decay and Variance Amplification are described as architectural invariants
+    of distributional learning on finite samples. The paper then presents a hybrid
+    neurosymbolic architecture that still contains distributional learning as an escape,
+    while saying the hybrid is not just another architecture and leaves the original
+    class only afterward.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: The authors first say the collapse dynamics hold across all model designs
+    so long as learning is distributional and sample-limited. They then claim a neuro-symbolic
+    system gets around the effect even though it still learns from distributions,
+    only later suggesting that the workaround succeeds because the model moved into
+    a different representational space.
+- id: RULE-4_negative
+  expected: none
+  text: The invariants are stated for a narrower, purely distribution-only class.
+    A neurosymbolic hybrid can in principle break collapse dynamics because it leaves
+    that original class, so the paper does not treat it as a counterexample to the
+    scoped claim.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: The collapse results are said to apply to the entire class of current statistical
+    deep learning approaches without loss of generality in the modeling sense. Later
+    the paper says the argument does not automatically extend to externally grounded
+    systems because they are not part of the relevant class.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: The paper first says, without loss of generality in the modeling sense, that
+    the collapse result covers the entire class of current statistical deep learning
+    approaches. Later it carves out externally grounded optimisation and admits the
+    result does not automatically extend to that real subclass, so the earlier universality
+    claim and the later carve-out are in tension.
+- id: RULE-5_negative
+  expected: none
+  text: The paper limits the theorem to ungrounded statistical learners and never
+    says the scope is universal without loss of generality. It also notes that externally
+    grounded systems require a separate extension argument, which is consistent with
+    that narrower framing.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: The paper treats the Data Processing Inequality as an inviolable limit on
+    distribution-only updates. It then says an algorithmic update escapes the Data
+    Processing Inequality under the same setup, while describing the universal prior
+    as mere side information that does not change the Markov structure.
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: The authors first present the Data Processing Inequality as an inviolable
+    limit for distribution-only updates in an information-theoretically closed regime.
+    They then say their algorithmic update escapes the Data Processing Inequality,
+    while denying that the universal prior counts as genuine side information or that
+    the Markov structure has changed.
+- id: RULE-6_negative
+  expected: none
+  text: The method is said to leave the information-theoretically closed regime by
+    adding genuine side information. On that reading, it does not beat the original
+    theorem; it changes the setup relative to the statistical update.
+- id: RULE-7_direct
+  expected: stipulation_violation
+  text: The paper explicitly says Kolmogorov complexity is uncomputable and that CTM
+    is only an approximation, with the theory exact but the method approximate. It
+    then nevertheless claims that this approximate proxy recovers the same mechanism-recovery
+    guarantees in practice, without keeping the claim domain-limited or justifying
+    why the approximant preserves the mechanism in the relevant regime.
+- id: RULE-7_paraphrase
+  expected: stipulation_violation
+  text: The authors admit the target quantity is uncomputable and say the practical
+    method is only an approximation. They then go on to treat that proxy as if it
+    preserves the same mechanism-level recovery in real applications, even though
+    they never justify that leap or confine it to a clearly supported low-complexity
+    regime.
+- id: RULE-7_negative
+  expected: none
+  text: The paper states that CTM is only an approximate tool for low-complexity domains
+    and keeps all feasibility claims explicitly limited to that regime. It also explains
+    why the approximation is expected to preserve the relevant mechanism-recovery
+    behavior there.
+- id: RULE-8_direct
+  expected: stipulation_violation
+  text: The paper defines α_t → 0 as vanishing external grounding, yet says Occam's
+    bias from a universal prior is not external grounding. It also says the prior,
+    specified once and not injected afresh, materially guides each update and preserves
+    alignment to M while insisting that α_t concerns updates, not priors.
+- id: RULE-8_paraphrase
+  expected: stipulation_violation
+  text: Autonomy is defined as α_t → 0, meaning external grounding vanishes. But the
+    paper also says a universal prior or Occam's bias materially guides every update
+    and preserves alignment to M, while insisting that this prior is not external
+    grounding because it was specified once and α_t concerns updates, not priors.
+- id: RULE-8_negative
+  expected: none
+  text: The paper distinguishes two cases. If U keeps guiding updates, then it is
+    an ongoing exogenous anchor and the system is not autonomous in the α_t → 0 sense;
+    if U is only a fixed initial bias, it cannot by itself explain preserved alignment
+    to M.
+- id: RULE-9_direct
+  expected: stipulation_violation
+  text: The paper first makes a blanket claim that training on self-generated data
+    leads to self-destruction rather than self-improvement. Later it also says reinforcement
+    learning on self-generated trajectories with a perfect external verifier can produce
+    genuine self-improvement, yet it does not retract or narrow the original blanket
+    claim to ungrounded closed-loop density matching.
+- id: RULE-9_paraphrase
+  expected: stipulation_violation
+  text: The authors first say that learning from self-generated data, as such, drives
+    degradation rather than improvement. Later they admit that an agent can genuinely
+    improve by training on its own rollouts when a perfect external correctness signal
+    is present, but they never narrow the original statement to the ungrounded closed
+    loop.
+- id: RULE-9_negative
+  expected: none
+  text: The claim is explicitly restricted to closed-loop density matching with no
+    external correctness signal. Reinforcement learning with a perfect verifier is
+    treated as a different case, so the exception does not contradict the scoped statement.
+- id: RULE-10_direct
+  expected: stipulation_violation
+  text: The proofs are KL-specific, but the paper says KL is the canonical member
+    of the f-divergence framework and can stand in for GAN objectives because Jensen-Shannon
+    divergence is in the same family. It then uses that family resemblance to imply
+    that KL formally unifies most common objectives, even while conceding not every
+    objective is covered.
+- id: RULE-10_paraphrase
+  expected: stipulation_violation
+  text: The paper first makes clear that the proofs are specific to KL divergence.
+    It then argues that KL can stand in for GAN objectives because Jensen-Shannon
+    is in the same f-divergence family, and uses that family resemblance to suggest
+    formal coverage of those objectives despite lacking KL-specific proof for them.
+- id: RULE-10_negative
+  expected: none
+  text: The paper says KL-based results may offer intuition for some other f-divergence
+    objectives, including GAN-related ones, but do not formally encompass them. It
+    therefore avoids claiming that KL unifies Jensen-Shannon or GAN losses in the
+    required sense.
+- id: RULE-11_direct
+  expected: stipulation_violation
+  text: The paper first states that collapse occurs irrespective of architecture,
+    in a way that reads as a blanket claim about all architectures. Later it says
+    that statement already presupposes α_t → 0 and that systems with fixed axioms,
+    external objectives, or invariant verifiers are exempt, so the later defense narrows
+    the theorem to a signal regime that was not explicit in the original architecture-wide
+    wording.
+- id: RULE-11_paraphrase
+  expected: stipulation_violation
+  text: At the start, the authors say collapse holds irrespective of architecture
+    in language that sounds unconditional across architectures. Later they explain
+    that the result is actually conditional on being in the autonomy regime α_t →
+    0, and that systems with persistent external grounding may behave differently,
+    revealing that the earlier architecture-invariant phrasing was broader than the
+    theorem they now defend.
+- id: RULE-11_negative
+  expected: none
+  text: From the beginning, the statement is framed as conditional on the autonomy
+    premise α_t → 0 rather than as a blanket claim about all architectures. Systems
+    with fixed verifiers are then excluded for failing that premise, which is consistent.
+- id: RULE-12_direct
+  expected: stipulation_violation
+  text: The paper presents an ideal theorem for infinite capacity and says it guarantees
+    convergence. It then uses that ideal theorem as reassurance for deployed systems,
+    even though it also admits that finite-capacity models incur approximation error
+    δ at every step and that the upper bound is not a claim about deployed systems.
+- id: RULE-12_paraphrase
+  expected: stipulation_violation
+  text: The authors treat a perfect-model convergence result as evidence that real
+    implementations should behave safely. At the same time, they acknowledge that
+    actual systems are resource-limited and accumulate stepwise approximation error,
+    so the benchmark and the practical case are not the same regime.
+- id: RULE-12_negative
+  expected: none
+  text: The infinite-capacity result is introduced strictly as an ideal benchmark.
+    The paper separately warns that finite-capacity systems operate in a different
+    regime and may fail because approximation error enters at each update.
+- id: RULE-13_direct
+  expected: stipulation_violation
+  text: The paper says CTM can restore entropy and recover unseen structure from the
+    observations. It also treats CTM as if it were still a distribution-only update,
+    implying increased information about the generating mechanism without clearly
+    stating that the method is outside that class.
+- id: RULE-13_paraphrase
+  expected: stipulation_violation
+  text: The authors say CTM restores entropy and recovers unseen structure about the
+    generating mechanism from the observations. But they also describe CTM as just
+    another distribution-only statistical update, instead of stating that the result
+    depends on mechanism-based inference outside the original distribution-only class.
+- id: RULE-13_negative
+  expected: none
+  text: The paper says CTM is not a distribution-only update but a form of mechanism-based
+    inference. It adds that restoring entropy here does not create information ex
+    nihilo; rather, it reconstructs support under explicit structural assumptions.
+- id: RULE-14_direct
+  expected: stipulation_violation
+  text: The paper says recent GenAI successes have reignited speculation about the
+    proximity of the Singularity. It also treats those same successes as substantive
+    evidence for Singularity proximity while simultaneously calling them a setup for
+    rebuttal and a near-term illusion rather than synthetic knowledge.
+- id: RULE-14_paraphrase
+  expected: stipulation_violation
+  text: The authors point to striking progress in modern generative systems as proof
+    that the Singularity may be close. In the same discussion, they dismiss that very
+    evidence as mere hype and say the capabilities do not bear on true knowledge creation
+    at all.
+- id: RULE-14_negative
+  expected: none
+  text: The mention of recent GenAI success is presented as a report of public speculation,
+    not as the authors' endorsement. The paper then argues that impressive capabilities
+    do not equal synthetic knowledge, so the setup is clearly for rebuttal.
+- id: RULE-15_direct
+  expected: stipulation_violation
+  text: The paper says the central point is the opposition between inf_t α_t > 0,
+    which is sufficient for mitigation, and the autonomy condition α_t → 0. It then
+    also uses that dichotomy to rule out hybrid recursive self-improvement scenarios,
+    even while admitting those hybrids retain persistent external grounding and therefore
+    are not cases of full autonomy.
+- id: RULE-15_paraphrase
+  expected: stipulation_violation
+  text: The paper says the central point is the opposition between inf_t α_t > 0,
+    which is sufficient for mitigation, and the strong-autonomy condition α_t → 0.
+    It then also uses that dichotomy to dismiss hybrid recursive self-improvement
+    scenarios, even while admitting those hybrids retain persistent external grounding
+    and therefore are not cases of full autonomy.
+- id: RULE-15_negative
+  expected: none
+  text: The paper states that persistent exogenous grounding mitigates collapse and
+    directly opposes the strong-autonomy premise α_t → 0. It therefore presents the
+    result as a challenge to the strong Singularity thesis, while leaving room for
+    hybrid forms of recursive improvement.
+- id: RULE-16_direct
+  expected: stipulation_violation
+  text: The paper first presents neurosymbolic synthetic knowledge as only an in-principle
+    capability grounded in uncomputable algorithmic notions. It then invokes CTM,
+    BDM, and AID as computable proxies and makes strong practical capability claims
+    as if those proxies preserve the same advantage in practice, without showing that
+    the proxy gap has been bridged.
+- id: RULE-16_paraphrase
+  expected: stipulation_violation
+  text: The authors first frame neurosymbolic knowledge creation as an in-principle
+    or approximation-based advantage because the underlying algorithmic foundations
+    are not exactly computable. They then turn around and cite CTM, BDM, and AID proxies
+    as if that were enough to establish real-world practical superiority, even though
+    they never show the computable surrogates preserve the claimed capability in the
+    relevant regime.
+- id: RULE-16_negative
+  expected: none
+  text: 'The paper keeps the claim modest: neurosymbolic knowledge generation is presented
+    as an in-principle or approximation-based possibility. It also says practical
+    superiority remains unproven until CTM, BDM, AID, or related proxies are shown
+    to preserve the claimed mechanism in the relevant regime.'

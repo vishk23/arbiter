@@ -1,0 +1,54 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: Gödel (1931), On Formally Undecidable Propositions: key ideas
+SEARCH QUERY: "Kurt Gödel" 1931 "On Formally Undecidable Propositions" English translation pdf
+RATIONALE: Targets Gödel’s original incompleteness paper, the canonical primary source behind the theory’s self-reference and provability claims.
+
+========================================================================
+
+Gödel’s 1931 paper develops a precise method for turning statements about formulas and proofs into arithmetic statements, and then uses that method to show that sufficiently strong formal systems for arithmetic have inherent limits.
+
+The paper’s central target is a formal theory like the one used in Principia Mathematica, or any similar axiomatized system strong enough to express basic arithmetic. Gödel is interested in systems whose axioms and rules are effectively specified, so that there is a mechanical way to check whether a string of symbols is a formula, an axiom, or a valid proof.
+
+The first major idea is arithmetization of syntax. Gödel assigns natural numbers to symbols, formulas, and proof-sequences. This makes metamathematical facts such as “x is the Gödel number of a proof of y” expressible as numerical relations. Once syntax is coded numerically, the system can talk indirectly about its own formulas and proofs using arithmetic.
+
+A second key step is representability: many computable or primitive recursive relations can be represented inside the formal system by formulas. So not only can proof-checking be described from outside the system, but corresponding arithmetic formulas can be written inside the system to say that a number codes a proof of a certain formula.
+
+Using this coding machinery, Gödel constructs a sentence that effectively says of itself: “I am not provable in this system.” He does this by a diagonal or self-substitution method: a formula with one free variable is built so that, when applied to its own Gödel number, it yields a sentence referring to itself. The result is the canonical self-referential sentence behind the incompleteness phenomenon.
+
+The first incompleteness result, in the original 1931 form, is that if the system is [UNCERTAIN: in Gödel’s original formulation, the key assumption is typically stated as omega-consistency, not merely consistency], then this self-referential sentence is neither provable nor refutable in the system. If the system proved the sentence, it would in effect prove a false claim about there being no proof of that very sentence. If it proved the negation, then under Gödel’s stronger soundness-style assumption, the system would again collapse into contradiction at the metalevel. So the system is incomplete: there are arithmetic truths not decidable within it.
+
+A closely related conclusion is that truth in arithmetic outruns formal provability in any one such system. Gödel’s undecidable sentence is intended to be true in the ordinary interpretation of the natural numbers if the system is sound in the relevant way, but it is not derivable by the system’s formal rules.
+
+The paper also derives a limit on internal consistency proofs. Roughly, Gödel shows that a sufficiently strong system cannot establish its own consistency by means formalizable within itself, assuming it really is consistent in the relevant sense. This is the seed of what is now called the second incompleteness theorem, though the exact modern formulation is somewhat cleaner than Gödel’s original 1931 presentation. [UNCERTAIN: the original paper’s exact assumptions and formulation differ in detail from the later textbook version.]
+
+Another important theme is the distinction between semantic truth and syntactic derivability. Gödel’s argument does not merely say that mathematicians have not yet found all proofs; it says there is a structural gap between what is true about the natural numbers and what can be captured by any single effective formal calculus strong enough for arithmetic.
+
+The logical structure of the paper can be summarized as follows:
+1. Define a formal arithmetic system precisely enough that proofs can be mechanically checked.
+2. Encode formulas and proofs by natural numbers.
+3. Show that key recursive relations about these codes are representable inside the system.
+4. Construct a sentence that refers to its own unprovability.
+5. Prove that, under the relevant consistency-style assumptions, this sentence cannot be decided by the system.
+6. Conclude that no such system can be both complete and adequate for arithmetic, and that it cannot fully certify its own consistency from within.
+
+For debate purposes, the most important takeaway is that Gödel’s original paper is not just a vague paradox about self-reference. It is a highly technical theorem proving that any effectively axiomatized formal system with enough arithmetic strength will leave some arithmetic propositions undecidable, because the system can encode statements about its own proofs and thereby generate a sentence that defeats complete formal capture.
+
+========================================================================
+
+KEY CONCEPTS:
+  - Arithmetization of syntax
+  - Gödel numbering
+  - Representability of recursive or primitive recursive relations
+  - Formal systems strong enough for arithmetic
+  - Self-reference via diagonalization
+  - Undecidable sentence
+  - Difference between provability and truth
+  - Incompleteness of effective formal systems
+  - Omega-consistency [historically central in the 1931 paper]
+  - Limits on proving consistency within the system
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.

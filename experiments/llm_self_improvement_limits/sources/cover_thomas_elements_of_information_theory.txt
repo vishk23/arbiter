@@ -1,0 +1,74 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: Cover & Thomas: Relative Entropy and the Data Processing Inequality
+SEARCH QUERY: "Cover Thomas" "Elements of Information Theory" "data processing inequality" "relative entropy"
+RATIONALE: Authoritative textbook source for KL divergence, relative entropy, and the Data Processing Inequality, which are core to the paper's impossibility argument.
+
+========================================================================
+
+In Cover and Thomas, **relative entropy** and the **data processing inequality (DPI)** are presented as basic tools for comparing probability laws and for formalizing the idea that information cannot be increased by post-processing.
+
+**Relative entropy / KL divergence.** For two distributions \(P\) and \(Q\) on the same alphabet, the relative entropy is
+\[
+D(P\|Q)=\sum_x P(x)\log \frac{P(x)}{Q(x)}
+\]
+in the discrete case, with the usual conventions when probabilities are zero; there is an analogous expectation/integral form in general settings. Cover and Thomas emphasize several standard facts:
+
+1. **Nonnegativity (Gibbs’ inequality):** \(D(P\|Q)\ge 0\), with equality iff \(P=Q\) almost everywhere.
+2. **Not a metric:** it is generally asymmetric and does not satisfy the triangle inequality.
+3. **Interpretation:** it measures how different two distributions are, often understood as a penalty for using \(Q\) when the true law is \(P\), or as a notion of statistical distinguishability.
+4. **Connection to entropy and mutual information:** mutual information can be written as a relative entropy,
+   \[
+   I(X;Y)=D(P_{XY}\|P_XP_Y),
+   \]
+   so mutual information is zero exactly when \(X\) and \(Y\) are independent.
+
+A recurring theme in the book is that relative entropy has strong **convexity/monotonicity** properties, often proved with the **log-sum inequality**, which is one of the main technical tools behind these results.
+
+**Data Processing Inequality.** The textbook’s central message is that if data are passed through a channel or transformed further, one cannot increase the information they contain about an earlier variable.
+
+A standard formulation is: if \(X\to Y\to Z\) is a Markov chain, then
+\[
+I(X;Z)\le I(X;Y).
+\]
+That is, once \(Y\) is produced from \(X\), any later processing of \(Y\) into \(Z\) cannot create new information about \(X\). This captures the slogan that **processing cannot increase information**.
+
+Cover and Thomas also present the corresponding statement for **relative entropy**: if the same channel \(W\) is applied to two input distributions \(P\) and \(Q\), producing output distributions \(PW\) and \(QW\), then
+\[
+D(PW\|QW)\le D(P\|Q).
+\]
+So a stochastic map cannot make two distributions more distinguishable than they were before processing. This is often the form most useful in impossibility arguments: once two hypotheses or worlds are mapped through the same observation process, their KL divergence can only shrink, never grow.
+
+**Why this matters conceptually.** In debate or proof settings, Cover and Thomas are often cited for the following structure:
+
+- KL divergence measures distinguishability between two distributions.
+- Mutual information is KL divergence between the joint law and the product of marginals.
+- Any channel, coarse-graining, summarization, or post-processing can only reduce distinguishability/information.
+- Therefore, if some task is impossible when judged at the raw-distribution level, it remains impossible after further processing; conversely, no post-processing can recover information that the channel has already discarded.
+
+**Useful related identities and intuitions from the textbook tradition:**
+
+- **Chain-rule style decompositions** show how KL divergence and mutual information split across stages of a probabilistic model.
+- **Sufficient statistics/equality cases:** equality in DPI occurs only in special cases where the later variable preserves all the information relevant to the earlier comparison; informally, no information is lost in the processing. The precise characterization depends on the setting.
+- **Statistical decision meaning:** because KL contracts under channels, observation noise or aggregation can only make inference harder, never easier in an information-theoretic sense.
+
+For your paper context, the key authoritative takeaway from Cover and Thomas is: **relative entropy is the canonical divergence used to quantify distinguishability, and the data processing inequality says that any common transformation of two distributions can only decrease that distinguishability.** That is exactly the kind of principle used in impossibility arguments based on KL divergence.
+
+========================================================================
+
+KEY CONCEPTS:
+  - Relative entropy (KL divergence)
+  - Gibbs' inequality / nonnegativity
+  - Mutual information as KL divergence
+  - Data Processing Inequality (DPI)
+  - Markov chain X→Y→Z
+  - Contraction of KL divergence under channels
+  - Log-sum inequality
+  - Statistical distinguishability
+  - Post-processing cannot increase information
+  - Impossibility arguments via information loss
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.

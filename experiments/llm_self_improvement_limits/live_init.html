@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Arbiter — Model Collapse as an Anti-Singularity Thesis</title>
+  <meta http-equiv="refresh" content="5">
+  <style>
+    body { font-family: 'SF Mono', 'Fira Code', monospace; margin: 0; padding: 2rem; background: #0d1117; color: #c9d1d9; }
+    h1 { color: #58a6ff; font-size: 1.3rem; margin: 0 0 0.3rem 0; }
+    .stage { color: #8b949e; font-size: 0.9rem; margin-bottom: 1.5rem; border-bottom: 1px solid #21262d; padding-bottom: 0.8rem; }
+    .content { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 1.2rem; overflow: auto; max-height: 85vh; }
+    pre { white-space: pre-wrap; font-size: 0.82rem; line-height: 1.6; margin: 0; }
+    /* Argdown syntax highlighting */
+    .ad-statement { color: #7ee787; font-weight: bold; }
+    .ad-argument { color: #ff7b72; font-weight: bold; }
+    .ad-tag { color: #d2a8ff; font-style: italic; }
+    .ad-comment { color: #8b949e; font-style: italic; }
+    .ad-relation-support { color: #3fb950; }
+    .ad-relation-attack { color: #f85149; }
+    .ad-section { color: #58a6ff; font-weight: bold; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>Arbiter — Model Collapse as an Anti-Singularity Thesis</h1>
+  <div class="stage">Step 4 — Config Generated · auto-refreshes every 5s</div>
+  <div class="content"><pre><span class="ad-section">=== CLAIMS (168) ===</span>
+
+  C1: The technological or AI Singularity posits a future inflection point where artificial intelligence surpasses human intel
+       [definitional]
+
+  C2: Central to the Singularity hypothesis is the concept of recursive self-improvement: an AI system that can inspect and en
+       [definitional]
+       depends: C1
+
+  C3: Recent successes of Generative AI, particularly LLMs like GPT-5 and Diffusion Models, have reignited speculation about t
+       [empirical]
+
+  C4: The assumption that scaling generative models and enabling them to learn from data they generate might trigger recursive
+       [logical]
+       depends: C2
+
+  C5: Training on self-generated data is a pathway to self-destruction rather than self-improvement.
+       [logical]
+       depends: C4
+
+  C6: Model collapse (the curse of recursion) describes the progressive degradation of a model's performance as its training d
+       [definitional]
+
+  C7: Rather than ascending towards superintelligence, a recursively self-training model's internal representation contracts a
+       [logical]
+       depends: C6
+
+  C8: Recursive self-training can be modelled as a dynamical system on the space of probability distributions.
+       [structural] [FORMAL]
+
+  C9: Under the condition of a diminishing supply of fresh authentic data, the dynamical system of recursive self-training is 
+       [logical] [FORMAL]
+       depends: C8
+
+  C10: The model collapse conclusion applies not only to single LLMs but also to complex ecosystems of interacting models and m
+       [logical]
+       depends: C9
+
+  C11: Current GenAI is fundamentally an analytic engine, excelling at analysing, recombining, and interpolating patterns in hu
+       [logical]
+
+  C12: The Singularity requires a capacity for synthetic knowledge generation, which is absent in the current GenAI paradigm.
+       [logical]
+       depends: C11, C1
+
+  C13: Degenerative dynamics in recursive self-training depend critically on the proportion of synthetic to real data.
+       [empirical]
+
+  C14: Model collapse can be mitigated when real data continue to accumulate at a sufficient rate.
+       [empirical]
+       depends: C13
+
+  C15: Maintaining inf_t α_t &gt; 0 (where α_t denotes the proportion of exogenous signal) corresponds to maintaining sufficient r
+       [definitional] [FORMAL]
+       depends: C14
+
+  C16: Strong versions of the Singularity/AGI/ASI hypotheses typically posit systems that require progressively less human or e
+       [empirical]
+
+  C17: The autonomy requirement of Singularity hypotheses implies that the relative contribution of externally grounded signal 
+       [logical] [FORMAL]
+       depends: C16
+
+  C18: If the proportion of exogenous, externally grounded signal α_t vanishes asymptotically (α_t → 0), the recursive self-tra
+       [logical] [FORMAL]
+       depends: C8
+
+  C19: There are two fundamental failure modes of recursive self-training: Entropy Decay and Variance Amplification.
+       [structural]
+       depends: C18
+
+  C20: Entropy Decay occurs when finite sampling effects induce monotonic loss of distributional diversity.
+       [definitional]
+       depends: C19
+
+  C21: Variance Amplification occurs when the absence of persistent grounding causes distributional drift via a random-walk mec
+       [definitional]
+       depends: C19
+
+  C22: Entropy Decay and Variance Amplification are architectural invariants of distributional learning on finite samples.
+       [logical]
+       depends: C20, C21
+
+  C23: The collapse results apply specifically to closed-loop density matching without persistent external signal.
+       [logical]
+       depends: C18
+
+  C24: Systems with non-vanishing exogenous grounding fall outside the collapse regime.
+       [logical] [FORMAL]
+       depends: C23
+
+  C25: In the autonomy regime where α_t → 0, collapse follows under KL-based objectives.
+       [logical] [FORMAL]
+       depends: C17, C18
+
+  C26: Neurosymbolic integration based on algorithmic probability and program synthesis is proposed to overcome the limits of r
+       [structural]
+       depends: C25
+
+  C27: The Coding Theorem Method (CTM) enables identification of generative mechanisms rather than mere correlations.
+       [definitional]
+
+  C28: Fully autonomous recursive density matching leads to degenerative fixed points.
+       [logical] [FORMAL]
+       depends: C18, C25
+
+  C29: Externally anchored or mechanism-based approaches operate under fundamentally different asymptotic dynamics than closed-
+       [logical]
+       depends: C28, C24
+
+  C30: The intelligence explosion hypothesis requires two key preconditions: (1) an AI intelligent enough to understand and mod
+       [logical]
+       depends: C1
+
+  C31: Proponents of the Singularity often conflate computational capacity with the architectural leaps required for genuine in
+       [logical]
+       depends: C30
+
+  C32: The core question for the Singularity is not whether a machine can be made more powerful, but whether it can make itself
+       [logical]
+       depends: C31
+
+  C33: Modern GenAI models share a common mathematical foundation: they are designed to learn and sample from a complex, high-d
+       [structural]
+
+  C34: Autoregressive models (e.g., LLMs) learn the conditional probability of the next token given preceding ones, and trainin
+       [structural] [FORMAL]
+       depends: C33
+
+  C35: Diffusion models learn to reverse a diffusion process that gradually adds noise to data, implicitly defining a complex d
+       [structural]
+       depends: C33
+
+  C36: GANs use a two-player game where the generator implicitly defines the model distribution Q_θ(x) and the discriminator gu
+       [structural]
+       depends: C33
+
+  C37: The Singularity hypothesis, applied to generative models, implies that a model M_t with distribution Q_t could generate 
+       [logical] [FORMAL]
+       depends: C33, C1
+
+  C38: Shumailov et al. showed that learning from data generated by other models causes a feedback loop that makes models forge
+       [empirical]
+
+  C39: In model collapse, diversity is rapidly lost, with the tails of the original distribution being forgotten first.
+       [empirical]
+       depends: C38
+
+  C40: In GAN literature, mode collapse occurs when the generator learns to produce only a few distinct types of samples, faili
+       [empirical]
+
+  C41: The proliferation of synthetic data on the internet could contaminate the training data for future models, leading to gr
+       [empirical]
+
+  C42: The paper's contribution is not to show that model collapse occurs, but to prove that it must occur under the autonomy c
+       [logical]
+       depends: C17, C18
+
+  C43: As α_t → 0, the system converges to a degenerate fixed point irrespective of architecture, modality, or ensemble structu
+       [logical] [FORMAL]
+       depends: C18
+
+  C44: An initial model M_0 trained on samples drawn exclusively from P will have Q_0 ≈ P but Q_0 ≠ P due to finite data and mo
+       [structural] [FORMAL]
+
+  C45: The training distribution for the next model is the convex combination P'_t = α_t P + (1 − α_t)Q_t.
+       [definitional] [FORMAL]
+
+  C46: The new model M_{t+1} is obtained by optimising parameters to minimise KL divergence between Q_{t+1} and the training di
+       [definitional] [FORMAL]
+       depends: C45
+
+  C47: The self-referential training process with α_t → 0 leads to convergence towards a degenerate fixed point Q* where DKL(P|
+       [logical] [FORMAL]
+       depends: C45, C46, C18
+
+  C48: Assuming infinite model capacity and constant α ∈ (0,1], the sequence of distributions {Q_t} converges to the true distr
+       [logical] [FORMAL]
+       depends: C45
+
+  C49: The convergence to P under infinite capacity relies entirely on the assumption that Q_{t+1} can perfectly capture the mi
+       [logical]
+       depends: C48
+
+  C50: In the absence of external ground truth (α = 0) and with finite sampling of N samples, the differential entropy of the m
+       [logical] [FORMAL]
+       depends: C44
+
+  C51: Δ(N) &gt; 0 is a strictly positive term representing information loss due to finite sampling and the discrete approximation
+       [definitional] [FORMAL]
+       depends: C50
+
+  C52: Q_t converges to a minimal-entropy distribution (a point mass or subset of modes) as t → ∞ under closed-loop training.
+       [logical] [FORMAL]
+       depends: C50, C51
+
+  C53: For any distribution with tails (non-compact support), the probability that a finite sample support covers the true supp
+       [logical] [FORMAL]
+
+  C54: H(Q̂_t) &lt; H(Q_t) for finite N due to the discretisation of the sample space.
+       [logical] [FORMAL]
+       depends: C53
+
+  C55: The sequence of entropies in closed-loop training forms a supermartingale, so by the Martingale Convergence Theorem, H(Q
+       [logical] [FORMAL]
+       depends: C54, C50
+
+  C56: In a closed loop, no growth in intelligence is possible as no new knowledge is generated; the system is information-theo
+       [logical]
+       depends: C52
+
+  C57: The self-referential training loop cannot increase the mutual information with the true distribution P: I(P; Q_{t+1}) ≤ 
+       [logical] [FORMAL]
+       depends: C56
+
+  C58: The data processing inequality states that for any Markov chain X → Y → Z, I(X; Z) ≤ I(X; Y).
+       [logical] [FORMAL]
+
+  C59: Any imperfection in Q_t (information about P that Q_t has lost) cannot be recovered by training on samples from Q_t.
+       [logical] [FORMAL]
+       depends: C58, C57
+
+  C60: If α_t → 0, the squared error between the model mean μ_t and the true mean μ_P diverges or follows a random walk bounded
+       [logical] [FORMAL]
+       depends: C45
+
+  C61: As α_t → 0, the autoregressive coefficient (1 − α_t) → 1, and the mean update process approaches a random walk: μ_{t+1} 
+       [logical] [FORMAL]
+       depends: C60
+
+  C62: The condition α_t → 0 removes the restoring force pulling μ_t back to μ_P, causing the variance of the mean Var(μ_t) to 
+       [logical] [FORMAL]
+       depends: C61
+
+  C63: Model collapse manifests not just as mode-dropping, but also as distributional drift.
+       [logical]
+       depends: C62
+
+  C64: If inf_t α_t &gt; 0 and the model family has sufficient capacity, the sequence {Q_t} converges to P in the idealised infini
+       [logical] [FORMAL]
+       depends: C45
+
+  C65: The degenerative dynamics proven in Theorems 2 and the variance amplification result require α_t → 0.
+       [logical] [FORMAL]
+       depends: C50, C60
+
+  C66: If α_t ≥ α* &gt; 0 for all t, the update operator contains a persistent contraction term toward P, and standard contraction
+       [logical] [FORMAL]
+       depends: C64
+
+  C67: The condition α_t → 0 formalises the autonomy requirement implicit in certain Singularity-style recursive self-improveme
+       [logical]
+       depends: C17
+
+  C68: Externally anchored self-improvement (with fixed axioms and invariant evaluators) does not satisfy the vanishing-exogeno
+       [logical]
+       depends: C67
+
+  C69: Reinforcement Learning with a verifier (e.g., a game engine or compiler) allows self-improvement without external data b
+       [logical]
+
+  C70: In the context of AGI and LLMs operating in open-ended domains (language, reasoning, physical reality), no perfect verif
+       [logical]
+       depends: C69
+
+  C71: If the verifier is a learned model (e.g., a Reward Model in RLHF), it is subject to the same collapse dynamics.
+       [logical]
+       depends: C70, C50
+
+  C72: If the verifier is a static proxy (e.g., string matching or simple heuristics), the model will exploit the metric (Goodh
+       [logical]
+       depends: C70
+
+  C73: The impossibility results hold for any system where the ground truth is not strictly encoded in a formal, executable env
+       [logical]
+       depends: C70, C71, C72
+
+  C74: If α_t → 0, for any fixed t the mixture distribution satisfies ||P'_t − Q_t||_TV → 0 as t → ∞.
+       [logical] [FORMAL]
+       depends: C45
+
+  C75: An ensemble of multi-modal models eventually suffers the same collapse fate as a single model once new training data is 
+       [logical]
+       depends: C43
+
+  C76: As α_t → 0, the ensemble of models converges to a consensus fixed-point distribution R* ≠ P that represents the consensu
+       [logical] [FORMAL]
+       depends: C75
+
+  C77: Any shared biases or errors across ensemble models will be reinforced in closed-loop multi-model training.
+       [logical]
+       depends: C76
+
+  C78: Any aspect of the true distribution P that is collectively under-represented by the initial ensemble will be progressive
+       [logical]
+       depends: C76
+
+  C79: Diversity may be lost more slowly in an ensemble than in a single-model case, but the fundamental information-theoretic 
+       [logical]
+       depends: C76, C57
+
+  C80: Closed-loop density matching defines a self-referential transformation on the space of distributions where the objective
+       [definitional]
+
+  C81: Externally anchored optimisation operates under additional structural assumptions: a fixed axiomatic base, an externally
+       [definitional]
+
+  C82: In externally anchored systems, even if training data are generated through self-play or simulation, the evaluation sign
+       [logical]
+       depends: C81
+
+  C83: The collapse results do not automatically extend to systems in which optimisation remains externally grounded.
+       [logical]
+       depends: C23, C82
+
+  C84: Purely self-referential density matching (α_t → 0) induces contraction toward a degenerate or distorted stationary distr
+       [logical] [FORMAL]
+       depends: C47, C52, C60
+
+  C85: Mutual information with the true generating distribution P cannot increase under distribution-only updates.
+       [logical] [FORMAL]
+       depends: C57
+
+  C86: Autonomy in the strong sense of vanishing external grounding leads to asymptotic self-reference rather than unbounded im
+       [logical]
+       depends: C17, C84
+
+  C87: Systems operating under fixed axioms, externally defined objectives, or invariant verifiers do not satisfy the α_t → 0 c
+       [logical]
+       depends: C68, C64
+
+  C88: This distinction is consistent with classical results in stochastic approximation theory, where convergence under persis
+       [logical]
+       depends: C66
+
+  C89: Any claim that a distributional generative model will achieve unbounded recursive improvement must specify whether its l
+       [logical]
+       depends: C84, C64
+
+  C90: The Singularity hypothesis, when framed as fully autonomous recursive density matching, is mathematically incompatible w
+       [logical]
+       depends: C25, C84, C86
+
+  C91: KL divergence underlies nearly all loss functions used in current deep learning, particularly in the transformer family 
+       [empirical]
+
+  C92: Cross-entropy minimisation is equivalent to minimising DKL(P||Q), and maximum likelihood estimation also reduces to this
+       [logical] [FORMAL]
+       depends: C91
+
+  C93: The collapse results apply to the entire class of current statistical deep learning approaches without loss of generalit
+       [logical]
+       depends: C91, C92, C25
+
+  C94: Cross-entropy loss in transformers is exactly equivalent to KL divergence between the true data distribution P and the m
+       [logical] [FORMAL]
+       depends: C92
+
+  C95: MSE minimisation is equivalent to maximum likelihood estimation under Gaussian noise assumptions, which corresponds to m
+       [logical] [FORMAL]
+
+  C96: Binary cross-entropy / logistic loss reduces to KL divergence between Bernoulli distributions.
+       [logical] [FORMAL]
+
+  C97: Categorical cross-entropy is the KL divergence between a one-hot true label distribution and the predicted probability d
+       [logical] [FORMAL]
+
+  C98: Many widely used losses (e.g., focal loss, label smoothing) are weighted or regularised versions of cross-entropy and th
+       [logical]
+       depends: C91
+
+  C99: GANs minimise Jensen-Shannon divergence, which belongs to the broader f-divergence family of which KL is a canonical mem
+       [logical] [FORMAL]
+
+  C100: KL divergence provides a unifying mathematical framework that encompasses the most common objectives in deep learning.
+       [logical]
+       depends: C94, C95, C96, C97, C98, C99
+
+  C101: The reliance on KL means that optimisation is driven by correlation, not causation.
+       [logical]
+       depends: C100
+
+  C102: Models trained under KL minimise distributional divergence but cannot infer or extrapolate underlying mechanisms.
+       [logical]
+       depends: C101
+
+  C103: KL training lacks a mechanism to preserve diversity beyond what is already present in the data mixture.
+       [logical]
+       depends: C102
+
+  C104: Replacing correlation-based optimisation with causal or algorithmic objectives could overcome the collapse limitations b
+       [logical]
+       depends: C102, C103
+
+  C105: Neurosymbolic architectures combining statistical learners with causal inference and algorithmic probability could in pr
+       [logical]
+       depends: C104, C26
+
+  C106: Unlike KL-based systems, neurosymbolic architectures are capable of producing genuinely synthetic knowledge rather than 
+       [logical]
+       depends: C105, C11
+
+  C107: Current LLMs remain confined to KL-like objectives and thus to the collapse trajectory.
+       [empirical]
+       depends: C100, C93
+
+  C108: Causal objectives permit the creation of genuinely synthetic knowledge, in line with Kant's distinction between analytic
+       [logical]
+       depends: C104, C11
+
+  C109: The one-step neurosymbolic update can be decomposed into a composition of three operators: statistical fitting T_{α_t}, 
+       [structural] [FORMAL]
+       depends: C26
+
+  C110: Symbolic projection Π_S is defined as projection onto a feasible set S of symbolic/axiomatic constraints: Π_S(Q) = arg m
+       [definitional] [FORMAL]
+       depends: C109
+
+  C111: The contraction factor σ &lt; 1 for symbolic projection is a direct consequence of the Coding Theorem, because projecting o
+       [logical] [FORMAL]
+       depends: C110
+
+  C112: When the true mechanism M has low complexity, the projection Π_S eliminates the vast majority of the search space (high-
+       [logical]
+       depends: C111
+
+  C113: There is a hierarchy: statistical updates contract discrepancies between distributions, symbolic updates contract hypoth
+       [logical]
+       depends: C109, C111
+
+  C114: No distribution-only learning update—including one driven by minimising KL or any f-divergence—can increase the informat
+       [logical] [FORMAL]
+       depends: C58
+
+  C115: If the map X → Q_θ is non-invertible on the support induced by M, then I(M; Q_θ) &lt; I(M; X) with strict inequality.
+       [logical] [FORMAL]
+       depends: C114
+
+  C116: Symbolic and causal updates that operate in program/mechanism space are not constrained by the Data Processing Inequalit
+       [logical]
+       depends: C114, C113
+
+  C117: A generative programme synthesis approach can effectively increase the mutual information with the true mechanism M by c
+       [logical] [FORMAL]
+       depends: C116
+
+  C118: In Algorithmic Information Dynamics, the update is (Q_t, U) → Q_{t+1}, where U is an enumeration of Turing Machines orde
+       [structural] [FORMAL]
+       depends: C117
+
+  C119: If the true mechanism M is simple, the algorithmic prior m(p) assigns high probability to M, whereas a statistical learn
+       [logical]
+       depends: C118
+
+  C120: When data X is sparse (the collapse regime), the intersection of data constraints and the algorithmic prior m(p) can uni
+       [logical]
+       depends: C119
+
+  C121: CTM restores entropy lost through finite sampling by re-deriving the underlying law that necessitates the existence of u
+       [logical]
+       depends: C27, C120
+
+  C122: The space of low-complexity programs is sparse; a program cannot drift slightly like a continuous parameter vector but m
+       [logical]
+
+  C123: The Kolmogorov complexity term K(p) acts as a potential barrier: small statistical noise is insufficient to jump to the 
+       [logical] [FORMAL]
+       depends: C122
+
+  C124: The quantisation of hypothesis space via algorithmic complexity prevents the continuous degradation (random walk) charac
+       [logical]
+       depends: C123, C61
+
+  C125: The algorithmic update ensures that I(M; Q^{alg}_{t+1}) ≥ I(M; Q^{stat}_t), explicitly escaping the data-processing ineq
+       [logical] [FORMAL]
+       depends: C117, C118
+
+  C126: The algorithmic approach allows the system to maintain alignment with the ground truth mechanism M even when α_t → 0, pr
+       [logical]
+       depends: C125
+
+  C127: Kolmogorov complexity of a finite object is defined as the length of the shortest programme that produces that object as
+       [definitional] [FORMAL]
+
+  C128: Algorithmic probability assigns to each object the probability that a randomly generated programme will produce it, yiel
+       [definitional] [FORMAL]
+       depends: C127
+
+  C129: The coding theorem links Kolmogorov complexity and algorithmic probability: objects with high algorithmic probability ha
+       [definitional] [FORMAL]
+       depends: C127, C128
+
+  C130: Algorithmic probability and Kolmogorov complexity shift the focus from observed statistical regularities to the underlyi
+       [logical]
+       depends: C127, C128
+
+  C131: The Coding Theorem Method (CTM) approximates algorithmic probability by enumerating a reference class M of small Turing 
+       [definitional] [FORMAL]
+       depends: C129
+
+  C132: BDM (Block Decomposition Method) decomposes an object into blocks to scale beyond the small-object regime, combining CTM
+       [definitional] [FORMAL]
+       depends: C131
+
+  C133: Algorithmic Information Dynamics (AID) studies the structure, evolution, and causal content of systems through the lens 
+       [definitional]
+       depends: C127
+
+  C134: AID characterises patterns, randomness and complexity in terms of the length of the shortest effective description capab
+       [definitional]
+       depends: C133
+
+  C135: The behaviour of a system can be understood by analysing how its algorithmic information content changes under perturbat
+       [logical]
+       depends: C133
+
+  C136: AID quantifies the algorithmic causal effect of a perturbation τ by the change in complexity.
+       [definitional] [FORMAL]
+       depends: C133
+
+  C137: A neurosymbolic operator combines subsymbolic/statistical learning with symbolic/structural reasoning within a single up
+       [definitional]
+
+  C138: Neural systems operate primarily in distribution space, adjusting parameters to minimise a loss function defined over ob
+       [structural]
+
+  C139: Symbolic systems manipulate discrete representations such as logical rules, equations, causal graphs, or programmes, ope
+       [definitional]
+
+  C140: While neural models excel at approximation, symbolic systems excel at constraint, explanation, and generalisation under 
+       [logical]
+       depends: C138, C139
+
+  C141: A neurosymbolic operator acts simultaneously in distribution space and in structure space.
+       [structural]
+       depends: C137
+
+  C142: In an algorithmic framework, the symbolic component may consist of candidate generative programmes weighted by algorithm
+       [structural]
+       depends: C137, C128
+
+  C143: I. J. Good argued that an ultraintelligent machine would be the last invention man need ever make, because such a machin
+       [empirical]
+
+  C144: The Singularity argument from Kant's perspective implies that current GenAI performs analytic operations (recombining ex
+       [logical]
+       depends: C11
+
+  C145: The impossibility result is conditional rather than universal: it applies to recursive density matching under KL-type ob
+       [logical]
+       depends: C23, C25
+
+  C146: If α_t → 0, the system becomes information-theoretically closed: no new information about the generating distribution ca
+       [logical] [FORMAL]
+       depends: C56, C57
+
+  C147: Recursive self-improvement framed as progressively self-contained generative retraining cannot yield unbounded growth un
+       [logical]
+       depends: C90, C146
+
+  C148: The deeper limitation is structural: KL-based and related divergence objectives optimise correlations within observed di
+       [logical]
+       depends: C101, C102
+
+  C149: When KL-based objectives dominate the update rule, recursive retraining contracts distributional diversity and amplifies
+       [logical]
+       depends: C148, C84
+
+  C150: To escape collapse attractor dynamics, learning must move beyond analytic correlation toward synthetic mechanism discove
+       [logical]
+       depends: C149, C11
+
+  C151: Neurosymbolic integration grounded in algorithmic information theory provides a principled direction for escaping collap
+       [logical]
+       depends: C26, C105, C150
+
+  C152: In a neurosymbolic framework, improvement is measured not by lower perplexity alone but by convergence toward simpler, c
+       [logical]
+       depends: C151
+
+  C153: Sustained self-improvement requires persistent grounding or a transition from distributional optimisation to mechanism-b
+       [logical]
+       depends: C147, C151
+
+  C154: The Singularity, if it is to be coherent, cannot be built upon closed-loop density matching alone.
+       [logical]
+       depends: C153, C90
+
+  C155: An object is considered algorithmically simple if it admits a short generating programme, and algorithmically random if 
+       [definitional] [FORMAL]
+       depends: C127
+
+  C156: Although Kolmogorov complexity and algorithmic probability are rooted in uncomputable quantities, the AID framework empl
+       [empirical]
+       depends: C133
+
+  C157: For the data processing inequality, in a Markov chain M → X → Y, I(M; Y) ≤ I(M; X).
+       [logical] [FORMAL]
+       depends: C58
+
+  C158: Even when statistical learning converges optimally, it may converge to a causally meaningless solution.
+       [logical]
+       depends: C114
+
+  C159: The self-referential training framework is deliberately abstract to encompass various GenAI paradigms including LLMs, Di
+       [structural]
+       depends: C8
+
+  C160: For adversarial setups such as GANs, if the generator is rewarded based on a classifier trained on the generator's outpu
+       [logical]
+       depends: C159, C43
+
+  C161: Statistical deep learning even when converging optimally cannot increase information about the underlying generative mec
+       [logical] [FORMAL]
+       depends: C114, C157
+
+  C162: The algorithmic learner searches for the minimal program p* such that U(p*) = x; if the data is generated by a lawful me
+       [logical] [FORMAL]
+       depends: C131
+
+  C163: While the statistical update shrinks support to the observed samples, supp(Q^{stat}) ⊆ supp(Q̂_t), the algorithmic updat
+       [logical] [FORMAL]
+       depends: C162
+
+  C164: By the Coding Theorem, the probability mass of the hypothesis space concentrates on simple programs: m(x) ≈ 2^{−K(x)}.
+       [logical] [FORMAL]
+       depends: C129
+
+  C165: When projecting the learned distribution Q_t onto the set of distributions generated by programs of length L, high-compl
+       [logical]
+       depends: C164, C111
+
+  C166: Kolmogorov complexity is uncomputable in general.
+       [logical] [FORMAL]
+       depends: C127
+
+  C167: The exogenous signal α_t may include fresh samples drawn from P, environmental feedback, simulator outcomes, or outputs 
+       [definitional]
+       depends: C45
+
+  C168: The causal contraction factor κ_t improves with both the identification strength η_c of interventions or perturbations a
+       [logical] [FORMAL]
+       depends: C109
+
+
+<span class="ad-section">=== CONTRADICTIONS (16) ===</span>
+
+  [FATAL] [Z3-encodable]
+    A: C43: As α_t → 0, the system converges to a degenerate fixed point irrespective of architecture, moda
+    B: C126: The algorithmic approach allows the system to maintain alignment with the ground truth mechani
+    → C43 claims collapse is architecture-invariant when α_t → 0, yet C126 claims the algorithmic/neurosymbolic approach avoid
+
+  [TENSION]
+    A: C5: Training on self-generated data is a pathway to self-destruction rather than self-improvement.
+    B: C14: Model collapse can be mitigated when real data continue to accumulate at a sufficient rate.
+    → C5 makes an unqualified claim that self-generated training data leads to self-destruction, while C14 states that collaps
+
+  [TENSION]
+    A: C90: The Singularity hypothesis, when framed as fully autonomous recursive density matching, is math
+    B: C145: The impossibility result is conditional rather than universal: it applies to recursive density
+    → C90 uses strong language ('mathematically incompatible') suggesting a sweeping impossibility, while C145 explicitly qual
+
+  [TENSION]
+    A: C22: Entropy Decay and Variance Amplification are architectural invariants of distributional learnin
+    B: C105: Neurosymbolic architectures combining statistical learners with causal inference and algorithm
+    → If the failure modes are 'architectural invariants,' it is unclear how any architecture—including neurosymbolic ones tha
+
+  [TENSION]
+    A: C93: The collapse results apply to the entire class of current statistical deep learning approaches 
+    B: C83: The collapse results do not automatically extend to systems in which optimisation remains exter
+    → C93 claims universal applicability across all current statistical deep learning, while C83 carves out an exception for e
+
+  [TENSION] [Z3-encodable]
+    A: C114: No distribution-only learning update—including one driven by minimising KL or any f-divergence
+    B: C125: The algorithmic update ensures that I(M; Q^{alg}_{t+1}) ≥ I(M; Q^{stat}_t), explicitly escapin
+    → C114 invokes the Data Processing Inequality as an inviolable mathematical bound, while C125 claims to 'escape' it via th
+
+  [TENSION]
+    A: C166: Kolmogorov complexity is uncomputable in general.
+    B: C131: The Coding Theorem Method (CTM) approximates algorithmic probability by enumerating a referenc
+    → The paper proposes building systems grounded in Kolmogorov complexity and algorithmic probability despite acknowledging 
+
+  [AMBIGUITY] [Z3-encodable]
+    A: C67: The condition α_t → 0 formalises the autonomy requirement implicit in certain Singularity-style
+    B: C118: In Algorithmic Information Dynamics, the update is (Q_t, U) → Q_{t+1}, where U is an enumerati
+    → If the algorithmic approach injects exogenous information via the universal prior U at every step, it effectively mainta
+
+  [TENSION]
+    A: C69: Reinforcement Learning with a verifier (e.g., a game engine or compiler) allows self-improvemen
+    B: C5: Training on self-generated data is a pathway to self-destruction rather than self-improvement.
+    → C69 acknowledges that self-generated data in RL with a perfect verifier can lead to genuine self-improvement, while C5 c
+
+  [AMBIGUITY]
+    A: C99: GANs minimise Jensen-Shannon divergence, which belongs to the broader f-divergence family of wh
+    B: C100: KL divergence provides a unifying mathematical framework that encompasses the most common obje
+    → Jensen-Shannon divergence is a distinct divergence from KL divergence. Claiming that KL 'encompasses' GAN objectives bec
+
+  [AMBIGUITY] [Z3-encodable]
+    A: C43: As α_t → 0, the system converges to a degenerate fixed point irrespective of architecture, moda
+    B: C87: Systems operating under fixed axioms, externally defined objectives, or invariant verifiers do 
+    → C43 claims architecture-invariant collapse under α_t → 0, but C87 exempts systems with external verifiers from the condi
+
+  [TENSION] [Z3-encodable]
+    A: C48: Assuming infinite model capacity and constant α ∈ (0,1], the sequence of distributions {Q_t} co
+    B: C49: The convergence to P under infinite capacity relies entirely on the assumption that Q_{t+1} can
+    → C48 establishes an idealised convergence guarantee that C49 immediately undercuts by noting the premise (infinite capaci
+
+  [TENSION]
+    A: C121: CTM restores entropy lost through finite sampling by re-deriving the underlying law that neces
+    B: C114: No distribution-only learning update can increase the information the learner has about the ge
+    → C121 claims CTM can 'restore' lost entropy (i.e., recover information about unseen data), while C114 states that no lear
+
+  [TENSION]
+    A: C11: Current GenAI is fundamentally an analytic engine, excelling at analysing, recombining, and int
+    B: C3: Recent successes of Generative AI, particularly LLMs like GPT-5 and Diffusion Models, have reign
+    → C11 categorically denies that current GenAI can produce genuinely new knowledge, while C3 reports that empirical success
+
+  [TENSION] [Z3-encodable]
+    A: C15: Maintaining inf_t α_t &gt; 0 corresponds to maintaining sufficient real data to mitigate collapse.
+    B: C17: The autonomy requirement of Singularity hypotheses implies that α_t → 0.
+    → The condition required to prevent collapse (α_t bounded away from zero) is the logical negation of the condition the Sin
+
+  [TENSION]
+    A: C106: Unlike KL-based systems, neurosymbolic architectures are capable of producing genuinely synthe
+    B: C166: Kolmogorov complexity is uncomputable in general.
+    → The neurosymbolic approach is claimed to produce genuinely synthetic knowledge via algorithmic information theory, but i
+
+
+<span class="ad-section">=== KEY TERMS (62) ===</span>
+
+  AI Singularity / technological Singularity: A hypothesised future inflection point at which AI surpasses human intelligence and initiates conseq
+  intelligence explosion: The runaway increase in capability supposedly produced once a sufficiently advanced AI can keep maki
+  recursive self-improvement: A process in which an AI inspects and improves its own architecture, code, or training procedure, cr
+  recursive self-training: The paper's more concrete version of self-improvement: repeatedly training later models on data part
+  Generative AI / GenAI: Current statistical generative systems that learn and sample from human-made data distributions rath
+  LLM: An autoregressive language model that predicts the next token from prior tokens and is treated here 
+  Diffusion model: A generative model that learns to reverse a noising process so as to sample from an implicit data di
+  GAN: A generative adversarial system in which a generator defines a model distribution and a discriminato
+  mode collapse: The GAN-specific failure in which the generator produces only a small subset of possible sample type
+  model collapse / curse of recursion: The progressive degradation of a model when its training data are increasingly contaminated by its o
+  degenerate fixed point: The limiting distribution reached under autonomous closed-loop retraining: distorted, low-diversity,
+  true data distribution P: The real underlying distribution that generates authentic data and serves as the paper's ground-trut
+  model distribution Q_t / Q_θ: The probability distribution represented by a model at a given iteration or parameter setting.
+  training distribution P'_t: The mixture used to train the next model, defined as a convex combination of true data and the curre
+  exogenous signal α_t: The proportion of training signal that comes from outside the model's own outputs, such as fresh rea
+  non-vanishing exogenous signal: The regime in which external grounding never disappears, formalised as inf_t α_t &gt; 0; this is the co
+  autonomy requirement / autonomy regime: The strong self-improvement assumption that external grounding becomes negligible over time, formali
+  external grounding / externally grounded signal: Any learning signal tied to reality outside the model's self-generated distribution.
+  closed-loop density matching: A self-referential learning setup in which models are trained to match distributions generated by pr
+  collapse regime: The class of systems subject to the paper's impossibility result: closed-loop density matching witho
+  Entropy Decay: A failure mode of recursive self-training in which finite-sample effects monotonically reduce distri
+  Variance Amplification: A failure mode in which loss of persistent grounding lets errors drift via a random-walk-like proces
+  distributional drift: The wandering of a model's learned distribution away from the true one when no stable external signa
+  Δ(N): A strictly positive finite-sampling information-loss term that captures how discretisation and limit
+  information-theoretically closed: A self-sampling system that cannot create new information about the true generating distribution bec
+  analytic engine: The paper's characterisation of current GenAI as a system that analyses, recombines, and interpolate
+  analytic operations: Operations that reorganise or recombine what is already implicit in the training data instead of der
+  synthetic knowledge: Genuinely novel knowledge about underlying mechanisms or reality, not merely a recombination of obse
+  synthetic operations: Knowledge-generating operations that go beyond interpolation and recover or construct new explanator
+  externally anchored optimisation: Self-improvement under fixed external structure, such as axioms, objectives, verifiers, or bounded d
+  verifier: An external correctness source used to judge outputs; if perfect and formal, it can keep learning gr
+  perfect verifier: A formal, exact, effectively inexhaustible source of ground truth, such as a game engine or compiler
+  semantic collapse: Failure caused by optimising against a static proxy or heuristic so that the metric is satisfied whi
+  Goodhart's Law: The tendency of a model to exploit an imperfect metric or proxy once that metric becomes the optimis
+  KL divergence / D_KL(P||Q): The core divergence measure in the paper's analysis; minimising it means fitting the model distribut
+  KL-based objectives: Losses equivalent or closely reducible to KL-divergence minimisation, including standard objectives 
+  distribution-only update: A learning update that only fits observed distributions or their divergences, without representing t
+  mutual information with P or M: The amount of information a learned model retains about the true data distribution P or the true mec
+  Data Processing Inequality: The information-theoretic principle that processing observations through distribution-matching updat
+  mechanism-based inference: Learning aimed at recovering the underlying generative law, program, or causal structure rather than
+  neurosymbolic integration: The proposed route beyond collapse: combining statistical learners with symbolic, causal, and algori
+  neurosymbolic operator: A single update process that acts in both distribution space and structure space, combining subsymbo
+  statistical fitting operator T_{α_t}: The distribution-fitting part of the neurosymbolic update that learns from the current mixture of ex
+  symbolic projection Π_S: Projection of a learned distribution onto a feasible set of symbolic or axiomatic constraints, remov
+  causal correction C_t: The intervention- or perturbation-based component of the neurosymbolic update that enforces consiste
+  distribution space: The space in which neural/statistical models operate by adjusting probability distributions over obs
+  structure space: The space of discrete symbolic objects such as rules, equations, causal graphs, or programs.
+  generative mechanism M: The underlying causal program, law, or process that actually produces the data distribution.
+  algorithmic probability / universal prior m: A prior that assigns higher weight to outputs or hypotheses generated by shorter programs, thereby f
+  Occam's bias: The exogenous simplicity preference injected by the universal prior, which concentrates search on sh
+  Kolmogorov complexity K: The length of the shortest program on a fixed universal Turing machine that generates a given object
+  Coding Theorem: The link between simplicity and probability stating that objects with high algorithmic probability h
+  Coding Theorem Method (CTM): A practical method that approximates algorithmic probability by enumerating small Turing machines, u
+  Block Decomposition Method (BDM): A decomposition-based extension of CTM that scales algorithmic-complexity estimation beyond very sma
+  Algorithmic Information Dynamics (AID): A framework that studies systems, perturbations, and causal structure through algorithmic informatio
+  algorithmic causal effect: In AID, the causal effect of a perturbation measured by the change it induces in algorithmic complex
+  algorithmically simple: Describing an object or mechanism that can be generated by a short program.
+  algorithmically random: Describing an object for which no substantially shorter generating description exists than the objec
+  low-complexity programs: Short candidate generative programs that the paper treats as sparse, stable anchors in hypothesis sp
+  program/mechanism space: The space of symbolic hypotheses or generative programs in which causal and algorithmic learning ope
+  persistent excitation: The stochastic-approximation condition that learning continues to receive non-vanishing externally g
+  consensus fixed-point distribution: The limiting distribution reached by an ensemble of interacting models under closed-loop training; i
+
+<span class="ad-section">=== AGENT CAST (11) ===</span>
+
+  Proponent
+    side: Proponent | provider: openai
+    prompt: You defend the repaired form of {{ topic.name }} using the theory's own notation and terminology, and you must treat {{ z3_stipulation }} as fixed. An...
+
+  Skeptic
+    side: Skeptic | provider: openai
+    prompt: You are the main attacker of {{ topic.name }}, and you must treat {{ z3_stipulation }} as fixed. Use this counter-thesis as your primary line: model c...
+
+  Steelman
+    side: Neutral | provider: openai
+    prompt: You must rescue {{ topic.name }} by preserving its strongest insights while treating {{ z3_stipulation }} as fixed and dropping claims that cannot be ...
+
+  Generalist
+    side: Neutral | provider: anthropic
+    prompt: You are the neutral referee for {{ topic.name }}, and you must treat {{ z3_stipulation }} as fixed. Stress-test both sides equally: if the Proponent s...
+
+  DynamicalSystems
+    side: Proponent | provider: anthropic
+    prompt: You defend the core collapse theorem inside {{ topic.name }} using the language of nonlinear dynamics, stochastic processes, and information theory, w...
+
+  CausalDiscovery
+    side: Proponent | provider: grok
+    prompt: You defend the paper's distinction between correlation fitting and mechanism recovery in {{ topic.name }}, while treating {{ z3_stipulation }} as fixe...
+
+  DivergenceCritic
+    side: Skeptic | provider: anthropic
+    prompt: You attack the paper's claim that current deep learning falls under one collapse-relevant KL umbrella in {{ topic.name }}, while treating {{ z3_stipul...
+
+  ControlTheorist
+    side: Skeptic | provider: grok
+    prompt: You attack the autonomy premise in {{ topic.name }} from the standpoint of environment-coupled control systems, while treating {{ z3_stipulation }} as...
+
+  Computabilist
+    side: Skeptic | provider: openai
+    prompt: You scrutinize the algorithmic escape hatch in {{ topic.name }} from the standpoint of computability theory, while treating {{ z3_stipulation }} as fi...
+
+  Empiricist
+    side: Neutral | provider: grok
+    prompt: You audit the empirical relevance of {{ topic.name }} while treating {{ z3_stipulation }} as fixed. Focus on T4, T5, and T6 by pressing C13, C14, C23,...
+
+  Epistemologist
+    side: Neutral | provider: openai
+    prompt: You audit the concepts of knowledge, novelty, mechanism, and intelligence in {{ topic.name }}, while treating {{ z3_stipulation }} as fixed. Focus on ...
+
+
+<span class="ad-section">=== GATE RULES (16) ===</span>
+
+  [RULE-1] If a claim says that as α_t → 0 the system collapses to a degenerate fixed point irrespective of architecture, modality,
+
+  [RULE-2] A categorical statement that training on self-generated data is a pathway to self-destruction rather than self-improveme
+
+  [RULE-3] A theorem described as mathematically incompatible cannot later be defended as only a conditional or compressed statemen
+
+  [RULE-4] If Entropy Decay and Variance Amplification are called architectural invariants of distributional learning on finite sam
+
+  [RULE-5] A claim that the collapse results apply to the entire class of current statistical deep learning approaches without loss
+
+  [RULE-6] The Data Processing Inequality cannot be treated as both an inviolable limit on distribution-only updates and something 
+
+  [RULE-7] Acknowledging that Kolmogorov complexity is uncomputable is compatible with using CTM as an approximation only if practi
+
+  [RULE-8] If α_t → 0 is supposed to formalize autonomy as vanishing external grounding, then a universal prior U that materially g
+
+  [RULE-9] A blanket claim that training on self-generated data leads to self-destruction is contradicted by admitting that reinfor
+
+  [RULE-10] KL divergence does not literally encompass GAN objectives merely because Jensen-Shannon divergence belongs to the same f
+
+  [RULE-11] The statement that collapse occurs irrespective of architecture under α_t → 0 must be read as conditional on that autono
+
+  [RULE-12] An infinite-capacity convergence theorem can coexist with a finite-capacity failure result only if the paper keeps the f
+
+  [RULE-13] A claim that CTM restores entropy or recovers unseen structure cannot be used to imply increased information about the g
+
+  [RULE-14] Reporting that recent GenAI successes have reignited Singularity speculation is compatible with saying current systems c
+
+  [RULE-15] The condition inf_t α_t &gt; 0, which mitigates collapse, is the logical opposite of the autonomy condition α_t → 0. This c
+
+  [RULE-16] Claims that neurosymbolic systems can produce genuinely synthetic knowledge despite the limits of KL-based systems must 
+
+
+<span class="ad-section">=== RUBRIC (6 criteria) ===</span>
+
+  R1: notation_fidelity
+    How accurately did the side work within the paper’s own formal framework—especially α_t, inf_t α_t &gt; 0 vs α_t → 0, P, Q_
+
+  R2: argument_survival
+    Did the side’s central case survive the opponent’s strongest rebuttals on the actual cruxes of this debate? For the Prop
+
+  R3: concession_honesty
+    Did the side plainly concede points that were genuinely established? Relevant examples include conceding that model coll
+
+  R4: closed_loop_extrapolation_gap
+    How well did the side address the specific dispute over whether the paper illegitimately extrapolates from one failure m
+
+  R5: external_grounding_boundary_cases
+    How effectively did the side handle the boundary between collapse-prone self-reference and externally grounded improveme
+
+  R6: empirical_relevance_of_collapse
+    How well did the side connect the formal theorem to real AI practice using topic-specific evidence? This includes the de
+</pre></div>
+</body>
+</html>

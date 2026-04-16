@@ -1,0 +1,94 @@
+[LLM-GENERATED SOURCE -- NOT from a live web search]
+
+TOPIC: NIST AI Risk Management Framework: key ideas on trustworthy AI
+SEARCH QUERY: "AI Risk Management Framework" "NIST" trustworthiness safety valid reliable pdf
+RATIONALE: Targets the authoritative NIST definition of trustworthy AI characteristics, useful for evaluating whether the theory’s definitions of safety and trust depart from standard practice.
+
+========================================================================
+
+The NIST AI Risk Management Framework (AI RMF) is a voluntary framework for identifying, assessing, and managing risks from AI systems across their lifecycle. Its central idea is that AI risk management should aim at trustworthy AI, understood not as a single property but as a cluster of characteristics that organizations should design for, test, monitor, and govern.
+
+For your purpose, the most important point is that NIST treats trustworthiness as broader than safety alone. In the AI RMF, trustworthy AI is commonly described in terms of these characteristics:
+
+1. Valid and reliable
+- This is foundational in NIST’s treatment. An AI system should do what it is intended to do, and do so consistently under expected conditions.
+- “Valid” concerns whether the system is actually appropriate for its intended use and whether the outputs meaningfully track the task it is supposed to perform.
+- “Reliable” concerns consistency and dependability over time and across conditions within the stated use context.
+- NIST emphasizes testing, evaluation, verification, and validation, including awareness that performance can degrade when conditions shift.
+
+2. Safe
+- Safety is one trustworthiness characteristic, not the whole of trustworthiness.
+- In NIST’s framing, safety concerns preventing unreasonable harm to people, property, or the environment, including foreseeable misuse or failure modes.
+- Safety is tied to context: whether a system is safe depends on how it is used, by whom, under what operating conditions, and what harms are plausible.
+- NIST’s approach usually links safety to hazard identification, impact assessment, human oversight, fallback procedures, and continuous monitoring after deployment.
+
+3. Secure and resilient
+- AI systems should be protected against attacks, manipulation, unauthorized access, and operational disruptions.
+- They should also be resilient: able to withstand, adapt to, or recover from failures, distribution shifts, adversarial behavior, and changing environments.
+- This reflects NIST’s view that trustworthiness is not just about nominal performance but also about robustness under stress.
+
+4. Accountable and transparent
+- Organizations should assign responsibility for AI decisions, risk controls, and outcomes.
+- Transparency means relevant information about the system, its purpose, limitations, and risk posture should be documented and communicated to appropriate stakeholders.
+- NIST does not imply that every model must be fully open or that all internals must be exposed; rather, transparency should be sufficient for governance, oversight, and risk management.
+
+5. Explainable and interpretable
+- NIST distinguishes these ideas, though in practice they are often discussed together.
+- Stakeholders should be able to understand enough about how the system works, what factors affect outputs, and what limitations apply, in ways appropriate to their role.
+- Explanations should support contestability, oversight, debugging, and safe use.
+
+6. Privacy-enhanced
+- Trustworthy AI should respect privacy values and relevant legal obligations.
+- NIST’s perspective is that privacy risk is not identical to cybersecurity risk; privacy concerns also involve data use, inference, surveillance, and governance choices.
+- Privacy protections should be built into design, development, and deployment, not added only afterward.
+
+7. Fair, with harmful bias managed
+- NIST does not present fairness as a simple universal formula.
+- Instead, it stresses that fairness depends on context, affected populations, and the kinds of harms at issue.
+- The practical aim is to identify, measure, and reduce harmful bias and discriminatory effects, while recognizing that fairness metrics can conflict and that tradeoffs may be unavoidable.
+
+A major theme of the AI RMF is that these trustworthiness characteristics are interdependent and sometimes in tension. For example, increasing transparency may raise privacy or security concerns; improving accuracy overall may still worsen outcomes for a particular subgroup; maximizing performance in one environment may reduce robustness in another. NIST therefore treats trustworthiness as a socio-technical achievement rather than a purely technical benchmark.
+
+NIST also emphasizes that AI risk is highly context-dependent. Risks do not arise only from the model itself, but from the full socio-technical system: data, human operators, organizational incentives, deployment setting, downstream users, and affected communities. Because of this, the same model may present very different risk profiles in different applications.
+
+The AI RMF organizes risk management into four high-level functions:
+
+- Govern
+  Establish organizational policies, roles, culture, accountability, and oversight for AI risk management. This is the cross-cutting function that supports the others.
+
+- Map
+  Define the context for the AI system: intended purpose, stakeholders, assumptions, operating environment, legal and social considerations, and potential impacts.
+
+- Measure
+  Assess and track risks using testing, evaluation, audits, documentation, metrics, and qualitative judgment. NIST stresses that not all important risks are easily quantifiable.
+
+- Manage
+  Prioritize risks, choose responses, implement controls, monitor outcomes, and adapt over time.
+
+For debate purposes, the key interpretive takeaway is:
+- NIST’s standard view does not define trustworthy AI purely as safe AI.
+- Safety is one important characteristic among several.
+- Validity and reliability are treated as especially basic, because an AI system that does not perform as intended or does so inconsistently cannot plausibly be considered trustworthy.
+- Trustworthiness is assessed in relation to intended use, deployment context, and real-world harms, not just abstract model quality.
+- Governance, documentation, and ongoing monitoring are part of the definition in practice; NIST does not treat trustworthiness as something established once and for all at model release.
+
+So if you are comparing another theory’s definitions against NIST, the most important benchmark is that NIST uses a multi-attribute, risk-based, lifecycle-oriented conception of trustworthy AI. A theory that treats safety as the sole or dominant essence of trustworthiness would depart from the NIST baseline unless it also accounts for validity/reliability, security/resilience, accountability/transparency, explainability, privacy, and fairness/harmful bias management.
+
+[UNCERTAIN] If you need the exact NIST wording for each characteristic, I can provide a careful near-paraphrase or help identify the specific glossary language from the AI RMF 1.0 and related NIST trustworthiness documents, but I should avoid pretending to quote the PDF exactly without the text in front of me.
+
+========================================================================
+
+KEY CONCEPTS:
+  - Trustworthy AI is broader than safety alone
+  - NIST trustworthiness characteristics: valid and reliable; safe; secure and resilient; accountable and transparent; explainable and interpretable; privacy-enhanced; fair with harmful bias managed
+  - Validity and reliability are foundational for trustworthiness
+  - Safety is context-dependent and tied to foreseeable harms
+  - AI risk is socio-technical and lifecycle-based
+  - NIST AI RMF functions: Govern, Map, Measure, Manage
+  - Trustworthiness characteristics can involve tradeoffs
+  - Evaluation should consider intended use, stakeholders, and deployment context
+
+WARNING: This summary was generated by an LLM from its training
+data, NOT retrieved from a live source.  It may contain errors.
+Do NOT treat this as a primary citation.  Verify all claims
+against the actual source before use in formal argumentation.

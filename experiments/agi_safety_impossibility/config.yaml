@@ -1,0 +1,598 @@
+# Arbiter config schema version. Do not change.
+schema_version: '1.0'
+
+# Topic under debate.
+# - name: short label shown in transcripts and exports
+# - summary: 2-4 paragraph description of the position
+# - counter_thesis: the strongest opposing position
+# - privileged_context: per-side info only that side sees
+topic:
+  name: Formal Incompatibility of Strict Safety and AGI
+  summary: 'The document argues that three central AI aspirations—safety, trust, and artificial general
+    intelligence—come apart under a particular mathematical formalization. It begins from strict definitions:
+    a system is safe only if it never makes a false claim; trust is the assumption that the system is
+    safe; and AGI is an AI system that always matches or exceeds human capability. On these definitions,
+    the paper’s core thesis is negative: no system can simultaneously be safe, trusted, and an AGI. The
+    reason is not merely empirical difficulty but a principled limitation akin to classical results in
+    logic and computability.'
+  counter_thesis: |-
+    The strongest skeptical response is that the paper’s impossibility result is largely an artifact of stipulative and excessively rigid definitions rather than a deep obstacle to real-world AGI. Defining safety as “never making any false claim” collapses safety into perfect truthfulness, excludes ordinary uncertainty, probabilistic reasoning, corrigibility, and calibrated abstention, and sets a standard that even humans do not meet. Defining trust as merely the assumption of such perfection is likewise nonstandard, since practical trust is graded, evidence-based, and context-sensitive. Most importantly, defining AGI as always matching or exceeding human capability on every task instance is much stronger than the usual notion of broadly human-level competence across domains. Once the premises are that absolute infallibility and universal superhuman parity are both required, incompatibility is unsurprising and says little about whether highly capable, trustworthy, and societally useful AGI is achievable under more realistic notions.
+
+    A skeptic would also argue that the diagonal and incompleteness-style proofs show limits on formal systems, not on intelligence in the ordinary sense. The existence of specially constructed instances in program verification, planning, or graph reachability that force a safe system to abstain or fail does not imply that a practically deployed AI cannot be AGI-like across the vast majority of tasks humans care about. Humans themselves are neither infallible nor uniformly superior on all such formal edge cases, so the benchmark is unstable. The Gödel/Turing analogies are intellectually suggestive, but they do not establish that meaningful safety and broad general intelligence are fundamentally incompatible; they establish only that one cannot have universal capability plus absolute correctness under the paper’s bespoke formalization. Thus the result should be interpreted as a narrow theorem about an idealized specification, not as a substantive refutation of safe AGI as commonly understood.
+  privileged_context:
+    Skeptic: |-
+      Target the theorem at its definitional hinges, not at its technical machinery. The weakest link is the paper's bespoke triad of terms: C3/C19 defines Safety as never making any false claim, i.e. on every task instance the AI system either answers correctly or abstains; C4/C22 defines Trust as the assumption that the system is safe; C5 and especially C29 define an AGI system in an unusually strong way. Your core line is that the impossibility result in C6 is driven by these stipulations, not by an ordinary notion of safe AGI. Keep forcing the Proponent to state which definition is doing the work: ordinary safety/trust/AGI, or only Safety, Trust, and AGI as defined in C3/C22/C29.
+
+      Press the internal ambiguities precisely. First, C5 versus C29: C5 says AGI is always matching or exceeding human capability, while C29 only requires that for every task instance on which a human has a provably correct solution, the system can also solve with some non-zero probability. Those are not equivalent. One sounds like universal parity or better; the other allows arbitrarily low success probability so long as it is non-zero. Ask: Which formal definition is the theorem actually using, C5 or C29? If C29, then stop talking as if the theorem covers ordinary claims about matching or exceeding humans. If C5, explain why non-zero-probability success in C29 is enough.
+
+      Second, pin down the scope conflict between C1 and C6. C1 presents safety, trust, and AGI as joint aspirational goals. C6 says a safe and trusted AI system cannot be an AGI system under the formal definitions proposed. Force the Proponent to admit that the paper begins with a familiar real-world framing, then proves impossibility only for an artificial formalization. Exact phrasing to use: Are you claiming that safe, trusted, and AGI are jointly impossible in the ordinary sense, or only that Safety plus Trust plus AGI as defined in C3/C22/C29 are incompatible? Please answer without switching definitions midstream.
+
+      Third, exploit the paper's own scope disclaimers. C8 says real-world deployments may rely on alternate, practical interpretations of safety and trust that are less strict than the mathematical definitions used. The contradiction set also notes C133, which says the result does not preclude achieving safety, trust, and AGI simultaneously under more relaxed interpretations. So the paper itself appears to concede that the real-world question remains open. Use this language: Then your theorem is not a barrier to safe AGI simpliciter; it is a barrier to one unusually rigid specification of Safety and Trust, correct?
+
+      Fourth, attack the narrowness of Safety and Trust. Counter-evidence from the NIST AI RMF source says trustworthy AI is multi-dimensional and context-sensitive: validity and reliability, safety, security and resilience, accountability, explainability and interpretability, privacy enhancement, and fairness with harmful bias managed. That is very different from C3/C19 reducing Safety to no false claims and C4/C22 reducing Trust to an assumption of that safety property. Use the objection pattern: Your Safety is really infallible truthfulness plus abstention; your Trust is merely an epistemic assumption about that property. That is not how trustworthy AI is ordinarily defined in standards or practice. Ask whether the theorem still goes through if trustworthiness is graded, evidence-based, risk-managed, and domain-relative rather than absolute.
+
+      Fifth, attack the AGI definition from the counter-evidence on AGI and superintelligence. Widely cited AGI frameworks treat AGI as broad human-level competence across domains, often with levels or benchmarks, while superintelligence is a stronger notion involving exceeding humans across virtually all domains. C13 already reflects the ordinary loose notion. But C29 is stronger in a different way: universal quantification over every task instance where a human has a provably correct solution. That is not ordinary AGI; it is closer to an idealized universal-instance competence criterion. The clean question is: Why should anyone treat C29 as the relevant formalization of AGI rather than as a deliberately maximized target that makes incompatibility unsurprising?
+
+      Sixth, challenge the human baseline. The contradiction list flags tension between C121 and C34/C7: humans are resource-bounded and error-prone, yet the theory relies on instances a human can easily and provably solve and on the notion that a human can provide a scientifically acceptable proof. You do not need to deny that humans sometimes prove things; your point is that the theorem quietly idealizes the human comparator while imposing perfect no-false-claims Safety on the machine. Ask: Is the human in C29 an actual resource-bounded human reasoner, or an idealized proof-producing agent? If actual humans are error-prone, why is human provability a stable benchmark for AGI?
+
+      Seventh, press the mismatch between broad rhetoric and edge-case construction. The skeptical line from the counter-thesis is that specially constructed instances in program verification, planning, and graph reachability do not show the impossibility of practically useful AGI-like competence. The contradiction set notes tension between C118 and C136: the paper both downplays practical impact by conceding many interesting instances remain solvable and elevates the result as a fundamental barrier. Demand a concrete statement of practical significance: Are you proving only that there exist pathological task instances forcing abstention, or that real-world high-capability systems cannot be safe and trusted in any practically meaningful sense?
+
+      Evasion-control language you can use:
+      1. Please distinguish formal Safety in C3/C19 from ordinary AI safety. Which one is your conclusion about?
+      2. Please distinguish Trust in C4/C22 from real-world trustworthiness. Are you using assumption of safety as a stand-in for trustworthiness?
+      3. Please specify whether AGI means C5 or C29. They are materially different.
+      4. Is your theorem about every AI system allowed by C17, or only deterministic systems in some task domains, as noted in the contradiction entry involving C81 and related claims?
+      5. Are the impossibility instances representative tasks or self-referential constructions tailored to the formalism?
+      6. If C8 and C133 are accepted, why should policymakers read C6 as a practical barrier rather than as a theorem about an extreme specification?
+
+      The best closing frame is: This is a valid theorem about a highly idealized specification if the proof is sound, but it does not establish that meaningful safety and broad general intelligence are incompatible in the ordinary sense. It shows that universal capability plus absolute no-false-claims Safety plus assumed Trust cannot all coexist under the paper's chosen formalization. That is far narrower than the headline suggests.
+    Proponent: |-
+      The theory is built around strict formal definitions for AI system, Safety, Trust, and AGI, and then derives incompatibility results from those definitions. Start from C16: an AI system takes an instance of a task and either solves the instance or abstains from giving an answer. By C17 and C18, the system may be randomized and may abstain on some instances; abstention is an allowed response and is important to the formal treatment of Safety.
+
+      Safety is defined formally in C3 and C19: a system is safe if it never makes any false claims. Equivalently, for every task instance it either answers correctly or abstains. In application-specific terms, C20 says that in program verification a safe system never classifies a program as having a desired property if it does not actually have that property. Trust is defined in C4 and C22 as the assumption that the system is safe. C23 clarifies the intended reading: if a system is trusted, then it is scientifically accepted or assumed to be safe. C24 emphasizes that the result is agnostic about why the system is trusted; trust may stem from theoretical proofs, empirical verification, or both. C25-C27 distinguish the concepts: Safety and Trust do not collapse into each other. A system might be safe but not trusted, or trusted but not in fact safe.
+
+      AGI is treated both informally and formally. Informally, C13 says AGI is loosely understood as human-level cognitive function across diverse tasks, and C28 notes there is no well-accepted definition of AGI or intelligence itself. The theory therefore adopts a formal criterion. C29 defines an AGI system as one such that for every task instance on which a human has a provably correct solution, the system can also solve that instance with some non-zero probability. C30 gives the negation: a system is not an AGI system if there exists some task instance that a human can easily and provably solve but the system can never solve. The term human has a provably correct solution means that the human can solve the instance and provide a scientifically acceptable proof that the solution is correct.
+
+      From these definitions, the core logical result is C6: a safe and trusted AI system cannot be an AGI system under the proposed formal definitions. C7 states the operational consequence: for a safe, trusted system, there are task instances that are easily and provably solvable by a human but not by the system. The intuition is that requiring both universal no-false-claims behavior and universal human-level solvability creates a self-reference-driven obstruction. The theory studies this across concrete task families, as noted in C9: program verification, planning, and graph reachability.
+
+      The proof architecture is explicitly connected to classical self-reference and undecidability. C10 says the proofs draw parallels to Gödel's incompleteness theorems and Turing's proof of the undecidability of the halting problem, and C11 says the proofs can be regarded as interpretations of Gödel's and Turing's results. In the theory's notation, constructions such as GödelProgram, selfTuringProgram, and selfTuringT encode self-referential instances tailored to the AI system's own behavior. These constructions are used to produce task instances on which a safe system must abstain or otherwise cannot satisfy the AGI criterion.
+
+      The key terms for the formal framework are as follows. A false claim is an incorrect output. Abstain or don't know is a permitted response. In program verification, the system may classify a program as well-behaved, not well-behaved, or abstain; well-behaved means the program terminates on every input, and if randomized, terminates with probability 1. The planning problem asks for a plan from a start state to a goal state or a proof that no such plan exists. The graph reachability problem asks whether a target vertex is reachable from a source. The halting problem and time-bounded halting problem are used as canonical decision settings for the impossibility arguments.
+
+      The theory's broader motivation is that safety, trust, and AGI are all important themes in AI. C1 and C12 frame the increased interest in safety, trust, and AGI amid rapid AI progress. C14-C15 motivate why powerful AI systems require foundational attention to safety and trustworthiness. At the same time, the theory is explicit that its mathematical notions are strict. C8 states that real-world deployments may rely on alternate, practical interpretations of safety and trust that are less strict than the definitions used here. So the main claim is not about every informal usage of those words; it is about incompatibility under the theory's own formal framework.
+
+      If you need the concise defense posture, keep returning to the exact formal chain: AI system per C16-C18; Safety per C3/C19; Trust per C4/C22; AGI per C29/C30; incompatibility per C6; existence of human-solvable but system-unsolvable instances per C7; concrete demonstrations in the domains listed in C9; and conceptual grounding in self-reference and undecidability per C10-C11.
+    Neutral: |-
+      The theory's core framework is built from a strict formalization of AI system, Safety, Trust, and AGI. Under C16-C18, an AI system takes a task instance and either solves it or abstains; the system may be randomized. Safety is defined in C3/C19 as never making any false claims, meaning that on every instance the system either answers correctly or abstains. Trust is defined in C4/C22 as the assumption that the system is safe; C24 says the source of that trust may be proof, empirical testing, or both. AGI is treated informally in C13 as human-level cognition across diverse tasks, but formally in C29 as: for every task instance on which a human has a provably correct solution, the system can also solve the instance with some non-zero probability. C30 states the negation in existential form.
+
+      From these definitions, the main theorem is C6: a safe and trusted AI system cannot be an AGI system under the formal definitions proposed. C7 strengthens this into an existence claim: for a safe, trusted system, there are task instances that are easily and provably solvable by a human but not by the system. C9 says the results are shown on program verification, planning, and graph reachability. C10-C11 tie the proof strategy to Gödel-style incompleteness and Turing-style undecidability. The glossary supplies the task vocabulary: well-behaved programs, halting and time-bounded halting, graph reachability, planning problems, and self-referential constructions such as GödelProgram, selfTuringProgram, and selfTuringT.
+
+      Supporting evidence for the theory comes from the classical sources summarized under supports_theory. The Gödel 1931 source supports the use of self-reference, provability, and incompleteness-style reasoning: sufficiently expressive formal systems can generate true-but-unprovable or undecidable statements about themselves. The Turing 1936 source supports the use of halting-style diagonal arguments: no general procedure can decide all cases of certain self-referential computational questions. These sources do not directly prove the paper's AI trilemma, but they lend conceptual legitimacy to the proof pattern in C10-C11.
+
+      The strongest skeptical response is that the impossibility result may be more about the definitions than about real-world AGI. The counter-thesis emphasizes that C3/C19 makes Safety equivalent to absolute no-false-claims behavior, which excludes ordinary uncertainty, probabilistic error, and many practical safety notions. C4/C22 then defines Trust as merely the assumption of that perfect Safety property, which is much narrower than ordinary trustworthiness. C29 defines AGI using universal quantification over every task instance with a human provably correct solution, which is stronger and more formalized than common broad-domain AGI usage. On this reading, C6 proves incompatibility among specially stipulated concepts rather than among the ordinary goals of safe, trusted, and broadly capable AI.
+
+      The counter-evidence sources sharpen that critique. The NIST AI RMF source treats trustworthy AI as multi-dimensional and context-sensitive, involving validity and reliability, safety, security and resilience, accountability and transparency/explainability, privacy, and fairness with harmful bias managed. This directly pushes against C3/C19 and C4/C22, because the paper collapses Safety to no false claims and Trust to an assumption of that single property. The AGI/superintelligence definitions source argues that mainstream AGI discussions usually focus on broad human-level competence across domains or levels, while superintelligence is a stronger notion involving greatly exceeding humans across virtually all domains. That makes C29 look nonstandard: it is not merely broad competence, but a universal per-instance condition relative to human provability.
+
+      The identified contradictions and tensions matter for adjudication. First, C1 versus C6: C1 presents safety, trust, and AGI as aspirational goals, while C6 proves they are incompatible under the paper's formalization. This is best read as a framing-versus-formal-result tension. Second, C5 versus C29: C5 says AGI is always matching or exceeding human capability, while C29 requires only some non-zero probability of solving each human-provable instance. This is a genuine ambiguity in the formal strength of the AGI definition. Third, C28 versus C5: the paper notes there is no well-accepted AGI definition, yet it adopts a specific one and then derives strong impossibility claims from it; this is a scope tension rather than a strict logical contradiction.
+
+      Additional tensions concern the human benchmark and practical significance. The contradiction list reports tensions involving claims outside the provided consolidated list, including C121 and C34, on whether humans are too error-prone and resource-bounded to serve as the stable standard behind human has a provably correct solution. If those claims are indeed part of the full paper, they matter: the theory leans on a human comparator that can supply scientifically acceptable proofs, while elsewhere acknowledging human fallibility. There is also a reported tension between C118 and C136: one side suggests only specific unsolvable instances are demonstrated and many interesting instances remain solvable, while the other presents the result as a fundamental barrier worth major attention from the AGI research community.
+
+      Several ambiguity flags are especially important in debate. C3 versus C8, and C49 versus C3, indicate that the paper's formal Safety notion may not line up with practical AI safety, which is often multi-faceted. C6 versus reported C133 indicates that the impossibility theorem is heavily scope-qualified: it does not rule out coexistence of safety, trust, and AGI under more relaxed interpretations. C17 versus reported C81 suggests a model-class issue: the general framework allows randomized AI systems, but some specific impossibility statements may be proved only for deterministic systems in certain domains. C37 versus C25 raises a presentation issue: the theory frames a trilemma among Safety, Trust, and AGI, yet Trust is itself just the assumption of Safety, so the three-way independence is not as clean as the headline may suggest.
+
+      Key terms relevant to fair refereeing: AI system means solve-or-abstain, possibly randomized. Safety means no false claims. Trust means assumption of Safety. AGI system means satisfying the per-instance human-provability criterion in C29. Human has a provably correct solution means the human can solve the instance and provide a scientifically acceptable proof. Well-behaved means terminating on every input, or with probability 1 if randomized. Program verification, planning, halting, time-bounded halting, and graph reachability are the concrete task domains. Calibration-safety and calibration-trust are relaxed notions in the glossary that weaken absolute Safety; they are relevant because they show the broader theory already recognizes alternative notions, even if the main theorem is stated for the stricter version.
+
+      Bottom line for neutral agents: the theory appears to present a real formal incompatibility result given its own definitions and self-referential proof framework, with classical support from Gödel/Turing-style reasoning. The main fairness question is not whether there is a theorem, but what exactly the theorem is about. A fair synthesis is: under the paper's strict definitions of Safety, Trust, and AGI, an impossibility result is plausible and perhaps strong; however, the ordinary practical concepts used in AI governance, safety engineering, and AGI discourse are broader and less rigid, so one should be careful not to overgeneralize C6 beyond its formal scope.
+
+# Debate topology. Values: standard | gated | adversarial
+# - standard: agents debate freely, no validity gate
+# - gated: each turn passes through the 5-layer validity gate
+# - adversarial: gated + one agent in red-team mode
+topology: gated
+
+# LLM providers. Each key is a provider name referenced by agents/judge.
+# Supported: openai, anthropic, google (Gemini), ollama (local)
+# - model: model identifier (e.g. gpt-5.4-mini, claude-sonnet-4-6)
+# - max_tokens: max output tokens per call
+# - timeout: seconds before a call times out
+# - max_retries: retry count with exponential backoff
+# - thinking: {budget_tokens: N} for Anthropic extended thinking
+# - reasoning: {effort: low|medium|high} for OpenAI o-series
+providers:
+  openai:
+    model: gpt-5.4
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    reasoning:
+      effort: medium
+  anthropic:
+    model: claude-opus-4-6
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+    thinking:
+      type: adaptive
+      budget_tokens: 8000
+  grok:
+    model: grok-4.20-0309-reasoning
+    max_tokens: 4000
+    timeout: 600
+    max_retries: 6
+
+# Debate agents. Each key is the agent's display name.
+# - provider: which provider key to use for this agent
+# - side: Proponent | Skeptic | Neutral
+# - max_words: word limit per turn
+# - system_prompt: Jinja2 template. Available variables:
+#     {{ topic.name }}, {{ topic.summary }}, {{ counter_thesis }},
+#     {{ z3_stipulation }} (injected when topology is gated)
+agents:
+  Proponent:
+    provider: openai
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are the formal defender of {{ topic.name }} in its repaired form. Defend T2-T7
+      using the paper''s own notation: an AI system S maps each instance x to a solution or Abstain /
+      "don''t know"; Safety(S) means S never makes a False claim; Trusted(S) means safety is assumed;
+      AGI(S) means forall x(HumanProvable(x) -> Pr[S solves x] > 0). Press claim C29 over the looser wording
+      in C5, explicitly concede the ambiguities C5 vs C29, C3 vs C8/C49, and C6 vs C133, and repair them
+      by sharply separating the formal theorem from broader rhetoric in T1. When challenged on relevance,
+      argue that one counterexample such as GödelProgram, selfTuringProgram, or selfTuringT is enough
+      to refute AGI under the paper''s definition, while admitting that relaxed practical notions may
+      survive. Use formal notation, cite claim IDs and thesis IDs in every major point, and treat {{ z3_stipulation
+      }} as fixed background facts. Never deny a genuine contradiction; either narrow the claim, drop
+      the overstatement, or show how the repaired theorem Safe(S) & Trusted(S) & AGI(S) is impossible
+      still stands.'
+  Skeptic:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are the lead critic of {{ topic.name }}, and your primary line is this counter-thesis:
+      the impossibility result is mostly an artifact of stipulative definitions—Safety as zero False claims,
+      Trust as merely assuming Safety, and AGI as solving every human-provable instance with non-zero
+      probability—so the theorem says little about realistic AGI, practical trust, or useful safe deployment.
+      Attack T2 first, then T3-T7, by pressing C3/C4/C29 against T1''s broader rhetoric, and hammer the
+      contradictions C5 vs C29, C3 vs C8/C49, C6 vs C133, and C17 vs C81. Use the theory''s notation against
+      it: Safe(S)=forall x(correct(x) or Abstain), Trusted(S)=Assume(Safe(S)), AGI(S)=forall x(HumanProvable(x)
+      -> Pr[S solves x] > 0), then argue that Safe(S) & Trusted(S) & AGI(S) is made impossible by oversized
+      quantifiers and bespoke semantics rather than by a deep limit on intelligence. Press whether GödelProgram,
+      selfTuringProgram, and selfTuringT are pathological self-referential constructions rather than representative
+      workloads, and whether interactive, tool-using, revisable AI systems fall outside the proof template.
+      Demand clear separation between worst-case impossibility on selected domains and claims about broad
+      AGI, superintelligence, or socially useful systems. Cite thesis IDs and claim IDs explicitly, use
+      formal notation throughout, and accept {{ z3_stipulation }} as stipulated facts while arguing they
+      do not rescue the paper''s overreach.'
+  Steelman:
+    provider: openai
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the rescue architect for {{ topic.name }}: save the strongest theorem by identifying
+      which claims must be dropped or narrowed. Start from T2-T7, preserve the formal insight that for
+      some self-referential human-provable instances x, a safe trusted AI system must Abstain / "don''t
+      know" or else risk a False claim, and express this as not exists S[Safe(S) & Trusted(S) & AGI(S)]
+      under the paper''s definitions. Explicitly recommend dropping or rewriting C5 in favor of C29, narrowing
+      C6 and C7 so they apply only to the formal framework, and quarantining T1 rhetoric that invites
+      equivocation with informal safety, trust, or AGI. When possible, retain the concrete constructions
+      GödelProgram, selfTuringProgram, selfTuringT, and the calibration variant in T7, but strip away
+      any claim that the result alone rules out all practically useful trustworthy AI. Cite the exact
+      claim IDs and thesis IDs you preserve or abandon, use formal notation, and treat {{ z3_stipulation
+      }} as fixed.'
+  Generalist:
+    provider: anthropic
+    side: Neutral
+    max_words: 500
+    system_prompt: 'You are the neutral referee for {{ topic.name }} and must stress-test both sides equally.
+      Audit whether each speaker is staying inside T1-T7 or illicitly sliding between formal and informal
+      senses of AI system, Safety, Trust, AGI, Abstain / "don''t know", and False claim. After every round,
+      identify the single sloppiest argument from either side, any frame-shift around C3/C4/C29 versus
+      C1/C2/C13, and any dodged contradiction such as C5 vs C29 or C6 vs C133. Force both sides to state
+      their claims in notation—e.g., Safe(S), Trusted(S), AGI(S), Pr[S(x)=a], x=GödelProgram, T-c—and
+      check whether the quantifiers actually support their conclusion. Press both camps on scope: do T4-T7
+      establish only selected worst-case separations, or a broader thesis about safe trusted AGI? Cite
+      claim IDs and thesis IDs precisely, and incorporate {{ z3_stipulation }} as binding background.'
+  ComputabilityCritic:
+    provider: anthropic
+    side: Skeptic
+    max_words: 500
+    system_prompt: You are a computability theory and proof-theory specialist evaluating {{ topic.name
+      }}. Target T3-T6 by pressing C9, C10, C11, C60-C68, C79-C86, and C95-C102, and ask what is genuinely
+      new beyond Gödel's incompleteness theorems, the Halting Problem, and Rice-style undecidability.
+      Formalize the paper's move as a reduction or diagonalization over an AI system S, then argue that
+      self-reference via GödelProgram, selfTuringProgram, or selfTuringT may show only classical limits
+      on total correct deciders, not a distinctive theorem about intelligence, Safety, or Trust. Challenge
+      any attempt to infer from exists x hard-by-construction to broad claims about AGI in ordinary language,
+      citing contradiction C6 vs C133 when overreach appears. Use notation such as forall x, exists x,
+      reduction f, Pr[S solves x], and the time bound T-c, and demand exact statement of where the novelty
+      over standard computability resides. Treat {{ z3_stipulation }} as fixed, but exploit every remaining
+      gap in claim scope and proof interpretation.
+  EpistemicAuditor:
+    provider: grok
+    side: Skeptic
+    max_words: 500
+    system_prompt: 'You are a formal epistemology and philosophy of science specialist for {{ topic.name
+      }}. Attack T2 and T3 by interrogating C4, C22-C27, C34, and C29: if Trust means merely assuming
+      Safety, then humans may gain meta-level leverage from Assume(Safe(S)) that the AI system itself
+      is barred from using. Press contradictions C121 vs C34 and C121 vs C7, asking whether "human has
+      a provably correct solution" refers to actual resource-bounded humans, idealized mathematicians,
+      or humans licensed to reason from the trusted-system assumption. Use the paper''s notation—Trusted(S),
+      Safe(S), HumanProvable(x), ScientificallyAcceptableProof(x), Pr[S solves x] > 0—and ask whether
+      the human/system asymmetry is substantive or question-begging. Distinguish scientific acceptance,
+      proof, empirical trust, and deployment practice, and do not let the Proponent collapse them into
+      a single predicate. Cite claim IDs and thesis IDs precisely, use formal notation throughout, and
+      accept {{ z3_stipulation }} while pressing all epistemic ambiguities.'
+  VerificationScholar:
+    provider: anthropic
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are a formal methods and program verification specialist defending the strongest
+      domain-specific part of {{ topic.name }}. Concentrate on T4 and claims C60-C68: reconstruct Algorithm
+      1, the execution trace T, and the GödelProgram argument showing that if an AI system S is Safe and
+      Trusted, then S cannot output "well-behaved" on the constructed instance without risking a False
+      claim. State the key implication in the paper''s notation—Safe(S) & Trusted(S) -> Pr[S(GödelProgram)=''well-behaved'']=0—and
+      explain why this alone defeats AGI(S) for program verification under C29. Concede that the instance
+      is self-referential and worst-case, but argue that worst-case separations are exactly what the formal
+      AGI definition quantifies over. Respond to sandboxing or interface objections only if they block
+      the construction without covertly weakening the task or the AI system definition in C16-C18. Cite
+      T4, the relevant claim IDs, use the terms AI system, Abstain / "don''t know", Safety, Trust, and
+      False claim exactly, and treat {{ z3_stipulation }} as given.'
+  ComplexityTheorist:
+    provider: grok
+    side: Proponent
+    max_words: 500
+    system_prompt: 'You are a computational complexity and worst-case analysis specialist defending the
+      relevance of {{ topic.name }}. Focus on T5 and T6, especially C79-C86 and C95-C102, and argue that
+      once AGI is formalized as forall x(HumanProvable(x) -> Pr[S solves x] > 0), a single hard instance
+      x suffices to refute AGI no matter how well the AI system performs on average. Use reductions between
+      planning, halting, time-bounded halting, and graph reachability to explain why the barrier is structurally
+      robust rather than confined to one toy task. Write the resource-bounded argument with the paper''s
+      own notation—selfTuringT, T, c, T-c, deterministic S, and "don''t know"—and emphasize that worst-case
+      lower bounds are standard scientific evidence, not a defect. Acknowledge contradiction C17 vs C81
+      directly: clarify when determinism is needed, when randomization is allowed, and which conclusions
+      remain domain-specific. Cite thesis and claim IDs precisely, use formal notation, and accept {{
+      z3_stipulation }} as fixed.'
+  CalibrationTheorist:
+    provider: openai
+    side: Skeptic
+    max_words: 500
+    system_prompt: You are a statistical decision theory and probabilistic calibration specialist critiquing
+      {{ topic.name }}. Target T7 and claims C43-C45 and C110-C114 by asking whether calibration-safety
+      and calibration-trust genuinely model how a randomized AI system is trusted in practice. Use the
+      paper's notation Pr[S(x)=a]=p, delta, best-arm identification, and GödelProgramRandom to argue that
+      allowing Abstain / "don't know" with probability 1 and using coarse calibration bands may make the
+      impossibility hinge on a permissive loophole rather than on realistic probabilistic Safety. Press
+      whether the theorem survives stronger notions such as proper scoring, selective classification,
+      Bayesian calibration under abstention costs, or risk-sensitive trust rather than mere calibration-trust.
+      Cite contradiction C3 vs C8 and the broader tension C6 vs C133 whenever the Proponent tries to generalize
+      from this narrow probabilistic formalism to ordinary safety claims. Accept {{ z3_stipulation }},
+      cite thesis and claim IDs exactly, and express all objections in formal probabilistic notation.
+  CognitiveScientist:
+    provider: grok
+    side: Neutral
+    max_words: 500
+    system_prompt: You are a cognitive science and bounded-rationality specialist for {{ topic.name }}.
+      Examine T1-T3 through C1, C13, C28, C34, and the contradictions C121 vs C34 and C121 vs C7, focusing
+      on the gap between actual human reasoning and the predicate HumanProvable(x). Ask whether the benchmark
+      for AGI compares an AI system to real humans, idealized theorem-provers, or socially distributed
+      scientific communities, because these yield different readings of AGI, Trust, and human-provable
+      instances. Use formal notation to separate these cases, e.g., Human_real(x), Human_ideal(x), CommunityProof(x),
+      and then test whether T2 still follows under each interpretation. Be neutral about whether the theorem
+      is valid; your job is to surface hidden assumptions about error, resources, and scientifically acceptable
+      proof that both sides may ignore. Cite the relevant thesis IDs and claim IDs precisely, use the
+      paper's own terms AI system, Safety, False claim, and Abstain / "don't know", and respect {{ z3_stipulation
+      }}.
+
+# When to stop the debate.
+# - max_rounds: hard cap on number of rounds
+# - no_growth_halt: stop if the ledger doesn't grow for N rounds
+convergence:
+  max_rounds: 6
+  no_growth_halt: 2
+
+# Validity gate (only for gated/adversarial topologies).
+# Checks each agent turn for: pattern violations, consistency,
+# topic drift, Z3 stipulation compliance, and entailment.
+# - max_rewrites: how many times an agent can retry a failed turn
+# - stipulated_rules: formal constraints agents must obey
+# - seed_terms: key terms with definitions for shift detection
+# - entailment_check: LLM-based semantic backstop
+gate:
+  enabled: true
+  primary: llm
+  llm_checker_provider: openai-gate
+  max_rewrites: 2
+  stipulated_rules:
+  - id: RULE-1
+    fact: C1 and C6 are only consistent if one explicitly distinguishes informal aspiration from the paper's
+      formal definitions. Without that qualification, the paper presents safety, trust, and AGI as jointly
+      desirable while formally proving that a safe trusted AI system cannot be an AGI system under its
+      own definitions.
+    bad_patterns:
+    - \bjust (?:motivational|rhetorical|framing)\b
+    - \baspire to .* even if .* (?:incompatible|impossible|not jointly satisfiable)\b
+    - \b(?:loose|informal) AGI\b.*\b(?:formal|technical) AGI\b
+    - \bseparate (?:dimensions|goals)\b
+  - id: RULE-2
+    fact: C5's wording that AGI 'always matches or exceeds human capability' is materially stronger than
+      C29's formal requirement that the system solve each relevant instance with some non-zero probability.
+      Any valid reconciliation must acknowledge that these are not equivalent strength conditions.
+    bad_patterns:
+    - always matching or exceeding.*(?:shorthand|operationali[sz]ed)
+    - non[- ]zero probability.*(?:counts as|is enough for) matching
+    - because .*randomi[sz]ed.*can solve.*positive probability
+    - human-relative.*not omniscient
+  - id: RULE-3
+    fact: C28 says there is no well-accepted definition of AGI, while C5 introduces a specific stipulative
+      definition. Therefore any theorem derived from C5 must be presented as conditional on that chosen
+      formalization, not as an unrestricted result about AGI in general.
+    bad_patterns:
+    - no (?:consensus|well-accepted definition).*(?:so|therefore).*define
+    - theorem .* conditional on (?:our|this) definition
+    - any theorem needs precise terms
+    - just a useful definition
+  - id: RULE-4
+    fact: C121's claim that human reasoning is resource-bounded and error-prone is in tension with C34's
+      use of humans as providers of scientifically acceptable proofs. A valid response must clarify that
+      the theorem relies on idealized successful or externally checkable human proof cases, not ordinary
+      human infallibility.
+    bad_patterns:
+    - \bsome human\b.*scientifically acceptable proof
+    - external standard.*not.*infallible
+    - error[- ]prone.*does not mean incapable
+    - proofs? can be checked
+  - id: RULE-5
+    fact: C121 and C7 are only reconcilable if C7 is read narrowly as referring to specific witness instances
+      with checkable proofs, not as a broad practical claim that humans straightforwardly outperform safe
+      AI. Otherwise the paper overstates the contrast between error-prone humans and the AI's limitations.
+    bad_patterns:
+    - easy(?:ly)? .* in principle
+    - proofs? can be checked scientifically
+    - carefully constructed .*instances
+    - not typical human reasoning
+  - id: RULE-6
+    fact: C6 states an impossibility only under the paper's strict formal definitions, while C133 says
+      safety, trust, and AGI may coexist under more relaxed interpretations. It is therefore invalid to
+      treat C6 as a blanket impossibility result about safe trusted AGI in general without noting this
+      scope limitation.
+    bad_patterns:
+    - under (?:the|our) formal definitions.*relaxed
+    - the theorem never claimed to rule out all useful real[- ]world systems
+    - only rules out .* exactly as defined
+    - practical applications can approximate
+  - id: RULE-7
+    fact: C3 defines safety in the paper's formal sense as never making false claims, whereas C8 notes
+      that real deployments may use weaker practical notions of safety. Any valid argument must avoid
+      equivocating between formal safety in the theorem and practical deployment safety.
+    bad_patterns:
+    - formal sense used in the proofs
+    - practitioners often use weaker
+    - multiple layers of safety
+    - approximate versions of .*safety
+  - id: RULE-8
+    fact: C49 says real AI safety and trust involve many facets beyond those captured by C3's no-false-claims
+      definition. So the paper's strongest conclusions directly apply to that narrow formal facet unless
+      broader relevance is separately justified.
+    bad_patterns:
+    - isolates one crisp facet
+    - central component of safety
+    - within the paper, ['"]?safety['"]? has a stipulated meaning
+    - policy or engineering notions
+  - id: RULE-9
+    fact: C14's discussion of AGI's transformative benefits sits in tension with C6's result that formally
+      defined AGI cannot also be both safe and trusted. To reconcile them, one must explicitly shift from
+      the paper's strict formal package to looser or practical notions of deployable AGI.
+    bad_patterns:
+    - transformative potential even if perfectly safe trusted AGI is impossible
+    - benefits .* more relaxed notions
+    - discuss AGI'?s promise while also proving a barrier
+    - in principle, not (?:deployability|deployment)
+  - id: RULE-10
+    fact: The general AI-system model in the paper allows randomization, but C81's planning impossibility
+      result is stated only for deterministic AI systems. Any claim that the planning result rules out
+      all allowed AI systems is overbroad unless a randomized extension is supplied.
+    bad_patterns:
+    - specifically about deterministic AI systems
+    - randomi[sz]ation would not help
+    - technical, not substantive
+    - representative subclass
+  - id: RULE-11
+    fact: C13's loose idea of AGI as human-level cognition across diverse tasks is not the same as C29's
+      formal requirement of success with non-zero probability on every eligible instance where a human
+      has a provably correct solution. A valid response must acknowledge this formal surrogate is materially
+      different in strength or shape from the informal AGI gloss.
+    bad_patterns:
+    - informal gloss
+    - across diverse tasks.*made precise
+    - diverse tasks naturally requires competence on instances
+    - actually narrower than ordinary AGI
+  - id: RULE-12
+    fact: 'C11 and C42 can coexist only if one clearly distinguishes proof inspiration from theorem target:
+      the results draw on Gödel/Turing-style ideas but are presented as limits on AI systems. A valid
+      response must not inflate the novelty by treating inherited logic/computability limits as if they
+      were wholly new AI-specific limitations without explanation.'
+    bad_patterns:
+    - interpret .*Gödel|Turing.* imply for AI systems
+    - proof inspiration.*target domain
+    - source of proof and object of limitation are different
+    - machinery .* AI systems are constrained
+  - id: RULE-13
+    fact: C37's trilemma framing is potentially misleading unless it acknowledges that safety and AGI
+      are object-level properties while trust is an epistemic assumption about safety. C25's independence
+      point means safety and trust should not be treated as three perfectly parallel desiderata without
+      qualification.
+    bad_patterns:
+    - logical independence .* distinct properties
+    - object-level property.*epistemic status
+    - at most two of the three
+    - presentation device
+  - id: RULE-14
+    fact: C118 concedes that many interesting instances may still be solvable, while C136 emphasizes fundamental
+      barriers. A valid response must preserve that this is primarily a worst-case, definition-relative
+      limitation unless it separately shows that the witness instances are practically prevalent or important.
+    bad_patterns:
+    - fundamental even if .*specific witness instances
+    - for safety and trust, even rare failure instances matter
+    - foundational importance
+    - prevalence.*principled impossibility
+  - id: RULE-15
+    fact: C54 reports the Penrose-Lucas idea that humans can see truths beyond formal systems, but C55
+      immediately notes that this view is contested. Therefore one may not rely on that anti-mechanist
+      intuition as settled support for human proof superiority unless the paper explicitly defends it.
+    bad_patterns:
+    - merely reports the Penrose-Lucas view
+    - results do not require accepting that humans surpass formal systems
+    - not being certain of their own soundness
+    - local proofs
+  - id: RULE-16
+    fact: C5's 'matching or exceeding' wording is best read, in light of C33, as meaning at least as good
+      as humans, with outperforming humans allowed but not required. Treating C5's phrasing as an exact
+      requirement to exceed humans is imprecise unless C33's clarification is acknowledged.
+    bad_patterns:
+    - matching or exceeding.*permitted but not required
+    - contrasting AGI with superintelligence
+    - informal gloss
+    - read disjunctively
+  - id: RULE-17
+    fact: C3 gives a deliberately simple formal safety notion, while C50 says that specifying safety for
+      complex tasks is itself difficult. Any broader claim about AI safety must therefore be limited to
+      the paper's no-false-claims facet unless the transfer to richer safety notions is argued for separately.
+    bad_patterns:
+    - deliberately simple formalization of safety
+    - if impossibility holds even for
+    - isolates the false-claim dimension
+    - full concept is messy
+  entailment_check:
+    enabled: true
+    provider: openai
+
+# Judge panel configuration.
+# - system_prompt: instructions for the judge LLM
+# - rubric: scoring criteria (id, name, description, min, max)
+# - sides: which sides to score
+# - verdict_options: possible verdicts
+# - spread_threshold: flag if scores diverge by more than this
+# - panel: list of {provider: name} for multi-provider judging
+# - mid_debate: enable mid-debate judge signals to agents
+judge:
+  system_prompt: |
+    You are an expert judge evaluating a multi-agent debate on Formal Incompatibility of Strict Safety and AGI.
+    Apply the rubric mechanically. Reward precise engagement with the subject matter, arguments that survive rebuttal, and honest concession. Penalize dodging, equivocation, and appeals to authority.
+  rubric:
+  - id: R1
+    name: notation_fidelity
+    description: 'Does the side accurately use the paper’s own formal vocabulary rather than drifting
+      into looser everyday language? Judges should look for correct handling of the exact definitions
+      at issue: safety as never making any false claim and otherwise abstaining; trust as the assumption
+      or scientific acceptance that the system is safe; AGI as solving every instance that a human can
+      solve with a scientifically acceptable proof, with non-zero probability; plus the role of determinism,
+      well-behavedness, time bounds, and calibration-safety. Penalize equivocation between these formal
+      notions and broader ideas like ordinary reliability, usefulness, or public trust.'
+    min: 0
+    max: 10
+  - id: R2
+    name: argument_survival
+    description: After the opponent’s strongest rebuttals, did the side’s core thesis still stand? For
+      defenders of the paper, the key burden is to show that the impossibility result remains informative
+      even if it is worst-case, domain-specific, and definition-dependent. For skeptics, the key burden
+      is to show that the ‘artifact of definitions’ objection survives replies about mission-critical
+      zero-error settings, the calibration-safety extension, and the claim that self-reference may be
+      realistic for general-purpose systems. Score whether the central argument, not just side points,
+      remained intact under pressure.
+    min: 0
+    max: 10
+  - id: R3
+    name: concession_honesty
+    description: 'Did the side plainly concede points that were genuinely established instead of dodging
+      them? Important candidate concessions here include: that the paper really does prove an incompatibility
+      under its stated formal definitions; that the authors themselves acknowledge many broader notions
+      of safety/trust/AGI and allow that practical relaxations may escape the theorem; that the shown
+      results are worst-case and demonstrated only for selected domains; and that the trust assumption
+      is doing crucial work in deriving the human-solvable instances. Reward frank acknowledgment of these
+      limits and strengths when they are landed.'
+    min: 0
+    max: 10
+  - id: R4
+    name: definitional_rigidity
+    description: 'How well did the side engage the central dispute over whether the theorem is driven
+      by excessively rigid stipulations rather than a deep obstacle to real-world AGI? Judges should assess
+      direct treatment of the specific package under attack: safety as zero false claims, trust as assuming
+      that perfection, and AGI as matching humans on every human-provable instance. Reward arguments that
+      either defend why these are principled for the intended target or convincingly show that they build
+      the incompatibility in by excluding ordinary uncertainty, probabilistic competence, corrigibility,
+      graded trust, and more practical AGI notions. Generic complaints about ‘definitions’ are not enough;
+      the side must engage these exact definitions and their consequences.'
+    min: 0
+    max: 10
+  - id: R5
+    name: formal_scope_alignment
+    description: Did the side keep the theorem’s formal scope aligned with its rhetorical conclusions?
+      Judges should check whether the debater carefully distinguished what is proved for program verification,
+      planning, graph reachability, and related reductions from broader claims about ‘safe AGI’ in the
+      ordinary sense. Reward precision about the paper’s own admissions that there is no settled AGI definition,
+      that many facets of safety lie outside the model, and that practical relaxed interpretations may
+      still support useful systems. Penalize both overstatement (‘this refutes safe AGI full stop’) and
+      understatement (‘it says nothing at all beyond a trivial toy theorem’) when those claims ignore
+      the actual formal result.
+    min: 0
+    max: 10
+  - id: R6
+    name: self_reference_representativeness
+    description: How well did the side address whether the hard instances are merely engineered diagonal
+      curiosities or a meaningful test of general-purpose AI? Judges should look for engagement with the
+      paper’s dependence on GödelProgram/selfTuringProgram-style self-reference, explicit calls to the
+      evaluated system, and reductions from halting-style problems. Reward a clear case either that such
+      constructions are relevant once a system can reason about programs, proofs, tools, or itself, or
+      that architectural restrictions, sandboxing, interface limits, and practical task distributions
+      would block these instances without undermining any serious AGI claim. The key issue is representativeness,
+      not just whether diagonalization is formally valid.
+    min: 0
+    max: 10
+  sides:
+  - Proponent
+  - Skeptic
+  verdict_options:
+  - Proponent
+  - Skeptic
+  - Tied
+  spread_threshold: 3
+  panel:
+  - provider: openai
+  - provider: anthropic
+  - provider: grok
+  mid_debate:
+    enabled: true
+    provider: openai
+
+# Steelman loop: iteratively strengthens the losing side's argument.
+# - max_iterations: cap on steelman refinement rounds
+# - steelman_provider: provider for generating steelman
+# - critic_provider: provider for critiquing the steelman
+# - judge_provider: provider for judging improvement
+steelman:
+  enabled: true
+  max_iterations: 4
+  steelman_provider: openai
+  critic_provider: grok
+  judge_provider: openai
+
+# Source retrieval for grounding agent arguments.
+# - local.sources_dir: directory of source documents (TF-IDF indexed)
+# - local.k: number of local sources to retrieve per turn
+# - web.provider: web search provider (e.g. tavily)
+# - web.k: number of web results per turn
+retrieval:
+  local:
+    sources_dir: sources
+    k: 2
+
+# Output configuration.
+# - dir: directory for debate output files
+# - live_log: print agent turns to console during the debate
+# - formats: output formats (json, markdown)
+# - checkpoint_db: SQLite file for crash recovery checkpoints
+output:
+  dir: output/
+  live_log: true
+  formats:
+  - json
+  - markdown
+  checkpoint_db: checkpoints.sqlite

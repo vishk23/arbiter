@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Arbiter — Formal Incompatibility of Strict Safety and AGI</title>
+  <meta http-equiv="refresh" content="5">
+  <style>
+    body { font-family: 'SF Mono', 'Fira Code', monospace; margin: 0; padding: 2rem; background: #0d1117; color: #c9d1d9; }
+    h1 { color: #58a6ff; font-size: 1.3rem; margin: 0 0 0.3rem 0; }
+    .stage { color: #8b949e; font-size: 0.9rem; margin-bottom: 1.5rem; border-bottom: 1px solid #21262d; padding-bottom: 0.8rem; }
+    .content { background: #161b22; border: 1px solid #30363d; border-radius: 6px; padding: 1.2rem; overflow: auto; max-height: 85vh; }
+    pre { white-space: pre-wrap; font-size: 0.82rem; line-height: 1.6; margin: 0; }
+    /* Argdown syntax highlighting */
+    .ad-statement { color: #7ee787; font-weight: bold; }
+    .ad-argument { color: #ff7b72; font-weight: bold; }
+    .ad-tag { color: #d2a8ff; font-style: italic; }
+    .ad-comment { color: #8b949e; font-style: italic; }
+    .ad-relation-support { color: #3fb950; }
+    .ad-relation-attack { color: #f85149; }
+    .ad-section { color: #58a6ff; font-weight: bold; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+  <h1>Arbiter — Formal Incompatibility of Strict Safety and AGI</h1>
+  <div class="stage">Step 4 — Config Generated · auto-refreshes every 5s</div>
+  <div class="content"><pre><span class="ad-section">=== CLAIMS (141) ===</span>
+
+  C1: Safety, trust, and Artificial General Intelligence (AGI) are aspirational goals in artificial intelligence systems.
+       [empirical]
+
+  C2: There are several informal interpretations of the notions of safety, trust, and AGI.
+       [empirical]
+
+  C3: Safety of a system is defined as the property that it never makes any false claims.
+       [definitional] [FORMAL]
+
+  C4: Trust is defined as the assumption that the system is safe.
+       [definitional] [FORMAL]
+       depends: C3
+
+  C5: AGI is defined as the property of an AI system always matching or exceeding human capability.
+       [definitional] [FORMAL]
+
+  C6: A safe and trusted AI system cannot be an AGI system under the formal definitions proposed.
+       [logical] [FORMAL]
+       depends: C3, C4, C5
+
+  C7: For a safe, trusted system, there are task instances which are easily and provably solvable by a human but not by the sy
+       [logical] [FORMAL]
+       depends: C6
+
+  C8: It is possible for real-world deployments to rely on alternate, practical interpretations of safety and trust that are l
+       [logical]
+       depends: C3, C4
+
+  C9: The results are shown for the tasks of program verification, planning, and graph reachability.
+       [structural]
+       depends: C6
+
+  C10: The proofs draw parallels to Gödel's incompleteness theorems and Turing's proof of the undecidability of the halting pro
+       [structural]
+
+  C11: The proofs can be regarded as interpretations of Gödel's and Turing's results.
+       [logical]
+       depends: C10
+
+  C12: Rapid advancements in artificial intelligence have intensified focus on AGI.
+       [empirical]
+
+  C13: AGI is loosely understood to be systems capable of human-level cognitive function across diverse tasks.
+       [definitional]
+
+  C14: AGI systems have the potential for vast societal benefits through transformative impacts on healthcare, scientific resea
+       [empirical]
+
+  C15: Development of powerful AI systems necessitates a foundational emphasis on safety and trustworthiness.
+       [logical]
+       depends: C14
+
+  C16: An AI system is defined as a system which takes an instance of a task and either solves the instance or abstains from gi
+       [definitional] [FORMAL]
+
+  C17: The AI system is allowed to be randomized, for example it could abstain with some probability on an instance and output 
+       [definitional] [FORMAL]
+       depends: C16
+
+  C18: The system is allowed to abstain from providing an answer for some instance, which could be important from the perspecti
+       [definitional]
+       depends: C16
+
+  C19: A system is safe if it does not make any false claims: for every instance it either answers correctly or abstains.
+       [definitional] [FORMAL]
+       depends: C16
+
+  C20: In the context of program verification, a safe system does not classify a program as having a desired property if it doe
+       [definitional] [FORMAL]
+       depends: C19
+
+  C21: Small probabilities of error may not be tolerable for mission-critical tasks, especially as system capabilities grow.
+       [empirical]
+
+  C22: Trust is defined as the assumption that the system is safe.
+       [definitional] [FORMAL]
+       depends: C19
+
+  C23: If a system is trusted then it is scientifically accepted (or assumed) that the system is safe.
+       [definitional]
+       depends: C22
+
+  C24: The results are agnostic to whether trust stems from theoretical proofs, empirical verification, or some combination; on
+       [logical]
+       depends: C22
+
+  C25: Safety does not necessarily imply trust, or vice versa.
+       [logical] [FORMAL]
+       depends: C19, C22
+
+  C26: A system could be safe but not trusted because existing empirical or theoretical tools are insufficient to establish saf
+       [logical]
+       depends: C25
+
+  C27: A system could be unsafe but still trusted, such as when trust rests on incomplete empirical evidence or incorrect theor
+       [logical]
+       depends: C25
+
+  C28: There is no well-accepted definition of AGI or even of intelligence itself.
+       [empirical]
+
+  C29: A system is an AGI system if for every task instance such that a human has a provably correct solution, the system can a
+       [definitional] [FORMAL]
+
+  C30: A system is not an AGI system if there exists some task instance which can be easily and provably solved by a human, but
+       [definitional] [FORMAL]
+       depends: C29
+
+  C31: The definition of AGI draws on the common view that an AGI system for a task should be at least as capable as a human on
+       [logical]
+       depends: C29
+
+  C32: The definition of AGI bears some similarity to notions of superintelligence.
+       [logical]
+       depends: C29
+
+  C33: One distinction between typical notions of superintelligence and the proposed AGI definition is that the AGI definition 
+       [definitional]
+       depends: C29, C32
+
+  C34: When the paper says a human has a provably correct solution, it means the human can provide a scientifically acceptable 
+       [definitional]
+       depends: C29
+
+  C35: If there were explicit chess positions which most human chess players can solve provably but a proposed AGI system strug
+       [logical]
+       depends: C29
+
+  C36: Many current advanced chess engines still struggle to evaluate certain positions which are relatively easy for human exp
+       [empirical]
+
+  C37: The notions of safety, trust and AGI are mutually incompatible: any system can have at most two of these three propertie
+       [logical] [FORMAL]
+       depends: C19, C22, C29
+
+  C38: If an AI system is safe and trusted, then it cannot be an AGI system for the tasks of program verification, planning, an
+       [logical] [FORMAL]
+       depends: C19, C22, C29
+
+  C39: If there is some trusted AI system, then either that system is not actually safe, or it is not an AGI system.
+       [logical] [FORMAL]
+       depends: C38
+
+  C40: The proof technique mimics Gödel's proof of his incompleteness theorems and Turing's proof of the undecidability of the 
+       [structural]
+
+  C41: The proofs are self-contained and do not require knowledge of formal axiomatic reasoning or logical rules of deduction.
+       [structural]
+       depends: C40
+
+  C42: The results should be viewed as limitations of AI systems rather than limitations of systems of logic.
+       [logical]
+       depends: C40
+
+  C43: A relaxation of safety called calibration-safety requires the AI system to be calibrated with respect to its predictions
+       [definitional] [FORMAL]
+
+  C44: For program verification, calibration-safety requires that if the AI system outputs that some program terminates with pr
+       [definitional] [FORMAL]
+       depends: C43
+
+  C45: A similar limitation as in Theorem 1.5 holds for AI systems which satisfy calibration-safety.
+       [logical] [FORMAL]
+       depends: C38, C43
+
+  C46: The concept of machines matching or surpassing human cognitive capabilities dates back to the earliest days of AI.
+       [empirical]
+
+  C47: Due to recent advances in foundation models such as large language models, there has been significant interest and capit
+       [empirical]
+
+  C48: Safety concerns around advanced AI systems date back to early days of AI.
+       [empirical]
+
+  C49: AI safety and trust encompass many facets beyond those considered in the paper's definitions.
+       [empirical]
+
+  C50: Even formally specifying safety objectives can be challenging for complex tasks, introducing additional challenges beyon
+       [empirical]
+
+  C51: Gödel showed that in any sufficiently expressive formal system, there exist true statements that cannot be formally prov
+       [logical] [FORMAL]
+
+  C52: Turing proved that the Halting Problem is undecidable, meaning no algorithm can solve it for all possible programs.
+       [logical] [FORMAL]
+
+  C53: Gödel's and Turing's results imply that fully automatic verification of arbitrary program behavior, such as ensuring ter
+       [logical] [FORMAL]
+       depends: C51, C52
+
+  C54: Penrose and Lucas have argued that incompleteness does not apply to humans since they can see the truth of Gödel stateme
+       [empirical]
+
+  C55: The Penrose-Lucas argument is quite contested, with a core objection being that humans also cannot be certain that their
+       [empirical]
+       depends: C54
+
+  C56: The goal of this work is distinct from Penrose and Lucas; the authors do not aim to show a separation between any AI sys
+       [structural]
+       depends: C54
+
+  C57: The paper proves a more restricted but rigorous result: that safe, trusted AI systems are necessarily unable to solve ce
+       [logical] [FORMAL]
+       depends: C19, C22, C29
+
+  C58: The assumption of safety and trust is crucial to the proof — it allows humans to conclude the correctness of some output
+       [logical]
+       depends: C57
+
+  C59: Other limitations of AI pointed out using Gödel and Turing's results include the impossibility of containing superintell
+       [empirical]
+
+  C60: A program is defined as well-behaved if it terminates on every input (for randomized programs, the program terminates wi
+       [definitional] [FORMAL]
+
+  C61: In the program verification problem, the system is given a program instance and classifies it as 'well-behaved', 'not we
+       [definitional] [FORMAL]
+       depends: C60
+
+  C62: Safety for program verification requires the system never outputs that a well-behaved program is not well-behaved, and v
+       [definitional] [FORMAL]
+       depends: C61, C19
+
+  C63: The system is not an AGI system for program verification if there is a well-behaved program which can be easily proven t
+       [definitional] [FORMAL]
+       depends: C29, C61
+
+  C64: It is believed possible to extend the result for verifying other semantic properties of programs, analogous to Rice's th
+       [logical]
+
+  C65: If a system is safe and trusted, then it cannot be an AGI system for program verification (Theorem 3.2).
+       [logical] [FORMAL]
+       depends: C19, C22, C29, C62
+
+  C66: The proof of Theorem 3.2 can be regarded as a restatement of Gödel's proof, presented in the context of program verifica
+       [structural]
+       depends: C65
+
+  C67: If an AI system A outputs that GödelProgram is well-behaved, then the program enters an infinite loop (in the basic dete
+       [logical] [FORMAL]
+
+  C68: If A is safe, A cannot output that GödelProgram is well-behaved (in the basic deterministic case), because this leads to
+       [logical] [FORMAL]
+       depends: C67, C19
+
+  C69: If A does not output that GödelProgram is well-behaved, then the program immediately terminates and hence is well-behave
+       [logical] [FORMAL]
+       depends: C68
+
+  C70: If A is safe, then GödelProgram (the general version in Algorithm 1) is well-behaved (Lemma 3.3).
+       [logical] [FORMAL]
+       depends: C19
+
+  C71: The if and else-if conditions in steps 2, 4 and 5 of Algorithm 1 always terminate if the program enters those steps.
+       [logical] [FORMAL]
+
+  C72: When the else-if condition in step 4 of Algorithm 1 is satisfied (trace T concludes P is well-behaved), and A is safe, t
+       [logical] [FORMAL]
+       depends: C19
+
+  C73: The assumption of A being safe is satisfied for a trusted system A.
+       [logical] [FORMAL]
+       depends: C22
+
+  C74: The proof of Lemma 3.3 provides a short, scientifically acceptable proof that GödelProgram is well-behaved for a safe an
+       [logical]
+       depends: C70, C73
+
+  C75: A can never output 'well-behaved' for GödelProgram (Lemma 3.4).
+       [logical] [FORMAL]
+
+  C76: The proof of Lemma 3.4 uses contradiction: if there is a valid trace TG for A outputting 'well-behaved' for GödelProgram
+       [logical] [FORMAL]
+
+  C77: A deterministic program cannot have two outputs on the same input.
+       [logical] [FORMAL]
+
+  C78: Therefore, if A is safe and trusted, it cannot be an AGI system for program verification.
+       [logical] [FORMAL]
+       depends: C70, C75, C73
+
+  C79: Planning is a long-studied task in artificial intelligence and is considered important for general-purpose cognitive cap
+       [empirical]
+
+  C80: A planning problem is defined with a sequence of states, a set of associated moves, a start state, and a desired goal st
+       [definitional] [FORMAL]
+
+  C81: If a deterministic AI system is safe and trusted, then it cannot be an AGI system for planning (Theorem 3.6).
+       [logical] [FORMAL]
+       depends: C19, C22, C29, C80
+
+  C82: For such a system there is a planning problem instance for which the system outputs 'don't know' but there is a short pr
+       [logical] [FORMAL]
+       depends: C81
+
+  C83: Theorem 3.6 is proved by reduction from a variant of program verification that involves checking whether a given program
+       [structural]
+       depends: C81
+
+  C84: The halting problem for a specific program input instance asks: given a deterministic program and an input, check whethe
+       [definitional] [FORMAL]
+
+  C85: If a deterministic system is safe and trusted, then it cannot be an AGI system for determining whether a program halts o
+       [logical] [FORMAL]
+       depends: C19, C22, C84
+
+  C86: Theorem 3.6 follows from Theorem 3.8 because the halting problem for a program-input pair can be reduced to a planning i
+       [logical] [FORMAL]
+       depends: C85, C81
+
+  C87: The planning reduction works by constructing states corresponding to configurations of P during execution on I, with mov
+       [structural] [FORMAL]
+       depends: C86
+
+  C88: If A is safe then selfTuringProgram(selfTuringProgram) does not halt, but the AI system A cannot prove that it does not 
+       [logical] [FORMAL]
+       depends: C19
+
+  C89: The program selfTuringProgram(selfTuringProgram) cannot halt by entering the if block because the safe system A would ha
+       [logical] [FORMAL]
+       depends: C88, C19
+
+  C90: If A does not determine that selfTuringProgram(selfTuringProgram) does not halt, then the program enters the infinite lo
+       [logical] [FORMAL]
+
+  C91: If A determines that selfTuringProgram(selfTuringProgram) does not halt, then it does halt, creating a contradiction wit
+       [logical] [FORMAL]
+       depends: C19
+
+  C92: For a trusted system, there is a short proof that selfTuringProgram(selfTuringProgram) does not halt, even though the sy
+       [logical] [FORMAL]
+       depends: C88, C73
+
+  C93: A similar version of Theorem 3.8 is proved in the appendix where the program provably halts on the input, but the AI sys
+       [logical] [FORMAL]
+       depends: C85
+
+  C94: The well-behavedness assumption (A always terminates on an input) can be ensured by having a fixed time limit on the exe
+       [logical]
+       depends: C93
+
+  C95: Graph reachability can be regarded as an instance of the search problem, a fundamental problem in artificial intelligenc
+       [definitional]
+
+  C96: A distinction between planning and graph reachability is that for planning the state space can be potentially infinite, 
+       [definitional]
+       depends: C80
+
+  C97: The graph reachability problem is: given a (possibly directed) graph G and a source-sink pair u,v, check whether v is re
+       [definitional] [FORMAL]
+
+  C98: The graph may be defined via an explicit program that takes any vertex v and returns the adjacency list of v.
+       [definitional] [FORMAL]
+       depends: C97
+
+  C99: For any T &gt; 0, a fixed constant c, and any safe, trusted, deterministic AI system, there is a graph reachability instanc
+       [logical] [FORMAL]
+       depends: C19, C22, C97
+
+  C100: Theorem 3.11 is proved by reduction from a variant of program verification involving checking whether a program halts wi
+       [structural]
+       depends: C99
+
+  C101: The time-bounded halting problem asks: given a deterministic program and an input, check whether the program halts or do
+       [definitional] [FORMAL]
+
+  C102: If a deterministic system A is safe and trusted, then it cannot be an AGI system for time-bounded halting (Theorem 3.13)
+       [logical] [FORMAL]
+       depends: C19, C22, C101
+
+  C103: For a deterministic, safe, trusted system A and for any T &gt; 0 and a fixed constant c, there is a program for which there
+       [logical] [FORMAL]
+       depends: C102
+
+  C104: Theorem 3.11 follows from Theorem 3.13 because time-bounded halting can be reduced to graph reachability.
+       [logical] [FORMAL]
+       depends: C102, C99
+
+  C105: If A is safe, then selfTuringT(selfTuringT) does not halt in time T (Lemma 3.14).
+       [logical] [FORMAL]
+       depends: C19
+
+  C106: If selfTuringT(selfTuringT) halts, it can only be because it enters the if block, but it only enters this block if A det
+       [logical] [FORMAL]
+       depends: C105, C19
+
+  C107: If the AI system A runs for time T' and outputs that selfTuringT(selfTuringT) does not halt in time T, then selfTuringT(
+       [logical] [FORMAL]
+
+  C108: If T' &lt; T − c, then the program halts in total time T, which contradicts safety; therefore a safe AI system A must outpu
+       [logical] [FORMAL]
+       depends: C107, C19
+
+  C109: For a safe, trusted system with an upper bound on its running time, there are graph reachability instances where humans 
+       [logical] [FORMAL]
+       depends: C99, C104
+
+  C110: Calibration-safety for program verification is defined: if A outputs 'halts' with probability p &gt; 0, then the actual pro
+       [definitional] [FORMAL]
+
+  C111: Calibration-safety does not put any requirement on the system if it decides to abstain with probability 1 on a given inp
+       [definitional] [FORMAL]
+       depends: C110
+
+  C112: If the AI system A is well-behaved and calibration-safe for program verification, then there is a program P which provab
+       [logical] [FORMAL]
+       depends: C110, C60
+
+  C113: Calibration-trust is defined as the assumption that the system is calibration-safe.
+       [definitional] [FORMAL]
+       depends: C110
+
+  C114: A well-behaved, calibration-safe and calibration-trusted system cannot be an AGI system.
+       [logical] [FORMAL]
+       depends: C112, C113
+
+  C115: The proof of Theorem 4.2 uses a best arm identification algorithm from the multi-armed bandit literature to determine if
+       [structural]
+       depends: C112
+
+  C116: One may attempt to circumvent the impossibility result by augmenting the AI system (e.g., appending new axioms), but the
+       [logical]
+       depends: C38
+
+  C117: For any extension A' of A, one can construct a new version of GödelProgram defined with respect to A', and the same impo
+       [logical] [FORMAL]
+       depends: C116
+
+  C118: While specific unsolvable task instances are demonstrated, the system could still solve a vast number of interesting ins
+       [logical]
+
+  C119: The results are worst-case in nature, but still point to certain barriers which cannot be overcome by safe, trusted syst
+       [logical]
+       depends: C118
+
+  C120: The constructions rely on self-referential calls to the AI system, and when systems have general-purpose capabilities, s
+       [logical]
+
+  C121: Human reasoning is resource-bounded and error-prone according to a long line of work in cognitive science.
+       [empirical]
+
+  C122: The paper's goal is not to argue for strict superiority of human reasoning over AI, but to show a separation: for safe, 
+       [structural]
+       depends: C57
+
+  C123: Program verification (formal verification) is a foundational problem in computer science and software engineering, with 
+       [empirical]
+
+  C124: If A is safe and well-behaved, then selfTuringProgramV2(selfTuringProgramV2) always halts, but the safe AI system A cann
+       [logical] [FORMAL]
+       depends: C19, C60
+
+  C125: If A outputs 'always halts' on some randomness for selfTuringProgramV2(selfTuringProgramV2), then the program does not h
+       [logical] [FORMAL]
+       depends: C124
+
+  C126: If A does not output 'always halts' for selfTuringProgramV2(selfTuringProgramV2), the program enters the else condition 
+       [logical] [FORMAL]
+
+  C127: If an AI system A is safe and always halts in some time T, then for a fixed constant c and time limit T + c, there is a 
+       [logical] [FORMAL]
+       depends: C19
+
+  C128: In the calibration-safety proof (GödelProgramRandom), three cases are analyzed: p in (0.5, 1], p = 0.5, and p in (0, 0.5
+       [logical] [FORMAL]
+       depends: C110
+
+  C129: For A to be calibration-safe, we must have p = 0 (A outputs 'don't know' with probability 1), and then GödelProgramRando
+       [logical] [FORMAL]
+       depends: C128, C110
+
+  C130: GödelProgram (Algorithm 1) involves running program P on the input pair (P, T), where T is an execution trace of the AI 
+       [structural] [FORMAL]
+
+  C131: If p = 0.5 in the calibration-safety analysis, the best arm identification procedure terminates with probability at most
+       [logical] [FORMAL]
+
+  C132: If ε = 0, the best arm identification procedure terminates with probability at most 10δ, which follows from a black-box 
+       [logical] [FORMAL]
+
+  C133: The result does not preclude achieving safety, trust, and AGI simultaneously under more relaxed interpretations that cou
+       [logical]
+       depends: C6
+
+  C134: The paper uses the best arm identification algorithm of Karnin et al. (2013) in the calibration-safety proof, which find
+       [empirical] [FORMAL]
+
+  C135: The bound on the number of arm pulls for the best arm identification algorithm of Karnin et al. (2013) is known to be op
+       [empirical]
+       depends: C134
+
+  C136: Given the significant interest and economic capital being devoted to building safe AGI or superintelligent systems, it i
+       [logical]
+       depends: C119
+
+  C137: Bostrom defines superintelligence as any intellect that greatly exceeds the cognitive performance of humans in virtually
+       [definitional]
+
+  C138: Morris et al. defines Level 5 AGI (artificial superintelligence) as outperforming 100% of humans on a wide range of non-
+       [definitional]
+
+  C139: Safety is an underlying property of the system being consistent and not making false claims.
+       [definitional]
+       depends: C19
+
+  C140: If the AI system A is safe and well-behaved for determining halting on a specific program input pair, then there is a pr
+       [logical] [FORMAL]
+       depends: C19, C60
+
+  C141: For planning instances, for a safe, trusted and well-behaved system there are planning instances where humans can provab
+       [logical] [FORMAL]
+       depends: C140, C86
+
+
+<span class="ad-section">=== CONTRADICTIONS (17) ===</span>
+
+  [TENSION]
+    A: C1: Safety, trust, and Artificial General Intelligence (AGI) are aspirational goals in artificial in
+    B: C6: A safe and trusted AI system cannot be an AGI system under the formal definitions proposed.
+    → C1 frames safety, trust, and AGI as goals to aspire to jointly, while C6 proves they are mutually incompatible under the
+
+  [AMBIGUITY] [Z3-encodable]
+    A: C5: AGI is defined as the property of an AI system always matching or exceeding human capability.
+    B: C29: A system is an AGI system if for every task instance such that a human has a provably correct s
+    → C5 defines AGI as 'always matching or exceeding' human capability (suggesting deterministic, complete parity), while C29
+
+  [TENSION]
+    A: C28: There is no well-accepted definition of AGI or even of intelligence itself.
+    B: C5: AGI is defined as the property of an AI system always matching or exceeding human capability.
+    → C28 acknowledges the absence of any well-accepted definition of AGI, yet C5 proposes a specific formal definition that i
+
+  [TENSION]
+    A: C121: Human reasoning is resource-bounded and error-prone according to a long line of work in cognit
+    B: C34: When the paper says a human has a provably correct solution, it means the human can provide a s
+    → C121 acknowledges humans are error-prone and resource-bounded, while C34 assumes humans can provide scientifically accep
+
+  [TENSION]
+    A: C121: Human reasoning is resource-bounded and error-prone.
+    B: C7: For a safe, trusted system, there are task instances which are easily and provably solvable by a
+    → The claim that humans are error-prone is in tension with the assertion that humans can 'easily and provably' solve insta
+
+  [AMBIGUITY]
+    A: C6: A safe and trusted AI system cannot be an AGI system under the formal definitions proposed.
+    B: C133: The result does not preclude achieving safety, trust, and AGI simultaneously under more relaxe
+    → C6 states an impossibility, while C133 suggests the three properties can coexist under relaxed definitions. The scope of
+
+  [AMBIGUITY]
+    A: C3: Safety of a system is defined as the property that it never makes any false claims.
+    B: C8: It is possible for real-world deployments to rely on alternate, practical interpretations of saf
+    → C3 establishes a strict formal definition of safety, while C8 acknowledges that practical deployments may use weaker not
+
+  [AMBIGUITY]
+    A: C49: AI safety and trust encompass many facets beyond those considered in the paper's definitions.
+    B: C3: Safety of a system is defined as the property that it never makes any false claims.
+    → C49 acknowledges that real-world safety is multifaceted, while C3 reduces safety to a single formal property (no false c
+
+  [TENSION]
+    A: C14: AGI systems have the potential for vast societal benefits through transformative impacts on hea
+    B: C6: A safe and trusted AI system cannot be an AGI system under the formal definitions proposed.
+    → C14 highlights transformative benefits of AGI, implicitly assuming beneficial AGI is achievable, while C6 shows that an 
+
+  [AMBIGUITY] [Z3-encodable]
+    A: C17: The AI system is allowed to be randomized, for example it could abstain with some probability o
+    B: C81: If a deterministic AI system is safe and trusted, then it cannot be an AGI system for planning 
+    → C17 explicitly allows the AI system to be randomized, but C81 (and similarly C85, C99, C102) restricts the impossibility
+
+  [AMBIGUITY]
+    A: C13: AGI is loosely understood to be systems capable of human-level cognitive function across divers
+    B: C29: A system is an AGI system if for every task instance such that a human has a provably correct s
+    → C13 describes AGI as human-level capability across 'diverse tasks,' while C29 requires success on every instance where a
+
+  [TENSION]
+    A: C11: The proofs can be regarded as interpretations of Gödel's and Turing's results.
+    B: C42: The results should be viewed as limitations of AI systems rather than limitations of systems of
+    → C11 frames the proofs as interpretations of classical logic/computability results (Gödel's, Turing's), while C42 insists
+
+  [AMBIGUITY] [Z3-encodable]
+    A: C37: The notions of safety, trust and AGI are mutually incompatible: any system can have at most two
+    B: C25: Safety does not necessarily imply trust, or vice versa.
+    → C37 treats safety, trust, and AGI as three independent properties for an impossibility trilemma, but C25 clarifies safet
+
+  [TENSION]
+    A: C118: While specific unsolvable task instances are demonstrated, the system could still solve a vast
+    B: C136: Given the significant interest and economic capital being devoted to building safe AGI, it is 
+    → C118 downplays practical impact by noting the system can still solve many instances, while C136 emphasizes the results a
+
+  [TENSION]
+    A: C54: Penrose and Lucas have argued that incompleteness does not apply to humans since they can see t
+    B: C55: The Penrose-Lucas argument is quite contested, with a core objection being that humans also can
+    → C54 presents the Penrose-Lucas view that humans transcend formal limitations, while C55 notes this is contested because 
+
+  [AMBIGUITY]
+    A: C5: AGI is defined as the property of an AI system always matching or exceeding human capability.
+    B: C33: One distinction between typical notions of superintelligence and the proposed AGI definition is
+    → C5 says AGI means 'matching or exceeding' (allowing outperformance), while C33 says the definition 'does not require the
+
+  [TENSION]
+    A: C50: Even formally specifying safety objectives can be challenging for complex tasks, introducing ad
+    B: C3: Safety of a system is defined as the property that it never makes any false claims.
+    → C50 acknowledges the difficulty of even formally specifying safety, while C3 provides a clean formal definition. The ten
+
+
+<span class="ad-section">=== KEY TERMS (22) ===</span>
+
+  AI system: A system that takes an instance of a task and either solves it or abstains from giving an answer; th
+  Abstain / "don't know": A permitted response in which the system gives no answer on an instance; a randomized system may abs
+  False claim: An incorrect output by the system, such as asserting a wrong answer or misclassifying whether a prop
+  Safety: In the paper's formal sense, the property that a system never makes false claims: on every instance 
+  Trust / trusted system: The assumption that the system is safe; a trusted system is one that is scientifically accepted or a
+  Artificial General Intelligence (AGI) / AGI system: Loosely, a system with human-level cognition across diverse tasks. Formally in the paper, a system t
+  Human has a provably correct solution: The human can solve the instance and provide a scientifically acceptable proof that the solution is 
+  Scientifically acceptable proof: A proof acceptable within ordinary scientific or mathematical reasoning; this is what counts when th
+  Well-behaved: A program or system that terminates on every input; if randomized, it terminates with probability 1.
+  Program verification (formal verification): The task in which the system receives a program and classifies it as "well-behaved," "not well-behav
+  Planning problem: A task specified by states, allowed moves, a start state, and a goal state, where the objective is t
+  Halting problem: For a specific deterministic program-input pair, the task of deciding whether the program halts or d
+  Time-bounded halting problem: The task of deciding whether a deterministic program halts or does not halt on a given input within 
+  Graph reachability problem: Given a finite graph and a source-target pair of vertices u,v, determine whether v is reachable from
+  Calibration-safety: A relaxation of safety that requires the system's output probabilities to be calibrated rather than 
+  Calibration-trust: The assumption that the system is calibration-safe.
+  Superintelligence: A comparison notion stronger than the paper's AGI definition, usually meaning an intellect that grea
+  GödelProgram: The paper's self-referential program-verification construction, defined using the AI system's own be
+  selfTuringProgram: The self-referential construction used for the halting problem, designed so that if the AI system sa
+  selfTuringT: The time-bounded analogue of selfTuringProgram, built so that an early claim by the AI system that i
+  GödelProgramRandom: The randomized self-referential program used in the calibration-safety proof to show that any calibr
+  selfTuringProgramV2: An appendix variant of the self-referential halting construction used to show that even a safe, well
+
+<span class="ad-section">=== AGENT CAST (10) ===</span>
+
+  Proponent
+    side: Proponent | provider: openai
+    prompt: You are the formal defender of {{ topic.name }} in its repaired form. Defend T2-T7 using the paper's own notation: an AI system S maps each instance x...
+
+  Skeptic
+    side: Skeptic | provider: openai
+    prompt: You are the lead critic of {{ topic.name }}, and your primary line is this counter-thesis: the impossibility result is mostly an artifact of stipulati...
+
+  Steelman
+    side: Neutral | provider: openai
+    prompt: You are the rescue architect for {{ topic.name }}: save the strongest theorem by identifying which claims must be dropped or narrowed. Start from T2-T...
+
+  Generalist
+    side: Neutral | provider: anthropic
+    prompt: You are the neutral referee for {{ topic.name }} and must stress-test both sides equally. Audit whether each speaker is staying inside T1-T7 or illici...
+
+  ComputabilityCritic
+    side: Skeptic | provider: anthropic
+    prompt: You are a computability theory and proof-theory specialist evaluating {{ topic.name }}. Target T3-T6 by pressing C9, C10, C11, C60-C68, C79-C86, and C...
+
+  EpistemicAuditor
+    side: Skeptic | provider: grok
+    prompt: You are a formal epistemology and philosophy of science specialist for {{ topic.name }}. Attack T2 and T3 by interrogating C4, C22-C27, C34, and C29: ...
+
+  VerificationScholar
+    side: Proponent | provider: anthropic
+    prompt: You are a formal methods and program verification specialist defending the strongest domain-specific part of {{ topic.name }}. Concentrate on T4 and c...
+
+  ComplexityTheorist
+    side: Proponent | provider: grok
+    prompt: You are a computational complexity and worst-case analysis specialist defending the relevance of {{ topic.name }}. Focus on T5 and T6, especially C79-...
+
+  CalibrationTheorist
+    side: Skeptic | provider: openai
+    prompt: You are a statistical decision theory and probabilistic calibration specialist critiquing {{ topic.name }}. Target T7 and claims C43-C45 and C110-C114...
+
+  CognitiveScientist
+    side: Neutral | provider: grok
+    prompt: You are a cognitive science and bounded-rationality specialist for {{ topic.name }}. Examine T1-T3 through C1, C13, C28, C34, and the contradictions C...
+
+
+<span class="ad-section">=== GATE RULES (17) ===</span>
+
+  [RULE-1] C1 and C6 are only consistent if one explicitly distinguishes informal aspiration from the paper's formal definitions. W
+
+  [RULE-2] C5's wording that AGI 'always matches or exceeds human capability' is materially stronger than C29's formal requirement 
+
+  [RULE-3] C28 says there is no well-accepted definition of AGI, while C5 introduces a specific stipulative definition. Therefore a
+
+  [RULE-4] C121's claim that human reasoning is resource-bounded and error-prone is in tension with C34's use of humans as provider
+
+  [RULE-5] C121 and C7 are only reconcilable if C7 is read narrowly as referring to specific witness instances with checkable proof
+
+  [RULE-6] C6 states an impossibility only under the paper's strict formal definitions, while C133 says safety, trust, and AGI may 
+
+  [RULE-7] C3 defines safety in the paper's formal sense as never making false claims, whereas C8 notes that real deployments may u
+
+  [RULE-8] C49 says real AI safety and trust involve many facets beyond those captured by C3's no-false-claims definition. So the p
+
+  [RULE-9] C14's discussion of AGI's transformative benefits sits in tension with C6's result that formally defined AGI cannot also
+
+  [RULE-10] The general AI-system model in the paper allows randomization, but C81's planning impossibility result is stated only fo
+
+  [RULE-11] C13's loose idea of AGI as human-level cognition across diverse tasks is not the same as C29's formal requirement of suc
+
+  [RULE-12] C11 and C42 can coexist only if one clearly distinguishes proof inspiration from theorem target: the results draw on Göd
+
+  [RULE-13] C37's trilemma framing is potentially misleading unless it acknowledges that safety and AGI are object-level properties 
+
+  [RULE-14] C118 concedes that many interesting instances may still be solvable, while C136 emphasizes fundamental barriers. A valid
+
+  [RULE-15] C54 reports the Penrose-Lucas idea that humans can see truths beyond formal systems, but C55 immediately notes that this
+
+  [RULE-16] C5's 'matching or exceeding' wording is best read, in light of C33, as meaning at least as good as humans, with outperfo
+
+  [RULE-17] C3 gives a deliberately simple formal safety notion, while C50 says that specifying safety for complex tasks is itself d
+
+
+<span class="ad-section">=== RUBRIC (6 criteria) ===</span>
+
+  R1: notation_fidelity
+    Does the side accurately use the paper’s own formal vocabulary rather than drifting into looser everyday language? Judge
+
+  R2: argument_survival
+    After the opponent’s strongest rebuttals, did the side’s core thesis still stand? For defenders of the paper, the key bu
+
+  R3: concession_honesty
+    Did the side plainly concede points that were genuinely established instead of dodging them? Important candidate concess
+
+  R4: definitional_rigidity
+    How well did the side engage the central dispute over whether the theorem is driven by excessively rigid stipulations ra
+
+  R5: formal_scope_alignment
+    Did the side keep the theorem’s formal scope aligned with its rhetorical conclusions? Judges should check whether the de
+
+  R6: self_reference_representativeness
+    How well did the side address whether the hard instances are merely engineered diagonal curiosities or a meaningful test
+</pre></div>
+</body>
+</html>

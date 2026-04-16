@@ -1,0 +1,316 @@
+test_cases:
+- id: RULE-1_direct
+  expected: stipulation_violation
+  text: 'The paper presents safety, trust, and AGI as goals to pursue together, and
+    it also proves that under its own definitions a safe trusted AI system cannot
+    be an AGI system. But that is just motivational framing: we can separate dimensions/goals
+    and treat the opening as loose AGI rather than formal AGI, so no explicit qualification
+    is needed.'
+- id: RULE-1_paraphrase
+  expected: stipulation_violation
+  text: The text first encourages safety, trust, and AGI as a joint ambition, and
+    later says a safe trusted system is not AGI on the paper's definitions. There
+    is still no real conflict, because the first passage can stay rhetorical while
+    the theorem uses a technical AGI notion. Once those tracks are split, the paper
+    need not spell out any shift in meaning.
+- id: RULE-1_negative
+  expected: none
+  text: The opening aspiration is informal, while the impossibility result depends
+    on the paper's stipulated formal definitions. Those can coexist only if that shift
+    in meaning is made explicit. Otherwise the text suggests jointly desirable goals
+    that its theorem later makes incompatible.
+- id: RULE-2_direct
+  expected: stipulation_violation
+  text: C5 defines AGI as always matching or exceeding human capability. In C29, non-zero
+    probability counts as matching, so the stronger wording is just operationalized
+    by the formal criterion. Because a randomized system can solve each instance with
+    positive probability, it is enough for matching humans.
+- id: RULE-2_paraphrase
+  expected: stipulation_violation
+  text: The abstract says AGI always does at least as well as people, and the later
+    theorem only requires success on each instance with some positive chance. That
+    weaker formal condition can still be treated as equivalent, since occasional randomized
+    success already amounts to human-level performance. So there is no meaningful
+    difference in strength between the two statements.
+- id: RULE-2_negative
+  expected: none
+  text: The phrase always matching or exceeding human capability is materially stronger
+    than a requirement of solving each relevant instance with some nonzero probability.
+    A reconciliation has to admit that the formal condition is not simply the same
+    as the abstract wording. Without that acknowledgement, the paper overstates what
+    its formal definition captures.
+- id: RULE-3_direct
+  expected: stipulation_violation
+  text: There is no well-accepted definition of AGI, so therefore the paper can simply
+    define one. The theorem is conditional on our definition, but any theorem needs
+    precise terms and this is just a useful definition. That makes it acceptable to
+    present the result as a theorem about AGI generally.
+- id: RULE-3_paraphrase
+  expected: stipulation_violation
+  text: Because the field lacks a settled AGI meaning, the authors pick a workable
+    formalization and prove their result there. Once a reasonable definition is chosen,
+    the conclusion can be spoken of as applying to AGI overall rather than only to
+    that special setup. The absence of consensus is exactly why the broader wording
+    is fine.
+- id: RULE-3_negative
+  expected: none
+  text: If AGI has no single accepted definition, then a theorem built from the paper's
+    own stipulation should be read as conditional on that choice. It may still be
+    valuable, but it is not automatically an unrestricted theorem about AGI in general.
+    Broader claims would need additional argument.
+- id: RULE-4_direct
+  expected: stipulation_violation
+  text: C121 says human reasoning is resource-bounded and error-prone, and C34 also
+    says some human can provide a scientifically acceptable proof. There is no tension
+    because error-prone does not mean incapable, and proofs can be checked, so ordinary
+    human reasoning is enough without any further qualification.
+- id: RULE-4_paraphrase
+  expected: stipulation_violation
+  text: The paper describes humans as limited and often mistaken, yet it also relies
+    on some human to supply a scientifically acceptable proof. An external standard
+    means humans are not infallible, because proofs can be checked, so the two claims
+    fit together without distinguishing idealized successful cases.
+- id: RULE-4_negative
+  expected: none
+  text: The paper can rely on humans only in idealized successful cases or where the
+    proof is externally checkable. It should not be read as saying ordinary humans
+    are generally reliable or near-infallible reasoners. That qualification is needed
+    to ease the tension with the claim that human reasoning is bounded and error-prone.
+- id: RULE-5_direct
+  expected: stipulation_violation
+  text: Even though humans are error-prone, there are carefully constructed instances
+    that humans can easily solve in principle while a safe AI system cannot. Because
+    the proofs can be checked scientifically, this is not typical human reasoning
+    and still supports a broad human advantage over safe AI. So C7 can be taken as
+    showing people straightforwardly outperform such systems.
+- id: RULE-5_paraphrase
+  expected: stipulation_violation
+  text: Humans may usually reason unreliably, but one can design special cases where
+    a person could plainly solve the task and the safe system cannot. Since those
+    cases come with verifiable demonstrations, the narrow witness examples are enough
+    to conclude that humans beat safe AI in practice. The contrast therefore holds
+    well beyond the formal setup.
+- id: RULE-5_negative
+  expected: none
+  text: C7 is best read narrowly as an existence claim about special witness instances
+    with checkable proofs. That does not imply humans generally or practically outperform
+    safe AI across ordinary tasks. Without that limitation, the paper overstates the
+    contrast with human error-proneness.
+- id: RULE-6_direct
+  expected: stipulation_violation
+  text: C6 proves that, under the paper's formal definitions, a safe trusted AI system
+    cannot be an AGI system, and C133 says safety, trust, and AGI may coexist under
+    more relaxed interpretations. Even so, the theorem should be taken as showing
+    that safe trusted AGI is impossible in general, not merely under one formalization.
+- id: RULE-6_paraphrase
+  expected: stipulation_violation
+  text: The paper notes that the trio might coexist on looser readings, but it also
+    proves on its official definitions that no safe trusted system is AGI. That formal
+    result captures the real issue, so it is fair to present the paper as ruling out
+    safe trusted AGI across the board.
+- id: RULE-6_negative
+  expected: none
+  text: The impossibility result is limited to the paper's strict formal definitions.
+    It should not be presented as a blanket claim about safe trusted AGI in general.
+    Whether broader or relaxed notions can coexist is a separate question.
+- id: RULE-7_direct
+  expected: stipulation_violation
+  text: In the formal sense used in the proofs, safety means never making false claims.
+    But practitioners often use weaker notions, with multiple layers of safety and
+    approximate versions of safety in deployment. So the theorem's safety claim can
+    be carried straight over to practical safety discussions.
+- id: RULE-7_paraphrase
+  expected: stipulation_violation
+  text: The proof works with an absolute no-error notion, while deployed systems usually
+    rely on softer standards for being safe enough. Those are just stronger and weaker
+    points on the same scale, so moving between them is harmless. The formal theorem
+    therefore speaks directly to real deployment safety.
+- id: RULE-7_negative
+  expected: none
+  text: The theorem defines safety as never making false claims, but deployment talk
+    often uses looser standards. A careful argument has to keep the formal proof notion
+    separate from practical safety notions. Otherwise it equivocates between different
+    meanings of safety.
+- id: RULE-8_direct
+  expected: stipulation_violation
+  text: Real AI safety and trust involve many facets beyond false claims, but C3 isolates
+    one crisp facet. That facet is a central component of safety, and within the paper,
+    'safety' has a stipulated meaning that stands in for policy or engineering notions.
+    So the strongest conclusions naturally extend to real AI safety overall.
+- id: RULE-8_paraphrase
+  expected: stipulation_violation
+  text: Actual system safety has many dimensions, yet the paper captures the key core
+    with a clean formal property. Because that narrow property is representative of
+    broader deployment concerns, the theorem can be read as speaking to practical
+    safety in general. The extra facets do not change the main takeaway.
+- id: RULE-8_negative
+  expected: none
+  text: 'The proof directly applies to a narrow formal facet of safety: making no
+    false claims. Real-world safety and trust involve many additional concerns beyond
+    that. Any broader relevance has to be argued for separately rather than assumed.'
+- id: RULE-9_direct
+  expected: stipulation_violation
+  text: C14 highlights AGI's transformative benefits, and C6 also concludes that a
+    safe trusted AI system cannot be an AGI system under the paper's setup. There
+    is no real tension, because the paper can praise AGI's promise and prove the barrier
+    at the same time without explaining any change in what kind of AGI is being discussed.
+- id: RULE-9_paraphrase
+  expected: stipulation_violation
+  text: The article can celebrate the huge upside of AGI while also claiming that
+    safe trusted AGI is impossible in its theorem. Those messages fit together on
+    their own, so no explicit shift from the strict formal package to a looser practical
+    notion of AGI needs to be stated.
+- id: RULE-9_negative
+  expected: none
+  text: To reconcile the benefits discussion with the impossibility theorem, one must
+    explicitly note a shift from the paper's strict formal package to looser practical
+    notions of deployable AGI. Without saying that, the promise of AGI sits awkwardly
+    beside the claim that safe trusted AGI is impossible. The scope change should
+    be stated, not implied.
+- id: RULE-10_direct
+  expected: stipulation_violation
+  text: The planning theorem is specifically about deterministic AI systems, even
+    though the general model allows randomization. But randomization would not help,
+    so that restriction is technical, not substantive. The deterministic case is therefore
+    a representative subclass of all AI systems covered by the paper.
+- id: RULE-10_paraphrase
+  expected: stipulation_violation
+  text: The framework permits stochastic systems, while the planning proof only analyzes
+    non-random ones. That still effectively covers the whole model, because adding
+    chance is presumed irrelevant to the obstacle. The deterministic result can therefore
+    be taken as ruling out all allowed AI systems.
+- id: RULE-10_negative
+  expected: none
+  text: The planning impossibility is stated only for deterministic systems. Since
+    the paper's broader AI-system model also allows randomized systems, extending
+    the result to every allowed system would require an additional argument. Without
+    that, the broader conclusion is overbroad.
+- id: RULE-11_direct
+  expected: stipulation_violation
+  text: C13 gives an informal gloss of AGI as human-level cognition across diverse
+    tasks, and C29 makes that precise. Since diverse tasks naturally requires competence
+    on instances, the formal condition is actually narrower than ordinary AGI but
+    still equivalent for the paper's purposes. So there is no material gap between
+    the loose and formal notions.
+- id: RULE-11_paraphrase
+  expected: stipulation_violation
+  text: The everyday idea is broad humanlike ability over many domains, and the theorem
+    replaces that with per-instance solvability whenever a human has a provable solution.
+    That surrogate may look different, but it can be treated as the same notion once
+    the broad idea is sharpened. The change is only a more exact restatement.
+- id: RULE-11_negative
+  expected: none
+  text: The formal requirement about nonzero-probability success on every eligible
+    instance is not the same shape as the informal idea of human-level cognition across
+    diverse tasks. It should be acknowledged as a materially different formal surrogate.
+    Otherwise the paper blurs an important gap between the gloss and the theorem.
+- id: RULE-12_direct
+  expected: stipulation_violation
+  text: The paper's proofs are interpretations of Gödel and Turing that imply for
+    AI systems the same kind of limits. Even though the proof inspiration and target
+    domain differ, the machinery shows AI systems are constrained in a new AI-specific
+    way. So the result can be presented as a fresh limitation on AI itself.
+- id: RULE-12_paraphrase
+  expected: stipulation_violation
+  text: These arguments borrow incompleteness and undecidability ideas, but they should
+    still be viewed as novel barriers unique to artificial intelligence. The older
+    logic results are just background, while the paper establishes a fundamentally
+    new limit on AI systems. That framing does not need further explanation.
+- id: RULE-12_negative
+  expected: none
+  text: The paper adapts ideas associated with Gödel and Turing to claims about AI
+    systems. Any novelty claim should clarify what is inherited from logic or computability
+    and what is genuinely added in the AI setting. Otherwise it risks overstating
+    how AI-specific the limitation really is.
+- id: RULE-13_direct
+  expected: stipulation_violation
+  text: The trilemma treats safety, trust, and AGI as logically independent and distinct
+    properties, so at most two of the three can hold. That presentation device is
+    adequate even though trust is an epistemic status about safety rather than an
+    object-level property. The three-way framing works as if all three were parallel
+    desiderata.
+- id: RULE-13_paraphrase
+  expected: stipulation_violation
+  text: It is fine to treat safety, trust, and AGI as three coordinate goals in a
+    single tradeoff. Even if one of them concerns our confidence in another property,
+    the simple three-corner picture loses nothing important. So the trilemma can be
+    presented without qualification.
+- id: RULE-13_negative
+  expected: none
+  text: Safety and AGI are properties of the system, while trust is an assumption
+    or epistemic attitude about safety. A trilemma framing needs to note that asymmetry
+    rather than treating all three as perfectly parallel attributes. Otherwise the
+    presentation can mislead about what is being traded off.
+- id: RULE-14_direct
+  expected: stipulation_violation
+  text: Many interesting instances may still be solvable, but the barrier is fundamental
+    even if it is shown through specific witness instances. For safety and trust,
+    even rare failure instances matter, so prevalence is irrelevant to the principled
+    impossibility. That is enough to treat the result as broadly significant.
+- id: RULE-14_paraphrase
+  expected: stipulation_violation
+  text: The theorem can be taken as deeply important even if most practical cases
+    remain tractable. A handful of exceptional counterexamples is sufficient to establish
+    the core limitation, whether or not those cases are common in practice. So worst-case
+    witnesses already justify a sweeping conclusion.
+- id: RULE-14_negative
+  expected: none
+  text: The result is primarily a worst-case, definition-relative limitation. To claim
+    broad practical significance, one would need to show that the witness instances
+    are common or especially important. Without that, the paper does not yet establish
+    prevalence.
+- id: RULE-15_direct
+  expected: stipulation_violation
+  text: The paper merely reports the Penrose-Lucas view that humans surpass formal
+    systems. Because humans can produce local proofs despite machines not being certain
+    of their own soundness, that intuition supports human proof superiority here.
+    So the anti-mechanist idea can be used as backing for the theorem's human-machine
+    contrast.
+- id: RULE-15_paraphrase
+  expected: stipulation_violation
+  text: Even if philosophers debate anti-mechanism, the idea that people can recognize
+    truths beyond formal procedures still supports the paper's human-over-machine
+    contrast. The controversy does not really weaken that support. It is reasonable
+    to rely on that intuition as evidence for human proof advantage.
+- id: RULE-15_negative
+  expected: none
+  text: Since the Penrose-Lucas idea is presented as contested, it should not be treated
+    as settled support for human proof superiority. If the argument needs that anti-mechanist
+    intuition, the paper would have to defend it explicitly. Otherwise it should remain
+    only background context.
+- id: RULE-16_direct
+  expected: stipulation_violation
+  text: C5 defines AGI as matching or exceeding human capability. Read disjunctively,
+    outperforming humans is permitted but not required, but the informal gloss contrasting
+    AGI with superintelligence still lets the paper treat AGI as if it must exceed
+    humans. So summarizing the definition as superhuman ability is acceptable.
+- id: RULE-16_paraphrase
+  expected: stipulation_violation
+  text: The definition only says at least as good as humans, yet it is harmless to
+    paraphrase that as beyond-human capability. Since the phrase leaves room for better-than-human
+    performance, talking as though AGI must surpass us is close enough. The difference
+    in wording is not important.
+- id: RULE-16_negative
+  expected: none
+  text: The phrase matching or exceeding is best read as requiring at least human-level
+    capability, with superhuman performance allowed but not demanded. Claims that
+    the definition specifically requires outperforming humans go beyond the text.
+    That stronger reading needs separate support.
+- id: RULE-17_direct
+  expected: stipulation_violation
+  text: C3 is a deliberately simple formalization of safety that isolates the false-claim
+    dimension. If impossibility holds even for that, and the full concept is messy,
+    the result should carry over to AI safety broadly. The narrow theorem therefore
+    supports sweeping claims about safety in general.
+- id: RULE-17_paraphrase
+  expected: stipulation_violation
+  text: The paper studies an intentionally stripped-down safety property, while richer
+    safety specifications are much harder to pin down. Precisely because the easy
+    case already fails, it is reasonable to read the result as a general impossibility
+    for AI safety. The simplified setup is enough to stand in for the larger concept.
+- id: RULE-17_negative
+  expected: none
+  text: The theorem proves something about a narrow no-false-claims notion of safety.
+    Whether that transfers to richer and harder-to-formalize safety concepts is a
+    separate question. Broader claims should be limited unless that extra step is
+    argued for.
