@@ -1,4 +1,4 @@
-# Arbiter — Formally Verified Multi-Agent Debate for Research Papers
+# Arbiter — Multi-Agent Debate with Formal Verification Stipulations for Research Paper Auditing
 
 [![PyPI](https://img.shields.io/pypi/v/arbiter-debate)](https://pypi.org/project/arbiter-debate/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -10,9 +10,9 @@ Works best on papers with explicit formal models — economics, theoretical CS, 
 
 Point Arbiter at a PDF — it extracts claims, finds contradictions, generates Z3/Knuckledragger proof certificates for encodable claims, designs specialist debate agents across multiple LLM providers (OpenAI, Anthropic, Google, Grok), and produces a structured verdict with every argument tracked.
 
-> **Paper**: [Arbiter: Formally Verified Multi-Agent Debate for Research Claim Evaluation](papers/arbiter_systems_paper.pdf)
+> **Paper**: [Arbiter: From PDF to Verdict — Formal Verification Stipulations for Multi-Agent Research Claim Debate](papers/arbiter_systems_paper.pdf)
 >
-> **Benchmark**: 244/244 on miniF2F, 89.3% checker-passing certificates (Claude Sonnet 4.5). **Important**: our audit finds ~13–26% of Z3 proofs are genuinely valid after checking encodings — the gap between checker-passing and genuinely-valid is the core finding of our audit paper. See [benchmark paper](papers/arbiter_paper.pdf) for full taxonomy.
+> **Benchmark**: 89.3% checker-passing on miniF2F (Claude Sonnet 4.5), but full audit of all 202 proved results finds only 16.3% genuinely valid (33/202 proved, 13.5% of all 244 problems). The 74.3% invalid rate includes 38.1% vacuous proofs and 14.4% trivial tails. The gap between checker-passing and genuinely-valid is the core finding of our audit paper. See [benchmark paper](papers/arbiter_paper.pdf) for full taxonomy.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/vishk23/arbiter/main/docs/screenshots/argdown_output.gif" width="800" alt="Arbiter argdown output showing argument ledger with syntax highlighting" />
@@ -24,7 +24,7 @@ Point Arbiter at a PDF — it extracts claims, finds contradictions, generates Z
 2. **Finds the cracks** — identifies contradictions, tensions, and Z3-encodable formal claims
 3. **Designs the debate** — creates specialist agents (e.g., Macroeconomist, TaxScholar, IO Theorist), gate rules, and a custom rubric
 4. **Runs the debate** — multi-round argumentation with real-time validity enforcement
-5. **Delivers a verdict** — multi-lab judge panel with scores, landed hits, and a structured argument map
+5. **Delivers a verdict** — multi-provider judge panel with scores, landed hits, and a structured argument map
 
 ## Case study: "The AI Layoff Trap"
 
@@ -58,6 +58,36 @@ We ran Arbiter on ["The AI Layoff Trap"](https://arxiv.org/abs/2603.20617) (Falk
 - 0 gate violations across 54 turns, 0 mid-debate judge failures
 
 Full outputs: [`experiments/ai_layoff_trap_v3/`](experiments/ai_layoff_trap_v3/)
+
+## Additional case studies
+
+We also ran Arbiter on two AI theory papers:
+
+**LLM Self-Improvement Limits** (anti-Singularity theorem paper): 11 agents, 168 total hits, 13 Proponent concessions. Skeptic wins 3-0. Core finding: the collapse theorem (P'_t = α_t P + (1-α_t)Q_t) is formally correct for closed-loop density-matching, but the headline anti-Singularity claim overreaches — systems with persistent exogenous grounding (experiments, verified proofs, robotic data) are not ruled out.
+
+| Judge | Proponent | Skeptic | Verdict |
+|-------|-----------|---------|---------|
+| Grok | 47 | 49 | **Skeptic** |
+| OpenAI | 37 | 55 | **Skeptic** |
+| Anthropic | 28 | 41 | **Skeptic** |
+
+Full outputs: [`experiments/llm_self_improvement_limits/`](experiments/llm_self_improvement_limits/)
+
+---
+
+**AGI Safety Incompatibility** (Gödel/Turing impossibility paper): 10 agents, 132 total hits, 9 Proponent concessions. Split verdict (Skeptic by plurality). Core finding: the formal impossibility theorem (¬∃S: Safe(S) ∧ Trusted(S) ∧ AGI(S)) survives under the paper's narrow definitions, but the headline safety definition ("never makes any false claim") was conceded — the impossibility applies to a regime that may not describe practical deployment.
+
+| Judge | Proponent | Skeptic | Verdict |
+|-------|-----------|---------|---------|
+| Grok | 50 | 50 | **Tied** |
+| OpenAI | 48 | 55 | **Skeptic** |
+| Anthropic | 42 | 39 | Proponent |
+
+Full outputs: [`experiments/agi_safety_impossibility/`](experiments/agi_safety_impossibility/)
+
+---
+
+**Consistent pattern across all 3 case studies**: core formal theorems hold within their stated assumptions, but policy or existential claims in the abstract/introduction overreach the formal model's scope.
 
 ## Quickstart
 
@@ -140,7 +170,7 @@ arbiter init --from-pdf paper.pdf
 | `arbiter init --from-pdf paper.pdf` | Generate debate config from PDF |
 | `arbiter init --topic "..."` | Generate config from topic description |
 | `arbiter run config.yaml` | Run the debate |
-| `arbiter judge output.json` | Run multi-lab judge panel |
+| `arbiter judge output.json` | Run multi-provider judge panel |
 | `arbiter export output.json -f argdown` | Export argument map |
 | `arbiter web config.yaml` | Live dashboard for debate |
 | `arbiter web --init --from-pdf paper.pdf` | Live dashboard for init + debate |
@@ -182,11 +212,14 @@ Arbiter uses three verification backends, with the LLM selecting the right one p
 
 ### Benchmark results
 
-| Benchmark | Model | Checker-passing | Audit-surviving (genuine valid) |
-|-----------|-------|----------------|---------------------------------|
-| miniF2F (244) | Sonnet 4.5 | 89.3% | ~26% (full set), ~13% (hard tier) |
-| miniF2F (244) | gpt-5.4-mini | 82.8% | ~13-26% (estimated) |
+| Benchmark | Model | Checker-passing / Cert rate | Audit-surviving (full audit) |
+|-----------|-------|-----------------------------|------------------------------|
+| miniF2F (244) | Sonnet 4.5 | 89.3% | 16.3% of proved (13.5% of 244) |
+| miniF2F (244) | gpt-5.4-mini | 82.8% | 16.3% of proved (13.5% of 244) |
+| FormalMATH (500) | gpt-5.4-mini | 61.6% cert | 7.4% of audited certs (54/308 sampled) |
 | MiniF2F-Dafny | Sonnet 4.5 | 55.7% | — (not audited) |
+
+The pipeline attempts all 244 miniF2F problems; "checker-passing" means Z3 returned UNSAT. "Audit-surviving" is from the full 202-problem semi-automated audit (all proved results, LLM classifier). An earlier 50-sample pilot found 26% audit-surviving; the full audit finds 16.3%. For FormalMATH, "cert rate" is 308/500 Knuckledragger-certified; the 7.4% is from manual audit of 54 sampled certified results.
 
 **The gap between checker-passing and audit-surviving is the core finding** — see [audit paper](papers/arbiter_paper.pdf) for the full 202-problem taxonomy. Certification does not mean the encoded claim is faithful to the original theorem.
 
@@ -245,7 +278,7 @@ Not all steps in Arbiter are equally trustworthy. Here is an honest breakdown:
 | Debate gate | **Heuristic** | LLM classifier; reduces but doesn't eliminate bad arguments |
 | Multi-provider judge panel | **Heuristic** | Correlated LLMs; better than single-model, not independent adjudication |
 
-**The central open problem**: how faithfully does LLM-generated Z3 code represent the intended mathematical claim? Our audit ([paper](papers/arbiter_paper.pdf)) finds ~13–26% of generated Z3 proofs are genuinely valid after checking encodings. Closing this gap is the active research frontier.
+**The central open problem**: how faithfully does LLM-generated Z3 code represent the intended mathematical claim? Our full audit of all 202 proved miniF2F results finds 16.3% genuinely valid (13.5% of all 244 problems). Closing this gap is the active research frontier.
 
 ## Contributing
 

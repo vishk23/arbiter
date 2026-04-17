@@ -41,10 +41,10 @@ The replication crisis (36\% of landmark results replicate), tripling retraction
 We present \arbiter{}, an open-source framework (11K~LOC Python, 7~LLM providers) that implements a complete PDF-to-verdict pipeline: it reads academic papers with formal or quantitative claims, extracts those claims, attempts machine verification via Knuckledragger (Z3) and SymPy, stages multi-agent debates with argumentative validity enforcement, and produces verdicts from a multi-provider evaluation panel.
 In an extended case study on \emph{The AI Layoff Trap} (Falk \& Tsoukalas, 2026), \arbiter{} assembled 9~specialist agents across 3~frontier providers (GPT-5.4, Claude Opus 4.6, Grok~4.20), which produced 141~substantive argument exchanges across 54~turns over 6~rounds (``argument hits'' counts distinct claims advanced or rebutted per turn, not correctness).
 The debate surfaced 17~Proponent concessions (the Proponent agent argues for the paper's claims)---revealing that the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) is mathematically correct, but its headline policy claims (``only a Pigouvian tax can fix over-automation'') extend far beyond the mathematics.
-In an ablation study on the same paper, debate with verification elicits more concessions and catches more overreach than either component alone; we treat this as preliminary evidence pending evaluation across more papers.
+A pilot ablation on the same paper suggests debate with verification may elicit more concessions than debate alone or LLM-as-judge; N=1 with no gold labels, so this is illustrative rather than conclusive.
 As a byproduct of building the verification backend, we characterize failure modes in LLM-generated Z3 proofs and report certificate validity rates for our own pipeline; we find that Z3-based proof generation requires careful audit, as LLMs frequently produce encodings that are technically satisfiable but do not faithfully represent the mathematical claim.
 We report these findings transparently; the verification backend is a work in progress, and honest measurement is a prerequisite to improvement.
-Code and all experimental artifacts are available at \url{https://github.com/vishk23/arbiter}. All experiments were conducted in April 2026 using frontier models available at that time (GPT-5.4, Claude Opus 4.6, Grok~4.20).
+Code and all experimental artifacts are available at \url{https://github.com/vishk23/arbiter}. All experiments were conducted in April 2026 using frontier models available at that time (GPT-5.4, Claude Opus 4.6, Grok~4.20). Debate agents were run at default temperature (0.7--1.0 depending on provider); judge calls at temperature 0. Gate model: GPT-5.4-mini at temperature 0. The AI Layoff Trap debate (9 agents, 6 rounds, 3 providers) required approximately 180 API calls. We report a single run; variance across random seeds has not been measured.
 \end{abstract}
 
 %% ============================================================
@@ -63,14 +63,14 @@ LLM-as-judge approaches---now ubiquitous in NeurIPS reviewing~\cite{neurips2024}
 The PAJAMA framework and ``Time to Impeach LLM-as-a-Judge''~\cite{pajama2025} demonstrated systematic biases: position bias, verbosity bias, self-enhancement bias, and susceptibility to adversarial prompt injection.
 Multi-agent debate~\cite{du2023} was proposed as a remedy, but recent theoretical work shows that under certain conditions debate reduces to a martingale---iterating does not improve accuracy beyond a single strong judge~\cite{debateskepticism2025}.
 
-We argue that the missing ingredient is \emph{formal verification as a constraint on debate}.
+We argue that one promising ingredient is \emph{formal verification as a constraint on debate}.
 When mathematical claims are machine-verified before debate begins, agents cannot dispute settled results; they must instead argue about the \emph{gap} between verified theorems and unverified conclusions.
-This transforms debate from a persuasion game into a structured audit.
+The design intent is to shift debate from a persuasion game toward a structured audit; whether this succeeds in practice, and at what verification reliability threshold, is an empirical question our case study begins to explore.
 
 \arbiter{} implements this insight as a complete pipeline:
 \begin{enumerate}[leftmargin=*,itemsep=2pt]
 \item \textbf{Agentic Initialization.} Given a PDF, \arbiter{} extracts assumptions, propositions, equations, and policy claims, then selects specialist debate agents and providers automatically.
-\item \textbf{Formally Verified Stipulations.} Knuckledragger (Z3) and SymPy verify quantitative claims, producing proof certificates that become debate stipulations---facts no agent may contest.
+\item \textbf{Formally Verified Stipulations.} Knuckledragger (Z3) and SymPy verify quantitative claims, producing proof certificates that become debate stipulations---claims treated as settled for the debate. Caveat: encoding fidelity is an open problem (see Section~\ref{sec:verification}); stipulations are machine-checked but not guaranteed to faithfully represent the original theorem.
 \item \textbf{Validity-Enforced Debate.} A layered gate system rejects fallacious, circular, or unsupported arguments before they enter the debate transcript. Agents that fail the gate must rewrite.
 \item \textbf{Multi-Provider Evaluation Panel.} Three frontier models from different providers independently score the debate, reducing single-model bias. Providers are correlated but not identical; cross-provider disagreement is itself a signal.
 \end{enumerate}
@@ -78,8 +78,8 @@ This transforms debate from a persuasion game into a structured audit.
 \noindent\textbf{Contributions.}
 \begin{itemize}[leftmargin=*,itemsep=2pt]
 \item A PDF-to-verdict pipeline that combines formal verification stipulations with multi-agent debate for research claim evaluation---to our knowledge, no prior open system integrates both components.
-\item An extended case study on a published economics paper~\cite{falk2026} in which \arbiter{} elicits 17~Proponent-agent concessions (the Proponent agent argues for the paper's position; concessions reflect positions the paper's own logic cannot defend under adversarial scrutiny), surfacing a gap between the formal model and the headline policy claims.
-\item Ablation evidence on the same paper that debate with verification elicits more overreach concessions than debate alone or a single LLM-as-judge call. A broader multi-paper evaluation is ongoing.
+\item An extended case study on a published economics paper~\cite{falk2026} in which \arbiter{} elicits 17~Proponent concessions, surfacing the gap between formal results and headline policy claims; plus two additional case studies showing a consistent overreach pattern (Section~\ref{sec:additional_casestudies}).
+\item Pilot ablation on AI Layoff Trap suggesting debate with verification may elicit more concessions than debate alone or a single LLM-as-judge call. N=1, no gold labels; results are illustrative, not conclusive. The overreach pattern across 3 case studies is consistent but the ablation itself remains N=1 (Section~\ref{sec:ablation}).
 \item An open-source system (11K~LOC) supporting 7~LLM providers, a web dashboard, and multiple export formats.
 \end{itemize}
 
@@ -104,7 +104,7 @@ All these systems treat the paper as a black box; none extract formal structure 
 Du et al.~\cite{du2023} showed that multi-agent debate among LLMs can improve factual accuracy.
 ChatEval~\cite{chateval2023} applied debate to open-ended evaluation.
 However, recent work has raised sharp concerns: the martingale result of~\cite{debateskepticism2025} proves that under exchangeability assumptions, iterated debate converges to the prior---additional rounds do not help.
-\arbiter{} sidesteps this critique by introducing \emph{asymmetric information}: verified stipulations give agents shared ground truth that breaks exchangeability and forces debate toward the overreach boundary.
+\arbiter{} changes this dynamic not through asymmetric information (verified stipulations are common knowledge, shared by all agents) but by \emph{constraining the feasible debate set}: mathematically verified claims are removed from the arguable space, forcing debate to concentrate on the interpretation boundary where formal proofs do not reach. We do not claim a formal theorem that this breaks the martingale condition; it is an empirical observation from our case study.
 
 \paragraph{Theorem Proving and Formal Verification.}
 AlphaProof~\cite{alphaproof2025} demonstrated neural theorem proving at the International Mathematical Olympiad level.
@@ -119,7 +119,7 @@ We detail our verification backend in Section~\ref{sec:verification} and a compa
 \section{System Architecture}
 \label{sec:architecture}
 
-\arbiter{} processes a research paper in three phases: \emph{agentic initialization}, \emph{validity-enforced debate}, and \emph{multi-lab judgment}.
+\arbiter{} processes a research paper in three phases: \emph{agentic initialization}, \emph{validity-enforced debate}, and \emph{multi-provider evaluation}.
 Figure~\ref{fig:architecture} illustrates the pipeline.
 
 \begin{figure}[t]
@@ -162,7 +162,7 @@ Figure~\ref{fig:architecture} illustrates the pipeline.
   \node[left=0.3cm of debate, font=\footnotesize\bfseries, text=black!60] {Phase 2};
   \node[left=0.3cm of judges, font=\footnotesize\bfseries, text=black!60] {Phase 3};
 \end{tikzpicture}
-\caption{The \arbiter{} pipeline. Phase~1 extracts and verifies claims. Phase~2 runs validity-enforced debate. Phase~3 produces a multi-lab verdict.}
+\caption{The \arbiter{} pipeline. Phase~1 extracts and verifies claims. Phase~2 runs validity-enforced debate. Phase~3 produces a multi-provider verdict.}
 \label{fig:architecture}
 \end{figure}
 
@@ -179,8 +179,11 @@ Given a PDF, \arbiter{} uses an LLM-driven extraction pass to identify:
 The extraction agent then performs \emph{agent selection}: based on the paper's domain, methodology, and claim types, it selects specialist roles from a library of 20+~agent templates.
 For an economics paper, this might include IndustrialOrganization, Macroeconomist, PublicFinance, CausalInference, and LaborEconomist specialists alongside the core Proponent, Skeptic, Steelman, and Generalist agents.
 
+\noindent\textbf{Extraction quality caveat.} Claim extraction and formalization are LLM-driven and untrusted: the extractor may miss claims, split claims incorrectly, or misclassify empirical claims as formal propositions. We have not evaluated extraction precision/recall against a gold annotation set. Extraction errors propagate through the entire pipeline; downstream verified stipulations and debate arguments are only as good as the upstream extraction.
+
 Formal claims are passed to the verification backend (Section~\ref{sec:verification}).
 Successfully verified claims become \emph{stipulations}---debate-time constraints that agents must accept as given.
+\textbf{Caveat}: stipulations are machine-checked for logical consistency, but may not faithfully represent the original mathematical claim (encoding fidelity problem). A stipulation based on a misencoded claim could suppress legitimate skeptical arguments. This is a known limitation; see Section~\ref{sec:verification}.
 Failed verifications become \emph{challenge points}---targets for skeptical agents.
 
 The agentic initialization also generates \emph{pre-filled engagement templates}: structured argument starters that ensure each specialist agent engages with the claims most relevant to its expertise.
@@ -211,7 +214,7 @@ The gate checks for:
 
 Arguments that fail the gate are returned to the agent with a diagnostic explanation.
 The agent must rewrite and resubmit.
-The gate model (GPT-5.4-mini) was selected via calibration experiments showing 100\%/100\% precision/recall on a gate violation benchmark.
+The gate model (GPT-5.4-mini) was selected via calibration on topic-specific test cases (n $\approx$ 30 per topic, covering AI Layoff Trap, AGI safety, and self-improvement limits). Calibration results: 100\%/100\% precision/recall on AGI safety cases, 100\%/78\% on self-improvement cases, and 100\%/82\% on AI Layoff Trap cases. These numbers are from internal calibration runs (LLM-generated test cases, not human-annotated), so they reflect behavior on synthetic examples rather than real debate arguments. They should be interpreted with significant caution given small sample sizes and synthetic test generation.
 
 \noindent\textbf{Stipulation Enforcement.}
 When an agent's argument contradicts a verified stipulation, the gate rejects it and provides the relevant proof certificate.
@@ -228,7 +231,7 @@ Each judge independently scores the Proponent and Skeptic on:
 \item \emph{Scope appropriateness}: staying within what the paper's evidence supports.
 \end{itemize}
 
-The multi-lab design mitigates single-provider bias.
+The multi-provider design reduces single-provider bias; providers are correlated but not identical, and cross-provider disagreement is itself a signal.
 The verdict includes per-judge scores, a majority decision, and a structured summary of key findings.
 
 
@@ -272,7 +275,7 @@ The system selected 9 specialist agents:
 \emph{Proponent}, \emph{Skeptic}, \emph{Steelman}, \emph{Generalist}, \emph{IndustrialOrganization} (IO), \emph{Macroeconomist}, \emph{PublicFinance}, \emph{CausalInference}, and \emph{LaborEconomist}.
 Three providers were assigned: GPT-5.4 (OpenAI), Claude Opus~4.6 (Anthropic), and Grok~4.20 (xAI).
 
-The debate ran for \textbf{6 rounds}, producing \textbf{54 turns}, \textbf{141 argument hits}, \textbf{0 gate violations} in the final transcript (8 rewrites occurred during the debate), and \textbf{17 Proponent concessions}.
+The debate ran for \textbf{6 rounds}, producing \textbf{54 turns}, \textbf{141 argument hits}, \textbf{0 gate violations} in the admitted transcript (8 rewrites were required before admission; gate violations preclude entry into the transcript by design, so this count is tautologically 0 for admitted arguments), and \textbf{17 Proponent concessions}.
 
 
 \subsection{Verdict}
@@ -356,7 +359,7 @@ The IO agent also deployed a \emph{folk-theorem argument}---that repeated intera
 
 \subsection{How Stipulations Changed the Debate}
 
-The verification backend confirmed the paper's core theorem as a valid stipulation.
+The verification backend confirmed the paper's core theorem ($\alpha_{\mathrm{NE}} > \alpha_{\mathrm{CO}}$ when $\eta < 1, N > 1$) as a valid stipulation via Z3/SymPy encoding. \textbf{Important caveat}: this Z3 encoding was not independently verified by a domain economist or formally checked against the paper's original proof. Given the encoding fidelity issues documented in Section~\ref{sec:verification}, this stipulation should be treated as ``machine-checked under our encoding,'' not as an independent mathematical verification. A false stipulation would mislead the debate, not improve it.
 This had two effects:
 
 First, it \emph{prevented} the Skeptic from wasting rounds attacking correct mathematics.
@@ -373,6 +376,36 @@ The paper proves a narrow, correct result: in a symmetric one-shot Cournot game 
 Every claim beyond this---inevitability, uniqueness of the Pigouvian tax, urgency, real-world applicability---is unsupported by the formal model.
 \arbiter{}'s verdict is not that the paper is \emph{wrong}, but that it \emph{overreaches}: it proves a theorem in a toy model and presents it as a general truth about AI labor markets.
 
+\subsection{Additional Case Studies}
+\label{sec:additional_casestudies}
+
+To test whether the AI Layoff Trap results generalize, we ran \arbiter{} on two additional papers in AI and theoretical computer science:
+(1) a paper arguing that model collapse constitutes a formal anti-Singularity theorem~\cite{selfimprovement2026}, and
+(2) a paper claiming that strict AGI safety and full AGI capability are formally incompatible via Gödel/Turing-style arguments~\cite{agisafety2026}.
+Both papers have formal structure (theorems, definitions, and proofs) alongside broad policy or existential claims.
+
+\begin{table}[t]
+\centering
+\caption{Summary of three \arbiter{} case studies. Conc.\ = Proponent concessions; verdict by 3-provider panel (OpenAI / Anthropic / Grok). All debates: 6 rounds, gated topology, 0 gate violations. $^\dagger$Grok: Tied 50--50; OpenAI: Skeptic 48--55; Anthropic: Proponent 42--39.}
+\label{tab:casestudies}
+\small
+\begin{tabular}{@{}lcccp{4.5cm}@{}}
+\toprule
+\textbf{Paper} & \textbf{Agents} & \textbf{Hits} & \textbf{Conc.\ / Verdict} & \textbf{Key Finding} \\
+\midrule
+AI Layoff Trap~\cite{falk2026} & 9 & 141 & 17 / Skeptic 2--1 & Policy claims overreach formal model \\[2pt]
+LLM Self-Improvement~\cite{selfimprovement2026} & 11 & 168 & 13 / Skeptic 3--0 & Collapse theorem scope vs.\ exogenous-grounding regimes \\[2pt]
+AGI Safety~\cite{agisafety2026} & 10 & 132 & 9 / Split$^\dagger$ & Safety definition conceded; theorem survives narrowly \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+All three debates completed 6 rounds with 0 gate violations.
+In the LLM Self-Improvement debate (168 hits, 13 Proponent concessions, Skeptic 3--0), the paper's core collapse theorem ($P'_t = \alpha_t P + (1-\alpha_t)Q_t \to$ degenerate fixed point under $\alpha_t \to 0$) was upheld, but the Proponent conceded that the headline anti-Singularity claim overreaches: systems with persistent exogenous grounding (experiments, verified proofs, robotic data) are not ruled out by the formal model. Judge scores: Grok 47--49, OpenAI 37--55, Anthropic 28--41.
+
+In the AGI Safety Incompatibility debate (132 hits, 9 Proponent concessions, Skeptic 1-1-1), the formal impossibility result ($\neg\exists S$: Safe($S$) $\wedge$ Trusted($S$) $\wedge$ AGI($S$)) survived under the paper's narrow definitions, but the Proponent conceded that the headline safety definition (``never makes any false claim'') must be replaced by expected-harm bounds. The impossibility theorem holds formally but for a regime that may not describe practical deployment. Judge scores: Grok 50--50 (tied), OpenAI 48--55 (Skeptic), Anthropic 42--39 (Proponent).
+
+Across all three case studies, a consistent pattern emerges: core formal theorems hold within their stated assumptions, but policy or existential claims in the abstract and introduction overreach the formal model's scope. This is an early indication that the finding is not idiosyncratic to the AI Layoff Trap paper, though N=3 single-run debates cannot support statistical conclusions. Full transcripts are in \texttt{experiments/}.
 
 %% ============================================================
 \section{Ablation: Debate + Verification > Either Alone}
@@ -395,26 +428,30 @@ We evaluate four conditions on ``The AI Layoff Trap''~\cite{falk2026}:
 
 \noindent We measure:
 \begin{itemize}[leftmargin=*,itemsep=1pt]
-\item \emph{Overreach detection}: fraction of expert-annotated overreach claims correctly identified.
-\item \emph{Precision}: fraction of flagged claims that are genuine overreach (avoiding false alarms).
-\item \emph{Concession yield}: number of substantive concessions elicited per paper.
-\item \emph{Wasted rounds}: debate rounds spent on mathematically settled questions.
+\item \emph{Overreach found}: number of distinct overreach claims flagged (no gold annotation available; counts reflect author reading of transcripts).
+\item \emph{Total hits}: total argument hits tracked in the ledger across all agents.
+\item \emph{Concession yield}: number of substantive Proponent concessions elicited.
+\item \emph{Hits resolved}: argument hits that were either conceded, rebutted, or explicitly addressed.
 \end{itemize}
+
+\noindent We do not have expert-annotated overreach labels for the AI Layoff Trap paper. The ``Overreach Found'' counts are author estimates from transcript review and should be interpreted as pilot observations, not precision/recall measurements. A rigorous ablation would require gold annotations from domain economists.
 
 \subsection{Results}
 
 \begin{table}[t]
 \centering
-\caption{Ablation results on ``The AI Layoff Trap.'' V = verification, D = debate.}
+\caption{Ablation results on ``The AI Layoff Trap.'' V = verification, D = debate. ``Concessions'' = Proponent concessions (ledger status = conceded, against = Proponent). ``Hits Resolved'' = conceded + rebutted in system ledger. Overreach Found$^\dag$ = author estimate from transcript review; no gold annotations exist. LLM-Judge estimated from reading single-pass output. N=1 paper; treat as qualitative pilot only.}
 \label{tab:ablation}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
-\textbf{Condition} & \textbf{Overreach Found} & \textbf{Total Hits} & \textbf{Concessions} & \textbf{Hits Resolved} \\
+\textbf{Condition} & \textbf{Overreach Found$^\dag$} & \textbf{Total Hits} & \textbf{Concessions} & \textbf{Hits Resolved} \\
 \midrule
-LLM-Judge (1 call) & 10 & --- & --- & --- \\
+LLM-Judge (1 call) & $\sim$10 & --- & --- & --- \\
 V-only & 6 (formal only) & --- & --- & --- \\
-D-only (6 rounds) & $\sim$12 & 132 & $\sim$10 & 92 \\
-V+D (\arbiter{}) & \textbf{17} & \textbf{141} & \textbf{17} & $\sim$100 \\
+D-only (6 rounds) & $\sim$12 & 132 & 8 & 92 \\
+V+D (\arbiter{}) & 17 & 141 & 17 & 90 \\
+\midrule
+\multicolumn{5}{l}{$^\dag$ Author estimate from reading transcript; not precision/recall against gold labels.} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -439,6 +476,8 @@ This produces more concessions per round and higher-precision overreach detectio
 A single-pass evaluation tends to either accept the paper's framing wholesale or raise generic objections.
 It lacks the adversarial pressure that forces concessions and the formal grounding that distinguishes valid from invalid mathematical claims.
 
+\noindent\textbf{Limitation: compute mismatch.} The LLM-Judge baseline uses a single frontier API call, while V+D uses a full multi-round, multi-agent, multi-provider pipeline. This is not a fair compute-matched comparison. A stronger baseline would be a well-prompted self-consistency judge (multiple calls, chain-of-thought). The purpose of this ablation is to illustrate qualitative differences in what each condition surfaces, not to claim computational efficiency advantages.
+
 
 %% ============================================================
 \section{Formal Verification Backend}
@@ -455,33 +494,34 @@ The verification pipeline operates in three stages:
 \item \textbf{Certificate Generation.} Successfully verified claims produce proof certificates---machine-checkable artifacts that serve as debate stipulations. Failed or timed-out claims are flagged as unverified.
 \end{enumerate}
 
-The backend implements a Z3 verification suite covering six check types: proof verification, counterexample search, sensitivity analysis, boundary condition checking, and policy consistency validation.
+The backend implements a Z3 verification suite covering five check types: proof verification (encode negated claim, check UNSAT), counterexample search (find concrete failing instances), sensitivity analysis (identify load-bearing assumptions), boundary analysis (find where results flip), and policy verification (check if proposed policies achieve stated goals).
 
 \subsection{Supporting Evidence: miniF2F}
 
 \begin{table}[t]
 \centering
-\caption{miniF2F benchmark results (244 problems). ``Checker-passing'' = fraction passing automated Z3 check. ``Audit-surviving'' = fraction found genuinely valid (non-trivial, faithful to original claim) under manual audit. The gap between these columns is the core problem.}
+\caption{miniF2F benchmark results (244 problems). ``Checker-passing'' = fraction of all 244 attempts producing a machine-verified proof (KD+SymPy for Sonnet; raw Z3 for others). ``Audit-surviving'' = fraction of proved results found genuinely valid in our audit (\textbf{audit column applies only to GPT-5.4-mini Z3-only pipeline}; Sonnet KD results not audited with same methodology). Gap documented in~\cite{arbiterpaperA}.}
 \label{tab:minif2f}
 \begin{tabular}{@{}lccc@{}}
 \toprule
-\textbf{System / Model} & \textbf{Accuracy} & \textbf{Checker-Passing} & \textbf{Audit-Surviving} \\
+\textbf{System / Model} & \textbf{Backend} & \textbf{Checker-Passing} & \textbf{Audit-Surviving} \\
 \midrule
-\arbiter{} + Claude Sonnet 4.5 & 244/244 (100\%) & 89.3\% & $\sim$26\% \\
-\arbiter{} + GPT-5.4 & 244/244 (100\%) & 87.1\% & $\sim$19\% \\
-\arbiter{} + Grok 4.20& 244/244 (100\%) & 84.6\% & $\sim$14\% \\
+\arbiter{} + Sonnet 4.5 & KD+SymPy & 89.3\% & \textit{not audited} \\
+\arbiter{} + GPT-5.4-mini & Raw Z3 & 82.8\% & 16.3\% (33/202)$^\dag$ \\
 \midrule
-MiniF2F-Dafny + Claude Sonnet 4.5 & 136/244 (55.7\%) & 55.7\% & --- \\
+MiniF2F-Dafny & Dafny/Z3 & 55.7\% & --- \\
+\midrule
+\multicolumn{4}{l}{$^\dag$ Full semi-automated audit of all 202 proved results; 13.5\% of all 244 problems.} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 Table~\ref{tab:minif2f} shows the verification backend's performance on miniF2F.
-The 100\% accuracy across all models reflects the backend's design: it combines LLM-generated proof sketches with Z3's sound verification, so incorrect proofs are rejected rather than accepted.
-The ``checker-passing'' rate---the fraction of correct answers backed by a Z3 proof that passes the automated checker---varies by model, with Claude Sonnet~4.5 achieving the highest rate (89.3\%).
-However, the ``audit-surviving'' column tells the real story: when proofs are manually audited for genuine validity (non-trivial, faithful to the original claim), the rate drops to 14--26\%.
+Claude Sonnet~4.5 (KD+SymPy) achieves 89.3\% checker-passing but has \textbf{not been audited}; the genuine valid rate is unknown.
+For GPT-5.4-mini (Z3-only), a full audit of all 202 proved results finds 16.3\% genuinely valid (13.5\% of all 244 problems)---a 6.1$\times$ gap from the reported rate.
+\textbf{The audit-surviving column applies only to the GPT-5.4-mini Z3-only pipeline; do not interpret the Sonnet row as having a known audit-surviving rate.}
 The gap between checker-passing and audit-surviving rates reveals that LLMs are adept at producing proofs that satisfy automated checkers without actually proving the intended claim.
-See Section~\ref{sec:verification}.3 for a detailed breakdown.
+See Section~\ref{sec:verification} for a detailed breakdown.
 
 These results serve as \emph{supporting evidence} for the backend's reliability, not as the paper's primary contribution.
 The miniF2F benchmark consists of competition-mathematics problems; the claims in research papers are typically less technically difficult but embedded in more complex domain context.
@@ -493,7 +533,7 @@ Three complementary audits of our own verification pipeline (all self-audits---w
 We report these findings transparently:
 
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-\item \textbf{Z3-only proofs}: 70\% of Z3-only proofs were found invalid (74\% including partial proofs) upon semi-automated audit (LLM-assisted classification)---vacuously true (contradictory premises), trivial arithmetic tails, wrong encodings, or crashes. See companion paper~\cite{arbiterpaperA} for full taxonomy.
+\item \textbf{Z3-only proofs}: Full audit of all 202 proved miniF2F results found 74.3\% strictly invalid (83.7\% including partial proofs)---vacuously true (38.1\%), trivial arithmetic tails (14.4\%), partial (9.4\%), crashes (8.9\%), assumed conclusion (6.9\%), wrong encodings (5.9\%). Valid rate: 16.3\% of proved results (33/202), or 13.5\% of all 244 problems. See companion paper~\cite{arbiterpaperA} for full taxonomy.
 \item \textbf{Knuckledragger certificates}: Knuckledragger prevents assumed-conclusion failures by construction, but our pipeline responds by proving trivial lemmas (e.g., \texttt{kd.prove(x <= x)}) rather than the intended theorem. Vacuous proofs from contradictory premises are \emph{not} prevented by certificates.
 \item \textbf{FormalMATH} (different benchmark, different pipeline---not directly comparable to miniF2F numbers): On a rigorous audit, only 7.4\% of generated certificates were genuinely valid---i.e., both non-trivial and faithful to the original claim.
 \end{itemize}
@@ -508,13 +548,13 @@ Closing this gap---between checker-passing and genuinely-valid---is our primary 
 \label{sec:discussion}
 
 \paragraph{When Arbiter is Most Useful.}
-\arbiter{} is most effective on papers that contain formal models---mathematical proofs, equilibrium analyses, statistical derivations---alongside broader claims that extend beyond the formal results.
+\arbiter{} is most effective on papers with formal models---proofs, equilibrium analyses, statistical derivations---alongside broader claims that extend beyond those results.
 This describes a large fraction of economics, theoretical CS, and quantitative social science papers.
-\arbiter{} is less useful for purely empirical papers without formal structure, though the debate engine alone still provides value.
+\arbiter{} is less useful for purely empirical papers without formal structure, though the debate engine alone still adds value.
 
 \paragraph{Honest Accounting of Benchmark Claims.}
 Our benchmark numbers were initially inflated.
-Audits of our own pipeline revealed that 70\% of Z3-only proofs are invalid (74\% including partial), and on FormalMATH only 7.4\% of Knuckledragger certificates were genuinely valid.
+Full audit of all 202 proved miniF2F results reveals that 74.3\% of Z3-only proofs are strictly invalid (83.7\% including partial); on FormalMATH only 7.4\% of Knuckledragger certificates were genuinely valid. The audited valid rate is 33/244 = 13.5\% of all problems.
 We report these findings transparently.
 The case study (Section~\ref{sec:casestudy}) remains our strongest contribution---its 17~concessions are independently verifiable by reading the debate transcript, not dependent on benchmark methodology.
 The verification backend adds value to the debate pipeline even at current reliability levels (it correctly verified the AI Layoff Trap's core theorem, which grounded the entire debate), but we do not claim it is a solved problem.
@@ -524,12 +564,12 @@ Several limitations merit acknowledgment.
 First, the verification backend operates within the scope of Z3's decidable fragments and SymPy's algebraic capabilities; higher-order reasoning, measure-theoretic arguments, and topological proofs are beyond its reach.
 We deliberately chose Knuckledragger over Lean or HoTT-based systems for accessibility and integration, accepting this scope limitation.
 Second, agentic initialization depends on LLM extraction quality; extraction errors propagate through the pipeline.
-Third, the gate model, while highly calibrated, may miss novel forms of fallacious reasoning not represented in its training distribution.
-Fourth, our case study evaluation covers one paper; generalization claims are necessarily limited until evaluation across more papers is complete (ongoing). Fifth, our ablation is conducted on the same single paper, so the finding that V+D outperforms D-only or LLM-judge should be treated as a pilot result, not a statistically robust conclusion.
+Third, the gate model achieved high precision/recall on our internal calibration benchmarks ($n \approx 30$ per topic), but these are small-sample internal evaluations; the gate may miss novel forms of fallacious reasoning not covered in calibration.
+Fourth, our primary case study covers one paper in detail; generalization claims require multi-paper evidence. Two additional completed case studies (Section~\ref{sec:additional_casestudies}) show a consistent pattern across AI theory and formal safety literature, but N=3 single runs cannot support statistical claims about generalizability. Fifth, our ablation is conducted on the same single paper, so the finding that V+D outperforms D-only or LLM-judge should be treated as a pilot result, not a statistically robust conclusion. Sixth, the system is stochastic: we report a single run with a single random seed; a different execution may produce different concessions, different hit counts, and potentially a different winner. We have not measured variance across runs. Seventh, specialist objections in the debate (Hotelling countermodels, folk theorem arguments) may reflect generic LLM-generated economics rhetoric rather than genuinely domain-expert insights; domain expert validation of the debate transcript would be needed to assess substantive correctness. Eighth, the evaluation pipeline is largely circular: LLMs extract claims, LLMs generate arguments, an LLM gate filters arguments, and LLM judges score outcomes. Multi-provider diversity reduces but does not eliminate this circularity; the judge panel models are trained on overlapping data and share systematic biases. Formal verification (Z3/Knuckledragger) is the one non-LLM component, and the companion paper documents its reliability limits.
 
 \paragraph{Future Work.}
 Near-term priorities include progressive RAG (retrieving external evidence during debate rather than only at initialization), Debate-SFT (fine-tuning debate agents on transcripts from high-quality debates), and sketch proofs (allowing the verification backend to verify proof outlines rather than requiring full formalization).
-We plan to evaluate on the FormalMATH benchmark and extend to citation verification---checking whether a paper's citations actually support the claims attributed to them.
+We have evaluated on a 500-problem FormalMATH benchmark (61.6\% cert rate; 7.4\% genuinely valid in a 54-result audit---see companion paper~\cite{arbiterpaperA}). Near-term extensions include citation verification---checking whether a paper's citations actually support the claims attributed to them.
 Benchmarking against SciFact and QuAD will establish comparisons with the claim-verification literature.
 
 
@@ -537,14 +577,14 @@ Benchmarking against SciFact and QuAD will establish comparisons with the claim-
 \section{Conclusion}
 \label{sec:conclusion}
 
-We have presented \arbiter{}, an open-source system implementing a complete PDF-to-verdict pipeline for research claim evaluation, combining formal verification with multi-agent debate.
-Our case study on \emph{The AI Layoff Trap} demonstrates the pipeline's ability to distinguish what a paper proves from what it claims: the core theorem is mathematically correct, but 17~concessions reveal that the paper's policy claims---inevitability of over-automation, uniqueness of the Pigouvian tax solution, urgency of intervention---extend far beyond what the formal model supports.
+We have presented \arbiter{}, an open-source system combining formal verification with multi-agent debate for research claim evaluation.
+Our primary case study on \emph{The AI Layoff Trap} illustrates the pipeline's intended use: distinguishing what a paper formally proves from what it claims. The debate elicited 17~Proponent concessions, suggesting that the paper's policy claims---inevitability of over-automation, uniqueness of the Pigouvian tax solution, urgency of intervention---may extend beyond what the formal model supports. Caution is warranted in interpreting these concessions as ground truth; they are outputs of prompted LLM agents, not expert verdicts, and the verification stipulations have not been independently audited for encoding fidelity. Two additional case studies (Section~\ref{sec:additional_casestudies}) find a consistent pattern: in both, the core formal theorem held within its stated assumptions while policy or existential claims in the introduction overreached the formal model's scope.
 
 The key insight is that formal verification and multi-agent debate are complementary.
 Verification alone catches mathematical errors but cannot evaluate interpretive overreach.
-Debate alone is susceptible to the martingale critique---agents may talk past each other indefinitely.
+Debate alone, without formal constraints, may devolve into agents talking past each other as suggested by theoretical analysis of LLM debate dynamics~\cite{debateskepticism2025}.
 Together, verification grounds debate in machine-checked facts, and debate explores the gap between formal results and informal conclusions.
-In an era of replication crisis and growing skepticism toward both human and automated peer review, tools that make this distinction transparent are not merely useful---they are necessary.
+In an era of replication crisis and growing skepticism toward both human and automated peer review, tools that make this distinction transparent are potentially valuable, though much validation work remains before they can be trusted for consequential review decisions.
 
 \arbiter{} is open source and available at \url{https://github.com/vishk23/arbiter}.
 
@@ -654,10 +694,21 @@ The AI layoff trap.
 \emph{arXiv preprint arXiv:2603.20617}, 2026.
 \url{https://arxiv.org/abs/2603.20617}
 
+\bibitem{selfimprovement2026}
+[Author redacted for blind review].
+Model Collapse as an Anti-Singularity Theorem.
+\emph{arXiv preprint}, 2026.
+
+\bibitem{agisafety2026}
+[Author redacted for blind review].
+Formal Incompatibility of Strict Safety and Full AGI Capability.
+\emph{arXiv preprint}, 2026.
+
 \bibitem{arbiterpaperA}
 V.~Kchitti.
-Arbiter verification backend: Knuckledragger + SymPy for research claim verification.
-\emph{In preparation}, 2026.
+Failure Modes in {LLM}-Generated {Z3} Proofs: A Taxonomy and Audit Methodology.
+\emph{arXiv preprint (companion paper)}, 2026.
+Available at \url{https://github.com/vishk23/arbiter/blob/main/papers/arbiter_paper.pdf}.
 
 \end{thebibliography}
 
