@@ -55,7 +55,7 @@ We ran Arbiter on ["The AI Layoff Trap"](https://arxiv.org/abs/2603.20617) (Falk
 - "Only a Pigouvian tax works" — **conceded** by Proponent (η-raising policies also work)
 - "Boundless productivity" rhetoric — **conceded** (not implied by the formal model)
 - 17 total Proponent concessions, 22 conceded hits, 141 total argument hits
-- 0 gate violations across 54 turns, 0 mid-debate judge failures
+- 0 violations in admitted transcripts across 54 turns (gate precludes entry by design; 8 rewrites were required before admission), 0 mid-debate judge failures
 
 Full outputs: [`experiments/ai_layoff_trap_v3/`](experiments/ai_layoff_trap_v3/)
 
@@ -87,7 +87,38 @@ Full outputs: [`experiments/agi_safety_impossibility/`](experiments/agi_safety_i
 
 ---
 
-**Consistent pattern across all 3 case studies**: core formal theorems hold within their stated assumptions, but policy or existential claims in the abstract/introduction overreach the formal model's scope.
+**Consistent pattern across all 3 case studies**: core formal theorems hold within their stated assumptions, but policy or existential claims in the abstract/introduction overreach. The three papers overreach in three different ways — and the pipeline flags each vector at initialization via internal contradictions.
+
+| Paper | Overreach type | Flagged contradiction | Concession that closed it |
+|---|---|---|---|
+| AI Layoff Trap | **Policy exclusivity** | C12 vs C117: "only a Pigouvian tax" vs η>1 reverses sign | Proponent dropped "only" at h101 (IO agent) |
+| Model Collapse | **Scope generalization** | C43 vs C126 [FATAL]: "irrespective of architecture" vs neurosymbolic escape at same α_t→0 | Proponent dropped C126 at h116 |
+| AGI Safety | **Definition mismatch** | C5 vs C29: "always matching or exceeding" vs ∀x Pr[S solves x]>0 | Proponent replaced C5 with C29 four times (h3, h25, h70, h93) |
+
+### Highlights from running the debates
+
+- **The Model Collapse paper literally contradicts itself.** C43 ("collapse occurs irrespective of architecture under α_t→0") and C126 ("our neurosymbolic method avoids collapse under α_t→0") cannot both hold. The init pipeline's contradiction detector flagged it [FATAL] before the debate even started.
+- **VerificationScholar rescued an argument the AGI Safety paper buries.** The Skeptic attacked: "Trust is just Assume(Safe(S)), it does no mathematical work." Reply: Trust enables the *human's* proof that GödelProgram halts; without it the human cannot rule out one branch of the execution trace, so C29's HumanProvable(x) precondition is unmet and the diagonal doesn't close. The Anthropic judge called it "the debate's strongest structural insight."
+- **The anti-Singularity theorem silently excludes RLHF.** DivergenceCritic showed that RLHF's objective π = argmax E[r(x)] − β·D_KL(π‖π_ref) injects a reward signal not representable as α_t·P in the mixture model. Every frontier LLM uses RLHF; the "entire class of current statistical deep learning without loss of generality" (C93) collapses in one move.
+- **The 3-provider judge panel mattered.** Anthropic ruled for Proponent in all three debates while OpenAI and Grok leaned Skeptic. A single-model judge would have given a cleaner Skeptic sweep; cross-provider disagreement is itself diagnostic.
+- **Both sides dodged the same question on Model Collapse.** The Empiricist asked for a single measured α_t trajectory from any frontier pipeline — received none. All three judges flagged empirical absence as the debate's largest gap.
+
+### What the debate output is useful for (and not)
+
+**Useful for:**
+- Reviewer triage — structured overreach list with claim IDs before reading the paper.
+- Self-critique before submission — authors get a concrete "things to narrow" list (C43 vs C126 is exactly what you want caught pre-submission, not post).
+- Research directions — the "open hits" list (76 on Model Collapse, 41 on AGI Safety, 51 on Layoff) is effectively a pre-written revise-and-resubmit list.
+- Adversarial argument data — concession ledgers with side labels, claim IDs, rebut/concede outcomes; rare at this structure.
+
+**Not useful for:**
+- Replacing peer review — LLM arguments need domain-expert validation.
+- Declaring papers wrong — verdicts reflect pipeline + prompts + rubric, not truth.
+- Generalization claims — N=3 single runs, no gold labels.
+
+The pipeline produces ~70% of a careful reviewer's critique in a few hours, automatically. That's a triage tool, not a replacement.
+
+**Note on the case-study papers.** All three are real public arXiv preprints: Falk & Tsoukalas, [*The AI Layoff Trap*](https://arxiv.org/abs/2603.20617); Zenil, [*On the Limits of Self-Improving in Large Language Models*](https://arxiv.org/abs/2601.05280); Panigrahy & Sharan, [*Limitations on Safe, Trusted, Artificial General Intelligence*](https://arxiv.org/abs/2509.21654). The concessions and verdicts here are outputs of prompted LLM agents under the Arbiter pipeline, not claims about what the authors actually believe or about ground truth. The papers' authors may reasonably disagree with specific concessions; we have not contacted them for response, and no domain-expert audit of the debate transcripts has been performed. Treat the case studies as demonstrations of what the pipeline produces, not as adjudicated critiques.
 
 ## Quickstart
 
@@ -154,7 +185,7 @@ arbiter init --from-pdf paper.pdf
 - **Agentic init from PDF** — one command generates a complete debate config with agents, gate, Z3, rubric
 - **Z3 verification suite** — proof verification, counterexample search, assumption sensitivity, boundary analysis, policy verification
 - **7 built-in providers** — OpenAI, Anthropic, Google Gemini, Grok, DeepSeek, Ollama, custom plugins
-- **LLM validity gate** — per-turn logical hygiene via LLM classifier, 0 violations across 54 frontier-model turns
+- **LLM validity gate** — per-turn logical hygiene via LLM classifier; 0 admitted violations across 54 frontier-model turns on Layoff Trap (8 rewrites before admission; gate precludes violations from entering the transcript by design)
 - **Structured argument ledger** — every hit tracked as open/conceded/rebutted/dodged
 - **Multi-lab judge panel** — N judges from different providers with spread-flagging
 - **Live web dashboard** — watch init and debate in real-time with argdown syntax highlighting
